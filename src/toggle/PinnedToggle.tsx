@@ -1,6 +1,6 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePinned, usePinned_isPinned } from '@/context/pinnedStore';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { Pin, PinOff } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 

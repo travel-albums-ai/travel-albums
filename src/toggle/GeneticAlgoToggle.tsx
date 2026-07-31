@@ -1,6 +1,6 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useNegative, useNegativeStoreSelector } from '@/context/negativeStore';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { GitGraph } from 'lucide-react';
 
 export default function GeneticAlgoToggle() {

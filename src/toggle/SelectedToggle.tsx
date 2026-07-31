@@ -1,6 +1,6 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSelected, useSelected_isSelected } from '@/context/selectedStore';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { Square, SquareCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

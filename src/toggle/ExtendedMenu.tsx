@@ -1,7 +1,7 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import PageRedirect from '@/layout/StatusBar/components/PageRedirect';
 import LocaleToggle from '@/toggle/LocaleToggle';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { Divider, Stack } from '@mui/material';
 import { EllipsisVertical, ScrollText, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

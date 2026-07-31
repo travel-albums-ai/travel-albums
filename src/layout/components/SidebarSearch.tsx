@@ -1,5 +1,5 @@
+import GenericToggleButton from '@/components/generics/GenericToggleButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import GenericToggleButton from '@/toggle/shared/GenericToggleButton';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { useHotkey } from '@tanstack/react-hotkeys';
 import { CircleX, Search, SearchCode } from 'lucide-react';

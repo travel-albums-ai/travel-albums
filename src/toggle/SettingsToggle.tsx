@@ -1,6 +1,6 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import SectionsPopover from '@/settings/SectionsPopover';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { Alert } from '@mui/material';
 import { Cog } from 'lucide-react';
 

@@ -1,6 +1,6 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { ArrowDown01Icon, ArrowUp01Icon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

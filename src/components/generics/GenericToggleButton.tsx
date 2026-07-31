@@ -1,6 +1,6 @@
 import KeyboardChip from '@/components/KeyboardChip';
 import PopoverButtonSimple from '@/components/PopoverButtonSimple';
-import GenericHotkey from '@/toggle/shared/GenericHotkey';
+import GenericHotkey from '@/components/generics/GenericHotkey';
 import { Box, ToggleButton, Tooltip, Typography } from '@mui/material';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, ReactElement, ReactNode } from 'react';

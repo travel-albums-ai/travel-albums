@@ -1,7 +1,7 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
 import SettingSelectRow from '@/settings/components/SettingSelectRow';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { ArrowDown01Icon, ArrowUp01Icon, EllipsisVertical } from 'lucide-react';
 
 export default function SortSectionsToggle() {

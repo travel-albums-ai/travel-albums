@@ -1,8 +1,8 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useFavorites } from '@/context/favoritesStore';
 import { useIgnored } from '@/context/ignoredStore';
 import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
 import { Star, StarOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

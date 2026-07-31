@@ -1,4 +1,4 @@
-import GenericToggleButton, { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
+import GenericToggleButton, { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import { ToggleButtonGroup } from '@mui/material';
 
 export default function GenericToggleButtonGroup({

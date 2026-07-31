@@ -1,8 +1,8 @@
 import { Minimize2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 
 export default function FullscreenToggle() {
   const [fullscreen, setFullscreen] = useState(!!document.fullscreenElement);

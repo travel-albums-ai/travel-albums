@@ -1,7 +1,7 @@
+import GenericToggleButton from '@/components/generics/GenericToggleButton';
 import { useLabels } from '@/context/labelsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { thumbnailUrl } from '@/lib/thumbnailService';
-import GenericToggleButton from '@/toggle/shared/GenericToggleButton';
 import { Box, Typography } from '@mui/material';
 import { Binoculars } from 'lucide-react';
 import { useEffect, useState } from 'react';

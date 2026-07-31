@@ -1,6 +1,6 @@
+import GenericToggleButton, { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { supportedLanguages, type SupportedLanguage } from '@/lib/i18n';
-import GenericToggleButton, { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
 import { ToggleButtonGroup } from '@mui/material';
 
 const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
