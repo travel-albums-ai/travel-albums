@@ -44,10 +44,9 @@ const defaultJson: IJsonModel = {
       location: 'left',
       selected: 0,
       size: 400,
-      minSize: 350,
-      // maxSize: 600,
+      minSize: 400,
       children: [
-        { type: 'tab', name: 'Explorer', component: 'sidebar' },
+        { type: 'tab', name: 'Explorer', component: 'sidebarDrawer' },
         { type: 'tab', name: 'Files', component: 'filesDrawer' },
       ],
     },
@@ -56,7 +55,6 @@ const defaultJson: IJsonModel = {
       location: 'right',
       size: 550,
       minSize: 550,
-      // maxSize: 1000,
       children: [
         { type: 'tab', name: 'Preview', component: 'previewDrawer' },
         { type: 'tab', name: 'Adjustments', component: 'adjustmentsDrawer' },
@@ -72,8 +70,8 @@ const defaultJson: IJsonModel = {
         type: 'tabset',
         weight: 50,
         children: [
-          { type: 'tab', name: 'Main', component: 'outlet' },
-          { type: 'tab', name: 'Globe', component: 'globe' },
+          { type: 'tab', name: 'Main', component: 'outletDrawer' },
+          { type: 'tab', name: 'Globe', component: 'globeDrawer' },
           { type: 'tab', name: 'Scroller', component: 'scrollerDrawer' },
           { type: 'tab', name: 'Rows', component: 'rowsDrawer' },
           { type: 'tab', name: 'Calendar', component: 'calendarDrawer' },
@@ -115,11 +113,11 @@ export default function ComplexLayout() {
 
   const factory = useCallback((node: TabNode) => {
     switch (node.getComponent()) {
-      case "sidebar":
+      case "sidebarDrawer":
         return sidebar;
-      case "globe":
+      case "globeDrawer":
         return globe;
-      case "outlet":
+      case "outletDrawer":
         return outlet;
       case "previewDrawer":
         return preview;
