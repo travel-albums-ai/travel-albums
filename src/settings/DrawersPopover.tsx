@@ -6,7 +6,17 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
+  { key: 'outlet', labelKey: '_Main', value: 'show-outlet', type: 'boolean' },
   { key: 'scroller', labelKey: 'Scroller', value: 'show-scroller', type: 'boolean' },
+  { key: 'globe', labelKey: 'Globe', value: 'show-globe', type: 'boolean' },
+
+  { key: 'sidebar', labelKey: 'Explorer', value: 'show-sidebar', type: 'boolean' },
+  { key: 'files', labelKey: 'Files', value: 'show-files', type: 'boolean' },
+  { key: 'preview', labelKey: 'Preview', value: 'show-preview', type: 'boolean' },
+  { key: 'adjustments', labelKey: 'Adjustments', value: 'show-adjustments', type: 'boolean' },
+  { key: 'labeler', labelKey: 'Labeler', value: 'show-labeler', type: 'boolean' },
+  { key: 'rows', labelKey: 'Rows', value: 'show-rows', type: 'boolean' },
+  { key: 'calendar', labelKey: 'Calendar', value: 'show-calendar', type: 'boolean' },
 ] as const
 
 export default function DrawersPopover({ filter }: { filter?: string }) {

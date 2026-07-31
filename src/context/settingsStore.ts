@@ -48,9 +48,16 @@ type SettingsStore = {
 
   isZygote: boolean,
   drawers: {
-    scroller: boolean,
+    sidebar: boolean,
     globe: boolean,
+    outlet: boolean,
+    preview: boolean,
+    adjustments: boolean,
+    files: boolean,
     labeler: boolean,
+    scroller: boolean,
+    rows: boolean,
+    calendar: boolean,
   }
   modules: {
     peopleAndPets: boolean,
@@ -118,6 +125,13 @@ const defaults: SettingsStore = {
     scroller: true,
     globe: true,
     labeler: true,
+    outlet: true,
+    sidebar: true,
+    files: true,
+    preview: true,
+    adjustments: true,
+    rows: true,
+    calendar: true,
   },
   modules: {
     peopleAndPets: true,

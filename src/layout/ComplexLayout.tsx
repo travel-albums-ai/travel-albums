@@ -34,70 +34,74 @@ import {
 const LAYOUT_STORAGE_KEY = 'travel-layers:layout-model';
 const SAVE_DELAY = 300;
 
-const defaultJson: IJsonModel = {
-  global: {
-    tabEnableClose: false,
-  },
-  borders: [
-    {
-      type: 'border',
-      location: 'left',
-      selected: 0,
-      size: 400,
-      minSize: 400,
-      children: [
-        { type: 'tab', name: 'Explorer', component: 'sidebarDrawer' },
-        { type: 'tab', name: 'Files', component: 'filesDrawer' },
-      ],
+function createDefaultJson(drawers: typeof drawers): IJsonModel {
+  return {
+    global: {
+      tabEnableClose: false,
     },
-    {
-      type: 'border',
-      location: 'right',
-      size: 550,
-      minSize: 550,
-      children: [
-        { type: 'tab', name: 'Preview', component: 'previewDrawer' },
-        { type: 'tab', name: 'Adjustments', component: 'adjustmentsDrawer' },
-        { type: 'tab', name: 'Labeler', component: 'labelerDrawer' }
-      ],
-    },
-  ],
-  layout: {
-    type: 'row',
-    weight: 100,
-    children: [
+    borders: [
       {
-        type: 'tabset',
-        weight: 50,
+        type: 'border',
+        location: 'left',
+        selected: 0,
+        size: 400,
+        minSize: 350,
         children: [
-          { type: 'tab', name: 'Main', component: 'outletDrawer' },
-          { type: 'tab', name: 'Globe', component: 'globeDrawer' },
-          { type: 'tab', name: 'Scroller', component: 'scrollerDrawer' },
-          { type: 'tab', name: 'Rows', component: 'rowsDrawer' },
-          { type: 'tab', name: 'Calendar', component: 'calendarDrawer' },
+          ...(drawers.sidebar ? [{ type: 'tab', name: 'Explorer', component: 'sidebarDrawer' }] : []),
+          ...(drawers.files ? [{ type: 'tab', name: 'Files', component: 'filesDrawer' }] : []),
+        ],
+      },
+      {
+        type: 'border',
+        location: 'right',
+        size: 550,
+        minSize: 550,
+        children: [
+          ...(drawers.preview ? [{ type: 'tab', name: 'Preview', component: 'previewDrawer' }] : []),
+          ...(drawers.adjustments ? [{ type: 'tab', name: 'Adjustments', component: 'adjustmentsDrawer' }] : []),
+          ...(drawers.labeler ? [{ type: 'tab', name: 'Labeler', component: 'labelerDrawer' }] : []),
         ],
       },
     ],
-  },
-};
+    layout: {
+      type: 'row',
+      weight: 100,
+      children: [
+        {
+          type: 'tabset',
+          weight: 50,
+          children: [
+            ...(drawers.outlet ? [{ type: 'tab', name: 'Main', component: 'outletDrawer' }] : []),
+            ...(drawers.globe ? [{ type: 'tab', name: 'Globe', component: 'globeDrawer' }] : []),
+            ...(drawers.scroller ? [{ type: 'tab', name: 'Scroller', component: 'scrollerDrawer' }] : []),
+            ...(drawers.rows ? [{ type: 'tab', name: 'Rows', component: 'rowsDrawer' }] : []),
+            ...(drawers.calendar ? [{ type: 'tab', name: 'Calendar', component: 'calendarDrawer' }] : []),
+          ],
+        },
+      ],
+    },
+  };
+}
 
-function loadModel() {
+function loadModel(drawers: typeof drawers) {
   try {
     const saved = localStorage.getItem(LAYOUT_STORAGE_KEY);
 
     if (!saved) {
-      return Model.fromJson(defaultJson);
+      return Model.fromJson(createDefaultJson(drawers));
     }
 
     return Model.fromJson(JSON.parse(saved));
   } catch (e) {
     console.warn('Failed loading layout', e);
-    return Model.fromJson(defaultJson);
+    return Model.fromJson(createDefaultJson(drawers));
   }
 }
 
 export default function ComplexLayout() {
-  const [model] = useState(loadModel);
+  const drawers = useSettingsStoreSelector((s) => s.drawers);
+
+  const [model, setModel] = useState(() => loadModel(drawers));
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
 
   const sidebar = useMemo(() => <SidebarDrawer />, []);
@@ -147,6 +151,11 @@ export default function ComplexLayout() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    setModel(loadModel(drawers));
+  }, [drawers]);
+
 
   const handleModelChange = useCallback((model: Model) => {
     if (timeout.current) {
