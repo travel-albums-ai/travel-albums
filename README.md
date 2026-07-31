@@ -50,14 +50,6 @@ This starts:
 
 > 💡 Set `PORT` before starting the server to use another API port, for example `PORT=4000 npm run server`.
 
-### Run Server (Backend) in Docker
-
-Build the image and start the same dev stack inside a container:
-
-```bash
-docker compose up --pull always
-```
-
 ### Index a collection
 
 ```bash
@@ -177,10 +169,10 @@ Trip Gallery is designed for photo libraries that do not fit comfortably in a si
 | `npm run server` | Start only the Express server |
 | `npm run build` | Create a production client build |
 | `npm run preview` | Build, preview the client, and start the server |
-| `npm run lint` | Run ESLint |
-| `npm run analyze` | Build with Rollup bundle-visualizer output |
-| `npm run indexer:hdd` | Index using the configured archive/cache paths |
-| `npm run propagate:bundles` | Bundle server/indexer and copy them to the companion builder location |
+
+## 🧠 Scripts documentation
+
+- Human + AI guide for the indexing pipeline: [scripts/README.md](scripts/README.md)
 
 ## ✅ Contribution guidelines
 
