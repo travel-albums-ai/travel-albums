@@ -1,0 +1,41 @@
+import { Minimize2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
+import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
+
+export default function FullscreenToggle() {
+  const [fullscreen, setFullscreen] = useState(!!document.fullscreenElement);
+
+  useEffect(() => {
+    const onChange = () => {
+      setFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else {
+      await document.documentElement.requestFullscreen();
+    }
+  };
+
+  return (
+    <GenericToggleButtonGroup asGroup={true}
+      id="fullscreen-toggle"
+      variant="standard"
+      items={[
+        {
+          tooltip: fullscreen ? 'exitFullscreen' : 'enterFullscreen',
+          icon:  <Minimize2 />,
+          onClick: toggleFullscreen,
+          selected: fullscreen,
+        },
+      ] satisfies GenericToggleButtonProps[]}
+    />
+  );
+}

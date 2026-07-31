@@ -1,0 +1,28 @@
+import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
+import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
+import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
+import { Focus, Scan } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
+export default function NarrowMapToggle() {
+  const { setSetting } = useFilterPhotos()
+  const filterGps = useFilterStoreSelector((state) => state.filterGps)
+  const { t } = useTranslation()
+
+  return <>
+    <GenericToggleButtonGroup items={[
+      {
+        tooltip: 'Re-run filter to only show photos between GPS coordinates',
+        onClick: () => setSetting((prev) => ({...prev, filterGps: !prev.filterGps})),
+        icon: <Focus size={20} />,
+        selected: filterGps
+      },
+      {
+        value: 'contain',
+        tooltip: t('thumbnailContain'),
+        onClick: () => setSetting((prev) => ({...prev, gps: localStorage.getItem('albumGlobeViewport') ? JSON.parse(localStorage.getItem('albumGlobeViewport')) : { top: 90, left: -180, bottom: -90, right: 180 }})),
+        icon: <Scan size={20} />,
+      }
+    ] satisfies GenericToggleButtonProps[]} asGroup />
+  </>
+}

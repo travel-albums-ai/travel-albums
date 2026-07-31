@@ -1,0 +1,12 @@
+{
+  "loading": "Chargement…",
+  "sampleFormat": "Format exemple: Exemple C:\\Users\\person\\Photos",
+  "settings": "Paramètres",
+  "filterPhotos": "Filtrer les photos",
+  "layout": "Mise en page",
+  "indexer": "Indexeur",
+  "sections": "Sections",
+  "demo": "Démo",
+  "tags": "Étiquettes",
+  "filterPhotosGuidance": "Configurer vos filtres par défaut pour la bibliothèque"
+}

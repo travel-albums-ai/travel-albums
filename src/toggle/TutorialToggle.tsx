@@ -1,0 +1,20 @@
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
+import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
+import { CircleQuestionMark } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
+export default function TutorialToggle() {
+  const { setSetting } = useSettings()
+  const tutorial = useSettingsStoreSelector((state) => state.tutorial);
+  const { t } = useTranslation()
+
+  return <GenericToggleButtonGroup variant="standard" items={[
+    {
+      tooltip: "Learn quickly how to use the app with a guided tutorial.",
+      icon: <CircleQuestionMark size={16} />,
+      onClick: () => setSetting((prev) => ({ ...prev, tutorial: !tutorial })),
+      selected: tutorial,
+    },
+  ] satisfies GenericToggleButtonProps[]} />
+}

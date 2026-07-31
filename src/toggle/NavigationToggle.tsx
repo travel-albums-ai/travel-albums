@@ -1,0 +1,26 @@
+import { GenericToggleButtonProps } from '@/toggle/shared/GenericToggleButton';
+import GenericToggleButtonGroup from '@/toggle/shared/GenericToggleButtonGroup';
+import { ArrowLeft, ArrowRight, RefreshCw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
+export default function NavigationToggle() {
+  const { t } = useTranslation()
+
+  return <GenericToggleButtonGroup items={[
+    {
+      icon: <ArrowLeft />,
+      onClick: () => window.history.back(),
+      tooltip: t('navBack')
+    },
+    {
+      icon: <ArrowRight />,
+      onClick: () => window.history.forward(),
+      tooltip: t('navForward')
+    },
+    {
+      icon: <RefreshCw />,
+      onClick: () => window.location.reload(),
+      tooltip: t('navRefresh')
+    },
+  ] satisfies GenericToggleButtonProps[]} variant="standard" />
+}

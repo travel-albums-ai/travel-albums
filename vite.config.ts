@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 export default defineConfig(({ mode, command }) => {
 
-  const plugins = [react(), cssInjectedByJsPlugin()];
+  const plugins = [react()];
 
   if (process.env.VITE_BUNDLE_VISUALIZE === 'true' && command === 'build') {
     plugins.push(
@@ -25,7 +25,7 @@ export default defineConfig(({ mode, command }) => {
     base: './',
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src')
+        '@': path.resolve(import.meta.dirname, 'src')
       }
     },
     plugins,
@@ -35,9 +35,10 @@ export default defineConfig(({ mode, command }) => {
       },
     },
     build: {
-      sourcemap: true,
-      rollupOptions: {
-        output: {
+      chunkSizeWarningLimit: 2000,
+      sourcemap: process.env.VITE_BUNDLE_VISUALIZE === 'true',
+      rolldownOptions: {
+        output: process.env.VITE_BUNDLE_VISUALIZE === 'true' ? {
           manualChunks(id) {
             if (!id) return;
             if (!id.includes('node_modules')) return;
@@ -61,8 +62,7 @@ export default defineConfig(({ mode, command }) => {
 
             return 'vendor';
           },
-          // chunkFileNames: (chunkInfo) => composeChunkFileNames(chunkInfo)
-        },
+        } : undefined,
       }
     },
   }

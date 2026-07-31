@@ -1,0 +1,63 @@
+import { FilterPresetProvider } from '@/context/filterPresetStore';
+import { FilteredGpsPhotosProvider } from '@/context/globals/filteredGpsPhotosStore';
+import { FilteredPhotosProvider } from '@/context/globals/filteredPhotosStore';
+import { SectionsProvider } from '@/context/globals/sectionsStore';
+import { UnfilteredPhotosProvider } from '@/context/globals/unfilteredPhotosStore';
+import { NegativeProvider } from '@/context/negativeStore';
+import { SelectedProvider } from '@/context/selectedStore';
+import { SidebarProvider } from '@/context/sidebarStore';
+import { TagsProvider } from '@/context/tagsStore';
+import React from 'react';
+import { AlbumPhotoCardProvider } from './albumPhotoCardStore';
+import { FavoritesProvider } from './favoritesStore';
+import { FilterProvider } from './filterStore';
+import { IgnoredProvider } from './ignoredStore';
+import { LabelsProvider } from './labelsStore';
+import { PinnedProvider } from './pinnedStore';
+import { PrivateProvider } from './privateStore';
+import { SettingsProvider } from './settingsStore';
+import { ThemeContextProvider } from './ThemeContext';
+
+type Props = { children: React.ReactNode };
+
+export default function AppProviders({ children }: Props) {
+  return (
+    <SettingsProvider>
+      <ThemeContextProvider>
+        <TagsProvider>
+          <SidebarProvider>
+            <FavoritesProvider>
+              <PinnedProvider>
+                <SelectedProvider>
+                  <LabelsProvider>
+                    <IgnoredProvider>
+                      <PrivateProvider>
+                        <FilterPresetProvider>
+                          <FilterProvider>
+                            <AlbumPhotoCardProvider>
+                              <NegativeProvider>
+                                <UnfilteredPhotosProvider>
+                                  <FilteredPhotosProvider>
+                                    <FilteredGpsPhotosProvider>
+                                      <SectionsProvider>
+                                        {children}
+                                      </SectionsProvider>
+                                    </FilteredGpsPhotosProvider>
+                                  </FilteredPhotosProvider>
+                                </UnfilteredPhotosProvider>
+                              </NegativeProvider>
+                            </AlbumPhotoCardProvider>
+                          </FilterProvider>
+                        </FilterPresetProvider>
+                      </PrivateProvider>
+                    </IgnoredProvider>
+                  </LabelsProvider>
+                </SelectedProvider>
+              </PinnedProvider>
+            </FavoritesProvider>
+          </SidebarProvider>
+        </TagsProvider>
+      </ThemeContextProvider>
+    </SettingsProvider>
+  );
+}
