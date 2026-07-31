@@ -13,8 +13,10 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+RUN ls -la
+
 # Build client and bundle server
-RUN npm run build && npm run bundle:server
+RUN npm run build && npm run bundle
 
 # Stage 2: Runtime - Minimal production image
 FROM node:20-alpine
@@ -27,7 +29,9 @@ RUN npm ci --production && npm cache clean --force
 
 # Copy built artifacts from builder
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/server.bundle.cjs ./server.cjs
+COPY --from=builder /app/indexer.bundle.cjs ./indexer.cjs
 
 # Copy config and static assets (if they exist)
 COPY server-config.json* ./

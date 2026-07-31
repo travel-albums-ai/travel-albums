@@ -50,65 +50,13 @@ This starts:
 
 > 💡 Set `PORT` before starting the server to use another API port, for example `PORT=4000 npm run server`.
 
-### Run in Docker
+### Run Server (Backend) in Docker
 
 Build the image and start the same dev stack inside a container:
 
 ```bash
-IMAGE_NAME=ghcr.io/<owner>/trip-gallery IMAGE_TAG=latest npm run docker:build
-docker run --rm -it \
-  -p 5173:5173 \
-  -p 3001:3001 \
-  -e PORT=3001 \
-  -e TAKEOUT_ROOT=/data/Takeout \
-  -e TARGET_ROOT=/data/cache \
-  -v /absolute/path/to/Takeout:/data/Takeout \
-  -v /absolute/path/to/cache:/data/cache \
-  -v /absolute/path/to/server-config.json:/app/server-config.json \
-  ghcr.io/<owner>/trip-gallery:latest
+docker compose up --pull always
 ```
-
-If you want the container to pull image tags from a registry, log in first with `docker login` for that registry.
-
-The Docker-specific npm scripts are:
-
-```bash
-IMAGE_NAME=ghcr.io/<owner>/trip-gallery IMAGE_TAG=latest npm run docker:build
-IMAGE_NAME=ghcr.io/<owner>/trip-gallery IMAGE_TAG=latest npm run docker:push
-IMAGE_NAME=ghcr.io/<owner>/trip-gallery IMAGE_TAG=latest npm run docker:build-and-push
-```
-
-### Point it at your archive
-
-1. Copy or edit `server-config.json` without committing personal filesystem paths.
-2. Set `TAKEOUT_ROOT` to the directory containing your exported photos and JSON sidecars.
-3. Set `TARGET_ROOT` to a writable cache directory.
-4. Set `JSON_PATH` to the generated metadata JSON file when it is stored outside the cache directory.
-5. Start the app and use the **Indexer** or **Settings** experience to verify/update configuration.
-
-Example shape:
-
-```json
-{
-  "TAKEOUT_ROOT": "/absolute/path/to/Takeout",
-  "TARGET_ROOT": "/absolute/path/to/gallery-cache",
-  "JSON_PATH": "/absolute/path/to/gallery-cache/metadata.json",
-  "THUMBNAIL_SIZE": "550",
-  "THUMBNAIL_QUALITY": "80"
-}
-```
-
-### Docker parameters
-
-- `IMAGE_NAME`: full image repository name, such as `ghcr.io/your-org/trip-gallery` or `docker.io/your-user/trip-gallery`.
-- `IMAGE_TAG`: image tag to build and push, defaulting to `latest`.
-- `PORT`: Express server port inside the container, default `3001`.
-- `TAKEOUT_ROOT`: container path to the mounted photo archive.
-- `TARGET_ROOT`: container path to the writable thumbnail and metadata cache.
-- `JSON_PATH`: optional metadata JSON path if it is not stored under `TARGET_ROOT`.
-- `THUMBNAIL_SIZE` and `THUMBNAIL_QUALITY`: thumbnail generation knobs read by the server/indexer config.
-
-The container image starts `npm run dev:docker`, which is the same as local `npm run dev` except the Vite client binds to `0.0.0.0` so the host can reach it through port mapping.
 
 ### Index a collection
 
