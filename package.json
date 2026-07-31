@@ -10,6 +10,7 @@
     "dev:client:docker": "vite --host 0.0.0.0",
     "dev:docker": "concurrently --names \"💻 ,🗃️  \" --prefix-colors \"cyan,yellow\" \"npm:dev:client:docker\" \"npm:server\"",
     "server": "node server.mjs",
+    "distro:server": "node server.bundle.mjs",
     "#-----BUILDING------": "",
     "build": "vite build",
     "bundle:server": "esbuild server.mjs --bundle --platform=node --target=node18 --outfile=./server.bundle.cjs --external:sharp --minify",
@@ -29,7 +30,8 @@
     "lint": "eslint .",
     "knip": "knip",
     "package": "npm run prepare:build && npm run prepare:bundles",
-    "preview": "npm run build && concurrently --names \"💻 ,🗃️  \" --prefix-colors \"cyan,yellow\" \"npm:preview_old\" \"npm:server\""
+    "preview": "npm run build && concurrently --names \"💻 ,🗃️  \" --prefix-colors \"cyan,yellow\" \"npm:preview_old\" \"npm:server\"",
+    "docker:run": "concurrently --names \"💻 ,🗃️  \" --prefix-colors \"cyan,yellow\" \"npm run preview\" \"npm run distro:server\""
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

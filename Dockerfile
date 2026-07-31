@@ -46,4 +46,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 EXPOSE 3001
 
 # Run the bundled server
-CMD ["npm", "run", "preview"]
+CMD ["node", "server.cjs"]
