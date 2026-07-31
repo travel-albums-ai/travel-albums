@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3001}:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+    volumes:
+      # Persistent data volumes for dynamic directories
+      - thumbnails_data:/app/thumbnails
+      - takeout_data:/app/Takeout
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  # Development service with hot reload
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${DEV_PORT:-3001}:3001"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+    volumes:
+      # Bind mounts for source code (hot reload)
+      - ./src:/app/src
+      - ./server.mjs:/app/server.mjs
+      - ./server-utils:/app/server-utils
+      - ./vite.config.ts:/app/vite.config.ts
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./index.html:/app/index.html
+      - ./public:/app/public
+      # Persistent data volumes
+      - thumbnails_data:/app/thumbnails
+      - takeout_data:/app/Takeout
+    command: npm run dev:docker
+    restart: unless-stopped
+
+volumes:
+  thumbnails_data:
+  takeout_data:
