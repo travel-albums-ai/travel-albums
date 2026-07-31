@@ -122,10 +122,6 @@ export default function MainDriver() {
   const tutorial = useSettingsStoreSelector((state) => state.tutorial);
 
   useEffect(() => {
-
-
-
-
     const driverObj = driver({
       showProgress: true,
       animate: true,
@@ -154,7 +150,6 @@ export default function MainDriver() {
 
     if (tutorial) {
       driverObj.drive();
-      // setSetting((prev) => ({ ...prev, tutorial: false }));
     }
 
     return () => driverObj.destroy();
