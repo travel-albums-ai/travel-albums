@@ -2,6 +2,7 @@ import GroupToolbarItems from '@/layout/components/GroupToolbarItems';
 import SearchModal from '@/layout/Header/SearchModal';
 import PageRedirect from '@/layout/StatusBar/components/PageRedirect';
 import DarkLightStatus from '@/toggle/DarkLightStatus';
+import DrawersToggle from '@/toggle/DrawersToggle';
 import ExtendedMenu from '@/toggle/ExtendedMenu';
 import FullscreenToggle from '@/toggle/FullscreenToggle';
 import NavigationToggle from '@/toggle/NavigationToggle';
@@ -22,6 +23,7 @@ export default function Header() {
         <DarkLightStatus />
         <FullscreenToggle />
         <TutorialToggle />
+        <DrawersToggle />
         <ExtendedMenu />
       </GroupToolbarItems>
     </Stack>

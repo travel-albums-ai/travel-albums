@@ -119,18 +119,6 @@
     "actionBar": false
   },
   {
-    "path": "/indexer",
-    "root": "/indexer",
-    "type": "page",
-    "component": "IndexerPage",
-    "title": "Indexer",
-    "icon": "material-symbols:settings-outline",
-    "visible": true,
-    "includeInMenu": false,
-    "order": 1,
-    "actionBar": true
-  },
-  {
     "path": "*",
     "type": "redirect",
     "to": "/dashboard",

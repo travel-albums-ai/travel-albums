@@ -1,5 +1,5 @@
 import CopyrightPage from '@/pages/CopyrightPage';
-import IndexerPage from '@/pages/IndexerPage';
+// import IndexerPage from '@/pages/IndexerPage';
 import ReleasePage from '@/pages/ReleasePage';
 import SelectedPage_type from '@/pages/SelectedPage_type';
 import SelectedPhotosPage_type_name from '@/pages/SelectedPhotosPage_type_name';
@@ -12,7 +12,6 @@ type RouteComponentKey =
   | 'SelectedPhotosPage_type_name'
   | 'SelectedPage_type'
   | 'ReleasePage'
-  | 'IndexerPage'
   | 'CopyrightPage'
   | 'SettingsPage'
 
@@ -63,7 +62,6 @@ export type MenuRoute = {
 const pageElements: Record<RouteComponentKey, () => ReactElement> = {
   SelectedPhotosPage_type_name: () => createElement(SelectedPhotosPage_type_name),
   ReleasePage: () => createElement(ReleasePage),
-  IndexerPage: () => createElement(IndexerPage),
   SettingsPage: () => createElement(SettingsPage),
   SelectedPage_type: () => createElement(SelectedPage_type),
   CopyrightPage: () => createElement(CopyrightPage),

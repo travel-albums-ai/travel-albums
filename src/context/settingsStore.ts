@@ -47,6 +47,11 @@ type SettingsStore = {
   locale: SupportedLanguage,
 
   isZygote: boolean,
+  drawers: {
+    scroller: boolean,
+    globe: boolean,
+    labeler: boolean,
+  }
   modules: {
     peopleAndPets: boolean,
     nowAndThen: boolean,
@@ -109,6 +114,11 @@ const defaults: SettingsStore = {
   albumType: 'default',
   locale: 'en',
   isZygote: false,
+  drawers: {
+    scroller: true,
+    globe: true,
+    labeler: true,
+  },
   modules: {
     peopleAndPets: true,
     nowAndThen: true,
@@ -147,6 +157,15 @@ export const useSettings = () => {
         modules: {
           ...prev.modules,
           [module]: value,
+        },
+      }))
+    },
+    setDrawer: (drawer: keyof SettingsStore['drawers'], value: boolean) => {
+      setSetting(prev => ({
+        ...prev,
+        drawers: {
+          ...prev.drawers,
+          [drawer]: value,
         },
       }))
     },
