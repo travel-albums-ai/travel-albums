@@ -80,6 +80,7 @@
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.0.5",
     "concurrently": "^10.0.4",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
     "esbuild": "^0.28.1",
     "eslint": "^10.8.0",
     "eslint-plugin-react-hooks": "^7.1.1",
