@@ -1,3 +1,13 @@
+## [1.0.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.0.0...v1.0.1) (2026-08-01)
+
+### 🐛 Fixes
+
+* increase skeleton count in NoPhotos component from 8 to 12 ([20a8118](https://github.com/travel-albums-ai/travel-albums/commit/20a81181fddda6533bc8aadf12da99bd66a45e9d))
+
+### 🔧 Chore
+
+* **release:** reset app version to 0.0.0 ([6685235](https://github.com/travel-albums-ai/travel-albums/commit/66852358fe28b1765c1ac8f645f281fc0b6a0cca))
+
 ## 1.0.0 (2026-08-01)
 
 ### ✨ Features
