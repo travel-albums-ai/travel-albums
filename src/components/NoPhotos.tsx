@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material';
 
 const BOX_SIZE = 42;
-const COUNT = 8;
+const COUNT = 12;
 
 export default function NoPhotos() {
   return (
