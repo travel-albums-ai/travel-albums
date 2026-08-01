@@ -1,7 +1,7 @@
 import AppRoutes from '@/components/AppRoutes';
 import '@/lib/i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import 'leaflet/dist/leaflet.css';
 import { createRoot } from 'react-dom/client';
