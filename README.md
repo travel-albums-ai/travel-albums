@@ -1,6 +1,6 @@
 [![Travel Albums](/readme/landing.png)](https://github.com/rand0mC0d3r/trip-gallery)
 
-**[Try out the DEMO Instance](https://app.travel-albums.com/#/allPhotos)**
+**[Try out the DEMO](https://app.travel-albums.com/#/allPhotos)**
 
 
 # 🗺️ Travel Albums
