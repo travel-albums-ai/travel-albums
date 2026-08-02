@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.0.1...v1.1.0) (2026-08-02)
+
+### ✨ Features
+
+* implement toolbar registry and discovery for dynamic toggle components ([483001b](https://github.com/travel-albums-ai/travel-albums/commit/483001b659b475ce699856cab3b5d7d1c3105575))
+
 ## [1.0.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.0.0...v1.0.1) (2026-08-01)
 
 ### 🐛 Fixes
