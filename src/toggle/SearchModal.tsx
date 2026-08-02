@@ -54,3 +54,16 @@ export default function SearchModal() {
     </Box>
   </Box>)
 }
+
+export const meta = {
+  id: "search-modal",
+  toolbar: [
+    {
+      id: 'header',
+      side: 'left',
+      priority: 0
+    }
+  ],
+  component: SearchModal,
+  priority: 0
+};

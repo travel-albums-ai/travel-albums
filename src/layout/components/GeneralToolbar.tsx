@@ -1,25 +1,11 @@
-import GroupToolbarItems from '@/layout/components/GroupToolbarItems';
-import PageRedirect from '@/layout/StatusBar/components/PageRedirect';
-import DarkLightStatus from '@/toggle/DarkLightStatus';
-import DrawersToggle from '@/toggle/DrawersToggle';
-import ExtendedMenu from '@/toggle/ExtendedMenu';
-import FullscreenToggle from '@/toggle/FullscreenToggle';
-import NavigationToggle from '@/toggle/NavigationToggle';
-import SearchModal from '@/toggle/SearchModal';
-import TutorialToggle from '@/toggle/TutorialToggle';
 import { toolbarRegistry } from '@/toolbarRegistry';
 import { Box, Divider, Stack, Theme } from '@mui/material';
-import { Settings } from 'lucide-react';
 import { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
 
-export default function Header() {
-  const { t } = useTranslation()
-  const registry = toolbarRegistry.toolbar('header')
+export default function GeneralToolbar({ group }: { group: string }) {
+  const registry = toolbarRegistry.toolbar(group)
 
-  console.log('Header registry', registry)
-
-  return (<>
+  return (
     <Stack sx={wrapperSx} divider={<Divider orientation="vertical" flexItem />} direction="row" id="header">
       <Box sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         {registry
@@ -42,20 +28,6 @@ export default function Header() {
           ))}
       </div>
     </Stack>
-    <Stack sx={wrapperSx} divider={<Divider orientation="vertical" flexItem />} direction="row" id="header">
-      <NavigationToggle />
-      <SearchModal />
-      <GroupToolbarItems>
-        <PageRedirect title={t('settings')} to="/settings" icon={<Settings size={16} style={{ margin: '0 8px' }} />} skipTitle />
-        {/* <GeneralSettingsToggle /> */}
-        <DarkLightStatus />
-        <FullscreenToggle />
-        <TutorialToggle />
-        <DrawersToggle />
-        <ExtendedMenu />
-      </GroupToolbarItems>
-    </Stack>
-  </>
   )
 }
 

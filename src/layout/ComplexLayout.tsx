@@ -10,7 +10,7 @@ import RowsDrawer from '@/drawers/RowsDrawer';
 import ScrollerDrawer from '@/drawers/ScrollerDrawer';
 import SidebarDrawer from '@/drawers/SidebarDrawer';
 import MainDriver from '@/drivers/MainDriver';
-import Header from '@/layout/Header';
+import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import StatusBar from '@/layout/StatusBar';
 import NoServerModal from '@/modals/NoServerModal';
 import OnboardingModal from '@/modals/OnboardingModal';
@@ -184,7 +184,7 @@ export default function ComplexLayout() {
 
   return (
     <>
-      <Header />
+      <GeneralToolbar group="header" />
       <NoServerModal />
       <OnboardingModal />
       <MainDriver />
