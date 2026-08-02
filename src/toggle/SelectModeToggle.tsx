@@ -11,6 +11,8 @@ export default function SelectModeToggle() {
 
   return <GenericToggleButtonGroup items={[
     {
+      id: "selectMode",
+      group: ['general'],
       tooltip: t('toggleSelectMode'),
       kbd: 'Shift+S',
       meta: {
@@ -25,3 +27,9 @@ export default function SelectModeToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "selectMode",
+  group: ['general'],
+  component: SelectModeToggle,
+};

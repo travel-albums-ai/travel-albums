@@ -6,6 +6,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, ReactElement, ReactNode } from 'react';
 
 export interface GenericToggleButtonProps {
+  id?: string;
+  group?: string[];
   tooltip: string;
   kbd?: string;
   icon: ReactNode;

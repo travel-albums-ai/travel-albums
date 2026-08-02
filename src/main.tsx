@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { createRoot } from 'react-dom/client';
 import AppProviders from './context/AppProviders';
 
+import '@/toolbarDiscovery';
 import './freakflags.css';
 import './index.css';
 

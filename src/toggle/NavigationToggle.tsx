@@ -24,3 +24,17 @@ export default function NavigationToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
+
+export const meta = {
+  id: "navigation",
+  group: ['header'],
+  toolbar: [
+    {
+      id: 'header',
+      side: 'left',
+      priority: 0
+    }
+  ],
+  component: NavigationToggle,
+  priority: 0
+};

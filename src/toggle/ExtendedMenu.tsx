@@ -28,3 +28,17 @@ export default function ExtendedMenu() {
     ] satisfies GenericToggleButtonProps[]}
   />
 }
+
+export const meta = {
+  id: "extendedMenu",
+  group: ['header'],
+  toolbar: [
+    {
+      id: 'header',
+      side: 'right',
+      priority: 1000
+    }
+  ],
+  component: ExtendedMenu,
+  priority: 100
+};

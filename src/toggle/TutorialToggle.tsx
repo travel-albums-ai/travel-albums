@@ -18,3 +18,17 @@ export default function TutorialToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "tutorial",
+  group: ['header'],
+  toolbar: [
+    {
+      id: 'header',
+      side: 'right',
+      priority: 800
+    }
+  ],
+  component: TutorialToggle,
+  priority: 70
+};
