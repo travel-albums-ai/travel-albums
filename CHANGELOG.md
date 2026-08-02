@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.1.0...v1.2.0) (2026-08-02)
+
+### ✨ Features
+
+* replace Header with GeneralToolbar and refactor SearchModal ([360b91d](https://github.com/travel-albums-ai/travel-albums/commit/360b91dd167264e244209ef44a33f61a88e37872))
+
 ## [1.1.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.0.1...v1.1.0) (2026-08-02)
 
 ### ✨ Features
