@@ -191,4 +191,4 @@ The standard build produces static client assets in `dist/` with relative asset 
 
 ---
 
-Built for exploring local travel memories—without handing your photo library to a cloud service. ✈️
+Built for exploring local travel memories—without handing your photo library to a cloud service. ☁️
