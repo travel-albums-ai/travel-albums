@@ -1,3 +1,9 @@
+## [1.19.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.18.0...v1.19.0) (2026-08-03)
+
+### ✨ Features
+
+* update toolbar discovery to support group preloading and improve error handling ([f8f045a](https://github.com/travel-albums-ai/travel-albums/commit/f8f045a2d03141a86f998aaa812fcb10782820fb))
+
 ## [1.18.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.17.0...v1.18.0) (2026-08-03)
 
 ### ✨ Features
