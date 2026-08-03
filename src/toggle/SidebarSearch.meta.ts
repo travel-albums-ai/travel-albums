@@ -1,7 +1,6 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 export const meta = {
   id: "sidebarSearch",
-  group: ['sidebar'],
   toolbar: [
     {
       id: 'sidebar',
@@ -10,5 +9,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/SidebarSearch'),
-  priority: 70
 } as ToolbarMeta;

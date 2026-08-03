@@ -38,15 +38,3 @@ export default function ScrollerRowsToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
-
-export const meta = {
-  id: "scroller-rows-toggle",
-  toolbar: [
-    {
-      id: 'scroller-drawer',
-      side: 'right',
-      priority: 700
-    }
-  ],
-  component: ScrollerRowsToggle,
-};
