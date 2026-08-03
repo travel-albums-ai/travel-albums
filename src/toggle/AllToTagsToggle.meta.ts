@@ -1,4 +1,4 @@
-
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "allToTagsToggle",
@@ -11,4 +11,4 @@ export const meta = {
     })),
   ],
   loader: () => import('@/toggle/AllToTagsToggle'),
-};
+} as ToolbarMeta;

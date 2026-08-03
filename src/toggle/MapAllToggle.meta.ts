@@ -1,3 +1,4 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "mapAll",
@@ -9,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/MapAllToggle'),
-};
+} as ToolbarMeta;

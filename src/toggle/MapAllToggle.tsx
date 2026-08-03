@@ -16,15 +16,3 @@ export default function MapAllToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
-
-export const meta = {
-  id: "mapAll",
-  toolbar: [
-    {
-      id: 'globe-drawer',
-      side: 'right',
-      priority: 400
-    }
-  ],
-  component: MapAllToggle,
-};

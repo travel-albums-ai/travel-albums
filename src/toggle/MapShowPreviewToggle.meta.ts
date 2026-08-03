@@ -1,4 +1,4 @@
-
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "mapShowPreview",
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/MapShowPreviewToggle'),
-};
+} as ToolbarMeta;

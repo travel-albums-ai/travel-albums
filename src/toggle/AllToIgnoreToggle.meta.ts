@@ -1,3 +1,5 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
+
 export const meta = {
   id: "allToIgnoreToggle",
   toolbar: [
@@ -9,4 +11,4 @@ export const meta = {
     })),
   ],
   loader: () => import('@/toggle/AllToIgnoreToggle'),
-};
+} as ToolbarMeta;

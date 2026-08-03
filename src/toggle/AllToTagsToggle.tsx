@@ -44,16 +44,3 @@ export default function AllToTagsToggle({ context } : { context: any }) {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
-
-export const meta = {
-  id: "allToTagsToggle",
-  toolbar: [
-    ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
-      id,
-      side: 'left',
-      priority: 1000,
-      visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
-    })),
-  ],
-  component: AllToTagsToggle,
-};

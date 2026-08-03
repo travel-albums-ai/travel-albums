@@ -25,17 +25,3 @@ export default function DarkLightStatus() {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
-
-export const meta = {
-  id: "darkLightStatus",
-  group: ['header'],
-  toolbar: [
-    {
-      id: 'header',
-      side: 'right',
-      priority: 600
-    }
-  ],
-  component: DarkLightStatus,
-  priority: 0
-};

@@ -25,7 +25,7 @@ export default function FullscreenToggle() {
   };
 
   return (
-    <GenericToggleButtonGroup asGroup={true}
+    <GenericToggleButtonGroup
       id="fullscreen-toggle"
       variant="standard"
       items={[
@@ -39,17 +39,3 @@ export default function FullscreenToggle() {
     />
   );
 }
-
-export const meta = {
-  id: "fullscreenToggle",
-  group: ['header'],
-  toolbar: [
-    {
-      id: 'header',
-      side: 'right',
-      priority: 700
-    }
-  ],
-  component: FullscreenToggle,
-  priority: 80
-};

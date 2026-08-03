@@ -7,17 +7,3 @@ export default function GoToSettingsToggle() {
 
   return <PageRedirect title={t('settings')} to="/settings" icon={<Settings size={16} />} skipTitle />
 }
-
-export const meta = {
-  id: "goToSettings",
-  group: ['header'],
-  toolbar: [
-    {
-      id: 'header',
-      side: 'right',
-      priority: 500
-    }
-  ],
-  component: GoToSettingsToggle,
-  priority: 70
-};

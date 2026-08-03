@@ -1,3 +1,4 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "favoriteToggle",
@@ -9,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/FavoriteToggle'),
-};
+} as ToolbarMeta;

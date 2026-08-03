@@ -10,15 +10,3 @@ export default function LabelsCataloguePopover() {
     </Box>
   </PopoverButton>
 }
-
-export const meta = {
-  id: "labels-catalogue-popover",
-  toolbar: [
-    {
-      id: 'labeler-drawer',
-      side: 'right',
-      priority: 500
-    }
-  ],
-  component: LabelsCataloguePopover,
-};

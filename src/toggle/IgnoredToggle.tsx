@@ -21,15 +21,3 @@ export default function IgnoredToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
-
-export const meta = {
-  id: "ignoredToggle",
-  toolbar: [
-    {
-      id: 'photo-drawer',
-      side: 'left',
-      priority: 300
-    }
-  ],
-  component: IgnoredToggle,
-};

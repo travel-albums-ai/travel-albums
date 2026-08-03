@@ -1,7 +1,7 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "fullscreenToggle",
-  group: ['header'],
   toolbar: [
     {
       id: 'header',
@@ -10,5 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/FullscreenToggle'),
-  priority: 80
-};
+} as ToolbarMeta;

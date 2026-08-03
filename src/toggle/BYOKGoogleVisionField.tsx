@@ -85,15 +85,3 @@ export default function BYOKGoogleVisionField() {
     </>
   );
 }
-
-export const meta = {
-  id: "byok-google-vision-field",
-  toolbar: [
-    {
-      id: 'labeler-drawer',
-      side: 'left',
-      priority: 0
-    }
-  ],
-  component: BYOKGoogleVisionField,
-};

@@ -20,15 +20,3 @@ export default function FavoriteToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
-
-export const meta = {
-  id: "favoriteToggle",
-  toolbar: [
-    {
-      id: 'photo-drawer',
-      side: 'left',
-      priority: 0
-    }
-  ],
-  component: FavoriteToggle,
-};
