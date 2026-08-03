@@ -55,16 +55,3 @@ export default function SelectionToggle({ context }: { context?: any }) {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
-
-export const meta = {
-  id: "selectionMode",
-  toolbar: [
-    ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
-      id,
-      side: 'left',
-      priority: 300,
-      visible: (context) => context?.selectMode === undefined ? false : context.selectMode === true,
-    })),
-  ],
-  component: SelectionToggle,
-};

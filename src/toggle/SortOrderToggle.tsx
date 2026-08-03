@@ -24,32 +24,5 @@ export default function SortOrderToggle() {
       icon: <ArrowDown01Icon size={20} />,
       selected: sortOrder === 'newestFirst'
     },
-  ] satisfies GenericToggleButtonProps[]} asGroup />
+  ] satisfies GenericToggleButtonProps[]} />
 }
-
-export const meta = {
-  id: "sort-order-toggle",
-  toolbar: [
-    {
-      id: 'selected-photos-drawer',
-      side: 'left',
-      priority: 0
-    },
-    {
-      id: 'scroller-drawer',
-      side: 'left',
-      priority: 0
-    },
-    {
-      id: 'rows-drawer',
-      side: 'left',
-      priority: 0
-    },
-    {
-      id: 'calendar-drawer',
-      side: 'left',
-      priority: 0
-    },
-  ],
-  component: SortOrderToggle,
-};
