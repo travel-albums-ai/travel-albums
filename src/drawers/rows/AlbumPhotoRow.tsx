@@ -8,8 +8,8 @@ import AlbumPhotoRowItem from '@/drawers/rows/AlbumPhotoRowItem';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import FavoriteToggle from '@/toggle/FavoriteToggle';
 import SelectedToggle from '@/toggle/SelectedToggle';
-import { Box, Typography, useTheme } from '@mui/material';
-import { SeparatorHorizontal, SeparatorVertical } from 'lucide-react';
+import { Box, useTheme } from '@mui/material';
+import { CaseUpper, Clock, Eye, Folder, Hash, MessageCircle, SeparatorHorizontal, SeparatorVertical, ThumbsUp } from 'lucide-react';
 import { memo, useCallback, useMemo } from 'react';
 
 interface AlbumPhotoCardProps {
@@ -69,17 +69,35 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
     theme.palette.primary.main
   ]);
 
-  const HIDDEN = new Set([
-    'city',
-    'albumName',
-    'takenAtTs',
-    'batch',
-    'imageUrl',
-    'people',
-    'social',
-  ]);
+  // const HIDDEN = new Set([
+  //   'city',
+  //   'albumName',
+  //   'takenAtTs',
+  //   'batch',
+  //   'imageUrl',
+  //   'people',
+  //   'social',
+  // ]);
 
   const properties = [
+    {
+      id: 'id',
+      icon: <Hash />,
+      title: 'id',
+      value: String(photo.id),
+    },
+    {
+      id: 'folder',
+      icon: <Folder />,
+      title: 'folder',
+      value: String(photo.folder),
+    },
+    {
+      id: 'title',
+      icon: <CaseUpper />,
+      title: 'title',
+      value: String(photo.title),
+    },
     {
       id: 'width',
       icon: <SeparatorVertical />,
@@ -93,48 +111,29 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
       value: String(photo.height),
     },
     {
-      id: 'id',
-      icon: null,
-      title: 'id',
-      value: String(photo.id),
+      id: 'takenAtTs',
+      icon: <Clock />,
+      title: 'taken at',
+      value: String(photo.takenAt),
     },
     {
       id: 'views',
-      icon: null,
+      icon: <Eye />,
       title: 'views',
       value: String(photo.views),
     },
     {
-      id: 'folder',
-      icon: null,
-      title: 'folder',
-      value: String(photo.folder),
-    },
-    {
-      id: 'title',
-      icon: null,
-      title: 'title',
-      value: String(photo.title),
-    },
-    {
       id: 'likes',
-      icon: null,
+      icon: <ThumbsUp />,
       title: 'likes',
       value: String(photo.likes),
     },
     {
       id: 'comments',
-      icon: null,
+      icon: <MessageCircle />,
       title: 'comments',
       value: String(photo.comments),
     },
-    {
-      id: 'takenAtTs',
-      icon: null,
-      title: 'taken at',
-      value: String(photo.takenAt),
-    },
-
   ];
 
   return (
@@ -148,7 +147,7 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        transition: 'filter 0.25s',
+        transition: 'all 0.25s',
         overflow: 'hidden',
         p: 0.75,
         pb: 1.25,
@@ -156,7 +155,7 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         mb: 0.5,
         cursor: 'pointer',
         '&:hover': {
-          filter: 'saturate(1.25)',
+          backgroundColor: 'action.hover',
         },
       }}
     >
@@ -167,25 +166,18 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
           height={thumbHeight}
           style={{...thumbnailStyle}}
         />
-      </Box>
 
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: '300px 300px 300px',
-        gap: 2,
-        overflow: 'hidden' }}>
-        {Object.entries(photo)
-          .filter(([key]) => !HIDDEN.has(key))
-          .map(([key, value]) => (
-            <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', px: 0.25, py: 0.25, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} key={key}>
-              <Typography variant="caption" color="textPrimary" sx={{ fontWeight: 'bold', width: 80, display: 'inline-block', textTransform: 'capitalize' }}>
-                {key}
-              </Typography>
-              <Typography  variant="caption" color="textDisabled">
-                {String(value)}
-              </Typography>
-            </Box>
-          ))}
+        {selectMode && (
+          <Box sx={{ position: 'absolute', top: 4, left: 4, zIndex: 2 }} onClick={stopPropagation}>
+            <SelectedToggle photoId={photo.id} />
+          </Box>
+        )}
+
+        {favorite && (
+          <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }} onClick={stopPropagation}>
+            <FavoriteToggle _photoId={photo.id} />
+          </Box>
+        )}
       </Box>
 
       <Box sx={{
@@ -196,21 +188,7 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         {properties.map((prop) => <AlbumPhotoRowItem key={prop.id} icon={prop.icon} title={prop.title} value={prop.value} />)}
       </Box>
 
-      {selectMode && (
-        <Box sx={{ position: 'absolute', top: 4, left: 4, zIndex: 2 }} onClick={stopPropagation}>
-          <SelectedToggle photoId={photo.id} />
-        </Box>
-      )}
-
-      {favorite && (
-        <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }} onClick={stopPropagation}>
-          <FavoriteToggle _photoId={photo.id} />
-        </Box>
-      )}
-
-      <Box sx={{
-        display: 'flex', gap: 0.5, flexWrap: 'wrap', flex: 1, p: 1
-      }}>
+      <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', flex: 1, p: 1 }}>
         {resolvedTags.map((tag) => (
           <Box key={tag.id} sx={{
             backgroundColor: `${tag.color}BD`, color: '#fff', px: 1, py: 0.5,

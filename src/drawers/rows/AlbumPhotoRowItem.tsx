@@ -1,21 +1,21 @@
-import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Typography } from '@mui/material';
-
-interface AlbumPhotoCardProps {
-  photo: GalleryPhoto
-}
-
-function stopPropagation(e: React.MouseEvent) {
-  e.stopPropagation();
-}
+import { cloneElement } from 'react';
 
 export default function AlbumPhotoRowItem({ icon, title, value }: { icon: React.ReactNode, title: string, value: string }) {
-
-
   return (
-
-    <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', px: 0.25, py: 0.25, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-      {icon}
+    <Box sx={{
+      borderBottom: '1px solid',
+      borderColor: 'divider',
+      transition: 'all 0.25s',
+      px: 0.25, py: 0.25,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      '&:hover': {
+        backgroundColor: 'action.hover',
+      },
+    }}>
+      {icon && cloneElement(icon as React.ReactElement, { size: 14, style: { marginRight: 4, verticalAlign: 'middle' } })}
       <Typography variant="caption" color="textPrimary" sx={{ fontWeight: 'bold', width: 80, display: 'inline-block', textTransform: 'capitalize' }}>
         {title}
       </Typography>
