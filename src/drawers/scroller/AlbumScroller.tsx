@@ -14,8 +14,6 @@ type Props = {
 
 const ITEM_WIDTH = 300;
 const GAP = 32;
-const MIN_ITEM_WIDTH = 180;
-const MAX_ITEM_WIDTH = 320;
 const ANIMATION_MS = 650;
 const INPUT_LOCK_MS = 350;
 const MOUNT_RADIUS = 1;
@@ -83,6 +81,7 @@ export default function AlbumScroller({
   const rows = useSettingsStoreSelector((state) => state.scrollerRows)
   const columns = useSettingsStoreSelector((state) => state.scrollerColumns)
   const groupedByBatches = useSettingsStoreSelector((state) => state.scrollerGroupedByBatches)
+  const previewPhotoObj = useSettingsStoreSelector((s) => s.previewPhotoObj);
   const blockSize = rows * columns;
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(1200);
@@ -112,8 +111,21 @@ export default function AlbumScroller({
     return splitOversizedBatches(timeBatches, blockSize);
   }, [photos, blockSize, groupedByBatches]);
 
+  const blockIndexByPhotoId = useMemo(() => {
+    const map = new Map<string, number>();
+
+    blocks.forEach((block, blockIndex) => {
+      block.forEach((photo) => {
+        map.set(photo.id, blockIndex);
+      });
+    });
+
+    return map;
+  }, [blocks]);
+
   const blockCount = blocks.length;
   const maxIndex = Math.max(0, blockCount - 1);
+  const previewRaf = useRef<number | null>(null);
 
   useEffect(() => {
     setCurrent(0);
@@ -126,6 +138,27 @@ export default function AlbumScroller({
   }, [groupedByBatches]);
 
   useEffect(() => {
+    if (!previewPhotoObj) return;
+
+    if (previewRaf.current !== null) {
+      cancelAnimationFrame(previewRaf.current);
+    }
+
+    previewRaf.current = requestAnimationFrame(() => {
+      const nextIndex = blockIndexByPhotoId.get(previewPhotoObj.id);
+      if (nextIndex == null) return;
+
+      setCurrent((index) => (index === nextIndex ? index : nextIndex));
+    });
+
+    return () => {
+      if (previewRaf.current !== null) {
+        cancelAnimationFrame(previewRaf.current);
+      }
+    };
+  }, [previewPhotoObj, blockIndexByPhotoId]);
+
+  useEffect(() => {
     setCurrent((v) => Math.min(v, maxIndex));
   }, [maxIndex]);
 
@@ -134,13 +167,14 @@ export default function AlbumScroller({
   const offsetX = -current * step;
 
   const lockRef = useRef(false);
-  const unlockTimer = useRef<number>();
+  const unlockTimer = useRef<number | null>(null);
 
   const triggerLock = useCallback(() => {
     lockRef.current = true;
-    if (unlockTimer.current) clearTimeout(unlockTimer.current);
+    if (unlockTimer.current !== null) clearTimeout(unlockTimer.current);
     unlockTimer.current = window.setTimeout(() => {
       lockRef.current = false;
+      unlockTimer.current = null;
     }, INPUT_LOCK_MS);
   }, []);
 
@@ -155,7 +189,7 @@ export default function AlbumScroller({
 
   useEffect(() => {
     return () => {
-      if (unlockTimer.current) clearTimeout(unlockTimer.current);
+      if (unlockTimer.current !== null) clearTimeout(unlockTimer.current);
     };
   }, []);
 
