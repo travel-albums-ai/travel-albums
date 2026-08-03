@@ -1,3 +1,4 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "pinned",
@@ -28,4 +29,4 @@ export const meta = {
     },
   ],
   loader: () => import('@/toggle/PinnedToggle'),
-};
+} as ToolbarMeta;

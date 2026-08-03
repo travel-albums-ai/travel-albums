@@ -6,15 +6,3 @@ export default function PreviewPhotoTitle() {
 
   return <Typography variant="caption" color="textSecondary">{`${previewPhotoObj?.title}`}</Typography>
 }
-
-export const meta = {
-  id: "previewPhotoTitle",
-  toolbar: [
-    {
-      id: 'photo-drawer',
-      side: 'left',
-      priority: 500
-    }
-  ],
-  component: PreviewPhotoTitle,
-};

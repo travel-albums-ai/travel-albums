@@ -1,4 +1,4 @@
-
+import type { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "previewPhotoTitle",
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/PreviewPhotoTitle'),
-};
+} as ToolbarMeta;

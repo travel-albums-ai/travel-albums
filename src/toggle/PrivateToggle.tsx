@@ -20,15 +20,3 @@ export default function PrivateToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
-
-export const meta = {
-  id: "privateToggle",
-  toolbar: [
-    {
-      id: 'photo-drawer',
-      side: 'left',
-      priority: 100
-    }
-  ],
-  component: PrivateToggle,
-};

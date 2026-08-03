@@ -1,3 +1,5 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
+
 export const meta = {
   id: "previewExifToggle",
   toolbar: [
@@ -8,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/PreviewExifToggle'),
-};
+} as ToolbarMeta;

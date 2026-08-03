@@ -1,3 +1,4 @@
+import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "previewMapToggle",
@@ -9,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/toggle/PreviewMapToggle'),
-};
+} as ToolbarMeta;

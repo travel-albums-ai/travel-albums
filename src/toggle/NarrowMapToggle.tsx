@@ -26,15 +26,3 @@ export default function NarrowMapToggle() {
     ] satisfies GenericToggleButtonProps[]} asGroup />
   </>
 }
-
-export const meta = {
-  id: "narrowMap",
-  toolbar: [
-    {
-      id: 'globe-drawer',
-      side: 'left',
-      priority: 0
-    }
-  ],
-  component: NarrowMapToggle,
-};
