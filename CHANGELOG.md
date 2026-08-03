@@ -1,3 +1,9 @@
+## [1.21.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.20.0...v1.21.0) (2026-08-03)
+
+### ✨ Features
+
+* enhance AlbumPhotoRow and AlbumPhotoRowItem components with improved property display and hover effects ([8b03efa](https://github.com/travel-albums-ai/travel-albums/commit/8b03efa452a708376e072d889fd8402e880f3fb2))
+
 ## [1.20.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.19.0...v1.20.0) (2026-08-03)
 
 ### ✨ Features
