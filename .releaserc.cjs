@@ -54,7 +54,12 @@ if (hasGitHubToken) {
     {
       successComment: false,
       failComment: false,
-      releasedLabels: false
+      releasedLabels: false,
+      assets: [
+        {
+          path: "**/*.exe"
+        }
+  s    ]
     }
   ]);
 }

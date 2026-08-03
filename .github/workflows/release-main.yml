@@ -1,4 +1,4 @@
-name: 🚀 Release (main)
+name: 🚀 Release
 
 on:
   push:
@@ -44,52 +44,16 @@ jobs:
         run: npm run next
 
       - name: 📦 Upload .exe files as workflow artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bun-executables
-          path: '**/*.exe'
+          path: |
+            **/*.exe
 
-      - name: 🔗 Attach .exe files to GitHub Release
-        uses: actions/github-script@v6
+      - name: Attach executables to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            **/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          script: |
-            const fs = require('fs');
-            const path = require('path');
-            const core = require('@actions/core');
-            const releases = await github.rest.repos.listReleases({ owner: context.repo.owner, repo: context.repo.repo, per_page: 10 });
-            if (releases.data.length === 0) core.setFailed('No releases found');
-            const release = releases.data[0];
-            function findExe(dir, results=[]) {
-              for (const f of fs.readdirSync(dir)) {
-                const p = path.join(dir,f);
-                const stat = fs.statSync(p);
-                if (stat.isDirectory()) {
-                  if (f === 'node_modules' || f === '.git') continue;
-                  findExe(p, results);
-                } else {
-                  if (p.toLowerCase().endsWith('.exe')) results.push(p);
-                }
-              }
-              return results;
-            }
-            const files = findExe(process.cwd());
-            if (files.length === 0) core.info('No .exe files found to attach to the release');
-            for (const file of files) {
-              const name = path.basename(file);
-              const contentLength = fs.statSync(file).size;
-              const rs = fs.createReadStream(file);
-              await github.rest.repos.uploadReleaseAsset({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                release_id: release.id,
-                name,
-                headers: {
-                  'content-type': 'application/octet-stream',
-                  'content-length': contentLength
-                },
-                data: rs
-              });
-              core.info(`Uploaded ${name} to release ${release.tag_name}`);
-            }
