@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.4.0...v1.5.0) (2026-08-03)
+
+### ✨ Features
+
+* enhance type safety in toolbar components and improve toolbar configuration logic ([4465180](https://github.com/travel-albums-ai/travel-albums/commit/4465180d2c25abb5142ccd758cf6046f634b6ab7))
+
 ## [1.4.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.3.0...v1.4.0) (2026-08-03)
 
 ### ✨ Features
