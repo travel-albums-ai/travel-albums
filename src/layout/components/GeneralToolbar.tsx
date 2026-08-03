@@ -1,3 +1,4 @@
+import { ensureToolbarDiscovery } from '@/toolbarDiscovery';
 import {
   ToolbarMeta,
   toolbarRegistry,
@@ -9,7 +10,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 interface GeneralToolbarProps {
   group: string;
@@ -24,6 +25,30 @@ function getToolbarConfig(item: ToolbarMeta, side: 'left' | 'right') {
 }
 
 export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx, context }: GeneralToolbarProps) {
+  const [ready, setReady] = useState(() => toolbarRegistry.hasItems());
+
+  useEffect(() => {
+    if (ready) {
+      return;
+    }
+
+    let mounted = true;
+
+    ensureToolbarDiscovery().then(() => {
+      if (mounted) {
+        setReady(true);
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [ready]);
+
+  if (!ready) {
+    return null;
+  }
+
   const registry = toolbarRegistry.toolbar(group);
 
   const leftItems = registry

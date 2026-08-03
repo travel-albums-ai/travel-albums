@@ -1,18 +1,31 @@
-// toolbarDiscovery.ts
-
 import { ToolbarMeta, toolbarRegistry } from '@/toolbarRegistry';
 
-const modules = import.meta.glob<{ meta?: ToolbarMeta }>('./toggle/*.meta.ts', {
-  eager: true,
-});
+const modules = import.meta.glob<{ meta?: ToolbarMeta }>('./toggle/*.meta.ts');
 
-for (const [path, mod] of Object.entries(modules)) {
-  const meta = mod.meta;
+let discoveryPromise: Promise<void> | null = null;
 
-  if (!meta) {
-    console.warn(`${path} does not export 'meta'`);
-    continue;
+export function ensureToolbarDiscovery() {
+  if (discoveryPromise) {
+    return discoveryPromise;
   }
 
-  toolbarRegistry.register(meta);
+  discoveryPromise = (async () => {
+    const loaded = await Promise.all(
+      Object.entries(modules).map(async ([path, loadModule]) => {
+        const mod = await loadModule();
+        return { path, meta: mod.meta };
+      }),
+    );
+
+    for (const { path, meta } of loaded) {
+      if (!meta) {
+        console.warn(`${path} does not export 'meta'`);
+        continue;
+      }
+
+      toolbarRegistry.register(meta);
+    }
+  })();
+
+  return discoveryPromise;
 }

@@ -31,6 +31,10 @@ class ToolbarRegistry {
     this.items.set(meta.id, meta);
   }
 
+  hasItems() {
+    return this.items.size > 0;
+  }
+
   all() {
     return [...this.items.values()];
   }
