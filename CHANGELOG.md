@@ -1,3 +1,9 @@
+## [1.17.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.16.0...v1.17.0) (2026-08-03)
+
+### ✨ Features
+
+* update FavoriteToggle to accept _photoId prop and refactor AlbumPhotoRow layout ([88c217f](https://github.com/travel-albums-ai/travel-albums/commit/88c217fc0c9441d4abfd2c3cef7581b75ff47edf))
+
 ## [1.16.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.15.0...v1.16.0) (2026-08-03)
 
 ### ✨ Features
