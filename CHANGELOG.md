@@ -1,3 +1,9 @@
+## [1.13.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.12.0...v1.13.0) (2026-08-03)
+
+### ✨ Features
+
+* enhance toolbar component loading and caching mechanism ([fa1836c](https://github.com/travel-albums-ai/travel-albums/commit/fa1836cb7c8d6d4132abaabdccf2ff9bc734b032))
+
 ## [1.12.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.11.0...v1.12.0) (2026-08-03)
 
 ### ✨ Features
