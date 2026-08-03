@@ -1,3 +1,9 @@
+## [1.16.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.15.0...v1.16.0) (2026-08-03)
+
+### ✨ Features
+
+* add GalleryPhoto import to CalendarDrawer and comment out loading state in fetchAirports ([782d8b4](https://github.com/travel-albums-ai/travel-albums/commit/782d8b4a548099dc76fb7e0e9856ceda4f0182d9))
+
 ## [1.15.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.14.0...v1.15.0) (2026-08-03)
 
 ### ✨ Features
