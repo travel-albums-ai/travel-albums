@@ -1,3 +1,9 @@
+## [1.12.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.11.0...v1.12.0) (2026-08-03)
+
+### ✨ Features
+
+* implement toolbar discovery mechanism in GeneralToolbar and update toolbarRegistry ([bed4a63](https://github.com/travel-albums-ai/travel-albums/commit/bed4a6384f893e223f0cb08bd2b313b89592d1b5))
+
 ## [1.11.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.10.0...v1.11.0) (2026-08-03)
 
 ### ✨ Features
