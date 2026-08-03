@@ -1,3 +1,9 @@
+## [1.25.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.25.0...v1.25.1) (2026-08-03)
+
+### 🐛 Fixes
+
+* reorder steps in release workflow for bun package build ([96b3d2e](https://github.com/travel-albums-ai/travel-albums/commit/96b3d2ed33636924bf666ee2a5a32e675d288717))
+
 ## [1.25.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.24.1...v1.25.0) (2026-08-03)
 
 ### ✨ Features
