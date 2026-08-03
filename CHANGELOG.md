@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.14.0...v1.15.0) (2026-08-03)
+
+### ✨ Features
+
+* add loading skeleton to GeneralToolbar while waiting for readiness ([5f1f78c](https://github.com/travel-albums-ai/travel-albums/commit/5f1f78c391f319c2548fe42292ed7f2685fe3766))
+
 ## [1.14.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.13.0...v1.14.0) (2026-08-03)
 
 ### ✨ Features
