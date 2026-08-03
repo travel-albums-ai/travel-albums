@@ -5,10 +5,11 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode, command }) => {
+  const shouldVisualize = process.env.VITE_BUNDLE_VISUALIZE === 'true' && command === 'build';
 
   const plugins = [react()];
 
-  if (process.env.VITE_BUNDLE_VISUALIZE === 'true' && command === 'build') {
+  if (shouldVisualize) {
     plugins.push(
       visualizer({
         filename: 'dist/stats.json',
@@ -36,9 +37,9 @@ export default defineConfig(({ mode, command }) => {
     },
     build: {
       chunkSizeWarningLimit: 2000,
-      sourcemap: process.env.VITE_BUNDLE_VISUALIZE === 'true',
+      sourcemap: shouldVisualize,
       rolldownOptions: {
-        output: process.env.VITE_BUNDLE_VISUALIZE === 'true' ? {
+        output: shouldVisualize ? {
           manualChunks(id) {
             if (!id) return;
             if (!id.includes('node_modules')) return;
@@ -62,7 +63,10 @@ export default defineConfig(({ mode, command }) => {
 
             return 'vendor';
           },
-        } : undefined,
+        } : {
+          // Keep dynamic import semantics while emitting a single JS bundle.
+          codeSplitting: false,
+        },
       }
     },
   }
