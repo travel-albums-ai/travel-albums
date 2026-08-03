@@ -4,10 +4,12 @@ import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
+import AlbumPhotoRowItem from '@/drawers/rows/AlbumPhotoRowItem';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import FavoriteToggle from '@/toggle/FavoriteToggle';
 import SelectedToggle from '@/toggle/SelectedToggle';
 import { Box, Typography, useTheme } from '@mui/material';
+import { SeparatorHorizontal, SeparatorVertical } from 'lucide-react';
 import { memo, useCallback, useMemo } from 'react';
 
 interface AlbumPhotoCardProps {
@@ -74,7 +76,66 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
     'batch',
     'imageUrl',
     'people',
+    'social',
   ]);
+
+  const properties = [
+    {
+      id: 'width',
+      icon: <SeparatorVertical />,
+      title: 'width',
+      value: String(photo.width),
+    },
+    {
+      id: 'height',
+      icon: <SeparatorHorizontal />,
+      title: 'height',
+      value: String(photo.height),
+    },
+    {
+      id: 'id',
+      icon: null,
+      title: 'id',
+      value: String(photo.id),
+    },
+    {
+      id: 'views',
+      icon: null,
+      title: 'views',
+      value: String(photo.views),
+    },
+    {
+      id: 'folder',
+      icon: null,
+      title: 'folder',
+      value: String(photo.folder),
+    },
+    {
+      id: 'title',
+      icon: null,
+      title: 'title',
+      value: String(photo.title),
+    },
+    {
+      id: 'likes',
+      icon: null,
+      title: 'likes',
+      value: String(photo.likes),
+    },
+    {
+      id: 'comments',
+      icon: null,
+      title: 'comments',
+      value: String(photo.comments),
+    },
+    {
+      id: 'takenAtTs',
+      icon: null,
+      title: 'taken at',
+      value: String(photo.takenAt),
+    },
+
+  ];
 
   return (
     <Box
@@ -111,13 +172,13 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
       <Box sx={{
         display: 'grid',
         gridTemplateColumns: '300px 300px 300px',
-        gap: 1,
+        gap: 2,
         overflow: 'hidden' }}>
         {Object.entries(photo)
           .filter(([key]) => !HIDDEN.has(key))
           .map(([key, value]) => (
-            <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', py: 0.25, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} key={key}>
-              <Typography variant="caption" color="textPrimary" sx={{ fontWeight: 'bold', width: 80, display: 'inline-block' }}>
+            <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', px: 0.25, py: 0.25, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} key={key}>
+              <Typography variant="caption" color="textPrimary" sx={{ fontWeight: 'bold', width: 80, display: 'inline-block', textTransform: 'capitalize' }}>
                 {key}
               </Typography>
               <Typography  variant="caption" color="textDisabled">
@@ -125,6 +186,14 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
               </Typography>
             </Box>
           ))}
+      </Box>
+
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: '300px 300px 300px',
+        gap: 2,
+        overflow: 'hidden' }}>
+        {properties.map((prop) => <AlbumPhotoRowItem key={prop.id} icon={prop.icon} title={prop.title} value={prop.value} />)}
       </Box>
 
       {selectMode && (
