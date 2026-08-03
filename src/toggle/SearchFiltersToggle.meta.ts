@@ -1,0 +1,13 @@
+
+export const meta = {
+  id: "searchFiltersToggle",
+  toolbar: [
+    {
+      id: 'sidebar',
+      side: 'right',
+      priority: 200,
+      visible: (context: any) => !context.sidebarSearchOpen,
+    }
+  ],
+  loader: () => import('@/toggle/SearchFiltersToggle'),
+};
