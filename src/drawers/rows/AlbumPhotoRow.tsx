@@ -127,7 +127,7 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
   ];
 
   return (
-    <Box
+    <Box data-photo-id={photo.id}
       onClick={handleClick}
       sx={{
         borderBottom: '1px solid',

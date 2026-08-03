@@ -31,9 +31,7 @@ const SimpleList = ({ style, children, ...props }: any) => (
 );
 
 export default function AllPhotosRowsVirtuoso({ photos }: Props) {
-  const width = useAlbumPhotoCardStoreSelector((s) => s.width);
   const height = useAlbumPhotoCardStoreSelector((s) => s.height);
-  const gap = useAlbumPhotoCardStoreSelector((s) => s.gap);
   const previewPhotoObj = useSettingsStoreSelector((s) => s.previewPhotoObj);
   const raf = useRef<number | null>(null);
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
@@ -67,7 +65,6 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
       if (element) {
         element.scrollIntoView({
           block: 'nearest',
-          inline: 'nearest',
           behavior: 'smooth',
         });
         return;
@@ -93,9 +90,7 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
       if (!photo) return null;
 
       return (
-        <div data-photo-id={photo.id}>
-          <AlbumPhotoRow photo={photo} />
-        </div>
+        <AlbumPhotoRow photo={photo} />
       );
     },
     [photos]
@@ -103,13 +98,13 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
 
   const List = useMemo(() => {
     const Component = (props: any) => (
-      <SimpleList {...props} width={width} gap={gap} />
+      <SimpleList {...props} />
     );
 
     Component.displayName = 'VirtuosoGridList';
 
     return Component;
-  }, [width, gap]);
+  }, []);
 
   return (
     <VirtuosoGrid
