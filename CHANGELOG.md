@@ -1,3 +1,9 @@
+## [1.14.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.13.0...v1.14.0) (2026-08-03)
+
+### ✨ Features
+
+* optimize toolbar registry with caching and improve toolbar item retrieval ([6201b97](https://github.com/travel-albums-ai/travel-albums/commit/6201b97d3d7b2c3af2ca279a68272934830cfb71))
+
 ## [1.13.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.12.0...v1.13.0) (2026-08-03)
 
 ### ✨ Features
