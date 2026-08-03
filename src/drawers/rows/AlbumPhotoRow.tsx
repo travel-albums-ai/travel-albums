@@ -48,6 +48,25 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
     setPreviewPhotoObj(photo);
   }, [photo, setPreviewPhotoObj]);
 
+  const thumbWidth = Math.max(width / 2, 200);
+  const thumbHeight = Math.max(height / 2, 150);
+
+  const thumbnailStyle = useMemo(() => ({
+    border:
+        selectMode && isSelected
+          ? `3px solid ${theme.palette.success.main}`
+          : isPreviewed
+            ? `4px solid ${theme.palette.primary.main}`
+            : 'none',
+    borderRadius: 8,
+  }), [
+    selectMode,
+    isSelected,
+    isPreviewed,
+    theme.palette.success.main,
+    theme.palette.primary.main
+  ]);
+
   return (
     <Box
       onClick={handleClick}
@@ -71,19 +90,12 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         },
       }}
     >
-      <Box sx={{ width: `${Math.max(width / 2, 200)}px`, height: `${Math.max(height / 2, 150)}px`, flexShrink: 0, position: 'relative' }}>
+      <Box sx={{ width: `${thumbWidth}px`, height: `${thumbHeight}px`, flexShrink: 0, position: 'relative' }}>
         <AlbumPhotoThumbnailBackground
           imageUrl={photo.id}
-          width={Math.max(width / 2, 200)}
-          height={Math.max(height / 2, 150)}
-          style={{
-            border: (selectMode && isSelected)
-              ? `3px solid ${theme.palette.success.main}`
-              : isPreviewed
-                ? `4px solid ${theme.palette.primary.main}`
-                : 'none',
-            borderRadius: 8,
-          }}
+          width={thumbWidth}
+          height={thumbHeight}
+          style={{...thumbnailStyle}}
         />
       </Box>
 
