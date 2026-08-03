@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.6.0...v1.7.0) (2026-08-03)
+
+### ✨ Features
+
+* refactor toggle components by moving metadata to separate files ([9c17ddf](https://github.com/travel-albums-ai/travel-albums/commit/9c17ddf72801e656ddd8e38047b8a69e71ac956c))
+
 ## [1.6.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.5.0...v1.6.0) (2026-08-03)
 
 ### ✨ Features
