@@ -16,8 +16,6 @@ const GRID_STYLE = {
   overflowX: 'visible',
 } as const;
 
-const VIEWPORT_MARGIN = 120;
-
 const SimpleList = ({ style, children, ...props }: any) => (
   <Box
     {...props}
@@ -37,7 +35,7 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
   const height = useAlbumPhotoCardStoreSelector((s) => s.height);
   const gap = useAlbumPhotoCardStoreSelector((s) => s.gap);
   const previewPhotoObj = useSettingsStoreSelector((s) => s.previewPhotoObj);
-
+  const raf = useRef<number | null>(null);
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
 
   const photoIndex = useMemo(() => {
@@ -53,46 +51,40 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
   useEffect(() => {
     if (!previewPhotoObj) return;
 
-    const index = photoIndex.get(previewPhotoObj.id);
+    if (raf.current) {
+      cancelAnimationFrame(raf.current);
+    }
 
-    if (index == null) return;
+    raf.current = requestAnimationFrame(() => {
+      const index = photoIndex.get(previewPhotoObj.id);
 
-    const element = document.querySelector(
-      `[data-photo-id="${previewPhotoObj.id}"]`
-    ) as HTMLElement | null;
+      if (index == null) return;
 
-    // Not rendered yet -> definitely scroll.
-    if (!element) {
+      const element = document.querySelector(
+        `[data-photo-id="${previewPhotoObj.id}"]`
+      ) as HTMLElement | null;
+
+      if (element) {
+        element.scrollIntoView({
+          block: 'nearest',
+          inline: 'nearest',
+          behavior: 'smooth',
+        });
+        return;
+      }
+
       virtuosoRef.current?.scrollToIndex({
         index,
         align: 'center',
         behavior: 'smooth',
       });
-      return;
-    }
-
-    const scroller = element.closest(
-      '[data-virtuoso-scroller]'
-    ) as HTMLElement | null;
-
-    if (!scroller) return;
-
-    const itemRect = element.getBoundingClientRect();
-    const viewportRect = scroller.getBoundingClientRect();
-
-    const comfortablyVisible =
-      itemRect.top >= viewportRect.top + VIEWPORT_MARGIN &&
-      itemRect.bottom <= viewportRect.bottom - VIEWPORT_MARGIN;
-
-    if (comfortablyVisible) {
-      return;
-    }
-
-    virtuosoRef.current?.scrollToIndex({
-      index,
-      align: 'center',
-      behavior: 'auto',
     });
+
+    return () => {
+      if (raf.current) {
+        cancelAnimationFrame(raf.current);
+      }
+    };
   }, [previewPhotoObj, photoIndex]);
 
   const itemContent = useCallback(
