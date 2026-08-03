@@ -24,5 +24,22 @@ export default function ThumbnailCoverToggle() {
       icon: <LayoutDashboard size={20} />,
       selected: thumbnailFormat === 'contain'
     }
-  ] satisfies GenericToggleButtonProps[]} asGroup />
+  ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "thumbnailCover",
+  toolbar: [
+    {
+      id: 'selected-photos-drawer',
+      side: 'right',
+      priority: 100
+    },
+    {
+      id: 'scroller-drawer',
+      side: 'right',
+      priority: 200
+    }
+  ],
+  component: ThumbnailCoverToggle,
+};

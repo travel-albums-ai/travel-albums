@@ -4,10 +4,6 @@ import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumGlobe from '@/drawers/globe/AlbumGlobe';
-import GroupToolbarItems from '@/layout/components/GroupToolbarItems';
-import MapAllToggle from '@/toggle/MapAllToggle';
-import MapShowPreviewToggle from '@/toggle/MapShowPreviewToggle';
-import NarrowMapToggle from '@/toggle/NarrowMapToggle';
 import { useParams } from 'react-router-dom';
 
 export default function GlobeDrawer() {
@@ -22,13 +18,7 @@ export default function GlobeDrawer() {
   const photos = showMapAll ? unfilteredPhotos : type_name === '' ? filteredPhotos : foundSet?.photos || []
 
   return (
-    <GenericPanel toolbar={<>
-      <NarrowMapToggle />
-      <GroupToolbarItems>
-        <MapAllToggle />
-        <MapShowPreviewToggle />
-      </GroupToolbarItems>
-    </>}>
+    <GenericPanel id="globe-drawer" defaultToolbar>
       <AlbumGlobe photos={showMapAll ? unfilteredPhotos : photos} multiplier={1.1} />
     </GenericPanel>
   );

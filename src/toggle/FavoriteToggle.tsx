@@ -31,5 +31,4 @@ export const meta = {
     }
   ],
   component: FavoriteToggle,
-  priority: 80
 };

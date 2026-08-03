@@ -7,16 +7,8 @@ import PopoverButton from '@/components/PopoverButton';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
 import ZoomPhoto from '@/drawers/components/ZoomPhoto';
-import GeneralToolbar from '@/layout/components/GeneralToolbar';
-import GroupToolbarItems from '@/layout/components/GroupToolbarItems';
 import { thumbnailUrl } from '@/lib/thumbnailService';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
-import FavoriteToggle from '@/toggle/FavoriteToggle';
-import IgnoredToggle from '@/toggle/IgnoredToggle';
-import PreviewCommentsToggle from '@/toggle/PreviewCommentsToggle';
-import PreviewExifToggle from '@/toggle/PreviewExifToggle';
-import PreviewMapToggle from '@/toggle/PreviewMapToggle';
-import PrivateToggle from '@/toggle/PrivateToggle';
 import { Box, Chip, Typography } from '@mui/material';
 import { FileQuestionMark, MessageSquare } from 'lucide-react';
 
@@ -43,22 +35,7 @@ export default function PhotoDrawer() {
 
   return (
     <>
-      <GenericPanel toolbar={<>
-        <GeneralToolbar group="photo-drawer" />
-        <GroupToolbarItems>
-          <FavoriteToggle photoId={photo.id} />
-          <IgnoredToggle photoId={photo.id} />
-          <PrivateToggle photoId={photo.id} />
-        </GroupToolbarItems>
-
-        <Typography variant="caption" color="textSecondary">{`${photo.title}`}</Typography>
-
-        <GroupToolbarItems>
-          <PreviewMapToggle />
-          <PreviewExifToggle />
-          <PreviewCommentsToggle />
-        </GroupToolbarItems>
-      </>}>
+      <GenericPanel id="photo-drawer" defaultToolbar>
 
         {showPreviewExif && <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
           <PopoverButton trigger={<PhotoExifDetails photo={photo} />} width={500}

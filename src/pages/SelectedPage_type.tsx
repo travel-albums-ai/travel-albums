@@ -29,7 +29,7 @@ export default function SelectedPage_type() {
         </Box>
       </BreadscrumbsPrimary>
 
-      <GenericPanel toolbar={
+      <GenericPanel id="selected-page-drawer" toolbar={
         <>
           {type_name === 'nowAndThen' && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
             <Typography sx={{ fontStyle: 'italic' }} variant="subtitle2" color="textPrimary">{t('nowAndThenTagline')}</Typography>

@@ -1,7 +1,22 @@
+import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 
-export default function GenericPanel({ id, toolbar, children }: { id?: string; toolbar?: React.ReactNode; children: React.ReactNode }) {
+interface Props {
+  id: string;
+  defaultToolbar?: boolean;
+  toolbarContext?: any;
+  toolbar?: React.ReactNode;
+  children?: React.ReactNode
+}
+
+export default function GenericPanel({
+  id,
+  defaultToolbar = false,
+  toolbarContext,
+  toolbar,
+  children
+}: Props) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -12,7 +27,8 @@ export default function GenericPanel({ id, toolbar, children }: { id?: string; t
       height: '100%',
       flex: '1 1 auto',
     }}>
-      {!collapsed && toolbar && <Box sx={wrapperSx} >
+      {!collapsed && (toolbar || defaultToolbar) && <Box sx={wrapperSx} >
+        {defaultToolbar && <GeneralToolbar group={id} context={toolbarContext} />}
         {toolbar}
       </Box>}
       {toolbar && <Box sx={{

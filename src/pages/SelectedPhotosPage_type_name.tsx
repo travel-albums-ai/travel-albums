@@ -2,16 +2,20 @@ import GenericPanel from '@/components/generics/GenericPanel';
 import NoPhotos from '@/components/NoPhotos';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import { useSelectedStoreSelector } from '@/context/selectedStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
 import BreadscrumbsPrimaryList from '@/layout/BreadcrumbsToolbar/BreadscrumbsPrimaryList';
+import { GalleryPhoto } from '@/lib/galleryData';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
-import ToolbarActions from '@/pages/components/ToolbarActions';
 import { useParams } from 'react-router-dom';
 
 export default function SelectedPhotosPage_type_name() {
   const { type_name = '', id = '' } = useParams()
   const sections = useSections_GLOBAL()
   const photosFiltered = useFilteredPhotos_GLOBAL()
+  const selectMode = useSettingsStoreSelector((state) => state.selectMode)
+  const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
 
   const showAll = type_name === ''
 
@@ -31,7 +35,7 @@ export default function SelectedPhotosPage_type_name() {
         }
       ] : []} />
 
-      <GenericPanel toolbar={<ToolbarActions photos={photos} showAll={ showAll} />}>
+      <GenericPanel id="selected-photos-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
         {photos.length === 0
           ? <NoPhotos />
           : <AllPhotosGridVirtuoso key={type_name} photos={photos} />}

@@ -4,14 +4,15 @@ import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
 import { Square, SquareCheckBig, SquareMinus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function SelectionToggle({ photoIds }: { photoIds?: string[] }) {
+export default function SelectionToggle({ context }: { context?: any }) {
   const { addMany, removeMany, invertMany } = useSelected()
   const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
   const { t } = useTranslation()
+  const photoIds = context?.photosIds || []
 
   return <GenericToggleButtonGroup items={[
     {
-      tooltip: t('addAll'),
+      tooltip: t('addAll') + 'ddd',
       kbd: 'Control+A',
       icon:  <SquareCheckBig />,
       onClick: () => photoIds && addMany(photoIds.filter((_, i) => i < 1000)),
@@ -52,5 +53,18 @@ export default function SelectionToggle({ photoIds }: { photoIds?: string[] }) {
       selected: false,
       disabled: selectedPhotos?.length === 0
     },
-  ] satisfies GenericToggleButtonProps[]} asGroup />
+  ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "selectionMode",
+  toolbar: [
+    ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
+      id,
+      side: 'left',
+      priority: 300,
+      visible: (context) => context?.selectMode === undefined ? false : context.selectMode === true,
+    })),
+  ],
+  component: SelectionToggle,
+};

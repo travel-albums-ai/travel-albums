@@ -1,10 +1,13 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePrivate } from '@/context/privateStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { EyeClosed } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function PrivateToggle({ photoId }: { photoId: string }) {
+export default function PrivateToggle() {
+  const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
+  const photoId = previewPhotoObj?.id || ''
   const { isPrivate, add, remove } = usePrivate()
   const { t } = useTranslation()
 
@@ -17,3 +20,15 @@ export default function PrivateToggle({ photoId }: { photoId: string }) {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
+
+export const meta = {
+  id: "privateToggle",
+  toolbar: [
+    {
+      id: 'photo-drawer',
+      side: 'left',
+      priority: 100
+    }
+  ],
+  component: PrivateToggle,
+};

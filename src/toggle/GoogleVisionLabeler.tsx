@@ -161,3 +161,15 @@ export default function GoogleVisionLabeler() {
     </div>
   );
 }
+
+export const meta = {
+  id: "google-vision-labeler",
+  toolbar: [
+    {
+      id: 'labeler-drawer',
+      side: 'right',
+      priority: 0
+    }
+  ],
+  component: GoogleVisionLabeler,
+};

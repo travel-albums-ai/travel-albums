@@ -1,10 +1,13 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useIgnored, useIgnored_isIgnored } from '@/context/ignoredStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Trash } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function IgnoredToggle({ photoId }: { photoId: string }) {
+export default function IgnoredToggle() {
+  const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
+  const photoId = previewPhotoObj?.id || ''
   const { add, remove } = useIgnored()
   const isIgnored = useIgnored_isIgnored(photoId)
   const { t } = useTranslation()
@@ -18,3 +21,15 @@ export default function IgnoredToggle({ photoId }: { photoId: string }) {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
+
+export const meta = {
+  id: "ignoredToggle",
+  toolbar: [
+    {
+      id: 'photo-drawer',
+      side: 'left',
+      priority: 300
+    }
+  ],
+  component: IgnoredToggle,
+};

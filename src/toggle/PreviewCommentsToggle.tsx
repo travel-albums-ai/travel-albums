@@ -18,3 +18,15 @@ export default function PreviewCommentsToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
+
+export const meta = {
+  id: "previewCommentsToggle",
+  toolbar: [
+    {
+      id: 'photo-drawer',
+      side: 'right',
+      priority: 200
+    }
+  ],
+  component: PreviewCommentsToggle,
+};

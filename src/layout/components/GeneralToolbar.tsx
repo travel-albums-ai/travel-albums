@@ -1,7 +1,7 @@
 import { toolbarRegistry } from '@/toolbarRegistry';
 import { Box, Divider, Stack } from '@mui/material';
 
-export default function GeneralToolbar({ group, noDivider, sx, context }: { group: string, noDivider?: boolean, sx?: any, context?: any }) {
+export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx, context }: { group: string, noDivider?: boolean, fullWidth?: boolean, sx?: any, context?: any }) {
   const registry = toolbarRegistry.toolbar(group)
 
   const leftItems = registry
@@ -15,7 +15,7 @@ export default function GeneralToolbar({ group, noDivider, sx, context }: { grou
     .filter(item => item.toolbar?.find(g => g.side === 'right')?.visible ? item.toolbar?.find(g => g.side === 'right')?.visible(context) : true)
 
   return (
-    <Stack sx={{ ...wrapperSx, ...sx }} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
+    <Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
       {leftItems.length > 0 && <Box sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         {leftItems
           .sort((a, b) => (a.toolbar?.find(g => g.side === 'left')?.priority ?? 0) - (b.toolbar?.find(g => g.side === 'left')?.priority ?? 0))

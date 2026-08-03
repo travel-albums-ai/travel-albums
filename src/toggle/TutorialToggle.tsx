@@ -21,7 +21,6 @@ export default function TutorialToggle() {
 
 export const meta = {
   id: "tutorial",
-  group: ['header'],
   toolbar: [
     {
       id: 'header',
@@ -30,5 +29,4 @@ export const meta = {
     }
   ],
   component: TutorialToggle,
-  priority: 70
 };

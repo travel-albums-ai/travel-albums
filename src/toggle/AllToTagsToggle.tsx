@@ -5,10 +5,11 @@ import { useTagsStore, useTagsStoreSelector } from '@/context/tagsStore';
 import { BadgeX, Tag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToTagsToggle({ photosIds } : { photosIds?: string[] }) {
+export default function AllToTagsToggle({ context } : { context: any }) {
   const { removeMany: removeManySelected } = useSelected()
   const { addTagToPhotos, removeTagFromPhotos, removeAllTagsFromPhotos } = useTagsStore()
   const { t } = useTranslation()
+  const photosIds = context?.photosIds || []
 
   const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
   const { tags, taggedPhotos } = useTagsStoreSelector((state) => state)
@@ -41,5 +42,18 @@ export default function AllToTagsToggle({ photosIds } : { photosIds?: string[] }
       },
       title: ''
     },
-  ] satisfies GenericToggleButtonProps[]} asGroup />
+  ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "allToTagsToggle",
+  toolbar: [
+    ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
+      id,
+      side: 'left',
+      priority: 1000,
+      visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
+    })),
+  ],
+  component: AllToTagsToggle,
+};

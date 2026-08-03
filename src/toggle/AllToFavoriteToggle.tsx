@@ -6,11 +6,12 @@ import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
 import { Star, StarOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToFavoriteToggle({ photosIds } : { photosIds?: string[] }) {
+export default function AllToFavoriteToggle({ context } : { context: any }) {
   const { areAllFavorite, addMany, removeMany } = useFavorites()
   const { removeMany: removeManySelected } = useSelected()
   const { removeMany: removeManyIgnored } = useIgnored()
   const { t } = useTranslation()
+  const photosIds = context?.photosIds || []
 
   const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
   const remainingPhotoIds = photosIds ? photosIds?.filter(id => selectedPhotos.includes(id)) : selectedPhotos
@@ -39,3 +40,16 @@ export default function AllToFavoriteToggle({ photosIds } : { photosIds?: string
     },
   ] satisfies GenericToggleButtonProps[]} asGroup />
 }
+
+export const meta = {
+  id: "allToFavoriteToggle",
+  toolbar: [
+    ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
+      id,
+      side: 'left',
+      priority: 700,
+      visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
+    })),
+  ],
+  component: AllToFavoriteToggle,
+};

@@ -25,3 +25,15 @@ export default function ScrollerOriginalToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "scroller-original-toggle",
+  toolbar: [
+    {
+      id: 'scroller-drawer',
+      side: 'right',
+      priority: 1100
+    }
+  ],
+  component: ScrollerOriginalToggle,
+};

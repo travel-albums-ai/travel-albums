@@ -16,3 +16,15 @@ export default function PreviewExifToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
+
+export const meta = {
+  id: "previewExifToggle",
+  toolbar: [
+    {
+      id: 'photo-drawer',
+      side: 'right',
+      priority: 100
+    }
+  ],
+  component: PreviewExifToggle,
+};

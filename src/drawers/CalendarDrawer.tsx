@@ -1,8 +1,9 @@
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import { useSelectedStoreSelector } from '@/context/selectedStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumPagePerDayWrapper from '@/drawers/calendar/AlbumPagePerDayWrapper';
-import ToolbarActions from '@/pages/components/ToolbarActions';
 import { useParams } from 'react-router-dom';
 
 export default function CalendarDrawer() {
@@ -15,9 +16,11 @@ export default function CalendarDrawer() {
   const foundSection = sections?.find((s) => s.type === type_name)
   const foundSet = foundSection?.data?.find((d: any) => d.name === id)
   const photos = showAll ? photosFiltered : foundSet?.photos || []
+  const selectMode = useSettingsStoreSelector((state) => state.selectMode)
+  const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
 
   return (
-    <GenericPanel toolbar={<ToolbarActions photos={photos} showAll={showAll} />}>
+    <GenericPanel id="calendar-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
       <AlbumPagePerDayWrapper photos={photos} />
     </GenericPanel>
   );

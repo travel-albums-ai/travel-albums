@@ -1,18 +1,18 @@
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import { useSelectedStoreSelector } from '@/context/selectedStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumScroller from '@/drawers/scroller/AlbumScroller';
-import ToolbarActions from '@/pages/components/ToolbarActions';
-import ScrollerColumnsToggle from '@/toggle/ScrollerColumnsToggle';
-import ScrollerGroupingToggle from '@/toggle/ScrollerGroupingToggle';
-import ScrollerOriginalToggle from '@/toggle/ScrollerOriginalToggle';
-import ScrollerRowsToggle from '@/toggle/ScrollerRowsToggle';
+import { GalleryPhoto } from '@/lib/galleryData';
 import { useParams } from 'react-router-dom';
 
 export default function ScrollerDrawer() {
   const { type_name = '', id = '' } = useParams()
   const sections = useSections_GLOBAL()
   const photosFiltered = useFilteredPhotos_GLOBAL()
+  const selectMode = useSettingsStoreSelector((state) => state.selectMode)
+  const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
 
   const showAll = type_name === ''
 
@@ -21,14 +21,7 @@ export default function ScrollerDrawer() {
   const photos = showAll ? photosFiltered : foundSet?.photos || []
 
   return (
-    <GenericPanel toolbar={<>
-      <ToolbarActions photos={photos} showAll={ showAll}>
-        <ScrollerColumnsToggle />
-        <ScrollerRowsToggle />
-        <ScrollerGroupingToggle />
-        <ScrollerOriginalToggle />
-      </ToolbarActions>
-    </>}>
+    <GenericPanel id="scroller-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
       <AlbumScroller photos={photos} columns={4} rows={3} />
     </GenericPanel>
   );

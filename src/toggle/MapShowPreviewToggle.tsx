@@ -16,3 +16,15 @@ export default function MapShowPreviewToggle() {
     },
   ] as GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "mapShowPreview",
+  toolbar: [
+    {
+      id: 'globe-drawer',
+      side: 'right',
+      priority: 300
+    }
+  ],
+  component: MapShowPreviewToggle,
+};

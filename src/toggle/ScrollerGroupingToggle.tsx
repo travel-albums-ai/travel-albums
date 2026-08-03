@@ -25,3 +25,15 @@ export default function ScrollerGroupingToggle() {
     },
   ] satisfies GenericToggleButtonProps[]} />
 }
+
+export const meta = {
+  id: "scroller-grouping-toggle",
+  toolbar: [
+    {
+      id: 'scroller-drawer',
+      side: 'right',
+      priority: 800
+    }
+  ],
+  component: ScrollerGroupingToggle,
+};

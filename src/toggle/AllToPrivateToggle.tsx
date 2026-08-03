@@ -7,12 +7,13 @@ import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
 import { Eye, EyeClosed } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToPrivateToggle({ photosIds } : { photosIds?: string[] }) {
+export default function AllToPrivateToggle({ context } : { context: any }) {
   const { areAllPrivate, addMany, removeMany } = usePrivate()
   const { removeMany: removeManySelected } = useSelected()
   const { removeMany: removeManyFavorites } = useFavorites()
   const { removeMany: removeManyIgnored } = useIgnored()
   const { t } = useTranslation()
+  const photosIds = context?.photosIds || []
 
   const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
 
@@ -44,3 +45,16 @@ export default function AllToPrivateToggle({ photosIds } : { photosIds?: string[
     },
   ] satisfies GenericToggleButtonProps[]} asGroup />
 }
+
+export const meta = {
+  id: "allToPrivateToggle",
+  toolbar: [
+    ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
+      id,
+      side: 'left',
+      priority: 900,
+      visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
+    })),
+  ],
+  component: AllToPrivateToggle,
+};
