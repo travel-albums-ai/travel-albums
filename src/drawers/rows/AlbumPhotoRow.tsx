@@ -67,6 +67,15 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
     theme.palette.primary.main
   ]);
 
+  const HIDDEN = new Set([
+    'city',
+    'albumName',
+    'takenAtTs',
+    'batch',
+    'imageUrl',
+    'people',
+  ]);
+
   return (
     <Box
       onClick={handleClick}
@@ -105,7 +114,7 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         gap: 1,
         overflow: 'hidden' }}>
         {Object.entries(photo)
-          .filter(([key]) => !['city', 'albumName', 'takenAtTs', 'batch', 'imageUrl', 'people' ].includes(key))
+          .filter(([key]) => !HIDDEN.has(key))
           .map(([key, value]) => (
             <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', py: 0.25, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} key={key}>
               <Typography variant="caption" color="textPrimary" sx={{ fontWeight: 'bold', width: 80, display: 'inline-block' }}>
