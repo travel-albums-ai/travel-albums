@@ -172,21 +172,24 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
 
       <Box sx={{
         display: 'grid',
-        gridTemplateColumns: '300px 300px 300px',
+        flex: 1,
+        gridTemplateColumns: 'repeat(3, 1fr)',
         gap: 2,
         overflow: 'hidden' }}>
         {properties.map((prop) => <AlbumPhotoRowItem key={prop.id} icon={prop.icon} title={prop.title} value={prop.value} />)}
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', flex: 1, p: 1 }}>
-        {resolvedTags.map((tag) => (
-          <Box key={tag.id} sx={{
-            backgroundColor: `${tag.color}BD`, color: '#fff', px: 1, py: 0.5,
-            borderRadius: 2, fontSize: '0.625rem', fontWeight: 500,
-          }}>
-            {tag.name}
-          </Box>
-        ))}
+      <Box sx={{ flex: '0 0 20%', p: 1, border: '1px dotted', borderColor: 'divider', borderRadius: 1, alignSelf: 'stretch' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.5, flexWrap: 'wrap', alignItems: 'center' }}>
+          {resolvedTags.map((tag) => (
+            <Box key={tag.id} sx={{
+              backgroundColor: `${tag.color}BD`, color: '#fff', px: 1, py: 0.5,
+              borderRadius: 2, fontSize: '0.625rem', fontWeight: 500,
+            }}>
+              {tag.name}
+            </Box>
+          ))}
+        </Box>
       </Box>
     </Box>
   );

@@ -89,7 +89,7 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
     }
 
     return <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx, }}>
-      <Skeleton variant="rounded" width="100%" height={38} />
+      <Skeleton variant="rounded" width="100%" animation="wave" height={38} />
     </Box>;
   }
 
