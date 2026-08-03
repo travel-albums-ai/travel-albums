@@ -33,7 +33,7 @@ jobs:
           cache: npm
 
       - name: 📥 Install deps
-        run: npm ci
+        run: npm ci && npm install bun
 
       - name: 🧰 Build bun package
         run: npm run bun:package
