@@ -1,3 +1,14 @@
+## [1.18.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.17.0...v1.18.0) (2026-08-03)
+
+### ✨ Features
+
+* enhance toolbar discovery with error handling and validation checks ([871d780](https://github.com/travel-albums-ai/travel-albums/commit/871d7809dd7cd257f5a6a986907d4da3b4f414cf))
+
+### 🧹 Refactors
+
+* optimize thumbnail dimensions and styles in AlbumPhotoRow ([6782a1f](https://github.com/travel-albums-ai/travel-albums/commit/6782a1f4385f3b7e428639c2e5487b3222f8b796))
+* replace hardcoded filter with HIDDEN set in AlbumPhotoRow ([b8f9a92](https://github.com/travel-albums-ai/travel-albums/commit/b8f9a92b553530d2bbac0bb0baac762794ebbb5d))
+
 ## [1.17.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.16.0...v1.17.0) (2026-08-03)
 
 ### ✨ Features
