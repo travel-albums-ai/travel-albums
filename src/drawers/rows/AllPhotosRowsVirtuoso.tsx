@@ -33,18 +33,52 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
   const gap = useAlbumPhotoCardStoreSelector((state) => state.gap);
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
+  const rangeRef = useRef({ startIndex: 0, endIndex: 0 });
 
   const photosRef = useRef(photos);
   photosRef.current = photos;
 
   useEffect(() => {
     if (!previewPhotoObj) return;
-    const index = photosRef.current.findIndex((p) => p.id === previewPhotoObj.id);
-    if (index >= 0) {
-      virtuosoRef.current?.scrollToIndex({ index, align: 'center', behavior: 'auto' });
+
+    const index = photosRef.current.findIndex(
+      p => p.id === previewPhotoObj.id
+    );
+
+    if (index < 0) return;
+
+    const el = document.querySelector(
+      `[data-photo-id="${previewPhotoObj.id}"]`
+    ) as HTMLElement | null;
+
+    if (!el) {
+      virtuosoRef.current?.scrollToIndex({
+        index,
+        align: 'center',
+        behavior: 'auto',
+      });
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+
+    const scroller = el.closest('[data-virtuoso-scroller]') as HTMLElement;
+    const viewport = scroller.getBoundingClientRect();
+
+    const margin = 100;
+
+    const comfortablyVisible =
+    rect.top >= viewport.top + margin &&
+    rect.bottom <= viewport.bottom - margin;
+
+    if (!comfortablyVisible) {
+      virtuosoRef.current?.scrollToIndex({
+        index,
+        align: 'center',
+        behavior: 'auto',
+      });
     }
   }, [previewPhotoObj]);
-
 
   const itemContent = useCallback(
     (index: number) => {
@@ -52,9 +86,9 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
       if (!photo) return null;
 
       return (
-        <AlbumPhotoRow
-          photo={photo}
-        />
+        <div data-photo-id={photo.id}>
+          <AlbumPhotoRow photo={photo} />
+        </div>
       );
     },
     [photos]
@@ -71,6 +105,9 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
   return (
     <VirtuosoGrid
       ref={virtuosoRef}
+      rangeChanged={(range) => {
+        rangeRef.current = range;
+      }}
       increaseViewportBy={{ top: height * 5, bottom: height * 5 }}
       style={GRID_STYLE}
       totalCount={photos.length}
