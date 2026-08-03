@@ -1,3 +1,13 @@
+## [1.22.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.21.0...v1.22.0) (2026-08-03)
+
+### ✨ Features
+
+* improve photo scrolling behavior in AllPhotosRowsVirtuoso component ([48146e7](https://github.com/travel-albums-ai/travel-albums/commit/48146e797a4b49029f912a7c1fe9198a5f441e66))
+
+### 🧹 Refactors
+
+* simplify AlbumPhotoRow component by removing memoization and unused code ([fb5c090](https://github.com/travel-albums-ai/travel-albums/commit/fb5c090a3de7adc597a008a21c9cc464bb09f479))
+
 ## [1.21.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.20.0...v1.21.0) (2026-08-03)
 
 ### ✨ Features
