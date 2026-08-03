@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.9.0...v1.10.0) (2026-08-03)
+
+### ✨ Features
+
+* refactor toggle components to implement ToolbarMeta type and remove inline metadata ([0b8eaba](https://github.com/travel-albums-ai/travel-albums/commit/0b8eabaa3238e98f5b695337fe74b9a75710f49f))
+
 ## [1.9.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.8.0...v1.9.0) (2026-08-03)
 
 ### ✨ Features
