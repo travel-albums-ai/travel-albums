@@ -7,6 +7,7 @@ import PopoverButton from '@/components/PopoverButton';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
 import ZoomPhoto from '@/drawers/components/ZoomPhoto';
+import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import GroupToolbarItems from '@/layout/components/GroupToolbarItems';
 import { thumbnailUrl } from '@/lib/thumbnailService';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
@@ -43,6 +44,7 @@ export default function PhotoDrawer() {
   return (
     <>
       <GenericPanel toolbar={<>
+        <GeneralToolbar group="photo-drawer" />
         <GroupToolbarItems>
           <FavoriteToggle photoId={photo.id} />
           <IgnoredToggle photoId={photo.id} />

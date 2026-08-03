@@ -115,3 +115,17 @@ export default function SidebarSearch() {
     </>
   );
 }
+
+export const meta = {
+  id: "sidebarSearch",
+  group: ['sidebar'],
+  toolbar: [
+    {
+      id: 'sidebar',
+      side: 'left',
+      priority: 0
+    }
+  ],
+  component: SidebarSearch,
+  priority: 70
+};

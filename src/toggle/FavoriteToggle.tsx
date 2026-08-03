@@ -1,10 +1,13 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useFavorites } from '@/context/favoritesStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Star, StarOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function FavoriteToggle({ photoId }: { photoId: string }) {
+export default function FavoriteToggle() {
+  const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
+  const photoId = previewPhotoObj?.id || ''
   const { isFavorite, add, remove } = useFavorites()
   const { t } = useTranslation()
 
@@ -17,3 +20,16 @@ export default function FavoriteToggle({ photoId }: { photoId: string }) {
     },
   ] satisfies GenericToggleButtonProps[]} variant="standard" />
 }
+
+export const meta = {
+  id: "favoriteToggle",
+  toolbar: [
+    {
+      id: 'photo-drawer',
+      side: 'left',
+      priority: 0
+    }
+  ],
+  component: FavoriteToggle,
+  priority: 80
+};
