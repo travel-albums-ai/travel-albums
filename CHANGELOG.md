@@ -1,3 +1,9 @@
+## [1.20.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.19.0...v1.20.0) (2026-08-03)
+
+### ✨ Features
+
+* add AlbumPhotoRowItem component for improved photo property display ([924c598](https://github.com/travel-albums-ai/travel-albums/commit/924c59815f9fcbc41bc6b33b14caba58d279b7b8))
+
 ## [1.19.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.18.0...v1.19.0) (2026-08-03)
 
 ### ✨ Features
