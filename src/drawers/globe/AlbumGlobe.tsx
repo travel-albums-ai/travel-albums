@@ -55,6 +55,7 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
         <AlbumMapPanelByBatches
           viewport={viewport}
           setViewport={setViewport}
+          allPhotos={photos}
           batches={batches}
           onPreview={(photo: GalleryPhoto) => {
             setPreviewPhotoObj(photo)

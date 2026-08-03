@@ -21,7 +21,12 @@ export default function CalendarDrawer() {
   const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
 
   return (
-    <GenericPanel id="calendar-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
+    <GenericPanel id="calendar-drawer" defaultToolbar toolbarContext={{
+      showAll,
+      selectedPhotos: selectedPhotos.length > 0,
+      photosIds: photos.map((p: GalleryPhoto) => p.id),
+      selectMode
+    }}>
       <AlbumPagePerDayWrapper photos={photos} />
     </GenericPanel>
   );

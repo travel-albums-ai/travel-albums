@@ -134,7 +134,7 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
 
       {favorite && (
         <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }} onClick={stopPropagation}>
-          <FavoriteToggle photoId={photo.id} />
+          <FavoriteToggle _photoId={photo.id} />
         </Box>
       )}
 

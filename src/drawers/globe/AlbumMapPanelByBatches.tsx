@@ -6,9 +6,10 @@ import 'leaflet/dist/leaflet.css';
 import { useEffect, useMemo, useRef } from 'react';
 
 const THUMB_SIZE = 44
+const FIT_PADDING_PX = 36
 
 type Props = {
-  // photosList: GalleryPhoto[]
+  allPhotos: any[]
   onPreview?: (photoId: string) => void,
   batches: any
 }
@@ -67,10 +68,26 @@ function getIcon(
   return iconCache.get(key)!
 }
 
-export default function AlbumMapPanelByBatches({ batches, onPreview, viewport, setViewport }: Props) {
+export default function AlbumMapPanelByBatches({ allPhotos, batches, onPreview, viewport, setViewport }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const mapRef = useRef<L.Map>()
   const previewPhotoId = useSettingsStoreSelector((state) => state.previewPhotoObj?.id)
+  const lastAutoFitKeyRef = useRef('')
+
+  const geotaggedPhotos = useMemo(() => {
+    return allPhotos.filter(
+      (photo) =>
+        photo.latitude != null &&
+        photo.longitude != null &&
+        (photo.latitude !== 0 || photo.longitude !== 0)
+    )
+  }, [allPhotos])
+
+  const geotaggedPhotosKey = useMemo(() => {
+    return geotaggedPhotos
+      .map((photo) => `${photo.id}:${photo.latitude}:${photo.longitude}`)
+      .join('|')
+  }, [geotaggedPhotos])
 
   const photos = useMemo(() => {
     return batches.flatMap(batch =>
@@ -174,6 +191,25 @@ export default function AlbumMapPanelByBatches({ batches, onPreview, viewport, s
       }
     })
   }, [photos, onPreview, previewPhotoId])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || geotaggedPhotos.length === 0) return
+
+    if (lastAutoFitKeyRef.current === geotaggedPhotosKey) {
+      return
+    }
+
+    const positions: [number, number][] = geotaggedPhotos.map((photo) => [photo.latitude, photo.longitude])
+
+    map.fitBounds(L.latLngBounds(positions), {
+      animate: false,
+      padding: [FIT_PADDING_PX, FIT_PADDING_PX],
+      maxZoom: 14,
+    })
+
+    lastAutoFitKeyRef.current = geotaggedPhotosKey
+  }, [geotaggedPhotos, geotaggedPhotosKey])
 
   return (
     <Box sx={{ flex: 1, position: 'relative' }}>
