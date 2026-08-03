@@ -59,7 +59,7 @@ if (hasGitHubToken) {
         {
           path: "**/*.exe"
         }
-  s    ]
+      ]
     }
   ]);
 }
