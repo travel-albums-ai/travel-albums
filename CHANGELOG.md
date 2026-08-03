@@ -1,3 +1,9 @@
+## [1.25.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.24.1...v1.25.0) (2026-08-03)
+
+### ✨ Features
+
+* separate bun installation and add build script for bun packages ([e255fb3](https://github.com/travel-albums-ai/travel-albums/commit/e255fb38d90f409f861dbc1f79f33a5667f2170a))
+
 ## [1.24.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.24.0...v1.24.1) (2026-08-03)
 
 ### 🐛 Fixes
