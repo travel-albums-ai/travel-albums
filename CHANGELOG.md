@@ -1,3 +1,13 @@
+## [1.24.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.24.0...v1.24.1) (2026-08-03)
+
+### 🐛 Fixes
+
+* update artifact paths to match new naming convention for executables ([913b954](https://github.com/travel-albums-ai/travel-albums/commit/913b954fc7c340f0989746207feefd58d58a2b58))
+
+### 🧹 Refactors
+
+* remove redundant step for attaching executables to release in workflow ([731bf5b](https://github.com/travel-albums-ai/travel-albums/commit/731bf5b769547ebf36ec8209e41557853af57324))
+
 ## [1.24.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.23.0...v1.24.0) (2026-08-03)
 
 ### ✨ Features
