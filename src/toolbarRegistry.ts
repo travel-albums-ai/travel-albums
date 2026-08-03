@@ -1,5 +1,9 @@
 import { ComponentType, lazy, LazyExoticComponent } from 'react';
 
+export interface ToolbarComponentProps {
+  context?: unknown;
+}
+
 export interface ToolbarMeta {
   id: string;
 
@@ -7,23 +11,23 @@ export interface ToolbarMeta {
     id: string;
     side: 'left' | 'right';
     priority?: number;
-    visible?: (context: unknown) => boolean;
+    visible?: (_context: unknown) => boolean;
   }[];
 
   loader: () => Promise<{
-    default: ComponentType<any>;
+    default: ComponentType<ToolbarComponentProps>;
   }>;
 }
 
 class ToolbarRegistry {
-  private items = new Map<string, any>();
+  private items = new Map<string, ToolbarMeta>();
 
   private lazyCache = new WeakMap<
   ToolbarMeta['loader'],
-  LazyExoticComponent<ComponentType<any>>
+  LazyExoticComponent<ComponentType<ToolbarComponentProps>>
 >();
 
-  register(meta: any) {
+  register(meta: ToolbarMeta) {
     this.items.set(meta.id, meta);
   }
 
@@ -33,7 +37,7 @@ class ToolbarRegistry {
 
   toolbar(group: string) {
     return this.all().filter(x =>
-      x.toolbar?.some(g => g.id === group)
+      x.toolbar?.some((g) => g.id === group)
     );
   }
 
