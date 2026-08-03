@@ -49,11 +49,3 @@ jobs:
           name: bun-executables
           path: |
             **/*.exe
-
-      - name: Attach executables to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            **/*.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
