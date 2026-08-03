@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.8.0...v1.9.0) (2026-08-03)
+
+### ✨ Features
+
+* update toggle metadata files to implement ToolbarMeta type ([3a758ff](https://github.com/travel-albums-ai/travel-albums/commit/3a758ffe4f2dab0281f1e45567339615df9d0290))
+
 ## [1.8.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.7.0...v1.8.0) (2026-08-03)
 
 ### ✨ Features
