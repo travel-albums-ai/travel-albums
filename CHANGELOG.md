@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.7.0...v1.8.0) (2026-08-03)
+
+### ✨ Features
+
+* add new toggle metadata files for various features ([6cc3db1](https://github.com/travel-albums-ai/travel-albums/commit/6cc3db1e6e52dc43702aa17dd002c00ca78cab08))
+
 ## [1.7.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.6.0...v1.7.0) (2026-08-03)
 
 ### ✨ Features
