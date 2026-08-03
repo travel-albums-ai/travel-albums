@@ -27,8 +27,23 @@ class ToolbarRegistry {
     ComponentType<ToolbarComponentProps>
   >();
 
+  private preloadCache = new WeakMap<
+    ToolbarMeta['loader'],
+    Promise<ComponentType<ToolbarComponentProps>>
+  >();
+
+  private groupCache = new Map<string, ToolbarMeta[]>();
+
+  private groupSideCache = new Map<string, ToolbarMeta[]>();
+
+  private sidePriority(meta: ToolbarMeta, side: 'left' | 'right') {
+    return meta.toolbar?.find((g) => g.side === side)?.priority ?? 0;
+  }
+
   register(meta: ToolbarMeta) {
     this.items.set(meta.id, meta);
+    this.groupCache.clear();
+    this.groupSideCache.clear();
   }
 
   hasItems() {
@@ -40,18 +55,64 @@ class ToolbarRegistry {
   }
 
   toolbar(group: string) {
-    return this.all().filter(x =>
+    const cached = this.groupCache.get(group);
+
+    if (cached) {
+      return cached;
+    }
+
+    const items = this.all().filter((x) =>
       x.toolbar?.some((g) => g.id === group)
     );
+
+    this.groupCache.set(group, items);
+    return items;
+  }
+
+  toolbarBySide(group: string, side: 'left' | 'right') {
+    const cacheKey = `${group}:${side}`;
+    const cached = this.groupSideCache.get(cacheKey);
+
+    if (cached) {
+      return cached;
+    }
+
+    const items = this.toolbar(group)
+      .filter((x) => x.toolbar?.some((g) => g.side === side))
+      .sort((a, b) => this.sidePriority(a, side) - this.sidePriority(b, side));
+
+    this.groupSideCache.set(cacheKey, items);
+    return items;
   }
 
   async preload(meta: ToolbarMeta) {
-    if (this.componentCache.has(meta.loader)) {
-      return;
+    const cached = this.componentCache.get(meta.loader);
+
+    if (cached) {
+      return cached;
     }
 
-    const mod = await meta.loader();
-    this.componentCache.set(meta.loader, mod.default);
+    const inFlight = this.preloadCache.get(meta.loader);
+
+    if (inFlight) {
+      return inFlight;
+    }
+
+    const loading = meta.loader()
+      .then((mod) => {
+        this.componentCache.set(meta.loader, mod.default);
+        return mod.default;
+      })
+      .finally(() => {
+        this.preloadCache.delete(meta.loader);
+      });
+
+    this.preloadCache.set(meta.loader, loading);
+    return loading;
+  }
+
+  preloadAll(metas: ToolbarMeta[]) {
+    return Promise.all(metas.map((meta) => this.preload(meta)));
   }
 
   resolve(meta: ToolbarMeta) {

@@ -49,17 +49,15 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
     return null;
   }
 
-  const registry = toolbarRegistry.toolbar(group);
-
-  const leftItems = registry
-    .filter((x) => x.toolbar?.some((g) => g.side === 'left'))
+  const leftItems = toolbarRegistry
+    .toolbarBySide(group, 'left')
     .filter((item) => {
       const config = getToolbarConfig(item, 'left');
       return config?.visible ? config.visible(context) : true;
     });
 
-  const rightItems = registry
-    .filter((x) => x.toolbar?.some((g) => g.side === 'right'))
+  const rightItems = toolbarRegistry
+    .toolbarBySide(group, 'right')
     .filter((item) => {
       const config = getToolbarConfig(item, 'right');
       return config?.visible ? config.visible(context) : true;
@@ -69,7 +67,6 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
     <Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
       {leftItems.length > 0 && <Box sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         {leftItems
-          .sort((a, b) => (getToolbarConfig(a, 'left')?.priority ?? 0) - (getToolbarConfig(b, 'left')?.priority ?? 0))
           .map((item) => {
             const Component = toolbarRegistry.resolve(item);
 
@@ -86,7 +83,6 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
       </Box>}
       {rightItems.length > 0 && <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         {rightItems
-          .sort((a, b) => (getToolbarConfig(a, 'right')?.priority ?? 0) - (getToolbarConfig(b, 'right')?.priority ?? 0))
           .map((item) => {
             const Component = toolbarRegistry.resolve(item);
 
