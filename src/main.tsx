@@ -1,6 +1,6 @@
 import AppRoutes from '@/components/AppRoutes';
 import '@/lib/i18n';
-import { warmToolbarDiscovery } from '@/toolbarDiscovery';
+import { warmToolbarDiscovery, warmToolbarGroup } from '@/toolbarDiscovery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -22,6 +22,7 @@ declare global {
 
 const warmToolbar = () => {
   warmToolbarDiscovery();
+  warmToolbarGroup('header');
 };
 
 if (typeof window !== 'undefined') {

@@ -4,7 +4,7 @@ const modules = import.meta.glob<ToolbarMeta | undefined>('./toggle/*.meta.ts', 
   import: 'meta',
 });
 
-let discoveryPromise: Promise<void> | null = null;
+let discoveryPromise: Promise<ToolbarMeta[]> | null = null;
 
 function isToolbarSide(value: unknown): value is 'left' | 'right' {
   return value === 'left' || value === 'right';
@@ -83,10 +83,7 @@ export function ensureToolbarDiscovery() {
     return discoveryPromise;
   }
 
-  discoveryPromise = (async () => {
-    const metas = await loadToolbarMetadata();
-    await toolbarRegistry.preloadAll(metas);
-  })().catch((error) => {
+  discoveryPromise = loadToolbarMetadata().catch((error) => {
     // Allow subsequent calls to retry when discovery or preload fails.
     discoveryPromise = null;
     throw error;
@@ -98,5 +95,17 @@ export function ensureToolbarDiscovery() {
 export function warmToolbarDiscovery() {
   void ensureToolbarDiscovery().catch((error) => {
     console.warn('Toolbar discovery warmup failed', error);
+  });
+}
+
+export async function ensureToolbarGroupPreload(group: string) {
+  await ensureToolbarDiscovery();
+  const metas = toolbarRegistry.toolbar(group);
+  await toolbarRegistry.preloadAll(metas);
+}
+
+export function warmToolbarGroup(group: string) {
+  void ensureToolbarGroupPreload(group).catch((error) => {
+    console.warn(`Toolbar group warmup failed for '${group}'`, error);
   });
 }

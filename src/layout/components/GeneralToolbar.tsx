@@ -1,4 +1,4 @@
-import { ensureToolbarDiscovery } from '@/toolbarDiscovery';
+import { ensureToolbarGroupPreload } from '@/toolbarDiscovery';
 import {
   ToolbarMeta,
   toolbarRegistry,
@@ -28,21 +28,23 @@ function getToolbarConfig(item: ToolbarMeta, side: 'left' | 'right') {
 }
 
 export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx, context }: GeneralToolbarProps) {
-  const [ready, setReady] = useState(() => toolbarRegistry.hasItems());
+  const [ready, setReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [retryToken, setRetryToken] = useState(0);
 
   useEffect(() => {
-    if (ready) {
-      return;
-    }
-
     let mounted = true;
-    setError(null);
 
-    ensureToolbarDiscovery()
+    queueMicrotask(() => {
+      if (mounted) {
+        setReady(false);
+      }
+    });
+
+    ensureToolbarGroupPreload(group)
       .then(() => {
         if (mounted) {
+          setError(null);
           setReady(true);
         }
       })
@@ -60,20 +62,24 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
     return () => {
       mounted = false;
     };
-  }, [ready, retryToken]);
+  }, [group, retryToken]);
 
   if (!ready) {
     if (error) {
       return (
         <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx }}>
-          <Stack direction="row" spacing={1} alignItems="center" sx={{ width: '100%', justifyContent: 'space-between' }}>
+          <Stack direction="row" spacing={1} sx={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="caption" color="text.secondary">
               Failed to load toolbar controls.
             </Typography>
             <Button
               size="small"
               variant="outlined"
-              onClick={() => setRetryToken((value) => value + 1)}
+              onClick={() => {
+                setError(null);
+                setReady(false);
+                setRetryToken((value) => value + 1);
+              }}
             >
               Retry
             </Button>
