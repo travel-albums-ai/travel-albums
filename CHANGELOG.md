@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.3.0...v1.4.0) (2026-08-03)
+
+### ✨ Features
+
+* enhance toolbar functionality with lazy loading and new metadata structure for ThumbnailCoverToggle and TutorialToggle ([7f1debf](https://github.com/travel-albums-ai/travel-albums/commit/7f1debffc3befffbba400fea6339cd615d5c5062))
+
 ## [1.3.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.2.0...v1.3.0) (2026-08-03)
 
 ### ✨ Features
