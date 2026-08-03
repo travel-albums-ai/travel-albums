@@ -24,6 +24,7 @@ export function ensureToolbarDiscovery() {
       }
 
       toolbarRegistry.register(meta);
+      await toolbarRegistry.preload(meta);
     }
   })();
 

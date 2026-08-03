@@ -10,7 +10,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface GeneralToolbarProps {
   group: string;
@@ -73,10 +73,12 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
           .map((item) => {
             const Component = toolbarRegistry.resolve(item);
 
+            if (!Component) {
+              return null;
+            }
+
             return (
-              <Suspense key={item.id} fallback={null}>
-                <Component context={context} />
-              </Suspense>
+              <Component key={item.id} context={context} />
             );
           })
 
@@ -88,10 +90,12 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
           .map((item) => {
             const Component = toolbarRegistry.resolve(item);
 
+            if (!Component) {
+              return null;
+            }
+
             return (
-              <Suspense key={item.id} fallback={null}>
-                <Component context={context} />
-              </Suspense>
+              <Component key={item.id} context={context} />
             );
           })}
       </Box>}

@@ -1,4 +1,4 @@
-import { ComponentType, lazy, LazyExoticComponent } from 'react';
+import { ComponentType } from 'react';
 
 export interface ToolbarComponentProps {
   context?: unknown;
@@ -22,10 +22,10 @@ export interface ToolbarMeta {
 class ToolbarRegistry {
   private items = new Map<string, ToolbarMeta>();
 
-  private lazyCache = new WeakMap<
-  ToolbarMeta['loader'],
-  LazyExoticComponent<ComponentType<ToolbarComponentProps>>
->();
+  private componentCache = new WeakMap<
+    ToolbarMeta['loader'],
+    ComponentType<ToolbarComponentProps>
+  >();
 
   register(meta: ToolbarMeta) {
     this.items.set(meta.id, meta);
@@ -45,15 +45,17 @@ class ToolbarRegistry {
     );
   }
 
-  resolve(meta: ToolbarMeta) {
-    let component = this.lazyCache.get(meta.loader);
-
-    if (!component) {
-      component = lazy(meta.loader);
-      this.lazyCache.set(meta.loader, component);
+  async preload(meta: ToolbarMeta) {
+    if (this.componentCache.has(meta.loader)) {
+      return;
     }
 
-    return component;
+    const mod = await meta.loader();
+    this.componentCache.set(meta.loader, mod.default);
+  }
+
+  resolve(meta: ToolbarMeta) {
+    return this.componentCache.get(meta.loader) ?? null;
   }
 }
 
