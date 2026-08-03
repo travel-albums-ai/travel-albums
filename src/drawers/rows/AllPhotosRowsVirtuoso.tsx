@@ -11,7 +11,12 @@ type Props = {
   photos: GalleryPhoto[];
 };
 
-const GRID_STYLE = { height: '100%', overflowX: 'visible' } as const;
+const GRID_STYLE = {
+  height: '100%',
+  overflowX: 'visible',
+} as const;
+
+const VIEWPORT_MARGIN = 120;
 
 const SimpleList = ({ style, children, ...props }: any) => (
   <Box
@@ -28,57 +33,67 @@ const SimpleList = ({ style, children, ...props }: any) => (
 );
 
 export default function AllPhotosRowsVirtuoso({ photos }: Props) {
-  const width = useAlbumPhotoCardStoreSelector((state) => state.width);
-  const height = useAlbumPhotoCardStoreSelector((state) => state.height);
-  const gap = useAlbumPhotoCardStoreSelector((state) => state.gap);
-  const virtuosoRef = useRef<VirtuosoGridHandle>(null);
-  const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
-  const rangeRef = useRef({ startIndex: 0, endIndex: 0 });
+  const width = useAlbumPhotoCardStoreSelector((s) => s.width);
+  const height = useAlbumPhotoCardStoreSelector((s) => s.height);
+  const gap = useAlbumPhotoCardStoreSelector((s) => s.gap);
+  const previewPhotoObj = useSettingsStoreSelector((s) => s.previewPhotoObj);
 
-  const photosRef = useRef(photos);
-  photosRef.current = photos;
+  const virtuosoRef = useRef<VirtuosoGridHandle>(null);
+
+  const photoIndex = useMemo(() => {
+    const map = new Map<string, number>();
+
+    photos.forEach((photo, index) => {
+      map.set(photo.id, index);
+    });
+
+    return map;
+  }, [photos]);
 
   useEffect(() => {
     if (!previewPhotoObj) return;
 
-    const index = photosRef.current.findIndex(
-      p => p.id === previewPhotoObj.id
-    );
+    const index = photoIndex.get(previewPhotoObj.id);
 
-    if (index < 0) return;
+    if (index == null) return;
 
-    const el = document.querySelector(
+    const element = document.querySelector(
       `[data-photo-id="${previewPhotoObj.id}"]`
     ) as HTMLElement | null;
 
-    if (!el) {
+    // Not rendered yet -> definitely scroll.
+    if (!element) {
       virtuosoRef.current?.scrollToIndex({
         index,
         align: 'center',
-        behavior: 'auto',
+        behavior: 'smooth',
       });
       return;
     }
 
-    const rect = el.getBoundingClientRect();
+    const scroller = element.closest(
+      '[data-virtuoso-scroller]'
+    ) as HTMLElement | null;
 
-    const scroller = el.closest('[data-virtuoso-scroller]') as HTMLElement;
-    const viewport = scroller.getBoundingClientRect();
+    if (!scroller) return;
 
-    const margin = 100;
+    const itemRect = element.getBoundingClientRect();
+    const viewportRect = scroller.getBoundingClientRect();
 
     const comfortablyVisible =
-    rect.top >= viewport.top + margin &&
-    rect.bottom <= viewport.bottom - margin;
+      itemRect.top >= viewportRect.top + VIEWPORT_MARGIN &&
+      itemRect.bottom <= viewportRect.bottom - VIEWPORT_MARGIN;
 
-    if (!comfortablyVisible) {
-      virtuosoRef.current?.scrollToIndex({
-        index,
-        align: 'center',
-        behavior: 'auto',
-      });
+    if (comfortablyVisible) {
+      return;
     }
-  }, [previewPhotoObj]);
+
+    virtuosoRef.current?.scrollToIndex({
+      index,
+      align: 'center',
+      behavior: 'auto',
+    });
+  }, [previewPhotoObj, photoIndex]);
 
   const itemContent = useCallback(
     (index: number) => {
@@ -95,23 +110,25 @@ export default function AllPhotosRowsVirtuoso({ photos }: Props) {
   );
 
   const List = useMemo(() => {
-    const Comp = (props: any) => (
+    const Component = (props: any) => (
       <SimpleList {...props} width={width} gap={gap} />
     );
-    Comp.displayName = 'VirtuosoGridList';
-    return Comp;
+
+    Component.displayName = 'VirtuosoGridList';
+
+    return Component;
   }, [width, gap]);
 
   return (
     <VirtuosoGrid
       ref={virtuosoRef}
-      rangeChanged={(range) => {
-        rangeRef.current = range;
-      }}
-      increaseViewportBy={{ top: height * 5, bottom: height * 5 }}
       style={GRID_STYLE}
       totalCount={photos.length}
       computeItemKey={(index) => photos[index]?.id ?? index}
+      increaseViewportBy={{
+        top: height * 5,
+        bottom: height * 5,
+      }}
       components={{ List }}
       itemContent={itemContent}
     />
