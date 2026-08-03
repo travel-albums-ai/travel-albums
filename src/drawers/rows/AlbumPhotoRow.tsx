@@ -10,7 +10,7 @@ import FavoriteToggle from '@/toggle/FavoriteToggle';
 import SelectedToggle from '@/toggle/SelectedToggle';
 import { Box, useTheme } from '@mui/material';
 import { CaseUpper, Clock, Eye, Folder, Hash, MessageCircle, SeparatorHorizontal, SeparatorVertical, ThumbsUp } from 'lucide-react';
-import { memo, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 interface AlbumPhotoCardProps {
   photo: GalleryPhoto
@@ -21,7 +21,7 @@ function stopPropagation(e: React.MouseEvent) {
 }
 
 
-function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
+export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
   const theme = useTheme();
 
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
@@ -68,16 +68,6 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
     theme.palette.success.main,
     theme.palette.primary.main
   ]);
-
-  // const HIDDEN = new Set([
-  //   'city',
-  //   'albumName',
-  //   'takenAtTs',
-  //   'batch',
-  //   'imageUrl',
-  //   'people',
-  //   'social',
-  // ]);
 
   const properties = [
     {
@@ -198,11 +188,6 @@ function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
           </Box>
         ))}
       </Box>
-
     </Box>
   );
 }
-
-export default memo(AlbumPhotoRow, (prev, next) => (
-  prev.photo === next.photo
-));
