@@ -4,6 +4,7 @@ import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumPagePerDayWrapper from '@/drawers/calendar/AlbumPagePerDayWrapper';
+import { GalleryPhoto } from '@/lib/galleryData';
 import { useParams } from 'react-router-dom';
 
 export default function CalendarDrawer() {

@@ -18,7 +18,7 @@ const URLS = {
 
 async function fetchAirports(demoMode: boolean, setSetting: any) {
   return benchmarkFunction(async () => {
-    setSetting((prev: any) => ({ ...prev, loading: true }));
+    // setSetting((prev: any) => ({ ...prev, loading: true }));
 
     const cached = await localforage.getItem<any>(LOCALFORAGE_KEY(demoMode));
     if (cached) {
