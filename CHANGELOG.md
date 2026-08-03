@@ -1,3 +1,20 @@
+## [1.24.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.23.0...v1.24.0) (2026-08-03)
+
+### ✨ Features
+
+* enhance release workflow by adding .exe file upload and build scripts for bun package ([3118b43](https://github.com/travel-albums-ai/travel-albums/commit/3118b4385ae5b45748acf829ed172e75ea2f3ecd))
+* install bun globally during dependency setup in release workflow ([7692d58](https://github.com/travel-albums-ai/travel-albums/commit/7692d580890f0cff2676038109607515aa36577f))
+* update release workflow to use actions/upload-artifact@v4 and streamline .exe file handling ([fa418f3](https://github.com/travel-albums-ai/travel-albums/commit/fa418f323549b264c716272be032183e098d1650))
+
+### 🐛 Fixes
+
+* correct syntax error in GitHub plugin configuration ([30e1018](https://github.com/travel-albums-ai/travel-albums/commit/30e1018957967ac1632d11bdefb98e4e72f7f246))
+
+### 🧹 Refactors
+
+* remove unused code and simplify FolderHandlersDrawer component structure ([4556259](https://github.com/travel-albums-ai/travel-albums/commit/455625977cdc2b473e61496ffbd39841b4773412))
+* streamline FolderHandlersDrawer component by simplifying folder management and improving UI layout ([69af099](https://github.com/travel-albums-ai/travel-albums/commit/69af099de5b1eb48d662c97d8dfb1c0d558ea7c6))
+
 ## [1.23.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.22.0...v1.23.0) (2026-08-03)
 
 ### ✨ Features
