@@ -54,3 +54,4 @@ jobs:
           name: bun-executables
           path: |
             **/TravelAlbums*.exe
+          retention-days: 2
