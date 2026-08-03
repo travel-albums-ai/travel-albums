@@ -210,8 +210,12 @@ export default function AlbumScroller({
       if (Math.abs(delta) < THRESHOLD) return;
       go(delta > 0 ? 1 : -1);
     };
-    window.addEventListener('wheel', onWheel, { passive: true });
-    return () => window.removeEventListener('wheel', onWheel);
+
+    const el = containerRef.current;
+    if (!el) return;
+
+    el.addEventListener('wheel', onWheel, { passive: true });
+    return () => el.removeEventListener('wheel', onWheel);
   }, [go]);
 
   const mountedIndices = useMemo(() => {
