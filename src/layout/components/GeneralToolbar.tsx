@@ -26,8 +26,6 @@ function getToolbarConfig(item: ToolbarMeta, side: 'left' | 'right') {
 export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx, context }: GeneralToolbarProps) {
   const registry = toolbarRegistry.toolbar(group);
 
-  console.log('GeneralToolbar', group, registry);
-
   const leftItems = registry
     .filter((x) => x.toolbar?.some((g) => g.side === 'left'))
     .filter((item) => {

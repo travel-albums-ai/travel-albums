@@ -41,16 +41,3 @@ export default function SortSectionsToggle() {
     ] as GenericToggleButtonProps[] satisfies GenericToggleButtonProps[]}
   />
 }
-
-export const meta = {
-  id: "sortSectionsToggle",
-  toolbar: [
-    {
-      id: 'sidebar',
-      side: 'right',
-      priority: 0,
-      visible: (context: any) => !context.sidebarSearchOpen,
-    }
-  ],
-  component: SortSectionsToggle,
-};
