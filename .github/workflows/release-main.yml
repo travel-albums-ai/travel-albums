@@ -48,4 +48,4 @@ jobs:
         with:
           name: bun-executables
           path: |
-            **/*.exe
+            **/TravelAlbums*.exe

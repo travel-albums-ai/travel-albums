@@ -57,7 +57,7 @@ if (hasGitHubToken) {
       releasedLabels: false,
       assets: [
         {
-          path: "**/*.exe"
+          path: "**/TravelAlbums*.exe",
         }
       ]
     }
