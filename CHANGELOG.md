@@ -1,3 +1,20 @@
+## [1.23.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.22.0...v1.23.0) (2026-08-03)
+
+### ✨ Features
+
+* add FolderHandlersDrawer component for managing folder uploads and organization ([39c051f](https://github.com/travel-albums-ai/travel-albums/commit/39c051fcb369255049a51eb9b4f2eccd443529df))
+
+### 🧹 Refactors
+
+* enhance AlbumScroller component with preview functionality and improved state management ([2d61485](https://github.com/travel-albums-ai/travel-albums/commit/2d6148523d4129a2e8ecdcb5ecddd6b97eacf82b))
+* enhance AlbumScroller component with responsive container width handling and improved photo alignment ([7283b2e](https://github.com/travel-albums-ai/travel-albums/commit/7283b2eae3e849c09c1a4cc0b3712aae5445e718))
+* enhance AllPhotosRowsVirtuoso component for improved photo scrolling and code clarity ([a62070a](https://github.com/travel-albums-ai/travel-albums/commit/a62070a4db60775eb47c357db769e1ba2d534f8e))
+* improve wheel event handling in AlbumScroller component by targeting the container element ([b2e679c](https://github.com/travel-albums-ai/travel-albums/commit/b2e679c068f5a31d68916525f9530d420eaeb333))
+* optimize AlbumPhotoRow and AllPhotosRowsVirtuoso components by removing unnecessary props and improving structure ([733db18](https://github.com/travel-albums-ai/travel-albums/commit/733db181dc5c72ee4c301286a240b557608ebb26))
+* simplify bundle visualization logic in vite.config.ts for improved readability ([bf2100b](https://github.com/travel-albums-ai/travel-albums/commit/bf2100bca51a4c173f9ad13d7c41fe878e032f03))
+* streamline scrolling logic in AllPhotosRowsVirtuoso component ([daf5dcb](https://github.com/travel-albums-ai/travel-albums/commit/daf5dcb9880804f941f76e1c38af909ec024dded))
+* update layout in AlbumPhotoRow and AllPhotosRowsVirtuoso components for improved responsiveness and clarity ([e288a9a](https://github.com/travel-albums-ai/travel-albums/commit/e288a9a605efd09e02b9e045203edc3d7256b463))
+
 ## [1.22.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.21.0...v1.22.0) (2026-08-03)
 
 ### ✨ Features
