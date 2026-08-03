@@ -14,6 +14,8 @@ type Props = {
 
 const ITEM_WIDTH = 300;
 const GAP = 32;
+const MIN_ITEM_WIDTH = 180;
+const MAX_ITEM_WIDTH = 320;
 const ANIMATION_MS = 650;
 const INPUT_LOCK_MS = 350;
 const MOUNT_RADIUS = 1;
@@ -82,6 +84,20 @@ export default function AlbumScroller({
   const columns = useSettingsStoreSelector((state) => state.scrollerColumns)
   const groupedByBatches = useSettingsStoreSelector((state) => state.scrollerGroupedByBatches)
   const blockSize = rows * columns;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(1200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setContainerWidth(entry.contentRect.width);
+    });
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const blocks = useMemo(() => {
     if (!groupedByBatches) {
@@ -177,8 +193,11 @@ export default function AlbumScroller({
     [blocks]
   );
 
+  const centeredOffset =
+    (containerWidth - blockWidth) / 2;
+
   return (
-    <Box
+    <Box ref={containerRef}
       sx={{
         position: 'relative',
         width: '100%',
@@ -210,7 +229,7 @@ export default function AlbumScroller({
         sx={{
           position: 'relative',
           height: '100%',
-          transform: `translate3d(calc(35% + ${offsetX}px), 0, 0)`,
+          transform: `translate3d(${centeredOffset + offsetX}px,0,0)`,
           transition: `transform ${ANIMATION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
           willChange: 'transform',
         }}
