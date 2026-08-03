@@ -1,116 +1,69 @@
-import {
-  Accordion,
-  AccordionSummary,
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Typography
-} from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import GenericPanel from '@/components/generics/GenericPanel';
-import { Delete, Expand, Folder } from 'lucide-react';
-
-type FolderFile = {
-  name: string;
-  path: string;
-  extension: string;
-  size: number;
-  file: File;
-};
-
-type FolderHandler = {
-  id: string;
-  name: string;
-  files: FolderFile[];
-};
-
-const formatBytes = (bytes: number) => {
-  if (bytes === 0) return '0 B';
-
-  const k = 1024;
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-  return `${(bytes / Math.pow(k, i)).toFixed(i === 0 ? 0 : 1)} ${sizes[i]}`;
-};
 
 export default function FolderHandlersDrawer() {
-  const [folders, setFolders] = useState<FolderHandler[]>([]);
+  const [folders, setFolders] = useState<Map<string, number>>(() => new Map());
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleAddFolder = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files ?? []);
+    const files = event.target.files;
 
-    if (!files.length) {
-      return;
+    if (!files || files.length === 0) return;
+
+    // Copy existing map so we can update counts in-place and trigger a single state update
+    const next = new Map(folders);
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i] as File & { webkitRelativePath?: string };
+      const path = file.webkitRelativePath ?? file.name;
+      const slash = path.indexOf('/');
+      const folder = slash === -1 ? path : path.slice(0, slash);
+
+      next.set(folder, (next.get(folder) ?? 0) + 1);
     }
 
-    const grouped = new Map<string, FolderHandler>();
+    setFolders(next);
 
-    for (const file of files) {
-      const relativePath = (file as File & { webkitRelativePath: string }).webkitRelativePath;
-
-      const folderName = relativePath.split('/')[0] || 'Folder';
-
-      if (!grouped.has(folderName)) {
-        grouped.set(folderName, {
-          id: crypto.randomUUID(),
-          name: folderName,
-          files: [],
-        });
-      }
-
-      grouped.get(folderName)!.files.push({
-        name: file.name,
-        path: relativePath,
-        extension: file.name.split('.').pop()?.toUpperCase() ?? '',
-        size: file.size,
-        file,
-      });
-    }
-
-    setFolders((prev) => [...prev, ...grouped.values()]);
-
-    // Allow selecting the same folder again later
     event.target.value = '';
   };
 
-  const removeFolder = (id: string) => {
-    setFolders((prev) => prev.filter((f) => f.id !== id));
-  };
+  console.log('folders', folders);
 
   return (
     <GenericPanel id="folder-handlers-drawer" defaultToolbar>
-      <Stack
-        spacing={2}
+      <Box
         sx={{
+          p: 1,
           height: '100%',
-          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <Stack direction="row" spacing={1}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 1,
+            mb: 1,
+          }}
+        >
           <Button
             variant="contained"
-            startIcon={<Folder />}
             onClick={() => inputRef.current?.click()}
           >
             Add Folder
           </Button>
 
           <Button
-            variant="outlined"
             color="error"
-            startIcon={<Delete />}
-            disabled={!folders.length}
+            disabled={folders.length === 0}
             onClick={() => setFolders([])}
           >
             Clear
           </Button>
-        </Stack>
+        </Box>
 
         <input
           ref={inputRef}
@@ -124,64 +77,57 @@ export default function FolderHandlersDrawer() {
 
         <Box
           sx={{
-            overflow: 'auto',
             flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 1,
+            overflow: 'auto',
           }}
         >
-          {!folders.length && (
-            <Typography color="text.secondary">
-              No folders added.
-            </Typography>
-          )}
-
-          {folders.map((folder) => {
-            const totalSize = folder.files.reduce((sum, file) => sum + file.size, 0);
-
-            return (
-              <Accordion
-                key={folder.id}
-                defaultExpanded
-                disableGutters
+          {folders.size === 0 ? (
+            <div>No folders added.</div>
+          ) : (
+            Array.from(folders.entries()).map(([name, count], i, arr) => (
+              <Box
+                key={name}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  py: 0.5,
+                  px: 1,
+                  borderBottom:
+                    i === arr.length - 1
+                      ? undefined
+                      : '1px solid rgba(255,255,255,.08)',
+                }}
               >
-                <AccordionSummary expandIcon={<Expand />}>
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    width="100%"
-                    pr={2}
+                <div>{name}</div>
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 1,
+                    alignItems: 'center',
+                  }}
+                >
+                  <div>{count} files</div>
+
+                  <Button
+                    size="small"
+                    color="error"
+                    onClick={() =>
+                      setFolders(prev => {
+                        const copy = new Map(prev);
+                        copy.delete(name);
+                        return copy;
+                      })
+                    }
                   >
-                    <Stack spacing={0.5}>
-                      <Typography >
-                        📁 {folder.name}
-                      </Typography>
-
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                      >
-                        {folder.files.length} files • {formatBytes(totalSize)}
-                      </Typography>
-                    </Stack>
-
-                    <IconButton
-                      color="error"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeFolder(folder.id);
-                      }}
-                    >
-                      <Delete />
-                    </IconButton>
-                  </Stack>
-                </AccordionSummary>
-              </Accordion>
-            );
-          })}
+                    Delete
+                  </Button>
+                </Box>
+              </Box>
+            ))
+          )}
         </Box>
-      </Stack>
+      </Box>
     </GenericPanel>
   );
 }
