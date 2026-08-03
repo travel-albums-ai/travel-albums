@@ -2,6 +2,7 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AdjustmentsDrawer from '@/drawers/AdjustmentsDrawer';
 import CalendarDrawer from '@/drawers/CalendarDrawer';
 import FilesDrawer from '@/drawers/FilesDrawer';
+import FolderHandlersDrawer from '@/drawers/FolderHandlersDrawer';
 import GlobeDrawer from '@/drawers/GlobeDrawer';
 import LabelerDrawer from '@/drawers/LabelerDrawer';
 import OutletDrawer from '@/drawers/OutletDrawer';
@@ -76,6 +77,7 @@ function createDefaultJson(drawers: typeof drawers): IJsonModel {
             ...(drawers.scroller ? [{ type: 'tab', name: 'Scroller', component: 'scrollerDrawer' }] : []),
             ...(drawers.rows ? [{ type: 'tab', name: 'Rows', component: 'rowsDrawer' }] : []),
             ...(drawers.calendar ? [{ type: 'tab', name: 'Calendar', component: 'calendarDrawer' }] : []),
+            ...(drawers.folderHandler ? [{ type: 'tab', name: 'Folder Handlers', component: 'folderHandlersDrawer' }] : []),
           ],
         },
       ],
@@ -114,6 +116,7 @@ export default function ComplexLayout() {
   const scroller = useMemo(() => <ScrollerDrawer />, []);
   const rows = useMemo(() => <RowsDrawer />, []);
   const calendar = useMemo(() => <CalendarDrawer />, []);
+  const folderHandler = useMemo(() => <FolderHandlersDrawer />, []);
 
   const factory = useCallback((node: TabNode) => {
     switch (node.getComponent()) {
@@ -137,10 +140,12 @@ export default function ComplexLayout() {
         return rows;
       case "calendarDrawer":
         return calendar;
+      case "folderHandlersDrawer":
+        return folderHandler;
       default:
         return null;
     }
-  }, [sidebar, globe, outlet, preview, adjustments, files, labeler, scroller, rows, calendar]);
+  }, [sidebar, globe, outlet, preview, adjustments, files, labeler, scroller, rows, calendar, folderHandler]);
 
   const timeout = useRef<number>();
 
