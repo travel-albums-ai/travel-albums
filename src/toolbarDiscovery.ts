@@ -2,12 +2,17 @@
 
 import { toolbarRegistry } from '@/toolbarRegistry';
 
-const modules = import.meta.glob('./toggle/*.tsx', {
+const modules = import.meta.glob('./toggle/*.meta.ts', {
   eager: true,
 });
 
-for (const mod of Object.values(modules)) {
-  if ('meta' in mod) {
-    toolbarRegistry.register(mod.meta);
+for (const [path, mod] of Object.entries(modules)) {
+  const meta = (mod as any).meta;
+
+  if (!meta) {
+    console.warn(`${path} does not export 'meta'`);
+    continue;
   }
+
+  toolbarRegistry.register(meta);
 }

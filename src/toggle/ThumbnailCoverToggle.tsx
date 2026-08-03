@@ -26,20 +26,3 @@ export default function ThumbnailCoverToggle() {
     }
   ] satisfies GenericToggleButtonProps[]} />
 }
-
-export const meta = {
-  id: "thumbnailCover",
-  toolbar: [
-    {
-      id: 'selected-photos-drawer',
-      side: 'right',
-      priority: 100
-    },
-    {
-      id: 'scroller-drawer',
-      side: 'right',
-      priority: 200
-    }
-  ],
-  component: ThumbnailCoverToggle,
-};
