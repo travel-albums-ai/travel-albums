@@ -6,6 +6,7 @@ import {
 import {
   Box,
   Divider,
+  Skeleton,
   Stack,
   SxProps,
   Theme,
@@ -46,7 +47,9 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
   }, [ready]);
 
   if (!ready) {
-    return null;
+    return <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx, }}>
+      <Skeleton variant="rounded" width="100%" height={38} />
+    </Box>;
   }
 
   const leftItems = toolbarRegistry

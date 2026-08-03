@@ -26,7 +26,7 @@ const warmToolbar = () => {
 
 if (typeof window !== 'undefined') {
   if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(warmToolbar, { timeout: 1500 });
+    window.requestIdleCallback(warmToolbar, { timeout: 250 });
   } else {
     globalThis.setTimeout(warmToolbar, 0);
   }
