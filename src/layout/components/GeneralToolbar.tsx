@@ -5,11 +5,13 @@ import {
 } from '@/toolbarRegistry';
 import {
   Box,
+  Button,
   Divider,
   Skeleton,
   Stack,
   SxProps,
   Theme,
+  Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -27,6 +29,8 @@ function getToolbarConfig(item: ToolbarMeta, side: 'left' | 'right') {
 
 export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx, context }: GeneralToolbarProps) {
   const [ready, setReady] = useState(() => toolbarRegistry.hasItems());
+  const [error, setError] = useState<Error | null>(null);
+  const [retryToken, setRetryToken] = useState(0);
 
   useEffect(() => {
     if (ready) {
@@ -34,19 +38,50 @@ export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx,
     }
 
     let mounted = true;
+    setError(null);
 
-    ensureToolbarDiscovery().then(() => {
-      if (mounted) {
-        setReady(true);
-      }
-    });
+    ensureToolbarDiscovery()
+      .then(() => {
+        if (mounted) {
+          setReady(true);
+        }
+      })
+      .catch((cause) => {
+        if (!mounted) {
+          return;
+        }
+
+        const discoveryError = cause instanceof Error
+          ? cause
+          : new Error('Toolbar discovery failed');
+        setError(discoveryError);
+      });
 
     return () => {
       mounted = false;
     };
-  }, [ready]);
+  }, [ready, retryToken]);
 
   if (!ready) {
+    if (error) {
+      return (
+        <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx }}>
+          <Stack direction="row" spacing={1} alignItems="center" sx={{ width: '100%', justifyContent: 'space-between' }}>
+            <Typography variant="caption" color="text.secondary">
+              Failed to load toolbar controls.
+            </Typography>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => setRetryToken((value) => value + 1)}
+            >
+              Retry
+            </Button>
+          </Stack>
+        </Box>
+      );
+    }
+
     return <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx, }}>
       <Skeleton variant="rounded" width="100%" height={38} />
     </Box>;

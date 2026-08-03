@@ -41,6 +41,13 @@ class ToolbarRegistry {
   }
 
   register(meta: ToolbarMeta) {
+    const existing = this.items.get(meta.id);
+
+    if (existing && existing.loader !== meta.loader) {
+      console.warn(`Duplicate toolbar meta id '${meta.id}' detected. Skipping registration.`);
+      return;
+    }
+
     this.items.set(meta.id, meta);
     this.groupCache.clear();
     this.groupSideCache.clear();
