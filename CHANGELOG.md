@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.5.0...v1.6.0) (2026-08-03)
+
+### ✨ Features
+
+* remove console log from GeneralToolbar and move SortSectionsToggle meta to a new file ([a142b03](https://github.com/travel-albums-ai/travel-albums/commit/a142b03c804b8da2559f1665fee4b8ae893ae88d))
+
 ## [1.5.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.4.0...v1.5.0) (2026-08-03)
 
 ### ✨ Features
