@@ -1,3 +1,17 @@
+## [1.26.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.25.1...v1.26.0) (2026-08-03)
+
+### ✨ Features
+
+* update emoji in README to reflect cloud service context ([a498810](https://github.com/travel-albums-ai/travel-albums/commit/a498810f7c26c89d4b25fa59803d40ba60f6a8b7))
+
+### 🧹 Refactors
+
+* streamline bun package build process by removing obsolete script and updating workflow ([8a0c86d](https://github.com/travel-albums-ai/travel-albums/commit/8a0c86dd3282616238c15c3099ac2d2da375949f))
+
+### 🔧 Chore
+
+* set retention days for bun executables workflow artifact ([4b0e050](https://github.com/travel-albums-ai/travel-albums/commit/4b0e050df4573c0e5c06c59a2903978c9adf900c))
+
 ## [1.25.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.25.0...v1.25.1) (2026-08-03)
 
 ### 🐛 Fixes
