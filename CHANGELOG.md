@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.2.0...v1.3.0) (2026-08-03)
+
+### ✨ Features
+
+* refactor layout to replace Header with GeneralToolbar and enhance toolbar functionality ([7b36b70](https://github.com/travel-albums-ai/travel-albums/commit/7b36b703928a43d950253d9b4307f7214c35b1e7))
+
 ## [1.2.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.1.0...v1.2.0) (2026-08-02)
 
 ### ✨ Features
