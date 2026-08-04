@@ -1,3 +1,5 @@
+## [1.27.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.26.0...v1.27.0) (2026-08-04)
+
 ## [1.26.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.25.1...v1.26.0) (2026-08-03)
 
 ### ✨ Features
