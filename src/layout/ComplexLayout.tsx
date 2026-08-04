@@ -24,6 +24,10 @@ import {
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
 
+import * as FlexLayout from 'flexlayout-react';
+
+console.log(FlexLayout);
+
 import i18n from '@/lib/i18n';
 import {
   useCallback,
