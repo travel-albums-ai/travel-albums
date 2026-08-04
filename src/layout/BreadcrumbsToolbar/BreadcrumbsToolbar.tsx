@@ -1,7 +1,6 @@
 import { routeIcons } from '@/icons/IconsIndex';
 import { getRouteDetailsByPath } from '@/routes';
 import { Box, Breadcrumbs, Link, Theme, Typography } from '@mui/material';
-import { House } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
@@ -28,7 +27,7 @@ export default function BreadcrumbsToolbar({ asIs = false }: { asIs?: boolean })
           to="/dashboard"
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <House size={16} />
+            <img src="/logo_new_48.png" alt="TravelAlbums" style={{ width: 16, height: 16 }} />
             TravelAlbums
           </Box>
         </Link>
