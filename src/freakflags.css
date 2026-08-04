@@ -1,13 +1,13 @@
 /*!*****************************************************
 
-Freak Flags, Copyright ©2026 Michael P. Cohen. Freak flags is licensed under the MIT license.  
+Freak Flags, Copyright ©2026 Michael P. Cohen. Freak flags is licensed under the MIT license.
 
-For complete information visit: www.freakflagsprite.com 
+For complete information visit: www.freakflagsprite.com
 
 ******************************************************/
 
 .fflag {
-    background-image:url(flagSprite42.png);
+    background-image:url(/flagSprite42.png);
     background-repeat:no-repeat;
     background-size: 100% 49494%;
     display: inline-block;
