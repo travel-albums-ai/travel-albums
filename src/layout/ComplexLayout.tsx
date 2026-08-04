@@ -106,7 +106,7 @@ const COMPONENTS = {
 
 function loadModel(drawers: typeof drawers) {
   try {
-    const saved = false
+    const saved = localStorage.getItem(STORAGE_KEY);
 
     if (saved) {
       return Model.fromJson(JSON.parse(saved));
@@ -120,7 +120,6 @@ function loadModel(drawers: typeof drawers) {
 
 export default function ComplexLayout() {
   const drawers = useSettingsStoreSelector((s) => s.drawers);
-  const locale = useSettingsStoreSelector((state) => state.locale);
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
 
   const [model, setModel] = useState(() => loadModel(drawers));
@@ -132,7 +131,7 @@ export default function ComplexLayout() {
 
   useEffect(() => {
     setModel(loadModel(drawers));
-  }, [drawers, locale]);
+  }, [drawers]);
 
   return (
     <>
