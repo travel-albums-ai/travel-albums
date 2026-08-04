@@ -42,6 +42,7 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
     }
   }, [previewPhotoId]);
 
+
   return (
     <>
       <Box
@@ -52,7 +53,7 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
           flexDirection: 'column',
         }}
       >
-        <AlbumMapPanelByBatches
+        {photos && <AlbumMapPanelByBatches
           viewport={viewport}
           setViewport={setViewport}
           allPhotos={photos}
@@ -60,7 +61,7 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
           onPreview={(photo: GalleryPhoto) => {
             setPreviewPhotoObj(photo)
           }}
-        />
+        />}
 
         {mapShowPreview && <Box
           sx={{
