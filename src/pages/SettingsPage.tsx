@@ -7,7 +7,6 @@ import LayoutPopover from '@/settings/LayoutPopover';
 import SectionsPopover from '@/settings/SectionsPopover';
 import SettingsPopover from '@/settings/SettingsPopover';
 import TagsPopover from '@/settings/TagsPopover';
-import OnboardingToggle from '@/toggle/OnboardingToggle';
 import { Box, Typography } from '@mui/material';
 import { Filter, Group, Server, Shapes, Tag } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
@@ -35,7 +34,7 @@ export default function SettingsPage() {
   }, [activeSettingsTab, sections, setSetting]);
 
   return (<>
-    <GenericPanel toolbar={<OnboardingToggle />}>
+    <GenericPanel defaultToolbar id="settings-page">
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
           {sections.map(section => (

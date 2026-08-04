@@ -1,8 +1,7 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "goToSettings",
-  enabled: false,
+  id: "settingsModalToggle",
   toolbar: [
     {
       id: 'header',
@@ -10,5 +9,5 @@ export const meta = {
       priority: 500
     }
   ],
-  loader: () => import('@/toggle/GoToSettingsToggle'),
+  loader: () => import('@/toggle/SettingsModalToggle'),
 } as ToolbarMeta;

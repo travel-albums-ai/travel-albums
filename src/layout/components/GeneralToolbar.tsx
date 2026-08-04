@@ -27,7 +27,7 @@ function getToolbarConfig(item: ToolbarMeta, side: 'left' | 'right') {
   return item.toolbar?.find((g) => g.side === side);
 }
 
-export default function GeneralToolbar({ group, noDivider, fullWidth = true, sx, context }: GeneralToolbarProps) {
+export default function GeneralToolbar({ group, noDivider = true, fullWidth = true, sx, context }: GeneralToolbarProps) {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [retryToken, setRetryToken] = useState(0);

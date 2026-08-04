@@ -24,11 +24,8 @@ import {
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
 
-import * as FlexLayout from 'flexlayout-react';
-
-console.log(FlexLayout);
-
 import i18n from '@/lib/i18n';
+import SettingsModal from '@/modals/SettingsModal';
 import {
   useCallback,
   useEffect,
@@ -63,7 +60,6 @@ const layoutChildren = [
 ]
 
 function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
-  console.log('createDefaultJson', drawers, locale);
   return {
     global: {
       tabEnableClose: false,
@@ -174,6 +170,7 @@ export default function ComplexLayout() {
       }} />
       <NoServerModal />
       <OnboardingModal />
+      <SettingsModal />
       <MainDriver />
 
       <Box

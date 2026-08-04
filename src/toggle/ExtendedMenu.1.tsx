@@ -2,14 +2,14 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import LocaleToggle from '@/toggle/LocaleToggle';
 import { Divider, Stack } from '@mui/material';
-import { EllipsisVertical, ScrollText, Settings } from 'lucide-react';
+import { EllipsisVertical, ScrollText } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const URLS = [
   {
     tooltip: 'GitHub',
     title: 'GitHub',
-    icon: <Settings />,
+    icon: <ScrollText />,
     url: 'https://github.com/travel-albums-ai/travel-albums',
   },
   {
@@ -48,10 +48,7 @@ export default function ExtendedMenu() {
               variant="standard"
               key={item.title}
               items={[
-                {
-                  ...item,
-                  onClick: () => window.open(item.url, '_blank'),
-                },
+                item
               ] satisfies GenericToggleButtonProps[]}
             />))}
             <LocaleToggle />
