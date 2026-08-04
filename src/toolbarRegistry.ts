@@ -7,6 +7,8 @@ export interface ToolbarComponentProps {
 export interface ToolbarMeta {
   id: string;
 
+  enabled?: boolean;
+
   toolbar?: {
     id: string;
     side: 'left' | 'right';

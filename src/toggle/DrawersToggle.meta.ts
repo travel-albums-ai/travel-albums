@@ -2,6 +2,7 @@ import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
   id: "drawersToggle",
+  enabled: false,
   toolbar: [
     {
       id: 'header',

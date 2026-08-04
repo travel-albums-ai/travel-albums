@@ -71,6 +71,11 @@ async function loadToolbarMetadata() {
       continue;
     }
 
+    if(meta.enabled === false) {
+      console.warn(`${path} is disabled`);
+      continue;
+    }
+
     toolbarRegistry.register(meta);
     metas.push(meta);
   }
