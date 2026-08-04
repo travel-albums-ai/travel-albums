@@ -11,7 +11,6 @@ import NegativeConverterToolbox from '@/drawers/adjustments/NegativeConverterToo
 import { Adjustments } from '@/drawers/adjustments/types';
 import useNegativeConverterState from '@/hooks/useNegativeConverterState';
 import { imageUrl } from '@/lib/thumbnailService';
-import GeneticAlgoToggle from '@/toggle/GeneticAlgoToggle';
 import { useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 
@@ -41,7 +40,7 @@ export default function NegativeConverterWrapper({
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);
 
   return (
-    <GenericPanel id="negative-drawer" toolbar={<GeneticAlgoToggle />}>
+    <GenericPanel id="adjustments-drawer" defaultToolbar>
       <Box id="negative-converter-wrapper"
         sx={{
           alignItems: 'stretch',
