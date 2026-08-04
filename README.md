@@ -20,7 +20,7 @@ Travel Albums pairs a Vite/React interface with a small Express server and a Nod
 - ⌨️ Navigate and select photos with keyboard shortcuts.
 - 🗂️ Generate thumbnails and normalized metadata from Takeout sidecar JSON files.
 - ⚙️ Configure source, cache, metadata, thumbnail size, and quality paths through the UI/server configuration.
-- 🎞️ Inspect EXIF details, maps, charts, collages, and image-negative conversion tools.
+- 🎞️ Inspect EXIF details, maps, charts, collages, and image-negative conversion tools and adjustments tools.
 
 ## 🚀 Quick start
 
