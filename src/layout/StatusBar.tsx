@@ -5,6 +5,7 @@ import KeyboardMenu from '@/layout/StatusBar/KeyboardMenu';
 import ServerStatus from '@/layout/StatusBar/ServerStatus';
 import SystemStatus from '@/layout/StatusBar/SystemStatus';
 import ThumbSizeStatus from '@/layout/StatusBar/ThumbSizeStatus';
+import VersionStatus from '@/layout/StatusBar/VersionStatus';
 import { Box, Divider, Stack, Theme } from '@mui/material';
 import { Fragment } from 'react';
 
@@ -37,6 +38,11 @@ export default function StatusBar() {
     {
       key: 'keyboardMenu',
       dom: <KeyboardMenu />,
+      secondary: true
+    },
+    {
+      key: 'versionStatus',
+      dom: <VersionStatus />,
       secondary: true
     },
   ]
