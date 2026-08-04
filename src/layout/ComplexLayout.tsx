@@ -32,8 +32,6 @@ import {
   useState
 } from 'react';
 
-const LAYOUT_STORAGE_KEY = 'travel-layers:layout-model';
-
 function createDefaultJson(drawers: typeof drawers): IJsonModel {
   console.log('createDefaultJson', drawers);
   return {
@@ -85,17 +83,6 @@ function createDefaultJson(drawers: typeof drawers): IJsonModel {
   };
 }
 
-function loadModel(drawers: typeof drawers) {
-  try {
-    const saved = localStorage.getItem(LAYOUT_STORAGE_KEY);
-    return Model.fromJson(saved ? JSON.parse(saved) : createDefaultJson(drawers)
-    );
-  } catch (e) {
-    console.warn(i18n.t('failedLoadingLayout'), e);
-    return Model.fromJson(createDefaultJson(drawers));
-  }
-}
-
 const COMPONENTS = {
   sidebarDrawer: SidebarDrawer,
   globeDrawer: GlobeDrawer,
@@ -110,97 +97,27 @@ const COMPONENTS = {
   folderHandlersDrawer: FolderHandlersDrawer,
 } as const;
 
-const DRAWER_LABELS = {
-  sidebarDrawer: 'drawerExplorer',
-  filesDrawer: 'drawerFiles',
-  previewDrawer: 'drawerPreview',
-  adjustmentsDrawer: 'drawerAdjustments',
-  labelerDrawer: 'drawerLabeler',
-  outletDrawer: 'drawerMain',
-  globeDrawer: 'drawerGlobe',
-  scrollerDrawer: 'drawerScroller',
-  rowsDrawer: 'drawerRows',
-  calendarDrawer: 'drawerCalendar',
-  folderHandlersDrawer: 'drawerFolderHandlers',
-} as const;
-
 export default function ComplexLayout() {
   const drawers = useSettingsStoreSelector((s) => s.drawers);
-
-  const [model, setModel] = useState(() => loadModel(drawers));
-  const themeMode = useSettingsStoreSelector((state) => state.themeMode);
   const locale = useSettingsStoreSelector((state) => state.locale);
+  const themeMode = useSettingsStoreSelector((state) => state.themeMode);
+
+  const [model, setModel] = useState(() => Model.fromJson(createDefaultJson(drawers)));
 
   const factory = useCallback((node: TabNode) => {
     const Component = COMPONENTS[node.getComponent() as keyof typeof COMPONENTS];
     return Component ? <Component /> : null;
   }, []);
 
-  const timeout = useRef<number>();
   const modelRef = useRef<Model | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (timeout.current) {
-        clearTimeout(timeout.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     modelRef.current = model;
   }, [model]);
 
   useEffect(() => {
-    setModel(loadModel(drawers));
+    setModel(Model.fromJson(createDefaultJson(drawers)));
   }, [drawers]);
-
-  // When locale changes, update tab names in the current layout JSON
-  useEffect(() => {
-    try {
-      const curModel = modelRef.current ?? loadModel(drawers);
-      const json = curModel.toJson();
-
-      const compKey = DRAWER_LABELS;
-
-      function walk(node: any) {
-        if (!node || typeof node !== 'object') return;
-        if (Array.isArray(node)) {
-          node.forEach(walk);
-          return;
-        }
-
-        if (node.type === 'tab' && node.component && compKey[node.component as keyof typeof compKey]) {
-          node.name = i18n.t(compKey[node.component as keyof typeof compKey]);
-        }
-
-        for (const k of Object.keys(node)) {
-          walk(node[k]);
-        }
-      }
-
-      walk(json);
-
-      const newModel = Model.fromJson(json as IJsonModel);
-      setModel(newModel);
-
-      try {
-        localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(json));
-      } catch (e) {
-        console.warn(i18n.t('failedSavingLayout'), e);
-      }
-    } catch (e) {
-      console.warn(i18n.t('failedLoadingLayout'), e);
-    }
-  }, [locale, drawers]);
-
-
-  const handleModelChange = useCallback((model: Model) => {
-    localStorage.setItem(
-      LAYOUT_STORAGE_KEY,
-      JSON.stringify(model.toJson())
-    );
-  }, []);
 
   return (
     <>
@@ -226,7 +143,6 @@ export default function ComplexLayout() {
         <Layout
           model={model}
           factory={factory}
-          onModelChange={handleModelChange}
         />
       </Box>
 

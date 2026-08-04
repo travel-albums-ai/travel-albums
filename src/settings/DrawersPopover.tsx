@@ -25,6 +25,8 @@ export default function DrawersPopover({ filter }: { filter?: string }) {
   const { t } = useTranslation()
 
   return <>
+
+    <textarea style={{ width: '100%', height: '100px'}} value={JSON.stringify(drawers)} />
     <Stack sx={{ gap: 0.5 }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
       {toggleControls
         .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
