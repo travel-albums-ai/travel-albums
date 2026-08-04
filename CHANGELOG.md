@@ -1,3 +1,5 @@
+## [1.29.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.28.1...v1.29.0) (2026-08-04)
+
 ## [1.28.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.28.0...v1.28.1) (2026-08-04)
 
 ## [1.28.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.27.0...v1.28.0) (2026-08-04)
