@@ -37,7 +37,7 @@ const process = (rawMetadata: Record<string, GooglePhotoMetadata>) => {
 
     const photo: GalleryPhoto = {
       ...rest,
-      id: `${data.folder}::${data.id}`,
+      id: `${data.folder}__${data.id}`,
       albumName: data.folder,
       title: data.id,
       batch: '',
