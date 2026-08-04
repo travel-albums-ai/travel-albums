@@ -2,8 +2,8 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePinned, usePinned_isPinned } from '@/context/pinnedStore';
 import { Pin, PinOff } from 'lucide-react';
-import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 export default function PinnedToggle() {
   const { type_name = '', id = '' } = useParams()

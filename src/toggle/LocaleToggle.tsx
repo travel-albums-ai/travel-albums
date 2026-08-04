@@ -21,7 +21,7 @@ const ITEMS = supportedLanguages.map((lang) => ({
   value: lang,
   tooltip: LANGUAGE_TOOLTIPS[lang],
   title: LANGUAGE_LABELS[lang],
-  icon: null,
+  icon: <div className={`fflag fflag-${lang.toUpperCase()}`} style={{ width: 16, height: 16, borderRadius: 10 }} />,
 })) as GenericToggleButtonProps[];
 
 export default function LocaleToggle() {

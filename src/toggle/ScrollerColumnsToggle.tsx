@@ -2,9 +2,9 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import {
-    Columns2,
-    Columns3,
-    Columns4
+  Columns2,
+  Columns3,
+  Columns4
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

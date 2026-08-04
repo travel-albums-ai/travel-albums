@@ -71,7 +71,7 @@ export default function BYOKGoogleVisionField() {
           />
         </>
       ) : (<>
-          <GenericToggleButton
+        <GenericToggleButton
           variant="outlined"
           item={{
             value: byokGoogleVisionKey,
