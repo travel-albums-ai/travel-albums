@@ -1,5 +1,5 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { imageUrl as imageUrlFunc, thumbnailUrl } from '@/lib/thumbnailService';
+import { originalUrl, thumbnailUrl } from '@/lib/thumbnailService';
 import React from 'react';
 
 type Props = {
@@ -9,7 +9,6 @@ type Props = {
   style?: React.CSSProperties;
   className?: string;
   original?: boolean;
-  imageObj?: any;
 };
 
 export default function AlbumPhotoThumbnailBackground({
@@ -19,7 +18,6 @@ export default function AlbumPhotoThumbnailBackground({
   style,
   className,
   original,
-  imageObj,
 }: Props) {
   const demoMode = useSettingsStoreSelector(s => s.demoMode);
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
@@ -27,11 +25,12 @@ export default function AlbumPhotoThumbnailBackground({
   if (!imageUrl) return null;
 
   const src = original
-    ? imageUrlFunc(`${imageObj.folder}/${imageObj.title}`, demoMode)
+    ? originalUrl(String(imageUrl).replace("__", '/'), demoMode)
     : thumbnailUrl(imageUrl, demoMode);
 
   return (
     <img
+      key={src}
       src={src}
       alt=""
       width={width}

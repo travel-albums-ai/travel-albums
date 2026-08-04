@@ -66,6 +66,10 @@ export const imageUrl = (imageId: string, demo = false) => {
   return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${toEndpointPath(imageId)}`
 }
 
+export const originalUrl = (imageId: string, demo = false) => {
+  return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${toEndpointPath(imageId)}`
+}
+
 export const serveThumbnailOrOriginal = (imageUrl: string | null): string | null => {
   if (!imageUrl) {
     return null
