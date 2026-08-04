@@ -12,7 +12,7 @@ export default function SelectionToggle({ context }: { context?: any }) {
 
   return <GenericToggleButtonGroup items={[
     {
-      tooltip: t('addAll') + 'ddd',
+      tooltip: t('addAll'),
       kbd: 'Control+A',
       icon:  <SquareCheckBig />,
       onClick: () => photoIds && addMany(photoIds.filter((_, i) => i < 1000)),

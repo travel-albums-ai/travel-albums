@@ -1,11 +1,13 @@
 import { Minimize2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 
 export default function FullscreenToggle() {
   const [fullscreen, setFullscreen] = useState(!!document.fullscreenElement);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onChange = () => {
@@ -30,7 +32,7 @@ export default function FullscreenToggle() {
       variant="standard"
       items={[
         {
-          tooltip: fullscreen ? 'exitFullscreen' : 'enterFullscreen',
+          tooltip: t(fullscreen ? 'exitFullscreen' : 'enterFullscreen'),
           icon:  <Minimize2 />,
           onClick: toggleFullscreen,
           selected: fullscreen,

@@ -12,7 +12,7 @@ export default function NarrowMapToggle() {
   return <>
     <GenericToggleButtonGroup items={[
       {
-        tooltip: 'Re-run filter to only show photos between GPS coordinates',
+        tooltip: t('reRunFilterGps'),
         onClick: () => setSetting((prev) => ({...prev, filterGps: !prev.filterGps})),
         icon: <Focus size={20} />,
         selected: filterGps

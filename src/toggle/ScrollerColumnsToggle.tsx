@@ -17,21 +17,21 @@ export default function ScrollerColumnsToggle() {
   return <GenericToggleButtonGroup items={[
     {
       value: '2',
-      tooltip: '2 columns',
+      tooltip: t('scrollerColumns2'),
       onClick: () => setSetting((prev) => ({...prev, scrollerColumns: 2})),
       icon: <Columns2 />,
       selected: scrollerColumns === 2,
     },
     {
       value: '3',
-      tooltip: '3 columns',
+      tooltip: t('scrollerColumns3'),
       onClick: () => setSetting((prev) => ({...prev, scrollerColumns: 3})),
       icon: <Columns3 />,
       selected: scrollerColumns === 3,
     },
     {
       value: '4',
-      tooltip: '4 columns',
+      tooltip: t('scrollerColumns4'),
       onClick: () => setSetting((prev) => ({...prev, scrollerColumns: 4})),
       icon: <Columns4 />,
       selected: scrollerColumns === 4,

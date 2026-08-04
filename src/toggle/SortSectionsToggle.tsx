@@ -3,16 +3,18 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
 import SettingSelectRow from '@/settings/components/SettingSelectRow';
 import { ArrowDown01Icon, ArrowUp01Icon, EllipsisVertical } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function SortSectionsToggle() {
   const { setSetting } = useSidebar()
   const { sortBy, sortAsc } = useSidebarStoreSelector((state) => state)
+  const { t } = useTranslation()
 
   return <GenericToggleButtonGroup id="sort-sections-toggle"
     items={[
       {
         value: true,
-        tooltip: 'Ascending',
+        tooltip: t('ascending'),
         icon: <ArrowDown01Icon size={20} />,
         onClick: () => setSetting((prev) => ({ ...prev, sortAsc: true })),
         selected: sortAsc === true,
@@ -20,14 +22,14 @@ export default function SortSectionsToggle() {
       },
       {
         value: false,
-        tooltip: 'Descending',
+        tooltip: t('descending'),
         icon: <ArrowUp01Icon size={20} />,
         onClick: () => setSetting((prev) => ({ ...prev, sortAsc: false })),
         selected: sortAsc === false,
         disabled: sortBy === 'original',
       },
       {
-        tooltip: 'Open sections settings',
+        tooltip: t('openSectionsSettings'),
         icon: <EllipsisVertical />,
         popover: <>
           <SettingSelectRow

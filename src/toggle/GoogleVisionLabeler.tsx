@@ -140,7 +140,7 @@ export default function GoogleVisionLabeler() {
                 variant="outlined"
                 item={{
                   value: '',
-                  tooltip: 'Bring your own key for Google Vision API',
+                  tooltip: t('byokGoogleVisionTooltip'),
                   icon: <Binoculars size={16} />,
                   onClick: () => {
                     if (photo) analyzeImageFromUrl(thumbnailUrl(photo.id));

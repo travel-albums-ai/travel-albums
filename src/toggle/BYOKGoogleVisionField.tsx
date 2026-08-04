@@ -46,7 +46,7 @@ export default function BYOKGoogleVisionField() {
       {(byokGoogleVisionOpen) ? (
         <>
           <TextField
-            placeholder={'Google Vision API Key...'}
+            placeholder={t('googleVisionApiKeyPlaceholder')}
             variant="outlined"
             size="small"
             autoFocus
@@ -71,11 +71,11 @@ export default function BYOKGoogleVisionField() {
           />
         </>
       ) : (<>
-        <GenericToggleButton
+          <GenericToggleButton
           variant="outlined"
           item={{
             value: byokGoogleVisionKey,
-            tooltip: 'Bring your own key for Google Vision API',
+            tooltip: t('byokGoogleVisionTooltip'),
             icon: <Key size={16} />,
             onClick: () => setSetting(prev => ({ ...prev, byokGoogleVisionOpen: true })),
             selected: !!byokGoogleVisionKey,

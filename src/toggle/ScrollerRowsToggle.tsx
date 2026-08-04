@@ -17,21 +17,21 @@ export default function ScrollerRowsToggle() {
   return <GenericToggleButtonGroup items={[
     {
       value: '2',
-      tooltip: '2 rows',
+      tooltip: t('scrollerRows2'),
       onClick: () => setSetting((prev) => ({...prev, scrollerRows: 2})),
       icon: <Columns2 style={{ transform: 'rotate(90deg)' }} />,
       selected: scrollerRows === 2,
     },
     {
       value: '3',
-      tooltip: '3 rows',
+      tooltip: t('scrollerRows3'),
       onClick: () => setSetting((prev) => ({...prev, scrollerRows: 3})),
       icon: <Columns3 style={{ transform: 'rotate(90deg)' }} />,
       selected: scrollerRows === 3,
     },
     {
       value: '4',
-      tooltip: '4 rows',
+      tooltip: t('scrollerRows4'),
       onClick: () => setSetting((prev) => ({...prev, scrollerRows: 4})),
       icon: <Columns4 style={{ transform: 'rotate(90deg)' }} />,
       selected: scrollerRows === 4,

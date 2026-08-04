@@ -14,7 +14,7 @@ export default function ExtendedMenu() {
     variant="standard"
     items={[
       {
-        tooltip: 'Open sections settings',
+        tooltip: t('openSectionsSettings'),
         icon: <EllipsisVertical />,
         popover: <>
           <Stack direction="column" spacing={1} divider={<Divider />}>

@@ -3,15 +3,17 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import { usePinned, usePinned_isPinned } from '@/context/pinnedStore';
 import { Pin, PinOff } from 'lucide-react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function PinnedToggle() {
   const { type_name = '', id = '' } = useParams()
   const { add, remove } = usePinned()
   const isPinned = usePinned_isPinned({ type_name, id })
+  const { t } = useTranslation()
 
   return <GenericToggleButtonGroup items={[
     {
-      tooltip: 'Toggle pin',
+      tooltip: t('togglePin'),
       icon: isPinned ? <Pin /> : <PinOff />,
       onClick: () => isPinned ? remove({ type_name, id }) : add({ type_name, id }),
       selected: isPinned,

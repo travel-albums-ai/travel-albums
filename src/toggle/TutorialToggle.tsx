@@ -11,7 +11,7 @@ export default function TutorialToggle() {
 
   return <GenericToggleButtonGroup variant="standard" items={[
     {
-      tooltip: "Learn quickly how to use the app with a guided tutorial.",
+      tooltip: t('tutorialToggleTooltip'),
       icon: <CircleQuestionMark size={16} />,
       onClick: () => setSetting((prev) => ({ ...prev, tutorial: !tutorial })),
       selected: tutorial,
