@@ -39,7 +39,7 @@ const tab = (
   enabled: boolean,
   label: string,
   component: string,
-) => (enabled ? [{ type: 'tab', name: i18n.t(label), component }] : []);
+) => [{ type: 'tab', name: i18n.t(label), component }]
 
 const STORAGE_KEY = 'flexlayout-model-v1';
 
@@ -57,8 +57,8 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
         size: 400,
         minSize: 350,
         children: [
-          ...tab(drawers.sidebar, 'drawerExplorer', 'sidebarDrawer'),
-          ...tab(drawers.files, 'drawerFiles', 'filesDrawer'),
+          ...tab(drawers.sidebar, 'drawerExplorer', 'sidebar'),
+          ...tab(drawers.files, 'drawerFiles', 'files'),
         ],
       },
       {
@@ -67,9 +67,9 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
         size: 550,
         minSize: 550,
         children: [
-          ...tab(drawers.preview, 'drawerPreview', 'previewDrawer'),
-          ...tab(drawers.adjustments, 'drawerAdjustments', 'adjustmentsDrawer'),
-          ...tab(drawers.labeler, 'drawerLabeler', 'labelerDrawer'),
+          ...tab(drawers.preview, 'drawerPreview', 'preview'),
+          ...tab(drawers.adjustments, 'drawerAdjustments', 'adjustments'),
+          ...tab(drawers.labeler, 'drawerLabeler', 'labeler'),
         ],
       },
     ],
@@ -81,12 +81,12 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
           type: 'tabset',
           weight: 50,
           children: [
-            ...tab(drawers.outlet, 'drawerMain', 'outletDrawer'),
-            ...tab(drawers.globe, 'drawerGlobe', 'globeDrawer'),
-            ...tab(drawers.scroller, 'drawerScroller', 'scrollerDrawer'),
-            ...tab(drawers.rows, 'drawerRows', 'rowsDrawer'),
-            ...tab(drawers.calendar, 'drawerCalendar', 'calendarDrawer'),
-            ...tab(drawers.folderHandler, 'drawerFolderHandlers', 'folderHandlersDrawer'),
+            ...tab(drawers.outlet, 'drawerMain', 'outlet'),
+            ...tab(drawers.globe, 'drawerGlobe', 'globe'),
+            ...tab(drawers.scroller, 'drawerScroller', 'scroller'),
+            ...tab(drawers.rows, 'drawerRows', 'rows'),
+            ...tab(drawers.calendar, 'drawerCalendar', 'calendar'),
+            ...tab(drawers.folderHandler, 'drawerFolderHandlers', 'folderHandler'),
           ],
         },
       ],
@@ -95,17 +95,17 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
 }
 
 const COMPONENTS = {
-  sidebarDrawer: SidebarDrawer,
-  globeDrawer: GlobeDrawer,
-  outletDrawer: OutletDrawer,
-  previewDrawer: PhotoDrawer,
-  adjustmentsDrawer: AdjustmentsDrawer,
-  filesDrawer: FilesDrawer,
-  labelerDrawer: LabelerDrawer,
-  scrollerDrawer: ScrollerDrawer,
-  rowsDrawer: RowsDrawer,
-  calendarDrawer: CalendarDrawer,
-  folderHandlersDrawer: FolderHandlersDrawer,
+  sidebar: SidebarDrawer,
+  globe: GlobeDrawer,
+  outlet: OutletDrawer,
+  preview: PhotoDrawer,
+  adjustments: AdjustmentsDrawer,
+  files: FilesDrawer,
+  labeler: LabelerDrawer,
+  scroller: ScrollerDrawer,
+  rows: RowsDrawer,
+  calendar: CalendarDrawer,
+  folderHandler: FolderHandlersDrawer,
 } as const;
 
 function loadModel(drawers: typeof drawers) {
@@ -113,13 +113,34 @@ function loadModel(drawers: typeof drawers) {
     const saved = localStorage.getItem(STORAGE_KEY);
 
     if (saved) {
-      return Model.fromJson(JSON.parse(saved));
+      return Model.fromJson(cleanModel(JSON.parse(saved), drawers));
     }
   } catch (e) {
     console.warn('Failed to restore layout', e);
   }
 
-  return Model.fromJson(createDefaultJson(drawers, i18n.language));
+  return Model.fromJson(cleanModel(createDefaultJson(drawers, i18n.language), drawers));
+}
+
+function cleanModel(model: IJsonModel, drawers: typeof drawers): IJsonModel {
+  const result = { ...model };
+
+  const resultDrawers = {
+    global: result.global,
+    borders: result?.borders?.map(border => ({
+      ...border,
+      children: border?.children?.filter(child => drawers[child.component as keyof typeof drawers])
+    })),
+    layout: {
+      ...result.layout,
+      children: result?.layout?.children?.map(tabset => ({
+        ...tabset,
+        children: tabset?.children?.filter(child => drawers[child.component as keyof typeof drawers])
+      })),
+    },
+  };
+
+  return resultDrawers as IJsonModel;
 }
 
 export default function ComplexLayout() {
