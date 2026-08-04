@@ -1,3 +1,10 @@
+## [1.39.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.39.0...v1.39.1) (2026-08-04)
+
+### 🐛 Fixes
+
+* update background image URL path in freakflags.css ([20f5241](https://github.com/travel-albums-ai/travel-albums/commit/20f5241484f9a793c78db2559890ca33c7f02a63))
+* update semantic-release and related dependencies to maintain compatibility ([48fcf7d](https://github.com/travel-albums-ai/travel-albums/commit/48fcf7df9831cb2241e43a13db6f010417516d8b))
+
 ## [1.39.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.38.1...v1.39.0) (2026-08-04)
 
 ## [1.38.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.38.0...v1.38.1) (2026-08-04)
