@@ -147,6 +147,22 @@
   "layoutShowViews": "Ansichten anzeigen",
   "layoutTheme": "Theme",
 
+  "_comment_drawers": "Layout drawer tab names",
+  "drawerExplorer": "Explorer",
+  "drawerFiles": "Dateien",
+  "drawerPreview": "Vorschau",
+  "drawerAdjustments": "Anpassungen",
+  "drawerLabeler": "Labeler",
+  "drawerMain": "Haupt",
+  "drawerGlobe": "Globus",
+  "drawerScroller": "Scroller",
+  "drawerRows": "Zeilen",
+  "drawerCalendar": "Kalender",
+  "drawerFolderHandlers": "Ordner-Handler",
+
+  "failedLoadingLayout": "Fehler beim Laden des Layouts",
+  "failedSavingLayout": "Fehler beim Speichern des Layouts",
+
   "_comment_tags_popover": "Tags popover",
   "deleteTag": "Löschen",
   "tagNameLabel": "Tag-Name",

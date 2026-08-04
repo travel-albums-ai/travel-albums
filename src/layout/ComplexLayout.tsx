@@ -31,6 +31,7 @@ import {
   useRef,
   useState
 } from 'react';
+import i18n from '@/lib/i18n';
 
 const LAYOUT_STORAGE_KEY = 'travel-layers:layout-model';
 const SAVE_DELAY = 300;
@@ -48,8 +49,8 @@ function createDefaultJson(drawers: typeof drawers): IJsonModel {
         size: 400,
         minSize: 350,
         children: [
-          ...(drawers.sidebar ? [{ type: 'tab', name: 'Explorer', component: 'sidebarDrawer' }] : []),
-          ...(drawers.files ? [{ type: 'tab', name: 'Files', component: 'filesDrawer' }] : []),
+          ...(drawers.sidebar ? [{ type: 'tab', name: i18n.t('drawerExplorer'), component: 'sidebarDrawer' }] : []),
+          ...(drawers.files ? [{ type: 'tab', name: i18n.t('drawerFiles'), component: 'filesDrawer' }] : []),
         ],
       },
       {
@@ -58,9 +59,9 @@ function createDefaultJson(drawers: typeof drawers): IJsonModel {
         size: 550,
         minSize: 550,
         children: [
-          ...(drawers.preview ? [{ type: 'tab', name: 'Preview', component: 'previewDrawer' }] : []),
-          ...(drawers.adjustments ? [{ type: 'tab', name: 'Adjustments', component: 'adjustmentsDrawer' }] : []),
-          ...(drawers.labeler ? [{ type: 'tab', name: 'Labeler', component: 'labelerDrawer' }] : []),
+          ...(drawers.preview ? [{ type: 'tab', name: i18n.t('drawerPreview'), component: 'previewDrawer' }] : []),
+          ...(drawers.adjustments ? [{ type: 'tab', name: i18n.t('drawerAdjustments'), component: 'adjustmentsDrawer' }] : []),
+          ...(drawers.labeler ? [{ type: 'tab', name: i18n.t('drawerLabeler'), component: 'labelerDrawer' }] : []),
         ],
       },
     ],
@@ -72,12 +73,12 @@ function createDefaultJson(drawers: typeof drawers): IJsonModel {
           type: 'tabset',
           weight: 50,
           children: [
-            ...(drawers.outlet ? [{ type: 'tab', name: 'Main', component: 'outletDrawer' }] : []),
-            ...(drawers.globe ? [{ type: 'tab', name: 'Globe', component: 'globeDrawer' }] : []),
-            ...(drawers.scroller ? [{ type: 'tab', name: 'Scroller', component: 'scrollerDrawer' }] : []),
-            ...(drawers.rows ? [{ type: 'tab', name: 'Rows', component: 'rowsDrawer' }] : []),
-            ...(drawers.calendar ? [{ type: 'tab', name: 'Calendar', component: 'calendarDrawer' }] : []),
-            ...(drawers.folderHandler ? [{ type: 'tab', name: 'Folder Handlers', component: 'folderHandlersDrawer' }] : []),
+            ...(drawers.outlet ? [{ type: 'tab', name: i18n.t('drawerMain'), component: 'outletDrawer' }] : []),
+            ...(drawers.globe ? [{ type: 'tab', name: i18n.t('drawerGlobe'), component: 'globeDrawer' }] : []),
+            ...(drawers.scroller ? [{ type: 'tab', name: i18n.t('drawerScroller'), component: 'scrollerDrawer' }] : []),
+            ...(drawers.rows ? [{ type: 'tab', name: i18n.t('drawerRows'), component: 'rowsDrawer' }] : []),
+            ...(drawers.calendar ? [{ type: 'tab', name: i18n.t('drawerCalendar'), component: 'calendarDrawer' }] : []),
+            ...(drawers.folderHandler ? [{ type: 'tab', name: i18n.t('drawerFolderHandlers'), component: 'folderHandlersDrawer' }] : []),
           ],
         },
       ],
@@ -95,7 +96,7 @@ function loadModel(drawers: typeof drawers) {
 
     return Model.fromJson(JSON.parse(saved));
   } catch (e) {
-    console.warn('Failed loading layout', e);
+    console.warn(i18n.t('failedLoadingLayout'), e);
     return Model.fromJson(createDefaultJson(drawers));
   }
 }
@@ -175,7 +176,7 @@ export default function ComplexLayout() {
             JSON.stringify(model.toJson()),
           );
         } catch (e) {
-          console.warn('Failed saving layout', e);
+          console.warn(i18n.t('failedSavingLayout'), e);
         }
       };
 

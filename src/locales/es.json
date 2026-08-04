@@ -9,4 +9,20 @@
   "demo": "Demo",
   "tags": "Etiquetas",
   "filterPhotosGuidance": "Configura tus filtros predeterminados para la biblioteca"
+,
+  "_comment_drawers": "Layout drawer tab names",
+  "drawerExplorer": "Explorador",
+  "drawerFiles": "Archivos",
+  "drawerPreview": "Previsualización",
+  "drawerAdjustments": "Ajustes",
+  "drawerLabeler": "Labeler",
+  "drawerMain": "Principal",
+  "drawerGlobe": "Globo",
+  "drawerScroller": "Scroller",
+  "drawerRows": "Filas",
+  "drawerCalendar": "Calendario",
+  "drawerFolderHandlers": "Manejadores de carpetas",
+
+  "failedLoadingLayout": "Error al cargar la disposición",
+  "failedSavingLayout": "Error al guardar la disposición"
 }

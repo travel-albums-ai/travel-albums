@@ -9,4 +9,20 @@
   "demo": "Démo",
   "tags": "Étiquettes",
   "filterPhotosGuidance": "Configurer vos filtres par défaut pour la bibliothèque"
+,
+  "_comment_drawers": "Layout drawer tab names",
+  "drawerExplorer": "Explorateur",
+  "drawerFiles": "Fichiers",
+  "drawerPreview": "Aperçu",
+  "drawerAdjustments": "Ajustements",
+  "drawerLabeler": "Labeler",
+  "drawerMain": "Principal",
+  "drawerGlobe": "Globe",
+  "drawerScroller": "Défileur",
+  "drawerRows": "Lignes",
+  "drawerCalendar": "Calendrier",
+  "drawerFolderHandlers": "Gestionnaires de dossiers",
+
+  "failedLoadingLayout": "Échec du chargement de la mise en page",
+  "failedSavingLayout": "Échec de l'enregistrement de la mise en page"
 }
