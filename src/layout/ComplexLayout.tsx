@@ -36,12 +36,31 @@ import {
 } from 'react';
 
 const tab = (
-  enabled: boolean,
   label: string,
   component: string,
 ) => [{ type: 'tab', name: i18n.t(label), component }]
 
 const STORAGE_KEY = 'flexlayout-model-v1';
+
+const leftChildren = [
+  ...tab('drawerExplorer', 'sidebar'),
+  ...tab('drawerFiles', 'files'),
+]
+
+const rightChildren = [
+  ...tab('drawerPreview', 'preview'),
+  ...tab('drawerAdjustments', 'adjustments'),
+  ...tab('drawerLabeler', 'labeler'),
+]
+
+const layoutChildren = [
+  ...tab('drawerMain', 'outlet'),
+  ...tab('drawerGlobe', 'globe'),
+  ...tab('drawerScroller', 'scroller'),
+  ...tab('drawerRows', 'rows'),
+  ...tab('drawerCalendar', 'calendar'),
+  ...tab('drawerFolderHandlers', 'folderHandler'),
+]
 
 function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
   console.log('createDefaultJson', drawers, locale);
@@ -56,21 +75,14 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
         selected: 0,
         size: 400,
         minSize: 350,
-        children: [
-          ...tab(drawers.sidebar, 'drawerExplorer', 'sidebar'),
-          ...tab(drawers.files, 'drawerFiles', 'files'),
-        ],
+        children: leftChildren,
       },
       {
         type: 'border',
         location: 'right',
         size: 550,
         minSize: 550,
-        children: [
-          ...tab(drawers.preview, 'drawerPreview', 'preview'),
-          ...tab(drawers.adjustments, 'drawerAdjustments', 'adjustments'),
-          ...tab(drawers.labeler, 'drawerLabeler', 'labeler'),
-        ],
+        children: rightChildren,
       },
     ],
     layout: {
@@ -80,14 +92,7 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
         {
           type: 'tabset',
           weight: 50,
-          children: [
-            ...tab(drawers.outlet, 'drawerMain', 'outlet'),
-            ...tab(drawers.globe, 'drawerGlobe', 'globe'),
-            ...tab(drawers.scroller, 'drawerScroller', 'scroller'),
-            ...tab(drawers.rows, 'drawerRows', 'rows'),
-            ...tab(drawers.calendar, 'drawerCalendar', 'calendar'),
-            ...tab(drawers.folderHandler, 'drawerFolderHandlers', 'folderHandler'),
-          ],
+          children: layoutChildren,
         },
       ],
     },
