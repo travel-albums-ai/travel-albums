@@ -17,6 +17,7 @@ import NoServerModal from '@/modals/NoServerModal';
 import OnboardingModal from '@/modals/OnboardingModal';
 import { Box, Theme } from '@mui/material';
 import {
+  Actions,
   IJsonModel,
   Layout,
   Model,
@@ -24,23 +25,59 @@ import {
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
 import i18n from '@/lib/i18n';
+import { ComponentType, useCallback, useEffect, useRef, useState } from 'react';
 
 const LAYOUT_STORAGE_KEY = 'travel-layers:layout-model';
 const SAVE_DELAY = 300;
 
-function createDefaultJson(drawers: typeof drawers): IJsonModel {
+type DrawerLocation = 'left-border' | 'right-border' | 'main';
+
+interface DrawerConfig {
+  key: string; // key on the settings store's `drawers` visibility map
+  component: string; // flexlayout component id
+  i18nKey: string;
+  location: DrawerLocation;
+  Component: ComponentType;
+}
+
+const DRAWER_CONFIGS = [
+  { key: 'sidebar', component: 'sidebarDrawer', i18nKey: 'drawerExplorer', location: 'left-border', Component: SidebarDrawer },
+  { key: 'files', component: 'filesDrawer', i18nKey: 'drawerFiles', location: 'left-border', Component: FilesDrawer },
+  { key: 'preview', component: 'previewDrawer', i18nKey: 'drawerPreview', location: 'right-border', Component: PhotoDrawer },
+  { key: 'adjustments', component: 'adjustmentsDrawer', i18nKey: 'drawerAdjustments', location: 'right-border', Component: AdjustmentsDrawer },
+  { key: 'labeler', component: 'labelerDrawer', i18nKey: 'drawerLabeler', location: 'right-border', Component: LabelerDrawer },
+  { key: 'outlet', component: 'outletDrawer', i18nKey: 'drawerMain', location: 'main', Component: OutletDrawer },
+  { key: 'globe', component: 'globeDrawer', i18nKey: 'drawerGlobe', location: 'main', Component: GlobeDrawer },
+  { key: 'scroller', component: 'scrollerDrawer', i18nKey: 'drawerScroller', location: 'main', Component: ScrollerDrawer },
+  { key: 'rows', component: 'rowsDrawer', i18nKey: 'drawerRows', location: 'main', Component: RowsDrawer },
+  { key: 'calendar', component: 'calendarDrawer', i18nKey: 'drawerCalendar', location: 'main', Component: CalendarDrawer },
+  { key: 'folderHandler', component: 'folderHandlersDrawer', i18nKey: 'drawerFolderHandlers', location: 'main', Component: FolderHandlersDrawer },
+] as const satisfies readonly DrawerConfig[];
+
+type DrawerKey = (typeof DRAWER_CONFIGS)[number]['key'];
+type DrawerVisibility = Record<DrawerKey, boolean>;
+
+const DRAWER_COMPONENTS: Record<string, ComponentType> = Object.fromEntries(
+  DRAWER_CONFIGS.map((c) => [c.component, c.Component]),
+);
+const COMPONENT_TO_I18N_KEY: Record<string, string> = Object.fromEntries(
+  DRAWER_CONFIGS.map((c) => [c.component, c.i18nKey]),
+);
+
+function buildTabs(location: DrawerLocation, visibility: DrawerVisibility) {
+  return DRAWER_CONFIGS.filter(
+    (c) => c.location === location && visibility[c.key as DrawerKey],
+  ).map((c) => ({
+    type: 'tab' as const,
+    name: i18n.t(c.i18nKey),
+    component: c.component,
+  }));
+}
+
+function createDefaultJson(visibility: DrawerVisibility): IJsonModel {
   return {
-    global: {
-      tabEnableClose: false,
-    },
+    global: { tabEnableClose: false },
     borders: [
       {
         type: 'border',
@@ -48,172 +85,154 @@ function createDefaultJson(drawers: typeof drawers): IJsonModel {
         selected: 0,
         size: 400,
         minSize: 350,
-        children: [
-          ...(drawers.sidebar ? [{ type: 'tab', name: i18n.t('drawerExplorer'), component: 'sidebarDrawer' }] : []),
-          ...(drawers.files ? [{ type: 'tab', name: i18n.t('drawerFiles'), component: 'filesDrawer' }] : []),
-        ],
+        children: buildTabs('left-border', visibility),
       },
       {
         type: 'border',
         location: 'right',
         size: 550,
         minSize: 550,
-        children: [
-          ...(drawers.preview ? [{ type: 'tab', name: i18n.t('drawerPreview'), component: 'previewDrawer' }] : []),
-          ...(drawers.adjustments ? [{ type: 'tab', name: i18n.t('drawerAdjustments'), component: 'adjustmentsDrawer' }] : []),
-          ...(drawers.labeler ? [{ type: 'tab', name: i18n.t('drawerLabeler'), component: 'labelerDrawer' }] : []),
-        ],
+        children: buildTabs('right-border', visibility),
       },
     ],
     layout: {
       type: 'row',
       weight: 100,
       children: [
-        {
-          type: 'tabset',
-          weight: 50,
-          children: [
-            ...(drawers.outlet ? [{ type: 'tab', name: i18n.t('drawerMain'), component: 'outletDrawer' }] : []),
-            ...(drawers.globe ? [{ type: 'tab', name: i18n.t('drawerGlobe'), component: 'globeDrawer' }] : []),
-            ...(drawers.scroller ? [{ type: 'tab', name: i18n.t('drawerScroller'), component: 'scrollerDrawer' }] : []),
-            ...(drawers.rows ? [{ type: 'tab', name: i18n.t('drawerRows'), component: 'rowsDrawer' }] : []),
-            ...(drawers.calendar ? [{ type: 'tab', name: i18n.t('drawerCalendar'), component: 'calendarDrawer' }] : []),
-            ...(drawers.folderHandler ? [{ type: 'tab', name: i18n.t('drawerFolderHandlers'), component: 'folderHandlersDrawer' }] : []),
-          ],
-        },
+        { type: 'tabset', weight: 50, children: buildTabs('main', visibility) },
       ],
     },
   };
 }
 
-function loadModel(drawers: typeof drawers) {
+function loadModel(visibility: DrawerVisibility): Model {
   try {
     const saved = localStorage.getItem(LAYOUT_STORAGE_KEY);
-
-    if (!saved) {
-      return Model.fromJson(createDefaultJson(drawers));
+    if (saved) {
+      return Model.fromJson(JSON.parse(saved));
     }
-
-    return Model.fromJson(JSON.parse(saved));
   } catch (e) {
     console.warn(i18n.t('failedLoadingLayout'), e);
-    return Model.fromJson(createDefaultJson(drawers));
+  }
+  return Model.fromJson(createDefaultJson(visibility));
+}
+
+function persistModel(model: Model) {
+  try {
+    localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(model.toJson()));
+  } catch (e) {
+    console.warn(i18n.t('failedSavingLayout'), e);
   }
 }
 
+
 export default function ComplexLayout() {
-  const drawers = useSettingsStoreSelector((s) => s.drawers);
+  const drawers = useSettingsStoreSelector((s) => s.drawers) as DrawerVisibility;
+  const themeMode = useSettingsStoreSelector((state) => state.themeMode);
+  const locale = useSettingsStoreSelector((state) => state.locale);
 
   const [model, setModel] = useState(() => loadModel(drawers));
-  const themeMode = useSettingsStoreSelector((state) => state.themeMode);
-
-  const sidebar = useMemo(() => <SidebarDrawer />, []);
-  const globe = useMemo(() => <GlobeDrawer />, []);
-  const outlet = useMemo(() => <OutletDrawer />, []);
-  const preview = useMemo(() => <PhotoDrawer />, []);
-  const adjustments = useMemo(() => <AdjustmentsDrawer />, []);
-  const files = useMemo(() => <FilesDrawer />, []);
-  const labeler = useMemo(() => <LabelerDrawer />, []);
-  const scroller = useMemo(() => <ScrollerDrawer />, []);
-  const rows = useMemo(() => <RowsDrawer />, []);
-  const calendar = useMemo(() => <CalendarDrawer />, []);
-  const folderHandler = useMemo(() => <FolderHandlersDrawer />, []);
-
-  const factory = useCallback((node: TabNode) => {
-    switch (node.getComponent()) {
-      case "sidebarDrawer":
-        return sidebar;
-      case "globeDrawer":
-        return globe;
-      case "outletDrawer":
-        return outlet;
-      case "previewDrawer":
-        return preview;
-      case "adjustmentsDrawer":
-        return adjustments;
-      case "filesDrawer":
-        return files;
-      case "labelerDrawer":
-        return labeler;
-      case "scrollerDrawer":
-        return scroller;
-      case "rowsDrawer":
-        return rows;
-      case "calendarDrawer":
-        return calendar;
-      case "folderHandlersDrawer":
-        return folderHandler;
-      default:
-        return null;
-    }
-  }, [sidebar, globe, outlet, preview, adjustments, files, labeler, scroller, rows, calendar, folderHandler]);
-
-  const timeout = useRef<number>();
+  const modelRef = useRef<Model | null>(null);
+  const saveTimeoutRef = useRef<number>();
+  const appliedLangRef = useRef<string | null>(null);
 
   useEffect(() => {
-    return () => {
-      if (timeout.current) {
-        clearTimeout(timeout.current);
-      }
-    };
-  }, []);
+    modelRef.current = model;
+  }, [model]);
 
-  useEffect(() => {
-    setModel(loadModel(drawers));
-  }, [drawers]);
-
-
-  const handleModelChange = useCallback((model: Model) => {
-    if (timeout.current) {
-      clearTimeout(timeout.current);
-    }
-
-    timeout.current = window.setTimeout(() => {
-      const save = () => {
-        try {
-          localStorage.setItem(
-            LAYOUT_STORAGE_KEY,
-            JSON.stringify(model.toJson()),
-          );
-        } catch (e) {
-          console.warn(i18n.t('failedSavingLayout'), e);
-        }
-      };
-
+  const schedulePersist = useCallback((m: Model) => {
+    if (saveTimeoutRef.current) window.clearTimeout(saveTimeoutRef.current);
+    saveTimeoutRef.current = window.setTimeout(() => {
+      const run = () => persistModel(m);
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(save);
+        requestIdleCallback(run);
       } else {
-        setTimeout(save, 0);
+        run();
       }
     }, SAVE_DELAY);
   }, []);
 
+  const flushPendingSave = useCallback(() => {
+    if (saveTimeoutRef.current) {
+      window.clearTimeout(saveTimeoutRef.current);
+      saveTimeoutRef.current = undefined;
+    }
+    if (modelRef.current) persistModel(modelRef.current);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      flushPendingSave();
+    };
+  }, [flushPendingSave]);
+
+  useEffect(() => {
+    flushPendingSave();
+    setModel(loadModel(drawers));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [drawers]);
+
+  const relabelDrawers = useCallback((lng?: string) => {
+    const resolvedLng = lng ?? i18n.language;
+    if (appliedLangRef.current === resolvedLng) return; // dedupe store-locale + i18n event firing together
+    appliedLangRef.current = resolvedLng;
+
+    const currentModel = modelRef.current;
+    if (!currentModel) return;
+
+    currentModel.visitNodes((node) => {
+      if (node.getType() !== 'tab') return;
+      const tabNode = node as TabNode;
+      const i18nKey = COMPONENT_TO_I18N_KEY[tabNode.getComponent() ?? ''];
+      if (!i18nKey) return;
+      const nextName = i18n.t(i18nKey, { lng: resolvedLng });
+      if (tabNode.getName() !== nextName) {
+        currentModel.doAction(Actions.renameTab(tabNode.getId(), nextName));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const handler = (lng: string) => relabelDrawers(lng);
+    i18n.on?.('languageChanged', handler);
+    return () => i18n.off?.('languageChanged', handler);
+  }, [relabelDrawers]);
+
+  useEffect(() => {
+    relabelDrawers(locale);
+  }, [locale, relabelDrawers]);
+
+  const factory = useCallback((node: TabNode) => {
+    const Component = DRAWER_COMPONENTS[node.getComponent() ?? ''];
+    return Component ? <Component /> : null;
+  }, []);
+
+  const handleModelChange = useCallback(
+    (m: Model) => schedulePersist(m),
+    [schedulePersist],
+  );
+
   return (
     <>
-      <GeneralToolbar group="header" sx={{
-        px: 1,
-        pt: 0.75,
-        pb: 0.75,
-        bgcolor: 'background.default',
-        borderBottom: (theme: Theme) => `1px solid ${theme.palette.divider}`
-      }} />
+      <GeneralToolbar
+        group="header"
+        sx={{
+          px: 1,
+          pt: 0.75,
+          pb: 0.75,
+          bgcolor: 'background.default',
+          borderBottom: (theme: Theme) => `1px solid ${theme.palette.divider}`,
+        }}
+      />
       <NoServerModal />
       <OnboardingModal />
       <MainDriver />
 
       <Box
         className={themeMode === 'dark' ? 'flexlayout__theme_alpha_dark' : 'flexlayout__theme_light'}
-        sx={{
-          flexGrow: 1,
-          mx: 0.5,
-          position: 'relative',
-        }}
+        sx={{ flexGrow: 1, mx: 0.5, position: 'relative' }}
       >
-        <Layout
-          model={model}
-          factory={factory}
-          onModelChange={handleModelChange}
-        />
+        <Layout model={model} factory={factory} onModelChange={handleModelChange} />
       </Box>
 
       <StatusBar />
