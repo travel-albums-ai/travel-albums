@@ -28,12 +28,11 @@ import i18n from '@/lib/i18n';
 import {
   useCallback,
   useEffect,
-  useRef,
   useState
 } from 'react';
 
-function createDefaultJson(drawers: typeof drawers): IJsonModel {
-  console.log('createDefaultJson', drawers);
+function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
+  console.log('createDefaultJson', drawers, locale);
   return {
     global: {
       tabEnableClose: false,
@@ -102,21 +101,24 @@ export default function ComplexLayout() {
   const locale = useSettingsStoreSelector((state) => state.locale);
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
 
-  const [model, setModel] = useState(() => Model.fromJson(createDefaultJson(drawers)));
+  const [model, setModel] = useState(() => Model.fromJson(createDefaultJson(drawers, locale)));
 
   const factory = useCallback((node: TabNode) => {
     const Component = COMPONENTS[node.getComponent() as keyof typeof COMPONENTS];
     return Component ? <Component /> : null;
   }, []);
 
-  const modelRef = useRef<Model | null>(null);
+  useEffect(() => {
+    setModel(Model.fromJson(createDefaultJson(drawers, i18n.language)));
+  }, [drawers]);
 
   useEffect(() => {
-    modelRef.current = model;
-  }, [model]);
+    const onLanguageChanged = () => {
+      setModel(Model.fromJson(createDefaultJson(drawers, i18n.language)));
+    };
 
-  useEffect(() => {
-    setModel(Model.fromJson(createDefaultJson(drawers)));
+    i18n.on('languageChanged', onLanguageChanged);
+    return () => i18n.off('languageChanged', onLanguageChanged);
   }, [drawers]);
 
   return (
