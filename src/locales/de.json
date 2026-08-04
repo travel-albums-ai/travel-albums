@@ -131,6 +131,7 @@
   "sectionFolders": "Ordner",
   "sectionViews": "Ansichten",
   "sectionLikes": "Likes",
+  "sectionCities": "Städte",
   "sectionComments": "Kommentare",
   "sectionFavorites": "Favoriten",
   "sectionTimeline": "Zeitachse",
@@ -230,6 +231,34 @@
   "deselectAllDescription": "Alle Fotos aus der Auswahl entfernen",
   "invertSelection": "Auswahl umkehren",
   "invertSelectionDescription": "Auswahl der Fotos umkehren",
+
+  "ascending": "Aufsteigend",
+  "descending": "Absteigend",
+
+  "byokGoogleVisionTooltip": "Eigenen Google Vision API-Schlüssel verwenden",
+  "openPanelsSettings": "Panel-Einstellungen öffnen",
+  "openSectionsSettings": "Bereichseinstellungen öffnen",
+  "enterFullscreen": "Vollbildmodus betreten",
+  "exitFullscreen": "Vollbildmodus verlassen",
+  "toggleGeneticAlgorithm": "Genetischen Algorithmus umschalten",
+  "toggleMapAll": "Alle Fotos / ausgewählte Fotos auf der Karte umschalten",
+  "toggleMapPreview": "Karten-Vorschau umschalten",
+  "togglePreviewComments": "Vorschau-Kommentare umschalten",
+  "togglePreviewExif": "EXIF-Vorschau umschalten",
+  "togglePreviewMap": "Vorschau-Karte umschalten",
+  "reRunFilterGps": "Filter erneut ausführen, um nur Fotos zwischen GPS-Koordinaten anzuzeigen",
+
+  "scrollerColumns2": "2 Spalten",
+  "scrollerColumns3": "3 Spalten",
+  "scrollerColumns4": "4 Spalten",
+  "scrollerRows2": "2 Zeilen",
+  "scrollerRows3": "3 Zeilen",
+  "scrollerRows4": "4 Zeilen",
+
+  "openGlobalFilters": "Globale Filter öffnen",
+  "tutorialToggleTooltip": "Lernen Sie schnell, wie Sie die App mit einem geführten Tutorial verwenden.",
+  "googleVisionApiKeyPlaceholder": "Google Vision API-Schlüssel...",
+
 
   "_comment_navigation": "Navigation toggle",
   "navBack": "Zurück",
