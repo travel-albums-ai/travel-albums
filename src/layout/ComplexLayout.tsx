@@ -24,12 +24,20 @@ import {
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
 
+import { useLayout, useLayoutStoreSelector } from '@/context/layoutStore';
 import i18n from '@/lib/i18n';
 import {
   useCallback,
   useEffect,
   useState
 } from 'react';
+
+const tab = (
+  enabled: boolean,
+  label: string,
+  component: string,
+) => (enabled ? [{ type: 'tab', name: i18n.t(label), component }] : []);
+
 
 function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
   console.log('createDefaultJson', drawers, locale);
@@ -45,8 +53,8 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
         size: 400,
         minSize: 350,
         children: [
-          ...(drawers.sidebar ? [{ type: 'tab', name: i18n.t('drawerExplorer'), component: 'sidebarDrawer' }] : []),
-          ...(drawers.files ? [{ type: 'tab', name: i18n.t('drawerFiles'), component: 'filesDrawer' }] : []),
+          ...tab(drawers.sidebar, 'drawerExplorer', 'sidebarDrawer'),
+          ...tab(drawers.files, 'drawerFiles', 'filesDrawer'),
         ],
       },
       {
@@ -55,9 +63,9 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
         size: 550,
         minSize: 550,
         children: [
-          ...(drawers.preview ? [{ type: 'tab', name: i18n.t('drawerPreview'), component: 'previewDrawer' }] : []),
-          ...(drawers.adjustments ? [{ type: 'tab', name: i18n.t('drawerAdjustments'), component: 'adjustmentsDrawer' }] : []),
-          ...(drawers.labeler ? [{ type: 'tab', name: i18n.t('drawerLabeler'), component: 'labelerDrawer' }] : []),
+          ...tab(drawers.preview, 'drawerPreview', 'previewDrawer'),
+          ...tab(drawers.adjustments, 'drawerAdjustments', 'adjustmentsDrawer'),
+          ...tab(drawers.labeler, 'drawerLabeler', 'labelerDrawer'),
         ],
       },
     ],
@@ -69,12 +77,12 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
           type: 'tabset',
           weight: 50,
           children: [
-            ...(drawers.outlet ? [{ type: 'tab', name: i18n.t('drawerMain'), component: 'outletDrawer' }] : []),
-            ...(drawers.globe ? [{ type: 'tab', name: i18n.t('drawerGlobe'), component: 'globeDrawer' }] : []),
-            ...(drawers.scroller ? [{ type: 'tab', name: i18n.t('drawerScroller'), component: 'scrollerDrawer' }] : []),
-            ...(drawers.rows ? [{ type: 'tab', name: i18n.t('drawerRows'), component: 'rowsDrawer' }] : []),
-            ...(drawers.calendar ? [{ type: 'tab', name: i18n.t('drawerCalendar'), component: 'calendarDrawer' }] : []),
-            ...(drawers.folderHandler ? [{ type: 'tab', name: i18n.t('drawerFolderHandlers'), component: 'folderHandlersDrawer' }] : []),
+            ...tab(drawers.outlet, 'drawerMain', 'outletDrawer'),
+            ...tab(drawers.globe, 'drawerGlobe', 'globeDrawer'),
+            ...tab(drawers.scroller, 'drawerScroller', 'scrollerDrawer'),
+            ...tab(drawers.rows, 'drawerRows', 'rowsDrawer'),
+            ...tab(drawers.calendar, 'drawerCalendar', 'calendarDrawer'),
+            ...tab(drawers.folderHandler, 'drawerFolderHandlers', 'folderHandlersDrawer'),
           ],
         },
       ],
@@ -100,6 +108,10 @@ export default function ComplexLayout() {
   const drawers = useSettingsStoreSelector((s) => s.drawers);
   const locale = useSettingsStoreSelector((state) => state.locale);
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
+  const layoutModel = useLayoutStoreSelector((state) => state.layoutModel);
+  const { setLayoutModel } = useLayout()
+
+  console.log('ComplexLayout', drawers, locale, themeMode, layoutModel);
 
   const [model, setModel] = useState(() => Model.fromJson(createDefaultJson(drawers, locale)));
 
@@ -110,11 +122,13 @@ export default function ComplexLayout() {
 
   useEffect(() => {
     setModel(Model.fromJson(createDefaultJson(drawers, i18n.language)));
+    setLayoutModel(Model.fromJson(createDefaultJson(drawers, i18n.language)));
   }, [drawers]);
 
   useEffect(() => {
     const onLanguageChanged = () => {
       setModel(Model.fromJson(createDefaultJson(drawers, i18n.language)));
+      setLayoutModel(Model.fromJson(createDefaultJson(drawers, i18n.language)));
     };
 
     i18n.on('languageChanged', onLanguageChanged);
