@@ -9,20 +9,22 @@ export default function SortOrderToggle() {
   const sortOrder = useFilterStoreSelector((state) => state.sortOrder)
   const { t } = useTranslation()
 
-  return <GenericToggleButtonGroup items={[
-    {
-      value: 'oldestFirst',
-      tooltip: t('sortOldestFirst'),
-      onClick: () => setSetting((prev) => ({...prev, sortOrder: 'oldestFirst'})),
-      icon: <ArrowUp01Icon size={20} />,
-      selected: sortOrder === 'oldestFirst'
-    },
-    {
-      value: 'newestFirst',
-      tooltip: t('sortNewestFirst'),
-      onClick: () => setSetting((prev) => ({...prev, sortOrder: 'newestFirst'})),
-      icon: <ArrowDown01Icon size={20} />,
-      selected: sortOrder === 'newestFirst'
-    },
-  ] satisfies GenericToggleButtonProps[]} />
+  return <>
+    <GenericToggleButtonGroup items={[
+      {
+        value: 'oldestFirst',
+        tooltip: t('sortOldestFirst'),
+        onClick: () => setSetting((prev) => ({...prev, sortOrder: 'oldestFirst'})),
+        icon: <ArrowUp01Icon size={20} />,
+        selected: sortOrder === 'oldestFirst'
+      },
+      {
+        value: 'newestFirst',
+        tooltip: t('sortNewestFirst'),
+        onClick: () => setSetting((prev) => ({...prev, sortOrder: 'newestFirst'})),
+        icon: <ArrowDown01Icon size={20} />,
+        selected: sortOrder === 'newestFirst'
+      },
+    ] satisfies GenericToggleButtonProps[]} />
+  </>
 }

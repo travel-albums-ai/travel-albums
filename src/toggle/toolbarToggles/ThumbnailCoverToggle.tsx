@@ -1,6 +1,5 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { LayoutDashboard, LayoutGrid } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -11,17 +10,6 @@ export default function ThumbnailCoverToggle() {
   const { t } = useTranslation()
 
   return <>
-    <WebMCPDataView
-      name="check_thumbnail_format"
-      description="Get current thumbnail format"
-      execute={async () => ({
-        content: [{
-          type: 'text',
-          text: `Thumbnail format is currently ${thumbnailFormat}.`
-        }]
-      })}
-    />
-
     <GenericToggleButtonGroup items={[
       {
         value: 'cover',

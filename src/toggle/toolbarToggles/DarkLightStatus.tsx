@@ -1,64 +1,39 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import WebMCPDataView from '@/components/WebMCPDataView';
+import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { MoonStar, Sun } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useWebMCP } from 'usewebmcp';
 
 export default function DarkLightStatus() {
   const { setSetting } = useSettings()
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
   const { t } = useTranslation()
 
-  useWebMCP({
-    name: 'toggle_theme',
-    description: 'Switch the application between light and dark theme, or toggle the current theme.',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        mode: {
-          type: 'string',
-          enum: ['light', 'dark', 'toggle'],
-          description: 'Theme to switch to. Defaults to toggle.',
-        },
-      },
-      additionalProperties: false,
-    } as const,
-    execute: async ({ mode = 'toggle' }) => {
-      let nextTheme: 'light' | 'dark' = 'light';
-
-      setSetting((prev) => {
-        nextTheme =
-        mode === 'toggle'
-          ? prev.themeMode === 'light'
-            ? 'dark'
-            : 'light'
-          : mode;
-
-        return {
-          ...prev,
-          themeMode: nextTheme,
-        };
-      });
-
-      return { themeMode: nextTheme };
-    },
-    onError: (error) => {
-      console.error('Error toggling theme:', error);
-    },
-  });
+  const handleOnChange = (mode?: 'light' | 'dark') => {
+    setSetting((prev) => ({ ...prev, themeMode: mode === 'light' ? 'dark' : 'light'}))
+  }
 
   return <>
-    <WebMCPDataView
-      name="check_theme_mode_mcp"
-      description="Get current theme mode"
-      execute={async () => ({
-        content: [{
-          type: 'text',
-          text: `Current theme mode is ${themeMode}.`
-        }]
-      })}
+    <WebMCPDataRun
+      name="toggle_theme"
+      description="Switch the application between light and dark theme."
+      inputSchema={{
+        type: 'object',
+        properties: {
+          mode: {
+            type: 'string',
+            enum: ['light', 'dark'],
+            description: 'Theme to switch to between white and dark',
+          },
+        },
+        additionalProperties: false,
+      }}
+      execute={async ({ mode }: { mode?: 'light' | 'dark' }) => {
+        handleOnChange(mode === 'light' ? 'dark' : 'light');
+
+        return { themeMode: mode === 'light' ? 'dark' : 'light' };
+      }}
     />
 
     <GenericToggleButtonGroup variant="standard" items={[
@@ -72,7 +47,7 @@ export default function DarkLightStatus() {
           group: 'Appearance'
         },
         icon: themeMode === 'light' ? <MoonStar /> : <Sun />,
-        onClick: () => setSetting((prev) => ({ ...prev, themeMode: themeMode === 'light' ? 'dark' : 'light'})),
+        onClick: () => handleOnChange(themeMode),
         selected: themeMode !== 'dark',
       },
     ] satisfies GenericToggleButtonProps[]} />

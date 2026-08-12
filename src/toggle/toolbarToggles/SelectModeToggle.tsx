@@ -9,21 +9,23 @@ export default function SelectModeToggle() {
   const selectMode = useSettingsStoreSelector((state) => state.selectMode)
   const { t } = useTranslation()
 
-  return <GenericToggleButtonGroup items={[
-    {
-      id: "selectMode",
-      group: ['general'],
-      tooltip: t('toggleSelectMode'),
-      kbd: 'Shift+S',
-      meta: {
-        name: t('toggleSelectModeName'),
-        description: t('toggleSelectModeDescription'),
-        icon: <CheckCheck />,
-        group: 'Select Mode'
+  return <>
+    <GenericToggleButtonGroup items={[
+      {
+        id: "selectMode",
+        group: ['general'],
+        tooltip: t('toggleSelectMode'),
+        kbd: 'Shift+S',
+        meta: {
+          name: t('toggleSelectModeName'),
+          description: t('toggleSelectModeDescription'),
+          icon: <CheckCheck />,
+          group: 'Select Mode'
+        },
+        icon: selectMode ? <CheckCheck /> : <Square />,
+        onClick: () => setSetting((prev) => ({ ...prev, selectMode: !prev.selectMode })),
+        selected: selectMode,
       },
-      icon: selectMode ? <CheckCheck /> : <Square />,
-      onClick: () => setSetting((prev) => ({ ...prev, selectMode: !prev.selectMode })),
-      selected: selectMode,
-    },
-  ] satisfies GenericToggleButtonProps[]} />
+    ] satisfies GenericToggleButtonProps[]} />
+  </>
 }

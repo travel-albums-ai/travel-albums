@@ -24,6 +24,7 @@ import {
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
 
+import WebMCPDataView from '@/components/WebMCPDataView';
 import i18n from '@/lib/i18n';
 import SettingsModal from '@/modals/SettingsModal';
 import {
@@ -147,6 +148,7 @@ function cleanModel(model: IJsonModel, drawers: typeof drawers): IJsonModel {
 export default function ComplexLayout() {
   const drawers = useSettingsStoreSelector((s) => s.drawers);
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
+  const settingsStore = useSettingsStoreSelector((state) => state);
 
   const [model, setModel] = useState(() => loadModel(drawers));
 
@@ -172,6 +174,17 @@ export default function ComplexLayout() {
       <OnboardingModal />
       <SettingsModal />
       <MainDriver />
+
+      <WebMCPDataView
+        name="check_settings_store"
+        description="Get current settings store"
+        execute={async () => ({
+          content: [{
+            type: 'text',
+            text: `Current settings store is ${JSON.stringify(settingsStore)}.`
+          }]
+        })}
+      />
 
       <Box
         className={themeMode === 'dark' ? 'flexlayout__theme_alpha_dark' : 'flexlayout__theme_light'}
