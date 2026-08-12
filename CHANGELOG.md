@@ -1,3 +1,9 @@
+## [1.60.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.59.0...v1.60.0) (2026-08-12)
+
+### ✨ Features
+
+* remove unused components and update settings popovers for improved functionality ([cb01b6a](https://github.com/travel-albums-ai/travel-albums/commit/cb01b6a1a04a84c0dc4a7cd2de3149f6ba7dcc1f))
+
 ## [1.59.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.58.0...v1.59.0) (2026-08-12)
 
 ### ✨ Features
