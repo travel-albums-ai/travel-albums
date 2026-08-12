@@ -1,4 +1,4 @@
-import PageRedirect from '@/layout/StatusBar/components/PageRedirect';
+import PageRedirect from '@/components/PageRedirect';
 import { Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

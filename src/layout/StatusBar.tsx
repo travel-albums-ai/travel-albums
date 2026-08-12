@@ -1,11 +1,11 @@
-import LoadingBar from '@/layout/StatusBar/components/LoadingBar';
-import DomCountStatus from '@/layout/StatusBar/DomCountStatus';
-import GenerateThumbnailsStatus from '@/layout/StatusBar/GenerateThumbnailsStatus';
-import KeyboardMenu from '@/layout/StatusBar/KeyboardMenu';
-import ServerStatus from '@/layout/StatusBar/ServerStatus';
-import SystemStatus from '@/layout/StatusBar/SystemStatus';
-import ThumbSizeStatus from '@/layout/StatusBar/ThumbSizeStatus';
-import VersionStatus from '@/layout/StatusBar/VersionStatus';
+import DomCountStatus from '@/base/DomCountStatus';
+import GenerateThumbnailsStatus from '@/base/GenerateThumbnailsStatus';
+import KeyboardMenu from '@/base/KeyboardMenu';
+import ServerStatus from '@/base/ServerStatus';
+import SystemStatus from '@/base/SystemStatus';
+import ThumbSizeStatus from '@/base/ThumbSizeStatus';
+import VersionStatus from '@/base/VersionStatus';
+import LoadingBar from '@/components/LoadingBar';
 import { Box, Divider, Stack, Theme } from '@mui/material';
 import { Fragment } from 'react';
 

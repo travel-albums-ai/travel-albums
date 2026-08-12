@@ -1,9 +1,9 @@
+import ThumbnailsStatus from '@/components/ThumbnailsStatus';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_DeleteGenerateThumbnails } from '@/hooks/remote/useFetch_DeleteGenerateThumbnails';
 import { useFetch_JobGenerateThumbnails } from '@/hooks/remote/useFetch_JobGenerateThumbnails';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { usePost_ScriptsGenerateThumbnails } from '@/hooks/usePost_ScriptsGenerateThumbnails';
-import ThumbnailsStatus from '@/layout/StatusBar/components/ThumbnailsStatus';
 import { useEffect, useMemo, useRef } from 'react';
 
 export default function GenerateThumbnailsStatus() {

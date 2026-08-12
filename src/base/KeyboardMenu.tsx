@@ -1,5 +1,5 @@
+import KeyboardList from '@/components/KeyboardList';
 import PopoverButton from '@/components/PopoverButton';
-import KeyboardList from '@/layout/StatusBar/components/KeyboardList';
 import { Keyboard } from 'lucide-react';
 
 export default function KeyboardMenu() {

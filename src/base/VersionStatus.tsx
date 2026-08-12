@@ -1,5 +1,5 @@
 import { Tooltip, Typography } from '@mui/material';
-import packageJson from '../../../package.json';
+import packageJson from '../../package.json';
 
 export default function VersionStatus() {
 
