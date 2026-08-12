@@ -65,6 +65,7 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
   return {
     global: {
       tabEnableClose: false,
+      tabEnableRenderOnDemand: true,
     },
     borders: [
       {

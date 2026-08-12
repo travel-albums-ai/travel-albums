@@ -1,6 +1,7 @@
 import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import { Box } from '@mui/material';
 import { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 interface Props {
   id: string;
@@ -18,9 +19,10 @@ export default function GenericPanel({
   children
 }: Props) {
   const [collapsed, setCollapsed] = useState(false);
+  const { ref, inView } = useInView();
 
   return (
-    <Box id={id} sx={{
+    <Box id={id} ref={ref} sx={{
       display: 'flex',
       flexDirection: 'column',
       width: 'auto',
@@ -53,9 +55,9 @@ export default function GenericPanel({
           -
         </Box>
       </Box>}
-      <Box sx={boxSx}>
+      {inView && <Box sx={boxSx}>
         {children}
-      </Box>
+      </Box>}
     </Box>
   )
 }

@@ -17,6 +17,8 @@ export default function GlobeDrawer() {
   const foundSet = foundSection?.data?.find((d: any) => d.name === id)
   const photos = showMapAll ? unfilteredPhotos : type_name === '' ? filteredPhotos : foundSet?.photos || []
 
+  console.log({ type_name, id, foundSection, foundSet, photos }, new Date().toISOString())
+
   return (
     <GenericPanel id="globe-drawer" defaultToolbar>
       <AlbumGlobe photos={showMapAll ? unfilteredPhotos : photos} multiplier={1.1} />
