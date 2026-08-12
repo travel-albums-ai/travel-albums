@@ -2,13 +2,16 @@ import { useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
-import { useSidebarStoreSelector } from '@/context/sidebarStore';
+import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
 
 import { sectionIcons } from '@/icons/IconsIndex';
 
+import WebMCPDataRun from '@/components/WebMCPDataRun';
+import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarSectionHeader from '@/layout/components/SidebarSectionHeader';
 import SidebarSectionItem from '@/layout/components/SidebarSectionItem';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type Section = ReturnType<typeof useSections_GLOBAL>[number];
 
@@ -29,13 +32,14 @@ export default function SidebarList() {
   const sections = useSections_GLOBAL();
   const sidebarOpen = useSidebarStoreSelector((s) => s.sidebarOpen);
   const modules = useSettingsStoreSelector((s) => s.modules);
+  const navigate = useNavigate();
+  const { setSidebarOpen } = useSidebar()
+  const location = useLocation();
 
   const rows = useMemo<SidebarRow[]>(() => {
     const result: SidebarRow[] = [];
 
     for (const section of sections) {
-      // if (!section.data?.length) continue;
-
       if(modules && !modules[section.type as keyof typeof modules]) continue;
 
       result.push({
@@ -59,7 +63,77 @@ export default function SidebarList() {
     return result;
   }, [sections, sidebarOpen, modules]);
 
-  return (
+
+  const availableSections = rows
+    .filter(row => row.type === 'header')
+    .map(row => row.section.type)
+
+  const availableSubSections = rows
+    .filter(row => row.type === 'item')
+    .filter(row => String(location.pathname).includes(row.section.type))
+    .map(row => row.item.name)
+
+  console.log('availableSections', availableSections, availableSubSections, rows, location.pathname.split('/')[2])
+
+  return <>
+    <WebMCPDataRun
+      name="navigate_sidebar_to_section"
+      description="Navigate the sidebar to a specific section."
+      inputSchema={{
+        type: 'object',
+        properties: {
+          sectionType: {
+            type: 'string',
+            enum: availableSections,
+            description: 'The type of the section to navigate to.',
+          },
+        },
+        additionalProperties: false,
+      }}
+      execute={async ({ sectionType }: { sectionType?: string }) => {
+        const isOpen = sidebarOpen?.[sectionType as keyof typeof sidebarOpen] ?? false
+        if(!isOpen) {
+          setSidebarOpen(sectionType as keyof typeof sidebarOpen, true)
+        }
+        navigate('/selectedType/' + sectionType);
+        return 'Sidebar navigated to section ' + sectionType;
+      }}
+      deps={[availableSections]}
+    />
+
+    <WebMCPDataRun
+      name="navigate_sidebar_to_sub_section"
+      description="Navigate the sidebar to a specific sub-section."
+      inputSchema={{
+        type: 'object',
+        properties: {
+          subSectionName: {
+            type: 'string',
+            enum: availableSubSections,
+            description: 'The name of the sub-section to navigate to.',
+          },
+        },
+        additionalProperties: false,
+      }}
+      execute={async ({ subSectionName }: { subSectionName?: string }) => {
+        navigate('/selectedPhotos/' + location.pathname.split('/')[2] + '/' + encodeURIComponent(subSectionName ?? ''));
+        console.log('/selectedPhotos/' + location.pathname.split('/')[2] + '/' + encodeURIComponent(subSectionName ?? ''))
+        return 'Sidebar navigated to sub-section ' + subSectionName + ' in section ' + location.pathname.split('/')[2];
+      }}
+      deps={[location.pathname, availableSubSections]}
+    />
+
+    <WebMCPDataView
+      name="check_current_navigation_state"
+      description="Get current navigation state"
+      execute={async () => ({
+        content: [{
+          type: 'text',
+          text: `Current navigation state is ${JSON.stringify(sidebarOpen)}. Current location is ${location.pathname}.`
+        }]
+      })}
+    />
+
     <Virtuoso
       data={rows}
       computeItemKey={(_, row) => row.key}
@@ -87,5 +161,5 @@ export default function SidebarList() {
         );
       }}
     />
-  );
+  </>;
 }
