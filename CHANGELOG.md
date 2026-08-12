@@ -1,3 +1,9 @@
+## [1.43.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.42.0...v1.43.0) (2026-08-12)
+
+### ✨ Features
+
+* add ThumbnailCoverToggle and TutorialToggle components with toolbar metadata ([9c417e7](https://github.com/travel-albums-ai/travel-albums/commit/9c417e73ccf94e49586306e59fcc9bef3353fa68))
+
 ## [1.42.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.41.0...v1.42.0) (2026-08-12)
 
 ### ✨ Features
