@@ -1,3 +1,10 @@
+## [1.67.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.66.0...v1.67.0) (2026-08-12)
+
+### ✨ Features
+
+* add AutoDescriptionDrawer and integrate into layout; update settings and localization ([fe31cbe](https://github.com/travel-albums-ai/travel-albums/commit/fe31cbed7d7c23bfe57693d945f94cf4634df5a6))
+* enhance GenericPanel with intersection observer for conditional rendering; add tabEnableRenderOnDemand to layout ([7b87808](https://github.com/travel-albums-ai/travel-albums/commit/7b878084ea7a727fc24f06420d56fe2a9b691491))
+
 ## [1.66.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.65.0...v1.66.0) (2026-08-12)
 
 ### ✨ Features
