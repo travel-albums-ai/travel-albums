@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "search-modal",
+  id: "extendedMenu",
   toolbar: [
     {
       id: 'header',
-      side: 'left',
-      priority: 0
+      side: 'right',
+      priority: 1000
     }
   ],
-  loader: () => import('@/toggle/SearchModal'),
+  loader: () => import('@/toggle/toolbarPopover/ExtendedMenu'),
 } as ToolbarMeta;

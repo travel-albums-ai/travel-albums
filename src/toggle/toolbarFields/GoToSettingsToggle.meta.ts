@@ -10,5 +10,5 @@ export const meta = {
       priority: 500
     }
   ],
-  loader: () => import('@/toggle/GoToSettingsToggle'),
+  loader: () => import('@/toggle/toolbarFields/GoToSettingsToggle'),
 } as ToolbarMeta;

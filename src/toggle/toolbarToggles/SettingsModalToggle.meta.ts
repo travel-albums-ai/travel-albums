@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "google-vision-labeler",
+  id: "settingsModalToggle",
   toolbar: [
     {
-      id: 'labeler-drawer',
+      id: 'header',
       side: 'right',
-      priority: 0
+      priority: 500
     }
   ],
-  loader: () => import('@/toggle/GoogleVisionLabeler'),
+  loader: () => import('@/toggle/toolbarToggles/SettingsModalToggle'),
 } as ToolbarMeta;

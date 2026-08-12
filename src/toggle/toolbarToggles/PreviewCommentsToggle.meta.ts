@@ -9,5 +9,5 @@ export const meta = {
       priority: 200
     }
   ],
-  loader: () => import('@/toggle/PreviewCommentsToggle'),
+  loader: () => import('@/toggle/toolbarToggles/PreviewCommentsToggle'),
 } as ToolbarMeta;

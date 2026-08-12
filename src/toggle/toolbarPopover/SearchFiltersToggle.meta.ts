@@ -1,14 +1,14 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "settingsToggle",
+  id: "searchFiltersToggle",
   toolbar: [
     {
       id: 'sidebar',
       side: 'right',
-      priority: 100,
+      priority: 200,
       visible: (context: any) => !context.sidebarSearchOpen,
     }
   ],
-  loader: () => import('@/toggle/SettingsToggle'),
-}  as ToolbarMeta;
+  loader: () => import('@/toggle/toolbarPopover/SearchFiltersToggle'),
+} as ToolbarMeta;

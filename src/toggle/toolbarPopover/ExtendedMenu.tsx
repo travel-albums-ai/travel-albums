@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import LocaleToggle from '@/toggle/LocaleToggle';
+import LocaleToggle from '@/toggle/toolbarFields/LocaleToggle';
 import { Divider, Stack } from '@mui/material';
 import { EllipsisVertical, ScrollText, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

@@ -28,5 +28,5 @@ export const meta = {
       visible: (context) => context?.showAll === undefined ? true : context.showAll === false
     },
   ],
-  loader: () => import('@/toggle/PinnedToggle'),
+  loader: () => import('@/toggle/toolbarToggles/PinnedToggle'),
 } as ToolbarMeta;

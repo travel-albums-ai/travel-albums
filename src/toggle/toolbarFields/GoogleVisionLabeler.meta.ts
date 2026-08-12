@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "labels-catalogue-popover",
+  id: "google-vision-labeler",
   toolbar: [
     {
       id: 'labeler-drawer',
       side: 'right',
-      priority: 500
+      priority: 0
     }
   ],
-  loader: () => import('@/toggle/LabelsCataloguePopover'),
+  loader: () => import('@/toggle/toolbarFields/GoogleVisionLabeler'),
 } as ToolbarMeta;

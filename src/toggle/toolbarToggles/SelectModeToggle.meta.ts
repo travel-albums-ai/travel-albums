@@ -1,28 +1,28 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "sort-order-toggle",
+  id: "selectMode",
   toolbar: [
     {
       id: 'selected-photos-drawer',
       side: 'left',
-      priority: 0
+      priority: 100
     },
     {
       id: 'scroller-drawer',
       side: 'left',
-      priority: 0
+      priority: 200
     },
     {
       id: 'rows-drawer',
       side: 'left',
-      priority: 0
+      priority: 300
     },
     {
       id: 'calendar-drawer',
       side: 'left',
-      priority: 0
+      priority: 400
     },
   ],
-  loader: () => import('@/toggle/SortOrderToggle'),
-} as ToolbarMeta;
+  loader: () => import('@/toggle/toolbarToggles/SelectModeToggle'),
+}  as ToolbarMeta;

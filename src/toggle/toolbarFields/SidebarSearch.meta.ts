@@ -1,13 +1,12 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
-
 export const meta = {
-  id: "onboardingToggle",
+  id: "sidebarSearch",
   toolbar: [
     {
-      id: 'settings-page',
+      id: 'sidebar',
       side: 'left',
-      priority: 200
+      priority: 0
     }
   ],
-  loader: () => import('@/toggle/OnboardingToggle'),
+  loader: () => import('@/toggle/toolbarFields/SidebarSearch'),
 } as ToolbarMeta;

@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "settingsModalToggle",
+  id: "labels-catalogue-popover",
   toolbar: [
     {
-      id: 'header',
+      id: 'labeler-drawer',
       side: 'right',
       priority: 500
     }
   ],
-  loader: () => import('@/toggle/SettingsModalToggle'),
+  loader: () => import('@/toggle/toolbarFields/LabelsCataloguePopover'),
 } as ToolbarMeta;

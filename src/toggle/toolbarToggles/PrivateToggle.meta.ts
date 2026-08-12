@@ -1,12 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
+
 export const meta = {
-  id: "sidebarSearch",
+  id: "privateToggle",
   toolbar: [
     {
-      id: 'sidebar',
+      id: 'photo-drawer',
       side: 'left',
-      priority: 0
+      priority: 100
     }
   ],
-  loader: () => import('@/toggle/SidebarSearch'),
+  loader: () => import('@/toggle/toolbarToggles/PrivateToggle'),
 } as ToolbarMeta;
