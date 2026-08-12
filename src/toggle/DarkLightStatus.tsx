@@ -4,29 +4,27 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import useRegisterTool from '@/hooks/useRegisterTool';
 import { MoonStar, Sun } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useWebMCP } from 'usewebmcp';
 
 export default function DarkLightStatus() {
   const { setSetting } = useSettings()
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
   const { t } = useTranslation()
 
-  useRegisterTool(
-    {
-      name: "check_theme_mode",
-      description: "Returns the current theme mode.",
 
-      execute: async () => ({
-        structuredContent: {
-          themeMode: themeMode,
-        },
-        content: [{
-          type: "text",
-          text: `Current theme mode is ${themeMode}.`
-        }]
-      })
-    },
-    [themeMode, setSetting]
-  );
+  useWebMCP({
+    name: 'check_theme_mode_mcp',
+    description: 'Get current theme mode',
+    execute: async () => ({
+      structuredContent: {
+        themeMode: themeMode,
+      },
+      content: [{
+        type: "text",
+        text: `Current theme mode is ${themeMode}.`
+      }]
+    })
+  });
 
   useRegisterTool(
     {
@@ -64,7 +62,6 @@ export default function DarkLightStatus() {
     },
     [themeMode, setSetting]
   );
-
 
   return <GenericToggleButtonGroup variant="standard" items={[
     {
