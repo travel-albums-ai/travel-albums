@@ -1,3 +1,9 @@
+## [1.51.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.50.0...v1.51.0) (2026-08-12)
+
+### ✨ Features
+
+* integrate WebMCPDataRun into toggle components for enhanced settings management ([367aacb](https://github.com/travel-albums-ai/travel-albums/commit/367aacb69647620aad42aba538b1132f81b4c776))
+
 ## [1.50.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.49.0...v1.50.0) (2026-08-12)
 
 ### ✨ Features
