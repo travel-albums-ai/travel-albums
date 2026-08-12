@@ -5,9 +5,8 @@ import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
 import AlbumPhotoRowItem from '@/drawers/rows/AlbumPhotoRowItem';
+import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import { type GalleryPhoto } from '@/lib/galleryData';
-import FavoriteToggle from '@/toggle/toolbarToggles/FavoriteToggle';
-import SelectedToggle from '@/toggle/toolbarToggles/SelectedToggle';
 import { Box, useTheme } from '@mui/material';
 import { CaseUpper, Clock, Eye, Folder, Hash, MessageCircle, SeparatorHorizontal, SeparatorVertical, ThumbsUp } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
@@ -157,17 +156,9 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
           style={{...thumbnailStyle}}
         />
 
-        {selectMode && (
-          <Box sx={{ position: 'absolute', top: 4, left: 4, zIndex: 2 }} onClick={stopPropagation}>
-            <SelectedToggle photoId={photo.id} />
-          </Box>
-        )}
-
-        {favorite && (
-          <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }} onClick={stopPropagation}>
-            <FavoriteToggle _photoId={photo.id} />
-          </Box>
-        )}
+        <Box sx={{ position: 'absolute', top: 0, right: 0, left: 0, height: '40px', zIndex: 2 }}>
+          <GeneralToolbar group={'album-photo-row'} context={{ photoId: photo.id, favorite, selectMode }} />
+        </Box>
       </Box>
 
       <Box sx={{

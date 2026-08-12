@@ -13,6 +13,12 @@ export const meta = {
       side: 'right',
       priority: 0,
       visible: (context: any) => context?.favorite === undefined ? false : context.favorite === true,
+    },
+    {
+      id: 'album-photo-row',
+      side: 'right',
+      priority: 0,
+      visible: (context: any) => context?.favorite === undefined ? false : context.favorite === true,
     }
   ],
   loader: () => import('@/toggle/toolbarToggles/FavoriteToggle'),
