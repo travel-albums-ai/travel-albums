@@ -14,7 +14,6 @@ export default function SettingsModal() {
         border: 2,
         borderColor: 'divider',
         bgcolor: 'background.default',
-        backdropFilter: 'blur(4px)',
         height: '65vh',
         overflowY: 'auto',
       }}>

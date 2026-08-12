@@ -11,11 +11,17 @@ export default function NoServerModal() {
   return (<>
     <Dialog onClose={() => { }} open={serverOnline === false && demoMode !== true} fullWidth sx={{ backdropFilter: 'blur(8px)', }} >
       <Box sx={{
-        p: 4, display: 'flex', flexDirection: 'column',
-        alignItems: 'center', gap: 2,
-        borderRadius: 2, boxShadow: 3,
-        border: 1, borderColor: 'divider',
-        m: 2, bgcolor: 'background.paper'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 2,
+        boxShadow: 3,
+        p: 2,
+        borderRadius: 2,
+        border: 2,
+        borderColor: 'divider',
+        bgcolor: 'background.default',
+        overflowY: 'auto',
       }}>
         <Box sx={{ fontSize: 48 }}>⚠️</Box>
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{t('noServerConnectionTitle')}</Typography>

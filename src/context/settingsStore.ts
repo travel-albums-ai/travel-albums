@@ -59,7 +59,8 @@ type SettingsStore = {
     scroller: boolean,
     rows: boolean,
     calendar: boolean,
-    folderHandler: boolean
+    folderHandler: boolean,
+    autoDescription: boolean
   }
   modules: {
     peopleAndPets: boolean,
@@ -135,7 +136,8 @@ const defaults: SettingsStore = {
     adjustments: true,
     rows: true,
     calendar: true,
-    folderHandler: true
+    folderHandler: true,
+    autoDescription: true
   },
   modules: {
     peopleAndPets: true,

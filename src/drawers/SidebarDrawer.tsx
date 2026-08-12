@@ -10,8 +10,6 @@ import {
 } from '@mui/material';
 import { NavLink, useLocation } from 'react-router-dom';
 
-
-
 export default function SidebarDrawer() {
   const location = useLocation();
   const { sidebarTerm, sidebarSearchOpen } = useSettingsStoreSelector((state) => state);

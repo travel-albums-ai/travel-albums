@@ -159,6 +159,7 @@
   "drawerRows": "Zeilen",
   "drawerCalendar": "Kalender",
   "drawerFolderHandlers": "Ordner-Handler",
+  "drawerAutoDescription": "Auto Description",
 
   "failedLoadingLayout": "Fehler beim Laden des Layouts",
   "failedSavingLayout": "Fehler beim Speichern des Layouts",

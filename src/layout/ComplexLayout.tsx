@@ -24,6 +24,7 @@ import {
 import 'flexlayout-react/style/combined.css';
 
 import WebMCPDataView from '@/components/WebMCPDataView';
+import AutoDescriptionDrawer from '@/drawers/AutoDescriptionDrawer';
 import i18n from '@/lib/i18n';
 import SettingsModal from '@/modals/SettingsModal';
 import {
@@ -48,6 +49,7 @@ const rightChildren = [
   ...tab('drawerPreview', 'preview'),
   ...tab('drawerAdjustments', 'adjustments'),
   ...tab('drawerLabeler', 'labeler'),
+  ...tab('drawerAutoDescription', 'autoDescription'),
 ]
 
 const layoutChildren = [
@@ -56,6 +58,7 @@ const layoutChildren = [
   ...tab('drawerScroller', 'scroller'),
   ...tab('drawerRows', 'rows'),
   ...tab('drawerCalendar', 'calendar'),
+
 ]
 
 function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
@@ -105,6 +108,7 @@ const COMPONENTS = {
   scroller: ScrollerDrawer,
   rows: RowsDrawer,
   calendar: CalendarDrawer,
+  autoDescription: AutoDescriptionDrawer,
 } as const;
 
 function loadModel(drawers: typeof drawers) {
