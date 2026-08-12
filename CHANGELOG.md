@@ -1,3 +1,9 @@
+## [1.48.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.47.0...v1.48.0) (2026-08-12)
+
+### ✨ Features
+
+* integrate GeneralToolbar into AlbumPhotoRow and update toggle visibility for improved context handling ([3d34383](https://github.com/travel-albums-ai/travel-albums/commit/3d343836d07b12bd489334c15873ee3b884ae533))
+
 ## [1.47.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.46.1...v1.47.0) (2026-08-12)
 
 ### ✨ Features
