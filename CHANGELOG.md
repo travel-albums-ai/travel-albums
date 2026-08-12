@@ -1,3 +1,9 @@
+## [1.45.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.44.0...v1.45.0) (2026-08-12)
+
+### ✨ Features
+
+* reorganize toggle components into toolbarToggles directory and add new toggles ([3f05c4b](https://github.com/travel-albums-ai/travel-albums/commit/3f05c4bfbbc2410532c5c8d2f33a0890c0af85e2))
+
 ## [1.44.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.43.0...v1.44.0) (2026-08-12)
 
 ### ✨ Features
