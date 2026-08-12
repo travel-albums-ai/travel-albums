@@ -5,9 +5,10 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Star, StarOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function FavoriteToggle({ _photoId }: { _photoId: string }) {
+// export default function FavoriteToggle({ _photoId }: { _photoId: string }) {
+export default function FavoriteToggle({ context } : { context: { photoId: string }}) {
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
-  const photoId = _photoId || previewPhotoObj?.id || ''
+  const photoId = context.photoId || previewPhotoObj?.id || ''
   const { isFavorite, add, remove } = useFavorites()
   const { t } = useTranslation()
 

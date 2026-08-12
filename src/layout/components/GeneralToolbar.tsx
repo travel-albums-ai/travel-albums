@@ -108,35 +108,21 @@ export default function GeneralToolbar({ group, noDivider = true, fullWidth = tr
     });
 
   return (
-    <Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
-      {leftItems.length > 0 && <Box sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
+    <Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} data-group={group} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
+      {leftItems.length > 0 && <Box data-side="left" sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         {leftItems
           .map((item) => {
             const Component = toolbarRegistry.resolve(item);
 
-            if (!Component) {
-              return null;
-            }
-
-            return (
-              <Component key={item.id} context={context} />
-            );
-          })
-
-        }
+            return !Component ? null : <Component key={item.id} context={context} />
+          })}
       </Box>}
-      {rightItems.length > 0 && <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+      {rightItems.length > 0 && <Box data-side="right" sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         {rightItems
           .map((item) => {
             const Component = toolbarRegistry.resolve(item);
 
-            if (!Component) {
-              return null;
-            }
-
-            return (
-              <Component key={item.id} context={context} />
-            );
+            return !Component ? null : <Component key={item.id} context={context} />
           })}
       </Box>}
     </Stack>

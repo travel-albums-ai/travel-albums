@@ -87,7 +87,7 @@ class ToolbarRegistry {
     }
 
     const items = this.toolbar(group)
-      .filter((x) => x.toolbar?.some((g) => g.side === side))
+      .filter((x) => x.toolbar?.some((g) => g.side === side && g.id === group))
       .sort((a, b) => this.sidePriority(a, side) - this.sidePriority(b, side));
 
     this.groupSideCache.set(cacheKey, items);

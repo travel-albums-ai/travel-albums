@@ -4,8 +4,9 @@ import { useSelected, useSelected_isSelected } from '@/context/selectedStore';
 import { Square, SquareCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function SelectedToggle({ photoId }: { photoId: string }) {
+export default function SelectedToggle({ context } : { context: { photoId: string }}) {
   const { add, remove } = useSelected()
+  const photoId = context.photoId
   const isSelected = useSelected_isSelected(photoId)
   const { t } = useTranslation()
 

@@ -5,9 +5,8 @@ import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
+import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import { type GalleryPhoto } from '@/lib/galleryData';
-import FavoriteToggle from '@/toggle/toolbarToggles/FavoriteToggle';
-import SelectedToggle from '@/toggle/toolbarToggles/SelectedToggle';
 import { Box, Card, Tooltip, Typography, useTheme } from '@mui/material';
 import dayjs from 'dayjs';
 import { memo, useCallback, useMemo, useState } from 'react';
@@ -16,14 +15,6 @@ interface AlbumPhotoCardProps {
   photo: GalleryPhoto
   style?: React.CSSProperties
   original?: boolean
-}
-
-const PRELOAD_IMG_STYLE: React.CSSProperties = {
-  width: 1, height: 1, position: 'absolute', top: -9999, left: -9999,
-};
-
-function stopPropagation(e: React.MouseEvent) {
-  e.stopPropagation();
 }
 
 function prettyTime(dateInput: string) {
@@ -40,7 +31,6 @@ function prettyTime(dateInput: string) {
 
 function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps) {
   const theme = useTheme();
-  const demoMode = useSettingsStoreSelector(s => s.demoMode);
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
   const borderRadius = useAlbumPhotoCardStoreSelector((state) => state.borderRadius);
@@ -126,17 +116,9 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
         }}
       />
 
-      {selectMode && (
-        <Box sx={{ position: 'absolute', top: 4, left: 4, zIndex: 2 }} onClick={stopPropagation}>
-          <SelectedToggle photoId={photo.id} />
-        </Box>
-      )}
-
-      {favorite && (
-        <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }} onClick={stopPropagation}>
-          <FavoriteToggle _photoId={photo.id} />
-        </Box>
-      )}
+      <Box sx={{ position: 'absolute', top: 0, right: 0, left: 0, height: '40px', zIndex: 2 }}>
+        <GeneralToolbar group={'album-photo-card'} context={{ photoId: photo.id, favorite, selectMode }} />
+      </Box>
 
       {resolvedTags.length > 0 && (
         <Box sx={{
