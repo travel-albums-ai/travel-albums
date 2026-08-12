@@ -1,6 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import FilterPhotosPopover from '@/settings/FilterPhotosPopover';
+import { Box } from '@mui/material';
 import { ListFilter } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +14,9 @@ export default function SearchFiltersToggle() {
       {
         tooltip: t('openGlobalFilters'),
         icon: <ListFilter />,
-        popover: <FilterPhotosPopover />,
+        popover: <Box sx={{ width: '400px', maxHeight: '75vh', overflowY: 'auto' }}>
+          <FilterPhotosPopover />
+        </Box>,
       },
     ] satisfies GenericToggleButtonProps[]}
   />

@@ -121,11 +121,12 @@ export const defaultDarkTheme = createTheme({
         paper: ({theme}) => ({
           background: 'transparent',
           backgroundImage: 'none',
+          borderRadius: 8,
           boxShadow: '0px 0px 12px 4px rgba(0,0,0,0.5)',
           overflow: 'hidden',
         }),
         backdrop: {
-          backgroundColor: 'rgba(0,0,0,0.25)',
+          backgroundColor: 'rgba(0,0,0,0.5)',
           backdropFilter: 'blur(0px)',
           WebkitBackdropFilter: 'blur(0px)',
         }

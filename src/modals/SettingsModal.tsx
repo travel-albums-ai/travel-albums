@@ -10,9 +10,13 @@ export default function SettingsModal() {
     <Dialog open={showSettings} fullWidth maxWidth="md" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
       <Box sx={{
         p: 2,
-        border: 1, borderColor: 'divider',
-        bgcolor: 'background.paper',
-        height: '65vh', overflowY: 'auto',
+        borderRadius: 2,
+        border: 2,
+        borderColor: 'divider',
+        bgcolor: 'background.default',
+        backdropFilter: 'blur(4px)',
+        height: '65vh',
+        overflowY: 'auto',
       }}>
         <SettingsContent />
       </Box>

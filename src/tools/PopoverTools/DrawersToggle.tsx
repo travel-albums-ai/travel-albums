@@ -13,9 +13,9 @@ export default function DrawersToggle() {
     variant="standard"
     items={[
       {
-        tooltip: t('openPanelsSettings'),
+        tooltip: "Toggle Drawers",
         icon: <PanelsRightBottom />,
-        popover: <Box sx={{ width: '400px', maxHeight: '50vh', overflowY: 'auto' }}>
+        popover: <Box sx={{ width: '400px', maxHeight: '75vh', overflowY: 'auto' }}>
           <DrawersPopover />
         </Box>,
       },
