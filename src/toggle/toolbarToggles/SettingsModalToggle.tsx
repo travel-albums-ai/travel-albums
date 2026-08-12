@@ -33,6 +33,7 @@ export default function SettingsModalToggle() {
 
     <GenericToggleButtonGroup variant="standard" items={[
       {
+        webMcp: true,
         tooltip: 'Toggle Settings Modal',
         icon: <Settings />,
         onClick: () => handleOnChange(),

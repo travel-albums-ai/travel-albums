@@ -2,11 +2,12 @@ import KeyboardChip from '@/components/KeyboardChip';
 import PopoverButtonSimple from '@/components/PopoverButtonSimple';
 import GenericHotkey from '@/components/generics/GenericHotkey';
 import { Box, ToggleButton, Tooltip, Typography } from '@mui/material';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Astroid, ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, ReactElement, ReactNode } from 'react';
 
 export interface GenericToggleButtonProps {
   id?: string;
+  webMcp?: boolean;
   group?: string[];
   tooltip: string;
   kbd?: string;
@@ -42,6 +43,7 @@ export default function GenericToggleButton({
   const buttonDOM = <>
     {item.kbd && !item.disabled && <GenericHotkey item={item as any} />}
     <Tooltip title={<Box sx={{ display: 'flex', p: 0.125, alignItems: 'center', gap: 0.5 }}>
+      {item.webMcp && <Astroid size={12} />}
       {item.tooltip}
       {item.kbd && !item.disabled && <KeyboardChip shortcut={item.kbd} />}</Box>
     } placement="bottom" arrow>

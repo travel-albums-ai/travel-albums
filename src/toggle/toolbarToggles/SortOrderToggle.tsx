@@ -41,6 +41,7 @@ export default function SortOrderToggle() {
     <GenericToggleButtonGroup items={[
       {
         value: 'oldestFirst',
+        webMcp: true,
         tooltip: t('sortOldestFirst'),
         onClick: () => handleSortOrderChange('oldestFirst'),
         icon: <ArrowUp01Icon size={20} />,
@@ -48,6 +49,7 @@ export default function SortOrderToggle() {
       },
       {
         value: 'newestFirst',
+        webMcp: true,
         tooltip: t('sortNewestFirst'),
         onClick: () => handleSortOrderChange('newestFirst'),
         icon: <ArrowDown01Icon size={20} />,

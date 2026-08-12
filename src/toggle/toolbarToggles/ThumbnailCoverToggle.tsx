@@ -41,14 +41,16 @@ export default function ThumbnailCoverToggle() {
     <GenericToggleButtonGroup items={[
       {
         value: 'cover',
-        tooltip: t('thumbnailCover'),
+        webMcp: true,
+        tooltip: 'Thumbnail Cover',
         onClick: () => handleThumbnailFormatChange('cover'),
         icon: <LayoutGrid size={20} />,
         selected: thumbnailFormat === 'cover'
       },
       {
         value: 'contain',
-        tooltip: t('thumbnailContain'),
+        webMcp: true,
+        tooltip: 'Thumbnail Contain',
         onClick: () => handleThumbnailFormatChange('contain'),
         icon: <LayoutDashboard size={20} />,
         selected: thumbnailFormat === 'contain'
