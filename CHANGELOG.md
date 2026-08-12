@@ -1,3 +1,9 @@
+## [1.54.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.53.0...v1.54.0) (2026-08-12)
+
+### ✨ Features
+
+* integrate WebMCPDataRun into SelectedToggle for improved photo selection handling ([7cd61d2](https://github.com/travel-albums-ai/travel-albums/commit/7cd61d22e68bc5399f44c2627d9e9092d0febde3))
+
 ## [1.53.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.52.0...v1.53.0) (2026-08-12)
 
 ### ✨ Features
