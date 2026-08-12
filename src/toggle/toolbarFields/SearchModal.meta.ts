@@ -6,7 +6,7 @@ export const meta = {
     {
       id: 'header',
       side: 'left',
-      priority: 0
+      priority: 10
     }
   ],
   loader: () => import('@/toggle/toolbarFields/SearchModal'),
