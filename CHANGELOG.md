@@ -1,3 +1,9 @@
+## [1.53.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.52.0...v1.53.0) (2026-08-12)
+
+### ✨ Features
+
+* implement WebMCPDataRun and WebMCPDataView components; refactor toggle components to utilize them for improved settings management ([7fd93ec](https://github.com/travel-albums-ai/travel-albums/commit/7fd93ec0c444ad6191a38f153083242ffe3b6f1a))
+
 ## [1.52.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.51.0...v1.52.0) (2026-08-12)
 
 ### ✨ Features
