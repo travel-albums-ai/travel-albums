@@ -1,3 +1,9 @@
+## [1.65.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.64.0...v1.65.0) (2026-08-12)
+
+### ✨ Features
+
+* enhance UI components with improved styling and layout adjustments ([22dbf6c](https://github.com/travel-albums-ai/travel-albums/commit/22dbf6ccfc4582f100254e7c2f75cd28ddd917aa))
+
 ## [1.64.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.63.0...v1.64.0) (2026-08-12)
 
 ### ✨ Features
