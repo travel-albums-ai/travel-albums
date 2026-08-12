@@ -1,3 +1,9 @@
+## [1.58.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.57.0...v1.58.0) (2026-08-12)
+
+### ✨ Features
+
+* add toolbarContext to GenericPanel in PhotoDrawer for improved context handling ([9eeb476](https://github.com/travel-albums-ai/travel-albums/commit/9eeb476d40dfae939fa1f9a3a97c2efb8c66dca6))
+
 ## [1.57.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.56.0...v1.57.0) (2026-08-12)
 
 ### ✨ Features
