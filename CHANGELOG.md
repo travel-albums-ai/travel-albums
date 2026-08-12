@@ -1,3 +1,13 @@
+## [1.40.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.39.1...v1.40.0) (2026-08-12)
+
+### ✨ Features
+
+* add usewebmcp integration for theme mode status and update dependencies ([f4daeeb](https://github.com/travel-albums-ai/travel-albums/commit/f4daeeb30e57c0978b7d4154cb68e4fba1a7ca64))
+
+### 🔧 Chore
+
+* simplify indexer configuration loading and improve error handling ([096205c](https://github.com/travel-albums-ai/travel-albums/commit/096205ccb71eb547119be3c2d1fc1cbeba7c0b90))
+
 ## [1.39.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.39.0...v1.39.1) (2026-08-04)
 
 ### 🐛 Fixes
