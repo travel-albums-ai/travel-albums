@@ -117,7 +117,6 @@ export default function SidebarList() {
       }}
       execute={async ({ subSectionName }: { subSectionName?: string }) => {
         navigate('/selectedPhotos/' + location.pathname.split('/')[2] + '/' + encodeURIComponent(subSectionName ?? ''));
-        console.log('/selectedPhotos/' + location.pathname.split('/')[2] + '/' + encodeURIComponent(subSectionName ?? ''))
         return 'Sidebar navigated to sub-section ' + subSectionName + ' in section ' + location.pathname.split('/')[2];
       }}
       deps={[location.pathname, availableSubSections]}
