@@ -1,14 +1,14 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "allToPrivateToggle",
+  id: "allToTagsToggle",
   toolbar: [
     ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
       id,
       side: 'left',
-      priority: 900,
+      priority: 1000,
       visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
     })),
   ],
-  loader: () => import('@/toggle/AllToPrivateToggle'),
+  loader: () => import('@/toggle/toolbarToggles/AllToTagsToggle'),
 } as ToolbarMeta;

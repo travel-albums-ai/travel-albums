@@ -10,5 +10,5 @@ export const meta = {
       visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
     })),
   ],
-  loader: () => import('@/toggle/AllToFavoriteToggle'),
+  loader: () => import('@/toggle/toolbarToggles/AllToFavoriteToggle'),
 } as ToolbarMeta;
