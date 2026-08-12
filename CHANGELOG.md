@@ -1,3 +1,9 @@
+## [1.64.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.63.0...v1.64.0) (2026-08-12)
+
+### ✨ Features
+
+* refactor StatusBar components and move to base directory ([1d91845](https://github.com/travel-albums-ai/travel-albums/commit/1d91845965af9d6e12dfb39dd438b223d2e7dd26))
+
 ## [1.63.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.62.0...v1.63.0) (2026-08-12)
 
 ### ✨ Features
