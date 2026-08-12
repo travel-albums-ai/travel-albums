@@ -81,19 +81,6 @@
     "order": -1,
     "actionBar": false
   },
-
-  {
-    "path": "/settings",
-    "root": "/settings",
-    "type": "page",
-    "component": "SettingsPage",
-    "title": "Settings",
-    "icon": "material-symbols:settings-outline",
-    "visible": true,
-    "includeInMenu": false,
-    "order": 1,
-    "actionBar": true
-  },
     {
     "path": "/release",
     "root": "/release",

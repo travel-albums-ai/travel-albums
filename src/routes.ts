@@ -1,9 +1,7 @@
 import CopyrightPage from '@/pages/CopyrightPage';
-// import IndexerPage from '@/pages/IndexerPage';
 import ReleasePage from '@/pages/ReleasePage';
 import SelectedPage_type from '@/pages/SelectedPage_type';
 import SelectedPhotosPage_type_name from '@/pages/SelectedPhotosPage_type_name';
-import SettingsPage from '@/pages/SettingsPage';
 import { createElement, type ReactElement } from 'react';
 import { matchPath, Navigate } from 'react-router-dom';
 import routeDefinitions from './data/routes.json';
@@ -13,7 +11,6 @@ type RouteComponentKey =
   | 'SelectedPage_type'
   | 'ReleasePage'
   | 'CopyrightPage'
-  | 'SettingsPage'
 
 type RouteMetadata = {
   title?: string
@@ -62,7 +59,6 @@ export type MenuRoute = {
 const pageElements: Record<RouteComponentKey, () => ReactElement> = {
   SelectedPhotosPage_type_name: () => createElement(SelectedPhotosPage_type_name),
   ReleasePage: () => createElement(ReleasePage),
-  SettingsPage: () => createElement(SettingsPage),
   SelectedPage_type: () => createElement(SelectedPage_type),
   CopyrightPage: () => createElement(CopyrightPage),
 }
