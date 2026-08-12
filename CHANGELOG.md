@@ -1,3 +1,9 @@
+## [1.49.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.48.0...v1.49.0) (2026-08-12)
+
+### ✨ Features
+
+* update GeneralToolbar to include data attributes for left and right items for better context handling ([c222ac4](https://github.com/travel-albums-ai/travel-albums/commit/c222ac468be0b0b720f9ccb99f2c3cadde19b6ac))
+
 ## [1.48.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.47.0...v1.48.0) (2026-08-12)
 
 ### ✨ Features
