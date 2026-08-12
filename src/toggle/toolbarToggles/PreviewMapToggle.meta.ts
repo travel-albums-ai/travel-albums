@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "mapShowPreview",
+  id: "previewMapToggle",
   toolbar: [
     {
-      id: 'globe-drawer',
+      id: 'photo-drawer',
       side: 'right',
-      priority: 300
+      priority: 0
     }
   ],
-  loader: () => import('@/toggle/MapShowPreviewToggle'),
+  loader: () => import('@/toggle/toolbarToggles/PreviewMapToggle'),
 } as ToolbarMeta;

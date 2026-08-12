@@ -9,5 +9,5 @@ export const meta = {
       priority: 100
     }
   ],
-  loader: () => import('@/toggle/PreviewExifToggle'),
+  loader: () => import('@/toggle/toolbarToggles/PreviewExifToggle'),
 } as ToolbarMeta;

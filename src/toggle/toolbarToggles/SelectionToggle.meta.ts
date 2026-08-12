@@ -10,5 +10,5 @@ export const meta = {
       visible: (context) => context?.selectMode === undefined ? false : context.selectMode === true,
     })),
   ],
-  loader: () => import('@/toggle/SelectionToggle'),
+  loader: () => import('@/toggle/toolbarToggles/SelectionToggle'),
 } as ToolbarMeta;
