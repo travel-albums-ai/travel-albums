@@ -1,3 +1,9 @@
+## [1.47.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.46.1...v1.47.0) (2026-08-12)
+
+### ✨ Features
+
+* integrate GeneralToolbar into AlbumPhotoCard and update toggle components for improved context handling ([b8cf4f0](https://github.com/travel-albums-ai/travel-albums/commit/b8cf4f03a46fcf7d493b2ae52704d4c277b68f12))
+
 ## [1.46.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.46.0...v1.46.1) (2026-08-12)
 
 ### 🐛 Fixes
