@@ -7,7 +7,7 @@ export const meta = {
       id,
       side: 'left',
       priority: 1000,
-      visible: (context) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
+      visible: (context: any) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
     })),
   ],
   loader: () => import('@/toggle/toolbarToggles/AllToTagsToggle'),

@@ -6,7 +6,7 @@ import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
 import { Star, StarOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToFavoriteToggle({ context } : { context: any }) {
+export default function AllToFavoriteToggle({ context } : { context: { photosIds?: string[] } }) {
   const { areAllFavorite, addMany, removeMany } = useFavorites()
   const { removeMany: removeManySelected } = useSelected()
   const { removeMany: removeManyIgnored } = useIgnored()

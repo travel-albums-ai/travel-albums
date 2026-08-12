@@ -7,7 +7,7 @@ import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
 import { Trash, Upload } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToIgnoreToggle({ context } : { context: any }) {
+export default function AllToIgnoreToggle({ context } : { context: { photosIds?: string[] } }) {
   const { addMany, removeMany } = useIgnored()
 
   const { removeMany: removeManySelected } = useSelected()
@@ -60,5 +60,5 @@ export default function AllToIgnoreToggle({ context } : { context: any }) {
       },
       disabled: !areAllIgnored,
     },
-  ] satisfies GenericToggleButtonProps[]} asGroup />
+  ] satisfies GenericToggleButtonProps[]} />
 }

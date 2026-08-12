@@ -7,7 +7,7 @@ import { useSelected, useSelectedStoreSelector } from '@/context/selectedStore';
 import { Eye, EyeClosed } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToPrivateToggle({ context } : { context: any }) {
+export default function AllToPrivateToggle({ context } : { context: { photosIds?: string[] } }) {
   const { areAllPrivate, addMany, removeMany } = usePrivate()
   const { removeMany: removeManySelected } = useSelected()
   const { removeMany: removeManyFavorites } = useFavorites()
@@ -43,5 +43,5 @@ export default function AllToPrivateToggle({ context } : { context: any }) {
       },
       disabled: !areAllPrivate(remainingPhotoIds),
     },
-  ] satisfies GenericToggleButtonProps[]} asGroup />
+  ] satisfies GenericToggleButtonProps[]} />
 }

@@ -5,7 +5,7 @@ import { useTagsStore, useTagsStoreSelector } from '@/context/tagsStore';
 import { BadgeX, Tag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export default function AllToTagsToggle({ context } : { context: any }) {
+export default function AllToTagsToggle({ context } : { context: { photosIds?: string[] } }) {
   const { removeMany: removeManySelected } = useSelected()
   const { addTagToPhotos, removeTagFromPhotos, removeAllTagsFromPhotos } = useTagsStore()
   const { t } = useTranslation()
