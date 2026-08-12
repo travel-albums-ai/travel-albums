@@ -73,8 +73,6 @@ export default function SidebarList() {
     .filter(row => String(location.pathname).includes(row.section.type))
     .map(row => row.item.name)
 
-  console.log('availableSections', availableSections, availableSubSections, rows, location.pathname.split('/')[2])
-
   return <>
     <WebMCPDataRun
       name="navigate_sidebar_to_section"

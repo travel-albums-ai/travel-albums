@@ -1,3 +1,4 @@
+import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { usePinned, usePinnedStoreSelector } from '@/context/pinnedStore';
 import { sectionIcons } from '@/icons/IconsIndex';
@@ -32,6 +33,17 @@ export default function SidebarPins() {
     }))) || []
 
   return <>
+    <WebMCPDataView
+      name="check_current_pins_state"
+      description="Get current pins state"
+      execute={async () => ({
+        content: [{
+          type: 'text',
+          text: `Current pins state is ${JSON.stringify(pins)}.`
+        }]
+      })}
+    />
+
     {pins.length > 0 && filteredPins.length > 0 && <Divider sx={{ my: 0.5 }} />}
     {filteredPins.length > 0 &&
         filteredPins?.map((item) => {
