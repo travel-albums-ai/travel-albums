@@ -1,3 +1,9 @@
+## [1.62.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.61.0...v1.62.0) (2026-08-12)
+
+### ✨ Features
+
+* remove FolderHandlersDrawer and update layout configuration ([1c0750f](https://github.com/travel-albums-ai/travel-albums/commit/1c0750f95802e1231c3fefbbc1137dcfccdd5a66))
+
 ## [1.61.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.60.0...v1.61.0) (2026-08-12)
 
 ### ✨ Features
