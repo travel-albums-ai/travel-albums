@@ -1,3 +1,9 @@
+## [1.42.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.41.0...v1.42.0) (2026-08-12)
+
+### ✨ Features
+
+* refactor toggle components and update toolbar discovery for new structure ([45c9b2a](https://github.com/travel-albums-ai/travel-albums/commit/45c9b2a83c9bddecf674d3b5dc1752eddf3a72cc))
+
 ## [1.41.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.40.0...v1.41.0) (2026-08-12)
 
 ### ✨ Features
