@@ -1,3 +1,9 @@
+## [1.57.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.56.0...v1.57.0) (2026-08-12)
+
+### ✨ Features
+
+* remove unused code and integrate WebMCPDataView for current pins state in SidebarPins ([ba77a02](https://github.com/travel-albums-ai/travel-albums/commit/ba77a026ca2f7c49da2f54b1bd1eac43d18a5da1))
+
 ## [1.56.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.55.0...v1.56.0) (2026-08-12)
 
 ### ✨ Features
