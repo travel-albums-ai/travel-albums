@@ -7,6 +7,7 @@ import PopoverButton from '@/components/PopoverButton';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
 import ZoomPhoto from '@/drawers/components/ZoomPhoto';
+import DescribePhoto from '@/drawers/preview/DescribePhoto';
 import { thumbnailUrl } from '@/lib/thumbnailService';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
 import { Box, Chip, Typography } from '@mui/material';
@@ -72,6 +73,8 @@ export default function PhotoDrawer() {
             <Chip label="🗺️ Google Maps" size="small" color="primary" sx={{ position: 'absolute', top: 8, right: 8, zIndex: 401 }} />
           </a>
         </Box>}
+
+        <DescribePhoto photoId={photo.id} />
 
         {showPreviewComments && photo.social.length > 0 && <Box sx={{
           display: 'flex', flexDirection: 'column',

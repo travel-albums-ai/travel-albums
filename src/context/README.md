@@ -99,6 +99,10 @@ Mounted at app root in `src/main.tsx`.
   - Manages tag definitions and photo-tag relationships.
   - Supports create/delete/update tags and apply/remove tags in bulk.
 
+- `descriptionsStore.ts`
+  - Keeps optional user descriptions for photos.
+  - Supports upserting, reading, and removing descriptions individually or in bulk.
+
 - `labelsStore.ts`
   - Stores raw image labels per photo + computed primary grouped labels.
   - Contains a large semantic mapping dictionary and rebuilds primary index after updates.
