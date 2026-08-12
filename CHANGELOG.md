@@ -1,3 +1,9 @@
+## [1.46.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.45.0...v1.46.0) (2026-08-12)
+
+### ✨ Features
+
+* add toolbar fields and toggles for settings, labels, and search functionalities ([f9f8027](https://github.com/travel-albums-ai/travel-albums/commit/f9f8027b335e8ad5a632061feebf2e0bc9524a4f))
+
 ## [1.45.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.44.0...v1.45.0) (2026-08-12)
 
 ### ✨ Features
