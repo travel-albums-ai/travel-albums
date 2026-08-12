@@ -1,3 +1,9 @@
+## [1.46.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.46.0...v1.46.1) (2026-08-12)
+
+### 🐛 Fixes
+
+* update context type for toggle components to improve type safety ([24a6d28](https://github.com/travel-albums-ai/travel-albums/commit/24a6d28b8b3e36bb42592dfc6dd0fac521107bbb))
+
 ## [1.46.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.45.0...v1.46.0) (2026-08-12)
 
 ### ✨ Features
