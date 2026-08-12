@@ -35,7 +35,7 @@ export default function PhotoDrawer() {
 
   return (
     <>
-      <GenericPanel id="photo-drawer" defaultToolbar>
+      <GenericPanel id="photo-drawer" defaultToolbar toolbarContext={{ photoId: photo.id }}>
 
         {showPreviewExif && <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
           <PopoverButton trigger={<PhotoExifDetails photo={photo} />} width={500}
