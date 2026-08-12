@@ -1,3 +1,13 @@
+## [1.41.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.40.0...v1.41.0) (2026-08-12)
+
+### ✨ Features
+
+* integrate WebMCPDataView component for theme and modal state reporting across toggle components ([4e40481](https://github.com/travel-albums-ai/travel-albums/commit/4e4048161469031a12713704f40a01dce39dbd82))
+
+### 🧹 Refactors
+
+* streamline DarkLightStatus component and enhance theme toggling logic ([a0f17ef](https://github.com/travel-albums-ai/travel-albums/commit/a0f17ef6ba6556d2475b8f2090f22385b932a6fa))
+
 ## [1.40.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.39.1...v1.40.0) (2026-08-12)
 
 ### ✨ Features
