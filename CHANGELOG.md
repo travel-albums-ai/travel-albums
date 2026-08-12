@@ -1,3 +1,9 @@
+## [1.56.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.55.0...v1.56.0) (2026-08-12)
+
+### ✨ Features
+
+* integrate WebMCPDataRun into PinnedToggle for enhanced toggle functionality ([2e13bc0](https://github.com/travel-albums-ai/travel-albums/commit/2e13bc06821721b7f36d802c5174c25cc72fdbfb))
+
 ## [1.55.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.54.0...v1.55.0) (2026-08-12)
 
 ### ✨ Features
