@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "ignoredToggle",
+  id: "favoriteToggle",
   toolbar: [
     {
       id: 'photo-drawer',
       side: 'left',
-      priority: 300
+      priority: 0
     }
   ],
-  loader: () => import('@/toggle/IgnoredToggle'),
+  loader: () => import('@/toggle/toolbarToggles/FavoriteToggle'),
 } as ToolbarMeta;

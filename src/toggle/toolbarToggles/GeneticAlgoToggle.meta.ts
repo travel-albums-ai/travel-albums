@@ -9,5 +9,5 @@ export const meta = {
       priority: 0
     }
   ],
-  loader: () => import('@/toggle/GeneticAlgoToggle'),
+  loader: () => import('@/toggle/toolbarToggles/GeneticAlgoToggle'),
 } as ToolbarMeta;
