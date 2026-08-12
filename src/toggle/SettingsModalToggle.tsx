@@ -1,5 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import useRegisterTool from '@/hooks/useRegisterTool';
 import { Settings } from 'lucide-react';
@@ -9,26 +10,6 @@ export default function SettingsModalToggle() {
   const { setSetting } = useSettings()
   const showSettings = useSettingsStoreSelector((state) => state.showSettings);
   const { t } = useTranslation()
-
-  useRegisterTool(
-    {
-      name: "get_settings_modal_state",
-      description: "Returns whether the settings modal is currently visible.",
-
-      execute: async () => ({
-        structuredContent: {
-          visible: showSettings,
-        },
-        content: [{
-          type: "text",
-          text: showSettings
-            ? "Settings modal is visible."
-            : "Settings modal is hidden."
-        }]
-      })
-    },
-    [showSettings, setSetting]
-  );
 
   useRegisterTool(
     {
@@ -66,12 +47,25 @@ export default function SettingsModalToggle() {
     [showSettings, setSetting]
   );
 
-  return <GenericToggleButtonGroup variant="standard" items={[
-    {
-      tooltip: 'Toggle Settings Modal',
-      icon: <Settings />,
-      onClick: () => setSetting((prev) => ({ ...prev, showSettings: !showSettings })) ,
-      selected: showSettings,
-    },
-  ] as GenericToggleButtonProps[]} />
+  return <>
+    <WebMCPDataView
+      name="check_settings_modal_state"
+      description="Get current settings modal state"
+      execute={async () => ({
+        content: [{
+          type: 'text',
+          text: `Settings modal is currently ${showSettings ? 'visible' : 'hidden'}.`
+        }]
+      })}
+    />
+
+    <GenericToggleButtonGroup variant="standard" items={[
+      {
+        tooltip: 'Toggle Settings Modal',
+        icon: <Settings />,
+        onClick: () => setSetting((prev) => ({ ...prev, showSettings: !showSettings })) ,
+        selected: showSettings,
+      },
+    ] as GenericToggleButtonProps[]} />
+  </>
 }

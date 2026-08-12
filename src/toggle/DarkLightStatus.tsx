@@ -1,5 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { MoonStar, Sun } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -9,17 +10,6 @@ export default function DarkLightStatus() {
   const { setSetting } = useSettings()
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
   const { t } = useTranslation()
-
-  useWebMCP({
-    name: 'check_theme_mode_mcp',
-    description: 'Get current theme mode',
-    execute: async () => ({
-      content: [{
-        type: "text",
-        text: `Current theme mode is ${themeMode}.`
-      }]
-    })
-  });
 
   useWebMCP({
     name: 'toggle_theme',
@@ -59,19 +49,32 @@ export default function DarkLightStatus() {
     },
   });
 
-  return <GenericToggleButtonGroup variant="standard" items={[
-    {
-      tooltip: t('toggleThemeTooltip'),
-      kbd: 'Alt+`',
-      meta: {
-        name: t('toggleThemeName'),
-        description: t('toggleThemeDescription'),
+  return <>
+    <WebMCPDataView
+      name="check_theme_mode_mcp"
+      description="Get current theme mode"
+      execute={async () => ({
+        content: [{
+          type: 'text',
+          text: `Current theme mode is ${themeMode}.`
+        }]
+      })}
+    />
+
+    <GenericToggleButtonGroup variant="standard" items={[
+      {
+        tooltip: t('toggleThemeTooltip'),
+        kbd: 'Alt+`',
+        meta: {
+          name: t('toggleThemeName'),
+          description: t('toggleThemeDescription'),
+          icon: themeMode === 'light' ? <MoonStar /> : <Sun />,
+          group: 'Appearance'
+        },
         icon: themeMode === 'light' ? <MoonStar /> : <Sun />,
-        group: 'Appearance'
+        onClick: () => setSetting((prev) => ({ ...prev, themeMode: themeMode === 'light' ? 'dark' : 'light'})),
+        selected: themeMode !== 'dark',
       },
-      icon: themeMode === 'light' ? <MoonStar /> : <Sun />,
-      onClick: () => setSetting((prev) => ({ ...prev, themeMode: themeMode === 'light' ? 'dark' : 'light'})),
-      selected: themeMode !== 'dark',
-    },
-  ] satisfies GenericToggleButtonProps[]} />
+    ] satisfies GenericToggleButtonProps[]} />
+  </>
 }
