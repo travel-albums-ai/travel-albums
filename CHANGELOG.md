@@ -1,3 +1,9 @@
+## [1.66.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.65.0...v1.66.0) (2026-08-12)
+
+### ✨ Features
+
+* add descriptions feature for photos with upsert and removal capabilities ([887ee47](https://github.com/travel-albums-ai/travel-albums/commit/887ee47bbcbc36122e0fa9e419e528f08dcff9c8))
+
 ## [1.65.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.64.0...v1.65.0) (2026-08-12)
 
 ### ✨ Features
