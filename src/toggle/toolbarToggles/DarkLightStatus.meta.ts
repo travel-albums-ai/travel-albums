@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "drawersToggle",
+  id: "darkLightStatus",
   toolbar: [
     {
       id: 'header',
       side: 'right',
-      priority: 900
+      priority: 600
     }
   ],
-  loader: () => import('@/toggle/DrawersToggle'),
+  loader: () => import('@/toggle/toolbarToggles/DarkLightStatus'),
 } as ToolbarMeta;

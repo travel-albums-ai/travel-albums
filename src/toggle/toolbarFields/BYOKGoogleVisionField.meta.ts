@@ -9,5 +9,5 @@ export const meta = {
       priority: 0
     }
   ],
-  loader: () => import('@/toggle/BYOKGoogleVisionField'),
+  loader: () => import('@/toggle/toolbarFields/BYOKGoogleVisionField'),
 } as ToolbarMeta;

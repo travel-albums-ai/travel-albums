@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "scroller-rows-toggle",
+  id: "scroller-grouping-toggle",
   toolbar: [
     {
       id: 'scroller-drawer',
       side: 'right',
-      priority: 700
+      priority: 800
     }
   ],
-  loader: () => import('@/toggle/ScrollerRowsToggle'),
+  loader: () => import('@/toggle/toolbarToggles/ScrollerGroupingToggle'),
 } as ToolbarMeta;

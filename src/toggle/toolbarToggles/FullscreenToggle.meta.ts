@@ -1,13 +1,13 @@
 import { ToolbarMeta } from '@/toolbarRegistry';
 
 export const meta = {
-  id: "scroller-columns-toggle",
+  id: "fullscreenToggle",
   toolbar: [
     {
-      id: 'scroller-drawer',
+      id: 'header',
       side: 'right',
-      priority: 800
+      priority: 700
     }
   ],
-  loader: () => import('@/toggle/ScrollerColumnsToggle'),
+  loader: () => import('@/toggle/toolbarToggles/FullscreenToggle'),
 } as ToolbarMeta;

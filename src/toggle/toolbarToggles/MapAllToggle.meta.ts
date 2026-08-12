@@ -9,5 +9,5 @@ export const meta = {
       priority: 400
     }
   ],
-  loader: () => import('@/toggle/MapAllToggle'),
+  loader: () => import('@/toggle/toolbarToggles/MapAllToggle'),
 } as ToolbarMeta;
