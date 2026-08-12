@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export default function SettingsToggle() {
   const { t } = useTranslation();
 
-  return <GenericToggleButtonGroup asGroup={true}
+  return <GenericToggleButtonGroup
     id="settings-sections-toggle"
     items={[
       {
