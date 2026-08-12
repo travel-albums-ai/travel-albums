@@ -1,3 +1,9 @@
+## [1.44.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.43.0...v1.44.0) (2026-08-12)
+
+### ✨ Features
+
+* restructure FavoriteToggle and GeneticAlgoToggle components into toolbarToggles directory ([3f335aa](https://github.com/travel-albums-ai/travel-albums/commit/3f335aa9434b1267c6954f0ba5afdf0c80a3a083))
+
 ## [1.43.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.42.0...v1.43.0) (2026-08-12)
 
 ### ✨ Features
