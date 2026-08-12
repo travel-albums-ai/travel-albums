@@ -58,8 +58,8 @@ export const defaultLightTheme = createTheme({
           overflow: 'hidden',
         },
         backdrop: {
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          backdropFilter: 'blur(2px)',
+          WebkitBackdropFilter: 'blur(2px)',
         }
       },
     },
@@ -114,19 +114,20 @@ export const defaultDarkTheme = createTheme({
     },
     MuiDialog: {
       styleOverrides: {
-        // root: {
-        //   backdropFilter: 'blur(12px)',
-        //   WebkitBackdropFilter: 'blur(12px)',
-        // },
-        paper: {
+        root: {
+          backdropFilter: 'blur(0px) !important',
+          WebkitBackdropFilter: 'blur(0px) !important',
+        },
+        paper: ({theme}) => ({
           background: 'transparent',
           backgroundImage: 'none',
-          boxShadow: 'none',
+          boxShadow: '0px 0px 12px 4px rgba(0,0,0,0.5)',
           overflow: 'hidden',
-        },
+        }),
         backdrop: {
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          backgroundColor: 'rgba(0,0,0,0.25)',
+          backdropFilter: 'blur(0px)',
+          WebkitBackdropFilter: 'blur(0px)',
         }
       },
     },

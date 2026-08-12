@@ -7,11 +7,11 @@ export default function SettingsModal() {
   const { setSetting } = useSettings()
 
   return (<>
-    <Dialog open={showSettings} fullWidth maxWidth="md"  sx={{ backdropFilter: 'blur(8px)', }} onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
+    <Dialog open={showSettings} fullWidth maxWidth="md" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
       <Box sx={{
         p: 2,
         border: 1, borderColor: 'divider',
-        m: 2, bgcolor: 'background.paper',
+        bgcolor: 'background.paper',
         height: '65vh', overflowY: 'auto',
       }}>
         <SettingsContent />
