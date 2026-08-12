@@ -1,3 +1,9 @@
+## [1.59.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.58.0...v1.59.0) (2026-08-12)
+
+### ✨ Features
+
+* remove SettingsPage and update routes to streamline navigation ([9ccceed](https://github.com/travel-albums-ai/travel-albums/commit/9ccceed1644c5ff210c7759c70971854632cf0ce))
+
 ## [1.58.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.57.0...v1.58.0) (2026-08-12)
 
 ### ✨ Features
