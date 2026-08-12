@@ -1,3 +1,9 @@
+## [1.63.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.62.0...v1.63.0) (2026-08-12)
+
+### ✨ Features
+
+* add new tools and components for tutorial, Google Vision, and settings management ([90ce201](https://github.com/travel-albums-ai/travel-albums/commit/90ce2019b3ff67074655e077649fd8bc1992d61b))
+
 ## [1.62.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.61.0...v1.62.0) (2026-08-12)
 
 ### ✨ Features
