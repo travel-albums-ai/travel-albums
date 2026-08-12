@@ -20,9 +20,11 @@ export default function NarrowMapToggle() {
       {
         value: 'contain',
         tooltip: t('thumbnailContain'),
-        onClick: () => setSetting((prev) => ({...prev, gps: localStorage.getItem('albumGlobeViewport') ? JSON.parse(localStorage.getItem('albumGlobeViewport')) : { top: 90, left: -180, bottom: -90, right: 180 }})),
+        onClick: () => setSetting((prev) => ({...prev, gps: localStorage.getItem('albumGlobeViewport')
+          ? JSON.parse(localStorage.getItem('albumGlobeViewport'))
+          : { top: 90, left: -180, bottom: -90, right: 180 }})),
         icon: <Scan size={20} />,
       }
-    ] satisfies GenericToggleButtonProps[]} asGroup />
+    ] satisfies GenericToggleButtonProps[]} />
   </>
 }

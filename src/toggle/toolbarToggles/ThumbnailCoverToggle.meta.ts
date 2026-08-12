@@ -9,5 +9,5 @@ export const meta = {
       priority: 1200,
     })),
   ],
-  loader: () => import('@/toggle/ThumbnailCoverToggle'),
+  loader: () => import('@/toggle/toolbarToggles/ThumbnailCoverToggle'),
 } as ToolbarMeta;
