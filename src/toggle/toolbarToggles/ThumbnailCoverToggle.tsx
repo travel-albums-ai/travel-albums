@@ -3,12 +3,10 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { LayoutDashboard, LayoutGrid } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 export default function ThumbnailCoverToggle() {
   const { setSetting } = useSettings()
   const thumbnailFormat = useSettingsStoreSelector((state) => state.thumbnailFormat)
-  const { t } = useTranslation()
 
   const handleThumbnailFormatChange = (newFormat: 'cover' | 'contain') => {
     setSetting((prev) => ({ ...prev, thumbnailFormat: newFormat }));
@@ -29,12 +27,9 @@ export default function ThumbnailCoverToggle() {
         },
         additionalProperties: false,
       }}
-      execute={async ({ thumbnailFormat }: { thumbnailFormat?: 'cover' | 'contain' }) => {
-        if (thumbnailFormat) {
-          handleThumbnailFormatChange(thumbnailFormat);
-        }
-
-        return { thumbnailFormat: thumbnailFormat ?? 'cover' };
+      execute={async ({ thumbnailFormat }: { thumbnailFormat: 'cover' | 'contain' }) => {
+        handleThumbnailFormatChange(thumbnailFormat);
+        return 'thumbnailFormat: ' + (thumbnailFormat ?? 'cover') + '.';
       }}
     />
 

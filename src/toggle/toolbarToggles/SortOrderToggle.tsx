@@ -29,12 +29,9 @@ export default function SortOrderToggle() {
         },
         additionalProperties: false,
       }}
-      execute={async ({ sortOrder }: { sortOrder?: 'oldestFirst' | 'newestFirst' }) => {
-        if (sortOrder) {
-          handleSortOrderChange(sortOrder);
-        }
-
-        return { sortOrder: sortOrder ?? 'newestFirst' };
+      execute={async ({ sortOrder }: { sortOrder: 'oldestFirst' | 'newestFirst' }) => {
+        handleSortOrderChange(sortOrder);
+        return 'sortOrder: ' + (sortOrder ?? 'oldestFirst') + '.';
       }}
     />
 

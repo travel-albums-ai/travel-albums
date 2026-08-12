@@ -8,26 +8,15 @@ export default function SettingsModalToggle() {
   const { setSetting } = useSettings()
   const showSettings = useSettingsStoreSelector((state) => state.showSettings);
 
-  const handleOnChange = (show?: boolean) => setSetting((prev) => ({ ...prev, showSettings: show ?? !prev.showSettings}));
+  const handleOnChange = () => setSetting((prev) => ({ ...prev, showSettings: !prev.showSettings}));
 
   return <>
     <WebMCPDataRun
       name="toggle_settings_modal"
       description="Toggle the settings modal visibility."
-      inputSchema={{
-        type: 'object',
-        properties: {
-          show: {
-            type: 'boolean',
-            description: 'Whether to show or hide the settings modal. If omitted, toggles the current state.',
-          },
-        },
-        additionalProperties: false,
-      }}
-      execute={async ({ show }: { show?: boolean }) => {
-        handleOnChange(show);
-
-        return `Settings modal ${typeof show === 'boolean' ? (show ? 'shown' : 'hidden') : (!showSettings ? 'shown' : 'hidden')}.`;
+      execute={async () => {
+        handleOnChange();
+        return `Settings modal ${!showSettings ? 'shown' : 'hidden'}.`;
       }}
     />
 
