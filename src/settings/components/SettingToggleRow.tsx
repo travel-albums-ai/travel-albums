@@ -7,7 +7,8 @@ type SettingToggleRowProps = {
   selected: boolean
   onChange: () => void
   activeIcon?: React.ReactNode
-  inactiveIcon?: React.ReactNode
+  inactiveIcon?: React.ReactNode,
+  disabled?: boolean
 }
 
 export default function SettingToggleRow({
@@ -16,14 +17,15 @@ export default function SettingToggleRow({
   selected,
   onChange,
   activeIcon,
-  inactiveIcon
+  inactiveIcon,
+  disabled = false
 }: SettingToggleRowProps) {
   return (
     <Box sx={boxSx} onClick={onChange}>
       {icon && cloneElement(icon, { size: 16, style: { opacity: !selected ? 1 : 0.5, marginRight: 4 } })}
       <Typography variant="caption" color="textSecondary" sx={{ flex: 1, lineHeight: 1 }}>{label}</Typography>
       {activeIcon && cloneElement(activeIcon, { size: 16, style: { opacity: !selected ? 1 : 0.5 } })}
-      <Switch checked={selected} onChange={onChange} size="small" />
+      <Switch checked={selected} onChange={onChange} size="small" disabled={disabled} />
       { inactiveIcon && cloneElement(inactiveIcon, { size: 16, style: { opacity: !selected ? 0.5 : 1 } }) }
     </Box>
   )

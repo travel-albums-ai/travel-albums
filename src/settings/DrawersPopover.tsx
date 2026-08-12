@@ -6,10 +6,10 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  // { key: 'sidebar', labelKey: 'Explorer', value: 'show-sidebar', type: 'boolean' },
+  { key: 'sidebar', labelKey: 'Explorer', value: 'show-sidebar', type: 'boolean', disabled: true },
   { key: 'globe', labelKey: 'Globe', value: 'show-globe', type: 'boolean' },
-  // { key: 'outlet', labelKey: '_Main', value: 'show-outlet', type: 'boolean' },
-  // { key: 'preview', labelKey: 'Preview', value: 'show-preview', type: 'boolean' },
+  { key: 'outlet', labelKey: 'Main', value: 'show-outlet', type: 'boolean', disabled: true },
+  { key: 'preview', labelKey: 'Preview', value: 'show-preview', type: 'boolean', disabled: true },
   { key: 'adjustments', labelKey: 'Adjustments', value: 'show-adjustments', type: 'boolean' },
   { key: 'files', labelKey: 'Files', value: 'show-files', type: 'boolean' },
   { key: 'labeler', labelKey: 'Labeler', value: 'show-labeler', type: 'boolean' },
@@ -29,13 +29,15 @@ export default function DrawersPopover({ filter }: { filter?: string }) {
       {toggleControls
         .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
         .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
+        .sort((a, b) => (a.disabled !== b.disabled ? (a.disabled ? 1 : -1) : 0))
         .map((control) => (
           <Fragment key={control.key}>
             {control.type === 'boolean' && <SettingToggleRow
-              label={control.labelKey}
+              label={t(control.labelKey)}
               icon={control.icon}
-              inactiveIcon={<Check size={16} />}
-              activeIcon={<Ban size={16} />}
+              disabled={control.disabled ?? false}
+              inactiveIcon={control.disabled ? undefined : <Check size={16} />}
+              activeIcon={control.disabled ? undefined : <Ban size={16} />}
               selected={drawers[control.key]}
               onChange={() => setDrawer(control.key, !drawers[control.key])}
             />}

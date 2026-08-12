@@ -15,10 +15,6 @@
     "src/**/*.d.ts"
   ],
 
-  "ignoreDependencies": [
-    "@types/*"
-  ],
-
   "ignoreBinaries": [],
 
   "ignoreExportsUsedInFile": true,

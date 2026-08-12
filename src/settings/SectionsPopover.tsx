@@ -16,9 +16,9 @@ const toggleControls = [
   { key: 'comments', icon: sectionIcons.mostCommented, labelKey: 'sectionComments', value: 'show-comments', type: 'boolean' },
   { key: 'favorites', icon: sectionIcons.favorites, labelKey: 'sectionFavorites', value: 'show-favorites', type: 'boolean' },
   { key: 'timeline', icon: sectionIcons.timeline, labelKey: 'sectionTimeline', value: 'show-timeline', type: 'boolean' },
-  { key: 'ignored', icon: sectionIcons.ignored, labelKey: 'sectionIgnored', value: 'show-ignored', type: 'boolean' },
-  { key: 'private', icon: sectionIcons.private, labelKey: 'sectionPrivate', value: 'show-private', type: 'boolean' },
-  { key: 'selected', icon: sectionIcons.selected, labelKey: 'sectionSelected', value: 'show-selected', type: 'boolean' },
+  { key: 'ignored', icon: sectionIcons.ignored, labelKey: 'sectionIgnored', value: 'show-ignored', type: 'boolean', disabled: true },
+  { key: 'private', icon: sectionIcons.private, labelKey: 'sectionPrivate', value: 'show-private', type: 'boolean', disabled: true },
+  { key: 'selected', icon: sectionIcons.selected, labelKey: 'sectionSelected', value: 'show-selected', type: 'boolean', disabled: true },
   { key: 'tags', icon: sectionIcons.tags, labelKey: 'sectionTags', value: 'show-tags', type: 'boolean'},
   { key: 'labels', icon: sectionIcons.labels, labelKey: 'sectionLabels', value: 'show-labels', type: 'boolean' },
   { key: 'cities', icon: sectionIcons.cities, labelKey: 'sectionCities', value: 'show-cities', type: 'boolean' },
@@ -34,13 +34,15 @@ export default function SectionsPopover({ filter }: { filter?: string }) {
       {toggleControls
         .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
         .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
+        .sort((a, b) => (a.disabled !== b.disabled ? (a.disabled ? 1 : -1) : 0))
         .map((control) => (
           <Fragment key={control.key}>
             {control.type === 'boolean' && <SettingToggleRow
               label={t(control.labelKey)}
               icon={control.icon}
-              inactiveIcon={<Check size={16} />}
-              activeIcon={<Ban size={16} />}
+              disabled={control.disabled ?? false}
+              inactiveIcon={control.disabled ? undefined : <Check size={16} />}
+              activeIcon={control.disabled ? undefined : <Ban size={16} />}
               selected={modules[control.key]}
               onChange={() => setModule(control.key, !modules[control.key])}
             />}

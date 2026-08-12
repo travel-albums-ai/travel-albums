@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 export default function SearchFiltersToggle() {
   const { t } = useTranslation();
 
-  return <GenericToggleButtonGroup asGroup={true}
+  return <GenericToggleButtonGroup
     id="search-filters-toggle"
     items={[
       {
