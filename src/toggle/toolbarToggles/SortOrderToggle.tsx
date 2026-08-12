@@ -1,5 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
 import { ArrowDown01Icon, ArrowUp01Icon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -9,19 +10,46 @@ export default function SortOrderToggle() {
   const sortOrder = useFilterStoreSelector((state) => state.sortOrder)
   const { t } = useTranslation()
 
+  const handleSortOrderChange = (newSortOrder: 'oldestFirst' | 'newestFirst') => {
+    setSetting((prev) => ({ ...prev, sortOrder: newSortOrder }));
+  }
+
   return <>
+    <WebMCPDataRun
+      name="toggle_sort_order"
+      description="Toggle the sort order of photos."
+      inputSchema={{
+        type: 'object',
+        properties: {
+          sortOrder: {
+            type: 'string',
+            enum: ['oldestFirst', 'newestFirst'],
+            description: 'The sort order of photos.',
+          },
+        },
+        additionalProperties: false,
+      }}
+      execute={async ({ sortOrder }: { sortOrder?: 'oldestFirst' | 'newestFirst' }) => {
+        if (sortOrder) {
+          handleSortOrderChange(sortOrder);
+        }
+
+        return { sortOrder: sortOrder ?? 'newestFirst' };
+      }}
+    />
+
     <GenericToggleButtonGroup items={[
       {
         value: 'oldestFirst',
         tooltip: t('sortOldestFirst'),
-        onClick: () => setSetting((prev) => ({...prev, sortOrder: 'oldestFirst'})),
+        onClick: () => handleSortOrderChange('oldestFirst'),
         icon: <ArrowUp01Icon size={20} />,
         selected: sortOrder === 'oldestFirst'
       },
       {
         value: 'newestFirst',
         tooltip: t('sortNewestFirst'),
-        onClick: () => setSetting((prev) => ({...prev, sortOrder: 'newestFirst'})),
+        onClick: () => handleSortOrderChange('newestFirst'),
         icon: <ArrowDown01Icon size={20} />,
         selected: sortOrder === 'newestFirst'
       },

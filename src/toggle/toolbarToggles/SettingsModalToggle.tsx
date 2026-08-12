@@ -3,12 +3,10 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { Settings } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 export default function SettingsModalToggle() {
   const { setSetting } = useSettings()
   const showSettings = useSettingsStoreSelector((state) => state.showSettings);
-  const { t } = useTranslation()
 
   const handleOnChange = (show?: boolean) => setSetting((prev) => ({ ...prev, showSettings: show ?? !prev.showSettings}));
 
