@@ -1,3 +1,9 @@
+## [1.55.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.54.0...v1.55.0) (2026-08-12)
+
+### ✨ Features
+
+* enhance SidebarDrawer and SidebarList with WebMCPDataRun and WebMCPDataView for improved navigation and state management ([206cc70](https://github.com/travel-albums-ai/travel-albums/commit/206cc701d2aa090fee58cd90429b3ddd7d6f8e5b))
+
 ## [1.54.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.53.0...v1.54.0) (2026-08-12)
 
 ### ✨ Features
