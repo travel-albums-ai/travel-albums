@@ -1,3 +1,9 @@
+## [1.61.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.60.0...v1.61.0) (2026-08-12)
+
+### ✨ Features
+
+* update backdrop filter settings for improved dialog appearance ([233c2ef](https://github.com/travel-albums-ai/travel-albums/commit/233c2efd595dfdc87cc104be6319fab61227af83))
+
 ## [1.60.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.59.0...v1.60.0) (2026-08-12)
 
 ### ✨ Features
