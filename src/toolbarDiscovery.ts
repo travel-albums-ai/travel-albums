@@ -1,6 +1,6 @@
 import { ToolbarMeta, toolbarRegistry } from '@/toolbarRegistry';
 
-const modules = import.meta.glob<ToolbarMeta | undefined>('./toggle/**/*.meta.ts', {
+const modules = import.meta.glob<ToolbarMeta | undefined>('./tools/**/*.meta.ts', {
   import: 'meta',
 });
 
