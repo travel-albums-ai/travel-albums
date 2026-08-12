@@ -2,7 +2,6 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AdjustmentsDrawer from '@/drawers/AdjustmentsDrawer';
 import CalendarDrawer from '@/drawers/CalendarDrawer';
 import FilesDrawer from '@/drawers/FilesDrawer';
-import FolderHandlersDrawer from '@/drawers/FolderHandlersDrawer';
 import GlobeDrawer from '@/drawers/GlobeDrawer';
 import LabelerDrawer from '@/drawers/LabelerDrawer';
 import OutletDrawer from '@/drawers/OutletDrawer';
@@ -57,7 +56,6 @@ const layoutChildren = [
   ...tab('drawerScroller', 'scroller'),
   ...tab('drawerRows', 'rows'),
   ...tab('drawerCalendar', 'calendar'),
-  ...tab('drawerFolderHandlers', 'folderHandler'),
 ]
 
 function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
@@ -107,7 +105,6 @@ const COMPONENTS = {
   scroller: ScrollerDrawer,
   rows: RowsDrawer,
   calendar: CalendarDrawer,
-  folderHandler: FolderHandlersDrawer,
 } as const;
 
 function loadModel(drawers: typeof drawers) {
