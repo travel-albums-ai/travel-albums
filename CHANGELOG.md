@@ -1,3 +1,9 @@
+## [1.85.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.84.0...v1.85.0) (2026-08-13)
+
+### ✨ Features
+
+* enhance AlbumPagePerDayWrapper with MiniCalendar and DayAnalyzer components; update DescribePhotoReadOnly for improved styling; refine ImageAnalyzer prompt for clarity ([5d2d790](https://github.com/travel-albums-ai/travel-albums/commit/5d2d790936c74e8418c2963da8865397629b3176))
+
 ## [1.84.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.83.0...v1.84.0) (2026-08-13)
 
 ### ✨ Features
