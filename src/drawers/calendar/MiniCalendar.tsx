@@ -4,26 +4,29 @@ import dayjs, { Dayjs } from 'dayjs';
 type Props = {
   year: number
   month: number // 1-12
-  highlightDays?: Dayjs[]
+  highlightMoments?: Dayjs[]
   selectedDay?: Dayjs
+  selectedMoment?: Dayjs
 }
 
 export default function MiniCalendar({
   year,
   month,
-  highlightDays = [],
+  highlightMoments = [],
   selectedDay,
+  selectedMoment,
 }: Props) {
   const first = dayjs().year(year).month(month - 1).date(1)
   const days = Array.from(
     { length: first.daysInMonth() },
     (_, i) => first.date(i + 1)
   )
-  const offset = first.day() // Sunday = 0
+
+  const offset = first.day()
 
   return (
-    <Box sx={{ width: 280, p: 1.5 }}>
-      <Typography fontWeight={600} textAlign="center" mb={1}>
+    <Box sx={{ }}>
+      <Typography sx={{ mb: 2, textTransform: 'uppercase', fontWeight: 600, fontSize: 14 }}>
         {first.format('MMMM YYYY')}
       </Typography>
 
@@ -31,7 +34,7 @@ export default function MiniCalendar({
         sx={{
           display: 'grid',
           gridTemplateColumns: 'repeat(7, 1fr)',
-          gap: .5,
+          gap: 0.5,
         }}
       >
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
@@ -39,19 +42,16 @@ export default function MiniCalendar({
             key={i}
             variant="caption"
             color="text.secondary"
-            textAlign="center"
-            fontWeight={600}
+            sx={{ textAlign: 'center', fontWeight: 600, borderBottom: '1px solid', borderColor: 'divider', pb: 0.5 }}
           >
             {d}
           </Typography>
         ))}
 
-        {Array.from({ length: offset }).map((_, i) => (
-          <Box key={`empty-${i}`} />
-        ))}
+        {Array.from({ length: offset }, (_, i) => <Box key={i} />)}
 
         {days.map(day => {
-          const highlighted = highlightDays.some(d => d.isSame(day, 'day'))
+          const moments = highlightMoments.filter(m => m.isSame(day, 'day'))
           const selected = selectedDay?.isSame(day, 'day')
 
           return (
@@ -59,31 +59,49 @@ export default function MiniCalendar({
               key={day.date()}
               sx={{
                 aspectRatio: '1',
-                display: 'grid',
-                placeItems: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <Box
                 sx={{
-                  width: 30,
-                  height: 30,
+                  width: 40,
+                  height: 40,
                   display: 'grid',
                   placeItems: 'center',
                   borderRadius: '50%',
                   fontSize: 14,
-                  fontWeight: selected || highlighted ? 600 : 400,
+                  fontWeight: selected || moments.length ? 600 : 400,
                   bgcolor: selected ? 'primary.main' : 'transparent',
                   color: selected
                     ? 'primary.contrastText'
                     : 'text.primary',
-                  border: highlighted && !selected
-                    ? '2px solid'
-                    : 'none',
+                  border: moments.length && !selected ? '2px dotted' : 'none',
                   borderColor: 'primary.main',
                 }}
               >
                 {day.date()}
               </Box>
+
+              {selected && moments.length > 0 && (
+                <Box sx={{ display: 'flex', gap: '3px', mt: '-1px' }}>
+                  {moments.map((moment, i) => (
+                    <Box
+                      key={i}
+                      sx={{
+                        width: 4,
+                        height: 4,
+                        borderRadius: '50%',
+                        bgcolor: selectedMoment?.isSame(moment)
+                          ? 'primary.main'
+                          : 'text.secondary',
+                      }}
+                    />
+                  ))}
+                </Box>
+              )}
             </Box>
           )
         })}

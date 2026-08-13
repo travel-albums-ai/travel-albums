@@ -19,7 +19,9 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
 
   const selectedPhotos = (selectedDay && selectedMoment && selectedPlace) ? photosByMoments.find((d) => d.label === selectedDay)?.moments.find((m) => m.label === selectedMoment)?.locations.find((l) => l.label === selectedPlace)?.photos : null;
 
-  const uniquePlaces =  [...new Set(selectedPhotos?.map(p => p.city).map(c => c?.name))]
+  const allMoments = photosByMoments.flatMap((day) => day.moments.flatMap((moment) => day.label + ", " + moment.label));
+
+  const uniquePlaces =  [...new Set(selectedPhotos?.map(p => p?.city).map(c => c?.name))]
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -35,16 +37,16 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
       >
 
         <Box sx={{ flex: '0 0 30%', maxWidth: 700, alignSelf: 'flex-start', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1, bgcolor: 'background.default', borderRadius: 2, p: 1, boxShadow: 2 }}>
-
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1, bgcolor: 'background.paper', borderRadius: 2, p: 2, boxShadow: 2 }}>
 
             <MiniCalendar
               year={dayjs(selectedDay).year()}
               month={dayjs(selectedDay).month() + 1}
-              highlightDays={[
-                ...photosByMoments.map((day) => dayjs(day.label)),
+              highlightMoments={[
+                ...allMoments.map((moment) => dayjs(moment)),
               ]}
               selectedDay={dayjs(selectedDay)}
+              selectedMoment={dayjs(selectedDay + ", " + selectedMoment)}
             />
 
             <DayAnalyzer
