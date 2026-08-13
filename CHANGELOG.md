@@ -1,3 +1,9 @@
+## [1.71.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.70.0...v1.71.0) (2026-08-13)
+
+### ✨ Features
+
+* integrate AISinkProvider for managing auto description preview state; refactor AutoTileCanvas and AutoDescriptionDrawer components ([11e2fff](https://github.com/travel-albums-ai/travel-albums/commit/11e2fff88193b39d3100019ab1ea014538cb6167))
+
 ## [1.70.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.69.0...v1.70.0) (2026-08-13)
 
 ### ✨ Features
