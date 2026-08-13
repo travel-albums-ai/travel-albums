@@ -7,64 +7,129 @@ import CustomPopoverForTrigger from '@/modals/components/CustomPopoverForTrigger
 import {
   Box,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function SearchFiles() {
   const [searchTerm, setSearchTerm] = useState('');
-  const { setPreviewPhotoObj } = useSettings()
+  const { setPreviewPhotoObj } = useSettings();
   const photos = useFilteredPhotos_GLOBAL();
-  const descriptionsStore = useDescriptionsStoreSelector(state => state.descriptions)
+  const descriptions = useDescriptionsStoreSelector(state => state.descriptions);
   const { t } = useTranslation();
 
-  const photosRelevant = (photos || [])
-    .filter(photo => {
-      if (!searchTerm) return true;
-      if(searchTerm === '') return true;
-      const filenameMatch = photo.id.toLowerCase().includes(searchTerm.toLowerCase());
-      const descriptionMatch = descriptionsStore.some(desc => desc.id === photo.id && desc.description.toLowerCase().includes(searchTerm.toLowerCase()));
-      return filenameMatch || descriptionMatch;
-    })
-    .filter((_, index) => index < 100) || []
+  const descriptionMap = useMemo(
+    () => new Map(descriptions.map(desc => [desc.id, desc.description])),
+    [descriptions]
+  );
 
-  return (<>
+  const term = searchTerm.trim().toLowerCase();
+
+  const photosRelevant = useMemo(() => {
+    if (!photos?.length) return [];
+
+    if (!term) return photos.slice(0, 100);
+
+    const result = [];
+
+    for (const photo of photos) {
+      const description = descriptionMap.get(photo.id) ?? '';
+
+      if (
+        photo.id.toLowerCase().includes(term) ||
+        description.toLowerCase().includes(term)
+      ) {
+        result.push(photo);
+
+        if (result.length === 100) break;
+      }
+    }
+
+    return result;
+  }, [photos, term, descriptionMap]);
+
+  return (
     <CustomPopoverForTrigger
-      preOpen={true}
-      trigger={<TextField
-        fullWidth
-        size="small"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder={t('searchFilesPlaceholder')}
-        variant="standard"
-      />}>
-
+      preOpen
+      trigger={
+        <TextField
+          fullWidth
+          size="small"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          placeholder={t('searchFilesPlaceholder')}
+          variant="standard"
+        />
+      }
+    >
       <ElementLabels />
 
-      {photosRelevant.length > 0 && photosRelevant
-        .map(photo => (
-          <Box key={photo.id} onClick={() => {
-            setPreviewPhotoObj(photo)
-          }} sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 1, borderRadius: 1, '&:hover': { bgcolor: 'action.hover' } }}>
+      {photosRelevant.length > 0 ? (
+        photosRelevant.map(photo => {
+          const description = descriptionMap.get(photo.id);
 
-            <Box sx={{ width: 32, height: 32, overflow: 'hidden', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-              <AlbumPhotoThumbnailBackground imageUrl={photo.id}  />
+          return (
+            <Box
+              key={photo.id}
+              onClick={() => setPreviewPhotoObj(photo)}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                p: 1,
+                borderRadius: 1,
+                '&:hover': { bgcolor: 'action.hover' },
+              }}
+            >
+              <Box
+                sx={{
+                  width: 32,
+                  height: 32,
+                  overflow: 'hidden',
+                  borderRadius: 2,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <AlbumPhotoThumbnailBackground imageUrl={photo.id} />
+              </Box>
+
+              <Typography variant="subtitle2" color="textSecondary">
+                {photo.title || photo.id}
+              </Typography>
+
+              {description && (
+                <Typography variant="caption" color="textSecondary">
+                  {description}
+                </Typography>
+              )}
+
+              <Typography
+                variant="caption"
+                color="textDisabled"
+                align="right"
+                sx={{
+                  flex: 1,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {photo.imageUrl}
+              </Typography>
             </Box>
-
-            <Typography variant="subtitle2" color="textSecondary">{photo.id}</Typography>
-            <Typography variant="caption" color="textSecondary">{descriptionsStore.find(desc => desc.id === photo.id)?.description}</Typography>
-            <Typography variant="caption" color="textDisabled" align="right" sx={{ flex: 1 }}>{photo.imageUrl}</Typography>
-          </Box>
-        ))}
-
-      {photosRelevant.length === 0 && (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 1, borderRadius: 1, '&:hover': { bgcolor: 'action.hover' } }}>
-          <Typography variant="subtitle2" color="textSecondary">{t('noPhotosFound')}</Typography>
+          );
+        })
+      ) : (
+        <Box sx={{ p: 1 }}>
+          <Typography variant="subtitle2" color="textSecondary">
+            {t('noPhotosFound')}
+          </Typography>
         </Box>
       )}
-
     </CustomPopoverForTrigger>
-  </>)
+  );
 }
