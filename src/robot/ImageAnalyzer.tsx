@@ -1,15 +1,28 @@
 import OpenAI from 'openai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
   apiKey: string;
+  image: File | null;
 };
 
-export default function ImageAnalyzer({ apiKey }: Props) {
-  const [image, setImage] = useState<File | null>(null);
-  const [prompt, setPrompt] = useState('');
+export default function ImageAnalyzer({ apiKey, image }: Props) {
+  const [prompt, setPrompt] = useState('Look at all the photos and answer in JSON with the index of the photo and what is in the photo. For example, if there is a photo of a cat, the answer should be: { "index": 0, "description": "A cat" }. If there are multiple photos, please provide an array of objects with the index and description for each photo.');
   const [result, setResult] = useState<unknown>();
   const [loading, setLoading] = useState(false);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!image) {
+      setImagePreviewUrl(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(image);
+    setImagePreviewUrl(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [image]);
 
   async function analyze() {
     if (!image || !apiKey) return;
@@ -74,11 +87,13 @@ export default function ImageAnalyzer({ apiKey }: Props) {
 
   return (
     <div>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setImage(e.target.files?.[0] ?? null)}
-      />
+      {imagePreviewUrl && (
+        <img
+          src={imagePreviewUrl}
+          alt="Current image for analysis"
+          style={{ display: 'block', maxWidth: '100px', height: 'auto' }}
+        />
+      )}
 
       <input
         value={prompt}

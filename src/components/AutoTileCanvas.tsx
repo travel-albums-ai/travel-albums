@@ -11,6 +11,7 @@ type Props = {
   tileSize: number
   columns: number
   gap?: number
+  onImageGenerated?: (image: File | null) => void
 }
 
 const loadImageBitmap = async (src: string): Promise<ImageBitmap> => {
@@ -61,6 +62,7 @@ export default function AutoTileCanvas({
   tileSize,
   columns,
   gap = 2,
+  onImageGenerated,
 }: Props) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
@@ -71,6 +73,7 @@ export default function AutoTileCanvas({
     const build = async () => {
       if (!photos.length || tileSize <= 0 || columns <= 0) {
         setPreviewUrl(null)
+        onImageGenerated?.(null)
         return
       }
 
@@ -161,6 +164,7 @@ export default function AutoTileCanvas({
       objectUrl = URL.createObjectURL(blob)
 
       setPreviewUrl(objectUrl)
+      onImageGenerated?.(new File([blob], 'auto-description.jpg', { type: 'image/jpeg' }))
     }
 
     build().catch(error => {
@@ -177,7 +181,7 @@ export default function AutoTileCanvas({
         URL.revokeObjectURL(objectUrl)
       }
     }
-  }, [photos, tileSize, columns, gap])
+  }, [photos, tileSize, columns, gap, onImageGenerated])
 
   if (!previewUrl) {
     return null
@@ -190,7 +194,7 @@ export default function AutoTileCanvas({
       draggable={false}
       style={{
         display: 'block',
-        width: '100%',
+        width: '50%',
         height: 'auto',
       }}
     />

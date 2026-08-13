@@ -18,6 +18,7 @@ export default function AutoDescriptionDrawer() {
   const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)
 
   const [renderedIndex, setRenderedIndex] = useState(0)
+  const [generatedImage, setGeneratedImage] = useState<File | null>(null)
 
   const foundSection = sections?.find((s) => s.type === type_name)
   const foundSet = foundSection?.data?.find((d: any) => d.name === id)
@@ -35,7 +36,12 @@ export default function AutoDescriptionDrawer() {
       />
     </>}>
 
-      {byokOpenAIKey && <ImageAnalyzer apiKey={byokOpenAIKey} />}
+      {byokOpenAIKey && (
+        <ImageAnalyzer
+          apiKey={byokOpenAIKey}
+          image={generatedImage}
+        />
+      )}
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
         <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>-</Button>
@@ -48,6 +54,7 @@ export default function AutoDescriptionDrawer() {
         tileSize={175}
         columns={5}
         gap={10}
+        onImageGenerated={setGeneratedImage}
       />
 
     </GenericPanel>
