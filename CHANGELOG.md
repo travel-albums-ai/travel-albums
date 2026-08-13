@@ -1,3 +1,9 @@
+## [1.72.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.71.0...v1.72.0) (2026-08-13)
+
+### ✨ Features
+
+* integrate ImageAnalyzer for enhanced image analysis; refactor props and state management ([11a28bb](https://github.com/travel-albums-ai/travel-albums/commit/11a28bb4bf34f4726dabbe2357204b5ec43b0a68))
+
 ## [1.71.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.70.0...v1.71.0) (2026-08-13)
 
 ### ✨ Features
