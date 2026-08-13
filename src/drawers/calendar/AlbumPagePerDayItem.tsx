@@ -4,7 +4,7 @@ import { Box, Divider, Typography } from '@mui/material';
 import { Calendar } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
-export default function AlbumPagePerDayItem({ day, index }: { day: ReturnType<typeof usePhotosByDay>[number], index: number }) {
+export default function AlbumPagePerDayItem({ day, index, children }: { day: ReturnType<typeof usePhotosByDay>[number], index: number, children?: React.ReactNode }) {
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
@@ -20,6 +20,7 @@ export default function AlbumPagePerDayItem({ day, index }: { day: ReturnType<ty
             <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled"> {day.label}</Typography>
           </Box>
         </Divider>
+        {children}
         {inView && <AllPhotosGridVirtuoso photos={day.photos} />}
       </Box>
     </Box>

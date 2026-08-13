@@ -38,8 +38,8 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
         }}
       >
 
-        <Box sx={{ flex: '0 0 30%', maxWidth: 700, alignSelf: 'flex-start', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1, bgcolor: 'background.paper', borderRadius: 2, p: 2, boxShadow: 2 }}>
+        <Box sx={{  maxWidth: 700, alignSelf: 'stretch', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1, flex: 1  }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', bgcolor: 'background.paper', borderRadius: 2, p: 2, boxShadow: 2, flex: 1, alignSelf: 'stretch' }}>
 
             <MiniCalendar
               year={dayjs(selectedDay).year()}
@@ -51,15 +51,7 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
               selectedMoment={dayjs(selectedDay + ", " + selectedMoment)}
             />
 
-            <DayAnalyzer
-              key={`${selectedDay} ${selectedMoment} at ${selectedPlace}`}
-              context={{
-                descriptions: (selectedPhotos || [])
-                  .map(photo => descriptionStore.find(d => d.id === photo.id))
-                  .filter(d => d !== undefined)
-                  .map(d => d.description),
-                location: uniquePlaces.join(', '),
-              }} />
+
           </Box>
 
           {selectedPhotos && <AlbumMapPanel photos={selectedPhotos} height={550} interactive={true} />}
@@ -83,14 +75,28 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
                           gap: 2, py: 2,
                           pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap',
                         }}>
+
                         <Box sx={{
                           width: '100%',
                           height: (location.photos.length / 10 + 1) * 25 + 'vh',
                         }}>
+
                           <AlbumPagePerDayItem
                             day={{ label: `${day.label} ${moment.label} at ${location.label} (${location.photos.length})`, photos: location.photos }}
                             index={index}
-                          />
+                          >
+                            <Box sx={{ pb: 2 }}>
+                              <DayAnalyzer
+                                key={`${selectedDay} ${selectedMoment} at ${selectedPlace}`}
+                                context={{
+                                  descriptions: (selectedPhotos || [])
+                                    .map(photo => descriptionStore.find(d => d.id === photo.id))
+                                    .filter(d => d !== undefined)
+                                    .map(d => d.description),
+                                  location: uniquePlaces.join(', '),
+                                }} />
+                            </Box>
+                          </AlbumPagePerDayItem>
                         </Box>
                       </Box>
                     ))}

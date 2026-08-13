@@ -10,11 +10,6 @@ import {
 import OpenAI from 'openai';
 import { useState } from 'react';
 
-type Result = {
-  index: number;
-  description: string;
-};
-
 type Props = {
   context: any;
 };
@@ -22,12 +17,9 @@ type Props = {
 export default function DayAnalyzer({ context }: Props) {
   const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)
 
-  console.log('DayAnalyzer context', context);
-
   const [prompt, setPrompt] = useState(
     'Make a story of max 200 words about the day based on the following descriptions: ' + context.descriptions.join(' ') ,
   );
-  // const [results, setResults] = useState<Result[]>([]);
   const [result, setResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +29,6 @@ export default function DayAnalyzer({ context }: Props) {
 
     setLoading(true);
     setError(null);
-    // setResults([]);
 
     try {
       const response = await new OpenAI({
@@ -84,7 +75,7 @@ export default function DayAnalyzer({ context }: Props) {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
-      <textarea value={prompt} style={{ width: '100%', minHeight: 100 }} />
+      {/* <textarea value={prompt} style={{ width: '100%', minHeight: 100 }} /> */}
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1 }}>
 
@@ -94,7 +85,7 @@ export default function DayAnalyzer({ context }: Props) {
             onClick={analyze}
             disabled={!byokOpenAIKey || loading}
           >
-            {loading ? 'Analyzing…' : 'Analyze'}
+            {loading ? 'Describing...' : 'Describe my moment'}
           </Button>
 
         </Box>

@@ -96,7 +96,7 @@ export default function MiniCalendar({
                     <Box
                       key={i}
                       sx={{
-                        width: '1px',
+                        width: selectedMoment?.isSame(moment) ? '3px' : '1px',
                         height: 4,
                         // borderRadius: '50%',
                         bgcolor: selectedMoment?.isSame(moment)
