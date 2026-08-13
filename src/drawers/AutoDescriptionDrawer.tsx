@@ -1,8 +1,10 @@
 import AutoTileCanvas from '@/components/AutoTileCanvas';
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import { GalleryPhoto } from '@/lib/galleryData';
 import ImageAnalyzer from '@/robot/ImageAnalyzer';
 import { Box, Button, TextField } from '@mui/material';
 import { useState } from 'react';
@@ -15,6 +17,7 @@ export default function AutoDescriptionDrawer() {
   const sections = useSections_GLOBAL()
   const filteredPhotos = useFilteredPhotos_GLOBAL();
   const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)
+  const descriptionsStore = useDescriptionsStoreSelector(state => state.descriptions)
 
   const [renderedIndex, setRenderedIndex] = useState(0)
   const [batchSize, setBatchSize] = useState(20)
@@ -24,7 +27,12 @@ export default function AutoDescriptionDrawer() {
   const foundSet = foundSection?.data?.find((d: any) => d.name === id)
   const photos = type_name === '' ? filteredPhotos : foundSet?.photos || []
 
-  const selectedPhotos = photos.filter((_, index) => index >= renderedIndex * batchSize && index < (renderedIndex + 1) * batchSize)
+  console.log("XXXX", descriptionsStore, photos)
+
+  const selectedPhotos = photos
+    .filter((photo: GalleryPhoto) => !descriptionsStore.some((desc) => desc.id === photo.id))
+    .filter((_, index) => index >= renderedIndex * batchSize && index < (renderedIndex + 1) * batchSize)
+
 
   return (
     <GenericPanel id="auto-description-drawer" toolbar={<>
