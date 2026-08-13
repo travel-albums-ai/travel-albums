@@ -88,17 +88,17 @@ export default function MiniCalendar({
 
               {selected && moments.length > 0 && (
                 <Box sx={{
-                  display: 'grid',
-                  gridTemplateColumns: `repeat(4, 4px)`,
-                  // display: 'flex',
+                  // display: 'grid',
+                  // gridTemplateColumns: `repeat(4, 4px)`,
+                  display: 'flex',
                   gap: '1px', position: 'absolute', bottom: 4 }}>
                   {moments.map((moment, i) => (
                     <Box
                       key={i}
                       sx={{
-                        width: 4,
+                        width: '1px',
                         height: 4,
-                        borderRadius: '50%',
+                        // borderRadius: '50%',
                         bgcolor: selectedMoment?.isSame(moment)
                           ? 'primary.dark'
                           : 'text.primary',
