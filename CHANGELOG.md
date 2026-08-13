@@ -1,3 +1,9 @@
+## [1.87.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.86.0...v1.87.0) (2026-08-13)
+
+### ✨ Features
+
+* adjust styling in MiniCalendar for improved layout and moment display ([61cbc52](https://github.com/travel-albums-ai/travel-albums/commit/61cbc52b6d6d8ebbf13360ca71edf6780fbab500))
+
 ## [1.86.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.85.0...v1.86.0) (2026-08-13)
 
 ### ✨ Features
