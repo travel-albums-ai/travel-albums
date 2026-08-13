@@ -49,7 +49,7 @@ export default function ImageAnalyzer({ photos }: Props) {
         apiKey: byokOpenAIKey,
         dangerouslyAllowBrowser: true,
       }).responses.create({
-        model: 'gpt-5.6',
+        model: 'gpt-5.6-luna',
         input: [{
           role: 'user',
           content: [

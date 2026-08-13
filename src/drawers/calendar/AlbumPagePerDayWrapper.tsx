@@ -1,6 +1,6 @@
-import AlbumPagePerDayItem from '@/drawers/calendar/AlbumPagePerDayItem';
 import { useNearbyPlacesFromPhotos } from '@/hooks/useTransform_Photos2NearbyPlaces';
 import { usePhotosByDay } from '@/hooks/useTransform_PhotosByDays';
+import { useTransform_PhotosByMoments } from '@/hooks/useTransform_PhotosByMoments';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
 import { Box, Chip } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -8,11 +8,11 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
-import { Virtuoso } from 'react-virtuoso';
 
 export default function AlbumPagePerDayWrapper({ photos }) {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const photosByDay = usePhotosByDay(photos);
+  const photosByMoments = useTransform_PhotosByMoments(photos);
 
   const days = useMemo(() => {
     return Object.values(photosByDay).slice();
@@ -27,6 +27,8 @@ export default function AlbumPagePerDayWrapper({ photos }) {
       setSelectedDay(days[0].label)
     }
   }, [days, selectedDay])
+
+  console.log("xfdsfdsfsd", photosByMoments, photosByDay)
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -51,17 +53,37 @@ export default function AlbumPagePerDayWrapper({ photos }) {
           </Box>
 
 
-          <AlbumMapPanel photos={day.photos} height={'55vh'} interactive={true} />
+          <AlbumMapPanel photos={day.photos} height={550} interactive={true} />
         </Box>}
 
         <Box sx={{ flex: 1, minHeight: 0 }}>
 
-          <Virtuoso
+          {photosByMoments.map((moment, index) => (
+            <Box key={moment.label} sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
+              onMouseOver={() => setSelectedDay(moment.label)}
+            >
+              {moment.label}
+              {moment.moments.map((day, index) => (
+                <Box key={day.label} sx={{ display: 'flex', flexDirection: 'row', height: '100%', gap: 2, py: 4, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
+                  onMouseOver={() => setSelectedDay(day.label)}
+                >
+                  {day.label}
+                  {day.photos.length}
+
+                </Box>
+              ))}
+            </Box>
+          ))}
+
+
+
+          {/* <Virtuoso
             style={{ height: '100%' }}
             totalCount={days.length}
             itemContent={(index) => (
               <Box sx={{
-                height: days[index].photos.length > 10 ? '100vh' : '50vh',
+                // height: days[index].photos.length > 10 ? '100vh' : '50vh',
+                height: '40vh',
               }}>
                 <AlbumPagePerDayItem
                   setSelectedDay={setSelectedDay}
@@ -70,7 +92,7 @@ export default function AlbumPagePerDayWrapper({ photos }) {
                 />
               </Box>
             )}
-          />
+          /> */}
 
         </Box>
       </Box>
