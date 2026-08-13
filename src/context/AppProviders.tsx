@@ -1,3 +1,4 @@
+import { BYOKProvider } from '@/context/byokStore';
 import { DescriptionsProvider } from '@/context/descriptionsStore';
 import { FilterPresetProvider } from '@/context/filterPresetStore';
 import { FilteredGpsPhotosProvider } from '@/context/globals/filteredGpsPhotosStore';
@@ -27,41 +28,43 @@ export default function AppProviders({ children }: Props) {
     <SettingsProvider>
       <ThemeContextProvider>
         <TagsProvider>
-          <DescriptionsProvider>
-            <SidebarProvider>
-              <FavoritesProvider>
-                <PinnedProvider>
-                  <SelectedProvider>
-                    <LabelsProvider>
-                      <IgnoredProvider>
-                        <LayoutProvider>
-                          <PrivateProvider>
-                            <FilterPresetProvider>
-                              <FilterProvider>
-                                <AlbumPhotoCardProvider>
-                                  <NegativeProvider>
-                                    <UnfilteredPhotosProvider>
-                                      <FilteredPhotosProvider>
-                                        <FilteredGpsPhotosProvider>
-                                          <SectionsProvider>
-                                            {children}
-                                          </SectionsProvider>
-                                        </FilteredGpsPhotosProvider>
-                                      </FilteredPhotosProvider>
-                                    </UnfilteredPhotosProvider>
-                                  </NegativeProvider>
-                                </AlbumPhotoCardProvider>
-                              </FilterProvider>
-                            </FilterPresetProvider>
-                          </PrivateProvider>
-                        </LayoutProvider>
-                      </IgnoredProvider>
-                    </LabelsProvider>
-                  </SelectedProvider>
-                </PinnedProvider>
-              </FavoritesProvider>
-            </SidebarProvider>
-          </DescriptionsProvider>
+          <BYOKProvider>
+            <DescriptionsProvider>
+              <SidebarProvider>
+                <FavoritesProvider>
+                  <PinnedProvider>
+                    <SelectedProvider>
+                      <LabelsProvider>
+                        <IgnoredProvider>
+                          <LayoutProvider>
+                            <PrivateProvider>
+                              <FilterPresetProvider>
+                                <FilterProvider>
+                                  <AlbumPhotoCardProvider>
+                                    <NegativeProvider>
+                                      <UnfilteredPhotosProvider>
+                                        <FilteredPhotosProvider>
+                                          <FilteredGpsPhotosProvider>
+                                            <SectionsProvider>
+                                              {children}
+                                            </SectionsProvider>
+                                          </FilteredGpsPhotosProvider>
+                                        </FilteredPhotosProvider>
+                                      </UnfilteredPhotosProvider>
+                                    </NegativeProvider>
+                                  </AlbumPhotoCardProvider>
+                                </FilterProvider>
+                              </FilterPresetProvider>
+                            </PrivateProvider>
+                          </LayoutProvider>
+                        </IgnoredProvider>
+                      </LabelsProvider>
+                    </SelectedProvider>
+                  </PinnedProvider>
+                </FavoritesProvider>
+              </SidebarProvider>
+            </DescriptionsProvider>
+          </BYOKProvider>
         </TagsProvider>
       </ThemeContextProvider>
     </SettingsProvider>

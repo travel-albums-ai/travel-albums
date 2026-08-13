@@ -50,6 +50,7 @@
     "leaflet": "^1.9.4",
     "localforage": "^1.10.0",
     "lucide-react": "^1.31.0",
+    "openai": "^7.4.0",
     "p-limit": "^7.3.1",
     "react": "^19.2.8",
     "react-compare-slider": "^4.0.0",

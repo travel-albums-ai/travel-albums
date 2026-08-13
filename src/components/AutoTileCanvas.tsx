@@ -10,6 +10,7 @@ type Props = {
   photos: Photo[]
   tileSize: number
   columns: number
+  gap?: number
 }
 
 const loadImageBitmap = async (src: string): Promise<ImageBitmap> => {
@@ -59,6 +60,7 @@ export default function AutoTileCanvas({
   photos,
   tileSize,
   columns,
+  gap = 2,
 }: Props) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
@@ -74,8 +76,11 @@ export default function AutoTileCanvas({
 
       const rows = Math.ceil(photos.length / columns)
 
-      const canvasWidth = columns * tileSize
-      const canvasHeight = rows * tileSize
+      const canvasWidth =
+        columns * tileSize + (columns - 1) * gap
+
+      const canvasHeight =
+        rows * tileSize + (rows - 1) * gap
 
       const canvas = new OffscreenCanvas(
         canvasWidth,
@@ -88,13 +93,10 @@ export default function AutoTileCanvas({
         throw new Error('Could not create 2D canvas context')
       }
 
-      // Deliberately do NOT paint the canvas background.
-      // OffscreenCanvas therefore remains transparent.
+      // Transparent background by default.
 
       const bitmaps: (ImageBitmap | null)[] = []
 
-      // Load a few images at a time so a giant album doesn't
-      // immediately eat the browser's RAM for breakfast.
       const BATCH_SIZE = 6
 
       for (let i = 0; i < photos.length; i += BATCH_SIZE) {
@@ -122,18 +124,6 @@ export default function AutoTileCanvas({
         return
       }
 
-      /*
-       * Automatic row-major placement.
-       *
-       * index:
-       *
-       *  0  1  2  3
-       *  4  5  6  7
-       *  8  9 10 11
-       *
-       * x = column
-       * y = row
-       */
       for (let i = 0; i < bitmaps.length; i++) {
         if (cancelled) break
 
@@ -144,8 +134,8 @@ export default function AutoTileCanvas({
         const column = i % columns
         const row = Math.floor(i / columns)
 
-        const x = column * tileSize
-        const y = row * tileSize
+        const x = column * (tileSize + gap)
+        const y = row * (tileSize + gap)
 
         drawCover(
           ctx,
@@ -157,13 +147,12 @@ export default function AutoTileCanvas({
         )
       }
 
-      // ImageBitmap resources are no longer needed.
       bitmaps.forEach(bitmap => bitmap?.close())
 
       if (cancelled) return
 
       const blob = await canvas.convertToBlob({
-        type: 'image/webp',
+        type: 'image/jpeg',
         quality: 0.90,
       })
 
@@ -188,7 +177,7 @@ export default function AutoTileCanvas({
         URL.revokeObjectURL(objectUrl)
       }
     }
-  }, [photos, tileSize, columns])
+  }, [photos, tileSize, columns, gap])
 
   if (!previewUrl) {
     return null
