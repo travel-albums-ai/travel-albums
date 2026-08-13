@@ -4,6 +4,7 @@ import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import SemanticPhotoSearch from '@/drawers/autoDescription/SemanticPhotoSearch';
 import { GalleryPhoto } from '@/lib/galleryData';
 import ImageAnalyzer from '@/robot/ImageAnalyzer';
 import { Box, Button, TextField } from '@mui/material';
@@ -44,6 +45,11 @@ export default function AutoDescriptionDrawer() {
     </>}>
 
       <ImageAnalyzer photos={selectedPhotos} />
+
+      {byokOpenAIKey && <SemanticPhotoSearch
+        apiKey={byokOpenAIKey}
+        photos={descriptionsStore}
+      />}
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
         <Button variant="outlined" onClick={() => setBatchSize(batchSize - 1)} disabled={batchSize <= 1}>-</Button>
