@@ -11,12 +11,12 @@ export default function AlbumPagePerDayItem({ day, index, setSelectedDay }: { da
       onMouseOver={() => setSelectedDay(day.label)}
     >
       <Box sx={{ width: '100%' }}>
-        {index !== 0 && <Divider sx={{ mb: 2 }} >
+        <Divider sx={{ mb: 2 }} >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Calendar size={16} />
             <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled"> {day.label}</Typography>
           </Box>
-        </Divider>}
+        </Divider>
         <AllPhotosGridVirtuoso photos={day.photos} />
       </Box>
     </Box>

@@ -100,8 +100,9 @@ export default function ImageAnalyzer({ photos }: Props) {
       if (result) {
         describePhoto(photo.id, result.description);
       }
-    }
-    )}
+    })
+    setResults([]);
+  }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'flex-start', flexWrap: 'wrap' }}>
