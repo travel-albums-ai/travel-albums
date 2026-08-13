@@ -1,3 +1,13 @@
+## [1.68.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.67.0...v1.68.0) (2026-08-13)
+
+### ✨ Features
+
+* implement AutoTileCanvas component for optimized photo rendering; update AutoDescriptionDrawer to utilize new component ([bfe9d4f](https://github.com/travel-albums-ai/travel-albums/commit/bfe9d4fc0cb508525b067026c2146821c6510e92))
+
+### 🔧 Chore
+
+* update dependencies to latest versions ([a6a8cfc](https://github.com/travel-albums-ai/travel-albums/commit/a6a8cfcccacde988b19552e9679583874901f5f5))
+
 ## [1.67.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.66.0...v1.67.0) (2026-08-12)
 
 ### ✨ Features
