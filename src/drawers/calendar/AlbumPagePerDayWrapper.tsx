@@ -21,6 +21,8 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
 
   const allMoments = photosByMoments.flatMap((day) => day.moments.flatMap((moment) => day.label + ", " + moment.label));
 
+  console.log('selectedPhotos', photosByMoments)
+
   const uniquePlaces =  [...new Set(selectedPhotos?.map(p => p?.city).map(c => c?.name))]
 
   return (
