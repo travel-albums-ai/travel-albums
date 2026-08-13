@@ -69,8 +69,10 @@ export default function AlbumPagePerDayWrapper({ photos }) {
             >
               {moment.label}
               {moment.moments.map((day, index) => (
-                <Box key={day.label} sx={{ display: 'flex', flexDirection: 'row', height: '100%', gap: 2, py: 4, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
-                  onMouseOver={() => setSelectedMoment(day.label)}
+                <Box key={day.label} sx={{
+                  display: 'flex', flexDirection: 'row', borderBottom: '1px dotted',
+                  borderBottomColor: 'divider', height: '100%', gap: 2, py: 2, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
+                onMouseOver={() => setSelectedMoment(day.label)}
                 >
                   {day.label}
                   {day.photos.length}
@@ -79,7 +81,7 @@ export default function AlbumPagePerDayWrapper({ photos }) {
                     height: '40vh',
                   }}>
                     <AlbumPagePerDayItem
-                      day={{ photos: day.photos }}
+                      day={{ label: day.label, photos: day.photos }}
                       index={index}
                     />
                   </Box>
