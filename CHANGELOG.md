@@ -1,3 +1,9 @@
+## [1.79.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.78.0...v1.79.0) (2026-08-13)
+
+### ✨ Features
+
+* implement useTransform_PhotosByMoments hook for grouping photos by moments and enhance AlbumPagePerDayWrapper component ([610b3c8](https://github.com/travel-albums-ai/travel-albums/commit/610b3c88e05a06a52709fc3f002b74a11155e4e4))
+
 ## [1.78.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.77.0...v1.78.0) (2026-08-13)
 
 ### ✨ Features
