@@ -1,3 +1,9 @@
+## [1.81.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.80.0...v1.81.0) (2026-08-13)
+
+### ✨ Features
+
+* enhance AlbumPagePerDayWrapper to improve moment display and structure for AlbumPagePerDayItem ([a93d835](https://github.com/travel-albums-ai/travel-albums/commit/a93d835d739fa8beea7dbcbc6403d4b3ad3a788a))
+
 ## [1.80.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.79.0...v1.80.0) (2026-08-13)
 
 ### ✨ Features
