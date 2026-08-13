@@ -2,11 +2,15 @@ import { usePhotosByDay } from '@/hooks/useTransform_PhotosByDays';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
 import { Box, Divider, Typography } from '@mui/material';
 import { Calendar } from 'lucide-react';
+import { useInView } from 'react-intersection-observer';
 
 export default function AlbumPagePerDayItem({ day, index }: { day: ReturnType<typeof usePhotosByDay>[number], index: number }) {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+  });
 
   return (
-    <Box key={day.label} id="AlbumPagePerDayItem"
+    <Box ref={ref} key={day.label} id="AlbumPagePerDayItem"
       sx={{ display: 'flex', flexDirection: 'row', height: '100%', gap: 2, py: 4, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
     >
       <Box sx={{ width: '100%' }}>
@@ -16,7 +20,7 @@ export default function AlbumPagePerDayItem({ day, index }: { day: ReturnType<ty
             <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled"> {day.label}</Typography>
           </Box>
         </Divider>
-        <AllPhotosGridVirtuoso photos={day.photos} />
+        {inView && <AllPhotosGridVirtuoso photos={day.photos} />}
       </Box>
     </Box>
   )
