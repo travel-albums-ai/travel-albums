@@ -70,7 +70,7 @@ export default function AlbumPagePerDayWrapper({ photos }) {
                 onMouseOver={() => setSelectedDay(day.label)}
               >
                 📅 {day.label}
-                {day.moments.map((moment, index) => (
+                {day.moments.map((moment) => (
                   <Box key={moment.label} onMouseOver={() => setSelectedMoment(moment.label)}>
                     {moment.locations.map((location, index) => (
                       <Box key={location.label}
@@ -82,11 +82,9 @@ export default function AlbumPagePerDayWrapper({ photos }) {
                         }}>
                         <Box sx={{
                           width: '100%',
-                          // minHeight: '20vh',
-                          height: (location.photos.length / 10 + 1) * 20 + 'vh',
+                          height: (location.photos.length / 10 + 1) * 25 + 'vh',
                         }}>
                           <AlbumPagePerDayItem
-                            setSelectedDay={() => {}}
                             day={{ label: `${day.label} ${moment.label} at ${location.label} (${location.photos.length})`, photos: location.photos }}
                             index={index}
                           />
@@ -98,25 +96,6 @@ export default function AlbumPagePerDayWrapper({ photos }) {
               </Box>
             ))}
           </Box>
-
-
-          {/* <Virtuoso
-            style={{ height: '100%' }}
-            totalCount={days.length}
-            itemContent={(index) => (
-              <Box sx={{
-                // height: days[index].photos.length > 10 ? '100vh' : '50vh',
-                height: '40vh',
-              }}>
-                <AlbumPagePerDayItem
-                  setSelectedDay={setSelectedDay}
-                  day={days[index]}
-                  index={index}
-                />
-              </Box>
-            )}
-          /> */}
-
         </Box>
       </Box>
     </LocalizationProvider>
