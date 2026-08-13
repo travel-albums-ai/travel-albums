@@ -1,3 +1,9 @@
+## [1.77.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.76.0...v1.77.0) (2026-08-13)
+
+### ✨ Features
+
+* refactor SearchFiles component to improve search logic and enhance UI rendering ([6eefe70](https://github.com/travel-albums-ai/travel-albums/commit/6eefe703d6eea4910d3bb70956b79e48b4a9929a))
+
 ## [1.76.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.75.0...v1.76.0) (2026-08-13)
 
 ### ✨ Features
