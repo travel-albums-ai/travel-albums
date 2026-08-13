@@ -1,3 +1,9 @@
+## [1.89.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.88.0...v1.89.0) (2026-08-13)
+
+### ✨ Features
+
+* add console log for selectedPhotos in AlbumPagePerDayWrapper for debugging ([1f81256](https://github.com/travel-albums-ai/travel-albums/commit/1f8125685eb2712e4e13bec50dc4dc82a97988e9))
+
 ## [1.88.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.87.0...v1.88.0) (2026-08-13)
 
 ### ✨ Features
