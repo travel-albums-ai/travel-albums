@@ -1,3 +1,4 @@
+import { useAISink } from '@/context/aiSinkStore';
 import { thumbnailUrl } from '@/lib/thumbnailService';
 import { useEffect, useState } from 'react';
 
@@ -11,21 +12,12 @@ type Props = {
   tileSize: number
   columns: number
   gap?: number
-  onImageGenerated?: (image: File | null) => void
 }
 
-const loadImageBitmap = async (src: string): Promise<ImageBitmap> => {
-  const response = await fetch(src, {
-    mode: 'cors',
-  })
-
-  if (!response.ok) {
-    throw new Error(`Failed to load image: ${response.status}`)
-  }
-
-  const blob = await response.blob()
-
-  return createImageBitmap(blob)
+const loadBitmap = async (src: string) => {
+  const res = await fetch(src, { mode: 'cors' })
+  if (!res.ok) throw new Error(`Failed to load image: ${res.status}`)
+  return createImageBitmap(await res.blob())
 }
 
 const drawCover = (
@@ -36,11 +28,7 @@ const drawCover = (
   w: number,
   h: number,
 ) => {
-  const scale = Math.max(
-    w / img.width,
-    h / img.height,
-  )
-
+  const scale = Math.max(w / img.width, h / img.height)
   const sw = w / scale
   const sh = h / scale
 
@@ -57,14 +45,22 @@ const drawCover = (
   )
 }
 
+const blobToDataUrl = (blob: Blob) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = reject
+    reader.readAsDataURL(blob)
+  })
+
 export default function AutoTileCanvas({
   photos,
   tileSize,
   columns,
   gap = 2,
-  onImageGenerated,
 }: Props) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const { setSetting } = useAISink()
 
   useEffect(() => {
     let cancelled = false
@@ -73,33 +69,18 @@ export default function AutoTileCanvas({
     const build = async () => {
       if (!photos.length || tileSize <= 0 || columns <= 0) {
         setPreviewUrl(null)
-        onImageGenerated?.(null)
         return
       }
 
       const rows = Math.ceil(photos.length / columns)
+      const width = columns * tileSize + (columns - 1) * gap
+      const height = rows * tileSize + (rows - 1) * gap
 
-      const canvasWidth =
-        columns * tileSize + (columns - 1) * gap
-
-      const canvasHeight =
-        rows * tileSize + (rows - 1) * gap
-
-      const canvas = new OffscreenCanvas(
-        canvasWidth,
-        canvasHeight,
-      )
-
+      const canvas = new OffscreenCanvas(width, height)
       const ctx = canvas.getContext('2d')
-
-      if (!ctx) {
-        throw new Error('Could not create 2D canvas context')
-      }
-
-      // Transparent background by default.
+      if (!ctx) throw new Error('Could not create 2D canvas context')
 
       const bitmaps: (ImageBitmap | null)[] = []
-
       const BATCH_SIZE = 6
 
       for (let i = 0; i < photos.length; i += BATCH_SIZE) {
@@ -107,64 +88,48 @@ export default function AutoTileCanvas({
 
         const batch = photos.slice(i, i + BATCH_SIZE)
 
-        const loaded = await Promise.all(
-          batch.map(async photo => {
-            try {
-              return await loadImageBitmap(
-                thumbnailUrl(photo.id),
-              )
-            } catch {
-              return null
-            }
-          }),
+        bitmaps.push(
+          ...(await Promise.all(
+            batch.map(async photo => {
+              try {
+                return await loadBitmap(thumbnailUrl(photo.id))
+              } catch {
+                return null
+              }
+            }),
+          )),
         )
-
-        bitmaps.push(...loaded)
       }
 
-      if (cancelled) {
-        bitmaps.forEach(bitmap => bitmap?.close())
-        return
-      }
+      bitmaps.forEach((bitmap, i) => {
+        if (!bitmap) return
 
-      for (let i = 0; i < bitmaps.length; i++) {
-        if (cancelled) break
-
-        const bitmap = bitmaps[i]
-
-        if (!bitmap) continue
-
-        const column = i % columns
+        const col = i % columns
         const row = Math.floor(i / columns)
-
-        const x = column * (tileSize + gap)
-        const y = row * (tileSize + gap)
 
         drawCover(
           ctx,
           bitmap,
-          x,
-          y,
+          col * (tileSize + gap),
+          row * (tileSize + gap),
           tileSize,
           tileSize,
         )
-      }
 
-      bitmaps.forEach(bitmap => bitmap?.close())
-
-      if (cancelled) return
-
-      const blob = await canvas.convertToBlob({
-        type: 'image/jpeg',
-        quality: 0.90,
+        bitmap.close()
       })
 
       if (cancelled) return
 
-      objectUrl = URL.createObjectURL(blob)
+      const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 0.9 })
 
+      if (cancelled) return
+
+      const dataUrl = await blobToDataUrl(blob)
+      setSetting({ autoDescriptionPreview: dataUrl })
+
+      objectUrl = URL.createObjectURL(blob)
       setPreviewUrl(objectUrl)
-      onImageGenerated?.(new File([blob], 'auto-description.jpg', { type: 'image/jpeg' }))
     }
 
     build().catch(error => {
@@ -174,29 +139,22 @@ export default function AutoTileCanvas({
       }
     })
 
+
+
     return () => {
       cancelled = true
-
-      if (objectUrl) {
-        URL.revokeObjectURL(objectUrl)
-      }
+      if (objectUrl) URL.revokeObjectURL(objectUrl)
     }
-  }, [photos, tileSize, columns, gap, onImageGenerated])
+  }, [photos, tileSize, columns, gap, setSetting])
 
-  if (!previewUrl) {
-    return null
-  }
+  if (!previewUrl) return null
 
   return (
     <img
       src={previewUrl}
       alt=""
       draggable={false}
-      style={{
-        display: 'block',
-        width: '50%',
-        height: 'auto',
-      }}
+      style={{ display: 'block', width: '50%', height: 'auto' }}
     />
   )
 }

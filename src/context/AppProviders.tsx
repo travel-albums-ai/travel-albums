@@ -1,3 +1,4 @@
+import { AISinkProvider } from '@/context/aiSinkStore';
 import { BYOKProvider } from '@/context/byokStore';
 import { DescriptionsProvider } from '@/context/descriptionsStore';
 import { FilterPresetProvider } from '@/context/filterPresetStore';
@@ -29,41 +30,43 @@ export default function AppProviders({ children }: Props) {
       <ThemeContextProvider>
         <TagsProvider>
           <BYOKProvider>
-            <DescriptionsProvider>
-              <SidebarProvider>
-                <FavoritesProvider>
-                  <PinnedProvider>
-                    <SelectedProvider>
-                      <LabelsProvider>
-                        <IgnoredProvider>
-                          <LayoutProvider>
-                            <PrivateProvider>
-                              <FilterPresetProvider>
-                                <FilterProvider>
-                                  <AlbumPhotoCardProvider>
-                                    <NegativeProvider>
-                                      <UnfilteredPhotosProvider>
-                                        <FilteredPhotosProvider>
-                                          <FilteredGpsPhotosProvider>
-                                            <SectionsProvider>
-                                              {children}
-                                            </SectionsProvider>
-                                          </FilteredGpsPhotosProvider>
-                                        </FilteredPhotosProvider>
-                                      </UnfilteredPhotosProvider>
-                                    </NegativeProvider>
-                                  </AlbumPhotoCardProvider>
-                                </FilterProvider>
-                              </FilterPresetProvider>
-                            </PrivateProvider>
-                          </LayoutProvider>
-                        </IgnoredProvider>
-                      </LabelsProvider>
-                    </SelectedProvider>
-                  </PinnedProvider>
-                </FavoritesProvider>
-              </SidebarProvider>
-            </DescriptionsProvider>
+            <AISinkProvider>
+              <DescriptionsProvider>
+                <SidebarProvider>
+                  <FavoritesProvider>
+                    <PinnedProvider>
+                      <SelectedProvider>
+                        <LabelsProvider>
+                          <IgnoredProvider>
+                            <LayoutProvider>
+                              <PrivateProvider>
+                                <FilterPresetProvider>
+                                  <FilterProvider>
+                                    <AlbumPhotoCardProvider>
+                                      <NegativeProvider>
+                                        <UnfilteredPhotosProvider>
+                                          <FilteredPhotosProvider>
+                                            <FilteredGpsPhotosProvider>
+                                              <SectionsProvider>
+                                                {children}
+                                              </SectionsProvider>
+                                            </FilteredGpsPhotosProvider>
+                                          </FilteredPhotosProvider>
+                                        </UnfilteredPhotosProvider>
+                                      </NegativeProvider>
+                                    </AlbumPhotoCardProvider>
+                                  </FilterProvider>
+                                </FilterPresetProvider>
+                              </PrivateProvider>
+                            </LayoutProvider>
+                          </IgnoredProvider>
+                        </LabelsProvider>
+                      </SelectedProvider>
+                    </PinnedProvider>
+                  </FavoritesProvider>
+                </SidebarProvider>
+              </DescriptionsProvider>
+            </AISinkProvider>
           </BYOKProvider>
         </TagsProvider>
       </ThemeContextProvider>
