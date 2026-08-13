@@ -42,6 +42,7 @@ export default function ImageAnalyzer({ photos }: Props) {
 
     setLoading(true);
     setError(null);
+    setResults([]);
 
     try {
       const response = await new OpenAI({

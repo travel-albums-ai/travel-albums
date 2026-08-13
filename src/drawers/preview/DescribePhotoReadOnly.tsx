@@ -1,12 +1,14 @@
 import { useDescriptions } from '@/context/descriptionsStore';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function DescribePhotoReadOnly({ photoId }: { photoId: string }) {
   const { getDescription } = useDescriptions()
 
   return (
-    <Typography variant="subtitle1" sx={{ p: 2 }}>
-      {getDescription(photoId)}
-    </Typography>
+    <Box sx={{ p: 1 }}>
+      <Typography variant="caption" color="textSecondary">
+        {getDescription(photoId)}
+      </Typography>
+    </Box>
   )
 }
