@@ -1,3 +1,9 @@
+## [1.73.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.72.0...v1.73.0) (2026-08-13)
+
+### ✨ Features
+
+* add DescribePhotoReadOnly component for displaying photo descriptions; update AlbumPhotoCard and ImageAnalyzer for enhanced functionality ([dd39296](https://github.com/travel-albums-ai/travel-albums/commit/dd392969e7782ff61e9d2c68e332615c6082749a))
+
 ## [1.72.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.71.0...v1.72.0) (2026-08-13)
 
 ### ✨ Features
