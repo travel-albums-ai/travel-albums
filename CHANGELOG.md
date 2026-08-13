@@ -1,3 +1,9 @@
+## [1.86.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.85.0...v1.86.0) (2026-08-13)
+
+### ✨ Features
+
+* update AlbumPagePerDayWrapper and MiniCalendar to support highlightMoments; enhance styling and layout ([ebe9090](https://github.com/travel-albums-ai/travel-albums/commit/ebe909099402a54e00d345dd19339a9900d47eec))
+
 ## [1.85.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.84.0...v1.85.0) (2026-08-13)
 
 ### ✨ Features
