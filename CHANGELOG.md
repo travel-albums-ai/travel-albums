@@ -1,3 +1,9 @@
+## [1.84.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.83.0...v1.84.0) (2026-08-13)
+
+### ✨ Features
+
+* add inView functionality to AlbumPagePerDayItem for conditional rendering of photos ([da346d4](https://github.com/travel-albums-ai/travel-albums/commit/da346d471fb1888a54ea102232950905d356d1b1))
+
 ## [1.83.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.82.0...v1.83.0) (2026-08-13)
 
 ### ✨ Features
