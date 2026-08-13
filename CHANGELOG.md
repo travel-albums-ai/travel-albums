@@ -1,3 +1,9 @@
+## [1.78.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.77.0...v1.78.0) (2026-08-13)
+
+### ✨ Features
+
+* add SemanticPhotoSearch component for enhanced photo indexing and semantic search functionality ([6c095d1](https://github.com/travel-albums-ai/travel-albums/commit/6c095d103a42e15ceca4746b515a87bf9adada10))
+
 ## [1.77.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.76.0...v1.77.0) (2026-08-13)
 
 ### ✨ Features
