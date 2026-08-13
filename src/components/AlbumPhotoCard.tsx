@@ -5,6 +5,7 @@ import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
+import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
 import GeneralToolbar from '@/layout/components/GeneralToolbar';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Card, Tooltip, Typography, useTheme } from '@mui/material';
@@ -118,6 +119,10 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
 
       <Box sx={{ position: 'absolute', top: 0, right: 0, left: 0, height: '40px', zIndex: 2 }}>
         <GeneralToolbar group={'album-photo-card'} context={{ photoId: photo.id, favorite, selectMode }} />
+      </Box>
+
+      <Box sx={{ position: 'absolute', bottom: 8, right: 0, left: 0, zIndex: 2 }}>
+        <DescribePhotoReadOnly photoId={photo.id} />
       </Box>
 
       {resolvedTags.length > 0 && (

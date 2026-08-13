@@ -8,7 +8,6 @@ import { Box, Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const batchSize = 20
 
 export default function AutoDescriptionDrawer() {
   const { type_name = '', id = '' } = useParams()
@@ -18,11 +17,14 @@ export default function AutoDescriptionDrawer() {
   const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)
 
   const [renderedIndex, setRenderedIndex] = useState(0)
+  const [batchSize, setBatchSize] = useState(20)
   // const [generatedImage, setGeneratedImage] = useState<File | null>(null)
 
   const foundSection = sections?.find((s) => s.type === type_name)
   const foundSet = foundSection?.data?.find((d: any) => d.name === id)
   const photos = type_name === '' ? filteredPhotos : foundSet?.photos || []
+
+  const selectedPhotos = photos.filter((_, index) => index >= renderedIndex * batchSize && index < (renderedIndex + 1) * batchSize)
 
   return (
     <GenericPanel id="auto-description-drawer" toolbar={<>
@@ -36,25 +38,24 @@ export default function AutoDescriptionDrawer() {
       />
     </>}>
 
-      {byokOpenAIKey && (
-        <ImageAnalyzer
-          apiKey={byokOpenAIKey}
-          // image={generatedImage}
-        />
-      )}
+      <ImageAnalyzer photos={selectedPhotos} />
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
         <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>-</Button>
-        <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)}>+</Button>
+        <AutoTileCanvas
+          photos={selectedPhotos}
+          tileSize={175}
+          columns={5}
+          gap={10}
+        />
+        <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)} disabled={(renderedIndex + 1) * batchSize >= photos.length}>+</Button>
       </Box>
 
-
-      <AutoTileCanvas
-        photos={photos.filter((_, index) => index >= renderedIndex * batchSize && index < (renderedIndex + 1) * batchSize)}
-        tileSize={175}
-        columns={5}
-        gap={10}
-      />
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
+        <Button variant="outlined" onClick={() => setBatchSize(batchSize - 1)} disabled={batchSize <= 1}>-</Button>
+        {batchSize}
+        <Button variant="outlined" onClick={() => setBatchSize(batchSize + 1)}>+</Button>
+      </Box>
 
     </GenericPanel>
   )
