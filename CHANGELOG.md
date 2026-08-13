@@ -1,3 +1,9 @@
+## [1.69.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.68.0...v1.69.0) (2026-08-13)
+
+### ✨ Features
+
+* integrate OpenAI API for image analysis; add BYOK context for API key management; enhance AutoDescriptionDrawer and AutoTileCanvas with new features ([4ad77f1](https://github.com/travel-albums-ai/travel-albums/commit/4ad77f1495987463eb28f43711ef86cc9f7399fb))
+
 ## [1.68.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.67.0...v1.68.0) (2026-08-13)
 
 ### ✨ Features
