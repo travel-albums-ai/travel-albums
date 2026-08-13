@@ -1,3 +1,9 @@
+## [1.83.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.82.0...v1.83.0) (2026-08-13)
+
+### ✨ Features
+
+* remove setSelectedDay prop from AlbumPagePerDayItem and adjust related functionality ([8f8e4ee](https://github.com/travel-albums-ai/travel-albums/commit/8f8e4ee1f9f64b8582b2759849da7fa4da48378a))
+
 ## [1.82.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.81.0...v1.82.0) (2026-08-13)
 
 ### ✨ Features
