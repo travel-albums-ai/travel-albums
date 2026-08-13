@@ -1,4 +1,5 @@
 import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSettings } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
@@ -15,13 +16,18 @@ export default function SearchFiles() {
   const [searchTerm, setSearchTerm] = useState('');
   const { setPreviewPhotoObj } = useSettings()
   const photos = useFilteredPhotos_GLOBAL();
+  const descriptionsStore = useDescriptionsStoreSelector(state => state.descriptions)
   const { t } = useTranslation();
 
-  const photosRelevant = photos?.filter(photo => {
-    const filenameMatch = photo.id.toLowerCase().includes(searchTerm.toLowerCase());
-    const descriptionMatch = photo.description?.toLowerCase().includes(searchTerm.toLowerCase());
-    return filenameMatch || descriptionMatch;
-  }).filter((_, index) => index < 100) || []
+  const photosRelevant = (photos || [])
+    .filter(photo => {
+      if (!searchTerm) return true;
+      if(searchTerm === '') return true;
+      const filenameMatch = photo.id.toLowerCase().includes(searchTerm.toLowerCase());
+      const descriptionMatch = descriptionsStore.some(desc => desc.id === photo.id && desc.description.toLowerCase().includes(searchTerm.toLowerCase()));
+      return filenameMatch || descriptionMatch;
+    })
+    .filter((_, index) => index < 100) || []
 
   return (<>
     <CustomPopoverForTrigger
@@ -48,6 +54,7 @@ export default function SearchFiles() {
             </Box>
 
             <Typography variant="subtitle2" color="textSecondary">{photo.id}</Typography>
+            <Typography variant="caption" color="textSecondary">{descriptionsStore.find(desc => desc.id === photo.id)?.description}</Typography>
             <Typography variant="caption" color="textDisabled" align="right" sx={{ flex: 1 }}>{photo.imageUrl}</Typography>
           </Box>
         ))}
