@@ -1,3 +1,9 @@
+## [1.75.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.74.0...v1.75.0) (2026-08-13)
+
+### ✨ Features
+
+* update AutoDescriptionDrawer to include batch size controls; refactor DescribePhotoReadOnly for improved layout; reset results in ImageAnalyzer ([53cf421](https://github.com/travel-albums-ai/travel-albums/commit/53cf4218c157ebf990463e1d0443a1b7a348d1cc))
+
 ## [1.74.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.73.0...v1.74.0) (2026-08-13)
 
 ### ✨ Features
