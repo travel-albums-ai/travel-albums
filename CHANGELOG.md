@@ -1,3 +1,9 @@
+## [1.76.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.75.0...v1.76.0) (2026-08-13)
+
+### ✨ Features
+
+* enhance SearchFiles component to include descriptions in search results and improve filtering logic ([a2c493c](https://github.com/travel-albums-ai/travel-albums/commit/a2c493c5ebff3902f25dd95c37a53b95a9330f1f))
+
 ## [1.75.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.74.0...v1.75.0) (2026-08-13)
 
 ### ✨ Features
