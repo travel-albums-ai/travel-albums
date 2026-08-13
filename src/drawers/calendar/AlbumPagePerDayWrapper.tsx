@@ -1,39 +1,25 @@
+import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import AlbumPagePerDayItem from '@/drawers/calendar/AlbumPagePerDayItem';
-import { usePhotosByDay } from '@/hooks/useTransform_PhotosByDays';
+import MiniCalendar from '@/drawers/calendar/MiniCalendar';
 import { useTransform_PhotosByMoments } from '@/hooks/useTransform_PhotosByMoments';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
+import DayAnalyzer from '@/robot/DayAnalyzer';
 import { Box } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
-export default function AlbumPagePerDayWrapper({ photos }) {
+export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [selectedMoment, setSelectedMoment] = useState<string | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
-  const photosByDay = usePhotosByDay(photos);
   const photosByMoments = useTransform_PhotosByMoments(photos);
+  const descriptionStore = useDescriptionsStoreSelector(state => state.descriptions);
 
   const selectedPhotos = (selectedDay && selectedMoment && selectedPlace) ? photosByMoments.find((d) => d.label === selectedDay)?.moments.find((m) => m.label === selectedMoment)?.locations.find((l) => l.label === selectedPlace)?.photos : null;
 
-
-  // const days = useMemo(() => {
-  //   return Object.values(photosByDay).slice();
-  // }, [photosByDay]);
-
-  const day = (selectedDay && selectedMoment && selectedPlace) ? photosByMoments.find((d) => d.label === selectedDay) : null;
-
-  // const uniquePlaces =  useNearbyPlacesFromPhotos(day?.photos || []);
-
-  // useEffect(() => {
-  //   if(!selectedDay && days.length > 0) {
-  //     setSelectedDay(days[0].label)
-  //   }
-  // }, [days, selectedDay])
-
-  console.log("xfdsfdsfsd", photosByMoments, photosByDay)
+  const uniquePlaces =  [...new Set(selectedPhotos?.map(p => p.city).map(c => c?.name))]
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -48,19 +34,32 @@ export default function AlbumPagePerDayWrapper({ photos }) {
         }}
       >
 
-        {day && <Box sx={{ flex: '0 0 30%', maxWidth: 700, alignSelf: 'flex-start', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ flex: '0 0 30%', maxWidth: 700, alignSelf: 'flex-start', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1, bgcolor: 'background.default', borderRadius: 2, p: 1, boxShadow: 2 }}>
-            <DateCalendar value={dayjs(day.label)} disabled sx={{ m: 0 }} reduceAnimations />
-            {selectedPhotos?.length}
-            {/* <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, maxWidth: '50%' }}>
-              {uniquePlaces.reverse().map((place) => <Chip key={place} label={place} variant="outlined" />)}
-            </Box> */}
-            {/* outdated */}
+
+
+            <MiniCalendar
+              year={dayjs(selectedDay).year()}
+              month={dayjs(selectedDay).month() + 1}
+              highlightDays={[
+                ...photosByMoments.map((day) => dayjs(day.label)),
+              ]}
+              selectedDay={dayjs(selectedDay)}
+            />
+
+            <DayAnalyzer
+              key={`${selectedDay} ${selectedMoment} at ${selectedPlace}`}
+              context={{
+                descriptions: (selectedPhotos || [])
+                  .map(photo => descriptionStore.find(d => d.id === photo.id))
+                  .filter(d => d !== undefined)
+                  .map(d => d.description),
+                location: uniquePlaces.join(', '),
+              }} />
           </Box>
 
-
           {selectedPhotos && <AlbumMapPanel photos={selectedPhotos} height={550} interactive={true} />}
-        </Box>}
+        </Box>
 
         <Box sx={{ flex: 1, minHeight: 0 }}>
 

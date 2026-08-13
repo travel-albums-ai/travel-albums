@@ -121,7 +121,7 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
         <GeneralToolbar group={'album-photo-card'} context={{ photoId: photo.id, favorite, selectMode }} />
       </Box>
 
-      <Box sx={{ position: 'absolute', bottom: 8, right: 0, left: 0, zIndex: 2 }}>
+      <Box sx={{ position: 'absolute', bottom: 0, right: 0, left: 0, zIndex: 2 }}>
         <DescribePhotoReadOnly photoId={photo.id} />
       </Box>
 

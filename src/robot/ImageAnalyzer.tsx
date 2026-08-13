@@ -31,7 +31,7 @@ export default function ImageAnalyzer({ photos }: Props) {
   const { describePhoto } = useDescriptions()
 
   const [prompt, setPrompt] = useState(
-    'Look at all the photos and describe what is in each one. Return an array containing the photo index and description for each photo.',
+    'Look at all the photos and describe what is in each one. Return an array containing the photo index and description for each photo. Unclear photos can be described as "Unclear". Start from index 0. Return the result in JSON format. Max 200 words per description.',
   );
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(false);
