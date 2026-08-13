@@ -1,3 +1,9 @@
+## [1.90.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.89.0...v1.90.0) (2026-08-13)
+
+### ✨ Features
+
+* enhance AlbumPagePerDayItem to accept children and update layout in AlbumPagePerDayWrapper ([730e51d](https://github.com/travel-albums-ai/travel-albums/commit/730e51dfa81cf81cbb1637c74da9a2642b4a6100))
+
 ## [1.89.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.88.0...v1.89.0) (2026-08-13)
 
 ### ✨ Features
