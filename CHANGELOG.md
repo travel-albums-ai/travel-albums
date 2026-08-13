@@ -1,3 +1,9 @@
+## [1.70.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.69.0...v1.70.0) (2026-08-13)
+
+### ✨ Features
+
+* enhance AutoTileCanvas and AutoDescriptionDrawer to support image generation callback; update ImageAnalyzer to handle image preview ([cd455d2](https://github.com/travel-albums-ai/travel-albums/commit/cd455d20c0ad26ea656cba0faf4c860619ff1ff3))
+
 ## [1.69.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.68.0...v1.69.0) (2026-08-13)
 
 ### ✨ Features
