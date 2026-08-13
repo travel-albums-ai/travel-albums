@@ -1,3 +1,9 @@
+## [1.74.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.73.0...v1.74.0) (2026-08-13)
+
+### ✨ Features
+
+* enhance AutoDescriptionDrawer to filter selected photos based on descriptions store ([3b7af6d](https://github.com/travel-albums-ai/travel-albums/commit/3b7af6d139f987bd0bd6771bb4d049908c39dca7))
+
 ## [1.73.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.72.0...v1.73.0) (2026-08-13)
 
 ### ✨ Features
