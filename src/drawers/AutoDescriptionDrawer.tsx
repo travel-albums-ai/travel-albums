@@ -3,6 +3,7 @@ import GenericPanel from '@/components/generics/GenericPanel';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import ImageAnalyzer from '@/robot/ImageAnalyzer';
 import { Box, Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -35,12 +36,12 @@ export default function AutoDescriptionDrawer() {
       />
     </>}>
 
-      {/* {byokOpenAIKey && (
+      {byokOpenAIKey && (
         <ImageAnalyzer
           apiKey={byokOpenAIKey}
-          image={generatedImage}
+          // image={generatedImage}
         />
-      )} */}
+      )}
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
         <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>-</Button>
@@ -53,7 +54,6 @@ export default function AutoDescriptionDrawer() {
         tileSize={175}
         columns={5}
         gap={10}
-        // onFile={setGeneratedImage}
       />
 
     </GenericPanel>

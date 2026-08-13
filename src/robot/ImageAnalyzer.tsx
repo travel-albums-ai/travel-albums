@@ -1,41 +1,41 @@
+import { useAISinkStoreSelector } from '@/context/aiSinkStore';
 import OpenAI from 'openai';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+type AnalysisResult = {
+  index: number;
+  description: string;
+};
 
 type Props = {
   apiKey: string;
-  image: File | null;
 };
 
-export default function ImageAnalyzer({ apiKey, image }: Props) {
-  const [prompt, setPrompt] = useState('Look at all the photos and answer in JSON with the index of the photo and what is in the photo. For example, if there is a photo of a cat, the answer should be: { "index": 0, "description": "A cat" }. If there are multiple photos, please provide an array of objects with the index and description for each photo.');
-  const [result, setResult] = useState<unknown>();
+export default function ImageAnalyzer({ apiKey }: Props) {
+  const [prompt, setPrompt] = useState(
+    'Look at the photo and describe what is in it. Return the result as JSON with the photo index and description. For example: { "index": 0, "description": "A cat sitting on a sofa." }',
+  );
+
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!image) {
-      setImagePreviewUrl(null);
-      return;
-    }
-
-    const objectUrl = URL.createObjectURL(image);
-    setImagePreviewUrl(objectUrl);
-
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
+  // This should already be a data URL such as:
+  // data:image/jpeg;base64,/9j/4AAQSkZJRg...
+  const imageBase64 = useAISinkStoreSelector(
+    (state) => state.autoDescriptionPreview,
+  );
 
   async function analyze() {
-    if (!image || !apiKey) return;
+    if (!imageBase64 || !apiKey || loading) return;
 
     setLoading(true);
+    setResult(null);
 
     try {
       const client = new OpenAI({
         apiKey,
         dangerouslyAllowBrowser: true,
       });
-
-      const base64 = await fileToBase64(image);
 
       const response = await client.responses.create({
         model: 'gpt-5.6',
@@ -49,7 +49,7 @@ export default function ImageAnalyzer({ apiKey, image }: Props) {
               },
               {
                 type: 'input_image',
-                image_url: base64,
+                image_url: imageBase64,
               },
             ],
           },
@@ -57,22 +57,19 @@ export default function ImageAnalyzer({ apiKey, image }: Props) {
         text: {
           format: {
             type: 'json_schema',
-            name: 'result',
+            name: 'image_analysis',
             strict: true,
             schema: {
               type: 'object',
               properties: {
+                index: {
+                  type: 'number',
+                },
                 description: {
                   type: 'string',
                 },
-                tags: {
-                  type: 'array',
-                  items: {
-                    type: 'string',
-                  },
-                },
               },
-              required: ['description', 'tags'],
+              required: ['index', 'description'],
               additionalProperties: false,
             },
           },
@@ -80,6 +77,8 @@ export default function ImageAnalyzer({ apiKey, image }: Props) {
       });
 
       setResult(JSON.parse(response.output_text));
+    } catch (error) {
+      console.error('Image analysis failed:', error);
     } finally {
       setLoading(false);
     }
@@ -87,11 +86,15 @@ export default function ImageAnalyzer({ apiKey, image }: Props) {
 
   return (
     <div>
-      {imagePreviewUrl && (
+      {imageBase64 && (
         <img
-          src={imagePreviewUrl}
+          src={imageBase64}
           alt="Current image for analysis"
-          style={{ display: 'block', maxWidth: '100px', height: 'auto' }}
+          style={{
+            display: 'block',
+            maxWidth: '100px',
+            height: 'auto',
+          }}
         />
       )}
 
@@ -102,7 +105,7 @@ export default function ImageAnalyzer({ apiKey, image }: Props) {
       />
 
       <button
-        disabled={!image || !apiKey || loading}
+        disabled={!imageBase64 || !apiKey || loading}
         onClick={analyze}
       >
         {loading ? 'Analyzing...' : 'Analyze'}
@@ -115,15 +118,4 @@ export default function ImageAnalyzer({ apiKey, image }: Props) {
       )}
     </div>
   );
-}
-
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-
-    reader.readAsDataURL(file);
-  });
 }
