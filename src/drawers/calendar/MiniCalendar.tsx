@@ -34,7 +34,7 @@ export default function MiniCalendar({
         sx={{
           display: 'grid',
           gridTemplateColumns: 'repeat(7, 1fr)',
-          gap: 0.5,
+          gap: 0.65,
         }}
       >
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
@@ -63,6 +63,7 @@ export default function MiniCalendar({
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
+                position: 'relative',
               }}
             >
               <Box
@@ -86,7 +87,11 @@ export default function MiniCalendar({
               </Box>
 
               {selected && moments.length > 0 && (
-                <Box sx={{ display: 'flex', gap: '3px', mt: '-1px' }}>
+                <Box sx={{
+                  display: 'grid',
+                  gridTemplateColumns: `repeat(4, 4px)`,
+                  // display: 'flex',
+                  gap: '1px', position: 'absolute', bottom: 4 }}>
                   {moments.map((moment, i) => (
                     <Box
                       key={i}
@@ -95,8 +100,8 @@ export default function MiniCalendar({
                         height: 4,
                         borderRadius: '50%',
                         bgcolor: selectedMoment?.isSame(moment)
-                          ? 'primary.main'
-                          : 'text.secondary',
+                          ? 'primary.dark'
+                          : 'text.primary',
                       }}
                     />
                   ))}
