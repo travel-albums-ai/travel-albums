@@ -1,3 +1,4 @@
+import AlbumPagePerDayItem from '@/drawers/calendar/AlbumPagePerDayItem';
 import { useNearbyPlacesFromPhotos } from '@/hooks/useTransform_Photos2NearbyPlaces';
 import { usePhotosByDay } from '@/hooks/useTransform_PhotosByDays';
 import { useTransform_PhotosByMoments } from '@/hooks/useTransform_PhotosByMoments';
@@ -11,6 +12,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 export default function AlbumPagePerDayWrapper({ photos }) {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [selectedMoment, setSelectedMoment] = useState<string | null>(null);
   const photosByDay = usePhotosByDay(photos);
   const photosByMoments = useTransform_PhotosByMoments(photos);
 
@@ -43,6 +45,9 @@ export default function AlbumPagePerDayWrapper({ photos }) {
         }}
       >
 
+        {selectedDay}
+        {selectedMoment}
+
         {day && <Box sx={{ flex: '0 0 30%', maxWidth: 700, alignSelf: 'flex-start', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1, bgcolor: 'background.default', borderRadius: 2, p: 1, boxShadow: 2 }}>
             <DateCalendar value={dayjs(day.label)} disabled sx={{ m: 0 }} reduceAnimations />
@@ -65,10 +70,19 @@ export default function AlbumPagePerDayWrapper({ photos }) {
               {moment.label}
               {moment.moments.map((day, index) => (
                 <Box key={day.label} sx={{ display: 'flex', flexDirection: 'row', height: '100%', gap: 2, py: 4, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
-                  onMouseOver={() => setSelectedDay(day.label)}
+                  onMouseOver={() => setSelectedMoment(day.label)}
                 >
                   {day.label}
                   {day.photos.length}
+                  <Box sx={{
+                    width: '100%',
+                    height: '40vh',
+                  }}>
+                    <AlbumPagePerDayItem
+                      day={{ photos: day.photos }}
+                      index={index}
+                    />
+                  </Box>
 
                 </Box>
               ))}
