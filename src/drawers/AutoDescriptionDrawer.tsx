@@ -7,7 +7,7 @@ import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import SemanticPhotoSearch from '@/drawers/autoDescription/SemanticPhotoSearch';
 import { GalleryPhoto } from '@/lib/galleryData';
 import ImageAnalyzer from '@/robot/ImageAnalyzer';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -33,16 +33,19 @@ export default function AutoDescriptionDrawer() {
 
 
   return (
-    <GenericPanel id="auto-description-drawer" toolbar={<>
-      <TextField
-        label="BYOK OpenAI Key"
-        variant="outlined"
-        fullWidth
-        value={byokOpenAIKey}
-        onChange={(e) => setSetting({ byokOpenAIKey: e.target.value })}
-        margin="normal"
-      />
-    </>}>
+    <GenericPanel id="auto-description-drawer"
+      defaultToolbar
+    // toolbar={<>
+    //   <TextField
+    //     label="BYOK OpenAI Key"
+    //     variant="outlined"
+    //     fullWidth
+    //     value={byokOpenAIKey}
+    //     onChange={(e) => setSetting({ byokOpenAIKey: e.target.value })}
+    //     margin="normal"
+    //   />
+    // </>}
+    >
 
       <ImageAnalyzer photos={selectedPhotos} />
 

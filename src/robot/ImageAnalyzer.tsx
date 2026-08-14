@@ -105,27 +105,25 @@ export default function ImageAnalyzer({ photos }: Props) {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'flex-start', flexWrap: 'wrap' }}>
       {imageBase64 && (
-        <Card variant="outlined">
-          <CardContent>
-            <Box
-              component="img"
-              src={imageBase64}
-              alt="Image being analyzed"
-              sx={{
-                display: 'block',
-                maxWidth: 200,
-                maxHeight: 200,
-                objectFit: 'contain',
-                borderRadius: 1,
-              }}
-            />
-          </CardContent>
-        </Card>
+        <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box
+            component="img"
+            src={imageBase64}
+            alt="Image being analyzed"
+            sx={{
+              display: 'block',
+              maxWidth: 220,
+              maxHeight: 220,
+              objectFit: 'contain',
+              borderRadius: 1,
+            }}
+          />
+        </Box>
       )}
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1, flexGrow: 1 }}>
         <TextField
           label="Prompt"
           value={prompt}

@@ -1,6 +1,7 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import useRegisterTool from '@/hooks/useRegisterTool';
 import SidebarCoreButton from '@/layout/components/SidebarCoreButton';
+import BYOKPopover from '@/settings/BYOKPopover';
 import DrawersPopover from '@/settings/DrawersPopover';
 import FilterPhotosPopover from '@/settings/FilterPhotosPopover';
 import IndexerPopover from '@/settings/IndexerPopover';
@@ -9,7 +10,7 @@ import SectionsPopover from '@/settings/SectionsPopover';
 import SettingsPopover from '@/settings/SettingsPopover';
 import TagsPopover from '@/settings/TagsPopover';
 import { Box, Typography } from '@mui/material';
-import { Group, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
+import { Group, Key, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -56,6 +57,7 @@ export default function SettingsContent() {
     { key: 'layout', title: t('layout'), component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
     { key: 'filterPhotos', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
     { key: 'drawers', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
+    { key: 'byok', title: 'BYOK', component: <BYOKPopover />, icon: <Key size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
     { key: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
     { key: 'sections', title: t('sections'), component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
     { key: 'demo', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },

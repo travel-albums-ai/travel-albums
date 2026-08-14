@@ -26,7 +26,7 @@ export default function MiniCalendar({
 
   return (
     <Box sx={{ }}>
-      <Typography sx={{ mb: 2, textTransform: 'uppercase', fontWeight: 600, fontSize: 14 }}>
+      <Typography sx={{ mb: 2, textTransform: 'uppercase', fontWeight: 600, fontSize: 14, py: 2, px: 1 }} color="text.secondary">
         {first.format('MMMM YYYY')}
       </Typography>
 
@@ -91,7 +91,7 @@ export default function MiniCalendar({
                   // display: 'grid',
                   // gridTemplateColumns: `repeat(4, 4px)`,
                   display: 'flex',
-                  gap: '1px', position: 'absolute', bottom: 4 }}>
+                  gap: 0.35, position: 'absolute', bottom: 4 }}>
                   {moments.map((moment, i) => (
                     <Box
                       key={i}
