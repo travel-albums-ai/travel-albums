@@ -1,5 +1,6 @@
 import { useAISink } from '@/context/aiSinkStore';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { GalleryPhoto } from '@/lib/galleryData';
+import { composeUrl } from '@/lib/thumbnailService';
 import { useEffect, useState } from 'react';
 
 type Photo = {
@@ -8,7 +9,7 @@ type Photo = {
 }
 
 type Props = {
-  photos: Photo[]
+  photos: GalleryPhoto[]
   tileSize: number
   columns: number
   gap?: number
@@ -92,7 +93,7 @@ export default function AutoTileCanvas({
           ...(await Promise.all(
             batch.map(async photo => {
               try {
-                return await loadBitmap(thumbnailUrl(photo.id))
+                return await loadBitmap(composeUrl(photo))
               } catch {
                 return null
               }
