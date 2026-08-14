@@ -1,4 +1,4 @@
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import { useAISinkStoreSelector } from '@/context/aiSinkStore';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { useDescriptions } from '@/context/descriptionsStore';
@@ -7,16 +7,11 @@ import {
   Alert,
   Box,
   Button,
-  Card,
-  CardContent,
-  Chip,
   Stack,
   Typography
 } from '@mui/material';
 import OpenAI from 'openai';
 import { useState } from 'react';
-
-
 
 type Result = {
   index: number;
@@ -168,26 +163,15 @@ export default function ImageAnalyzer({ photos, context }: Props) {
       {error && <Alert severity="error">{error}</Alert>}
 
       {results.length > 0 && (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1, height: '500px', overflowY: 'auto', }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, height: '500px', overflowY: 'auto', }}>
           <Stack spacing={1}>
             {results.map((result) => (
-              <Card key={result.index} variant="outlined">
-                <CardContent>
-                  <Stack direction="row" spacing={1} alignItems="center">
-
-                    <Box sx={{ width: 100, height: 100, borderRadius: 2, overflow: 'hidden', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', bgcolor: 'background.default', border: '1px solid', borderColor: 'divider', position: 'relative' }}>
-                      <AlbumPhotoThumbnailBackground  imageUrl={photos[result.index].id}  />
-                      <Chip
-                        sx={{ position: 'absolute', bottom: 4, right: 4 }}
-                        label={`Photo ${result.index + 1}`}
-                        size="small"
-                        variant="filled"
-                      />
-                    </Box>
-                    <Typography>{result.description}</Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
+              <Box key={result.index} sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', p: 1, border: 1, borderColor: 'divider', bgcolor: 'background.paper', borderRadius: 2 }}>
+                <Box sx={{ width: 50, height: 50, borderRadius: 1, overflow: 'hidden', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', bgcolor: 'background.default', border: '1px solid', borderColor: 'divider', position: 'relative' }}>
+                  <AlbumPhotoThumbnailBackgroundNg photo={photos[result.index]}  />
+                </Box>
+                <Typography color="textSecondary" variant="caption">{result.index + 1}: {result.description}</Typography>
+              </Box>
             ))}
           </Stack>
         </Box>

@@ -1,5 +1,4 @@
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
-import { useSettings } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
 import BYOKPersona from '@/modals/settings/components/BYOKPersona';
 import SettingFieldRow from '@/modals/settings/components/SettingFieldRow';
@@ -14,7 +13,7 @@ const toggleControls = [
 ] as const
 
 export default function BYOKPopover() {
-  const { setModule } = useSettings()
+  const { setSetting } = useBYOK()
   const byokStore = useBYOKStoreSelector((state) => state)
   const { getMainPersona, getAdditionalPersonas, addAdditionalPersona } = useBYOK()
   const { t } = useTranslation()
@@ -29,7 +28,7 @@ export default function BYOKPopover() {
               key={control.key}
               label={t(control.labelKey)}
               value={byokStore[control.key]}
-              onChange={(newValue) => setModule(control.key, newValue)}
+              onChange={(newValue) => setSetting(prev => ({ ...prev, [control.key]: newValue }))}
             />}
           </Fragment>
         ))}

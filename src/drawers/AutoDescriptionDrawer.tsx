@@ -1,7 +1,7 @@
 import AutoTileCanvas from '@/components/AutoTileCanvas';
 import GenericPanel from '@/components/generics/GenericPanel';
 import SolidChip from '@/components/SolidChip';
-import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { useBYOKStoreSelector } from '@/context/byokStore';
 import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
@@ -16,7 +16,6 @@ import { useParams } from 'react-router-dom';
 
 export default function AutoDescriptionDrawer() {
   const { type_name = '', id = '' } = useParams()
-  const { setSetting } = useBYOK()
   const sections = useSections_GLOBAL()
   const filteredPhotos = useFilteredPhotos_GLOBAL();
   const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)

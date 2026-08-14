@@ -1,13 +1,12 @@
 import GenericToggleButton from '@/components/generics/GenericToggleButton';
-import { useBYOKStoreSelector } from '@/context/byokStore';
-import { useSettings } from '@/context/settingsStore';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { Key, PanelLeftClose } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function BYOKOpenAiField() {
-  const { setSetting } = useSettings();
+  const { setSetting } = useBYOK();
   const { byokGoogleVisionKey, byokOpenAIKey } = useBYOKStoreSelector((state) => state);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { t } = useTranslation();

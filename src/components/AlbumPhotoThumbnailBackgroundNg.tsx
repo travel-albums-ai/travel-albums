@@ -27,7 +27,6 @@ export default function AlbumPhotoThumbnailBackgroundNg({
 
   return (
     <img
-      key={src}
       src={src}
       alt=""
       width={width}

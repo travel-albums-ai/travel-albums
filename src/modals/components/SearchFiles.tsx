@@ -1,4 +1,4 @@
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSettings } from '@/context/settingsStore';
@@ -94,7 +94,7 @@ export default function SearchFiles() {
                   flexShrink: 0,
                 }}
               >
-                <AlbumPhotoThumbnailBackground imageUrl={photo.id} />
+                <AlbumPhotoThumbnailBackgroundNg photo={photo} />
               </Box>
 
               <Typography variant="subtitle2" color="textSecondary">
