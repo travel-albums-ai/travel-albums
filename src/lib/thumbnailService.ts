@@ -75,11 +75,9 @@ export const originalUrlNg = (imageId: string, demo = false) => {
 export const composeUrl = (photo: GalleryPhoto, original = false, demo = false) => {
   const composePath = `${photo.rootIndex}/${encodeURIComponent(photo.folder ?? '')}/${encodeURIComponent(photo.title ?? '')}`
 
-  const src = original
+  return original
     ? originalUrlNg(composePath, demo)
-    : thumbnailUrlNg(composePath, demo);
-
-  return src
+    : thumbnailUrlNg(composePath, demo)
 }
 
 // export const imageUrlNg = (imageId: string, demo = false) => {
