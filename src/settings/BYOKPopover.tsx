@@ -1,9 +1,10 @@
-import { useBYOKStoreSelector } from '@/context/byokStore';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { useSettings } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
+import BYOKPersona from '@/settings/components/BYOKPersona';
 import SettingFieldRow from '@/settings/components/SettingFieldRow';
-import { Box, Stack } from '@mui/material';
-import { Key } from 'lucide-react';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import { Key, Plus } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,6 +16,7 @@ const toggleControls = [
 export default function BYOKPopover() {
   const { setModule } = useSettings()
   const byokStore = useBYOKStoreSelector((state) => state)
+  const { getMainPersona, getAdditionalPersonas, addAdditionalPersona } = useBYOK()
   const { t } = useTranslation()
 
   return <>
@@ -31,6 +33,17 @@ export default function BYOKPopover() {
             />}
           </Fragment>
         ))}
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, py: 2, justifyContent: 'space-between' }}>
+        <Typography variant="subtitle2">Identify personas in photos</Typography>
+        <Button variant="outlined" color="primary" onClick={() => addAdditionalPersona({ name: '', description: '' })}><Plus /></Button>
+      </Box>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <BYOKPersona persona={getMainPersona()} main={true} index={0} />
+        {getAdditionalPersonas().map((persona, index) => <BYOKPersona persona={persona} main={false} index={index} key={index} />)}
+      </Box>
+
     </Stack>
   </>
 }

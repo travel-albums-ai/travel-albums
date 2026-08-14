@@ -26,13 +26,18 @@ type Props = {
 };
 
 export default function ImageAnalyzer({ photos }: Props) {
-  const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)
+  const { byokOpenAIKey, mainPersona, additionalPersonas } = useBYOKStoreSelector((state) => state)
+
   const imageBase64 = useAISinkStoreSelector((state) => state.autoDescriptionPreview);
   const { describePhoto } = useDescriptions()
 
   const [prompt, setPrompt] = useState(
-    'Look at all the photos and describe what is in each one. Return an array containing the photo index and description for each photo. Unclear photos can be described as "Unclear". Start from index 0. Return the result in JSON format. Max 200 words per description.',
+    `Look at all the photos and describe what is in each one. Return an array containing the photo index and description for each photo. Unclear photos can be described as "Unclear". Start from index 0. Return the result in JSON format. Max 30 words per description. If the person in photos looks like: ${mainPersona.description}, then it's likely the user. His name is ${mainPersona.name}.`
+
   );
+
+  const friendsPrompt = additionalPersonas?.map(p => `If the person in photos looks like: ${p.description}, then it's likely ${p.name}.`).join(' ')
+
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,6 +59,7 @@ export default function ImageAnalyzer({ photos }: Props) {
           role: 'user',
           content: [
             { type: 'input_text', text: prompt },
+            { type: 'input_text', text: friendsPrompt },
             { type: 'input_image', image_url: imageBase64 },
           ],
         } as any],
