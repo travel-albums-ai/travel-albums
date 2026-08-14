@@ -1,3 +1,9 @@
+## [1.96.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.95.0...v1.96.0) (2026-08-14)
+
+### ✨ Features
+
+* update AlbumPhotoCard to conditionally render photo description and log takenAt time ([ecb7ed3](https://github.com/travel-albums-ai/travel-albums/commit/ecb7ed3d1fed9fe1f478ba32e16d255989183318))
+
 ## [1.95.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.94.0...v1.95.0) (2026-08-14)
 
 ### ✨ Features
