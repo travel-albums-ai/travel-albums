@@ -1,3 +1,9 @@
+## [1.98.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.97.0...v1.98.0) (2026-08-14)
+
+### ✨ Features
+
+* refactor thumbnail URL handling to use composeUrl function across components ([31ecca2](https://github.com/travel-albums-ai/travel-albums/commit/31ecca25ecd111132ca35dd46bc741472289054f))
+
 ## [1.97.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.96.0...v1.97.0) (2026-08-14)
 
 ### ✨ Features
