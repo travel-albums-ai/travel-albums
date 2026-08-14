@@ -1,3 +1,9 @@
+## [1.93.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.92.0...v1.93.0) (2026-08-14)
+
+### ✨ Features
+
+* **settings:** add various settings components and filters ([f2a03a5](https://github.com/travel-albums-ai/travel-albums/commit/f2a03a517dc7ee9d500b38e68345cbbb81ee163c))
+
 ## [1.92.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.91.0...v1.92.0) (2026-08-14)
 
 ### ✨ Features
