@@ -2,7 +2,7 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumMapPanelByBatches from '@/drawers/globe/AlbumMapPanelByBatches';
 import useRelevantAlbumsByProximity from '@/hooks/useRelevantAlbumsByProximity';
 import { GalleryPhoto } from '@/lib/galleryData';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
@@ -109,8 +109,9 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
                       transition: 'all 0.3s ease',
                     }}
                   >
+
                     <img
-                      src={thumbnailUrl(p.id)}
+                      src={composeUrl(p)}
                       draggable={false}
                       style={{
                         width: selected ? 200 : 90,

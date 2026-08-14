@@ -1,5 +1,5 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { imageUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { Box, Typography } from '@mui/material';
 import { FileQuestionMark } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -96,7 +96,7 @@ export default function ZoomPhoto() {
           <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
             <img
               ref={imgRef}
-              src={imageUrl(`${photo.folder}/${photo.title}`, demoMode)}
+              src={composeUrl(photo, true, demoMode)}
               alt={photo.title}
               loading="lazy"
               decoding="async"

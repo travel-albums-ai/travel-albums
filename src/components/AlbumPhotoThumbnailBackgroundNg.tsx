@@ -1,6 +1,6 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { GalleryPhoto } from '@/lib/galleryData';
-import { originalUrlNg, thumbnailUrlNg } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import React from 'react';
 
 type Props = {
@@ -18,16 +18,12 @@ export default function AlbumPhotoThumbnailBackgroundNg({
   height,
   style,
   className,
-  original,
+  original = false,
 }: Props) {
   const demoMode = useSettingsStoreSelector(s => s.demoMode);
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
 
-  const composePath = `${photo.rootIndex}/${encodeURIComponent(photo.folder ?? '')}/${encodeURIComponent(photo.title ?? '')}`
-
-  const src = original
-    ? originalUrlNg(composePath, demoMode)
-    : thumbnailUrlNg(composePath, demoMode);
+  const src = composeUrl(photo, original, demoMode);
 
   return (
     <img

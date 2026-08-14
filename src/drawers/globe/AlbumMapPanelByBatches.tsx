@@ -1,5 +1,5 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -162,7 +162,7 @@ export default function AlbumMapPanelByBatches({ allPhotos, batches, onPreview, 
       const selected = previewPhotoId === p.id
 
       const icon = getIcon(
-        thumbnailUrl(p.id),
+        composeUrl(p),
         selected ? '#90caf9' : 'gray',
         selected
       )

@@ -1,4 +1,4 @@
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
@@ -149,8 +149,8 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
       }}
     >
       <Box sx={{ width: `${thumbWidth}px`, height: `${thumbHeight}px`, flexShrink: 0, position: 'relative' }}>
-        <AlbumPhotoThumbnailBackground
-          imageUrl={photo.id}
+        <AlbumPhotoThumbnailBackgroundNg
+          photo={photo}
           width={thumbWidth}
           height={thumbHeight}
           style={{...thumbnailStyle}}
