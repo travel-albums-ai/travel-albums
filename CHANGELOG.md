@@ -1,3 +1,9 @@
+## [1.95.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.94.0...v1.95.0) (2026-08-14)
+
+### ✨ Features
+
+* update DayAnalyzer prompts and context handling for improved story generation ([6307d15](https://github.com/travel-albums-ai/travel-albums/commit/6307d15c1e255ce8eff8a7c85da80bfb3bda072f))
+
 ## [1.94.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.93.0...v1.94.0) (2026-08-14)
 
 ### ✨ Features
