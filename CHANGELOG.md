@@ -1,3 +1,9 @@
+## [1.99.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.98.0...v1.99.0) (2026-08-14)
+
+### ✨ Features
+
+* simplify composeUrl function by directly returning the result of originalUrlNg or thumbnailUrlNg ([601f205](https://github.com/travel-albums-ai/travel-albums/commit/601f205b2848d498a55868ee24bada2e491bc751))
+
 ## [1.98.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.97.0...v1.98.0) (2026-08-14)
 
 ### ✨ Features
