@@ -1,3 +1,9 @@
+## [1.100.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.100.0...v1.100.1) (2026-08-14)
+
+### 🐛 Fixes
+
+* comment out imageBase64 rendering to prevent display issues ([2012862](https://github.com/travel-albums-ai/travel-albums/commit/2012862a312b72eb99cb6db839f9f3519027b259))
+
 ## [1.100.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.99.0...v1.100.0) (2026-08-14)
 
 ### ✨ Features
