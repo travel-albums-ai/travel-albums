@@ -1,3 +1,4 @@
+import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
 import { useAISinkStoreSelector } from '@/context/aiSinkStore';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { useDescriptions } from '@/context/descriptionsStore';
@@ -10,11 +11,12 @@ import {
   CardContent,
   Chip,
   Stack,
-  TextField,
-  Typography,
+  Typography
 } from '@mui/material';
 import OpenAI from 'openai';
 import { useState } from 'react';
+
+
 
 type Result = {
   index: number;
@@ -23,20 +25,24 @@ type Result = {
 
 type Props = {
   photos: GalleryPhoto[];
+  context: any;
 };
 
-export default function ImageAnalyzer({ photos }: Props) {
+export default function ImageAnalyzer({ photos, context }: Props) {
   const { byokOpenAIKey, mainPersona, additionalPersonas } = useBYOKStoreSelector((state) => state)
 
   const imageBase64 = useAISinkStoreSelector((state) => state.autoDescriptionPreview);
   const { describePhoto } = useDescriptions()
 
-  const [prompt, setPrompt] = useState(
-    `Look at all the photos and describe what is in each one. Return an array containing the photo index and description for each photo. Unclear photos can be described as "Unclear". Start from index 0. Return the result in JSON format. Max 30 words per description. If the person in photos looks like: ${mainPersona.description}, then it's likely the user. His name is ${mainPersona.name}.`
-
-  );
-
-  const friendsPrompt = additionalPersonas?.map(p => `If the person in photos looks like: ${p.description}, then it's likely ${p.name}.`).join(' ')
+  const prompts = {
+    main:  [
+      `Look at all the photos and describe what is in each one. Return an array containing the photo index`,
+      'and description for each photo. Unclear photos can be described as "Unclear". Start from index 0.',
+      'Return the result in JSON format. Max 30 words per description.'
+    ].join(' '),
+    mainPersonaPrompt: `If the person looks like: ${mainPersona.description}, then it's ${mainPersona.name}.`,
+    friendsPrompt: additionalPersonas?.map(p => `If the person looks like: ${p.description}, then it's likely ${p.name}.`).join(' ')
+  }
 
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(false);
@@ -58,8 +64,8 @@ export default function ImageAnalyzer({ photos }: Props) {
         input: [{
           role: 'user',
           content: [
-            { type: 'input_text', text: prompt },
-            { type: 'input_text', text: friendsPrompt },
+            ...Object.values(prompts).map((desc) => ({ type: 'input_text', text: desc })),
+            ...Object.values(context).map((desc) => ({ type: 'input_text', text: desc })),
             { type: 'input_image', image_url: imageBase64 },
           ],
         } as any],
@@ -112,7 +118,7 @@ export default function ImageAnalyzer({ photos }: Props) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-      {imageBase64 && (
+      {/* {imageBase64 && (
         <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Box
             component="img"
@@ -127,16 +133,19 @@ export default function ImageAnalyzer({ photos }: Props) {
             }}
           />
         </Box>
-      )}
+      )} */}
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1, flexGrow: 1 }}>
-        <TextField
-          label="Prompt"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          multiline
-          minRows={5}
-        />
+        {[...Object.entries(prompts), ...Object.entries(context)].map(([key, desc], idx) => (
+          <Box key={idx} sx={{ display: 'flex', flexDirection: 'row', gap: 1, borderBottom: 1, borderColor: 'divider', pb: 0.5 }}>
+            <Typography variant="caption" color="textDisabled" sx={{ textTransform: 'capitalize', flex: '0 0 120px' }}>
+              {key}:
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              {desc}
+            </Typography>
+          </Box>
+        ))}
 
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
@@ -149,7 +158,7 @@ export default function ImageAnalyzer({ photos }: Props) {
           <Button
             variant="contained"
             onClick={addAllDescriptions}
-            disabled={!imageBase64 || !byokOpenAIKey || loading}
+            disabled={!imageBase64 || !byokOpenAIKey || loading || results.length === 0}
           >
             {loading ? 'Analyzing…' : 'Add All Descriptions'}
           </Button>
@@ -159,22 +168,29 @@ export default function ImageAnalyzer({ photos }: Props) {
       {error && <Alert severity="error">{error}</Alert>}
 
       {results.length > 0 && (
-        <Stack spacing={1}>
-          {results.map((result) => (
-            <Card key={result.index} variant="outlined">
-              <CardContent>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Chip
-                    label={`Photo ${result.index}`}
-                    size="small"
-                    variant="outlined"
-                  />
-                  <Typography>{result.description}</Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          ))}
-        </Stack>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1, height: '500px', overflowY: 'auto', }}>
+          <Stack spacing={1}>
+            {results.map((result) => (
+              <Card key={result.index} variant="outlined">
+                <CardContent>
+                  <Stack direction="row" spacing={1} alignItems="center">
+
+                    <Box sx={{ width: 100, height: 100, borderRadius: 2, overflow: 'hidden', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', bgcolor: 'background.default', border: '1px solid', borderColor: 'divider', position: 'relative' }}>
+                      <AlbumPhotoThumbnailBackground  imageUrl={photos[result.index].id}  />
+                      <Chip
+                        sx={{ position: 'absolute', bottom: 4, right: 4 }}
+                        label={`Photo ${result.index + 1}`}
+                        size="small"
+                        variant="filled"
+                      />
+                    </Box>
+                    <Typography>{result.description}</Typography>
+                  </Stack>
+                </CardContent>
+              </Card>
+            ))}
+          </Stack>
+        </Box>
       )}
     </Box>
   );

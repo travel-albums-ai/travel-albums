@@ -7,6 +7,7 @@ import {
 import { useState } from 'react';
 
 import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import { Cpu, Search } from 'lucide-react';
 import {
   indexPhotos,
   searchPhotos,
@@ -50,19 +51,12 @@ export default function SemanticPhotoSearch({
   }
 
   return (
-    <Box sx={{ p: 2 }}>
-      <Button
-        onClick={handleIndex}
-        disabled={indexing}
-      >
-        {indexing ? 'Indexing...' : 'Index photos'}
-      </Button>
-
+    <Box sx={{ }}>
       <Box
         sx={{
           display: 'flex',
           gap: 1,
-          mt: 2,
+          // mt: 2,
         }}
       >
         <TextField
@@ -77,9 +71,15 @@ export default function SemanticPhotoSearch({
           }}
           placeholder="Search photos semantically..."
         />
-
-        <Button onClick={handleSearch}>
-          Search
+        <Button
+          variant="outlined"
+          onClick={handleIndex}
+          disabled={indexing}
+        >
+          <Cpu size={16} style={{ marginRight: 4 }} />
+        </Button>
+        <Button variant="contained" onClick={handleSearch}>
+          <Search size={16} style={{ marginRight: 4 }} />
         </Button>
       </Box>
 

@@ -27,13 +27,19 @@ async function getCacheKey(input: string) {
 }
 
 export default function DayAnalyzer({ context }: Props) {
-  const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey);
+  const { byokOpenAIKey, mainPersona } = useBYOKStoreSelector((state) => state);
 
+  // const prompt = useMemo(
+  //   () =>
+  //     'Make a story of max 100 words about the day based on the following descriptions: ' +
+  //     context.descriptions.join(' ') + 'Main persona: ' + mainPersona.name + ' as a ' + mainPersona.description,
+  //   [context.descriptions, mainPersona.name, mainPersona.description],
+  // );
   const prompt = useMemo(
     () =>
-      'Make a story of max 200 words about the day based on the following descriptions: ' +
-      context.descriptions.join(' '),
-    [context.descriptions],
+      'Make a story of max 100 words about the day based on the following descriptions: ' +
+      context.descriptions.join(' ') + 'Main persona: ' + mainPersona.name + ' as a ' + mainPersona.description,
+    [context.descriptions, mainPersona.name, mainPersona.description],
   );
 
   const [result, setResult] = useState<string | null>(null);
@@ -91,7 +97,10 @@ export default function DayAnalyzer({ context }: Props) {
         model: 'gpt-5.6-luna',
         input: [{
           role: 'user',
-          content: [{ type: 'input_text', text: prompt }],
+          content: [
+            { type: 'input_text', text: prompt },
+            ...Object.values(context).map((desc) => ({ type: 'input_text', text: desc })),
+          ],
         } as any],
         text: {
           format: {

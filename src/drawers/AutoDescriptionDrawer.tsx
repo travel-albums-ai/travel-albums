@@ -1,5 +1,6 @@
 import AutoTileCanvas from '@/components/AutoTileCanvas';
 import GenericPanel from '@/components/generics/GenericPanel';
+import SolidChip from '@/components/SolidChip';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
@@ -7,7 +8,8 @@ import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import SemanticPhotoSearch from '@/drawers/autoDescription/SemanticPhotoSearch';
 import { GalleryPhoto } from '@/lib/galleryData';
 import ImageAnalyzer from '@/robot/ImageAnalyzer';
-import { Box, Button } from '@mui/material';
+import { Box, Button, IconButton } from '@mui/material';
+import { Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -31,44 +33,41 @@ export default function AutoDescriptionDrawer() {
     .filter((photo: GalleryPhoto) => !descriptionsStore.some((desc) => desc.id === photo.id))
     .filter((_, index) => index >= renderedIndex * batchSize && index < (renderedIndex + 1) * batchSize)
 
+  const uniquePlaces =  [...new Set(selectedPhotos?.map(p => p?.city).map(c => c?.name))]
 
   return (
-    <GenericPanel id="auto-description-drawer"
-      defaultToolbar
-    // toolbar={<>
-    //   <TextField
-    //     label="BYOK OpenAI Key"
-    //     variant="outlined"
-    //     fullWidth
-    //     value={byokOpenAIKey}
-    //     onChange={(e) => setSetting({ byokOpenAIKey: e.target.value })}
-    //     margin="normal"
-    //   />
-    // </>}
-    >
-
-      <ImageAnalyzer photos={selectedPhotos} />
+    <GenericPanel id="auto-description-drawer" defaultToolbar toolbar={<>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
+        <SolidChip count={batchSize} label="batch size" minWidth={80} />
+        <IconButton onClick={() => setBatchSize(batchSize - 1)} disabled={batchSize <= 1}>
+          <Minus size={16} />
+        </IconButton>
+        <IconButton onClick={() => setBatchSize(batchSize + 1)}>
+          <Plus size={16} />
+        </IconButton>
+      </Box>
+    </>}>
 
       {byokOpenAIKey && <SemanticPhotoSearch
         apiKey={byokOpenAIKey}
         photos={descriptionsStore}
       />}
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
-        <Button variant="outlined" onClick={() => setBatchSize(batchSize - 1)} disabled={batchSize <= 1}>-</Button>
-        {batchSize}
-        <Button variant="outlined" onClick={() => setBatchSize(batchSize + 1)}>+</Button>
-      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'flex-start', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, alignItems: 'center', flexDirection: 'row', width: '100%', borderBottom: '1px solid', borderColor: 'divider', pb: 1, mb: 1 }}>
+          <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>-</Button>
+          <AutoTileCanvas
+            photos={selectedPhotos}
+            tileSize={175}
+            columns={5}
+            gap={10}
+          />
+          <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)} disabled={(renderedIndex + 1) * batchSize >= photos.length}>+</Button>
+        </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
-        <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>-</Button>
-        <AutoTileCanvas
-          photos={selectedPhotos}
-          tileSize={175}
-          columns={5}
-          gap={10}
-        />
-        <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)} disabled={(renderedIndex + 1) * batchSize >= photos.length}>+</Button>
+        <Box sx={{ flex: 1 }} >
+          <ImageAnalyzer photos={selectedPhotos} context={{ photoLocations: 'Photo where these photos were taken: ' + uniquePlaces.join(', ') }} />
+        </Box>
       </Box>
 
     </GenericPanel>
