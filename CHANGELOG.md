@@ -1,3 +1,9 @@
+## [1.94.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.93.0...v1.94.0) (2026-08-14)
+
+### ✨ Features
+
+* enhance AutoDescriptionDrawer and related components with batch size controls and improved context handling ([56dc86f](https://github.com/travel-albums-ai/travel-albums/commit/56dc86f9dd0a6c137bde2d43165517134beb6128))
+
 ## [1.93.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.92.0...v1.93.0) (2026-08-14)
 
 ### ✨ Features
