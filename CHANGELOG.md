@@ -1,3 +1,9 @@
+## [1.92.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.91.0...v1.92.0) (2026-08-14)
+
+### ✨ Features
+
+* enhance BYOK persona management with add, update, and remove functionalities ([f0920a1](https://github.com/travel-albums-ai/travel-albums/commit/f0920a1c519dd20db0e211d13073732b4a74a119))
+
 ## [1.91.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.90.0...v1.91.0) (2026-08-14)
 
 ### ✨ Features
