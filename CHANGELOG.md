@@ -1,3 +1,9 @@
+## [1.100.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.99.0...v1.100.0) (2026-08-14)
+
+### ✨ Features
+
+* update AutoTileCanvas to use GalleryPhoto type and composeUrl for thumbnail loading ([8f01e9b](https://github.com/travel-albums-ai/travel-albums/commit/8f01e9b745ab3c65986914122185bbd7352b1a2b))
+
 ## [1.99.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.98.0...v1.99.0) (2026-08-14)
 
 ### ✨ Features
