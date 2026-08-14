@@ -1,3 +1,9 @@
+## [1.97.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.96.0...v1.97.0) (2026-08-14)
+
+### ✨ Features
+
+* replace AlbumPhotoThumbnailBackground with AlbumPhotoThumbnailBackgroundNg and update related components ([7cfc47b](https://github.com/travel-albums-ai/travel-albums/commit/7cfc47b4320694a86eb3c777578322d6694b66db))
+
 ## [1.96.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.95.0...v1.96.0) (2026-08-14)
 
 ### ✨ Features
