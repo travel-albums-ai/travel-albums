@@ -118,7 +118,7 @@ export default function ImageAnalyzer({ photos, context }: Props) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-      {imageBase64 && (
+      {/* {imageBase64 && (
         <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Box
             component="img"
@@ -133,7 +133,7 @@ export default function ImageAnalyzer({ photos, context }: Props) {
             }}
           />
         </Box>
-      )}
+      )} */}
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1, flexGrow: 1 }}>
         {[...Object.entries(prompts), ...Object.entries(context)].map(([key, desc], idx) => (
