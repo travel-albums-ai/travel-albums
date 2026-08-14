@@ -1,6 +1,6 @@
 import { usePhotosByDay } from '@/hooks/useTransform_PhotosByDays';
 import { GalleryPhoto } from '@/lib/galleryData';
-import SparklinePhotos from '@/settings/components/SparklinePhotos';
+import SparklinePhotos from '@/modals/settings/components/SparklinePhotos';
 import { useMemo } from 'react';
 
 export default function SparklineDates({ photos, photosFiltered }: { photos?: GalleryPhoto[]; photosFiltered?: GalleryPhoto[] }) {

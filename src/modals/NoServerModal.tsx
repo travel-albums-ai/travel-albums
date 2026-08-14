@@ -1,5 +1,5 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingsPopover from '@/settings/SettingsPopover';
+import SettingsPopover from '@/modals/settings/SettingsPopover';
 import { Box, Dialog, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 

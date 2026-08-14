@@ -1,8 +1,8 @@
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { useSettings } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import BYOKPersona from '@/settings/components/BYOKPersona';
-import SettingFieldRow from '@/settings/components/SettingFieldRow';
+import BYOKPersona from '@/modals/settings/components/BYOKPersona';
+import SettingFieldRow from '@/modals/settings/components/SettingFieldRow';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { Key, Plus } from 'lucide-react';
 import { Fragment } from 'react';

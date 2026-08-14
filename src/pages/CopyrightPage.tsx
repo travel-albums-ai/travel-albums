@@ -1,10 +1,10 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import FilterPhotosPopover from '@/settings/FilterPhotosPopover';
-import IndexerPopover from '@/settings/IndexerPopover';
-import LayoutPopover from '@/settings/LayoutPopover';
-import SectionsPopover from '@/settings/SectionsPopover';
-import SettingsPopover from '@/settings/SettingsPopover';
-import TagsPopover from '@/settings/TagsPopover';
+import FilterPhotosPopover from '@/modals/settings/FilterPhotosPopover';
+import IndexerPopover from '@/modals/settings/IndexerPopover';
+import LayoutPopover from '@/modals/settings/LayoutPopover';
+import SectionsPopover from '@/modals/settings/SectionsPopover';
+import SettingsPopover from '@/modals/settings/SettingsPopover';
+import TagsPopover from '@/modals/settings/TagsPopover';
 import { Filter, Group, Server, Shapes, Tag } from 'lucide-react';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';

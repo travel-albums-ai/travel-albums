@@ -1,8 +1,8 @@
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingSelectRow from '@/settings/components/SettingSelectRow';
-import SettingsSliderRow from '@/settings/components/SettingsSliderRow';
-import SettingToggleRow from '@/settings/components/SettingToggleRow';
+import SettingSelectRow from '@/modals/settings/components/SettingSelectRow';
+import SettingsSliderRow from '@/modals/settings/components/SettingsSliderRow';
+import SettingToggleRow from '@/modals/settings/components/SettingToggleRow';
 import { Box, Stack } from '@mui/material';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';

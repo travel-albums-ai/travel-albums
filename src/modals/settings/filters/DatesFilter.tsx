@@ -2,8 +2,8 @@
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
-import SettingDateRow from '@/settings/components/SettingDateRow';
-import SparklineDates from '@/settings/SparklineDates';
+import SettingDateRow from '@/modals/settings/components/SettingDateRow';
+import SparklineDates from '@/modals/settings/SparklineDates';
 import { Box, IconButton } from '@mui/material';
 import { PlusCircle, Square, SquareCheck, Trash } from 'lucide-react';
 import { useState } from 'react';

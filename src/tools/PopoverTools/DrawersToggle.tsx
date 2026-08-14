@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import DrawersPopover from '@/settings/DrawersPopover';
+import DrawersPopover from '@/modals/settings/DrawersPopover';
 import { Box } from '@mui/material';
 import { PanelsRightBottom } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
