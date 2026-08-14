@@ -27,20 +27,13 @@ async function getCacheKey(input: string) {
 }
 
 export default function DayAnalyzer({ context }: Props) {
-  const { byokOpenAIKey, mainPersona } = useBYOKStoreSelector((state) => state);
+  const { byokOpenAIKey, mainPersona, additionalPersonas } = useBYOKStoreSelector((state) => state);
 
-  // const prompt = useMemo(
-  //   () =>
-  //     'Make a story of max 100 words about the day based on the following descriptions: ' +
-  //     context.descriptions.join(' ') + 'Main persona: ' + mainPersona.name + ' as a ' + mainPersona.description,
-  //   [context.descriptions, mainPersona.name, mainPersona.description],
-  // );
-  const prompt = useMemo(
-    () =>
-      'Make a story of max 100 words about the day based on the following descriptions: ' +
-      context.descriptions.join(' ') + 'Main persona: ' + mainPersona.name + ' as a ' + mainPersona.description,
-    [context.descriptions, mainPersona.name, mainPersona.description],
-  );
+  const prompts = useMemo(() => ({
+    main:  'Make a story of max 100 words about the day based on the following descriptions. Do not mention the personas unless they are explicitly mentioned in the descriptions',
+    mainPersonaPrompt: `If the person seen in photos looks like: ${mainPersona.description}, then it's ${mainPersona.name}.`,
+    friendsPrompt: additionalPersonas?.map(p => `If the person looks like: ${p.description}, then it's likely ${p.name}.`).join(' ')
+  }), [mainPersona, additionalPersonas]);
 
   const [result, setResult] = useState<string | null>(null);
   const [cached, setCached] = useState(false);
@@ -52,11 +45,13 @@ export default function DayAnalyzer({ context }: Props) {
   useEffect(() => {
     let cancelled = false;
 
+    const generateCacheKey = Object.values(prompts).concat(Object.values(context)).join(' ');
+
     setResult(null);
     setCached(false);
     setError(null);
 
-    getCacheKey(prompt).then((key) => {
+    getCacheKey(generateCacheKey).then((key) => {
       if (cancelled) return;
 
       setCacheKey(key);
@@ -72,7 +67,7 @@ export default function DayAnalyzer({ context }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [prompt]);
+  }, [context, prompts]);
 
   async function analyze() {
     if (!byokOpenAIKey || loading || !cacheKey) return;
@@ -98,7 +93,7 @@ export default function DayAnalyzer({ context }: Props) {
         input: [{
           role: 'user',
           content: [
-            { type: 'input_text', text: prompt },
+            ...Object.values(prompts).map((desc) => ({ type: 'input_text', text: desc })),
             ...Object.values(context).map((desc) => ({ type: 'input_text', text: desc })),
           ],
         } as any],

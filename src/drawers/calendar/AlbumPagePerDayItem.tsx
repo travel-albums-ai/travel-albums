@@ -34,8 +34,8 @@ export default function AlbumPagePerDayItem({ day, index, children }: { day: Ret
           {contextDescriptions.length > 0 && contextDescriptions.length === day.photos.length && (
             <DayAnalyzer
               context={{
-                descriptions: contextDescriptions,
-                photoLocations: uniquePlaces.join(', '),
+                descriptions: contextDescriptions.join(', '),
+                photoLocations: 'Places where photos were taken: ' + uniquePlaces.join(', '),
               }}
             />
           )}
