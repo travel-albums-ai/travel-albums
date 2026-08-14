@@ -1,3 +1,9 @@
+## [1.91.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.90.0...v1.91.0) (2026-08-14)
+
+### ✨ Features
+
+* implement BYOK settings management and enhance related components ([4db801c](https://github.com/travel-albums-ai/travel-albums/commit/4db801c5f01de0b2b6b16b28c87ca8687e8d805b))
+
 ## [1.90.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.89.0...v1.90.0) (2026-08-13)
 
 ### ✨ Features
