@@ -60,8 +60,20 @@ const buildThumbnailUrl = (imageUrl: string): string | null => {
 
 export const thumbnailUrl = (imageId: string, demo = false) => {
   return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${THUMBNAILS_BASE_URL}/${toEndpointPath(imageId)}`
-
 }
+
+export const thumbnailUrlNg = (imageId: string, demo = false) => {
+  return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${THUMBNAILS_BASE_URL}/${imageId}`
+}
+
+export const originalUrlNg = (imageId: string, demo = false) => {
+  return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${imageId}`
+}
+
+// export const imageUrlNg = (imageId: string, demo = false) => {
+//   return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${imageId}`
+// }
+
 export const imageUrl = (imageId: string, demo = false) => {
   return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${toEndpointPath(imageId)}`
 }

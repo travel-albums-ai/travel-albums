@@ -1,4 +1,4 @@
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFavorites } from '@/context/favoritesStore';
@@ -101,11 +101,25 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
         ...style,
       }}
     >
-      <AlbumPhotoThumbnailBackground
+      {/* <AlbumPhotoThumbnailBackground
         imageUrl={photo.id}
         width={photo.width}
         original={original}
         imageObj={photo}
+        height={height}
+        style={{
+          border: (selectMode && isSelected)
+            ? `3px solid ${theme.palette.success.main}`
+            : isPreviewed
+              ? `4px solid ${theme.palette.primary.main}`
+              : 'none',
+          borderRadius: 8,
+        }}
+      /> */}
+      <AlbumPhotoThumbnailBackgroundNg
+        photo={photo}
+        width={photo.width}
+        original={original}
         height={height}
         style={{
           border: (selectMode && isSelected)

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useNegativeStoreSelector } from '@/context/negativeStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
@@ -88,10 +88,9 @@ export default function NegativeConverterWrapper({
               maxWidth: '100%',
             }}
           ><ReactCompareSlider
-              itemOne={<AlbumPhotoThumbnailBackground
-                imageUrl={previewPhotoObj.id}
+              itemOne={<AlbumPhotoThumbnailBackgroundNg
+                photo={previewPhotoObj}
                 original={true}
-                imageObj={previewPhotoObj}
               />}
               itemTwo={<>
                 {/* <NegativeConverterCanvas pipeline={pipeline} url={thumbnailUrl(previewPhotoObj.id, false)} /> */}

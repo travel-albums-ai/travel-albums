@@ -1,4 +1,4 @@
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
@@ -114,8 +114,8 @@ export default function FilesDrawer() {
             }}
           >
             <Box sx={{ width: newWidth, height: newHeight, borderRadius: 1, overflow: 'hidden', flexShrink: 0, mb: 1 }} >
-              <AlbumPhotoThumbnailBackground
-                imageUrl={row.item.id}
+              <AlbumPhotoThumbnailBackgroundNg
+                photo={row.item}
                 width={newWidth}
                 height={newHeight}
               />
