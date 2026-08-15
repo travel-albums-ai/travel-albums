@@ -1,70 +1,14 @@
-import DomCountStatus from '@/base/DomCountStatus';
-import GenerateThumbnailsStatus from '@/base/GenerateThumbnailsStatus';
-import KeyboardMenu from '@/base/KeyboardMenu';
-import ServerStatus from '@/base/ServerStatus';
-import SystemStatus from '@/base/SystemStatus';
-import ThumbSizeStatus from '@/base/ThumbSizeStatus';
-import VersionStatus from '@/base/VersionStatus';
 import LoadingBar from '@/components/LoadingBar';
-import { Box, Divider, Stack, Theme } from '@mui/material';
-import { Fragment } from 'react';
+import RegistryToolGroup from '@/layout/components/RegistryToolGroup';
+import { Box, Theme } from '@mui/material';
 
 export default function StatusBar() {
-  const pages = [
-    {
-      key: "indexStatus",
-      dom: <SystemStatus />,
-    },
-    {
-      key: "domCount",
-      dom: <DomCountStatus />,
-      secondary: true
-    },
-    {
-      key: "thumbSize",
-      dom: <ThumbSizeStatus />,
-      secondary: true
-    },
-    {
-      key: "generateThumbnails",
-      dom: <GenerateThumbnailsStatus />,
-      secondary: true
-    },
-    {
-      key: "serverStatus",
-      dom: <ServerStatus />,
-      secondary: true
-    },
-    {
-      key: 'keyboardMenu',
-      dom: <KeyboardMenu />,
-      secondary: true
-    },
-    {
-      key: 'versionStatus',
-      dom: <VersionStatus />,
-      secondary: true
-    },
-  ]
-
-  const pagesGroups = [
-    pages.filter(page => page.secondary !== true),
-    pages.filter(page => page.secondary === true)
-  ]
-
   return (
     <Box sx={wrapperSx} id="status-bar">
       <LoadingBar />
 
-      {pagesGroups.map((group, index) => <Stack
-        key={`group_${index}`}
-        direction="row"
-        sx={{ alignItems: 'center' }}
-        spacing={1}
-        divider={<Divider orientation="vertical" flexItem />}
-      >
-        {group.map(page => <Fragment key={ page.key}>{page.dom && page.dom}</Fragment>)}
-      </Stack>)}
+      <RegistryToolGroup group="status-bar-primary" side="left" />
+      <RegistryToolGroup group="status-bar-secondary" side="right" divider />
     </Box>
   )
 }
