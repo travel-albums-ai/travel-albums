@@ -1,3 +1,13 @@
+## [1.103.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.102.0...v1.103.0) (2026-08-15)
+
+### ✨ Features
+
+* **settings:** add various settings components and filters ([5d3fcae](https://github.com/travel-albums-ai/travel-albums/commit/5d3fcae06c2df029955c4dc0ce26d3a013be4408))
+
+### 🧹 Refactors
+
+* rename toolbar to tool in registry and related components ([8c03b67](https://github.com/travel-albums-ai/travel-albums/commit/8c03b6786eb209d5f84c4ce58d68b3962b6b5b01))
+
 ## [1.102.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.101.0...v1.102.0) (2026-08-15)
 
 ### ✨ Features
