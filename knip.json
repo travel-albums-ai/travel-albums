@@ -7,16 +7,22 @@
   "project": [
     "src/**/*.{ts,tsx}",
     "server-utils/**/*",
-    "scripts/**/*",
-    "server.mjs"
+    "scripts/**/*"
   ],
 
   "ignore": [
     "src/**/*.d.ts"
   ],
 
-  "ignoreBinaries": [],
+  "ignoreDependencies": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/release-notes-generator",
+    "conventional-changelog-conventionalcommits"
+  ],
 
+  "ignoreBinaries": [],
   "ignoreExportsUsedInFile": true,
 
   "typescript": {
