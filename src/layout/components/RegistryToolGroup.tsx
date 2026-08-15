@@ -9,7 +9,7 @@ interface RegistryToolGroupProps {
   divider?: boolean;
 }
 
-export default function RegistryToolGroup({ group, side, divider = false }: RegistryToolGroupProps) {
+export default function RegistryToolGroup({ group, side, divider = true }: RegistryToolGroupProps) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,8 @@ export default function RegistryToolGroup({ group, side, divider = false }: Regi
     >
       {items.map((item) => {
         const Component = toolRegistry.resolve(item);
-        return Component ? <Component key={item.id} /> : null;
+        console.log('RegistryToolGroup', group, side, item.id, Component);
+        return Component ? <>{item.id} <Component key={item.id} /></> : null;
       })}
     </Stack>
   );
