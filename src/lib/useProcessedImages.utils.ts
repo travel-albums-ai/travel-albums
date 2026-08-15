@@ -46,6 +46,7 @@ const process = (rawMetadata: Record<string, GooglePhotoMetadata>) => {
       social,
       likes,
       comments,
+      city: { country: data.country || '', name: data.city || '' },
       views: Number(data.views || 0),
       takenAt: data.formatted,
       takenAtTs: data.timestamp,

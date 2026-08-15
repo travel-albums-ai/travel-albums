@@ -6,7 +6,8 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import AlbumPhotoThumbnailBackground from '@/components/AlbumPhotoThumbnailBackground';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import type { GalleryPhoto } from '@/lib/galleryData';
 import { Cpu, Search } from 'lucide-react';
 import {
   indexPhotos,
@@ -16,12 +17,14 @@ import {
 
 type Props = {
   apiKey: string
-  photos: Photo[]
+  photos: GalleryPhoto[]
+  descriptions: Photo[]
 }
 
 export default function SemanticPhotoSearch({
   apiKey,
   photos,
+  descriptions,
 }: Props) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<
@@ -33,7 +36,7 @@ export default function SemanticPhotoSearch({
     setIndexing(true)
 
     try {
-      await indexPhotos(apiKey, photos)
+      await indexPhotos(apiKey, descriptions)
     } finally {
       setIndexing(false)
     }
@@ -49,6 +52,8 @@ export default function SemanticPhotoSearch({
 
     setResults(results)
   }
+
+  console.log('SemanticPhotoSearch results', results, descriptions)
 
   return (
     <Box sx={{ }}>
@@ -98,8 +103,8 @@ export default function SemanticPhotoSearch({
               }}
             >
               <Box sx={{ maxWidth: '100px', maxHeight: '100px', aspectRatio: '1 / 1', overflow: 'hidden', borderRadius: 1 }}>
-                <AlbumPhotoThumbnailBackground
-                  imageUrl={result.id}
+                <AlbumPhotoThumbnailBackgroundNg
+                  photo={photos.find(photo => photo.id === result.id) || ({} as GalleryPhoto)}
                 />
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, flexGrow: 1 }}>

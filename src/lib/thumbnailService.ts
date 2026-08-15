@@ -21,12 +21,12 @@ const toEndpointPath = (relativePath: string) =>
     .map((segment) => encodeURIComponent(segment))
     .join('/')
 
-const toEndpointPathNg = (relativePath: string) =>
-  relativePath
-    .split('/')
-    .filter(Boolean)
-    // .map((segment) => encodeURIComponent(segment))
-    .join('/')
+// const toEndpointPathNg = (relativePath: string) =>
+//   relativePath
+//     .split('/')
+//     .filter(Boolean)
+//     // .map((segment) => encodeURIComponent(segment))
+//     .join('/')
 
 const toTakeoutRelativePath = (imageUrl: string): string | null => {
   if (!imageUrl) {
@@ -64,33 +64,24 @@ export const thumbnailUrl = (imageId: string, demo = false) => {
   return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${THUMBNAILS_BASE_URL}/${toEndpointPath(imageId)}`
 }
 
-export const thumbnailUrlNg = (imageId: string, demo = false) => {
-  return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${THUMBNAILS_BASE_URL}/${imageId}`
-}
-
-export const originalUrlNg = (imageId: string, demo = false) => {
-  return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${imageId}`
-}
-
 export const composeUrl = (photo: GalleryPhoto, original = false, demo = false) => {
   const composePath = `${photo.rootIndex}/${encodeURIComponent(photo.folder ?? '')}/${encodeURIComponent(photo.title ?? '')}`
 
+  const thumbnailUrl = (imageId: string, demo = false) => demo
+    ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}`
+    : `${THUMBNAILS_BASE_URL}/${imageId}`
+  const originalUrl = (imageId: string, demo = false) => demo
+    ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}`
+    : `${IMAGES_BASE_URL}/${imageId}`
+
   return original
-    ? originalUrlNg(composePath, demo)
-    : thumbnailUrlNg(composePath, demo)
+    ? originalUrl(composePath, demo)
+    : thumbnailUrl(composePath, demo)
 }
 
-// export const imageUrlNg = (imageId: string, demo = false) => {
-//   return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${imageId}`
+// export const originalUrl = (imageId: string, demo = false) => {
+//   return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${toEndpointPath(imageId)}`
 // }
-
-export const imageUrl = (imageId: string, demo = false) => {
-  return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${toEndpointPath(imageId)}`
-}
-
-export const originalUrl = (imageId: string, demo = false) => {
-  return demo ? `${SERVER_ORIGIN_DEMO_IMAGES}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${IMAGES_BASE_URL}/${toEndpointPath(imageId)}`
-}
 
 export const serveThumbnailOrOriginal = (imageUrl: string | null): string | null => {
   if (!imageUrl) {

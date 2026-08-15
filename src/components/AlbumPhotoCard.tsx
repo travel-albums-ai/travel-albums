@@ -116,6 +116,7 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
           borderRadius: 8,
         }}
       /> */}
+      {console.log(photo)}
       <AlbumPhotoThumbnailBackgroundNg
         photo={photo}
         width={photo.width}
@@ -130,6 +131,7 @@ function AlbumPhotoCard({ photo, style, original = false }: AlbumPhotoCardProps)
           borderRadius: 8,
         }}
       />
+
 
       <Box sx={{ position: 'absolute', top: 0, right: 0, left: 0, height: '40px', zIndex: 2 }}>
         <GeneralToolbar group={'album-photo-card'} context={{ photoId: photo.id, favorite, selectMode }} />

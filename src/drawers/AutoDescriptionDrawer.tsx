@@ -47,10 +47,11 @@ export default function AutoDescriptionDrawer() {
       </Box>
     </>}>
 
-      {byokOpenAIKey && <SemanticPhotoSearch
-        apiKey={byokOpenAIKey}
-        photos={descriptionsStore}
-      />}
+      <SemanticPhotoSearch
+        apiKey={byokOpenAIKey || ''}
+        descriptions={descriptionsStore}
+        photos={photos}
+      />
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'flex-start', flexDirection: 'column' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, alignItems: 'center', flexDirection: 'row', width: '100%', borderBottom: '1px solid', borderColor: 'divider', pb: 1, mb: 1 }}>

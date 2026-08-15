@@ -10,7 +10,7 @@ import NegativeConverterPresetSelector from '@/drawers/adjustments/NegativeConve
 import NegativeConverterToolbox from '@/drawers/adjustments/NegativeConverterToolbox';
 import { Adjustments } from '@/drawers/adjustments/types';
 import useNegativeConverterState from '@/hooks/useNegativeConverterState';
-import { imageUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 
@@ -87,16 +87,12 @@ export default function NegativeConverterWrapper({
               aspectRatio: previewPhotoObj.width / previewPhotoObj.height * -1, // or 4/3, 16/9...
               maxWidth: '100%',
             }}
-          ><ReactCompareSlider
-              itemOne={<AlbumPhotoThumbnailBackgroundNg
-                photo={previewPhotoObj}
-                original={true}
-              />}
-              itemTwo={<>
-                {/* <NegativeConverterCanvas pipeline={pipeline} url={thumbnailUrl(previewPhotoObj.id, false)} /> */}
-                <NegativeConverterCanvas pipeline={pipeline} url={imageUrl(`${previewPhotoObj.folder}/${previewPhotoObj.title}`, demoMode ?? false)} />
-              </>}
-            /> </Box>
+          >
+            <ReactCompareSlider
+              itemOne={<AlbumPhotoThumbnailBackgroundNg photo={previewPhotoObj} original={true} />}
+              itemTwo={<NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, true, demoMode ?? false)} />}
+            />
+          </Box>
         </Box>}
 
         {/* {!(hasGeneticBreeding && showGenetic) && <> */}
