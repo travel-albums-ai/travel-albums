@@ -10,10 +10,33 @@ import SectionsPopover from '@/windows/settings/SectionsPopover';
 import SettingsPopover from '@/windows/settings/SettingsPopover';
 import TagsPopover from '@/windows/settings/TagsPopover';
 import ToolsPopover from '@/windows/settings/ToolsPopover';
-import { Box, Typography } from '@mui/material';
-import { Dock, Group, Key, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
+import { Box, Tooltip, Typography } from '@mui/material';
+import { Brain, Dock, GalleryVerticalEnd, Group, Info, Key, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+
+const sectionsMetadata = {
+  ai: {
+    icon: <Brain size={16} />,
+    title: 'AI',
+    guidance: 'Configure AI features and personas',
+  },
+  features: {
+    icon: <Dock size={16} />,
+    title: 'Features',
+    guidance: 'Manage application features and settings',
+  },
+  default: {
+    icon: <Shapes size={16} />,
+    title: 'Layout',
+    guidance: 'Customize the layout of the application',
+  },
+  indexer: {
+    icon: <GalleryVerticalEnd size={16} />,
+    title: 'Indexer',
+    guidance: 'Configure the indexer settings and behavior',
+  },
+};
 
 export default function SettingsContent() {
   const { t } = useTranslation()
@@ -56,14 +79,14 @@ export default function SettingsContent() {
 
   const sections = useMemo(() => [
     { key: 'layout', title: t('layout'), component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
-    { key: 'tools', title: "Tools", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
-    { key: 'filterPhotos', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
-    { key: 'drawers', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
-    { key: 'byok', title: 'BYOK', component: <BYOKPopover />, icon: <Key size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
-    { key: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
-    { key: 'sections', title: t('sections'), component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
-    { key: 'demo', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },
-    { key: 'tags', title: t('tags'), component: <TagsPopover />, icon:  <Tag size={16} />, guidance: t('tagsGuidance') },
+    { key: 'tools', title: "Toolbars and status", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
+    { key: 'filterPhotos', group: 'features', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
+    { key: 'drawers', group: 'features', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
+    { key: 'byok', group: 'ai', title: 'BYOK', component: <BYOKPopover />, icon: <Key size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
+    { key: 'indexer', group: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
+    { key: 'sections', group: 'features', title: 'Explorer', component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
+    { key: 'demo', group: 'indexer', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },
+    { key: 'tags', group: 'features', title: t('tags'), component: <TagsPopover />, icon:  <Tag size={16} />, guidance: t('tagsGuidance') },
   ], [t])
 
   useEffect(() => {
@@ -73,19 +96,43 @@ export default function SettingsContent() {
     }
   }, [activeSettingsTab, sections, setSetting]);
 
+  const groupedSections = useMemo(() => {
+    const groups: Record<string, typeof sections> = {};
+    sections.forEach((section) => {
+      const group = section.group || 'default';
+      if (!groups[group]) {
+        groups[group] = [];
+      }
+      groups[group].push(section);
+    });
+    return groups;
+  }, [sections]);
+
   return (<>
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
-        {sections.map(section => (
-          <SidebarCoreButton
-            key={section.key}
-            title={section.title}
-            icon={section.icon}
-            isActive={activeSettingsTab === section.key}
-            onClick={() => setSetting((prev) => ({ ...prev, activeSettingsTab: section.key }))}
-            noCounts={true}
-          />
+        {Object.entries(groupedSections).map(([group, groupSections]) => (
+          <Fragment key={group}>
+            <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', p: 1, borderRadius: 2, gap: 1 }}>
+              {sectionsMetadata[group]?.icon}
+              <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group]?.title || group}</Typography>
+              <Tooltip title={sectionsMetadata[group]?.guidance || ''} placement="top" arrow>
+                <Info size={16} />
+              </Tooltip>
+            </Box>
+            {groupSections.map(section => (
+              <SidebarCoreButton
+                key={section.key}
+                title={section.title}
+                icon={section.icon}
+                isActive={activeSettingsTab === section.key}
+                onClick={() => setSetting((prev) => ({ ...prev, activeSettingsTab: section.key }))}
+                noCounts={true}
+              />
+            ))}
+          </Fragment>
         ))}
+
 
       </Box>
 
@@ -98,7 +145,7 @@ export default function SettingsContent() {
               <Typography variant="h5" sx={{ lineHeight: 1, flex: 1 }}> {section.title}</Typography>
               { section.guidance && <Typography variant="body2" color="textDisabled">{section.guidance}</Typography> }
             </Box>
-            <Box key={section.keys} sx={{ bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', p: 2, borderRadius: 2 }}>
+            <Box key={section.key} sx={{ bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', p: 2, borderRadius: 2 }}>
               {section.component}
             </Box>
           </Fragment>))}

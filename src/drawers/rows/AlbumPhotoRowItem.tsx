@@ -4,10 +4,11 @@ import { cloneElement } from 'react';
 export default function AlbumPhotoRowItem({ icon, title, value }: { icon: React.ReactNode, title: string, value: string }) {
   return (
     <Box sx={{
-      borderBottom: '1px solid',
-      borderColor: 'divider',
+      // borderBottom: '1px dotted',
+      // borderColor: 'divider',
       transition: 'all 0.25s',
-      px: 0.25, py: 0.25,
+      px: 1, py: 0.25,
+      borderRadius: 2,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',

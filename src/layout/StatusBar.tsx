@@ -16,6 +16,7 @@ export default function StatusBar() {
         gap: 1.5,
         px: 1.25,
         py: 0.5,
+        height: '30px',
         bgcolor: 'background.default',
         position: 'relative',
         borderTop: (theme: Theme) => `1px solid ${theme.palette.divider}`,

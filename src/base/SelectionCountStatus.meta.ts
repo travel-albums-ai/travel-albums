@@ -6,7 +6,7 @@ export const meta = {
     id: 'status-bar-primary',
     side: 'left',
     priority: 200,
-    visible: (context: any) => context?.selectedPhotos.length > 0,
+    visible: (context: any) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
   }],
   loader: () => import('@/base/SelectionCountStatus'),
 } as ToolMeta;

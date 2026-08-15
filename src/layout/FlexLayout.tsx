@@ -138,10 +138,6 @@ export default function FlexLayout() {
     [drawers, drawerDiscoveryReady],
   );
 
-  if (!model) {
-    return null;
-  }
-
   return (
     <>
       <Box
@@ -152,11 +148,11 @@ export default function FlexLayout() {
           position: 'relative',
         }}
       >
-        <Layout
+        {model && <Layout
           model={model}
           factory={factory}
           onModelChange={(newModel) => localStorage.setItem(STORAGE_KEY, JSON.stringify(newModel.toJson()))}
-        />
+        />}
       </Box>
     </>
   );

@@ -49,8 +49,8 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
     setPreviewPhotoObj(photo);
   }, [photo, setPreviewPhotoObj]);
 
-  const thumbWidth = Math.max(width / 2, 200);
-  const thumbHeight = Math.max(height / 2, 150);
+  const thumbWidth = width / 2;
+  const thumbHeight = height / 2;
 
   const thumbnailStyle = useMemo(() => ({
     border:
@@ -165,8 +165,14 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         display: 'grid',
         flex: 1,
         gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 2,
-        overflow: 'hidden' }}>
+        gap: 0,
+        opacity: 0.5,
+        overflow: 'hidden',
+        transition: 'all 0.25s',
+        '&:hover': {
+          opacity: 1,
+        },
+      }}>
         {properties.map((prop) => <AlbumPhotoRowItem key={prop.id} icon={prop.icon} title={prop.title} value={prop.value} />)}
       </Box>
 
