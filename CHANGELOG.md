@@ -1,3 +1,9 @@
+## [1.111.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.110.0...v1.111.0) (2026-08-15)
+
+### ✨ Features
+
+* refactor registry components and update imports; add new BreadcrumbsTool and FlexLayout components ([83d1eba](https://github.com/travel-albums-ai/travel-albums/commit/83d1eba6bc830b14c81da93c3c08aca0efc67dee))
+
 ## [1.110.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.109.0...v1.110.0) (2026-08-15)
 
 ### ✨ Features
