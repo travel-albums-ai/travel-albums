@@ -1,3 +1,9 @@
+## [1.106.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.105.0...v1.106.0) (2026-08-15)
+
+### ✨ Features
+
+* **status-bar:** enhance RegistryToolGroup to support context and update visibility logic ([d57a915](https://github.com/travel-albums-ai/travel-albums/commit/d57a915f65fb078a6aac70180ccb8d8689d0e3f6))
+
 ## [1.105.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.104.0...v1.105.0) (2026-08-15)
 
 ### ✨ Features
