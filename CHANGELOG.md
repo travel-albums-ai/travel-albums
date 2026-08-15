@@ -1,3 +1,9 @@
+## [1.107.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.106.0...v1.107.0) (2026-08-15)
+
+### ✨ Features
+
+* **status-bar:** replace RegistryToolGroup with RegistryStatus for improved status display ([0271730](https://github.com/travel-albums-ai/travel-albums/commit/0271730b103553e3b004312bb3e92895a7d7206a))
+
 ## [1.106.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.105.0...v1.106.0) (2026-08-15)
 
 ### ✨ Features
