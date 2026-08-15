@@ -1,9 +1,9 @@
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
+import SidebarList from '@/drawers/sidebar/SidebarList';
+import SidebarPins from '@/drawers/sidebar/SidebarPins';
 import { routeIcons } from '@/icons/IconsIndex';
-import SidebarCoreButton from '@/layout/components/SidebarCoreButton';
-import SidebarList from '@/layout/components/SidebarList';
-import SidebarPins from '@/layout/components/SidebarPins';
 import { menuRoutes } from '@/routes';
 import {
   Box

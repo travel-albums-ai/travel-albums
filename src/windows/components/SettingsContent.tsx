@@ -1,6 +1,6 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
 import useRegisterTool from '@/hooks/useRegisterTool';
-import SidebarCoreButton from '@/layout/components/SidebarCoreButton';
 import BYOKPopover from '@/windows/settings/BYOKPopover';
 import DrawersPopover from '@/windows/settings/DrawersPopover';
 import FilterPhotosPopover from '@/windows/settings/FilterPhotosPopover';

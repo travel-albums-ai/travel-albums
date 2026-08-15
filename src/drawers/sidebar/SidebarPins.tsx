@@ -1,8 +1,8 @@
 import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { usePinned, usePinnedStoreSelector } from '@/context/pinnedStore';
+import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
 import { sectionIcons } from '@/icons/IconsIndex';
-import SidebarCoreButton from '@/layout/components/SidebarCoreButton';
 import {
   Box,
   Divider,

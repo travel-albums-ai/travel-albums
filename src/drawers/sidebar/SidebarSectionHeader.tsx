@@ -1,5 +1,5 @@
 import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
-import SidebarCoreButton from '@/layout/components/SidebarCoreButton';
+import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';

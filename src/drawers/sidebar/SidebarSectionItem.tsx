@@ -1,6 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
 import { Section } from '@/hooks/sections/useTransform_AllSections';
-import SidebarCoreButton from '@/layout/components/SidebarCoreButton';
 import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 

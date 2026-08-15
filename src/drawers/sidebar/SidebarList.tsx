@@ -9,8 +9,8 @@ import { sectionIcons } from '@/icons/IconsIndex';
 import WebMCPDataRun from '@/components/WebMCPDataRun';
 import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import SidebarSectionHeader from '@/layout/components/SidebarSectionHeader';
-import SidebarSectionItem from '@/layout/components/SidebarSectionItem';
+import SidebarSectionHeader from '@/drawers/sidebar/SidebarSectionHeader';
+import SidebarSectionItem from '@/drawers/sidebar/SidebarSectionItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type Section = ReturnType<typeof useSections_GLOBAL>[number];
