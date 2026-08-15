@@ -5,7 +5,7 @@ import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
 import { Aperture, Camera, Focus, Rabbit, SquareFunction, Timer } from 'lucide-react';
 
 export default function PhotoExifDetails({ photo }: { photo?: GalleryPhoto }) {
-  const { exif } = useTransform_Photo2Exif(composeUrl(photo, false, false))
+  const { exif } = useTransform_Photo2Exif(composeUrl(photo))
 
   if (!photo) {
     return null

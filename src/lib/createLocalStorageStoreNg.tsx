@@ -134,5 +134,6 @@ export function createLocalStorageStoreNg<T extends object>(
     useStore,
     useStoreSelector,
     useSetStore,
+    getStore: store.get,
   }
 }

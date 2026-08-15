@@ -12,7 +12,7 @@ import {
 
 
 export default function PhotoExifComplete({ photo }: { photo?: GalleryPhoto }) {
-  const { exif, loading, error } = useTransform_Photo2Exif(composeUrl(photo, false, false));
+  const { exif, loading, error } = useTransform_Photo2Exif(composeUrl(photo));
 
   const ignoredKeys = [
     'YCbCrSubSampling', 'YCbCrPositioning', 'XResolution', 'YResolution', 'ResolutionUnit',

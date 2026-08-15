@@ -163,7 +163,8 @@ const defaults: SettingsStore = {
 const {
   Provider: SettingsProvider,
   useSetStore,
-  useStoreSelector: useSettingsStoreSelector
+  useStoreSelector: useSettingsStoreSelector,
+  getStore: getSettingsStore,
 } = createLocalStorageStoreNg<SettingsStore>(defaults, 'settingsStore')
 
 export const useSettings = () => {
@@ -204,4 +205,4 @@ export const useSettings = () => {
   }
 }
 
-export { SettingsProvider, useSettingsStoreSelector };
+export { getSettingsStore, SettingsProvider, useSettingsStoreSelector };

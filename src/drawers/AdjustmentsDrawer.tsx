@@ -7,6 +7,6 @@ export default function AdjustmentsDrawer() {
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
 
   return <>
-    {previewPhotoObj && <NegativeConverterWrapper previewPhotoObj={previewPhotoObj} url={composeUrl(previewPhotoObj, false, false)} hasToolbox={true} hasPresetSelector={true} hasGeneticBreeding={true} />}
+    {previewPhotoObj && <NegativeConverterWrapper previewPhotoObj={previewPhotoObj} url={composeUrl(previewPhotoObj)} hasToolbox={true} hasPresetSelector={true} hasGeneticBreeding={true} />}
   </>
 }

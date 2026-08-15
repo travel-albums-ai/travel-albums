@@ -197,7 +197,7 @@ export default function AlbumPhotoCollageCanvas({ photos, size = 600 }: Props) {
         if (cancelled) return
         const batch = await Promise.all(
           photoSlice.slice(i, i + 3).map(p =>
-            loadImage(composeUrl(p, false, false)).catch(() => null)
+            loadImage(composeUrl(p)).catch(() => null)
           )
         )
         imgs.push(...batch)

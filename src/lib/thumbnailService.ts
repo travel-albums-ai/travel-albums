@@ -1,3 +1,4 @@
+import { getSettingsStore } from '@/context/settingsStore';
 import { GalleryPhoto } from '@/lib/galleryData';
 
 const SERVER_ORIGIN = import.meta.env.VITE_TAKEOUT_SERVER_ORIGIN?.trim() || 'http://localhost:3001'
@@ -15,7 +16,8 @@ const toDemoPath = (relativePath: string) =>
     .join('/')
     .replace("%3A%3A", "%EF%80%BA%EF%80%BA")
 
-export const composeUrl = (photo: GalleryPhoto, original = false, demo = false) => {
+export const composeUrl = (photo: GalleryPhoto, original = false) => {
+  const demo = getSettingsStore().demoMode;
   const composePath = `${photo.rootIndex}/${encodeURIComponent(photo.folder ?? '')}/${encodeURIComponent(photo.title ?? '')}`
 
   return original

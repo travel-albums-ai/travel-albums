@@ -34,7 +34,7 @@ export default function NegativeConverterWrapper({
   hasGeneticBreeding,
 }: NegativeConverterWrapperProps) {
   const { adj, applyPreset, pipeline, preset, presets, set } = useNegativeConverterState({ initialPreset });
-  const demoMode = useSettingsStoreSelector(s => s.demoMode);
+  useSettingsStoreSelector(s => s.demoMode);
   const showGenetic = useNegativeStoreSelector((state) => state.showGenetic)
 
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);
@@ -90,7 +90,7 @@ export default function NegativeConverterWrapper({
           >
             <ReactCompareSlider
               itemOne={<AlbumPhotoThumbnailBackgroundNg photo={previewPhotoObj} original={true} />}
-              itemTwo={<NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, true, demoMode ?? false)} />}
+              itemTwo={<NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, true)} />}
             />
           </Box>
         </Box>}

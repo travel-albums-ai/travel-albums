@@ -15,9 +15,8 @@ export default function NegativeConverterReusable({
   initialPreset,
 }: NegativeConverterWrapperProps) {
   const { pipeline } = useNegativeConverterState({ initialPreset });
-  const demoMode = useSettingsStoreSelector(s => s.demoMode);
-
+  useSettingsStoreSelector(s => s.demoMode);
   return (
-    <NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, false, demoMode)} />
+    <NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj)} />
   );
 }

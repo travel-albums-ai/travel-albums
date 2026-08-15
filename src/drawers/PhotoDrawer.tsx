@@ -49,7 +49,7 @@ export default function PhotoDrawer() {
               <PhotoExifComplete photo={photo} />
             </Box>
           </PopoverButton>
-          <Histogram imageUrl={composeUrl(photo, false, false)} width={100} height={50} />
+          <Histogram imageUrl={composeUrl(photo)} width={100} height={50} />
         </Box>}
 
 

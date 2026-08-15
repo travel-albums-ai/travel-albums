@@ -7,7 +7,7 @@ import { TransformComponent, TransformWrapper, type ReactZoomPanPinchRef } from 
 
 export default function ZoomPhoto() {
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj);
-  const demoMode = useSettingsStoreSelector(s => s.demoMode);
+  useSettingsStoreSelector(s => s.demoMode);
   const containerRef = useRef<HTMLDivElement>(null);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -96,7 +96,7 @@ export default function ZoomPhoto() {
           <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
             <img
               ref={imgRef}
-              src={composeUrl(photo, true, demoMode)}
+              src={composeUrl(photo, true)}
               alt={photo.title}
               loading="lazy"
               decoding="async"
