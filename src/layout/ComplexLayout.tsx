@@ -1,15 +1,9 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import AdjustmentsDrawer from '@/drawers/AdjustmentsDrawer';
-import CalendarDrawer from '@/drawers/CalendarDrawer';
-import FilesDrawer from '@/drawers/FilesDrawer';
-import GlobeDrawer from '@/drawers/GlobeDrawer';
-import OutletDrawer from '@/drawers/OutletDrawer';
-import PhotoDrawer from '@/drawers/PhotoDrawer';
-import RowsDrawer from '@/drawers/RowsDrawer';
-import ScrollerDrawer from '@/drawers/ScrollerDrawer';
-import SidebarDrawer from '@/drawers/SidebarDrawer';
+import { ensureDrawerDiscovery } from '@/drawerDiscovery';
+import { drawerRegistry } from '@/drawerRegistry';
 import MainDriver from '@/drivers/MainDriver';
 import GeneralTool from '@/layout/components/GeneralTool';
+import RegistryDrawer from '@/layout/components/RegistryDrawer';
 import StatusBar from '@/layout/StatusBar';
 import NoServerWindow from '@/windows/NoServerWindow';
 import OnboardingWindow from '@/windows/OnboardingWindow';
@@ -23,13 +17,13 @@ import {
 import 'flexlayout-react/style/combined.css';
 
 import WebMCPDataView from '@/components/WebMCPDataView';
-import AutoDescriptionDrawer from '@/drawers/AutoDescriptionDrawer';
 import i18n from '@/lib/i18n';
 import SettingsWindow from '@/windows/SettingsWindow';
 import {
   useCallback,
   useEffect,
-  useState
+  useMemo,
+  useState,
 } from 'react';
 
 const tab = (
@@ -59,7 +53,7 @@ const layoutChildren = [
 
 ]
 
-function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel {
+function createDefaultJson(): IJsonModel {
   return {
     global: {
       tabEnableClose: false,
@@ -96,19 +90,6 @@ function createDefaultJson(drawers: typeof drawers, locale: string): IJsonModel 
   };
 }
 
-const COMPONENTS = {
-  sidebar: SidebarDrawer,
-  globe: GlobeDrawer,
-  outlet: OutletDrawer,
-  preview: PhotoDrawer,
-  adjustments: AdjustmentsDrawer,
-  files: FilesDrawer,
-  scroller: ScrollerDrawer,
-  rows: RowsDrawer,
-  calendar: CalendarDrawer,
-  autoDescription: AutoDescriptionDrawer,
-} as const;
-
 function loadModel(drawers: typeof drawers) {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -120,7 +101,7 @@ function loadModel(drawers: typeof drawers) {
     console.warn('Failed to restore layout', e);
   }
 
-  return Model.fromJson(cleanModel(createDefaultJson(drawers, i18n.language), drawers));
+  return Model.fromJson(cleanModel(createDefaultJson(), drawers));
 }
 
 function cleanModel(model: IJsonModel, drawers: typeof drawers): IJsonModel {
@@ -149,16 +130,25 @@ export default function ComplexLayout() {
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
   const settingsStore = useSettingsStoreSelector((state) => state);
 
-  const [model, setModel] = useState(() => loadModel(drawers));
-
-  const factory = useCallback((node: TabNode) => {
-    const Component = COMPONENTS[node.getComponent() as keyof typeof COMPONENTS];
-    return Component ? <Component /> : null;
-  }, []);
+  const [drawerDiscoveryReady, setDrawerDiscoveryReady] = useState(false);
 
   useEffect(() => {
-    setModel(loadModel(drawers));
-  }, [drawers]);
+    ensureDrawerDiscovery().then(() => setDrawerDiscoveryReady(true));
+  }, []);
+
+  const factory = useCallback((node: TabNode) => {
+    const component = node.getComponent();
+    return drawerRegistry.has(component) ? <RegistryDrawer id={component} /> : null;
+  }, []);
+
+  const model = useMemo(
+    () => drawerDiscoveryReady ? loadModel(drawers) : null,
+    [drawers, drawerDiscoveryReady],
+  );
+
+  if (!model) {
+    return null;
+  }
 
   return (
     <>
