@@ -1,6 +1,6 @@
 import LoadingBar from '@/components/LoadingBar';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
-import RegistryToolGroup from '@/layout/components/RegistryToolGroup';
+import RegistryStatus from '@/layout/components/RegistryStatus';
 import { Box, Theme } from '@mui/material';
 
 export default function StatusBar() {
@@ -10,8 +10,8 @@ export default function StatusBar() {
     <Box sx={wrapperSx} id="status-bar">
       <LoadingBar />
 
-      <RegistryToolGroup group="status-bar-primary" side="left" context={{ selectedPhotos }} />
-      <RegistryToolGroup group="status-bar-secondary" side="right" divider context={{ selectedPhotos }}  />
+      <RegistryStatus group="status-bar-primary" side="left" context={{ selectedPhotos }} />
+      <RegistryStatus group="status-bar-secondary" side="right" divider context={{ selectedPhotos }}  />
     </Box>
   )
 }
