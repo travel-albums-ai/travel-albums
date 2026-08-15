@@ -1,3 +1,13 @@
+## [1.114.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.113.0...v1.114.0) (2026-08-15)
+
+### ✨ Features
+
+* optimize AlbumPhotoCard component with memoization and improved styles; refactor time formatting and tag resolution logic ([493a451](https://github.com/travel-albums-ai/travel-albums/commit/493a451c8eb231f24231d4460c0a31804f0c7bb5))
+
+### 🧹 Refactors
+
+* clean up commented code in AlbumPhotoRowItem component ([03982b3](https://github.com/travel-albums-ai/travel-albums/commit/03982b3691b18bdcfc06cbb81b576ecc14cec0dc))
+
 ## [1.113.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.112.0...v1.113.0) (2026-08-15)
 
 ### ✨ Features
