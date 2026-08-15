@@ -1,3 +1,13 @@
+## [1.101.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.100.1...v1.101.0) (2026-08-15)
+
+### ✨ Features
+
+* update components to use AlbumPhotoThumbnailBackgroundNg and refactor thumbnail URL handling ([f915969](https://github.com/travel-albums-ai/travel-albums/commit/f915969fcb197bab9e0aaf7b3d4cace6a79432fb))
+
+### 🧹 Refactors
+
+* replace AlbumPhotoThumbnailBackground with AlbumPhotoThumbnailBackgroundNg in multiple components ([c2d85e3](https://github.com/travel-albums-ai/travel-albums/commit/c2d85e39934a5af84792cd0d873cf259b9282592))
+
 ## [1.100.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.100.0...v1.100.1) (2026-08-14)
 
 ### 🐛 Fixes
