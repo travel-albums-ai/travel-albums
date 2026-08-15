@@ -1,3 +1,9 @@
+## [1.110.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.109.0...v1.110.0) (2026-08-15)
+
+### ✨ Features
+
+* **status-bar:** replace RegistryStatus with GeneralRegistryStatus and remove unused GeneralTool and RegistryStatus components ([21a1c27](https://github.com/travel-albums-ai/travel-albums/commit/21a1c27b2083d60c673377fbc76c42e75b439a9d))
+
 ## [1.109.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.108.0...v1.109.0) (2026-08-15)
 
 ### ✨ Features
