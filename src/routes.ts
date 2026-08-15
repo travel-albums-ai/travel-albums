@@ -1,5 +1,3 @@
-import CopyrightPage from '@/pages/CopyrightPage';
-import ReleasePage from '@/pages/ReleasePage';
 import SelectedPage_type from '@/pages/SelectedPage_type';
 import SelectedPhotosPage_type_name from '@/pages/SelectedPhotosPage_type_name';
 import { createElement, type ReactElement } from 'react';
@@ -9,8 +7,6 @@ import routeDefinitions from './data/routes.json';
 type RouteComponentKey =
   | 'SelectedPhotosPage_type_name'
   | 'SelectedPage_type'
-  | 'ReleasePage'
-  | 'CopyrightPage'
 
 type RouteMetadata = {
   title?: string
@@ -58,9 +54,7 @@ export type MenuRoute = {
 
 const pageElements: Record<RouteComponentKey, () => ReactElement> = {
   SelectedPhotosPage_type_name: () => createElement(SelectedPhotosPage_type_name),
-  ReleasePage: () => createElement(ReleasePage),
   SelectedPage_type: () => createElement(SelectedPage_type),
-  CopyrightPage: () => createElement(CopyrightPage),
 }
 
 const normalizedRouteDefinitions: RouteDefinition[] = (routeDefinitions as RouteDefinition[]).map((routeDefinition) => ({

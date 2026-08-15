@@ -82,33 +82,9 @@
     "actionBar": false
   },
     {
-    "path": "/release",
-    "root": "/release",
-    "type": "page",
-    "component": "ReleasePage",
-    "title": "Release Notes",
-    "icon": "material-symbols:settings-outline",
-    "visible": true,
-    "includeInMenu": false,
-    "order": 1,
-    "actionBar": false
-  },
-    {
-    "path": "/copyright",
-    "root": "/copyright",
-    "type": "page",
-    "component": "CopyrightPage",
-    "title": "Copyright Information",
-    "icon": "material-symbols:settings-outline",
-    "visible": true,
-    "includeInMenu": false,
-    "order": 1,
-    "actionBar": false
-  },
-  {
     "path": "*",
     "type": "redirect",
-    "to": "/dashboard",
+    "to": "/allPhotos",
     "replace": true,
     "title": "Fallback Redirect",
     "icon": "material-symbols:warning-outline-rounded",
