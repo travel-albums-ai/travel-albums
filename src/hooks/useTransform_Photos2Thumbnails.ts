@@ -1,5 +1,5 @@
 import type { GalleryPhoto } from '@/lib/galleryData';
-import { serveThumbnailOrOriginal } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { useEffect, useState } from 'react';
 
 const MAP_THUMBNAIL_MAX_PHOTOS = 320
@@ -48,7 +48,8 @@ export const useMapMarkerThumbnails = (
     }
 
     const resolvedMap = imageUrls.reduce<Record<string, string>>((acc, imageUrl) => {
-      const thumbnailUrl = serveThumbnailOrOriginal(imageUrl)
+      const photo = photos.find((candidate) => candidate.imageUrl === imageUrl)
+      const thumbnailUrl = photo ? composeUrl(photo) : null
       if (thumbnailUrl) {
         acc[imageUrl] = thumbnailUrl
       }
