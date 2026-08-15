@@ -8,7 +8,7 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
 import ZoomPhoto from '@/drawers/components/ZoomPhoto';
 import DescribePhoto from '@/drawers/preview/DescribePhoto';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
 import { Box, Chip, Typography } from '@mui/material';
 import { FileQuestionMark, MessageSquare } from 'lucide-react';
@@ -49,7 +49,7 @@ export default function PhotoDrawer() {
               <PhotoExifComplete photo={photo} />
             </Box>
           </PopoverButton>
-          <Histogram imageUrl={ thumbnailUrl(photo.id, false)} width={100} height={50} />
+          <Histogram imageUrl={composeUrl(photo, false, false)} width={100} height={50} />
         </Box>}
 
 

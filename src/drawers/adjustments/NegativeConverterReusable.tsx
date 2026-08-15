@@ -3,7 +3,7 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import NegativeConverterCanvas from '@/drawers/adjustments/NegativeConverterCanvas';
 import { Adjustments } from '@/drawers/adjustments/types';
 import useNegativeConverterState from '@/hooks/useNegativeConverterState';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 
 type NegativeConverterWrapperProps = {
   previewPhotoObj: any;
@@ -18,6 +18,6 @@ export default function NegativeConverterReusable({
   const demoMode = useSettingsStoreSelector(s => s.demoMode);
 
   return (
-    <NegativeConverterCanvas pipeline={pipeline} url={thumbnailUrl(previewPhotoObj.id, demoMode)} />
+    <NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, false, demoMode)} />
   );
 }

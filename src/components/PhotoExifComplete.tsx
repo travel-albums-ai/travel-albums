@@ -1,7 +1,7 @@
 
 import useTransform_Photo2Exif from '@/hooks/useTransform_Photo2Exif';
 import { GalleryPhoto } from '@/lib/galleryData';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 
 import {
   Alert,
@@ -12,7 +12,7 @@ import {
 
 
 export default function PhotoExifComplete({ photo }: { photo?: GalleryPhoto }) {
-  const { exif, loading, error } = useTransform_Photo2Exif(thumbnailUrl(photo?.id ?? null, false))
+  const { exif, loading, error } = useTransform_Photo2Exif(composeUrl(photo, false, false));
 
   const ignoredKeys = [
     'YCbCrSubSampling', 'YCbCrPositioning', 'XResolution', 'YResolution', 'ResolutionUnit',

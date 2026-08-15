@@ -1,11 +1,11 @@
 import useTransform_Photo2Exif from '@/hooks/useTransform_Photo2Exif';
 import { GalleryPhoto } from '@/lib/galleryData';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
 import { Aperture, Camera, Focus, Rabbit, SquareFunction, Timer } from 'lucide-react';
 
 export default function PhotoExifDetails({ photo }: { photo?: GalleryPhoto }) {
-  const { exif } = useTransform_Photo2Exif(thumbnailUrl(photo?.id ?? null, false))
+  const { exif } = useTransform_Photo2Exif(composeUrl(photo, false, false))
 
   if (!photo) {
     return null
