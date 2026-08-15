@@ -1,3 +1,21 @@
+## [1.102.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.101.0...v1.102.0) (2026-08-15)
+
+### ✨ Features
+
+* implement toolbar management with GeneralToolbar and ToolbarsPopover components ([6ed246a](https://github.com/travel-albums-ai/travel-albums/commit/6ed246a807a61f54493593bfa7cfe034172eab90))
+
+### 🧹 Refactors
+
+* add clearCache functionality to NavigationToggle for data reloading ([8d46371](https://github.com/travel-albums-ai/travel-albums/commit/8d46371d8afc937c09de11d398b40de2c925b744))
+* remove console.log statements from AlbumPhotoCard, GlobeDrawer, and RowsDrawer components ([ed31662](https://github.com/travel-albums-ai/travel-albums/commit/ed31662309a1b5b73baad79476647db58677a46b))
+* remove unused components and hooks related to labeler and airport fetching ([0a3f470](https://github.com/travel-albums-ai/travel-albums/commit/0a3f4700c0d99b6480ae8d42a2e207cdf7e90596))
+* remove webMcp property from NavigationToggle and add esbuild configuration in vite.config ([3e8ac81](https://github.com/travel-albums-ai/travel-albums/commit/3e8ac818ec70ca34ecae319951a079e64b1b6e1c))
+* replace serveThumbnailOrOriginal with composeUrl for thumbnail handling ([9b725b3](https://github.com/travel-albums-ai/travel-albums/commit/9b725b37bf3f8b2c2bf7b971a4c83ad72023e815))
+* replace thumbnailUrl with composeUrl in PhotoExifComplete, PhotoExifDetails, PhotoDrawer, and NegativeConverterReusable components ([cda1c0d](https://github.com/travel-albums-ai/travel-albums/commit/cda1c0de0d34d5ce255347af2000fe06ead10fd9))
+* replace thumbnailUrl with composeUrl in various components ([2eaf650](https://github.com/travel-albums-ai/travel-albums/commit/2eaf650c2ef6b39ac6530ad9bcb96763b096210b))
+* update project configuration in knip.json by removing server.mjs and restructuring ignoreDependencies ([6c56f49](https://github.com/travel-albums-ai/travel-albums/commit/6c56f4995162790c2db506193c19f807c53f2e7e))
+* update SettingsModal to use xl width and add ToolbarsPopover component for toolbar management ([4b936b5](https://github.com/travel-albums-ai/travel-albums/commit/4b936b51b4d9e1b1cbdfa6606093aaa384ae1cdd))
+
 ## [1.101.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.100.1...v1.101.0) (2026-08-15)
 
 ### ✨ Features
