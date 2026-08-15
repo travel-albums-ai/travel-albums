@@ -3,7 +3,7 @@ import { ToolMeta, toolRegistry } from '@/toolRegistry';
 import { Divider, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-interface RegistryToolGroupProps {
+interface GeneralRegistryStatusProps {
   group: string;
   side: 'left' | 'right';
   divider?: boolean;
@@ -14,7 +14,7 @@ function getToolConfig(item: ToolMeta, side: 'left' | 'right') {
   return item.tool?.find((config) => config.side === side);
 }
 
-export default function RegistryToolGroup({ group, side, divider = true, context }: RegistryToolGroupProps) {
+export default function GeneralRegistryStatus({ group, side, divider = true, context }: GeneralRegistryStatusProps) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
