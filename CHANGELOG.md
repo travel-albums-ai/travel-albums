@@ -1,3 +1,13 @@
+## [1.105.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.104.0...v1.105.0) (2026-08-15)
+
+### ✨ Features
+
+* **selection-count-status:** add SelectionCountStatus component and its metadata ([e9983f5](https://github.com/travel-albums-ai/travel-albums/commit/e9983f5153bef8fcbc973a8118cf4d80e02faa6b))
+
+### 🧹 Refactors
+
+* simplify composeUrl usage across components and remove unused parameters ([f3acc86](https://github.com/travel-albums-ai/travel-albums/commit/f3acc86eb036a04e402db22303c396f73941e13f))
+
 ## [1.104.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.103.0...v1.104.0) (2026-08-15)
 
 ### ✨ Features
