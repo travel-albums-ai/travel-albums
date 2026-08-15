@@ -1,3 +1,9 @@
+## [1.109.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.108.0...v1.109.0) (2026-08-15)
+
+### ✨ Features
+
+* **toolbar:** replace GeneralTool with GeneralRegistryToolbar and add GeneralRegistryDrawer component ([580612e](https://github.com/travel-albums-ai/travel-albums/commit/580612ebdf392101716105d8f6279c44a0ff82ae))
+
 ## [1.108.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.107.0...v1.108.0) (2026-08-15)
 
 ### ✨ Features
