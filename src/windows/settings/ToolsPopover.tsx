@@ -1,4 +1,4 @@
-import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { toolRegistry } from '@/toolRegistry';
 import { Box, Stack, Typography } from '@mui/material';
 

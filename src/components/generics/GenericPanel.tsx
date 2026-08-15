@@ -1,4 +1,4 @@
-import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';

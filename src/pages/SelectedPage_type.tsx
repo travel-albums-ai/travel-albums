@@ -1,3 +1,4 @@
+import BreadscrumbsPrimary from '@/components/BreadcrumbsTool/BreadscrumbsPrimary';
 import GenericPanel from '@/components/generics/GenericPanel';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
@@ -5,7 +6,6 @@ import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import BreadscrumbsPrimary from '@/layout/BreadcrumbsTool/BreadscrumbsPrimary';
 import GroupingPreviewItemNg from '@/pages/components/GroupingPreviewItemNg';
 import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

@@ -1,6 +1,6 @@
 import LoadingBar from '@/components/LoadingBar';
+import GeneralRegistryStatus from '@/components/registry/GeneralRegistryStatus';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
-import GeneralRegistryStatus from '@/layout/components/GeneralRegistryStatus';
 import { Box, Theme } from '@mui/material';
 
 export default function StatusBar() {

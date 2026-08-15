@@ -1,4 +1,4 @@
-import ComplexLayout from '@/layout/ComplexLayout';
+import ComplexLayout from '@/layout';
 import { appRoutes } from '@/routes';
 import type { ReactElement } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';

@@ -1,12 +1,12 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
 import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
-import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Card, Tooltip, Typography, useTheme } from '@mui/material';
 import dayjs from 'dayjs';

@@ -1,3 +1,4 @@
+import BreadscrumbsPrimaryList from '@/components/BreadcrumbsTool/BreadscrumbsPrimaryList';
 import GenericPanel from '@/components/generics/GenericPanel';
 import NoPhotos from '@/components/NoPhotos';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
@@ -5,7 +6,6 @@ import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import BreadscrumbsPrimaryList from '@/layout/BreadcrumbsTool/BreadscrumbsPrimaryList';
 import { GalleryPhoto } from '@/lib/galleryData';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
 import { useParams } from 'react-router-dom';
