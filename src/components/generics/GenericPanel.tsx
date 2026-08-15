@@ -1,4 +1,4 @@
-import GeneralTool from '@/layout/components/GeneralTool';
+import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -30,7 +30,7 @@ export default function GenericPanel({
       flex: '1 1 auto',
     }}>
       {!collapsed && (tool || defaultTool) && <Box sx={wrapperSx} >
-        {defaultTool && <GeneralTool group={id} context={toolContext} />}
+        {defaultTool && <GeneralRegistryToolbar group={id} context={toolContext} />}
         {tool}
       </Box>}
       {tool && <Box sx={{

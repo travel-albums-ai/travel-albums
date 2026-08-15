@@ -5,7 +5,7 @@ import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
 import AlbumPhotoRowItem from '@/drawers/rows/AlbumPhotoRowItem';
-import GeneralTool from '@/layout/components/GeneralTool';
+import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, useTheme } from '@mui/material';
 import { CaseUpper, Clock, Eye, Folder, Hash, MessageCircle, SeparatorHorizontal, SeparatorVertical, ThumbsUp } from 'lucide-react';
@@ -157,7 +157,7 @@ export default function AlbumPhotoRow({ photo }: AlbumPhotoCardProps) {
         />
 
         <Box sx={{ position: 'absolute', top: 0, right: 0, left: 0, height: '40px', zIndex: 2 }}>
-          <GeneralTool group={'album-photo-row'} context={{ photoId: photo.id, favorite, selectMode }} />
+          <GeneralRegistryToolbar group={'album-photo-row'} context={{ photoId: photo.id, favorite, selectMode }} />
         </Box>
       </Box>
 

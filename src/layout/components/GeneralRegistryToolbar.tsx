@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-interface GeneralToolProps {
+interface GeneralRegistryToolbarProps {
   group: string;
   noDivider?: boolean;
   fullWidth?: boolean;
@@ -27,7 +27,7 @@ function getToolConfig(item: ToolMeta, side: 'left' | 'right') {
   return item.tool?.find((g) => g.side === side);
 }
 
-export default function GeneralRegistryToolbar({ group, noDivider = true, fullWidth = true, sx, context }: GeneralToolProps) {
+export default function GeneralRegistryToolbar({ group, noDivider = true, fullWidth = true, sx, context }: GeneralRegistryToolbarProps) {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [retryToken, setRetryToken] = useState(0);

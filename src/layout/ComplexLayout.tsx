@@ -2,8 +2,7 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { ensureDrawerDiscovery } from '@/drawerDiscovery';
 import { drawerRegistry } from '@/drawerRegistry';
 import MainDriver from '@/drivers/MainDriver';
-import GeneralTool from '@/layout/components/GeneralTool';
-import RegistryDrawer from '@/layout/components/RegistryDrawer';
+import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
 import StatusBar from '@/layout/StatusBar';
 import NoServerWindow from '@/windows/NoServerWindow';
 import OnboardingWindow from '@/windows/OnboardingWindow';
@@ -17,6 +16,7 @@ import {
 import 'flexlayout-react/style/combined.css';
 
 import WebMCPDataView from '@/components/WebMCPDataView';
+import GeneralRegistryDrawer from '@/layout/components/GeneralRegistryDrawer';
 import i18n from '@/lib/i18n';
 import SettingsWindow from '@/windows/SettingsWindow';
 import {
@@ -138,7 +138,7 @@ export default function ComplexLayout() {
 
   const factory = useCallback((node: TabNode) => {
     const component = node.getComponent();
-    return drawerRegistry.has(component) ? <RegistryDrawer id={component} /> : null;
+    return drawerRegistry.has(component) ? <GeneralRegistryDrawer id={component} /> : null;
   }, []);
 
   const model = useMemo(
@@ -152,7 +152,7 @@ export default function ComplexLayout() {
 
   return (
     <>
-      <GeneralTool group="header" sx={{
+      <GeneralRegistryToolbar group="header" sx={{
         px: 1,
         pt: 0.75,
         pb: 0.75,

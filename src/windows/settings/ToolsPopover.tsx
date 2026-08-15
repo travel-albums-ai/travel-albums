@@ -1,4 +1,4 @@
-import GeneralTool from '@/layout/components/GeneralTool';
+import GeneralRegistryToolbar from '@/layout/components/GeneralRegistryToolbar';
 import { toolRegistry } from '@/toolRegistry';
 import { Box, Stack, Typography } from '@mui/material';
 
@@ -18,7 +18,7 @@ export default function ToolsPopover() {
         return <Box key={toolId} sx={{ display: 'flex', pointerEvents: 'none', flexDirection: 'column', alignItems: 'flex-start', gap: 1, p: 1, borderRadius: 1, '&:hover': { bgcolor: 'action.hover' } }}>
           <Typography variant="caption" color="textSecondary">{toolId}</Typography>
           <Box sx={{ width: '100%', overflow: 'auto' }}>
-            <GeneralTool group={toolId} context={{ sidebarSearchOpen: false }} />
+            <GeneralRegistryToolbar group={toolId} context={{ sidebarSearchOpen: false }} />
           </Box>
         </Box>
       })}

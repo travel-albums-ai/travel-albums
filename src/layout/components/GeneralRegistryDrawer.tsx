@@ -1,11 +1,11 @@
 import { drawerRegistry } from '@/drawerRegistry';
 import { useEffect, useState } from 'react';
 
-interface RegistryDrawerProps {
+interface GeneralRegistryDrawerProps {
   id: string;
 }
 
-export default function RegistryDrawer({ id }: RegistryDrawerProps) {
+export default function GeneralRegistryDrawer({ id }: GeneralRegistryDrawerProps) {
   const [component, setComponent] = useState<React.ComponentType | null>(null);
 
   useEffect(() => {
