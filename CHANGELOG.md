@@ -1,3 +1,9 @@
+## [1.108.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.107.0...v1.108.0) (2026-08-15)
+
+### ✨ Features
+
+* **sidebar:** refactor sidebar components and move to new directory structure ([6ec07b9](https://github.com/travel-albums-ai/travel-albums/commit/6ec07b983788f49153bdbe924629c688c9b42493))
+
 ## [1.107.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.106.0...v1.107.0) (2026-08-15)
 
 ### ✨ Features
