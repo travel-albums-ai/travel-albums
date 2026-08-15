@@ -1,3 +1,9 @@
+## [1.112.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.111.0...v1.112.0) (2026-08-15)
+
+### ✨ Features
+
+* replace ComplexLayout with AppLayout in AppRoutes; update Header and StatusBar layout styles ([41ab6e3](https://github.com/travel-albums-ai/travel-albums/commit/41ab6e3b3c8d9f53a42310aa77b4f8e689a0814c))
+
 ## [1.111.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.110.0...v1.111.0) (2026-08-15)
 
 ### ✨ Features
