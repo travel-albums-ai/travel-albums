@@ -9,8 +9,9 @@ import LayoutPopover from '@/modals/settings/LayoutPopover';
 import SectionsPopover from '@/modals/settings/SectionsPopover';
 import SettingsPopover from '@/modals/settings/SettingsPopover';
 import TagsPopover from '@/modals/settings/TagsPopover';
+import ToolbarsPopover from '@/modals/settings/ToolbarsPopover';
 import { Box, Typography } from '@mui/material';
-import { Group, Key, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
+import { Dock, Group, Key, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -55,6 +56,7 @@ export default function SettingsContent() {
 
   const sections = useMemo(() => [
     { key: 'layout', title: t('layout'), component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
+    { key: 'toolbars', title: "Toolbars", component: <ToolbarsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage toolbars in the application" },
     { key: 'filterPhotos', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
     { key: 'drawers', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
     { key: 'byok', title: 'BYOK', component: <BYOKPopover />, icon: <Key size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },

@@ -7,7 +7,7 @@ export default function SettingsModal() {
   const { setSetting } = useSettings()
 
   return (<>
-    <Dialog open={showSettings} fullWidth maxWidth="md" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
+    <Dialog open={showSettings} fullWidth maxWidth="xl" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
       <Box sx={{
         p: 2,
         borderRadius: 2,
