@@ -1,5 +1,5 @@
 import { ensureToolGroupPreload } from '@/toolDiscovery';
-import { toolRegistry } from '@/toolRegistry';
+import { ToolMeta, toolRegistry } from '@/toolRegistry';
 import { Divider, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -7,9 +7,14 @@ interface RegistryToolGroupProps {
   group: string;
   side: 'left' | 'right';
   divider?: boolean;
+  context?: unknown;
 }
 
-export default function RegistryToolGroup({ group, side, divider = true }: RegistryToolGroupProps) {
+function getToolConfig(item: ToolMeta, side: 'left' | 'right') {
+  return item.tool?.find((config) => config.side === side);
+}
+
+export default function RegistryToolGroup({ group, side, divider = true, context }: RegistryToolGroupProps) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -30,7 +35,12 @@ export default function RegistryToolGroup({ group, side, divider = true }: Regis
     return null;
   }
 
-  const items = toolRegistry.toolBySide(group, side);
+  const items = toolRegistry
+    .toolBySide(group, side)
+    .filter((item) => {
+      const config = getToolConfig(item, side);
+      return config?.visible ? config.visible(context) : true;
+    });
 
   return (
     <Stack
@@ -41,8 +51,7 @@ export default function RegistryToolGroup({ group, side, divider = true }: Regis
     >
       {items.map((item) => {
         const Component = toolRegistry.resolve(item);
-        console.log('RegistryToolGroup', group, side, item.id, Component);
-        return Component ? <>{item.id} <Component key={item.id} /></> : null;
+        return Component ? <Component key={item.id} context={context} /> : null;
       })}
     </Stack>
   );

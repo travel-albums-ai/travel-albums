@@ -1,14 +1,17 @@
 import LoadingBar from '@/components/LoadingBar';
+import { useSelectedStoreSelector } from '@/context/selectedStore';
 import RegistryToolGroup from '@/layout/components/RegistryToolGroup';
 import { Box, Theme } from '@mui/material';
 
 export default function StatusBar() {
+  const selectedPhotos = useSelectedStoreSelector(s => s.photos)
+
   return (
     <Box sx={wrapperSx} id="status-bar">
       <LoadingBar />
 
-      <RegistryToolGroup group="status-bar-primary" side="left" />
-      <RegistryToolGroup group="status-bar-secondary" side="right" divider />
+      <RegistryToolGroup group="status-bar-primary" side="left" context={{ selectedPhotos }} />
+      <RegistryToolGroup group="status-bar-secondary" side="right" divider context={{ selectedPhotos }}  />
     </Box>
   )
 }
