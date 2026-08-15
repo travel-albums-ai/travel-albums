@@ -60,9 +60,9 @@ const buildThumbnailUrl = (imageUrl: string): string | null => {
   return `${THUMBNAILS_BASE_URL}/${toEndpointPath(relativePath)}`
 }
 
-export const thumbnailUrl = (imageId: string, demo = false) => {
-  return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${THUMBNAILS_BASE_URL}/${toEndpointPath(imageId)}`
-}
+// export const thumbnailUrl = (imageId: string, demo = false) => {
+//   return demo ? `${SERVER_ORIGIN_DEMO}/${toEndpointPath(imageId).replace("%3A%3A", "%EF%80%BA%EF%80%BA")}` : `${THUMBNAILS_BASE_URL}/${toEndpointPath(imageId)}`
+// }
 
 export const composeUrl = (photo: GalleryPhoto, original = false, demo = false) => {
   const composePath = `${photo.rootIndex}/${encodeURIComponent(photo.folder ?? '')}/${encodeURIComponent(photo.title ?? '')}`

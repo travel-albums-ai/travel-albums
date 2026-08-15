@@ -3,7 +3,6 @@ import AdjustmentsDrawer from '@/drawers/AdjustmentsDrawer';
 import CalendarDrawer from '@/drawers/CalendarDrawer';
 import FilesDrawer from '@/drawers/FilesDrawer';
 import GlobeDrawer from '@/drawers/GlobeDrawer';
-import LabelerDrawer from '@/drawers/LabelerDrawer';
 import OutletDrawer from '@/drawers/OutletDrawer';
 import PhotoDrawer from '@/drawers/PhotoDrawer';
 import RowsDrawer from '@/drawers/RowsDrawer';
@@ -48,7 +47,6 @@ const leftChildren = [
 const rightChildren = [
   ...tab('drawerPreview', 'preview'),
   ...tab('drawerAdjustments', 'adjustments'),
-  ...tab('drawerLabeler', 'labeler'),
   ...tab('drawerAutoDescription', 'autoDescription'),
 ]
 
@@ -105,7 +103,6 @@ const COMPONENTS = {
   preview: PhotoDrawer,
   adjustments: AdjustmentsDrawer,
   files: FilesDrawer,
-  labeler: LabelerDrawer,
   scroller: ScrollerDrawer,
   rows: RowsDrawer,
   calendar: CalendarDrawer,

@@ -1,4 +1,4 @@
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import localforage from 'localforage';
 import { useEffect, useState } from 'react';
 
@@ -197,7 +197,7 @@ export default function AlbumPhotoCollageCanvas({ photos, size = 600 }: Props) {
         if (cancelled) return
         const batch = await Promise.all(
           photoSlice.slice(i, i + 3).map(p =>
-            loadImage(thumbnailUrl(p.id)).catch(() => null)
+            loadImage(composeUrl(p, false, false)).catch(() => null)
           )
         )
         imgs.push(...batch)

@@ -1,7 +1,7 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { useMapMarkerThumbnails } from '@/hooks/useTransform_Photos2Thumbnails';
 import type { GalleryPhoto } from '@/lib/galleryData';
-import { thumbnailUrl } from '@/lib/thumbnailService';
+import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import L from 'leaflet';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -18,9 +18,9 @@ const THUMB_SIZE = 44
 
 const CENTER_PADDING_PX = 24
 
-const createPhotoIcon = (imageUrl: string | null) => {
-  const content = imageUrl
-    ? `<img src="${thumbnailUrl(imageUrl)}" style="width:${THUMB_SIZE}px;height:${THUMB_SIZE}px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,0.5);" />`
+const createPhotoIcon = (photo: GalleryPhoto) => {
+  const content = photo.title
+    ? `<img src="${composeUrl(photo)}" style="width:${THUMB_SIZE}px;height:${THUMB_SIZE}px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,0.5);" />`
     : `<div style="width:${THUMB_SIZE}px;height:${THUMB_SIZE}px;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,0.5);background:#888;"></div>`
   return L.divIcon({
     html: content,
@@ -281,7 +281,7 @@ export default function AlbumMapPanel({ photos, height = 320, interactive = true
       const markerImageUrl = null
 
       const marker = L.marker([photo.latitude, photo.longitude], {
-        icon: createPhotoIcon(photo.id),
+        icon: createPhotoIcon(photo),
       })
         .addTo(markersLayer)
         .bindPopup(`<strong>${photo.title}</strong><br/>${photo.takenAt || ''}`)
@@ -326,7 +326,7 @@ export default function AlbumMapPanel({ photos, height = 320, interactive = true
         continue
       }
 
-      marker.setIcon(createPhotoIcon(photo.id))
+      marker.setIcon(createPhotoIcon(photo))
       markerImageByPhotoIdRef.current.set(photo.id, thumbnail)
     }
   }, [photosWithGps, thumbnailByImageUrl])
