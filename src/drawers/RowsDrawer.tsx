@@ -21,7 +21,7 @@ export default function RowsDrawer() {
   const photos = showAll ? photosFiltered : foundSet?.photos || []
 
   return (
-    <GenericPanel id="rows-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
+    <GenericPanel id="rows-drawer" defaultTool toolContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
       <AllPhotosRowsVirtuoso photos={photos} />
     </GenericPanel>
   );

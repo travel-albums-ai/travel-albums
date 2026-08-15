@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "previewExifToggle",
-  toolbar: [
+  tool: [
     {
       id: 'photo-drawer',
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/PreviewExifToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

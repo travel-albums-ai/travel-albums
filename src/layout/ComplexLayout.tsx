@@ -9,7 +9,7 @@ import RowsDrawer from '@/drawers/RowsDrawer';
 import ScrollerDrawer from '@/drawers/ScrollerDrawer';
 import SidebarDrawer from '@/drawers/SidebarDrawer';
 import MainDriver from '@/drivers/MainDriver';
-import GeneralToolbar from '@/layout/components/GeneralToolbar';
+import GeneralTool from '@/layout/components/GeneralTool';
 import StatusBar from '@/layout/StatusBar';
 import NoServerModal from '@/modals/NoServerModal';
 import OnboardingModal from '@/modals/OnboardingModal';
@@ -162,7 +162,7 @@ export default function ComplexLayout() {
 
   return (
     <>
-      <GeneralToolbar group="header" sx={{
+      <GeneralTool group="header" sx={{
         px: 1,
         pt: 0.75,
         pb: 0.75,

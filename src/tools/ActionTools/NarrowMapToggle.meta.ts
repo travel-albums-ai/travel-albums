@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "narrowMap",
-  toolbar: [
+  tool: [
     {
       id: 'globe-drawer',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/NarrowMapToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

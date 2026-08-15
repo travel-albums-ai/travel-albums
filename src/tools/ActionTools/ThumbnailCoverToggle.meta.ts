@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "thumbnailCover",
-  toolbar: [
+  tool: [
     ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
       id,
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     })),
   ],
   loader: () => import('@/tools/ActionTools/ThumbnailCoverToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

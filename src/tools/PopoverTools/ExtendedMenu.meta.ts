@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "extendedMenu",
-  toolbar: [
+  tool: [
     {
       id: 'header',
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/PopoverTools/ExtendedMenu'),
-} as ToolbarMeta;
+} as ToolMeta;

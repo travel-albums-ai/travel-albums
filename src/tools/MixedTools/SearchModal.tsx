@@ -1,4 +1,4 @@
-import BreadcrumbsToolbar from '@/layout/BreadcrumbsToolbar/BreadcrumbsToolbar';
+import BreadcrumbsTool from '@/layout/BreadcrumbsTool/BreadcrumbsTool';
 import SearchFiles from '@/modals/components/SearchFiles';
 import { Box } from '@mui/material';
 import { CircleX } from 'lucide-react';
@@ -35,7 +35,7 @@ export default function SearchModal() {
             opacity: breadcrumbs ? 1 : 0,
           }}
         >
-          <BreadcrumbsToolbar asIs />
+          <BreadcrumbsTool asIs />
         </Box>
         {!breadcrumbs && <Box
           sx={{

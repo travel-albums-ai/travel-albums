@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "selectedToggle",
-  toolbar: [
+  tool: [
     {
       id: 'album-photo-card',
       side: 'left',
@@ -17,4 +17,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/SelectedToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

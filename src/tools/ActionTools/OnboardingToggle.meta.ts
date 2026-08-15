@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "onboardingToggle",
-  toolbar: [
+  tool: [
     {
       id: 'settings-page',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/OnboardingToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

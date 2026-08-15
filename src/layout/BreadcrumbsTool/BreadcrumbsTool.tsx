@@ -4,7 +4,7 @@ import { Box, Breadcrumbs, Link, Theme, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-export default function BreadcrumbsToolbar({ asIs = false }: { asIs?: boolean }) {
+export default function BreadcrumbsTool({ asIs = false }: { asIs?: boolean }) {
   const { pathname } = useLocation()
 
   const routeDetails = useMemo(

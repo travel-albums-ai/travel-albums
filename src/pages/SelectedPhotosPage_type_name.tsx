@@ -5,7 +5,7 @@ import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import BreadscrumbsPrimaryList from '@/layout/BreadcrumbsToolbar/BreadscrumbsPrimaryList';
+import BreadscrumbsPrimaryList from '@/layout/BreadcrumbsTool/BreadscrumbsPrimaryList';
 import { GalleryPhoto } from '@/lib/galleryData';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
 import { useParams } from 'react-router-dom';
@@ -35,7 +35,7 @@ export default function SelectedPhotosPage_type_name() {
         }
       ] : []} />
 
-      <GenericPanel id="selected-photos-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
+      <GenericPanel id="selected-photos-drawer" defaultTool toolContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
         {photos.length === 0
           ? <NoPhotos />
           : <AllPhotosGridVirtuoso key={type_name} photos={photos} />}

@@ -1,8 +1,8 @@
-import { ensureToolbarGroupPreload } from '@/toolbarDiscovery';
+import { ensureToolGroupPreload } from '@/toolDiscovery';
 import {
-  ToolbarMeta,
-  toolbarRegistry,
-} from '@/toolbarRegistry';
+  ToolMeta,
+  toolRegistry,
+} from '@/toolRegistry';
 import {
   Box,
   Button,
@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-interface GeneralToolbarProps {
+interface GeneralToolProps {
   group: string;
   noDivider?: boolean;
   fullWidth?: boolean;
@@ -23,11 +23,11 @@ interface GeneralToolbarProps {
   context?: unknown;
 }
 
-function getToolbarConfig(item: ToolbarMeta, side: 'left' | 'right') {
-  return item.toolbar?.find((g) => g.side === side);
+function getToolConfig(item: ToolMeta, side: 'left' | 'right') {
+  return item.tool?.find((g) => g.side === side);
 }
 
-export default function GeneralToolbar({ group, noDivider = true, fullWidth = true, sx, context }: GeneralToolbarProps) {
+export default function GeneralTool({ group, noDivider = true, fullWidth = true, sx, context }: GeneralToolProps) {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [retryToken, setRetryToken] = useState(0);
@@ -41,7 +41,7 @@ export default function GeneralToolbar({ group, noDivider = true, fullWidth = tr
       }
     });
 
-    ensureToolbarGroupPreload(group)
+    ensureToolGroupPreload(group)
       .then(() => {
         if (mounted) {
           setError(null);
@@ -55,7 +55,7 @@ export default function GeneralToolbar({ group, noDivider = true, fullWidth = tr
 
         const discoveryError = cause instanceof Error
           ? cause
-          : new Error('Toolbar discovery failed');
+          : new Error('Tool discovery failed');
         setError(discoveryError);
       });
 
@@ -70,7 +70,7 @@ export default function GeneralToolbar({ group, noDivider = true, fullWidth = tr
         <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx }}>
           <Stack direction="row" spacing={1} sx={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="caption" color="text.secondary">
-              Failed to load toolbar controls.
+              Failed to load tool controls.
             </Typography>
             <Button
               size="small"
@@ -93,17 +93,17 @@ export default function GeneralToolbar({ group, noDivider = true, fullWidth = tr
     </Box>;
   }
 
-  const leftItems = toolbarRegistry
-    .toolbarBySide(group, 'left')
+  const leftItems = toolRegistry
+    .toolBySide(group, 'left')
     .filter((item) => {
-      const config = getToolbarConfig(item, 'left');
+      const config = getToolConfig(item, 'left');
       return config?.visible ? config.visible(context) : true;
     });
 
-  const rightItems = toolbarRegistry
-    .toolbarBySide(group, 'right')
+  const rightItems = toolRegistry
+    .toolBySide(group, 'right')
     .filter((item) => {
-      const config = getToolbarConfig(item, 'right');
+      const config = getToolConfig(item, 'right');
       return config?.visible ? config.visible(context) : true;
     });
 
@@ -111,14 +111,14 @@ export default function GeneralToolbar({ group, noDivider = true, fullWidth = tr
     <Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} data-group={group} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
       {leftItems.length > 0 && <Box data-side="left" data-items={leftItems.map(item => item.id).join(',')} sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         {leftItems.map((item) => {
-          const Component = toolbarRegistry.resolve(item);
+          const Component = toolRegistry.resolve(item);
 
           return !Component ? null : <Component key={item.id} context={context} />
         })}
       </Box>}
       {rightItems.length > 0 && <Box data-side="right" data-items={rightItems.map(item => item.id).join(',')} sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         {rightItems.map((item) => {
-          const Component = toolbarRegistry.resolve(item);
+          const Component = toolRegistry.resolve(item);
 
           return !Component ? null : <Component key={item.id} context={context} />
         })}

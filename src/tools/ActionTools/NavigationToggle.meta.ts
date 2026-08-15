@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "navigation",
-  toolbar: [
+  tool: [
     {
       id: 'header',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/NavigationToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

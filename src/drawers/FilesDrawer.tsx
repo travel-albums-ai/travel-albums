@@ -79,7 +79,7 @@ export default function FilesDrawer() {
   const newWidth = Math.round(width / multiplier)
 
   return (
-    <GenericPanel id="files-drawer" toolbar={<>
+    <GenericPanel id="files-drawer" tool={<>
       <Button variant="outlined" size="small" onClick={toggleAllFolders}>
         {closedFolders.size === 0 ? 'Close All Folders' : 'Open All Folders'}
       </Button>

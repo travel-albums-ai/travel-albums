@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "byok-openai-field",
-  toolbar: [
+  tool: [
     {
       id: 'auto-description-drawer',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/MixedTools/BYOKOpenAiField'),
-} as ToolbarMeta;
+} as ToolMeta;

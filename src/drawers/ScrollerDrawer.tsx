@@ -21,7 +21,7 @@ export default function ScrollerDrawer() {
   const photos = showAll ? photosFiltered : foundSet?.photos || []
 
   return (
-    <GenericPanel id="scroller-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
+    <GenericPanel id="scroller-drawer" defaultTool toolContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
       <AlbumScroller photos={photos} columns={4} rows={3} />
     </GenericPanel>
   );

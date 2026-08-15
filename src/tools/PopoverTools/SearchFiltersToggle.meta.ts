@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "searchFiltersToggle",
-  toolbar: [
+  tool: [
     {
       id: 'sidebar',
       side: 'right',
@@ -11,4 +11,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/PopoverTools/SearchFiltersToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

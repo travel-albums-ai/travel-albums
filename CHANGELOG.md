@@ -293,7 +293,7 @@
 
 ### ✨ Features
 
-* add toolbarContext to GenericPanel in PhotoDrawer for improved context handling ([9eeb476](https://github.com/travel-albums-ai/travel-albums/commit/9eeb476d40dfae939fa1f9a3a97c2efb8c66dca6))
+* add toolContext to GenericPanel in PhotoDrawer for improved context handling ([9eeb476](https://github.com/travel-albums-ai/travel-albums/commit/9eeb476d40dfae939fa1f9a3a97c2efb8c66dca6))
 
 ## [1.57.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.56.0...v1.57.0) (2026-08-12)
 
@@ -347,19 +347,19 @@
 
 ### ✨ Features
 
-* update GeneralToolbar to include data attributes for left and right items for better context handling ([c222ac4](https://github.com/travel-albums-ai/travel-albums/commit/c222ac468be0b0b720f9ccb99f2c3cadde19b6ac))
+* update GeneralTool to include data attributes for left and right items for better context handling ([c222ac4](https://github.com/travel-albums-ai/travel-albums/commit/c222ac468be0b0b720f9ccb99f2c3cadde19b6ac))
 
 ## [1.48.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.47.0...v1.48.0) (2026-08-12)
 
 ### ✨ Features
 
-* integrate GeneralToolbar into AlbumPhotoRow and update toggle visibility for improved context handling ([3d34383](https://github.com/travel-albums-ai/travel-albums/commit/3d343836d07b12bd489334c15873ee3b884ae533))
+* integrate GeneralTool into AlbumPhotoRow and update toggle visibility for improved context handling ([3d34383](https://github.com/travel-albums-ai/travel-albums/commit/3d343836d07b12bd489334c15873ee3b884ae533))
 
 ## [1.47.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.46.1...v1.47.0) (2026-08-12)
 
 ### ✨ Features
 
-* integrate GeneralToolbar into AlbumPhotoCard and update toggle components for improved context handling ([b8cf4f0](https://github.com/travel-albums-ai/travel-albums/commit/b8cf4f03a46fcf7d493b2ae52704d4c277b68f12))
+* integrate GeneralTool into AlbumPhotoCard and update toggle components for improved context handling ([b8cf4f0](https://github.com/travel-albums-ai/travel-albums/commit/b8cf4f03a46fcf7d493b2ae52704d4c277b68f12))
 
 ## [1.46.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.46.0...v1.46.1) (2026-08-12)
 
@@ -371,31 +371,31 @@
 
 ### ✨ Features
 
-* add toolbar fields and toggles for settings, labels, and search functionalities ([f9f8027](https://github.com/travel-albums-ai/travel-albums/commit/f9f8027b335e8ad5a632061feebf2e0bc9524a4f))
+* add tool fields and toggles for settings, labels, and search functionalities ([f9f8027](https://github.com/travel-albums-ai/travel-albums/commit/f9f8027b335e8ad5a632061feebf2e0bc9524a4f))
 
 ## [1.45.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.44.0...v1.45.0) (2026-08-12)
 
 ### ✨ Features
 
-* reorganize toggle components into toolbarToggles directory and add new toggles ([3f05c4b](https://github.com/travel-albums-ai/travel-albums/commit/3f05c4bfbbc2410532c5c8d2f33a0890c0af85e2))
+* reorganize toggle components into toolToggles directory and add new toggles ([3f05c4b](https://github.com/travel-albums-ai/travel-albums/commit/3f05c4bfbbc2410532c5c8d2f33a0890c0af85e2))
 
 ## [1.44.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.43.0...v1.44.0) (2026-08-12)
 
 ### ✨ Features
 
-* restructure FavoriteToggle and GeneticAlgoToggle components into toolbarToggles directory ([3f335aa](https://github.com/travel-albums-ai/travel-albums/commit/3f335aa9434b1267c6954f0ba5afdf0c80a3a083))
+* restructure FavoriteToggle and GeneticAlgoToggle components into toolToggles directory ([3f335aa](https://github.com/travel-albums-ai/travel-albums/commit/3f335aa9434b1267c6954f0ba5afdf0c80a3a083))
 
 ## [1.43.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.42.0...v1.43.0) (2026-08-12)
 
 ### ✨ Features
 
-* add ThumbnailCoverToggle and TutorialToggle components with toolbar metadata ([9c417e7](https://github.com/travel-albums-ai/travel-albums/commit/9c417e73ccf94e49586306e59fcc9bef3353fa68))
+* add ThumbnailCoverToggle and TutorialToggle components with tool metadata ([9c417e7](https://github.com/travel-albums-ai/travel-albums/commit/9c417e73ccf94e49586306e59fcc9bef3353fa68))
 
 ## [1.42.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.41.0...v1.42.0) (2026-08-12)
 
 ### ✨ Features
 
-* refactor toggle components and update toolbar discovery for new structure ([45c9b2a](https://github.com/travel-albums-ai/travel-albums/commit/45c9b2a83c9bddecf674d3b5dc1752eddf3a72cc))
+* refactor toggle components and update tool discovery for new structure ([45c9b2a](https://github.com/travel-albums-ai/travel-albums/commit/45c9b2a83c9bddecf674d3b5dc1752eddf3a72cc))
 
 ## [1.41.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.40.0...v1.41.0) (2026-08-12)
 
@@ -560,13 +560,13 @@
 
 ### ✨ Features
 
-* update toolbar discovery to support group preloading and improve error handling ([f8f045a](https://github.com/travel-albums-ai/travel-albums/commit/f8f045a2d03141a86f998aaa812fcb10782820fb))
+* update tool discovery to support group preloading and improve error handling ([f8f045a](https://github.com/travel-albums-ai/travel-albums/commit/f8f045a2d03141a86f998aaa812fcb10782820fb))
 
 ## [1.18.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.17.0...v1.18.0) (2026-08-03)
 
 ### ✨ Features
 
-* enhance toolbar discovery with error handling and validation checks ([871d780](https://github.com/travel-albums-ai/travel-albums/commit/871d7809dd7cd257f5a6a986907d4da3b4f414cf))
+* enhance tool discovery with error handling and validation checks ([871d780](https://github.com/travel-albums-ai/travel-albums/commit/871d7809dd7cd257f5a6a986907d4da3b4f414cf))
 
 ### 🧹 Refactors
 
@@ -589,43 +589,43 @@
 
 ### ✨ Features
 
-* add loading skeleton to GeneralToolbar while waiting for readiness ([5f1f78c](https://github.com/travel-albums-ai/travel-albums/commit/5f1f78c391f319c2548fe42292ed7f2685fe3766))
+* add loading skeleton to GeneralTool while waiting for readiness ([5f1f78c](https://github.com/travel-albums-ai/travel-albums/commit/5f1f78c391f319c2548fe42292ed7f2685fe3766))
 
 ## [1.14.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.13.0...v1.14.0) (2026-08-03)
 
 ### ✨ Features
 
-* optimize toolbar registry with caching and improve toolbar item retrieval ([6201b97](https://github.com/travel-albums-ai/travel-albums/commit/6201b97d3d7b2c3af2ca279a68272934830cfb71))
+* optimize tool registry with caching and improve tool item retrieval ([6201b97](https://github.com/travel-albums-ai/travel-albums/commit/6201b97d3d7b2c3af2ca279a68272934830cfb71))
 
 ## [1.13.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.12.0...v1.13.0) (2026-08-03)
 
 ### ✨ Features
 
-* enhance toolbar component loading and caching mechanism ([fa1836c](https://github.com/travel-albums-ai/travel-albums/commit/fa1836cb7c8d6d4132abaabdccf2ff9bc734b032))
+* enhance tool component loading and caching mechanism ([fa1836c](https://github.com/travel-albums-ai/travel-albums/commit/fa1836cb7c8d6d4132abaabdccf2ff9bc734b032))
 
 ## [1.12.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.11.0...v1.12.0) (2026-08-03)
 
 ### ✨ Features
 
-* implement toolbar discovery mechanism in GeneralToolbar and update toolbarRegistry ([bed4a63](https://github.com/travel-albums-ai/travel-albums/commit/bed4a6384f893e223f0cb08bd2b313b89592d1b5))
+* implement tool discovery mechanism in GeneralTool and update toolRegistry ([bed4a63](https://github.com/travel-albums-ai/travel-albums/commit/bed4a6384f893e223f0cb08bd2b313b89592d1b5))
 
 ## [1.11.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.10.0...v1.11.0) (2026-08-03)
 
 ### ✨ Features
 
-* refactor toggle components to implement ToolbarMeta type and remove inline metadata ([b9be750](https://github.com/travel-albums-ai/travel-albums/commit/b9be750a14366a88c0b774d6b3eb48ca385d3986))
+* refactor toggle components to implement ToolMeta type and remove inline metadata ([b9be750](https://github.com/travel-albums-ai/travel-albums/commit/b9be750a14366a88c0b774d6b3eb48ca385d3986))
 
 ## [1.10.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.9.0...v1.10.0) (2026-08-03)
 
 ### ✨ Features
 
-* refactor toggle components to implement ToolbarMeta type and remove inline metadata ([0b8eaba](https://github.com/travel-albums-ai/travel-albums/commit/0b8eabaa3238e98f5b695337fe74b9a75710f49f))
+* refactor toggle components to implement ToolMeta type and remove inline metadata ([0b8eaba](https://github.com/travel-albums-ai/travel-albums/commit/0b8eabaa3238e98f5b695337fe74b9a75710f49f))
 
 ## [1.9.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.8.0...v1.9.0) (2026-08-03)
 
 ### ✨ Features
 
-* update toggle metadata files to implement ToolbarMeta type ([3a758ff](https://github.com/travel-albums-ai/travel-albums/commit/3a758ffe4f2dab0281f1e45567339615df9d0290))
+* update toggle metadata files to implement ToolMeta type ([3a758ff](https://github.com/travel-albums-ai/travel-albums/commit/3a758ffe4f2dab0281f1e45567339615df9d0290))
 
 ## [1.8.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.7.0...v1.8.0) (2026-08-03)
 
@@ -643,37 +643,37 @@
 
 ### ✨ Features
 
-* remove console log from GeneralToolbar and move SortSectionsToggle meta to a new file ([a142b03](https://github.com/travel-albums-ai/travel-albums/commit/a142b03c804b8da2559f1665fee4b8ae893ae88d))
+* remove console log from GeneralTool and move SortSectionsToggle meta to a new file ([a142b03](https://github.com/travel-albums-ai/travel-albums/commit/a142b03c804b8da2559f1665fee4b8ae893ae88d))
 
 ## [1.5.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.4.0...v1.5.0) (2026-08-03)
 
 ### ✨ Features
 
-* enhance type safety in toolbar components and improve toolbar configuration logic ([4465180](https://github.com/travel-albums-ai/travel-albums/commit/4465180d2c25abb5142ccd758cf6046f634b6ab7))
+* enhance type safety in tool components and improve tool configuration logic ([4465180](https://github.com/travel-albums-ai/travel-albums/commit/4465180d2c25abb5142ccd758cf6046f634b6ab7))
 
 ## [1.4.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.3.0...v1.4.0) (2026-08-03)
 
 ### ✨ Features
 
-* enhance toolbar functionality with lazy loading and new metadata structure for ThumbnailCoverToggle and TutorialToggle ([7f1debf](https://github.com/travel-albums-ai/travel-albums/commit/7f1debffc3befffbba400fea6339cd615d5c5062))
+* enhance tool functionality with lazy loading and new metadata structure for ThumbnailCoverToggle and TutorialToggle ([7f1debf](https://github.com/travel-albums-ai/travel-albums/commit/7f1debffc3befffbba400fea6339cd615d5c5062))
 
 ## [1.3.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.2.0...v1.3.0) (2026-08-03)
 
 ### ✨ Features
 
-* refactor layout to replace Header with GeneralToolbar and enhance toolbar functionality ([7b36b70](https://github.com/travel-albums-ai/travel-albums/commit/7b36b703928a43d950253d9b4307f7214c35b1e7))
+* refactor layout to replace Header with GeneralTool and enhance tool functionality ([7b36b70](https://github.com/travel-albums-ai/travel-albums/commit/7b36b703928a43d950253d9b4307f7214c35b1e7))
 
 ## [1.2.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.1.0...v1.2.0) (2026-08-02)
 
 ### ✨ Features
 
-* replace Header with GeneralToolbar and refactor SearchModal ([360b91d](https://github.com/travel-albums-ai/travel-albums/commit/360b91dd167264e244209ef44a33f61a88e37872))
+* replace Header with GeneralTool and refactor SearchModal ([360b91d](https://github.com/travel-albums-ai/travel-albums/commit/360b91dd167264e244209ef44a33f61a88e37872))
 
 ## [1.1.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.0.1...v1.1.0) (2026-08-02)
 
 ### ✨ Features
 
-* implement toolbar registry and discovery for dynamic toggle components ([483001b](https://github.com/travel-albums-ai/travel-albums/commit/483001b659b475ce699856cab3b5d7d1c3105575))
+* implement tool registry and discovery for dynamic toggle components ([483001b](https://github.com/travel-albums-ai/travel-albums/commit/483001b659b475ce699856cab3b5d7d1c3105575))
 
 ## [1.0.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.0.0...v1.0.1) (2026-08-01)
 

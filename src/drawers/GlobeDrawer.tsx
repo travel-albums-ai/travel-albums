@@ -18,7 +18,7 @@ export default function GlobeDrawer() {
   const photos = showMapAll ? unfilteredPhotos : type_name === '' ? filteredPhotos : foundSet?.photos || []
 
   return (
-    <GenericPanel id="globe-drawer" defaultToolbar>
+    <GenericPanel id="globe-drawer" defaultTool>
       <AlbumGlobe photos={showMapAll ? unfilteredPhotos : photos} multiplier={1.1} />
     </GenericPanel>
   );

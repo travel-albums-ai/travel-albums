@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "search-modal",
-  toolbar: [
+  tool: [
     {
       id: 'header',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/MixedTools/SearchModal'),
-} as ToolbarMeta;
+} as ToolMeta;

@@ -30,7 +30,7 @@ export default function ReleasePage() {
           <li>Efficient client-side photo indexing and metrics (indexer) 📊</li>
           <li>Favorites, pinned and private photo collections ⭐📌🔒</li>
           <li>Geolocation-aware views using airports & capitals data ✈️🏙️</li>
-          <li>Accessible UI helpers: theme switcher, toolbars, drawers, and modals 🎛️</li>
+          <li>Accessible UI helpers: theme switcher, tools, drawers, and modals 🎛️</li>
         </ul>
       </section>
 
@@ -59,7 +59,7 @@ export default function ReleasePage() {
           </li>
           <li>
             <strong>UX patterns:</strong> single-component pages, modular
-            toolbars/drawers, and small focused components for predictable
+            tools/drawers, and small focused components for predictable
             composition and easy testing.
           </li>
         </ul>

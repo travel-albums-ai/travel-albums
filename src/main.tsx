@@ -1,6 +1,6 @@
 import AppRoutes from '@/components/AppRoutes';
 import '@/lib/i18n';
-import { warmToolbarDiscovery, warmToolbarGroup } from '@/toolbarDiscovery';
+import { warmToolDiscovery, warmToolGroup } from '@/toolDiscovery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -20,16 +20,16 @@ declare global {
   }
 }
 
-const warmToolbar = () => {
-  warmToolbarDiscovery();
-  warmToolbarGroup('header');
+const warmTool = () => {
+  warmToolDiscovery();
+  warmToolGroup('header');
 };
 
 if (typeof window !== 'undefined') {
   if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(warmToolbar, { timeout: 250 });
+    window.requestIdleCallback(warmTool, { timeout: 250 });
   } else {
-    globalThis.setTimeout(warmToolbar, 0);
+    globalThis.setTimeout(warmTool, 0);
   }
 }
 

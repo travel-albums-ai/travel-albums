@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "selectionMode",
-  toolbar: [
+  tool: [
     ...['rows-drawer', 'selected-photos-drawer', 'scroller-drawer', 'calendar-drawer'].map(id => ({
       id,
       side: 'left',
@@ -11,4 +11,4 @@ export const meta = {
     })),
   ],
   loader: () => import('@/tools/ActionTools/SelectionToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

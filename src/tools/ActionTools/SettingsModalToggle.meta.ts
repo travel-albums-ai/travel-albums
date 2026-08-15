@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "settingsModalToggle",
-  toolbar: [
+  tool: [
     {
       id: 'header',
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/SettingsModalToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

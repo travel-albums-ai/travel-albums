@@ -1,9 +1,9 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "goToSettings",
   enabled: false,
-  toolbar: [
+  tool: [
     {
       id: 'header',
       side: 'right',
@@ -11,4 +11,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/MixedTools/GoToSettingsToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

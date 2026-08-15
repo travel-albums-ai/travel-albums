@@ -1,21 +1,21 @@
-import GeneralToolbar from '@/layout/components/GeneralToolbar';
+import GeneralTool from '@/layout/components/GeneralTool';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 interface Props {
   id: string;
-  defaultToolbar?: boolean;
-  toolbarContext?: any;
-  toolbar?: React.ReactNode;
+  defaultTool?: boolean;
+  toolContext?: any;
+  tool?: React.ReactNode;
   children?: React.ReactNode
 }
 
 export default function GenericPanel({
   id,
-  defaultToolbar = false,
-  toolbarContext,
-  toolbar,
+  defaultTool = false,
+  toolContext,
+  tool,
   children
 }: Props) {
   const [collapsed, setCollapsed] = useState(false);
@@ -29,11 +29,11 @@ export default function GenericPanel({
       height: '100%',
       flex: '1 1 auto',
     }}>
-      {!collapsed && (toolbar || defaultToolbar) && <Box sx={wrapperSx} >
-        {defaultToolbar && <GeneralToolbar group={id} context={toolbarContext} />}
-        {toolbar}
+      {!collapsed && (tool || defaultTool) && <Box sx={wrapperSx} >
+        {defaultTool && <GeneralTool group={id} context={toolContext} />}
+        {tool}
       </Box>}
-      {toolbar && <Box sx={{
+      {tool && <Box sx={{
         width: '100%',
         height: '2px',
         display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer',

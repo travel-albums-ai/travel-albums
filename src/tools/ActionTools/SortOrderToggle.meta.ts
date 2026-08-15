@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "sort-order-toggle",
-  toolbar: [
+  tool: [
     {
       id: 'selected-photos-drawer',
       side: 'left',
@@ -25,4 +25,4 @@ export const meta = {
     },
   ],
   loader: () => import('@/tools/ActionTools/SortOrderToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

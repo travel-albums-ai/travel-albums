@@ -40,7 +40,7 @@ export default function NegativeConverterWrapper({
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);
 
   return (
-    <GenericPanel id="adjustments-drawer" defaultToolbar>
+    <GenericPanel id="adjustments-drawer" defaultTool>
       <Box id="negative-converter-wrapper"
         sx={{
           alignItems: 'stretch',

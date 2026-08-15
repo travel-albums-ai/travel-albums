@@ -5,7 +5,7 @@ import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import BreadscrumbsPrimary from '@/layout/BreadcrumbsToolbar/BreadscrumbsPrimary';
+import BreadscrumbsPrimary from '@/layout/BreadcrumbsTool/BreadscrumbsPrimary';
 import GroupingPreviewItemNg from '@/pages/components/GroupingPreviewItemNg';
 import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +29,7 @@ export default function SelectedPage_type() {
         </Box>
       </BreadscrumbsPrimary>
 
-      <GenericPanel id="selected-page-drawer" toolbar={
+      <GenericPanel id="selected-page-drawer" tool={
         <>
           {type_name === 'nowAndThen' && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
             <Typography sx={{ fontStyle: 'italic' }} variant="subtitle2" color="textPrimary">{t('nowAndThenTagline')}</Typography>

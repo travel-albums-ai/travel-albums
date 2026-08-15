@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "mapShowPreview",
-  toolbar: [
+  tool: [
     {
       id: 'globe-drawer',
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/MapShowPreviewToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

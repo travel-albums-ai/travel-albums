@@ -1,15 +1,15 @@
 import { ComponentType } from 'react';
 
-export interface ToolbarComponentProps {
+export interface ToolComponentProps {
   context?: unknown;
 }
 
-export interface ToolbarMeta {
+export interface ToolMeta {
   id: string;
 
   enabled?: boolean;
 
-  toolbar?: {
+  tool?: {
     id: string;
     side: 'left' | 'right';
     priority?: number;
@@ -17,36 +17,36 @@ export interface ToolbarMeta {
   }[];
 
   loader: () => Promise<{
-    default: ComponentType<ToolbarComponentProps>;
+    default: ComponentType<ToolComponentProps>;
   }>;
 }
 
-class ToolbarRegistry {
-  private items = new Map<string, ToolbarMeta>();
+class ToolRegistry {
+  private items = new Map<string, ToolMeta>();
 
   private componentCache = new WeakMap<
-    ToolbarMeta['loader'],
-    ComponentType<ToolbarComponentProps>
+    ToolMeta['loader'],
+    ComponentType<ToolComponentProps>
   >();
 
   private preloadCache = new WeakMap<
-    ToolbarMeta['loader'],
-    Promise<ComponentType<ToolbarComponentProps>>
+    ToolMeta['loader'],
+    Promise<ComponentType<ToolComponentProps>>
   >();
 
-  private groupCache = new Map<string, ToolbarMeta[]>();
+  private groupCache = new Map<string, ToolMeta[]>();
 
-  private groupSideCache = new Map<string, ToolbarMeta[]>();
+  private groupSideCache = new Map<string, ToolMeta[]>();
 
-  private sidePriority(meta: ToolbarMeta, side: 'left' | 'right') {
-    return meta.toolbar?.find((g) => g.side === side)?.priority ?? 0;
+  private sidePriority(meta: ToolMeta, side: 'left' | 'right') {
+    return meta.tool?.find((g) => g.side === side)?.priority ?? 0;
   }
 
-  register(meta: ToolbarMeta) {
+  register(meta: ToolMeta) {
     const existing = this.items.get(meta.id);
 
     if (existing && existing.loader !== meta.loader) {
-      console.warn(`Duplicate toolbar meta id '${meta.id}' detected. Skipping registration.`);
+      console.warn(`Duplicate tool meta id '${meta.id}' detected. Skipping registration.`);
       return;
     }
 
@@ -63,7 +63,7 @@ class ToolbarRegistry {
     return [...this.items.values()];
   }
 
-  toolbar(group: string) {
+  tool(group: string) {
     const cached = this.groupCache.get(group);
 
     if (cached) {
@@ -71,14 +71,14 @@ class ToolbarRegistry {
     }
 
     const items = this.all().filter((x) =>
-      x.toolbar?.some((g) => g.id === group)
+      x.tool?.some((g) => g.id === group)
     );
 
     this.groupCache.set(group, items);
     return items;
   }
 
-  toolbarBySide(group: string, side: 'left' | 'right') {
+  toolBySide(group: string, side: 'left' | 'right') {
     const cacheKey = `${group}:${side}`;
     const cached = this.groupSideCache.get(cacheKey);
 
@@ -86,15 +86,15 @@ class ToolbarRegistry {
       return cached;
     }
 
-    const items = this.toolbar(group)
-      .filter((x) => x.toolbar?.some((g) => g.side === side && g.id === group))
+    const items = this.tool(group)
+      .filter((x) => x.tool?.some((g) => g.side === side && g.id === group))
       .sort((a, b) => this.sidePriority(a, side) - this.sidePriority(b, side));
 
     this.groupSideCache.set(cacheKey, items);
     return items;
   }
 
-  async preload(meta: ToolbarMeta) {
+  async preload(meta: ToolMeta) {
     const cached = this.componentCache.get(meta.loader);
 
     if (cached) {
@@ -120,13 +120,13 @@ class ToolbarRegistry {
     return loading;
   }
 
-  preloadAll(metas: ToolbarMeta[]) {
+  preloadAll(metas: ToolMeta[]) {
     return Promise.all(metas.map((meta) => this.preload(meta)));
   }
 
-  resolve(meta: ToolbarMeta) {
+  resolve(meta: ToolMeta) {
     return this.componentCache.get(meta.loader) ?? null;
   }
 }
 
-export const toolbarRegistry = new ToolbarRegistry();
+export const toolRegistry = new ToolRegistry();

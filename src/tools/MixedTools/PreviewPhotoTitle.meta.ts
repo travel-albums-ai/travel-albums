@@ -1,8 +1,8 @@
-import type { ToolbarMeta } from '@/toolbarRegistry';
+import type { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "previewPhotoTitle",
-  toolbar: [
+  tool: [
     {
       id: 'photo-drawer',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/MixedTools/PreviewPhotoTitle'),
-} as ToolbarMeta;
+} as ToolMeta;

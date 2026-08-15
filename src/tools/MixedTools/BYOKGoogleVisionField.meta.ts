@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "byok-google-vision-field",
-  toolbar: [
+  tool: [
     {
       id: 'labeler-drawer',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/MixedTools/BYOKGoogleVisionField'),
-} as ToolbarMeta;
+} as ToolMeta;

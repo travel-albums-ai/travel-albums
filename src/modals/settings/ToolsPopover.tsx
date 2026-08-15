@@ -1,24 +1,24 @@
-import GeneralToolbar from '@/layout/components/GeneralToolbar';
-import { toolbarRegistry } from '@/toolbarRegistry';
+import GeneralTool from '@/layout/components/GeneralTool';
+import { toolRegistry } from '@/toolRegistry';
 import { Box, Stack, Typography } from '@mui/material';
 
-export default function ToolbarsPopover() {
-  const toolbars = toolbarRegistry.all()
+export default function ToolsPopover() {
+  const tools = toolRegistry.all()
 
-  const toolbarIds = [...new Set(toolbars.map((toolbar) => toolbar.toolbar?.flatMap((item) => item.id)).flat().filter(Boolean) as string[])]
+  const toolIds = [...new Set(tools.map((tool) => tool.tool?.flatMap((item) => item.id)).flat().filter(Boolean) as string[])]
 
   return <>
     <Stack sx={{ gap: 0.5, height: '600px', overflow: 'auto' }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
-      {toolbarIds.map((toolbarId) => {
-        const toolbar = toolbars.find((toolbar) => toolbar.toolbar?.some((item) => item.id === toolbarId))
-        if (!toolbar) {
+      {toolIds.map((toolId) => {
+        const tool = tools.find((tool) => tool.tool?.some((item) => item.id === toolId))
+        if (!tool) {
           return null
         }
 
-        return <Box key={toolbarId} sx={{ display: 'flex', pointerEvents: 'none', flexDirection: 'column', alignItems: 'flex-start', gap: 1, p: 1, borderRadius: 1, '&:hover': { bgcolor: 'action.hover' } }}>
-          <Typography variant="caption" color="textSecondary">{toolbarId}</Typography>
+        return <Box key={toolId} sx={{ display: 'flex', pointerEvents: 'none', flexDirection: 'column', alignItems: 'flex-start', gap: 1, p: 1, borderRadius: 1, '&:hover': { bgcolor: 'action.hover' } }}>
+          <Typography variant="caption" color="textSecondary">{toolId}</Typography>
           <Box sx={{ width: '100%', overflow: 'auto' }}>
-            <GeneralToolbar group={toolbarId} context={{ sidebarSearchOpen: false }} />
+            <GeneralTool group={toolId} context={{ sidebarSearchOpen: false }} />
           </Box>
         </Box>
       })}

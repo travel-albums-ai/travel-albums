@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "privateToggle",
-  toolbar: [
+  tool: [
     {
       id: 'photo-drawer',
       side: 'left',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/PrivateToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

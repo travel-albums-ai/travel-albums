@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "scroller-columns-toggle",
-  toolbar: [
+  tool: [
     {
       id: 'scroller-drawer',
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/ActionTools/ScrollerColumnsToggle'),
-} as ToolbarMeta;
+} as ToolMeta;

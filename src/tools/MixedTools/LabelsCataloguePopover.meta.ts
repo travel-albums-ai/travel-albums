@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "labels-catalogue-popover",
-  toolbar: [
+  tool: [
     {
       id: 'labeler-drawer',
       side: 'right',
@@ -10,4 +10,4 @@ export const meta = {
     }
   ],
   loader: () => import('@/tools/MixedTools/LabelsCataloguePopover'),
-} as ToolbarMeta;
+} as ToolMeta;

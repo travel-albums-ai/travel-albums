@@ -35,7 +35,7 @@ export default function AutoDescriptionDrawer() {
   const uniquePlaces =  [...new Set(selectedPhotos?.map(p => p?.city).map(c => c?.name))]
 
   return (
-    <GenericPanel id="auto-description-drawer" defaultToolbar toolbar={<>
+    <GenericPanel id="auto-description-drawer" defaultTool tool={<>
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
         <SolidChip count={batchSize} label="batch size" minWidth={80} />
         <IconButton onClick={() => setBatchSize(batchSize - 1)} disabled={batchSize <= 1}>

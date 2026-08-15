@@ -1,8 +1,8 @@
-import { ToolbarMeta } from '@/toolbarRegistry';
+import { ToolMeta } from '@/toolRegistry';
 
 export const meta = {
   id: "pinned",
-  toolbar: [
+  tool: [
     {
       id: 'selected-photos-drawer',
       side: 'left',
@@ -29,4 +29,4 @@ export const meta = {
     },
   ],
   loader: () => import('@/tools/ActionTools/PinnedToggle'),
-} as ToolbarMeta;
+} as ToolMeta;
