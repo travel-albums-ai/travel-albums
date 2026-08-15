@@ -20,8 +20,6 @@ export default function RowsDrawer() {
   const foundSet = foundSection?.data?.find((d: any) => d.name === id)
   const photos = showAll ? photosFiltered : foundSet?.photos || []
 
-  console.log('RowsDrawer', { type_name, id, showAll, foundSection, foundSet, photos })
-
   return (
     <GenericPanel id="rows-drawer" defaultToolbar toolbarContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
       <AllPhotosRowsVirtuoso photos={photos} />
