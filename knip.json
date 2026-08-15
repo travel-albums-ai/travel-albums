@@ -5,9 +5,7 @@
   ],
 
   "project": [
-    "src/**/*.{ts,tsx}",
-    "server-utils/**/*",
-    "scripts/**/*"
+    "src/**/*.{ts,tsx}"
   ],
 
   "ignore": [

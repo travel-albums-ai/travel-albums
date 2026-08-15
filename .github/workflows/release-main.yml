@@ -35,23 +35,7 @@ jobs:
       - name: 📥 Install deps
         run: npm ci
 
-      - name: 🟡 Install Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: 🧰 Build bun package
-        run: npm run bun:package
-
       - name: 🏷️ Create release (npm run next)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run next
-
-      - name: 📦 Upload .exe files as workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: bun-executables
-          path: |
-            **/TravelAlbums*.exe
-          retention-days: 2

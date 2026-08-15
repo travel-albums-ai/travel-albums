@@ -7,7 +7,7 @@
 
 > **TL;DR:** A local-first React gallery for exploring a Google Takeout-style photo archive. It indexes photo metadata, generates thumbnails, and turns a large personal collection into filterable galleries, timelines, places, trips, albums, and maps.
 
-Travel Albums pairs a Vite/React interface with a small Express server and a Node-based indexer. Your original files remain on disk; the app reads from configured folders and serves local previews.
+Travel Albums is a Vite/React interface for exploring a Google Takeout-style photo archive.
 
 ## ✨ What it can do
 
@@ -18,47 +18,25 @@ Travel Albums pairs a Vite/React interface with a small Express server and a Nod
 - 📍 Use EXIF/GPS metadata for location-aware views and nearby-place suggestions.
 - 🔎 Filter, sort, search, pin, select, favorite, tag, ignore, or mark photos private.
 - ⌨️ Navigate and select photos with keyboard shortcuts.
-- 🗂️ Generate thumbnails and normalized metadata from Takeout sidecar JSON files.
-- ⚙️ Configure source, cache, metadata, thumbnail size, and quality paths through the UI/server configuration.
+- 🗂️ Explore indexed thumbnails and normalized metadata from Takeout sidecar JSON files.
 - 🎞️ Inspect EXIF details, maps, charts, collages, and image-negative conversion tools and adjustments tools.
 
 ## 🚀 Quick start
 
 ### Prerequisites
 
-- Node.js 18 or higher (a current LTS release is recommended). The bundled server targets Node 18; newer supported Node releases are expected to work.
+- Node.js 18 or higher (a current LTS release is recommended).
 - npm
-- A local photo archive with Google Takeout-compatible JSON sidecars
-- Enough disk space for the thumbnail cache
 
 
 ### Install and run
-
-> ⚠️ **Local-only data:** the server can read your configured media directories. Before starting it, keep the machine firewall enabled and do not expose port `3001` (or your chosen `PORT`) to untrusted networks.
 
 ```bash
 npm install
 npm run dev
 ```
 
-This starts:
-
-| Service | Default address | Purpose |
-| --- | --- | --- |
-| Vite client | `http://localhost:5173` | React gallery UI |
-| Express server | `http://localhost:3001` | Local archive, thumbnail, metadata, and job API |
-
-> 💡 Set `PORT` before starting the server to use another API port, for example `PORT=4000 npm run server`.
-
-### Index a collection
-
-```bash
-npm run indexer:hdd
-```
-
-The indexer reads `server-config.json`, discovers JSON sidecars, creates thumbnails under `TARGET_ROOT/thumbnails`, and appends normalized records to `TARGET_ROOT/metadata.json`. Re-running it resumes from metadata already written, so it is suitable for long-running collections.
-
-> ⚠️ **Privacy:** this application is intended for local use. Do not expose the Express server to an untrusted network: it reads local media and offers configured, allowlisted script jobs.
+This starts the Vite development client at `http://localhost:5173`.
 
 ## 🧑‍💻 Everyday use
 
@@ -69,7 +47,7 @@ The indexer reads `server-config.json`, discovers JSON sidecars, creates thumbna
 | Change presentation | Use the gallery-type control to switch grid, rows, scroller, per-day, or negative modes |
 | Compare or curate | Turn on selection mode, select photos, then apply favorite/private/ignore/tag actions |
 | Navigate efficiently | Use `←` / `→` to move the preview; in selection mode, use `Enter` to toggle the current photo |
-| Refresh source data | Check **Indexer** and **Settings** |
+| Refresh source data | Reload the indexed data available to the client |
 
 The UI uses hash routing, so it can be hosted from a relative path and its views can be deep-linked with URLs such as `#/allPhotos` and `#/selectedPhotos/:type_name/:id`.
 
@@ -84,14 +62,9 @@ The UI uses hash routing, so it can be hosted from a relative path and its views
 │   ├── hooks/            # Fetching, transforms, pipelines, sections, and workers
 │   ├── layout/           # Header, sidebar, breadcrumbs, status bar, shell
 │   ├── lib/              # Shared domain types, i18n, storage, and services
-│   ├── modals/           # Onboarding, server, search, and indexer flows
+│   ├── modals/           # Onboarding, search, and gallery flows
 │   ├── pages/            # Route-level gallery/dashboard/settings views
 │   └── routes.ts         # Data-driven route normalization and menu generation
-├── scripts/
-│   └── indexer.mjs       # Takeout scanner, thumbnail creator, metadata writer
-├── server-utils/         # Compression, filesystem, thumbnail, and job helpers
-├── server.mjs            # Local Express API and static media serving
-├── server-config.json    # Local archive/cache configuration (machine-specific)
 └── vite.config.ts        # Vite, aliases, build options, and bundle analysis
 ```
 
@@ -106,13 +79,6 @@ The UI uses hash routing, so it can be hosted from a relative path and its views
 - **i18next** supplies localization wiring.
 
 `AppProviders` composes settings, theme, notifications, filters, selection, labels, favorites, privacy, and derived gallery-data providers around the route tree. This keeps page components focused on rendering and interaction.
-
-### Server and indexer
-
-- The Express server exposes health, configuration, local file, thumbnail, metadata, city, airport, and script-job endpoints.
-- Images are served only after path containment and image-type checks.
-- The indexer uses `sharp` to create thumbnails, reads JSON sidecars, derives dimensions and location context, and writes records incrementally.
-- `server-utils/` centralizes filesystem, compression, thumbnails, and controlled script execution.
 
 ### Data model
 
@@ -157,22 +123,15 @@ Trip Gallery is designed for photo libraries that do not fit comfortably in a si
 - `react-virtuoso` backs grid and row gallery renderers to virtualize long lists.
 - Background workers perform expensive grouping and filtering for sections.
 - Derived hooks favor memoized, stable data transformations to limit rerenders.
-- The indexer uses configurable HDD/SSD concurrency, streams metadata in batches, resumes existing records, and disables Sharp’s in-process cache.
-- The server coalesces concurrent archive scans, caches selected API responses, compresses responses, and emits immutable cache headers for thumbnails and geographic reference data.
 - Vite ignores archive, thumbnail, and sprite folders during development watch; `npm run analyze` emits `dist/stats.json` for bundle inspection.
 
 ## 🛠️ Commands
 
 | Command | Description |
 | --- | --- |
-| `npm run dev` | Start the Vite client and local server together |
-| `npm run server` | Start only the Express server |
+| `npm run dev` | Start the Vite client |
 | `npm run build` | Create a production client build |
-| `npm run preview` | Build, preview the client, and start the server |
-
-## 🧠 Scripts documentation
-
-- Human + AI guide for the indexing pipeline: [scripts/README.md](scripts/README.md)
+| `npm run preview` | Build and preview the client |
 
 ## ✅ Contribution guidelines
 
@@ -187,7 +146,7 @@ Trip Gallery is designed for photo libraries that do not fit comfortably in a si
 
 ## 📦 Build and packaging
 
-The standard build produces static client assets in `dist/` with relative asset paths, which supports desktop/embedded packaging. The project also includes commands to bundle the Node server and indexer with esbuild and copy artifacts to a sibling builder project.
+The standard build produces static client assets in `dist/` with relative asset paths, which supports desktop/embedded packaging.
 
 ---
 
