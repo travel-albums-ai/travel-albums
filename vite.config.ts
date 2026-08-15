@@ -38,6 +38,10 @@ export default defineConfig(({ mode, command }) => {
     build: {
       chunkSizeWarningLimit: 2000,
       sourcemap: shouldVisualize,
+      esbuild: {
+        legalComments: 'none',
+        drop: ['console', 'debugger'],
+      },
       rolldownOptions: {
         output: shouldVisualize ? {
           manualChunks(id) {

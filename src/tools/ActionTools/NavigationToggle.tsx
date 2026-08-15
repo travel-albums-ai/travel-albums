@@ -57,7 +57,6 @@ export default function NavigationToggle() {
         tooltip: t('navRefresh')
       },
       {
-        webMcp: true,
         icon: <Database />,
         onClick: () => clearCache(),
         tooltip: "Reload data from server"
