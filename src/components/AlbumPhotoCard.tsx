@@ -10,46 +10,165 @@ import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Card, Tooltip, Typography, useTheme } from '@mui/material';
 import dayjs from 'dayjs';
-import { useCallback, useMemo } from 'react';
+import {
+  memo,
+  useCallback,
+  useMemo,
+  type CSSProperties,
+  type MouseEvent,
+} from 'react';
 
 interface AlbumPhotoCardProps {
-  photo: GalleryPhoto
-  style?: React.CSSProperties
-  original?: boolean
+  photo: GalleryPhoto;
+  style?: CSSProperties;
+  original?: boolean;
 }
 
 function prettyTime(dateInput: string) {
   const d = dayjs(dateInput);
   const hour = d.hour();
 
-  let partOfDay = '';
-
-  if (hour >= 5 && hour < 12) {
-    partOfDay = 'Morning';
-  } else if (hour < 18) {
-    partOfDay = 'Afternoon';
-  } else if (hour < 22) {
-    partOfDay = 'Evening';
-  } else {
-    partOfDay = 'Night';
-  }
+  const partOfDay =
+    hour >= 5 && hour < 12
+      ? 'Morning'
+      : hour < 18
+        ? 'Afternoon'
+        : hour < 22
+          ? 'Evening'
+          : 'Night';
 
   return `${partOfDay}, ${d.format('D MMM YYYY')}`;
 }
 
-export default function AlbumPhotoCard({
+/**
+ * Static styles are kept outside the component.
+ *
+ * This avoids constructing the same large style objects for every
+ * AlbumPhotoCard render.
+ */
+const cardSx = {
+  position: 'relative',
+  display: 'flex',
+  height: '100%',
+  overflow: 'hidden',
+  borderRadius: 2,
+  cursor: 'pointer',
+  transition: 'filter 0.25s',
+
+  '&:hover': {
+    filter: 'saturate(1.25)',
+
+    '& .album-photo-description': {
+      opacity: 0,
+      pointerEvents: 'none',
+    },
+
+    '& .album-photo-tags': {
+      bottom: 56,
+    },
+
+    '& .album-photo-details': {
+      opacity: 1,
+      pointerEvents: 'auto',
+    },
+  },
+
+  '& .album-photo-description': {
+    opacity: 1,
+    transition: 'opacity 0.15s',
+  },
+
+  '& .album-photo-details': {
+    transition: 'opacity 0.15s',
+  },
+} as const;
+
+const toolbarSx = {
+  position: 'absolute',
+  top: 4,
+  right: 4,
+  left: 4,
+  height: 40,
+  zIndex: 2,
+} as const;
+
+const descriptionSx = {
+  position: 'absolute',
+  right: 16,
+  bottom: 0,
+  left: 16,
+  zIndex: 2,
+} as const;
+
+const tagsSx = {
+  position: 'absolute',
+  bottom: 8,
+  left: 8,
+  zIndex: 2,
+  display: 'flex',
+  gap: 0.5,
+  flexWrap: 'wrap',
+  maxWidth: '70%',
+  transition: 'bottom 0.15s',
+} as const;
+
+const tagSx = {
+  color: '#fff',
+  px: 1,
+  py: 0.5,
+  borderRadius: 2,
+  fontSize: '0.625rem',
+  fontWeight: 500,
+} as const;
+
+const detailsSx = {
+  position: 'absolute',
+  right: 0,
+  bottom: 0,
+  left: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  gap: 0.5,
+  borderRadius: 2,
+  borderTopLeftRadius: 0,
+  borderTopRightRadius: 0,
+  zIndex: 3,
+  px: 2,
+  py: 0.75,
+} as const;
+
+function AlbumPhotoCard({
   photo,
   style,
   original = false,
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
 
+  /*
+   * These are the values that can affect this individual card.
+   *
+   * Keeping the selectors narrow is important with Zustand-style stores:
+   * unrelated store changes should not cause every card to rerender.
+   */
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
-  const showPersistentDetails = useAlbumPhotoCardStoreSelector((state) => state.showPersistentDetails);
-  const isPreviewed = useSettingsStoreSelector((state) => state.previewPhotoObj?.id === photo.id);
+  const showPersistentDetails = useAlbumPhotoCardStoreSelector(
+    (state) => state.showPersistentDetails,
+  );
+
   const selectMode = useSettingsStoreSelector((state) => state.selectMode);
-  const photoTagIds = useTagsStoreSelector((state) => state.taggedPhotos.find((tp) => tp.id === photo.id)?.tags);
+
+  const isPreviewed = useSettingsStoreSelector(
+    (state) => state.previewPhotoObj?.id === photo.id,
+  );
+
+  const photoTagIds = useTagsStoreSelector(
+    (state) =>
+      state.taggedPhotos.find((tp) => tp.id === photo.id)?.tags ?? null,
+  );
+
+  const tags = useTagsStoreSelector((state) => state.tags);
 
   const { setPreviewPhotoObj, setFocusedPhoto } = useSettings();
   const { isFavorite } = useFavorites();
@@ -57,15 +176,42 @@ export default function AlbumPhotoCard({
   const favorite = isFavorite(photo.id);
   const isSelected = useSelected_isSelected(photo.id);
 
-  const tags = useTagsStoreSelector((state) => state.tags);
+  /*
+   * O(1) tag resolution instead of doing:
+   *
+   *   tags.find(...)
+   *   tags.find(...)
+   *   tags.find(...)
+   *
+   * for every tag on every card.
+   */
+  const tagsById = useMemo(() => {
+    const map = new Map<string, (typeof tags)[number]>();
+
+    for (const tag of tags) {
+      map.set(tag.id, tag);
+    }
+
+    return map;
+  }, [tags]);
 
   const resolvedTags = useMemo(() => {
-    if (!photoTagIds?.length) return [];
+    if (!photoTagIds?.length) {
+      return [];
+    }
 
-    return photoTagIds
-      .map((tagId) => tags.find((tag) => tag.id === tagId))
-      .filter((tag): tag is NonNullable<typeof tag> => Boolean(tag));
-  }, [photoTagIds, tags]);
+    const result = [];
+
+    for (const tagId of photoTagIds) {
+      const tag = tagsById.get(tagId);
+
+      if (tag) {
+        result.push(tag);
+      }
+    }
+
+    return result;
+  }, [photoTagIds, tagsById]);
 
   const hasGps =
     Number.isFinite(photo.latitude) &&
@@ -73,99 +219,79 @@ export default function AlbumPhotoCard({
     photo.latitude !== 0 &&
     photo.longitude !== 0;
 
+  const showDetails = showPersistentDetails && width >= 150;
+  const canShowDate = width >= 250;
+  const canShowDetails = width >= 150;
+
+  const formattedTime = useMemo(
+    () => (canShowDate ? prettyTime(photo.takenAt) : ''),
+    [canShowDate, photo.takenAt],
+  );
+
   const handleMouseEnter = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      if (hasGps && e.shiftKey) {
+    (event: MouseEvent<HTMLElement>) => {
+      if (hasGps && event.shiftKey) {
         setFocusedPhoto(photo.id);
       }
     },
-    [hasGps, photo.id, setFocusedPhoto]
+    [hasGps, photo.id, setFocusedPhoto],
   );
 
   const handleClick = useCallback(() => {
     setPreviewPhotoObj(photo);
   }, [photo, setPreviewPhotoObj]);
 
-  const showDetails = showPersistentDetails && width >= 150;
+  const thumbnailBorder = useMemo(() => {
+    if (selectMode && isSelected) {
+      return `3px solid ${theme.palette.success.main}`;
+    }
+
+    if (isPreviewed) {
+      return `4px solid ${theme.palette.primary.main}`;
+    }
+
+    return 'none';
+  }, [
+    isPreviewed,
+    isSelected,
+    selectMode,
+    theme.palette.primary.main,
+    theme.palette.success.main,
+  ]);
 
   return (
     <Card
+      component="article"
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}
-      component="article"
       sx={{
-        position: 'relative',
-        display: 'flex',
-        minHeight: `${height}px`,
-        height: '100%',
-        overflow: 'hidden',
-        borderRadius: 2,
-        cursor: 'pointer',
-        transition: 'filter 0.25s',
-
-        '&:hover': {
-          filter: 'saturate(1.25)',
-
-          // Hide the read-only description while hovering.
-          '& .album-photo-description': {
-            opacity: 0,
-            pointerEvents: 'none',
-          },
-
-          // Move tags upward while hovering.
-          '& .album-photo-tags': {
-            bottom: 56,
-          },
-
-          // Show details while hovering.
-          '& .album-photo-details': {
-            opacity: 1,
-            pointerEvents: 'auto',
-          },
-        },
-
-        // Details are hidden unless persistent details are enabled.
-        '& .album-photo-details': {
-          opacity: showDetails ? 0 : 0,
-          pointerEvents: 'none',
-          transition: 'opacity 0.15s',
-        },
-
-        // Description is normally visible.
-        '& .album-photo-description': {
-          opacity: 1,
-          transition: 'opacity 0.15s',
-        },
-
+        ...cardSx,
+        minHeight: height,
         ...style,
+
+        /*
+         * Persistent details are visible immediately.
+         * Otherwise they only become visible through :hover.
+         */
+        '& .album-photo-details': {
+          ...cardSx['& .album-photo-details'],
+          opacity: showDetails ? 1 : 0,
+          pointerEvents: showDetails ? 'auto' : 'none',
+        },
       }}
     >
       <AlbumPhotoThumbnailBackgroundNg
         photo={photo}
         width={photo.width}
-        original={original}
         height={height}
+        original={original}
         style={{
-          border:
-            selectMode && isSelected
-              ? `3px solid ${theme.palette.success.main}`
-              : isPreviewed
-                ? `4px solid ${theme.palette.primary.main}`
-                : 'none',
+          border: thumbnailBorder,
           borderRadius: 8,
         }}
       />
 
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 4,
-          right: 4,
-          left: 4,
-          height: '40px',
-          zIndex: 2,
-        }}
-      >
+      <Box sx={toolbarSx}>
         <GeneralRegistryToolbar
           group="album-photo-card"
           context={{
@@ -178,13 +304,7 @@ export default function AlbumPhotoCard({
 
       <Box
         className="album-photo-description"
-        sx={{
-          position: 'absolute',
-          bottom: 0,
-          right: 16,
-          left: 16,
-          zIndex: 2,
-        }}
+        sx={descriptionSx}
       >
         <DescribePhotoReadOnly photoId={photo.id} />
       </Box>
@@ -192,29 +312,14 @@ export default function AlbumPhotoCard({
       {resolvedTags.length > 0 && (
         <Box
           className="album-photo-tags"
-          sx={{
-            position: 'absolute',
-            bottom: 8,
-            left: 8,
-            zIndex: 2,
-            display: 'flex',
-            gap: 0.5,
-            flexWrap: 'wrap',
-            maxWidth: '70%',
-            transition: 'bottom 0.15s',
-          }}
+          sx={tagsSx}
         >
           {resolvedTags.map((tag) => (
             <Box
               key={tag.id}
               sx={{
+                ...tagSx,
                 backgroundColor: `${tag.color}BD`,
-                color: '#fff',
-                px: 1,
-                py: 0.5,
-                borderRadius: 2,
-                fontSize: '0.625rem',
-                fontWeight: 500,
               }}
             >
               {tag.name}
@@ -223,36 +328,16 @@ export default function AlbumPhotoCard({
         </Box>
       )}
 
-      {width >= 150 && (
+      {canShowDetails && (
         <Box
           className="album-photo-details"
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            borderRadius: 2,
-            borderTopLeftRadius: 0,
-            borderTopRightRadius: 0,
-            gap: 0.5,
-            border: (theme) =>
-              `1px dashed ${theme.palette.divider}42`,
-            bgcolor: (theme) =>
-              `${theme.palette.background.paper}AA`,
-            zIndex: 3,
-            px: 2,
-            py: 0.75,
-
-            ...(showDetails && {
-              opacity: 1,
-              pointerEvents: 'auto',
-            }),
+            ...detailsSx,
+            border: `1px dashed ${theme.palette.divider}42`,
+            bgcolor: `${theme.palette.background.paper}AA`,
           }}
         >
-          {width >= 250 && (
+          {canShowDate && (
             <Tooltip arrow title={photo.takenAt}>
               <Typography
                 variant="caption"
@@ -263,7 +348,7 @@ export default function AlbumPhotoCard({
                   flexGrow: 1,
                 }}
               >
-                {prettyTime(photo.takenAt)}
+                {formattedTime}
               </Typography>
             </Tooltip>
           )}
@@ -278,3 +363,17 @@ export default function AlbumPhotoCard({
     </Card>
   );
 }
+
+/*
+ * The gallery can contain thousands of these.
+ *
+ * Prevent rerendering when the parent rerenders but this photo's
+ * relevant props haven't changed.
+ */
+export default memo(AlbumPhotoCard, (previous, next) => {
+  return (
+    previous.photo === next.photo &&
+    previous.original === next.original &&
+    previous.style === next.style
+  );
+});
