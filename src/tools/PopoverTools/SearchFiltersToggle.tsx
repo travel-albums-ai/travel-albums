@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import FilterPhotosPopover from '@/modals/settings/FilterPhotosPopover';
+import FilterPhotosPopover from '@/windows/settings/FilterPhotosPopover';
 import { Box } from '@mui/material';
 import { ListFilter } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

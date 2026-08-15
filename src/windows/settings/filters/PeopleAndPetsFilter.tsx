@@ -1,6 +1,6 @@
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
 import useTransform_PeopleAndPets from '@/hooks/sections/useTransform_PeopleAndPets';
-import GeneralFilter from '@/modals/settings/components/GeneralFilter';
+import GeneralFilter from '@/windows/settings/components/GeneralFilter';
 import { Users } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

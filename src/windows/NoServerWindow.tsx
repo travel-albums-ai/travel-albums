@@ -1,9 +1,9 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingsPopover from '@/modals/settings/SettingsPopover';
+import SettingsPopover from '@/windows/settings/SettingsPopover';
 import { Box, Dialog, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-export default function NoServerModal() {
+export default function NoServerWindow() {
   const serverOnline = useSettingsStoreSelector(s => s.serverOnline)
   const demoMode = useSettingsStoreSelector(s => s.demoMode)
   const { t } = useTranslation();

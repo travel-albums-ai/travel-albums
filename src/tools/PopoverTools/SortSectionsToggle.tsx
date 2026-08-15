@@ -1,7 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
-import SettingSelectRow from '@/modals/settings/components/SettingSelectRow';
+import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
 import { ArrowDown01Icon, ArrowUp01Icon, EllipsisVertical } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

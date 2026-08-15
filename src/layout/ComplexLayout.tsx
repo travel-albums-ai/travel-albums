@@ -11,8 +11,8 @@ import SidebarDrawer from '@/drawers/SidebarDrawer';
 import MainDriver from '@/drivers/MainDriver';
 import GeneralTool from '@/layout/components/GeneralTool';
 import StatusBar from '@/layout/StatusBar';
-import NoServerModal from '@/modals/NoServerModal';
-import OnboardingModal from '@/modals/OnboardingModal';
+import NoServerWindow from '@/windows/NoServerWindow';
+import OnboardingWindow from '@/windows/OnboardingWindow';
 import { Box, Theme } from '@mui/material';
 import {
   IJsonModel,
@@ -25,7 +25,7 @@ import 'flexlayout-react/style/combined.css';
 import WebMCPDataView from '@/components/WebMCPDataView';
 import AutoDescriptionDrawer from '@/drawers/AutoDescriptionDrawer';
 import i18n from '@/lib/i18n';
-import SettingsModal from '@/modals/SettingsModal';
+import SettingsWindow from '@/windows/SettingsWindow';
 import {
   useCallback,
   useEffect,
@@ -169,9 +169,9 @@ export default function ComplexLayout() {
         bgcolor: 'background.default',
         borderBottom: (theme: Theme) => `1px solid ${theme.palette.divider}`
       }} />
-      <NoServerModal />
-      <OnboardingModal />
-      <SettingsModal />
+      <NoServerWindow />
+      <OnboardingWindow />
+      <SettingsWindow />
       <MainDriver />
 
       <WebMCPDataView

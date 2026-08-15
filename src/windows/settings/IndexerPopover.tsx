@@ -1,6 +1,6 @@
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/usePost_Config';
-import SettingFieldRow from '@/modals/settings/components/SettingFieldRow';
+import SettingFieldRow from '@/windows/settings/components/SettingFieldRow';
 import { Box, Stack } from '@mui/material';
 import { File, Folder } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

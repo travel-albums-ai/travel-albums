@@ -1,8 +1,8 @@
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingSelectRow from '@/modals/settings/components/SettingSelectRow';
-import SettingsSliderRow from '@/modals/settings/components/SettingsSliderRow';
-import SettingToggleRow from '@/modals/settings/components/SettingToggleRow';
+import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
+import SettingsSliderRow from '@/windows/settings/components/SettingsSliderRow';
+import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Box, Stack } from '@mui/material';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';

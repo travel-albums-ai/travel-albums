@@ -9,5 +9,5 @@ export const meta = {
       priority: 10
     }
   ],
-  loader: () => import('@/tools/MixedTools/SearchModal'),
+  loader: () => import('@/tools/MixedTools/SearchWindow'),
 } as ToolMeta;

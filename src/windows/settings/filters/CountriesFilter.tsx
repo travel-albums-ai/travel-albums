@@ -1,6 +1,6 @@
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import useTransform_Countries from '@/hooks/sections/useTransform_Countries';
-import GeneralFilter from '@/modals/settings/components/GeneralFilter';
+import GeneralFilter from '@/windows/settings/components/GeneralFilter';
 import { SquareDashedText } from 'lucide-react';
 
 export default function CountriesFilter() {

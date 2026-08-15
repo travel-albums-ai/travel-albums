@@ -1,7 +1,7 @@
 import PopoverButton from '@/components/PopoverButton';
 import { useFilterPresetSelector, useFilterPresetStore } from '@/context/filterPresetStore';
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
-import FilterPresetsItem from '@/modals/settings/components/FilterPresetsItem';
+import FilterPresetsItem from '@/windows/settings/components/FilterPresetsItem';
 import { Box, Button, IconButton, Typography } from '@mui/material';
 import { PlusCircle, Recycle, Trash } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

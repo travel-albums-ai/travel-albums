@@ -9,5 +9,5 @@ export const meta = {
       priority: 500
     }
   ],
-  loader: () => import('@/tools/ActionTools/SettingsModalToggle'),
+  loader: () => import('@/tools/ActionTools/SettingsWindowToggle'),
 } as ToolMeta;

@@ -1,10 +1,10 @@
 import BreadcrumbsTool from '@/layout/BreadcrumbsTool/BreadcrumbsTool';
-import SearchFiles from '@/modals/components/SearchFiles';
+import SearchFiles from '@/windows/components/SearchFiles';
 import { Box } from '@mui/material';
 import { CircleX } from 'lucide-react';
 import { useState } from 'react';
 
-export default function SearchModal() {
+export default function SearchWindow() {
   const [breadcrumbs, setBreadcrumbs] = useState<boolean>(true);
 
   return (<Box sx={{ display: 'inline-flex', gap: 1, flexGrow: 1 }}>

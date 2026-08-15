@@ -1,5 +1,5 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingToggleRow from '@/modals/settings/components/SettingToggleRow';
+import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Box, Stack } from '@mui/material';
 import { Fragment } from 'react';
 

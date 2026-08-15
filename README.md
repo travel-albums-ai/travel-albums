@@ -62,7 +62,7 @@ The UI uses hash routing, so it can be hosted from a relative path and its views
 │   ├── hooks/            # Fetching, transforms, pipelines, sections, and workers
 │   ├── layout/           # Header, sidebar, breadcrumbs, status bar, shell
 │   ├── lib/              # Shared domain types, i18n, storage, and services
-│   ├── modals/           # Onboarding, search, and gallery flows
+│   ├── windows/          # Onboarding, search, and gallery flows
 │   ├── pages/            # Route-level gallery/dashboard/settings views
 │   └── routes.ts         # Data-driven route normalization and menu generation
 └── vite.config.ts        # Vite, aliases, build options, and bundle analysis

@@ -4,7 +4,7 @@ import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { Settings } from 'lucide-react';
 
-export default function SettingsModalToggle() {
+export default function SettingsWindowToggle() {
   const { setSetting } = useSettings()
   const showSettings = useSettingsStoreSelector((state) => state.showSettings);
 

@@ -1,6 +1,6 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import SettingToggleRow from '@/modals/settings/components/SettingToggleRow';
+import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Box, Stack } from '@mui/material';
 import { Ban, Check } from 'lucide-react';
 import { Fragment } from 'react';

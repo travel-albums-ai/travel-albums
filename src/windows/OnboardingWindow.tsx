@@ -26,7 +26,7 @@ const phaseSteps = [
   },
 ]
 
-export default function OnboardingModal() {
+export default function OnboardingWindow() {
   const { setSetting } = useSettings()
   const onboarding = useSettingsStoreSelector((state) => state.onboarding);
 
