@@ -1,3 +1,14 @@
+## [1.104.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.103.0...v1.104.0) (2026-08-15)
+
+### ✨ Features
+
+* **drawers:** implement dynamic drawer registration and loading mechanism ([e01f1ed](https://github.com/travel-albums-ai/travel-albums/commit/e01f1edfe6ce85bcbf14e40a8e1051a6bba5b9fe))
+
+### 🧹 Refactors
+
+* remove unused ReleasePage and CopyrightPage components and update routes ([e49fd96](https://github.com/travel-albums-ai/travel-albums/commit/e49fd967b1ac1ab1ff559e9d24443a3117134710))
+* simplify StatusBar component and introduce RegistryToolGroup for tool management ([e127f47](https://github.com/travel-albums-ai/travel-albums/commit/e127f472bdb07ee98df173a500b6ee0afba9a425))
+
 ## [1.103.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.102.0...v1.103.0) (2026-08-15)
 
 ### ✨ Features
