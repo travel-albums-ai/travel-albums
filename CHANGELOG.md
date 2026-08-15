@@ -1,3 +1,9 @@
+## [1.113.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.112.0...v1.113.0) (2026-08-15)
+
+### ✨ Features
+
+* update visibility logic in SelectionCountStatus; refactor AlbumPhotoRow and AlbumPhotoRowItem styles; enhance SettingsContent with grouped sections ([92e0d9c](https://github.com/travel-albums-ai/travel-albums/commit/92e0d9ce62a25857935cf7d5e1b39fffd49dea48))
+
 ## [1.112.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.111.0...v1.112.0) (2026-08-15)
 
 ### ✨ Features
