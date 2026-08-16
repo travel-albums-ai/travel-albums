@@ -1,4 +1,4 @@
 import { DrawerMeta } from '@/drawerRegistry';
-import { Circle } from 'lucide-react';
+import { FileSearch } from 'lucide-react';
 
-export const meta = { id: 'sidebar', icon: Circle, loader: () => import('@/drawers/SidebarDrawer') } as DrawerMeta;
+export const meta = { id: 'sidebar', icon: FileSearch, loader: () => import('@/drawers/SidebarDrawer') } as DrawerMeta;

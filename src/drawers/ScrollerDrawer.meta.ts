@@ -1,4 +1,4 @@
 import { DrawerMeta } from '@/drawerRegistry';
-import { Circle } from 'lucide-react';
+import { GalleryHorizontal } from 'lucide-react';
 
-export const meta = { id: 'scroller', icon: Circle, loader: () => import('@/drawers/ScrollerDrawer') } as DrawerMeta;
+export const meta = { id: 'scroller', icon: GalleryHorizontal, loader: () => import('@/drawers/ScrollerDrawer') } as DrawerMeta;

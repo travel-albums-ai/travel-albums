@@ -1,5 +1,5 @@
-import { ComponentType } from 'react';
 import type { LucideIcon } from 'lucide-react';
+import { ComponentType } from 'react';
 
 export interface DrawerMeta {
   id: string;

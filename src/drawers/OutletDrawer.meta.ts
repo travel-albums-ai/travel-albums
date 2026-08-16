@@ -1,4 +1,4 @@
 import { DrawerMeta } from '@/drawerRegistry';
-import { Circle } from 'lucide-react';
+import { PanelTopBottomDashed } from 'lucide-react';
 
-export const meta = { id: 'outlet', icon: Circle, loader: () => import('@/drawers/OutletDrawer') } as DrawerMeta;
+export const meta = { id: 'outlet', icon: PanelTopBottomDashed, loader: () => import('@/drawers/OutletDrawer') } as DrawerMeta;

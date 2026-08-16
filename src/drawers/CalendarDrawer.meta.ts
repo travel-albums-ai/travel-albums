@@ -1,4 +1,4 @@
 import { DrawerMeta } from '@/drawerRegistry';
-import { Circle } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
-export const meta = { id: 'calendar', icon: Circle, loader: () => import('@/drawers/CalendarDrawer') } as DrawerMeta;
+export const meta = { id: 'calendar', icon: Calendar, loader: () => import('@/drawers/CalendarDrawer') } as DrawerMeta;
