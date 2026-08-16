@@ -1,33 +1,37 @@
-import { useWebMCP } from 'usewebmcp';
+import GenericWebMCP from '@/components/GenericWebMCP';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { useEffect } from 'react';
 
-export default function WebMCPDataRun({ name, description, inputSchema, execute, deps } : { name: string; description: string; inputSchema?: any, execute: (input: any) => Promise<any>; deps?: any[] }) {
+type WebMCPDataRunProps = {
+  name: string;
+  description: string;
+  inputSchema?: any;
+  execute: (input: any) => Promise<any>;
+  deps?: any[];
+};
 
-  // const { registerTool, hasRegisteredTool } = useBYOK();
+export default function WebMCPDataRun({ name, description, inputSchema, execute, deps }: WebMCPDataRunProps) {
+  const { registerTool } = useBYOK();
+  const webMcp = useBYOKStoreSelector((state) => state.webMcp);
 
-  // useEffect(() => {
-  //   if (hasRegisteredTool(name)) {
-  //     return;
-  //   }
-  //   registerTool({
-  //     name,
-  //     description,
-  //     inputSchema: inputSchema || {
-  //       type: 'object',
-  //       properties: {},
-  //     },
-  //     execute,
-  //   });
-  // }, []);
+  useEffect(() => {
+    registerTool({
+      name,
+      description,
+      inputSchema,
+      type: 'run',
+    });
+  }, [name, description, inputSchema]);
 
-  useWebMCP({
-    name,
-    description,
-    inputSchema: inputSchema || {
-      type: 'object',
-      properties: {},
-    },
-    execute,
-  }, deps || []);
-
-  return null;
+  return <>
+    {webMcp && <GenericWebMCP
+      webMcp={{
+        name,
+        description,
+        inputSchema,
+        execute,
+      }}
+      deps={deps}
+    />}
+  </>;
 }

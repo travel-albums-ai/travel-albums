@@ -1,6 +1,6 @@
+import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
-import useRegisterTool from '@/hooks/useRegisterTool';
 import BYOKPopover from '@/windows/settings/BYOKPopover';
 import DrawersPopover from '@/windows/settings/DrawersPopover';
 import FilterPhotosPopover from '@/windows/settings/FilterPhotosPopover';
@@ -49,40 +49,6 @@ export default function SettingsContent() {
   const { setSetting } = useSettings()
   const activeSettingsTab = useSettingsStoreSelector((state) => state.activeSettingsTab);
 
-  useRegisterTool(
-    {
-      name: 'toggle_settings_section',
-      description:
-        'Toggle the active settings section.',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          mode: {
-            type: 'string',
-            enum: ['layout', 'indexer', 'sections', 'demo', 'tags'],
-            description: 'Settings section to switch to.',
-          },
-        },
-      },
-      execute: async ({ mode }: { mode: 'layout' | 'indexer' | 'sections' | 'demo' | 'tags' }) => {
-        setSetting((prev) => ({
-          ...prev,
-          activeSettingsTab: mode,
-        }));
-
-        return {
-          content: [
-            {
-              type: 'text',
-              text: `Settings section switched to ${mode}.`,
-            },
-          ],
-        };
-      },
-    },
-    [activeSettingsTab, setSetting]
-  );
-
   const sections = useMemo(() => [
     { key: 'layout', title: "Interface", component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
     { key: 'tools', group: 'debug', title: "Toolbars", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
@@ -116,6 +82,40 @@ export default function SettingsContent() {
   }, [sections]);
 
   return (<>
+    <WebMCPDataRun
+      name="toggle_settings_section"
+      description="Toggle the active settings section."
+      inputSchema={{
+        type: 'object',
+        properties: {
+          type: 'object',
+          properties: {
+            mode: {
+              type: 'string',
+              enum: ['layout', 'indexer', 'sections', 'demo', 'tags'],
+              description: 'Settings section to switch to.',
+            },
+          },
+        },
+        additionalProperties: false,
+      }}
+      execute={async ({ mode }: { mode: 'layout' | 'indexer' | 'sections' | 'demo' | 'tags' }) => {
+        setSetting((prev) => ({
+          ...prev,
+          activeSettingsTab: mode,
+        }));
+
+        return {
+          content: [
+            {
+              type: 'text',
+              text: `Settings section switched to ${mode}.`,
+            },
+          ],
+        };
+      }}
+      deps={[activeSettingsTab, setSetting]}
+    />
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%" }} id="settings-content">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
         {Object.entries(groupedSections).map(([group, groupSections]) => (

@@ -1,11 +1,30 @@
-import { useWebMCP } from 'usewebmcp';
+import GenericWebMCP from '@/components/GenericWebMCP';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { useEffect } from 'react';
 
-export default function WebMCPDataView({ name, description, execute }: { name: string; description: string; execute: (input: any) => Promise<any> }) {
-  useWebMCP({
-    name,
-    description,
-    execute,
-  });
+type WebMCPDataViewProps = {
+  name: string;
+  description: string;
+  execute: (input: any) => Promise<any>;
+};
 
-  return null;
+export default function WebMCPDataView({ name, description, execute }: WebMCPDataViewProps) {
+  const { registerTool } = useBYOK();
+  const webMcp = useBYOKStoreSelector((state) => state.webMcp);
+
+  useEffect(() => {
+    registerTool({
+      name,
+      description,
+      type: 'view',
+    });
+  }, [name, description]);
+
+  return <>
+    {webMcp && <GenericWebMCP webMcp={{
+      name,
+      description,
+      execute,
+    }} />}
+  </>;
 }
