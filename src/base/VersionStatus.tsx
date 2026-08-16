@@ -1,4 +1,4 @@
-import { Tooltip, Typography } from '@mui/material';
+import SolidChip from '@/components/SolidChip';
 import packageJson from '../../package.json';
 
 export default function VersionStatus() {
@@ -6,8 +6,11 @@ export default function VersionStatus() {
   const version = packageJson.version;
 
   return (
-    <Tooltip title={`Version: ${version}`} arrow>
-      <Typography variant="caption" color="textPrimary">{version}</Typography>
-    </Tooltip>
+    <SolidChip
+      count={version}
+      label={"Version"}
+      variant="text"
+      tooltip={`Version: ${version}`}
+    />
   )
 }

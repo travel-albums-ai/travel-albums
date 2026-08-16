@@ -17,7 +17,7 @@ export default function ThumbSizeStatus() {
     setSetting((prev) => ({ ...prev, width, height }));
   };
 
-  return <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, px: 1 }} id="zoom-controls">
+  return <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, px: 1 }} id="zoom-controls">
     <ZoomOut size={16} style={{ opacity: 0.6 }} />
     <Tooltip title={t('adjustThumbnailSize', { width })} placement="top" arrow>
       <Slider

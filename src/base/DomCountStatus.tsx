@@ -1,4 +1,4 @@
-import { Tooltip, Typography } from '@mui/material';
+import SolidChip from '@/components/SolidChip';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -44,8 +44,11 @@ export default function DomCountStatus() {
   }, [])
 
   return (
-    <Tooltip title={t('domElementsTooltip')} arrow>
-      <Typography variant="caption" color="textPrimary">{count}</Typography>
-    </Tooltip>
+    <SolidChip
+      count={count}
+      label={"DOM Elements"}
+      variant="text"
+      tooltip={t('domElementsTooltip')}
+    />
   )
 }
