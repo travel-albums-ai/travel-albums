@@ -1,5 +1,6 @@
 import PopoverButton from '@/components/PopoverButton';
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
+import SettingsSection from '@/windows/components/SettingsSection';
 import FilterPresets from '@/windows/settings/components/FilterPresets';
 import SettingComponentRow from '@/windows/settings/components/SettingComponentRow';
 import SettingDateRow from '@/windows/settings/components/SettingDateRow';
@@ -11,7 +12,7 @@ import DatesFilter from '@/windows/settings/filters/DatesFilter';
 import FoldersFilter from '@/windows/settings/filters/FoldersFilter';
 import GeneralRow from '@/windows/settings/filters/GeneralRow';
 import PeopleAndPetsFilter from '@/windows/settings/filters/PeopleAndPetsFilter';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { Calendar, Folder, Image, LocateFixed, LocateOff, Users } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -71,18 +72,19 @@ export default function FilterPhotosPopover({ filter }: { filter?: string }) {
 
   return <>
 
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid', borderColor: 'divider', pb: 1, mb: 1 }} >
+    <SettingsSection>
       <FilterPresets />
-    </Box>
+    </SettingsSection>
 
-    <Stack sx={{ gap: 0.5 }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
-      {Object.entries(groupedControls)
-        .map(([category, controls], i) => (
-          <Box key={category} sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, px: 1 }}>
-              { categories.find(c => c.key === category)?.icon}
-              <Typography variant="subtitle2" sx={{ mb: 1, mt: 1, textTransform: 'capitalize' }}>{categories.find(c => c.key === category)?.label ?? category}</Typography>
-            </Box>
+    {/* <Stack sx={{ gap: 0.5 }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} > */}
+    {Object.entries(groupedControls)
+      .map(([category, controls], i) => (
+        <Box key={category} sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+          <SettingsSection icon={categories.find(c => c.key === category)?.icon} title={categories.find(c => c.key === category)?.label ?? category}>
+            {/* <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, px: 1 }}>
+                { categories.find(c => c.key === category)?.icon}
+                <Typography variant="subtitle2" sx={{ mb: 1, mt: 1, textTransform: 'capitalize' }}>{categories.find(c => c.key === category)?.label ?? category}</Typography>
+              </Box> */}
             {controls
               .filter(control => !filter || control.label.toLowerCase().includes(filter.toLowerCase()))
               .map((control) => (
@@ -122,8 +124,9 @@ export default function FilterPhotosPopover({ filter }: { filter?: string }) {
                   />}
                 </Fragment>
               ))}
-          </Box>
-        ))}
-    </Stack>
+          </SettingsSection>
+        </Box>
+      ))}
+    {/* </Stack> */}
   </>
 }

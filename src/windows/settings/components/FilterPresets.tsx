@@ -13,7 +13,7 @@ export default function FilterPresets() {
   const allPhotosSettings =  useFilterStoreSelector((state) => state)
   const { t } = useTranslation()
 
-  return <>
+  return <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', justifyContent: 'space-between' }} >
     <PopoverButton width={500}  trigger={<Button variant="outlined" size="small">{t('presetsButton')}</Button>} anchorHorizontal="center" anchorVertical="bottom" transformHorizontal="center" transformVertical="top">
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexWrap: 'wrap', p: 1 }} >
@@ -43,5 +43,5 @@ export default function FilterPresets() {
     <IconButton onClick={() => { resetAllPhotos() }} variant="outlined" size="small" color="inherit">
       <Recycle />
     </IconButton>
-  </>
+  </Box>
 }
