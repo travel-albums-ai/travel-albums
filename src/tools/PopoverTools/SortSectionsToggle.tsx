@@ -2,6 +2,7 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
 import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
+import { Box } from '@mui/material';
 import { ArrowDown01Icon, ArrowUp01Icon, EllipsisVertical } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,14 +32,14 @@ export default function SortSectionsToggle() {
       {
         tooltip: t('openSectionsSettings'),
         icon: <EllipsisVertical />,
-        popover: <>
+        popover: <Box sx={{ width: '300px', maxHeight: '75vh', overflowY: 'auto' }}>
           <SettingSelectRow
             label=""
             value={sortBy}
             options={['count', 'name', 'original']}
             onChange={(value) => setSetting((prev) => ({ ...prev, sortBy: value as any }))}
           />
-        </>,
+        </Box>,
       },
     ] as GenericToggleButtonProps[] satisfies GenericToggleButtonProps[]}
   />
