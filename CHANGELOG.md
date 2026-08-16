@@ -1,3 +1,9 @@
+## [1.117.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.116.0...v1.117.0) (2026-08-16)
+
+### ✨ Features
+
+* update drawer icons in metadata to use specific Lucide icons ([cd5809c](https://github.com/travel-albums-ai/travel-albums/commit/cd5809cd8121258547e6b820fb926b44771928a8))
+
 ## [1.116.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.115.0...v1.116.0) (2026-08-16)
 
 ### ✨ Features
