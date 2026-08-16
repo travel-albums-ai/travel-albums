@@ -78,7 +78,7 @@ export default function AllPhotosGridVirtuoso({ photos }: Props) {
   return (
     <VirtuosoGrid
       ref={virtuosoRef}
-      increaseViewportBy={{ top: height * 5, bottom: height * 5 }}
+      increaseViewportBy={{ top: height * 2, bottom: height * 2 }}
       style={GRID_STYLE}
       totalCount={photos.length}
       computeItemKey={(index) => photos[index]?.id ?? index}
