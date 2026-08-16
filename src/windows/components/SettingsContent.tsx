@@ -11,7 +11,7 @@ import SettingsPopover from '@/windows/settings/SettingsPopover';
 import TagsPopover from '@/windows/settings/TagsPopover';
 import ToolsPopover from '@/windows/settings/ToolsPopover';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { Brain, Dock, GalleryVerticalEnd, Group, Info, Key, ListFilter, PanelsRightBottom, Server, Shapes, Tag } from 'lucide-react';
+import { Brain, Dock, GalleryVerticalEnd, Group, Info, Key, ListFilter, PanelsRightBottom, Proportions, Server, Shapes, Tag } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -27,7 +27,7 @@ const sectionsMetadata = {
     guidance: 'Manage application features and settings',
   },
   default: {
-    icon: <Shapes size={16} />,
+    icon: <Proportions size={16} />,
     title: 'Layout',
     guidance: 'Customize the layout of the application',
   },
@@ -78,7 +78,7 @@ export default function SettingsContent() {
   );
 
   const sections = useMemo(() => [
-    { key: 'layout', title: t('layout'), component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
+    { key: 'layout', title: "Interface", component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
     { key: 'tools', title: "Toolbars and status", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
     { key: 'filterPhotos', group: 'features', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
     { key: 'drawers', group: 'features', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },

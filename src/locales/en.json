@@ -144,6 +144,11 @@
   "_comment_layout_popover": "Layout popover",
   "layoutWidth": "Width",
   "layoutHeight": "Height",
+  "layoutShowFileName": "Show file name",
+  "layoutShowDescription": "Show description",
+  "layoutShowDate": "Show date",
+  "layoutShowLocation": "Show location",
+  "layoutShowTags": "Show tags",
   "layoutShowViews": "Show views",
   "layoutTheme": "Theme",
 
