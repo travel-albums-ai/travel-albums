@@ -1,3 +1,9 @@
+## [1.115.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.114.1...v1.115.0) (2026-08-16)
+
+### ✨ Features
+
+* replace Tooltip and Typography with SolidChip in DomCountStatus and VersionStatus components; adjust spacing in ThumbSizeStatus ([4c817c7](https://github.com/travel-albums-ai/travel-albums/commit/4c817c7a87559e42b892a97b211cef0faff828d6))
+
 ## [1.114.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.114.0...v1.114.1) (2026-08-16)
 
 ### 🐛 Fixes
