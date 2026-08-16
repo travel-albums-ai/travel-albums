@@ -3,7 +3,7 @@ import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { Tooltip } from '@mui/material';
 import { CheckCheck } from 'lucide-react';
 
-export default function SelectionCountStatus() {
+export default function SectionCountStatus() {
   const photos = useSelectedStoreSelector(s => s.photos)
 
   return (<>

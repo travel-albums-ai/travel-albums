@@ -1,5 +1,4 @@
 import GenericPortal from '@/components/generics/GenericPortal';
-import SolidChip from '@/components/SolidChip';
 import { Box, Breadcrumbs, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 
@@ -19,7 +18,7 @@ export default function BreadscrumbsPrimaryList({ list, count }: BreadscrumbsPri
           {item.breadcrumbTitle}
         </Typography>
       </Box>)}
-      {typeof count === 'number' && <SolidChip label={`${count}`} height={24} minWidth={60} />}
+      {/* {typeof count === 'number' && <SolidChip label={`${count}`} height={24} minWidth={60} />} */}
     </Breadcrumbs>
   </GenericPortal>
 }

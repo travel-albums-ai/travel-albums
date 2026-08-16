@@ -38,7 +38,7 @@
     "root": "/selectedType",
     "type": "page",
     "component": "SelectedPage_type",
-    "title": "Selected Page",
+    "title": "Selected Section",
     "icon": "material-symbols:photo-library",
     "visible": true,
     "includeInMenu": false,
