@@ -69,7 +69,6 @@ export default defineConfig(({ mode, command }) => {
                   if (id.includes('lucide-react')) return 'vendor-ux-lucide';
                   if (id.includes('driver.js')) return 'vendor-driver-js';
                   if (id.includes('uplot')) return 'vendor-ux-uplot';
-                  if (id.includes('openai')) return 'vendor-open-ai';
                   if (id.includes('react-virtuoso')) return 'vendor-render-virtuoso';
                   if (id.includes('react-zoom-pan-pinch')) return 'vendor-ux-zoom-pan-pinch';
                   if (id.includes('react-intersection-observer')) {

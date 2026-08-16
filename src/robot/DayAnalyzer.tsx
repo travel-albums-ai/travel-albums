@@ -3,17 +3,24 @@ import {
   Alert,
   Box,
   Button,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Astroid } from 'lucide-react';
-import OpenAI from 'openai';
 import { useEffect, useMemo, useState } from 'react';
 
 type Props = {
-  context: any;
+  context: Record<string, unknown>;
+};
+
+type OpenAIResponse = {
+  output_text?: string;
+  error?: {
+    message?: string;
+  };
 };
 
 const CACHE_PREFIX = 'day-analyzer:';
+const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses';
 
 async function getCacheKey(input: string) {
   const hash = await crypto.subtle.digest(
@@ -21,18 +28,35 @@ async function getCacheKey(input: string) {
     new TextEncoder().encode(input),
   );
 
-  return CACHE_PREFIX + [...new Uint8Array(hash)]
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+  return (
+    CACHE_PREFIX +
+    [...new Uint8Array(hash)]
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('')
+  );
 }
 
 export default function DayAnalyzer({ context }: Props) {
-  const { byokOpenAIKey, mainPersona, additionalPersonas } = useBYOKStoreSelector((state) => state);
+  const {
+    byokOpenAIKey,
+    mainPersona,
+    additionalPersonas,
+  } = useBYOKStoreSelector((state) => state);
 
   const prompts = useMemo(() => ({
-    main:  'Make a story of max 100 words about the day based on the following descriptions. Do not mention the personas unless they are explicitly mentioned in the descriptions',
-    mainPersonaPrompt: `If the person seen in photos looks like: ${mainPersona.description}, then it's ${mainPersona.name}.`,
-    friendsPrompt: additionalPersonas?.map(p => `If the person looks like: ${p.description}, then it's likely ${p.name}.`).join(' ')
+    main:
+      'Make a story of max 100 words about the day based on the following descriptions. Do not mention the personas unless they are explicitly mentioned in the descriptions.',
+
+    mainPersonaPrompt:
+      `If the person seen in photos looks like: ${mainPersona.description}, then it's ${mainPersona.name}.`,
+
+    friendsPrompt:
+      additionalPersonas
+        ?.map(
+          (p) =>
+            `If the person looks like: ${p.description}, then it's likely ${p.name}.`,
+        )
+        .join(' ') ?? '',
   }), [mainPersona, additionalPersonas]);
 
   const [result, setResult] = useState<string | null>(null);
@@ -41,17 +65,20 @@ export default function DayAnalyzer({ context }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [cacheKey, setCacheKey] = useState<string | null>(null);
 
-  // Eagerly check cache whenever the context changes
   useEffect(() => {
     let cancelled = false;
 
-    const generateCacheKey = Object.values(prompts).concat(Object.values(context)).join(' ');
+    const input = JSON.stringify({
+      prompts,
+      context,
+    });
 
     setResult(null);
     setCached(false);
     setError(null);
+    setCacheKey(null);
 
-    getCacheKey(generateCacheKey).then((key) => {
+    getCacheKey(input).then((key) => {
       if (cancelled) return;
 
       setCacheKey(key);
@@ -76,7 +103,7 @@ export default function DayAnalyzer({ context }: Props) {
     setError(null);
 
     try {
-      // Double-check in case another tab/component populated it
+      // Another component/tab may have populated the cache.
       const existing = localStorage.getItem(cacheKey);
 
       if (existing) {
@@ -85,79 +112,94 @@ export default function DayAnalyzer({ context }: Props) {
         return;
       }
 
-      const response = await new OpenAI({
-        apiKey: byokOpenAIKey,
-        dangerouslyAllowBrowser: true,
-      }).responses.create({
-        model: 'gpt-5.6-luna',
-        input: [{
-          role: 'user',
-          content: [
-            ...Object.values(prompts).map((desc) => ({ type: 'input_text', text: desc })),
-            ...Object.values(context).map((desc) => ({ type: 'input_text', text: desc })),
-          ],
-        } as any],
-        text: {
-          format: {
-            type: 'json_schema',
-            name: 'image_analysis',
-            strict: true,
-            schema: {
-              type: 'object',
-              properties: {
-                results: { type: 'string' },
+      const input = [
+        ...Object.values(prompts),
+        ...Object.values(context),
+      ]
+        .filter((value) => value != null && value !== '')
+        .map(String)
+        .join('\n\n');
+
+      const response = await fetch(OPENAI_RESPONSES_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${byokOpenAIKey}`,
+        },
+        body: JSON.stringify({
+          model: 'gpt-5.6-luna',
+          input,
+          text: {
+            format: {
+              type: 'json_schema',
+              name: 'image_analysis',
+              strict: true,
+              schema: {
+                type: 'object',
+                properties: {
+                  results: {
+                    type: 'string',
+                  },
+                },
+                required: ['results'],
+                additionalProperties: false,
               },
-              required: ['results'],
-              additionalProperties: false,
             },
           },
-        },
+        }),
       });
 
-      const value = JSON.parse(response.output_text).results;
+      const data = (await response.json()) as OpenAIResponse;
+
+      if (!response.ok) {
+        throw new Error(
+          data.error?.message ||
+          `OpenAI request failed (${response.status})`,
+        );
+      }
+
+      if (!data.output_text) {
+        throw new Error('OpenAI returned an empty response');
+      }
+
+      const value = JSON.parse(data.output_text).results;
 
       localStorage.setItem(cacheKey, value);
+
       setResult(value);
       setCached(false);
     } catch (e) {
       console.error(e);
-      setError(e instanceof Error ? e.message : 'Analysis failed');
+      setError(
+        e instanceof Error
+          ? e.message
+          : 'Analysis failed',
+      );
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-      {!result && <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1 }}>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <Button
-            startIcon={<Astroid size={16} />}
-            variant="outlined"
-            size="small"
-            onClick={analyze}
-            disabled={!byokOpenAIKey || loading || !cacheKey}
-          >
-            {loading
-              ? 'Describing...'
-              : cached
-                ? 'Regenerate'
-                : 'Describe my moment'}
-          </Button>
-        </Box>
-      </Box>}
-
-      {error && <Alert severity="error">{error}</Alert>}
-
-      {result && (
-        <Box sx={{ p: 2, border: '1px solid', borderColor: 'divider', flexGrow: 1, borderRadius: 2, bgcolor: 'background.paper', maxWidth: '100%' }}>
-          <Box sx={{ display: 'flex', gap: 1, mb: 1, alignItems: 'center', justifyContent: 'space-between' }}>
-            {cached && <Typography variant="caption" color="textDisabled">
-              Cached result
-            </Typography>}
-            {!cached && <Typography variant="caption" color="textDisabled">
-              Fresh result
-            </Typography>}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 2,
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
+      }}
+    >
+      {!result && (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+            flexGrow: 1,
+          }}
+        >
+          <Box sx={{ display: 'flex', gap: 1 }}>
             <Button
               startIcon={<Astroid size={16} />}
               variant="outlined"
@@ -166,11 +208,63 @@ export default function DayAnalyzer({ context }: Props) {
               disabled={!byokOpenAIKey || loading || !cacheKey}
             >
               {loading
-                ? 'Thinking...'
-                : 'Regenerate'}
+                ? 'Describing...'
+                : cached
+                  ? 'Regenerate'
+                  : 'Describe my moment'}
             </Button>
           </Box>
-          <Typography gutterBottom={false}>{result}</Typography>
+        </Box>
+      )}
+
+      {error && (
+        <Alert severity="error">
+          {error}
+        </Alert>
+      )}
+
+      {result && (
+        <Box
+          sx={{
+            p: 2,
+            border: '1px solid',
+            borderColor: 'divider',
+            flexGrow: 1,
+            borderRadius: 2,
+            bgcolor: 'background.paper',
+            maxWidth: '100%',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 1,
+              mb: 1,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography
+              variant="caption"
+              color="textDisabled"
+            >
+              {cached ? 'Cached result' : 'Fresh result'}
+            </Typography>
+
+            <Button
+              startIcon={<Astroid size={16} />}
+              variant="outlined"
+              size="small"
+              onClick={analyze}
+              disabled={!byokOpenAIKey || loading || !cacheKey}
+            >
+              {loading ? 'Thinking...' : 'Regenerate'}
+            </Button>
+          </Box>
+
+          <Typography gutterBottom={false}>
+            {result}
+          </Typography>
         </Box>
       )}
     </Box>
