@@ -10,12 +10,12 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { type Theme } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import {
   memo,
   useCallback,
   useMemo,
-  useState,
   type CSSProperties,
   type MouseEvent,
 } from 'react';
@@ -96,7 +96,7 @@ const detailsSx = {
   zIndex: 3,
   px: 2,
   py: 0.75,
-  bgcolor: theme => `${theme.palette.background.paper}BB`,
+  bgcolor: (theme: Theme) => `${theme.palette.background.paper}BB`,
 } as const;
 
 function AlbumPhotoCard({
@@ -106,7 +106,6 @@ function AlbumPhotoCard({
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
   const { hasDescription } = useDescriptions()
-  const [isHovered, setIsHovered] = useState(false);
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
   const showDescription = useAlbumPhotoCardStoreSelector((state) => state.showDescription);
@@ -140,14 +139,9 @@ function AlbumPhotoCard({
       if (hasGps && event.shiftKey) {
         setFocusedPhoto(photo.id);
       }
-      setIsHovered(true);
     },
     [hasGps, photo.id, setFocusedPhoto],
   );
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
-  }, []);
 
   const handleClick = useCallback(() => {
     setPreviewPhotoObj(photo);
@@ -176,7 +170,6 @@ function AlbumPhotoCard({
       <Card
         component="article"
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onClick={handleClick}
         sx={{
           ...cardSx,
@@ -187,6 +180,10 @@ function AlbumPhotoCard({
 
           '& .album-photo-details': {
             ...cardSx['& .album-photo-details'],
+            opacity: 0,
+            pointerEvents: 'none',
+          },
+          '&:hover .album-photo-details': {
             opacity: showDetails ? 1 : 0,
             pointerEvents: showDetails ? 'auto' : 'none',
           },
@@ -218,11 +215,11 @@ function AlbumPhotoCard({
 
         {showTags && <AlbumPhotoCardTags photo={photo} />}
 
-        {showDescription && !isHovered && hasDescription(photo.id) && (
+        {showDescription && hasDescription(photo.id) && (
           <DescribePhotoReadOnly photoId={photo.id} className="album-photo-description" sx={detailsSx} />
         )}
 
-        {isHovered && (
+        {showDetails && (
           <Stack direction="row" divider={<Divider orientation="vertical" sx={{ borderStyle: 'dotted' }} flexItem />} className="album-photo-details" sx={detailsSx}>
             {showDate && (
               <Tooltip arrow title={photo.takenAt}>
