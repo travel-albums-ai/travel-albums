@@ -121,8 +121,8 @@ const detailsSx = {
   left: 0,
   display: 'flex',
   flexWrap: 'wrap',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end',
   gap: 0.5,
   borderRadius: 2,
   borderTopLeftRadius: 0,
@@ -208,13 +208,6 @@ function AlbumPhotoCard({
     photo.longitude !== 0;
 
   const showDetails = width >= 150;
-  const canShowDate = width >= 250;
-  const canShowDetails = width >= 150;
-
-  const formattedTime = useMemo(
-    () => (canShowDate ? prettyTime(photo.takenAt) : ''),
-    [canShowDate, photo.takenAt],
-  );
 
   const handleMouseEnter = useCallback(
     (event: MouseEvent<HTMLElement>) => {
@@ -292,7 +285,7 @@ function AlbumPhotoCard({
         }}
       />
 
-      {resolvedTags.length > 0 && (
+      {showTags && resolvedTags.length > 0 && (
         <Box
           className="album-photo-tags"
           sx={tagsSx}
@@ -319,7 +312,7 @@ function AlbumPhotoCard({
 
       {isHovered && (
         <Box className="album-photo-details" sx={detailsSx}>
-          {canShowDate && (
+          {showDate && (
             <Tooltip arrow title={photo.takenAt}>
               <Typography
                 variant="caption"
@@ -331,7 +324,7 @@ function AlbumPhotoCard({
                   lineHeight: 1.5,
                 }}
               >
-                {formattedTime}
+                {prettyTime(photo.takenAt)}
               </Typography>
             </Tooltip>
           )}
@@ -339,6 +332,7 @@ function AlbumPhotoCard({
             photos={[photo]}
             minWidth={0}
             filterEmpty
+            showCount={false}
           />
         </Box>
       )}

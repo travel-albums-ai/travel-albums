@@ -4,7 +4,7 @@ import { Camera, Eye, Heart, MapPin, MessagesSquare, Users } from 'lucide-react'
 import { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmpty = false, extraItems = [] }: { id?: string, photos?: any[], minWidth?: number, filterEmpty?: boolean, extraItems?: { label: string, value: number, icon: JSX.Element }[] }) {
+export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmpty = false, extraItems = [], showCount = true }: { id?: string, photos?: any[], minWidth?: number, filterEmpty?: boolean, extraItems?: { label: string, value: number, icon: JSX.Element }[] , showCount?: boolean}) {
   const albumPhotos = photos
   const { t } = useTranslation()
 
@@ -56,6 +56,7 @@ export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmp
     >
       {items
         .filter(item => !filterEmpty || (item.value !== undefined && item.value > 0))
+        .filter(item => showCount || item.label !== t('metaPhotos'))
         .map(item => (<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }} key={item.label}>
           {item.icon}
           {item.value !== undefined
