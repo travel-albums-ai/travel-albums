@@ -67,50 +67,28 @@ export default defineConfig(({ mode, command }) => {
               name(id) {
                 if (id.includes('node_modules')) {
                   if (id.includes('lucide-react')) return 'vendor-ux-lucide';
-                  if (id.includes('blurhash')) return 'vendor-ux-blurhash';
+                  if (id.includes('driver.js')) return 'vendor-driver-js';
                   if (id.includes('uplot')) return 'vendor-ux-uplot';
-                  if (id.includes('react-type-animation')) return 'vendor-ux-type-animation';
+                  if (id.includes('openai')) return 'vendor-open-ai';
                   if (id.includes('react-virtuoso')) return 'vendor-render-virtuoso';
                   if (id.includes('react-zoom-pan-pinch')) return 'vendor-ux-zoom-pan-pinch';
                   if (id.includes('react-intersection-observer')) {
                     return 'vendor-render-intersection-observer';
-                  }
-                  if (id.includes('react-resizable-panels')) {
-                    return 'vendor-ux-resizable-panels';
                   }
                   if (id.includes('leaflet')) return 'vendor-map-leaflet';
                   if (id.includes('localforage')) return 'vendor-storage-localforage';
                   if (id.includes('@tanstack')) return 'vendor-render-tanstack';
                   if (id.includes('exifr')) return 'vendor-parse-exifr';
 
-                  if (
-                    id.includes('@mui/x-charts') ||
-      id.includes('@mui/x-data-grid') ||
-      id.includes('recharts') ||
-      id.includes('apexcharts')
-                  ) {
-                    return 'vendor-ux-mui-charts';
-                  }
-
-                  if (
-                    id.includes('react-router') ||
-      id.includes('react-router-dom')
-                  ) {
+                  if (id.includes('react-router') || id.includes('react-router-dom')) {
                     return 'vendor-render-router';
                   }
 
-                  if (
-                    id.includes('@mui') ||
-      id.includes('material-ui') ||
-      id.includes('@emotion')
-                  ) {
+                  if (id.includes('@mui') || id.includes('material-ui') || id.includes('@emotion')) {
                     return 'vendor-ux-mui';
                   }
 
-                  if (
-                    id.includes('react') ||
-      id.includes('react-dom')
-                  ) {
+                  if ( id.includes('react') || id.includes('react-dom')) {
                     return 'vendor-render-react';
                   }
 
