@@ -64,14 +64,20 @@ export default function SidebarList() {
   }, [sections, sidebarOpen, modules]);
 
 
-  const availableSections = rows
-    .filter(row => row.type === 'header')
-    .map(row => row.section.type)
+  const availableSections = useMemo(
+    () => rows
+      .filter(row => row.type === 'header')
+      .map(row => row.section.type),
+    [rows],
+  );
 
-  const availableSubSections = rows
-    .filter(row => row.type === 'item')
-    .filter(row => String(location.pathname).includes(row.section.type))
-    .map(row => row.item.name)
+  const availableSubSections = useMemo(
+    () => rows
+      .filter(row => row.type === 'item')
+      .filter(row => String(location.pathname).includes(row.section.type))
+      .map(row => row.item.name),
+    [rows, location.pathname],
+  );
 
   return <>
     <WebMCPDataRun
