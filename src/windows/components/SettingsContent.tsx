@@ -132,8 +132,6 @@ export default function SettingsContent() {
             ))}
           </Fragment>
         ))}
-
-
       </Box>
 
       <Box sx={{ p: 1, display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, overflow: 'auto'  }}>

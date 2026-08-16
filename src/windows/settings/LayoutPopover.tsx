@@ -7,32 +7,28 @@ import { CreditCard, GalleryHorizontal } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const toggleControlsPreview = [
-  { key: 'thumbSizeStatus', labelKey: 'layoutThumbSizeStatus', type: 'toolbar', toolbarComponentId: 'thumbSizeStatus' },
-  { key: "thumbnailCover", labelKey: 'layoutThumbnailCover', type: 'toolbar', toolbarComponentId: "thumbnailCover" },
-  { key: 'showDescription', labelKey: 'layoutShowDescription', type: 'boolean' },
-  { key: 'showTags', labelKey: 'layoutShowTags', type: 'boolean' },
-  { key: 'showDate', labelKey: 'layoutShowDate', type: 'boolean' },
-  { key: 'showLocation', labelKey: 'layoutShowLocation', type: 'boolean' },
-  { key: 'showFileName', labelKey: 'layoutShowFileName', type: 'boolean' },
-] as const
-
-const toggleControlsScroller = [
-  { key: 'scrollerColumns', labelKey: 'layoutScrollerColumns', type: 'toolbar', toolbarComponentId: "scroller-columns-toggle" },
-  { key: 'scrollerRows', labelKey: 'layoutScrollerRows', type: 'toolbar', toolbarComponentId: "scroller-rows-toggle" },
-  { key: 'scrollerGrouping', labelKey: 'layoutScrollerGrouping', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
-  { key: 'scrollerOriginal', labelKey: 'layoutScrollerOriginal', type: 'toolbar', toolbarComponentId: "scroller-original-toggle" },
-] as const
-
 const groups = [
   {
     title: "Card",
-    controls: toggleControlsPreview,
+    controls: [
+      { key: 'thumbSizeStatus', labelKey: 'layoutThumbSizeStatus', type: 'toolbar', toolbarComponentId: 'thumbSizeStatus' },
+      { key: "thumbnailCover", labelKey: 'layoutThumbnailCover', type: 'toolbar', toolbarComponentId: "thumbnailCover" },
+      { key: 'showDescription', labelKey: 'layoutShowDescription', type: 'boolean' },
+      { key: 'showTags', labelKey: 'layoutShowTags', type: 'boolean' },
+      { key: 'showDate', labelKey: 'layoutShowDate', type: 'boolean' },
+      { key: 'showLocation', labelKey: 'layoutShowLocation', type: 'boolean' },
+      { key: 'showFileName', labelKey: 'layoutShowFileName', type: 'boolean' },
+    ],
     icon: <CreditCard style={{ transform: 'rotate(180deg)' }} />,
   },
   {
     title: "Scroller",
-    controls: toggleControlsScroller,
+    controls: [
+      { key: 'scrollerColumns', labelKey: 'layoutScrollerColumns', type: 'toolbar', toolbarComponentId: "scroller-columns-toggle" },
+      { key: 'scrollerRows', labelKey: 'layoutScrollerRows', type: 'toolbar', toolbarComponentId: "scroller-rows-toggle" },
+      { key: 'scrollerGrouping', labelKey: 'layoutScrollerGrouping', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
+      { key: 'scrollerOriginal', labelKey: 'layoutScrollerOriginal', type: 'toolbar', toolbarComponentId: "scroller-original-toggle" },
+    ],
     icon: <GalleryHorizontal />,
   }
 ]
@@ -62,37 +58,5 @@ export default function LayoutPopover() {
           ))}
       </SettingsSection>
     ))}
-
-
-
-
-
-    <SettingsSection title="Card" icon={<CreditCard style={{ transform: 'rotate(180deg)' }} />} >
-      {toggleControlsPreview
-        .map((control) => (
-          <Fragment key={control.key}>
-            {control.type === 'boolean' && <SettingToggleRow
-              key={control.key}
-              label={t(control.labelKey)}
-              selected={cardSettings[control.key]}
-              onChange={() => setCardSetting((prev) => ({ ...prev, [control.key]: !cardSettings[control.key] }))}
-            />}
-
-            {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
-              <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
-            </SettingsComponentRow>}
-          </Fragment>
-        ))}
-    </SettingsSection>
-    <SettingsSection title="Scroller" icon={<GalleryHorizontal />} >
-      {toggleControlsScroller
-        .map((control) => (
-          <Fragment key={control.key}>
-            {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
-              <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
-            </SettingsComponentRow>}
-          </Fragment>
-        ))}
-    </SettingsSection>
   </>
 }
