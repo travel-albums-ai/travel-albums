@@ -1,3 +1,4 @@
+import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumMapPanelByBatches from '@/drawers/globe/AlbumMapPanelByBatches';
 import useRelevantAlbumsByProximity from '@/hooks/useRelevantAlbumsByProximity';
@@ -11,6 +12,8 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
   const { setPreviewPhotoObj } = useSettings()
   const previewPhotoId = useSettingsStoreSelector((state) => state.previewPhotoObj?.id)
   const mapShowPreview = useSettingsStoreSelector((state) => state.mapShowPreview);
+  const width = useAlbumPhotoCardStoreSelector((state) => state.width);
+  const height = useAlbumPhotoCardStoreSelector((state) => state.height);
 
   const [viewport, setViewport] = useState({
     north: -90,
@@ -109,13 +112,12 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
                       transition: 'all 0.3s ease',
                     }}
                   >
-
                     <img
                       src={composeUrl(p)}
                       draggable={false}
                       style={{
-                        width: selected ? 200 : 90,
-                        height: selected ? 200 : 90,
+                        width: selected ? width : width / 2,
+                        height: selected ? height : height / 2,
                         objectFit: 'cover',
                         borderRadius: 4,
                         lineHeight: 0,

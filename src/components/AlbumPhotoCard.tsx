@@ -218,13 +218,8 @@ function AlbumPhotoCard({
       return `4px solid ${theme.palette.primary.main}`;
     }
 
-    if(isHovered) {
-      return `1px solid ${theme.palette.primary.main}AA`;
-    }
-
     return 'none';
   }, [
-    isHovered,
     isPreviewed,
     isSelected,
     selectMode,

@@ -1,3 +1,4 @@
+import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
@@ -17,9 +18,12 @@ type Props = {
 const createIcon = (
   img: string | null,
   color: string,
-  selected = false
+  selected = false,
+  width: number,
+  height: number,
 ) => {
-  const size = selected ? 72 : THUMB_SIZE
+  const sizeWidth = selected ? width / 2 : width / 4
+  const sizeHeight = selected ? height / 2 : height / 4
   const border = selected ? 4 : 0.5
   const shadow = selected ? '0 0 2px 3px #90caf944' : 'none'
 
@@ -28,24 +32,26 @@ const createIcon = (
       ? `<img
           src="${img}"
           style="
-            width:${size}px;
-            height:${size}px;
+            width:${sizeWidth}px;
+            height:${sizeHeight}px;
             object-fit:cover;
             border-radius:6px;
             opacity: ${selected ? 1 : 0.9};
             border:${border}px solid ${color};
             box-shadow:${shadow};
+            z-index: ${selected ? 1000 : 1};
           "
         />`
       : `<div
           style="
-            width:${size}px;
-            height:${size}px;
+            width:${sizeWidth}px;
+            height:${sizeHeight}px;
+            z-index: ${selected ? 1000 : 1};
           "
         />`,
     className: '',
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
+    iconSize: [sizeWidth, sizeHeight],
+    iconAnchor: [sizeWidth / 2, sizeHeight / 2],
   })
 }
 
@@ -54,14 +60,16 @@ const iconCache = new Map<string, L.DivIcon>()
 function getIcon(
   img: string | null,
   color: string,
-  selected = false
+  selected = false,
+  width: number,
+  height: number,
 ) {
   const key = `${img}|${color}|${selected}`
 
   if (!iconCache.has(key)) {
     iconCache.set(
       key,
-      createIcon(img, color, selected)
+      createIcon(img, color, selected, width, height)
     )
   }
 
@@ -73,6 +81,8 @@ export default function AlbumMapPanelByBatches({ allPhotos, batches, onPreview, 
   const mapRef = useRef<L.Map>()
   const previewPhotoId = useSettingsStoreSelector((state) => state.previewPhotoObj?.id)
   const lastAutoFitKeyRef = useRef('')
+  const width = useAlbumPhotoCardStoreSelector((state) => state.width);
+  const height = useAlbumPhotoCardStoreSelector((state) => state.height);
 
   const geotaggedPhotos = useMemo(() => {
     return allPhotos.filter(
@@ -164,7 +174,9 @@ export default function AlbumMapPanelByBatches({ allPhotos, batches, onPreview, 
       const icon = getIcon(
         composeUrl(p),
         selected ? '#90caf9' : 'gray',
-        selected
+        selected,
+        width,
+        height
       )
 
       if (!marker) {
@@ -190,7 +202,7 @@ export default function AlbumMapPanelByBatches({ allPhotos, batches, onPreview, 
         layer.removeLayer(marker)
       }
     })
-  }, [photos, onPreview, previewPhotoId])
+  }, [photos, onPreview, previewPhotoId, width, height])
 
   useEffect(() => {
     const map = mapRef.current
