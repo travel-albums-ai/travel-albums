@@ -1,3 +1,9 @@
+## [1.114.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.114.0...v1.114.1) (2026-08-16)
+
+### 🐛 Fixes
+
+* adjust viewport increase for VirtuosoGrid to improve performance ([1cb9a95](https://github.com/travel-albums-ai/travel-albums/commit/1cb9a95c40d2ba48166c69a0ad21e968bf5308cc))
+
 ## [1.114.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.113.0...v1.114.0) (2026-08-15)
 
 ### ✨ Features
