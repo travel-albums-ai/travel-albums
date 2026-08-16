@@ -26,7 +26,6 @@ export default function OutletDrawer() {
           overflow: 'auto',
           overflowX: 'visible',
           borderRadius: 2,
-          // m: 0.75,
           p: 0,
         }}
       >

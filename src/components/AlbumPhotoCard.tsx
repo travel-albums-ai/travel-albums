@@ -113,9 +113,9 @@ const detailsSx = {
   justifyContent: "flex-end",
   alignItems: "center",
   gap: 1,
-  borderRadius: 2,
-  borderTopLeftRadius: 0,
-  borderTopRightRadius: 0,
+  // borderRadius: 2,
+  // borderTopLeftRadius: 0,
+  // borderTopRightRadius: 0,
   zIndex: 3,
   px: 2,
   py: 0.75,
@@ -244,6 +244,8 @@ function AlbumPhotoCard({
         sx={{
           ...cardSx,
           minHeight: height,
+          borderBottomLeftRadius: showFileName ? 0 : 8,
+          borderBottomRightRadius: showFileName ? 0 : 8,
           ...style,
 
           '& .album-photo-details': {
@@ -329,7 +331,7 @@ function AlbumPhotoCard({
 
       </Card>
 
-      {showFileName && <Box sx={{ display: 'block', p: 0.5}}>
+      {showFileName && <Box sx={{ display: 'block', p: 0.5, bgcolor: 'background.paper', borderRadius: 2, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
         <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>
           <Typography variant="caption" color="textSecondary">{photo.title}</Typography>
         </Tooltip>

@@ -29,11 +29,11 @@ export default function GenericPanel({
       height: '100%',
       flex: '1 1 auto',
     }}>
-      {!collapsed && (tool || defaultTool) && <Box sx={wrapperSx} >
+      {!collapsed && inView && (tool || defaultTool) && <Box sx={wrapperSx} >
         {defaultTool && <GeneralRegistryToolbar group={id} context={toolContext} />}
         {tool}
       </Box>}
-      {tool && <Box sx={{
+      {tool && inView && <Box sx={{
         width: '100%',
         height: '2px',
         display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer',
