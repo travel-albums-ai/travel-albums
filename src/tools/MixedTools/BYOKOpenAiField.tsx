@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function BYOKOpenAiField() {
   const { setSetting } = useBYOK();
-  const { byokGoogleVisionKey, byokOpenAIKey } = useBYOKStoreSelector((state) => state);
+  const { byokOpenAIKey } = useBYOKStoreSelector((state) => state);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { t } = useTranslation();
 
@@ -81,7 +81,7 @@ export default function BYOKOpenAiField() {
             onClick: () => {
               setOpen(true)
             },
-            selected: !!byokGoogleVisionKey,
+            selected: !!byokOpenAIKey,
           }}
         />
       </>)}

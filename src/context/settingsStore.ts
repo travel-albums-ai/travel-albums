@@ -9,11 +9,9 @@ type SettingsStore = {
   drawerId?: string,
   tutorial: boolean,
   themeMode?: 'light' | 'dark',
-  byokGoogleVisionOpen: boolean,
   themeId: string,
   thumbnailFormat: 'cover' | 'contain',
 
-  byokGoogleVisionKey?: string,
   showSidebar: boolean,
 
   thumbnailGenerator: boolean,
@@ -99,8 +97,6 @@ const defaults: SettingsStore = {
   scrollerAutoScroll: true,
   drawerId: undefined,
   mapShowPreview: false,
-  byokGoogleVisionKey: '',
-  byokGoogleVisionOpen: false,
   thumbnailGenerator: false,
   thumbnailJobId: undefined,
   showPreviewMap: false,

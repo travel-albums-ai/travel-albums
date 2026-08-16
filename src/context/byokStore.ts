@@ -6,7 +6,6 @@ type Persona = {
 }
 
 type BYOKStore = {
-  byokGoogleVisionKey?: string,
   byokOpenAIKey?: string,
 
   mainPersona: Persona,
@@ -15,7 +14,6 @@ type BYOKStore = {
 }
 
 const defaults: BYOKStore = {
-  byokGoogleVisionKey: '',
   byokOpenAIKey: '',
   mainPersona: {
     name: '',

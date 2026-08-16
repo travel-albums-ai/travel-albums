@@ -8,7 +8,6 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  { key: 'byokGoogleVisionKey', icon: sectionIcons.trips, labelKey: 'Google Vision', value: 'show-trips', type: 'field' },
   { key: 'byokOpenAIKey', icon: sectionIcons.peopleAndPets, labelKey: 'Open AI', value: 'show-people-and-pets', type: 'field' },
 ] as const
 
