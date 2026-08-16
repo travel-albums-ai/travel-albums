@@ -8,9 +8,15 @@ export default function NoServerWindow() {
   const demoMode = useSettingsStoreSelector(s => s.demoMode)
   const { t } = useTranslation();
 
+  const showWindow = serverOnline === false && demoMode !== true
+
+  if (!showWindow) {
+    return null
+  }
+
   return (<>
-    <Dialog onClose={() => { }} open={serverOnline === false && demoMode !== true} fullWidth sx={{ backdropFilter: 'blur(8px)', }} >
-      <Box sx={{
+    <Dialog onClose={() => { }} open={showWindow} fullWidth sx={{ backdropFilter: 'blur(8px)', }} >
+      {showWindow && <Box sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -30,8 +36,7 @@ export default function NoServerWindow() {
         </Typography>
 
         <SettingsPopover />
-      </Box>
-
+      </Box>}
     </Dialog>
   </>)
 }

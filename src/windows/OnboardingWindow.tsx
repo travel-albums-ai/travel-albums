@@ -39,9 +39,15 @@ export default function OnboardingWindow() {
     t('onboardingStepConfigureFolders'),
   ];
 
+  const showWindow = onboarding === true
+
+  if (!showWindow) {
+    return null
+  }
+
   return (<>
-    <Dialog onClose={() => { }} open={onboarding === true} fullWidth>
-      <Box sx={{
+    <Dialog onClose={() => { }} open={onboarding} fullWidth>
+      {onboarding && <Box sx={{
         p: 2,
         borderRadius: 2,
         border: 2,
@@ -138,7 +144,7 @@ export default function OnboardingWindow() {
           </Button>
         </Box>
 
-      </Box>
+      </Box>}
     </Dialog>
   </>)
 }

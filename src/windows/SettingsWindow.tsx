@@ -6,9 +6,15 @@ export default function SettingsWindow() {
   const showSettings = useSettingsStoreSelector(s => s.showSettings)
   const { setSetting } = useSettings()
 
+  const showWindow = showSettings === true
+
+  if (!showWindow) {
+    return null
+  }
+
   return (<>
-    <Dialog open={showSettings} fullWidth maxWidth="xl" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
-      <Box sx={{
+    <Dialog open={showWindow} fullWidth maxWidth="xl" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
+      {showWindow && <Box sx={{
         p: 2,
         borderRadius: 2,
         border: 2,
@@ -18,7 +24,7 @@ export default function SettingsWindow() {
         overflowY: 'auto',
       }}>
         <SettingsContent />
-      </Box>
+      </Box>}
     </Dialog>
   </>)
 }
