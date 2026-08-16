@@ -1,3 +1,4 @@
+import AlbumPhotoCardTags from '@/components/albumPhotoCard/AlbumPhotoCardTags';
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
@@ -6,7 +7,6 @@ import { useDescriptions } from '@/context/descriptionsStore';
 import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import { useTagsStoreSelector } from '@/context/tagsStore';
 import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
@@ -84,27 +84,6 @@ const toolbarSx = {
   zIndex: 2,
 } as const;
 
-const tagsSx = {
-  position: 'absolute',
-  top: 8,
-  right: 8,
-  zIndex: 2,
-  display: 'flex',
-  gap: 0.5,
-  flexWrap: 'wrap',
-  maxWidth: '70%',
-  transition: 'bottom 0.15s',
-} as const;
-
-const tagSx = {
-  color: '#fff',
-  px: 1,
-  py: 0.5,
-  borderRadius: 2,
-  fontSize: '0.625rem',
-  fontWeight: 500,
-} as const;
-
 const detailsSx = {
   position: 'absolute',
   right: 8,
@@ -142,46 +121,11 @@ function AlbumPhotoCard({
     (state) => state.previewPhotoObj?.id === photo.id,
   );
 
-  const photoTagIds = useTagsStoreSelector(
-    (state) =>
-      state.taggedPhotos.find((tp) => tp.id === photo.id)?.tags ?? null,
-  );
-
-  const tags = useTagsStoreSelector((state) => state.tags);
-
   const { setPreviewPhotoObj, setFocusedPhoto } = useSettings();
   const { isFavorite } = useFavorites();
 
   const favorite = isFavorite(photo.id);
   const isSelected = useSelected_isSelected(photo.id);
-
-  const tagsById = useMemo(() => {
-    const map = new Map<string, (typeof tags)[number]>();
-
-    for (const tag of tags) {
-      map.set(tag.id, tag);
-    }
-
-    return map;
-  }, [tags]);
-
-  const resolvedTags = useMemo(() => {
-    if (!photoTagIds?.length) {
-      return [];
-    }
-
-    const result = [];
-
-    for (const tagId of photoTagIds) {
-      const tag = tagsById.get(tagId);
-
-      if (tag) {
-        result.push(tag);
-      }
-    }
-
-    return result;
-  }, [photoTagIds, tagsById]);
 
   const hasGps =
     Number.isFinite(photo.latitude) &&
@@ -272,21 +216,7 @@ function AlbumPhotoCard({
           />
         )}
 
-        {showTags && resolvedTags.length > 0 && (
-          <Box className="album-photo-tags" sx={tagsSx}>
-            {resolvedTags.map((tag) => (
-              <Box
-                key={tag.id}
-                sx={{
-                  ...tagSx,
-                  backgroundColor: `${tag.color}BD`,
-                }}
-              >
-                {tag.name}
-              </Box>
-            ))}
-          </Box>
-        )}
+        {showTags && <AlbumPhotoCardTags photo={photo} />}
 
         {showDescription && !isHovered && hasDescription(photo.id) && (
           <DescribePhotoReadOnly photoId={photo.id} className="album-photo-description" sx={detailsSx} />
