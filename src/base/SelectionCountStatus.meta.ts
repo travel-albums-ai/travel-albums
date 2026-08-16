@@ -3,7 +3,7 @@ import { ToolMeta } from '@/toolRegistry';
 export const meta = {
   id: 'selection-count-status',
   tool: [{
-    id: 'status-bar-primary',
+    id: 'status-bar',
     side: 'left',
     priority: 200,
     visible: (context: any) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,

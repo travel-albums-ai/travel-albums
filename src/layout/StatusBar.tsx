@@ -1,5 +1,5 @@
 import LoadingBar from '@/components/LoadingBar';
-import GeneralRegistryStatus from '@/components/registry/GeneralRegistryStatus';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { Box, Theme } from '@mui/material';
 
@@ -24,8 +24,11 @@ export default function StatusBar() {
     >
       <LoadingBar />
 
-      <GeneralRegistryStatus group="status-bar-primary" side="left" context={{ selectedPhotos }} />
-      <GeneralRegistryStatus group="status-bar-secondary" side="right" divider context={{ selectedPhotos }}  />
+      <GeneralRegistryToolbar
+        noDivider={false}
+        group="status-bar"
+        context={{ selectedPhotos }}
+      />
     </Box>
   )
 }

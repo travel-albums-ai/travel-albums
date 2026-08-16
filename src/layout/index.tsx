@@ -13,8 +13,6 @@ export default function AppLayout() {
 
   return (
     <>
-      <Header />
-
       <NoServerWindow />
       <OnboardingWindow />
       <SettingsWindow />
@@ -30,6 +28,8 @@ export default function AppLayout() {
           }]
         })}
       />
+
+      <Header />
 
       <FlexLayout />
 

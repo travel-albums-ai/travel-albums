@@ -3,7 +3,7 @@ import { ToolMeta } from '@/toolRegistry';
 export const meta = {
   id: 'section-count-status',
   tool: [{
-    id: 'status-bar-secondary',
+    id: 'status-bar',
     side: 'right',
     priority: 0,
   }],
