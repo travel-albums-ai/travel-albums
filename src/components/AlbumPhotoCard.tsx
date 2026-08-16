@@ -65,9 +65,9 @@ const cardSx = {
       pointerEvents: 'none',
     },
 
-    '& .album-photo-tags': {
-      bottom: 56,
-    },
+    // '& .album-photo-tags': {
+    //   bottom: 56,
+    // },
 
     '& .album-photo-details': {
       opacity: 1,
@@ -88,7 +88,6 @@ const cardSx = {
 const toolbarSx = {
   position: 'absolute',
   top: 4,
-  right: 4,
   left: 4,
   height: 40,
   zIndex: 2,
@@ -96,8 +95,8 @@ const toolbarSx = {
 
 const tagsSx = {
   position: 'absolute',
-  bottom: 8,
-  left: 8,
+  top: 8,
+  right: 8,
   zIndex: 2,
   display: 'flex',
   gap: 0.5,
@@ -150,9 +149,10 @@ function AlbumPhotoCard({
    */
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
-  const showPersistentDetails = useAlbumPhotoCardStoreSelector(
-    (state) => state.showPersistentDetails,
-  );
+  const showDescription = useAlbumPhotoCardStoreSelector((state) => state.showDescription);
+  const showTags = useAlbumPhotoCardStoreSelector((state) => state.showTags);
+  const showDate = useAlbumPhotoCardStoreSelector((state) => state.showDate);
+  const showLocation = useAlbumPhotoCardStoreSelector((state) => state.showLocation);
 
   const selectMode = useSettingsStoreSelector((state) => state.selectMode);
 
@@ -207,7 +207,7 @@ function AlbumPhotoCard({
     photo.latitude !== 0 &&
     photo.longitude !== 0;
 
-  const showDetails = showPersistentDetails && width >= 150;
+  const showDetails = width >= 150;
   const canShowDate = width >= 250;
   const canShowDetails = width >= 150;
 
@@ -282,6 +282,7 @@ function AlbumPhotoCard({
       />
 
       <GeneralRegistryToolbar
+        fullWidth={false}
         group="album-photo-card"
         sx={toolbarSx}
         context={{
@@ -290,12 +291,6 @@ function AlbumPhotoCard({
           selectMode,
         }}
       />
-
-      {hasDescription(photo.id) && (
-        <Box className="album-photo-description" sx={detailsSx}>
-          <DescribePhotoReadOnly photoId={photo.id} />
-        </Box>
-      )}
 
       {resolvedTags.length > 0 && (
         <Box
@@ -316,7 +311,13 @@ function AlbumPhotoCard({
         </Box>
       )}
 
-      {canShowDetails && isHovered && (
+      {showDescription && !isHovered && hasDescription(photo.id) && (
+        <Box className="album-photo-description" sx={detailsSx}>
+          <DescribePhotoReadOnly photoId={photo.id} />
+        </Box>
+      )}
+
+      {isHovered && (
         <Box className="album-photo-details" sx={detailsSx}>
           {canShowDate && (
             <Tooltip arrow title={photo.takenAt}>

@@ -3,23 +3,19 @@ import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 type AlbumPhotoCardStore = {
   width: number
   height: number
-  borderRadius: number
-  gap: number
-  showViews: boolean
-  showTimeOfDay: boolean
-  showPersistentDetails: boolean
-  showBatch?: boolean
+  showDescription: boolean
+  showTags: boolean
+  showDate: boolean
+  showLocation: boolean
 }
 
 const defaults: AlbumPhotoCardStore = {
   width: 300,
   height: 300,
-  borderRadius: 2,
-  gap: 1,
-  showViews: true,
-  showTimeOfDay: false,
-  showPersistentDetails: false,
-  showBatch: false,
+  showDescription: true,
+  showTags: true,
+  showDate: true,
+  showLocation: true,
 }
 
 const {

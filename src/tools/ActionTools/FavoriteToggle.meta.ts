@@ -6,7 +6,7 @@ export const meta = {
     {
       id: 'photo-drawer',
       side: 'left',
-      priority: 0
+      priority: 100
     },
     {
       id: 'album-photo-card',

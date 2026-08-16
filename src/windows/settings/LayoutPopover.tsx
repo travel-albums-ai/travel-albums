@@ -10,7 +10,10 @@ import { useTranslation } from 'react-i18next';
 const toggleControls = [
   { key: 'width', labelKey: 'layoutWidth', value: 'show-width-size', type: 'number', max: 500 },
   { key: 'height', labelKey: 'layoutHeight', value: 'show-height-size', type: 'number', max: 500 },
-  { key: 'showViews', labelKey: 'layoutShowViews', value: 'show-views', type: 'boolean' },
+  { key: 'showDescription', labelKey: 'layoutShowDescription', value: 'show-description', type: 'boolean' },
+  { key: 'showTags', labelKey: 'layoutShowTags', value: 'show-tags', type: 'boolean' },
+  { key: 'showDate', labelKey: 'layoutShowDate', value: 'show-date', type: 'boolean' },
+  { key: 'showLocation', labelKey: 'layoutShowLocation', value: 'show-location', type: 'boolean' },
 ] as const
 
 export default function LayoutPopover() {

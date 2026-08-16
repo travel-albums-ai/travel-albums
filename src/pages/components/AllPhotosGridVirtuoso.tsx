@@ -36,7 +36,6 @@ const GridList = ({ style, children, width, gap, ...props }: any) => {
 export default function AllPhotosGridVirtuoso({ photos }: Props) {
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
-  const gap = useAlbumPhotoCardStoreSelector((state) => state.gap);
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
 
@@ -69,11 +68,11 @@ export default function AllPhotosGridVirtuoso({ photos }: Props) {
 
   const List = useMemo(() => {
     const Comp = (props: any) => (
-      <GridList {...props} width={width} gap={gap} />
+      <GridList {...props} width={width} gap={1} />
     );
     Comp.displayName = 'VirtuosoGridList';
     return Comp;
-  }, [width, gap]);
+  }, [width]);
 
   return (
     <VirtuosoGrid
