@@ -11,7 +11,7 @@ import SettingsPopover from '@/windows/settings/SettingsPopover';
 import TagsPopover from '@/windows/settings/TagsPopover';
 import ToolsPopover from '@/windows/settings/ToolsPopover';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { Brain, Dock, GalleryVerticalEnd, Group, Info, Key, ListFilter, PanelsRightBottom, Proportions, Server, Shapes, Tag } from 'lucide-react';
+import { Astroid, Brain, Dock, GalleryVerticalEnd, Group, Info, ListFilter, PanelsRightBottom, Proportions, Server, Shapes, Tag } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -79,10 +79,10 @@ export default function SettingsContent() {
 
   const sections = useMemo(() => [
     { key: 'layout', title: "Interface", component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
-    { key: 'tools', title: "Toolbars and status", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
+    { key: 'tools', title: "Theme & Debug", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
     { key: 'filterPhotos', group: 'features', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
     { key: 'drawers', group: 'features', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
-    { key: 'byok', group: 'ai', title: 'BYOK', component: <BYOKPopover />, icon: <Key size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
+    { key: 'byok', group: 'ai', title: 'BYOK & AI', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
     { key: 'indexer', group: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
     { key: 'sections', group: 'features', title: 'Explorer', component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
     { key: 'demo', group: 'indexer', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },

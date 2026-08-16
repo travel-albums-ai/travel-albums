@@ -1,7 +1,7 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
+import SettingsSection from '@/windows/components/SettingsSection';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
-import { Box, Stack } from '@mui/material';
 import { Ban, Check } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +29,7 @@ export default function SectionsPopover({ filter }: { filter?: string }) {
   const { t } = useTranslation()
 
   return <>
-    <Stack sx={{ gap: 0.5 }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
+    <SettingsSection>
       {toggleControls
         .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
         .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
@@ -47,6 +47,6 @@ export default function SectionsPopover({ filter }: { filter?: string }) {
             />}
           </Fragment>
         ))}
-    </Stack>
+    </SettingsSection>
   </>
 }

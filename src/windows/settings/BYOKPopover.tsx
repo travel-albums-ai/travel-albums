@@ -1,9 +1,10 @@
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { sectionIcons } from '@/icons/IconsIndex';
+import SettingsSection from '@/windows/components/SettingsSection';
 import BYOKPersona from '@/windows/settings/components/BYOKPersona';
 import SettingFieldRow from '@/windows/settings/components/SettingFieldRow';
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { Key, Plus } from 'lucide-react';
+import { Box, Button, Typography } from '@mui/material';
+import { Key, PersonStanding, Plus } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -18,7 +19,7 @@ export default function BYOKPopover() {
   const { t } = useTranslation()
 
   return <>
-    <Stack sx={{ gap: 0.5 }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
+    <SettingsSection title="Bring Your Own Key (BYOK)" icon={<Key />}>
       {toggleControls
         .map((control) => (
           <Fragment key={control.key}>
@@ -31,10 +32,12 @@ export default function BYOKPopover() {
             />}
           </Fragment>
         ))}
+    </SettingsSection>
 
+    <SettingsSection title="AI identifiable personas" icon={<PersonStanding />}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, py: 2, justifyContent: 'space-between' }}>
         <Typography variant="subtitle2">Identify personas in photos</Typography>
-        <Button variant="outlined" color="primary" onClick={() => addAdditionalPersona({ name: '', description: '' })}><Plus /></Button>
+        <Button variant="outlined" size="small" color="primary" onClick={() => addAdditionalPersona({ name: '', description: '' })}><Plus size={16} /></Button>
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -42,6 +45,6 @@ export default function BYOKPopover() {
         {getAdditionalPersonas().map((persona, index) => <BYOKPersona persona={persona} main={false} index={index} key={index} />)}
       </Box>
 
-    </Stack>
+    </SettingsSection>
   </>
 }

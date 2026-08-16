@@ -1,8 +1,10 @@
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { toolRegistry } from '@/toolRegistry';
+import SettingsSection from '@/windows/components/SettingsSection';
 import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { Bug, PaintBucket } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function ToolsPopover() {
@@ -13,18 +15,21 @@ export default function ToolsPopover() {
   const { setSetting } = useSettings()
 
   return <>
-    <SettingSelectRow
-      label={t('layoutTheme')}
-      value={themeId}
-      options={['default', 'barbie', 'solarized', 'monokai']}
-      onChange={(value) => {
-        setSetting((prev) => ({
-          ...prev,
-          themeId: value,
-        }))
-      }}
-    />
-    <Stack sx={{ gap: 0.5, height: '600px', overflow: 'auto' }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
+    <SettingsSection title={t('layoutTheme')} icon={<PaintBucket />}>
+      <SettingSelectRow
+        label={t('layoutTheme')}
+        value={themeId}
+        options={['default', 'barbie', 'solarized', 'monokai']}
+        onChange={(value) => {
+          setSetting((prev) => ({
+            ...prev,
+            themeId: value,
+          }))
+        }}
+      />
+    </SettingsSection>
+
+    <SettingsSection title="Debug Tools" icon={<Bug />}>
       {toolIds.map((toolId) => {
         const tool = tools.find((tool) => tool.tool?.some((item) => item.id === toolId))
         if (!tool) {
@@ -39,7 +44,7 @@ export default function ToolsPopover() {
         </Box>
       })}
 
-    </Stack>
+    </SettingsSection>
 
   </>
 }
