@@ -1,3 +1,13 @@
+## [1.118.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.117.1...v1.118.0) (2026-08-16)
+
+### ✨ Features
+
+* enhance AlbumPhotoCard with hover state and description visibility ([f73e29b](https://github.com/travel-albums-ai/travel-albums/commit/f73e29bbdb9747f6b679f2034b602cb33a38f7b7))
+
+### 🧹 Refactors
+
+* simplify styles in AlbumPhotoCard and DescribePhotoReadOnly components ([6e1f2e8](https://github.com/travel-albums-ai/travel-albums/commit/6e1f2e8779a81c2d53ec4a6a9740de5173796f89))
+
 ## [1.117.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.117.0...v1.117.1) (2026-08-16)
 
 ### 🐛 Fixes
