@@ -86,7 +86,7 @@ export default function SettingsContent() {
     { key: 'layout', title: "Interface", component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
     { key: 'tools', group: 'debug', title: "Toolbars", component: <ToolsPopover />, icon: <Dock size={16} />, guidance: "Organize and manage tools in the application" },
     { key: 'filterPhotos', group: 'features', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
-    { key: 'drawers', group: 'features', title: 'Drawers', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
+    { key: 'drawers', group: 'features', title: 'Windows', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
     { key: 'byok', group: 'ai', title: 'BYOK & AI', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
     { key: 'indexer', group: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
     { key: 'sections', group: 'features', title: 'Explorer', component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },

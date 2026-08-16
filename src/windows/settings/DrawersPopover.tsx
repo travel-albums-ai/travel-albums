@@ -39,7 +39,7 @@ export default function DrawersPopover({ filter }: { filter?: string }) {
 
           return <Fragment key={control.key}>
             {control.type === 'boolean' && <SettingToggleRow
-              label={t(control.labelKey) + control.key}
+              label={t(control.labelKey)}
               disabled={control.disabled ?? false}
               icon={Icon ? <Icon /> : undefined}
               inactiveIcon={control.disabled ? undefined : <Check size={16} />}
