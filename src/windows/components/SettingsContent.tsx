@@ -6,6 +6,7 @@ import DrawersPopover from '@/windows/settings/DrawersPopover';
 import FilterPhotosPopover from '@/windows/settings/FilterPhotosPopover';
 import IndexerPopover from '@/windows/settings/IndexerPopover';
 import LayoutPopover from '@/windows/settings/LayoutPopover';
+import MCPPopover from '@/windows/settings/MCPPopover';
 import SectionsPopover from '@/windows/settings/SectionsPopover';
 import SettingsPopover from '@/windows/settings/SettingsPopover';
 import TagsPopover from '@/windows/settings/TagsPopover';
@@ -88,6 +89,7 @@ export default function SettingsContent() {
     { key: 'filterPhotos', group: 'features', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
     { key: 'drawers', group: 'features', title: 'Windows', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
     { key: 'byok', group: 'ai', title: 'BYOK & AI', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
+    { key: 'mcp', group: 'ai', title: 'WebMCP', component: <MCPPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
     { key: 'indexer', group: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
     { key: 'sections', group: 'features', title: 'Explorer', component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
     { key: 'demo', group: 'indexer', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },

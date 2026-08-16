@@ -12,7 +12,7 @@ const toggleControls = [
   { key: 'byokOpenAIKey', icon: sectionIcons.peopleAndPets, labelKey: 'Open AI', value: 'show-people-and-pets', type: 'field' },
 ] as const
 
-export default function BYOKPopover() {
+export default function MCPPopover() {
   const { setSetting } = useBYOK()
   const byokStore = useBYOKStoreSelector((state) => state)
   const { getMainPersona, getAdditionalPersonas, addAdditionalPersona } = useBYOK()

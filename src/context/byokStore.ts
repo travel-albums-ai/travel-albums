@@ -3,6 +3,10 @@ import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 type Persona = {
   name: string;
   description: string;
+
+  webMcp: boolean;
+
+  registeredMcpTools: any[]
 }
 
 type BYOKStore = {
@@ -11,6 +15,10 @@ type BYOKStore = {
   mainPersona: Persona,
 
   additionalPersonas?: Persona[],
+
+  webMcp?: boolean,
+
+  registeredMcpTools?: any[],
 }
 
 const defaults: BYOKStore = {
@@ -71,7 +79,14 @@ export const useBYOK = () => {
     getAdditionalPersonas: () => store.additionalPersonas || [],
     getAllPersonas: () => {
       return [store.mainPersona, ...(store.additionalPersonas || [])]
-    }
+    },
+    registerTool: (tool: any) => {
+      setSetting(prev => ({
+        ...prev,
+        registeredMcpTools: [...(prev.registeredMcpTools || []), tool],
+      }))
+    },
+    getRegisteredTools: () => store.registeredMcpTools || [],
   }
 }
 
