@@ -107,15 +107,13 @@ const tagSx = {
 
 const detailsSx = {
   position: 'absolute',
-  right: 0,
-  bottom: 0,
-  left: 0,
-  justifyContent: "flex-end",
+  right: 8,
+  bottom: 8,
+  left: 8,
+  borderRadius: 2,
+  justifyContent: "flex-start",
   alignItems: "center",
   gap: 1,
-  // borderRadius: 2,
-  // borderTopLeftRadius: 0,
-  // borderTopRightRadius: 0,
   zIndex: 3,
   px: 2,
   py: 0.75,
@@ -296,9 +294,7 @@ function AlbumPhotoCard({
         )}
 
         {showDescription && !isHovered && hasDescription(photo.id) && (
-          <Box className="album-photo-description" sx={detailsSx}>
-            <DescribePhotoReadOnly photoId={photo.id} />
-          </Box>
+          <DescribePhotoReadOnly photoId={photo.id} className="album-photo-description" sx={detailsSx} />
         )}
 
         {isHovered && (

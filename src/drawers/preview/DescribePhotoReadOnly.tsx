@@ -1,14 +1,14 @@
 import { useDescriptions } from '@/context/descriptionsStore';
 import { Box, Typography } from '@mui/material';
+import { Astroid } from 'lucide-react';
 
-export default function DescribePhotoReadOnly({ photoId }: { photoId: string }) {
+export default function DescribePhotoReadOnly({ photoId, className, sx }: { photoId: string; className?: string, sx?: any }) {
   const { getDescription } = useDescriptions()
 
-  return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Typography variant="caption" color="textSecondary" align="center">
-        {getDescription(photoId)}
-      </Typography>
-    </Box>
-  )
+  return <Box className={className} sx={{...sx, display: 'flex', alignItems: 'center', gap: 1 }}>
+    <Astroid size={12} />
+    <Typography variant="caption" color="textSecondary">
+      {getDescription(photoId)}
+    </Typography>
+  </Box>
 }
