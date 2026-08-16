@@ -4,7 +4,7 @@ import { Camera, Eye, Heart, MapPin, MessagesSquare, Users } from 'lucide-react'
 import { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmpty = false, extraItems = [], showCount = true }: { id?: string, photos?: any[], minWidth?: number, filterEmpty?: boolean, extraItems?: { label: string, value: number, icon: JSX.Element }[] , showCount?: boolean}) {
+export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmpty = false, extraItems = [], showCount = true, showLocation = true }: { id?: string, photos?: any[], minWidth?: number, filterEmpty?: boolean, extraItems?: { label: string, value: number, icon: JSX.Element }[] , showCount?: boolean, showLocation?: boolean }) {
   const albumPhotos = photos
   const { t } = useTranslation()
 
@@ -17,7 +17,8 @@ export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmp
     {
       label: t('metaPhotos'),
       value: photos?.length,
-      icon: <Camera size={14} />
+      icon: <Camera size={14} />,
+      visible: showCount
     },
     {
       label: t('metaComments'),
@@ -37,7 +38,8 @@ export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmp
     {
       label: t('metaGeotagged'),
       value: photos ? photos?.filter(photo => typeof photo.latitude === 'number' && typeof photo.longitude === 'number' && photo.latitude > 0 && photo.longitude > 0).length || 0 : 0,
-      icon: <MapPin size={14} />
+      icon: <MapPin size={14} />,
+      visible: showLocation
     },
     {
       label: t('metaViewed'),
@@ -56,7 +58,7 @@ export default function AlbumsMetaDetails({ id, photos, minWidth = 50, filterEmp
     >
       {items
         .filter(item => !filterEmpty || (item.value !== undefined && item.value > 0))
-        .filter(item => showCount || item.label !== t('metaPhotos'))
+        .filter(item => item.visible === undefined || item.visible)
         .map(item => (<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }} key={item.label}>
           {item.icon}
           {item.value !== undefined

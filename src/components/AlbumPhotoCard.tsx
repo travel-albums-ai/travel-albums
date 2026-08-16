@@ -42,12 +42,6 @@ function prettyTime(dateInput: string) {
   return `${partOfDay}, ${d.format('D MMM YYYY')}`;
 }
 
-/**
- * Static styles are kept outside the component.
- *
- * This avoids constructing the same large style objects for every
- * AlbumPhotoCard render.
- */
 const cardSx = {
   position: 'relative',
   display: 'flex',
@@ -64,10 +58,6 @@ const cardSx = {
       opacity: 0,
       pointerEvents: 'none',
     },
-
-    // '& .album-photo-tags': {
-    //   bottom: 56,
-    // },
 
     '& .album-photo-details': {
       opacity: 1,
@@ -139,12 +129,6 @@ function AlbumPhotoCard({
   const theme = useTheme();
   const { hasDescription } = useDescriptions()
   const [isHovered, setIsHovered] = useState(false);
-  /*
-   * These are the values that can affect this individual card.
-   *
-   * Keeping the selectors narrow is important with Zustand-style stores:
-   * unrelated store changes should not cause every card to rerender.
-   */
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
   const showDescription = useAlbumPhotoCardStoreSelector((state) => state.showDescription);
@@ -330,6 +314,7 @@ function AlbumPhotoCard({
             minWidth={0}
             filterEmpty
             showCount={false}
+            showLocation={showLocation}
           />
         </Stack>
       )}
@@ -337,12 +322,6 @@ function AlbumPhotoCard({
   );
 }
 
-/*
- * The gallery can contain thousands of these.
- *
- * Prevent rerendering when the parent rerenders but this photo's
- * relevant props haven't changed.
- */
 export default memo(AlbumPhotoCard, (previous, next) => {
   return (
     previous.photo === next.photo &&
