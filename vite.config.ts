@@ -22,8 +22,6 @@ export default defineConfig(({ mode, command }) => {
     )
   }
 
-  const folders = ['src/windows', 'src/tools', 'src/base', 'src/drawers', 'src/components'];
-
   return {
     base: './',
     resolve: {
@@ -51,13 +49,6 @@ export default defineConfig(({ mode, command }) => {
               return 'vendors/[name]-[hash].js';
             }
 
-            for (const folder of folders) {
-              if (chunkInfo.name.startsWith(folder.split('/').pop() ?? '')) {
-                return `${folder.split('/').pop()}/[name]-[hash].js`;
-              }
-            }
-
-
             return 'assets/[name]-[hash].js';
           },
 
@@ -66,14 +57,13 @@ export default defineConfig(({ mode, command }) => {
             groups: [{
               name(id) {
                 if (id.includes('node_modules')) {
+                  if (id.includes('@vercel')) return 'vendor-vercel';
                   if (id.includes('lucide-react')) return 'vendor-ux-lucide';
                   if (id.includes('driver.js')) return 'vendor-driver-js';
                   if (id.includes('uplot')) return 'vendor-ux-uplot';
                   if (id.includes('react-virtuoso')) return 'vendor-render-virtuoso';
                   if (id.includes('react-zoom-pan-pinch')) return 'vendor-ux-zoom-pan-pinch';
-                  if (id.includes('react-intersection-observer')) {
-                    return 'vendor-render-intersection-observer';
-                  }
+                  if (id.includes('react-intersection-observer')) return 'vendor-render-intersection-observer';
                   if (id.includes('leaflet')) return 'vendor-map-leaflet';
                   if (id.includes('localforage')) return 'vendor-storage-localforage';
                   if (id.includes('@tanstack')) return 'vendor-render-tanstack';
@@ -99,23 +89,9 @@ export default defineConfig(({ mode, command }) => {
               test: (id) => id.includes('node_modules'),
               priority: 10,
               minShareCount: 0,
-            }, {
-              name(id) {
-                for (const folder of folders) {
-                  if (id.includes(folder)) {
-                    return folder.split('/').pop() ?? null;
-                  }
-                }
-
-                return null;
-              },
-              test: (id) => folders.some((folder) => id.includes(folder)),
-              priority: 5,
-              minShareCount: 0,
             }],
           },
         } : {
-          // Keep dynamic import semantics while emitting a single JS bundle.
           codeSplitting: false,
         },
       }
