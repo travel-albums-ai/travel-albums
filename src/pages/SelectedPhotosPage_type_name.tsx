@@ -1,15 +1,11 @@
-import BreadscrumbsPrimary from '@/components/BreadcrumbsTool/BreadscrumbsPrimary';
 import GenericPanel from '@/components/generics/GenericPanel';
 import NoPhotos from '@/components/NoPhotos';
-import SolidChip from '@/components/SolidChip';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { sectionIcons } from '@/icons/IconsIndex';
 import { GalleryPhoto } from '@/lib/galleryData';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
-import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 export default function SelectedPhotosPage_type_name() {
@@ -27,15 +23,6 @@ export default function SelectedPhotosPage_type_name() {
 
   return (
     <>
-      <BreadscrumbsPrimary>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          {sectionIcons[type_name]}
-          <Typography variant="subtitle2" color="primary" sx={{ fontWeight: 700 }}>{foundSection?.title}</Typography>
-        </Box>
-        <SolidChip label={id} height={24} />
-
-      </BreadscrumbsPrimary>
-
       <GenericPanel id="selected-photos-drawer" defaultTool toolContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
         {photos.length === 0
           ? <NoPhotos />

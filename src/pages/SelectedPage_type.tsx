@@ -1,11 +1,9 @@
-import BreadscrumbsPrimary from '@/components/BreadcrumbsTool/BreadscrumbsPrimary';
 import GenericPanel from '@/components/generics/GenericPanel';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { sectionIcons } from '@/icons/IconsIndex';
 import GroupingPreviewItemNg from '@/pages/components/GroupingPreviewItemNg';
 import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -22,13 +20,6 @@ export default function SelectedPage_type() {
 
   return (
     <>
-      <BreadscrumbsPrimary>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          {sectionIcons[type_name]}
-          <Typography variant="subtitle2" color="primary" sx={{ fontWeight: 700 }}>{foundSection?.title}</Typography>
-        </Box>
-      </BreadscrumbsPrimary>
-
       <GenericPanel id="selected-page-drawer" tool={
         <>
           {type_name === 'nowAndThen' && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
