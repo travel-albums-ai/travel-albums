@@ -1,16 +1,15 @@
 import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import { useSettings } from '@/context/settingsStore';
+import SettingsSection from '@/windows/components/SettingsSection';
 import SettingsComponentRow from '@/windows/settings/components/SettingsComponentRow';
-import SettingsSliderRow from '@/windows/settings/components/SettingsSliderRow';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
-import { Box, Stack } from '@mui/material';
+import { CreditCard, GalleryHorizontal } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControlsPreview = [
-  { key: 'width', labelKey: 'layoutWidth', type: 'number', max: 500 },
-  { key: 'height', labelKey: 'layoutHeight', type: 'number', max: 500 },
+  { key: 'thumbSizeStatus', labelKey: 'layoutThumbSizeStatus', type: 'toolbar', toolbarComponentId: 'thumbSizeStatus' },
+  { key: "thumbnailCover", labelKey: 'layoutThumbnailCover', type: 'toolbar', toolbarComponentId: "thumbnailCover" },
   { key: 'showDescription', labelKey: 'layoutShowDescription', type: 'boolean' },
   { key: 'showTags', labelKey: 'layoutShowTags', type: 'boolean' },
   { key: 'showDate', labelKey: 'layoutShowDate', type: 'boolean' },
@@ -19,46 +18,81 @@ const toggleControlsPreview = [
 ] as const
 
 const toggleControlsScroller = [
-  { key: 'scrollerGroupedByBatches', labelKey: 'layoutScrollerGroupedByBatches', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
+  { key: 'scrollerColumns', labelKey: 'layoutScrollerColumns', type: 'toolbar', toolbarComponentId: "scroller-columns-toggle" },
+  { key: 'scrollerRows', labelKey: 'layoutScrollerRows', type: 'toolbar', toolbarComponentId: "scroller-rows-toggle" },
+  { key: 'scrollerGrouping', labelKey: 'layoutScrollerGrouping', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
+  { key: 'scrollerOriginal', labelKey: 'layoutScrollerOriginal', type: 'toolbar', toolbarComponentId: "scroller-original-toggle" },
 ] as const
+
+const groups = [
+  {
+    title: "Card",
+    controls: toggleControlsPreview,
+    icon: <CreditCard style={{ transform: 'rotate(180deg)' }} />,
+  },
+  {
+    title: "Scroller",
+    controls: toggleControlsScroller,
+    icon: <GalleryHorizontal />,
+  }
+]
 
 export default function LayoutPopover() {
   const { setSetting: setCardSetting } = useAlbumPhotoCard()
-  const { setSetting } = useSettings()
   const cardSettings = useAlbumPhotoCardStoreSelector((state) => state)
-  const settings = useSettings((state) => state)
   const { t } = useTranslation()
 
-  return <Stack sx={{ gap: 0.5 }} divider={<Box sx={{ borderBottom: '1px dotted', borderColor: 'divider' }} />} >
-    {toggleControlsPreview
-      .map((control) => (
-        <Fragment key={control.key}>
-          {control.type === 'boolean' && <SettingToggleRow
-            key={control.key}
-            label={t(control.labelKey)}
-            selected={cardSettings[control.key]}
-            onChange={() => setCardSetting((prev) => ({ ...prev, [control.key]: !cardSettings[control.key] }))}
-          />}
+  return <>
+    {groups.map((group) => (
+      <SettingsSection key={group.title} title={group.title} icon={group.icon} >
+        {group.controls
+          .map((control) => (
+            <Fragment key={control.key}>
+              {control.type === 'boolean' && <SettingToggleRow
+                key={control.key}
+                label={t(control.labelKey)}
+                selected={cardSettings[control.key]}
+                onChange={() => setCardSetting((prev) => ({ ...prev, [control.key]: !cardSettings[control.key] }))}
+              />}
 
-          {control.type === 'number' && <SettingsSliderRow
-            key={control.key}
-            label={t(control.labelKey)}
-            max={control.max}
-            value={cardSettings[control.key] || 0}
-            onChange={(value) => setCardSetting((prev) => ({ ...prev, [control.key]: value }))}
-          />}
-        </Fragment>
-      ))}
+              {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
+                <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
+              </SettingsComponentRow>}
+            </Fragment>
+          ))}
+      </SettingsSection>
+    ))}
 
 
-    {toggleControlsScroller
-      .map((control) => (
-        <Fragment key={control.key}>
-          {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
-            <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
-          </SettingsComponentRow>}
-        </Fragment>
-      ))}
 
-  </Stack>
+
+
+    <SettingsSection title="Card" icon={<CreditCard style={{ transform: 'rotate(180deg)' }} />} >
+      {toggleControlsPreview
+        .map((control) => (
+          <Fragment key={control.key}>
+            {control.type === 'boolean' && <SettingToggleRow
+              key={control.key}
+              label={t(control.labelKey)}
+              selected={cardSettings[control.key]}
+              onChange={() => setCardSetting((prev) => ({ ...prev, [control.key]: !cardSettings[control.key] }))}
+            />}
+
+            {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
+              <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
+            </SettingsComponentRow>}
+          </Fragment>
+        ))}
+    </SettingsSection>
+    <SettingsSection title="Scroller" icon={<GalleryHorizontal />} >
+      {toggleControlsScroller
+        .map((control) => (
+          <Fragment key={control.key}>
+            {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
+              <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
+            </SettingsComponentRow>}
+          </Fragment>
+        ))}
+    </SettingsSection>
+  </>
 }

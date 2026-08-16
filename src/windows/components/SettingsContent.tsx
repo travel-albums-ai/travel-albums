@@ -109,7 +109,7 @@ export default function SettingsContent() {
   }, [sections]);
 
   return (<>
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%" }} id="settings-content">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
         {Object.entries(groupedSections).map(([group, groupSections]) => (
           <Fragment key={group}>
@@ -136,7 +136,7 @@ export default function SettingsContent() {
 
       </Box>
 
-      <Box sx={{ p: 1, display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1 }}>
+      <Box sx={{ p: 1, display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, overflow: 'auto'  }}>
         {sections
           .filter(section => section.key === activeSettingsTab)
           .map(section => (<Fragment key={section.key}>
@@ -145,7 +145,7 @@ export default function SettingsContent() {
               <Typography variant="h5" sx={{ lineHeight: 1, flex: 1 }}> {section.title}</Typography>
               { section.guidance && <Typography variant="body2" color="textDisabled">{section.guidance}</Typography> }
             </Box>
-            <Box key={section.key} sx={{ bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', p: 2, borderRadius: 2 }}>
+            <Box key={section.key} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               {section.component}
             </Box>
           </Fragment>))}
