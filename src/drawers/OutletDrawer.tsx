@@ -1,6 +1,5 @@
 
 import { Box } from '@mui/material';
-import 'flexlayout-react/style/alpha_dark.css';
 import { Outlet } from 'react-router-dom';
 
 export default function OutletDrawer() {

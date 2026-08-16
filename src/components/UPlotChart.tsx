@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import uPlot from 'uplot';
-import 'uplot/dist/uPlot.min.css';
 
 type Props = {
   data: number[];

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { driver } from "driver.js";
-import "driver.js/dist/driver.css";
+
 
 const sidebar = [
   {

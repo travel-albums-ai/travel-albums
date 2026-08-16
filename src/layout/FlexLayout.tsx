@@ -9,7 +9,7 @@ import {
   Model,
   TabNode,
 } from 'flexlayout-react';
-import 'flexlayout-react/style/combined.css';
+
 
 import GeneralRegistryDrawer from '@/components/registry/GeneralRegistryDrawer';
 import i18n from '@/lib/i18n';

@@ -1,13 +1,11 @@
+import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import MainDriver from '@/drivers/MainDriver';
+import FlexLayout from '@/layout/FlexLayout';
+import Header from '@/layout/Header';
 import StatusBar from '@/layout/StatusBar';
 import NoServerWindow from '@/windows/NoServerWindow';
 import OnboardingWindow from '@/windows/OnboardingWindow';
-import 'flexlayout-react/style/combined.css';
-
-import WebMCPDataView from '@/components/WebMCPDataView';
-import FlexLayout from '@/layout/FlexLayout';
-import Header from '@/layout/Header';
 import SettingsWindow from '@/windows/SettingsWindow';
 
 export default function AppLayout() {

@@ -3,7 +3,6 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import { useEffect, useMemo, useRef } from 'react';
 
 const THUMB_SIZE = 44

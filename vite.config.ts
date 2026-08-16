@@ -44,8 +44,26 @@ export default defineConfig(({ mode, command }) => {
       },
       rolldownOptions: {
         output: shouldVisualize ? {
+          chunkFileNames: (chunkInfo) => {
+            if (chunkInfo.name.startsWith('vendor')) {
+              return 'vendors/[name]-[hash].js';
+            }
+
+            if (chunkInfo.name.startsWith('tools')) {
+              return 'tools/[name]-[hash].js';
+            }
+
+
+            return 'assets/[name]-[hash].js';
+          },
+
+          assetFileNames: 'assets/[name]-[hash][extname]',
           manualChunks(id) {
             if (!id) return;
+
+
+
+
             if (!id.includes('node_modules')) return;
 
             if (id.includes('lucide-react')) return 'vendor-ux-lucide';

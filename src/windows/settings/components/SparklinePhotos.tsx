@@ -1,7 +1,5 @@
-import uPlot from 'uplot';
-import 'uplot/dist/uPlot.min.css';
-
 import { useEffect, useMemo, useRef } from 'react';
+import uPlot from 'uplot';
 
 type SparklineProps = {
   data: Record<string, number>;
