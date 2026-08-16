@@ -81,10 +81,22 @@ export const useBYOK = () => {
       return [store.mainPersona, ...(store.additionalPersonas || [])]
     },
     registerTool: (tool: any) => {
-      setSetting(prev => ({
-        ...prev,
-        registeredMcpTools: [...(prev.registeredMcpTools || []), tool],
-      }))
+      console.log('Registering tool:', tool);
+      setSetting(prev => {
+        const registeredTools = prev.registeredMcpTools || []
+
+        if (tool.name && registeredTools.some(registeredTool => registeredTool.name === tool.name)) {
+          return prev
+        }
+
+        return {
+          ...prev,
+          registeredMcpTools: [...registeredTools, tool],
+        }
+      })
+    },
+    hasRegisteredTool: (toolName: string) => {
+      return (store.registeredMcpTools || []).some(tool => tool.name === toolName)
     },
     getRegisteredTools: () => store.registeredMcpTools || [],
   }

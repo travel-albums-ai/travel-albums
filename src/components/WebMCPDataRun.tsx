@@ -1,22 +1,23 @@
-import { useBYOK } from '@/context/byokStore';
-import { useEffect } from 'react';
 import { useWebMCP } from 'usewebmcp';
 
 export default function WebMCPDataRun({ name, description, inputSchema, execute, deps } : { name: string; description: string; inputSchema?: any, execute: (input: any) => Promise<any>; deps?: any[] }) {
 
-  const { registerTool } = useBYOK();
+  // const { registerTool, hasRegisteredTool } = useBYOK();
 
-  useEffect(() => {
-    registerTool({
-      name,
-      description,
-      inputSchema: inputSchema || {
-        type: 'object',
-        properties: {},
-      },
-      execute,
-    });
-  }, [name, description, inputSchema, execute]);
+  // useEffect(() => {
+  //   if (hasRegisteredTool(name)) {
+  //     return;
+  //   }
+  //   registerTool({
+  //     name,
+  //     description,
+  //     inputSchema: inputSchema || {
+  //       type: 'object',
+  //       properties: {},
+  //     },
+  //     execute,
+  //   });
+  // }, []);
 
   useWebMCP({
     name,

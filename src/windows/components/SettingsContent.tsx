@@ -89,7 +89,7 @@ export default function SettingsContent() {
     { key: 'filterPhotos', group: 'features', title: t('filterPhotos'), component: <FilterPhotosPopover />, icon: <ListFilter size={16} />, guidance: t('filterPhotosGuidance') },
     { key: 'drawers', group: 'features', title: 'Windows', component: <DrawersPopover />, icon: <PanelsRightBottom size={16} />, guidance: 'Hide/Show various drawers in the application' },
     { key: 'byok', group: 'ai', title: 'BYOK & AI', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
-    { key: 'mcp', group: 'ai', title: 'WebMCP', component: <MCPPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
+    { key: 'mcp', group: 'ai', title: 'WebMCP', component: <MCPPopover />, icon: <Astroid size={16} />, guidance: 'Give AI access to your data via WebMCP' },
     { key: 'indexer', group: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
     { key: 'sections', group: 'features', title: 'Explorer', component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
     { key: 'demo', group: 'indexer', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },
