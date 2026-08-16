@@ -9,7 +9,7 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useTagsStoreSelector } from '@/context/tagsStore';
 import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
 import { type GalleryPhoto } from '@/lib/galleryData';
-import { Box, Card, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import dayjs from 'dayjs';
 import {
   memo,
@@ -119,11 +119,9 @@ const detailsSx = {
   right: 0,
   bottom: 0,
   left: 0,
-  display: 'flex',
-  flexWrap: 'wrap',
-  alignItems: 'flex-end',
-  justifyContent: 'flex-end',
-  gap: 0.5,
+  justifyContent: "flex-end",
+  alignItems: "center",
+  gap: 1,
   borderRadius: 2,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0,
@@ -311,7 +309,7 @@ function AlbumPhotoCard({
       )}
 
       {isHovered && (
-        <Box className="album-photo-details" sx={detailsSx}>
+        <Stack direction="row" divider={<Divider orientation="vertical" sx={{ borderStyle: 'dotted' }} flexItem />} className="album-photo-details" sx={detailsSx}>
           {showDate && (
             <Tooltip arrow title={photo.takenAt}>
               <Typography
@@ -334,7 +332,7 @@ function AlbumPhotoCard({
             filterEmpty
             showCount={false}
           />
-        </Box>
+        </Stack>
       )}
     </Card>
   );
