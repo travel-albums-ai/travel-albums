@@ -272,22 +272,21 @@ function AlbumPhotoCard({
         }}
       />
 
-      <GeneralRegistryToolbar
-        fullWidth={false}
-        group="album-photo-card"
-        sx={toolbarSx}
-        context={{
-          photoId: photo.id,
-          favorite,
-          selectMode,
-        }}
-      />
+      {(selectMode || favorite) && (
+        <GeneralRegistryToolbar
+          fullWidth={false}
+          group="album-photo-card"
+          sx={toolbarSx}
+          context={{
+            photoId: photo.id,
+            favorite,
+            selectMode,
+          }}
+        />
+      )}
 
       {showTags && resolvedTags.length > 0 && (
-        <Box
-          className="album-photo-tags"
-          sx={tagsSx}
-        >
+        <Box className="album-photo-tags" sx={tagsSx}>
           {resolvedTags.map((tag) => (
             <Box
               key={tag.id}
