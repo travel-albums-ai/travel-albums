@@ -3,7 +3,7 @@ import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/alb
 import SettingsSection from '@/windows/components/SettingsSection';
 import SettingsComponentRow from '@/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
-import { CreditCard, GalleryHorizontal } from 'lucide-react';
+import { CreditCard, GalleryHorizontal, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -30,6 +30,13 @@ const groups = [
       { key: 'scrollerOriginal', labelKey: 'layoutScrollerOriginal', type: 'toolbar', toolbarComponentId: "scroller-original-toggle" },
     ],
     icon: <GalleryHorizontal />,
+  },
+  {
+    title: "Theme",
+    controls: [
+      { key: 'theme', labelKey: 'layoutTheme', type: 'toolbar', toolbarComponentId: "themeMenu" },
+    ],
+    icon: <PaintBucket />,
   }
 ]
 
