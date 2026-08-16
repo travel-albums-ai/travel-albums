@@ -2,6 +2,7 @@ import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBac
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
+import { useDescriptions } from '@/context/descriptionsStore';
 import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
@@ -14,6 +15,7 @@ import {
   memo,
   useCallback,
   useMemo,
+  useState,
   type CSSProperties,
   type MouseEvent,
 } from 'react';
@@ -129,6 +131,7 @@ const detailsSx = {
   zIndex: 3,
   px: 2,
   py: 0.75,
+  bgcolor: theme => `${theme.palette.background.paper}BB`,
 } as const;
 
 function AlbumPhotoCard({
@@ -137,7 +140,8 @@ function AlbumPhotoCard({
   original = false,
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
-
+  const { hasDescription } = useDescriptions()
+  const [isHovered, setIsHovered] = useState(false);
   /*
    * These are the values that can affect this individual card.
    *
@@ -169,15 +173,6 @@ function AlbumPhotoCard({
   const favorite = isFavorite(photo.id);
   const isSelected = useSelected_isSelected(photo.id);
 
-  /*
-   * O(1) tag resolution instead of doing:
-   *
-   *   tags.find(...)
-   *   tags.find(...)
-   *   tags.find(...)
-   *
-   * for every tag on every card.
-   */
   const tagsById = useMemo(() => {
     const map = new Map<string, (typeof tags)[number]>();
 
@@ -226,9 +221,14 @@ function AlbumPhotoCard({
       if (hasGps && event.shiftKey) {
         setFocusedPhoto(photo.id);
       }
+      setIsHovered(true);
     },
     [hasGps, photo.id, setFocusedPhoto],
   );
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+  }, []);
 
   const handleClick = useCallback(() => {
     setPreviewPhotoObj(photo);
@@ -256,16 +256,13 @@ function AlbumPhotoCard({
     <Card
       component="article"
       onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       sx={{
         ...cardSx,
         minHeight: height,
         ...style,
 
-        /*
-         * Persistent details are visible immediately.
-         * Otherwise they only become visible through :hover.
-         */
         '& .album-photo-details': {
           ...cardSx['& .album-photo-details'],
           opacity: showDetails ? 1 : 0,
@@ -284,27 +281,21 @@ function AlbumPhotoCard({
         }}
       />
 
-      <Box sx={toolbarSx}>
-        <GeneralRegistryToolbar
-          group="album-photo-card"
-          context={{
-            photoId: photo.id,
-            favorite,
-            selectMode,
-          }}
-        />
-      </Box>
-
-      <Box
-        className="album-photo-description"
-        sx={{
-          ...detailsSx,
-          border: `1px dashed ${theme.palette.divider}42`,
-          bgcolor: `${theme.palette.background.paper}AA`,
+      <GeneralRegistryToolbar
+        group="album-photo-card"
+        sx={toolbarSx}
+        context={{
+          photoId: photo.id,
+          favorite,
+          selectMode,
         }}
-      >
-        <DescribePhotoReadOnly photoId={photo.id} />
-      </Box>
+      />
+
+      {hasDescription(photo.id) && (
+        <Box className="album-photo-description" sx={detailsSx}>
+          <DescribePhotoReadOnly photoId={photo.id} />
+        </Box>
+      )}
 
       {resolvedTags.length > 0 && (
         <Box
@@ -325,15 +316,8 @@ function AlbumPhotoCard({
         </Box>
       )}
 
-      {canShowDetails && (
-        <Box
-          className="album-photo-details"
-          sx={{
-            ...detailsSx,
-            border: `1px dashed ${theme.palette.divider}42`,
-            bgcolor: `${theme.palette.background.paper}AA`,
-          }}
-        >
+      {canShowDetails && isHovered && (
+        <Box className="album-photo-details" sx={detailsSx}>
           {canShowDate && (
             <Tooltip arrow title={photo.takenAt}>
               <Typography
