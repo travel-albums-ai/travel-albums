@@ -7,17 +7,17 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControlsPreview = [
-  { key: 'width', labelKey: 'layoutWidth', value: 'show-width-size', type: 'number', max: 500, group: 'preview' },
-  { key: 'height', labelKey: 'layoutHeight', value: 'show-height-size', type: 'number', max: 500, group: 'preview' },
-  { key: 'showDescription', labelKey: 'layoutShowDescription', value: 'show-description', type: 'boolean', group: 'preview' },
-  { key: 'showTags', labelKey: 'layoutShowTags', value: 'show-tags', type: 'boolean', group: 'preview' },
-  { key: 'showDate', labelKey: 'layoutShowDate', value: 'show-date', type: 'boolean', group: 'preview' },
-  { key: 'showLocation', labelKey: 'layoutShowLocation', value: 'show-location', type: 'boolean', group: 'preview' },
-  { key: 'showFileName', labelKey: 'layoutShowFileName', value: 'show-file-name', type: 'boolean', group: 'preview' },
+  { key: 'width', labelKey: 'layoutWidth', type: 'number', max: 500 },
+  { key: 'height', labelKey: 'layoutHeight', type: 'number', max: 500 },
+  { key: 'showDescription', labelKey: 'layoutShowDescription', type: 'boolean' },
+  { key: 'showTags', labelKey: 'layoutShowTags', type: 'boolean' },
+  { key: 'showDate', labelKey: 'layoutShowDate', type: 'boolean' },
+  { key: 'showLocation', labelKey: 'layoutShowLocation', type: 'boolean' },
+  { key: 'showFileName', labelKey: 'layoutShowFileName', type: 'boolean' },
 ] as const
 
 const toggleControlsScroller = [
-  { key: 'scrollerGroupedByBatches', labelKey: 'layoutScrollerGroupedByBatches', value: 'scroller-grouped-by-batches', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
+  { key: 'scrollerGroupedByBatches', labelKey: 'layoutScrollerGroupedByBatches', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
 ] as const
 
 export default function LayoutPopover() {
@@ -51,20 +51,10 @@ export default function LayoutPopover() {
     {toggleControlsScroller
       .map((control) => (
         <Fragment key={control.key}>
-          {control.type === 'boolean' && <SettingToggleRow
-            key={control.key}
-            label={t(control.labelKey)}
-            selected={settings[control.key]}
-            onChange={() => setSetting((prev) => ({ ...prev, [control.key]: !settings[control.key] }))}
-          />}
-
-          {control.type === 'number' && <SettingsSliderRow
-            key={control.key}
-            label={t(control.labelKey)}
-            max={control.max}
-            value={settings[control.key] || 0}
-            onChange={(value) => setSetting((prev) => ({ ...prev, [control.key]: value }))}
-          />}
+          {control.type === 'toolbar' && <>
+            {control.labelKey}
+            {control.toolbarComponentId}
+          </>}
         </Fragment>
       ))}
 
