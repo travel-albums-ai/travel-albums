@@ -1,3 +1,3 @@
-import { DrawerMeta } from '@/drawerRegistry';
+// import { DrawerMeta } from '@/drawerRegistry';
 
-export const meta = { id: 'files', loader: () => import('@/drawers/FilesDrawer') } as DrawerMeta;
+// export const meta = { id: 'files', loader: () => import('@/drawers/FilesDrawer') } as DrawerMeta;

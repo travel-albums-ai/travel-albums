@@ -3,10 +3,8 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import DrawersPopover from '@/windows/settings/DrawersPopover';
 import { Box } from '@mui/material';
 import { PanelsRightBottom } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 export default function DrawersToggle() {
-  const { t } = useTranslation();
 
   return <GenericToggleButtonGroup
     id="settings-sections-toggle"

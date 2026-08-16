@@ -4,11 +4,13 @@ import { drawerRegistry } from '@/drawerRegistry';
 import { Box } from '@mui/material';
 import {
   IJsonModel,
+  ITabRenderValues,
   Layout,
   Model,
   TabNode,
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
+import { Circle } from 'lucide-react';
 
 import GeneralRegistryDrawer from '@/components/registry/GeneralRegistryDrawer';
 import i18n from '@/lib/i18n';
@@ -28,7 +30,6 @@ const STORAGE_KEY = 'flexlayout-model-v1';
 
 const leftChildren = [
   ...tab('drawerExplorer', 'sidebar'),
-  ...tab('drawerFiles', 'files'),
 ]
 
 const rightChildren = [
@@ -133,6 +134,10 @@ export default function FlexLayout() {
     return drawerRegistry.has(component) ? <GeneralRegistryDrawer id={component} /> : null;
   }, []);
 
+  const renderTab = useCallback((_node: TabNode, renderValues: ITabRenderValues) => {
+    renderValues.leading = <Circle size={14} strokeWidth={2} aria-hidden="true" />;
+  }, []);
+
   const model = useMemo(
     () => drawerDiscoveryReady ? loadModel(drawers) : null,
     [drawers, drawerDiscoveryReady],
@@ -151,6 +156,7 @@ export default function FlexLayout() {
         {model && <Layout
           model={model}
           factory={factory}
+          onRenderTab={renderTab}
           onModelChange={(newModel) => localStorage.setItem(STORAGE_KEY, JSON.stringify(newModel.toJson()))}
         />}
       </Box>
