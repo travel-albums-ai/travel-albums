@@ -3,8 +3,6 @@ import MiniCalendar from '@/drawers/calendar/MiniCalendar';
 import { useTransform_PhotosByMoments } from '@/hooks/useTransform_PhotosByMoments';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
 import { Box } from '@mui/material';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
@@ -18,73 +16,71 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
   const allMoments = photosByMoments.flatMap((day) => day.moments.flatMap((moment) => day.label + ", " + moment.label));
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box
-        component="section"
-        aria-label="Photos in album"
-        sx={{
-          flex: 1,
-          display: 'flex',
-          minHeight: 0,
-          gap: 2
-        }}
-      >
+    <Box
+      component="section"
+      aria-label="Photos in album"
+      sx={{
+        flex: 1,
+        display: 'flex',
+        minHeight: 0,
+        gap: 2
+      }}
+    >
 
-        <Box sx={{  width: '500px', alignSelf: 'stretch', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1  }}>
+      <Box sx={{  width: '500px', alignSelf: 'stretch', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', gap: 1  }}>
 
-          <MiniCalendar
-            year={dayjs(selectedDay).year()}
-            month={dayjs(selectedDay).month() + 1}
-            highlightMoments={[
-              ...allMoments.map((moment) => dayjs(moment)),
-            ]}
-            selectedDay={dayjs(selectedDay)}
-            selectedMoment={dayjs(selectedDay + ", " + selectedMoment)}
-          />
+        <MiniCalendar
+          year={dayjs(selectedDay).year()}
+          month={dayjs(selectedDay).month() + 1}
+          highlightMoments={[
+            ...allMoments.map((moment) => dayjs(moment)),
+          ]}
+          selectedDay={dayjs(selectedDay)}
+          selectedMoment={dayjs(selectedDay + ", " + selectedMoment)}
+        />
 
-          {selectedPhotos && <AlbumMapPanel photos={selectedPhotos} height={950} interactive={true} />}
-        </Box>
+        {selectedPhotos && <AlbumMapPanel photos={selectedPhotos} height={950} interactive={true} />}
+      </Box>
 
-        <Box sx={{ flex: 1, minHeight: 0 }}>
+      <Box sx={{ flex: 1, minHeight: 0 }}>
 
-          <Box sx={{ overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column', gap: 2, pt: 2, px: 1 }}>
-            {photosByMoments.map((day, index) => (
-              <Box key={day.label} sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
-                onMouseOver={() => setSelectedDay(day.label)}
-              >
+        <Box sx={{ overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column', gap: 2, pt: 2, px: 1 }}>
+          {photosByMoments.map((day, index) => (
+            <Box key={day.label} sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
+              onMouseOver={() => setSelectedDay(day.label)}
+            >
                 📅 {day.label}
-                {day.moments.map((moment) => (
-                  <Box key={moment.label} onMouseOver={() => setSelectedMoment(moment.label)}>
-                    {moment.locations.map((location, index) => (
-                      <Box key={location.label}
-                        onMouseOver={() => setSelectedPlace(location.label)}
-                        sx={{
-                          display: 'flex', flexDirection: 'row',
-                          gap: 2, py: 2,
-                          pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap',
-                        }}>
+              {day.moments.map((moment) => (
+                <Box key={moment.label} onMouseOver={() => setSelectedMoment(moment.label)}>
+                  {moment.locations.map((location, index) => (
+                    <Box key={location.label}
+                      onMouseOver={() => setSelectedPlace(location.label)}
+                      sx={{
+                        display: 'flex', flexDirection: 'row',
+                        gap: 2, py: 2,
+                        pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap',
+                      }}>
 
-                        <Box sx={{
-                          width: '100%',
-                          overflowY: 'auto',
-                        }}>
-                          <AlbumPagePerDayItem
-                            day={{
-                              label: `${day.label} ${moment.label} at ${location.label} (${location.photos.length})`,
-                              photos: location.photos,
-                            }}
-                            index={index}
-                          />
-                        </Box>
+                      <Box sx={{
+                        width: '100%',
+                        overflowY: 'auto',
+                      }}>
+                        <AlbumPagePerDayItem
+                          day={{
+                            label: `${day.label} ${moment.label} at ${location.label} (${location.photos.length})`,
+                            photos: location.photos,
+                          }}
+                          index={index}
+                        />
                       </Box>
-                    ))}
-                  </Box>
-                ))}
-              </Box>
-            ))}
-          </Box>
+                    </Box>
+                  ))}
+                </Box>
+              ))}
+            </Box>
+          ))}
         </Box>
       </Box>
-    </LocalizationProvider>
+    </Box>
   );
 }

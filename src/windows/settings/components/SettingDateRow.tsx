@@ -1,7 +1,5 @@
+import DatePickerCustom from '@/windows/settings/components/DatePickerCustom';
 import { Box, Typography } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 
@@ -29,24 +27,20 @@ export default function SettingDateRow({
   return (
     <Box sx={boxSx}>
       <Typography variant="caption" color="textSecondary" sx={{ flex: 1 }}>{label}</Typography>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label={fieldLabel}
-          slots={disabled ? {
-            openPickerIcon: () => <></>
-          } : undefined}
-          disabled={ disabled }
-          value={localValue}
-          onChange={(newVal) => {
-            setLocalValue(newVal)
-            const newValStr = newVal ? newVal.unix() * 1000 : ''
-            if (newValStr !== value) onChange(Number(newValStr))
-          }}
-          slotProps={{
-            textField: { size: 'small', margin: 'none', sx: { width: disabled ? 120 : 150 } },
-          }}
-        />
-      </LocalizationProvider>
+      <DatePickerCustom
+        label={fieldLabel}
+        disabled={disabled}
+        value={localValue ? localValue.valueOf() : 0}
+        onChange={(newValue) => {
+          setLocalValue(newValue ? dayjs(newValue) : null);
+          onChange(newValue);
+        }}
+        size="small"
+        margin="none"
+        sx={{
+          width: disabled ? 120 : 150,
+        }}
+      />
     </Box>
   )
 }
