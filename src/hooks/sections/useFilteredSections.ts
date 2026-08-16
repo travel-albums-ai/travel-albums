@@ -20,7 +20,6 @@ import nowAndThenWorker from '@/hooks/sections/workers/nowAndThen.worker';
 import peopleAndPetsWorker from '@/hooks/sections/workers/peopleGrouping.worker';
 import tagsWorker from '@/hooks/sections/workers/tags.worker';
 import timelineWorker from '@/hooks/sections/workers/timeline.worker';
-import tripsWorker from '@/hooks/sections/workers/trips.worker';
 import { benchmarkFunction } from '@/hooks/utils';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { useMemo } from 'react';
@@ -65,7 +64,6 @@ export function useFilteredSections(): Section[] {
   const peopleAndPetsData = useMemo(() => (hasData && modules.peopleAndPets && sidebarOpen.peopleAndPets) ? peopleAndPetsWorker(photos) : [], [hasData, modules.peopleAndPets, photos, sidebarOpen.peopleAndPets]);
   const nowAndThenData = useMemo(() => (hasData && modules.nowAndThen && sidebarOpen.nowAndThen) ? nowAndThenWorker(photos) : [], [hasData, modules.nowAndThen, photos, sidebarOpen.nowAndThen]);
   const foldersData = useMemo(() => (hasData && modules.folders && sidebarOpen.folders) ? albumsWorker(photos, sortOrder) : [], [hasData, modules.folders, photos, sortOrder, sidebarOpen.folders]);
-  const tripsData = useMemo(() => (hasData && modules.trips && sidebarOpen.trips) ? tripsWorker(photosGps) : [], [hasData, modules.trips, photosGps, sidebarOpen.trips]);
   const citiesData = useMemo(() => (hasData && modules.cities && sidebarOpen.cities) ? citiesWorker(photosGps) : [], [hasData, modules.cities, photosGps, sidebarOpen.cities]);
   const countriesData = useMemo(() => (hasData && modules.countries && sidebarOpen.countries) ? countriesWorker(photosGps) : [], [hasData, modules.countries, photosGps, sidebarOpen.countries]);
   const viewedData = useMemo(() => (hasData && modules.views && sidebarOpen.viewed) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.viewed]);
@@ -86,7 +84,6 @@ export function useFilteredSections(): Section[] {
       { type: 'peopleAndPets', title: t('sectionPeopleAndPets'), data: peopleAndPetsData, preview: true },
       { type: 'nowAndThen', title: t('sectionNowAndThen'), data: nowAndThenData },
       { type: 'folders', title: t('sectionFolders'), data: foldersData },
-      { type: 'trips', title: t('sectionTrips'), data: tripsData },
       { type: 'cities', title: t('sectionCities'), preview: true, data: citiesData },
       { type: 'countries', title: t('sectionCountries'), preview: true, data: countriesData },
       { type: 'viewed', title: t('sectionViews'), data: viewedData },
@@ -102,7 +99,7 @@ export function useFilteredSections(): Section[] {
     ] satisfies Section[]), 'useFilteredSections', [`${photos?.length ?? 0} photos`]);
   }, [
     hasData, t,
-    peopleAndPetsData, nowAndThenData, foldersData, tripsData, citiesData,
+    peopleAndPetsData, nowAndThenData, foldersData, citiesData,
     countriesData, viewedData, timelineData, mostLikedData, mostCommentedData,
     favoritesData, tagsData, labelsData, ignoredData, privateData, selectedData,
     photos,

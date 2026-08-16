@@ -7,7 +7,6 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  { key: 'trips', icon: sectionIcons.trips, labelKey: 'sectionTrips', value: 'show-trips', type: 'boolean' },
   { key: 'peopleAndPets', icon: sectionIcons.peopleAndPets, labelKey: 'sectionPeopleAndPets', value: 'show-people-and-pets', type: 'boolean' },
   { key: 'countries', icon: sectionIcons.countries, labelKey: 'sectionCountries', value: 'show-countries', type: 'boolean' },
   { key: 'nowAndThen', icon: sectionIcons.nowAndThen, labelKey: 'sectionNowAndThen', value: 'show-now-and-then', type: 'boolean' },
