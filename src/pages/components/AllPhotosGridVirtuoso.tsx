@@ -23,7 +23,6 @@ const GridList = ({ style, children, width, gap, ...props }: any) => {
         display: 'grid',
         gridTemplateColumns: `repeat(auto-fill, minmax(${width}px, 1fr))`,
         gap,
-        gridAutoFlow: 'dense',
         py: 1,
         alignContent: 'start',
       }}
@@ -77,7 +76,8 @@ export default function AllPhotosGridVirtuoso({ photos }: Props) {
   return (
     <VirtuosoGrid
       ref={virtuosoRef}
-      increaseViewportBy={{ top: height * 2, bottom: height * 4 }}
+      increaseViewportBy={{ top: height * 3, bottom: height * 6 }}
+      overscan={{ main: height * 2, reverse: height * 2 }}
       style={GRID_STYLE}
       totalCount={photos.length}
       computeItemKey={(index) => photos[index]?.id ?? index}
