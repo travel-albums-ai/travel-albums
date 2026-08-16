@@ -10,7 +10,6 @@ import {
   TabNode,
 } from 'flexlayout-react';
 import 'flexlayout-react/style/combined.css';
-import { Circle } from 'lucide-react';
 
 import GeneralRegistryDrawer from '@/components/registry/GeneralRegistryDrawer';
 import i18n from '@/lib/i18n';
@@ -134,8 +133,9 @@ export default function FlexLayout() {
     return drawerRegistry.has(component) ? <GeneralRegistryDrawer id={component} /> : null;
   }, []);
 
-  const renderTab = useCallback((_node: TabNode, renderValues: ITabRenderValues) => {
-    renderValues.leading = <Circle size={14} strokeWidth={2} aria-hidden="true" />;
+  const renderTab = useCallback((node: TabNode, renderValues: ITabRenderValues) => {
+    const Icon = drawerRegistry.get(node.getComponent())?.icon;
+    renderValues.leading = Icon ? <Icon size={14} strokeWidth={2} aria-hidden="true" /> : null;
   }, []);
 
   const model = useMemo(

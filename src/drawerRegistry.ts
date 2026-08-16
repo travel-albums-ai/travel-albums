@@ -1,7 +1,9 @@
 import { ComponentType } from 'react';
+import type { LucideIcon } from 'lucide-react';
 
 export interface DrawerMeta {
   id: string;
+  icon: LucideIcon;
   loader: () => Promise<{
     default: ComponentType;
   }>;
