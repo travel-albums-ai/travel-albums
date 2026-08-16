@@ -7,6 +7,7 @@ type AlbumPhotoCardStore = {
   showTags: boolean
   showDate: boolean
   showLocation: boolean
+  showFileName?: boolean
 }
 
 const defaults: AlbumPhotoCardStore = {
@@ -16,6 +17,7 @@ const defaults: AlbumPhotoCardStore = {
   showTags: true,
   showDate: true,
   showLocation: true,
+  showFileName: true,
 }
 
 const {

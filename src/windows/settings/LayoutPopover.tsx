@@ -14,6 +14,7 @@ const toggleControls = [
   { key: 'showTags', labelKey: 'layoutShowTags', value: 'show-tags', type: 'boolean' },
   { key: 'showDate', labelKey: 'layoutShowDate', value: 'show-date', type: 'boolean' },
   { key: 'showLocation', labelKey: 'layoutShowLocation', value: 'show-location', type: 'boolean' },
+  { key: 'showFileName', labelKey: 'layoutShowFileName', value: 'show-file-name', type: 'boolean' },
 ] as const
 
 export default function LayoutPopover() {

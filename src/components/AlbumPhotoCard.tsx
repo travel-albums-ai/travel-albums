@@ -45,7 +45,8 @@ function prettyTime(dateInput: string) {
 const cardSx = {
   position: 'relative',
   display: 'flex',
-  height: '100%',
+  flexDirection: 'column',
+  // height: '100%',
   overflow: 'hidden',
   borderRadius: 2,
   cursor: 'pointer',
@@ -135,6 +136,7 @@ function AlbumPhotoCard({
   const showTags = useAlbumPhotoCardStoreSelector((state) => state.showTags);
   const showDate = useAlbumPhotoCardStoreSelector((state) => state.showDate);
   const showLocation = useAlbumPhotoCardStoreSelector((state) => state.showLocation);
+  const showFileName = useAlbumPhotoCardStoreSelector((state) => state.showFileName);
 
   const selectMode = useSettingsStoreSelector((state) => state.selectMode);
 
@@ -218,8 +220,13 @@ function AlbumPhotoCard({
       return `4px solid ${theme.palette.primary.main}`;
     }
 
+    if(isHovered) {
+      return `1px solid ${theme.palette.primary.main}AA`;
+    }
+
     return 'none';
   }, [
+    isHovered,
     isPreviewed,
     isSelected,
     selectMode,
@@ -228,97 +235,106 @@ function AlbumPhotoCard({
   ]);
 
   return (
-    <Card
-      component="article"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-      sx={{
-        ...cardSx,
-        minHeight: height,
-        ...style,
+    <>
+      <Card
+        component="article"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        sx={{
+          ...cardSx,
+          minHeight: height,
+          ...style,
 
-        '& .album-photo-details': {
-          ...cardSx['& .album-photo-details'],
-          opacity: showDetails ? 1 : 0,
-          pointerEvents: showDetails ? 'auto' : 'none',
-        },
-      }}
-    >
-      <AlbumPhotoThumbnailBackgroundNg
-        photo={photo}
-        width={photo.width}
-        height={height}
-        original={original}
-        style={{
-          border: thumbnailBorder,
-          borderRadius: 8,
+          '& .album-photo-details': {
+            ...cardSx['& .album-photo-details'],
+            opacity: showDetails ? 1 : 0,
+            pointerEvents: showDetails ? 'auto' : 'none',
+          },
         }}
-      />
-
-      {(selectMode || favorite) && (
-        <GeneralRegistryToolbar
-          fullWidth={false}
-          group="album-photo-card"
-          sx={toolbarSx}
-          context={{
-            photoId: photo.id,
-            favorite,
-            selectMode,
+      >
+        <AlbumPhotoThumbnailBackgroundNg
+          photo={photo}
+          width={photo.width}
+          height={height}
+          original={original}
+          style={{
+            border: thumbnailBorder,
+            borderRadius: 8,
           }}
         />
-      )}
 
-      {showTags && resolvedTags.length > 0 && (
-        <Box className="album-photo-tags" sx={tagsSx}>
-          {resolvedTags.map((tag) => (
-            <Box
-              key={tag.id}
-              sx={{
-                ...tagSx,
-                backgroundColor: `${tag.color}BD`,
-              }}
-            >
-              {tag.name}
-            </Box>
-          ))}
-        </Box>
-      )}
+        {(selectMode || favorite) && (
+          <GeneralRegistryToolbar
+            fullWidth={false}
+            group="album-photo-card"
+            sx={toolbarSx}
+            context={{
+              photoId: photo.id,
+              favorite,
+              selectMode,
+            }}
+          />
+        )}
 
-      {showDescription && !isHovered && hasDescription(photo.id) && (
-        <Box className="album-photo-description" sx={detailsSx}>
-          <DescribePhotoReadOnly photoId={photo.id} />
-        </Box>
-      )}
-
-      {isHovered && (
-        <Stack direction="row" divider={<Divider orientation="vertical" sx={{ borderStyle: 'dotted' }} flexItem />} className="album-photo-details" sx={detailsSx}>
-          {showDate && (
-            <Tooltip arrow title={photo.takenAt}>
-              <Typography
-                variant="caption"
-                gutterBottom={false}
+        {showTags && resolvedTags.length > 0 && (
+          <Box className="album-photo-tags" sx={tagsSx}>
+            {resolvedTags.map((tag) => (
+              <Box
+                key={tag.id}
                 sx={{
-                  color: 'text.secondary',
-                  opacity: 0.9,
-                  fontWeight: 500,
-                  lineHeight: 1.5,
+                  ...tagSx,
+                  backgroundColor: `${tag.color}BD`,
                 }}
               >
-                {prettyTime(photo.takenAt)}
-              </Typography>
-            </Tooltip>
-          )}
-          <AlbumsMetaDetails
-            photos={[photo]}
-            minWidth={0}
-            filterEmpty
-            showCount={false}
-            showLocation={showLocation}
-          />
-        </Stack>
-      )}
-    </Card>
+                {tag.name}
+              </Box>
+            ))}
+          </Box>
+        )}
+
+        {showDescription && !isHovered && hasDescription(photo.id) && (
+          <Box className="album-photo-description" sx={detailsSx}>
+            <DescribePhotoReadOnly photoId={photo.id} />
+          </Box>
+        )}
+
+        {isHovered && (
+          <Stack direction="row" divider={<Divider orientation="vertical" sx={{ borderStyle: 'dotted' }} flexItem />} className="album-photo-details" sx={detailsSx}>
+            {showDate && (
+              <Tooltip arrow title={photo.takenAt}>
+                <Typography
+                  variant="caption"
+                  gutterBottom={false}
+                  sx={{
+                    color: 'text.secondary',
+                    opacity: 0.9,
+                    fontWeight: 500,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {prettyTime(photo.takenAt)}
+                </Typography>
+              </Tooltip>
+            )}
+            <AlbumsMetaDetails
+              photos={[photo]}
+              minWidth={0}
+              filterEmpty
+              showCount={false}
+              showLocation={showLocation}
+            />
+          </Stack>
+        )}
+
+      </Card>
+
+      {showFileName && <Box sx={{ display: 'block', p: 0.5}}>
+        <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>
+          <Typography variant="caption" color="textSecondary">{photo.title}</Typography>
+        </Tooltip>
+      </Box>}
+    </>
   );
 }
 
