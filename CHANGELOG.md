@@ -1,3 +1,13 @@
+## [1.116.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.115.0...v1.116.0) (2026-08-16)
+
+### ✨ Features
+
+* add icon property to DrawerMeta interface and update drawer metadata to include icons ([aa0547d](https://github.com/travel-albums-ai/travel-albums/commit/aa0547d237b3d8f9075869bea3ff6fbe9ba2a8fd))
+
+### 🧹 Refactors
+
+* comment out unused imports and code in FilesDrawer, FlexLayout, FavoriteToggle, and DrawersToggle components ([ee68ddd](https://github.com/travel-albums-ai/travel-albums/commit/ee68ddd9e2237b1c31ed5973d6bdca7e2166b732))
+
 ## [1.115.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.114.1...v1.115.0) (2026-08-16)
 
 ### ✨ Features
