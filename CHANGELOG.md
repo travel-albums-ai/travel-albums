@@ -1,3 +1,9 @@
+## [1.117.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.117.0...v1.117.1) (2026-08-16)
+
+### 🐛 Fixes
+
+* wrap popover content in Box component for better styling in SortSectionsToggle ([1a3b914](https://github.com/travel-albums-ai/travel-albums/commit/1a3b91496dd2dc17536a506808f4ee6f2e5279a2))
+
 ## [1.117.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.116.0...v1.117.0) (2026-08-16)
 
 ### ✨ Features
