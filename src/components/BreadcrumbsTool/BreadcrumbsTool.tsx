@@ -19,7 +19,6 @@ export default function BreadcrumbsTool({ asIs = false }: { asIs?: boolean }) {
   const foundSection = sectionTitles[type_name]
   const foundSectionIcon = sectionIcons[type_name]
 
-
   return (
     <Box sx={asIs ? {} : wrapperSx}>
       <Breadcrumbs aria-label="breadcrumb" separator="›" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

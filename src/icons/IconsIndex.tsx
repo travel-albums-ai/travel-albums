@@ -1,11 +1,9 @@
-import { Bookmark, Building, Eye, EyeClosed, Folder, FolderClock, Globe, Grid3X3, Hand, Heart, Map, MessageSquareText, SquareLibrary, Star, Tag, Timeline, Trash, Users } from 'lucide-react';
+import { Bookmark, Building, Eye, EyeClosed, Folder, FolderClock, Heart, Map, MessageSquareText, SquareLibrary, Star, Tag, Timeline, Trash, Users } from 'lucide-react';
 
 export const routeIcons: Record<string, React.ReactElement> = {
-  '/welcome': <Hand size={16} />,
-  '/dashboard': <Grid3X3 size={16} />,
-  '/globe': <Globe size={16} />,
   '/allPhotos': <SquareLibrary size={16} />,
   '/selectedPhotos/:type_name/:id': <SquareLibrary size={16} />,
+  '/selectedType/:type_name': <SquareLibrary size={16} />,
 }
 export const sectionIcons: Record<string, React.ReactElement> = {
   'peopleAndPets': <Users size={16} />,

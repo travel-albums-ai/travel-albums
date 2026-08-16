@@ -191,18 +191,18 @@ function AlbumPhotoCard({
           },
         }}
       >
-        {inView && <>
-          <AlbumPhotoThumbnailBackgroundNg
-            photo={photo}
-            width={photo.width}
-            height={height}
-            original={original}
-            style={{
-              border: thumbnailBorder,
-              borderRadius: 8,
-            }}
-          />
+        <AlbumPhotoThumbnailBackgroundNg
+          photo={photo}
+          width={photo.width}
+          height={height}
+          original={original}
+          style={{
+            border: thumbnailBorder,
+            borderRadius: 8,
+          }}
+        />
 
+        {inView && <>
           {(selectMode || favorite) && (
             <GeneralRegistryToolbar
               fullWidth={false}
