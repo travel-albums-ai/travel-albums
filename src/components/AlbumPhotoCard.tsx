@@ -92,14 +92,6 @@ const toolbarSx = {
   zIndex: 2,
 } as const;
 
-const descriptionSx = {
-  position: 'absolute',
-  right: 16,
-  bottom: 0,
-  left: 16,
-  zIndex: 2,
-} as const;
-
 const tagsSx = {
   position: 'absolute',
   bottom: 8,
@@ -127,8 +119,9 @@ const detailsSx = {
   bottom: 0,
   left: 0,
   display: 'flex',
+  flexWrap: 'wrap',
   alignItems: 'center',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
   gap: 0.5,
   borderRadius: 2,
   borderTopLeftRadius: 0,
@@ -304,7 +297,11 @@ function AlbumPhotoCard({
 
       <Box
         className="album-photo-description"
-        sx={descriptionSx}
+        sx={{
+          ...detailsSx,
+          border: `1px dashed ${theme.palette.divider}42`,
+          bgcolor: `${theme.palette.background.paper}AA`,
+        }}
       >
         <DescribePhotoReadOnly photoId={photo.id} />
       </Box>
@@ -341,21 +338,21 @@ function AlbumPhotoCard({
             <Tooltip arrow title={photo.takenAt}>
               <Typography
                 variant="caption"
+                gutterBottom={false}
                 sx={{
                   color: 'text.secondary',
                   opacity: 0.9,
                   fontWeight: 500,
-                  flexGrow: 1,
+                  lineHeight: 1.5,
                 }}
               >
                 {formattedTime}
               </Typography>
             </Tooltip>
           )}
-
           <AlbumsMetaDetails
             photos={[photo]}
-            minWidth={7}
+            minWidth={0}
             filterEmpty
           />
         </Box>
