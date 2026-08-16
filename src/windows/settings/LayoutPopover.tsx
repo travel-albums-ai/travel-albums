@@ -1,5 +1,7 @@
+import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSettings } from '@/context/settingsStore';
+import SettingsComponentRow from '@/windows/settings/components/SettingsComponentRow';
 import SettingsSliderRow from '@/windows/settings/components/SettingsSliderRow';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Box, Stack } from '@mui/material';
@@ -48,13 +50,13 @@ export default function LayoutPopover() {
         </Fragment>
       ))}
 
+
     {toggleControlsScroller
       .map((control) => (
         <Fragment key={control.key}>
-          {control.type === 'toolbar' && <>
-            {control.labelKey}
-            {control.toolbarComponentId}
-          </>}
+          {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
+            <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
+          </SettingsComponentRow>}
         </Fragment>
       ))}
 
