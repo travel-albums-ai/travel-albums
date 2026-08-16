@@ -14,7 +14,7 @@ export default function SearchFiltersToggle() {
       {
         tooltip: t('openGlobalFilters'),
         icon: <ListFilter />,
-        popover: <Box sx={{ width: '400px', maxHeight: '75vh', overflowY: 'auto' }}>
+        popover: <Box sx={{ width: '500px', maxHeight: '75vh', overflowY: 'auto' }}>
           <FilterPhotosPopover />
         </Box>,
       },

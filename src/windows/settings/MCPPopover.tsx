@@ -40,7 +40,7 @@ export default function MCPPopover() {
       {registeredTools
         .filter(tool => tool.type === 'view')
         .map((tool) => (
-          <Box key={tool.id} sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+          <Box key={tool.name} sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
             <Typography sx={{ flex: 1, textDecoration: webMcpEnabled ? 'none' : 'line-through' }} variant="body2" color={webMcpEnabled ? 'textSecondary' : 'textDisabled'}>{tool.description}</Typography>
             <SolidChip label={tool.name} />
           </Box>
@@ -51,7 +51,7 @@ export default function MCPPopover() {
       {registeredTools
         .filter(tool => tool.type === 'run')
         .map((tool) => (
-          <Box key={tool.id} sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+          <Box key={tool.name} sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
             <Typography sx={{ flex: 1, textDecoration: webMcpEnabled ? 'none' : 'line-through' }} variant="body2" color={webMcpEnabled ? 'textSecondary' : 'textDisabled'}>{tool.description}</Typography>
             <PopoverButtonSimple trigger={<Code size={16} />}>
               <pre>{JSON.stringify(tool.inputSchema, null, 2)}</pre>

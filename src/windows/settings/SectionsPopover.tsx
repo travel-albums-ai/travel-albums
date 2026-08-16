@@ -4,7 +4,7 @@ import { sectionIcons } from '@/icons/IconsIndex';
 import SettingsSection from '@/windows/components/SettingsSection';
 import SettingsComponentRow from '@/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
-import { Ban, Check, Cog } from 'lucide-react';
+import { Ban, Check, Settings } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -35,27 +35,7 @@ export default function SectionsPopover({ filter }: { filter?: string }) {
   const { t } = useTranslation()
 
   return <>
-    <SettingsSection>
-      {toggleControls
-        .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
-        .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
-        .sort((a, b) => (a.disabled !== b.disabled ? (a.disabled ? 1 : -1) : 0))
-        .map((control) => (
-          <Fragment key={control.key}>
-            {control.type === 'boolean' && <SettingToggleRow
-              label={t(control.labelKey)}
-              icon={control.icon}
-              disabled={control.disabled ?? false}
-              inactiveIcon={control.disabled ? undefined : <Check size={16} />}
-              activeIcon={control.disabled ? undefined : <Ban size={16} />}
-              selected={modules[control.key]}
-              onChange={() => setModule(control.key, !modules[control.key])}
-            />}
-          </Fragment>
-        ))}
-    </SettingsSection>
-
-    <SettingsSection title="Features" icon={<Cog size={16} />}>
+    <SettingsSection title="Features" icon={<Settings size={16} />}>
       {explorerTools
         .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
         .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
@@ -75,6 +55,26 @@ export default function SectionsPopover({ filter }: { filter?: string }) {
             {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
               <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
             </SettingsComponentRow>}
+          </Fragment>
+        ))}
+    </SettingsSection>
+
+    <SettingsSection title="Active sections" icon={<Check size={16} />}>
+      {toggleControls
+        .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
+        .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
+        .sort((a, b) => (a.disabled !== b.disabled ? (a.disabled ? 1 : -1) : 0))
+        .map((control) => (
+          <Fragment key={control.key}>
+            {control.type === 'boolean' && <SettingToggleRow
+              label={t(control.labelKey)}
+              icon={control.icon}
+              disabled={control.disabled ?? false}
+              inactiveIcon={control.disabled ? undefined : <Check size={16} />}
+              activeIcon={control.disabled ? undefined : <Ban size={16} />}
+              selected={modules[control.key]}
+              onChange={() => setModule(control.key, !modules[control.key])}
+            />}
           </Fragment>
         ))}
     </SettingsSection>
