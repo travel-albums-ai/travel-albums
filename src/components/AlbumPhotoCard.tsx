@@ -19,6 +19,7 @@ import {
   type CSSProperties,
   type MouseEvent,
 } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 interface AlbumPhotoCardProps {
   photo: GalleryPhoto;
@@ -113,8 +114,10 @@ function AlbumPhotoCard({
   const showDate = useAlbumPhotoCardStoreSelector((state) => state.showDate);
   const showLocation = useAlbumPhotoCardStoreSelector((state) => state.showLocation);
   const showFileName = useAlbumPhotoCardStoreSelector((state) => state.showFileName);
-
   const selectMode = useSettingsStoreSelector((state) => state.selectMode);
+
+  const { ref, inView } = useInView({
+  });
 
   const isPreviewed = useSettingsStoreSelector(
     (state) => state.previewPhotoObj?.id === photo.id,
@@ -131,8 +134,6 @@ function AlbumPhotoCard({
     Number.isFinite(photo.longitude) &&
     photo.latitude !== 0 &&
     photo.longitude !== 0;
-
-  const showDetails = width >= 150;
 
   const handleMouseEnter = useCallback(
     (event: MouseEvent<HTMLElement>) => {
@@ -168,6 +169,7 @@ function AlbumPhotoCard({
   return (
     <>
       <Card
+        ref={ref}
         component="article"
         onMouseEnter={handleMouseEnter}
         onClick={handleClick}
@@ -184,42 +186,42 @@ function AlbumPhotoCard({
             pointerEvents: 'none',
           },
           '&:hover .album-photo-details': {
-            opacity: showDetails ? 1 : 0,
-            pointerEvents: showDetails ? 'auto' : 'none',
+            opacity: 1,
+            pointerEvents: 'auto',
           },
         }}
       >
-        <AlbumPhotoThumbnailBackgroundNg
-          photo={photo}
-          width={photo.width}
-          height={height}
-          original={original}
-          style={{
-            border: thumbnailBorder,
-            borderRadius: 8,
-          }}
-        />
-
-        {(selectMode || favorite) && (
-          <GeneralRegistryToolbar
-            fullWidth={false}
-            group="album-photo-card"
-            sx={toolbarSx}
-            context={{
-              photoId: photo.id,
-              favorite,
-              selectMode,
+        {inView && <>
+          <AlbumPhotoThumbnailBackgroundNg
+            photo={photo}
+            width={photo.width}
+            height={height}
+            original={original}
+            style={{
+              border: thumbnailBorder,
+              borderRadius: 8,
             }}
           />
-        )}
 
-        {showTags && <AlbumPhotoCardTags photo={photo} />}
+          {(selectMode || favorite) && (
+            <GeneralRegistryToolbar
+              fullWidth={false}
+              group="album-photo-card"
+              sx={toolbarSx}
+              context={{
+                photoId: photo.id,
+                favorite,
+                selectMode,
+              }}
+            />
+          )}
 
-        {showDescription && hasDescription(photo.id) && (
-          <DescribePhotoReadOnly photoId={photo.id} className="album-photo-description" sx={detailsSx} />
-        )}
+          {showTags && <AlbumPhotoCardTags photo={photo} />}
 
-        {showDetails && (
+          {showDescription && hasDescription(photo.id) && (
+            <DescribePhotoReadOnly photoId={photo.id} className="album-photo-description" sx={detailsSx} />
+          )}
+
           <Stack direction="row" divider={<Divider orientation="vertical" sx={{ borderStyle: 'dotted' }} flexItem />} className="album-photo-details" sx={detailsSx}>
             {showDate && (
               <Tooltip arrow title={photo.takenAt}>
@@ -245,11 +247,11 @@ function AlbumPhotoCard({
               showLocation={showLocation}
             />
           </Stack>
-        )}
+        </>}
 
       </Card>
 
-      {showFileName && <Box sx={{ display: 'block', p: 0.5, bgcolor: 'background.paper', borderRadius: 2, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
+      {inView && showFileName && <Box sx={{ display: 'block', p: 0.5, bgcolor: 'background.paper', borderRadius: 2, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
         <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>
           <Typography variant="caption" color="textSecondary">{photo.title}</Typography>
         </Tooltip>
