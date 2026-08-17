@@ -1,9 +1,11 @@
+import IndexerMetricCard from '@/components/IndexerMetricCard';
 import PopoverButton from '@/components/PopoverButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
 import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
 import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import { DatabaseSearch, History } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
 export default function GenerateThumbnailsStatus() {
@@ -46,14 +48,13 @@ export default function GenerateThumbnailsStatus() {
     }
   }, [fetchStatus]);
 
-  // ⏱ polling logic
   useEffect(() => {
     if (!indexing) return;
 
     const jobInterval = setInterval(() => {
       console.log('Refetching job status...');
       handleGetStatus()
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearInterval(jobInterval);
@@ -62,18 +63,43 @@ export default function GenerateThumbnailsStatus() {
 
   return (
     <>
-      <PopoverButton id="indexer" upsideDown={true} width={650} label="" icon="" trigger={<Button variant="contained" color="primary">Indexer Control</Button>}>
-        <Button onClick={() => handleTurnOn()}>On</Button>
-        <Button onClick={() => handleTurnOff()}>Off</Button>
-        <Button onClick={() => handleGetStatus()}>Status</Button>
-        <div>status: {indexing ? 'indexing' : 'idle'}</div>
-        <div>progress: {progress ? JSON.stringify(progress) : 'no progress'}</div>
-        {/* <ThumbnailsStatus
-          busy={indexing}
-          handleDelete={() => {}}
-          handleGenerate={() => {}}
-          lastLine=""
-        /> */}
+      <PopoverButton id="indexer" upsideDown={true} width={650} label="" icon="" trigger={<Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <DatabaseSearch size={16} />
+        <Typography variant="caption" color="inherit" sx={{ lineHeight: 1 }}>
+          {indexing ? 'Indexing...' : 'Indexer'}
+        </Typography>
+      </Box>}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
+          <Button disabled={indexing} variant="contained" color="primary" onClick={() => handleTurnOn()}>On</Button>
+          <Button disabled={!indexing} variant="contained" color="primary" onClick={() => handleTurnOff()}>Off</Button>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Typography variant="caption" color="textSecondary">
+              {indexing ? 'Indexer is running' : 'Indexer is stopped'}
+            </Typography>
+            <Box sx={{
+              borderRadius: '50%',
+              width: 10,
+              height: 10,
+              mr: 2,
+              backgroundColor: indexing ? 'success.main' : 'divider',
+              opacity: indexing ? 0.5 : 1,
+              transition: 'background-color 0.3s ease, opacity 0.3s ease',
+            }} />
+          </Box>
+        </Box>
+
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
+          {Object.entries(progress).map(([key, value]) => <Box key={key} sx={{ flex: '0 1 20%'}}>
+            <IndexerMetricCard
+              key={key}
+              line={`${key}: ${value}`}
+              object={{
+                icon: <History size={16} />,
+                label: key,
+              }}
+              showChart={true}
+            /> </Box>)}
+        </Box>
       </PopoverButton>
     </>
   );
