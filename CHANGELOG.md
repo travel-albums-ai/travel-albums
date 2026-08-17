@@ -1,3 +1,9 @@
+## [1.129.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.128.0...v1.129.0) (2026-08-17)
+
+### ✨ Features
+
+* add loading state to TwinLensMascot for animation during loading ([c818e3c](https://github.com/travel-albums-ai/travel-albums/commit/c818e3c01e49fa1502f20fb9210614621532b198))
+
 ## [1.128.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.127.0...v1.128.0) (2026-08-17)
 
 ### ✨ Features
