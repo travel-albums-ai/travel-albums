@@ -13,7 +13,13 @@ type Props = {
 };
 
 type OpenAIResponse = {
-  output_text?: string;
+  output?: Array<{
+    type?: string;
+    content?: Array<{
+      type?: string;
+      text?: string;
+    }>;
+  }>;
   error?: {
     message?: string;
   };
@@ -158,11 +164,17 @@ export default function DayAnalyzer({ context }: Props) {
         );
       }
 
-      if (!data.output_text) {
+      const outputText = data.output
+        ?.filter((item) => item.type === 'message')
+        .flatMap((item) => item.content ?? [])
+        .find((content) => content.type === 'output_text')
+        ?.text;
+
+      if (!outputText) {
         throw new Error('OpenAI returned an empty response');
       }
 
-      const value = JSON.parse(data.output_text).results;
+      const value = JSON.parse(outputText).results;
 
       localStorage.setItem(cacheKey, value);
 

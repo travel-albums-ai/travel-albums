@@ -2,7 +2,7 @@ import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore'
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { composeUrl } from '@/lib/thumbnailService';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 export default function LightboxWindow() {
+  const theme = useTheme()
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
   const previewPhotoObj = useSettingsStoreSelector(s => s.previewPhotoObj);
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
@@ -80,6 +81,11 @@ export default function LightboxWindow() {
         height: '100%',
       }}
     >
+      <style>{`
+        .yarl__thumbnails_thumbnail_active {
+          border: 3px solid ${theme.palette.primary.main} !important;
+        }
+      `}</style>
       <Lightbox
         open={showWindow}
         close={() =>
@@ -92,7 +98,7 @@ export default function LightboxWindow() {
         slides={slides}
         carousel={{
           finite: true,
-          preload: 10,
+          preload: 6,
         }}
         plugins={[
           Fullscreen,

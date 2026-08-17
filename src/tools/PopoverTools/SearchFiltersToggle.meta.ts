@@ -4,10 +4,10 @@ export const meta = {
   id: "searchFiltersToggle",
   tool: [
     {
-      id: 'sidebar',
+      id: 'header',
       side: 'right',
       priority: 200,
-      visible: (context: any) => !context.sidebarSearchOpen,
+      // visible: (context: any) => !context.sidebarSearchOpen,
     }
   ],
   loader: () => import('@/tools/PopoverTools/SearchFiltersToggle'),

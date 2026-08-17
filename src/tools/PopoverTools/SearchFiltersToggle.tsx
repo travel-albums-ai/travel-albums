@@ -10,6 +10,7 @@ export default function SearchFiltersToggle() {
 
   return <GenericToggleButtonGroup
     id="search-filters-toggle"
+    variant="standard"
     items={[
       {
         tooltip: t('openGlobalFilters'),

@@ -23,7 +23,13 @@ type Props = {
 };
 
 type OpenAIResponse = {
-  output_text?: string;
+  output?: Array<{
+    type?: string;
+    content?: Array<{
+      type?: string;
+      text?: string;
+    }>;
+  }>;
   error?: {
     message?: string;
   };
@@ -153,11 +159,17 @@ export default function ImageAnalyzer({ photos, context }: Props) {
         );
       }
 
-      if (!data.output_text) {
+      const outputText = data.output
+        ?.filter((item) => item.type === 'message')
+        .flatMap((item) => item.content ?? [])
+        .find((content) => content.type === 'output_text')
+        ?.text;
+
+      if (!outputText) {
         throw new Error('OpenAI returned an empty response');
       }
 
-      const parsed = JSON.parse(data.output_text) as {
+      const parsed = JSON.parse(outputText) as {
         results: Result[];
       };
 
@@ -197,6 +209,23 @@ export default function ImageAnalyzer({ photos, context }: Props) {
         flexWrap: 'wrap',
       }}
     >
+
+      {/* {imageBase64 && (
+        <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box
+            component="img"
+            src={imageBase64}
+            alt="Image being analyzed"
+            sx={{
+              display: 'block',
+              maxWidth: 220,
+              maxHeight: 220,
+              objectFit: 'contain',
+              borderRadius: 1,
+            }}
+          />
+        </Box>
+      )} */}
       <Box
         sx={{
           display: 'flex',
