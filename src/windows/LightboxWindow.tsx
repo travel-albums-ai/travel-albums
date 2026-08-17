@@ -1,20 +1,26 @@
-import { type GalleryPhoto } from '@/lib/galleryData';
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { composeUrl } from '@/lib/thumbnailService';
 import { Box, Dialog, IconButton } from '@mui/material';
 import { X } from 'lucide-react';
 
-interface PhotoLightboxProps {
-  photo: GalleryPhoto;
-  open: boolean;
-  onClose: () => void;
-}
+export default function LightboxWindow() {
+  const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen)
+  const { setSetting } = useSettings()
 
-export default function PhotoLightbox({ photo, open, onClose }: PhotoLightboxProps) {
+  const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
+  const photo = previewPhotoObj ?? null
+
+  const showWindow = lightboxOpen === true
+
+  if (!showWindow) {
+    return null
+  }
+
   return (
     <Dialog
       fullScreen
-      open={open}
-      onClose={onClose}
+      open={showWindow}
+      onClose={() => setSetting(prev => ({ ...prev, lightboxOpen: false }))}
       sx={{
         '& .MuiDialog-paper': {
           bgcolor: (theme) => theme.palette.divider + 'EE',
@@ -25,7 +31,7 @@ export default function PhotoLightbox({ photo, open, onClose }: PhotoLightboxPro
     >
       <IconButton
         aria-label="Close image"
-        onClick={onClose}
+        onClick={() => setSetting(prev => ({ ...prev, lightboxOpen: false }))}
         sx={{
           position: 'absolute',
           top: 1,
@@ -39,7 +45,7 @@ export default function PhotoLightbox({ photo, open, onClose }: PhotoLightboxPro
         <X size={24} />
       </IconButton>
       <Box
-        onClick={onClose}
+        onClick={() => setSetting(prev => ({ ...prev, lightboxOpen: false }))}
         component="img"
         src={composeUrl(photo, true)}
         alt={photo.title}

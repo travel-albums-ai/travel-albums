@@ -1,4 +1,4 @@
-import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
 import React from 'react';
@@ -22,6 +22,7 @@ export default function AlbumPhotoThumbnailBackgroundNg({
 }: Props) {
   useSettingsStoreSelector(s => s.demoMode);
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
+  const { setSetting } = useSettings()
 
   const src = composeUrl(photo, original);
 
@@ -33,6 +34,7 @@ export default function AlbumPhotoThumbnailBackgroundNg({
       height={height}
       loading="lazy"
       decoding="async"
+      onDoubleClick={() => setSetting(prev => ({ ...prev, lightboxOpen: true }))}
       draggable={false}
       className={className}
       style={{
