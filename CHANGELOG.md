@@ -1,3 +1,9 @@
+## [1.126.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.125.0...v1.126.0) (2026-08-17)
+
+### ✨ Features
+
+* add comments filtering options in FilterStore and update related components ([6196521](https://github.com/travel-albums-ai/travel-albums/commit/619652196909954d54a5e7d9334ae6dbc483dfdc))
+
 ## [1.125.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.124.0...v1.125.0) (2026-08-17)
 
 ### ✨ Features
