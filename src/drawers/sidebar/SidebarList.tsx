@@ -38,6 +38,8 @@ export default function SidebarList() {
   const { setSidebarOpen } = useSidebar()
   const location = useLocation();
 
+  console.log(sections)
+
   const rows = useMemo<SidebarRow[]>(() => {
     const result: SidebarRow[] = [];
 

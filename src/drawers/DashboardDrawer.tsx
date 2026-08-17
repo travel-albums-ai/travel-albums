@@ -11,44 +11,30 @@ export default function DashboardDrawer() {
 
   return (
     <GenericPanel id="dashboard-drawer">
+      <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{
+          display: 'grid',
+          maxWidth: '1200px',
+          gridTemplateColumns: 'repeat(1, minmax(550px, 1fr))',
+          alignItems: 'start',
+          justifyContent: 'start',
 
+          gap: 2, px: 4 }}>
 
+          <Typography color="primary" sx={{ mt: 16, textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
 
+          <DashboardSuggestions />
 
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(1, minmax(550px, 1fr))',
-        alignItems: 'start',
-        justifyContent: 'start',
+          <DashboardMetrics />
 
-        gap: 2, px: 4 }}>
+          {/* <div>Recent files</div>  */}
 
-        <Typography color="primary" sx={{ mt: 16, textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
+          <DashboardComments />
+          <DashboardFriends />
+          <DashboardCountries />
+          <DashboardCities />
 
-        <DashboardSuggestions />
-
-        <DashboardMetrics />
-
-        {/* <div>suggestions</div>
-        <div>ENable AI</div>
-
-        <div>Database metrics</div>
-
-        <div>Recent files</div> */}
-
-        {/* <div>Most commented</div> */}
-        <DashboardComments />
-
-
-        {/* <div>Friends</div> */}
-        <DashboardFriends />
-
-        {/* <div>Countries</div> */}
-        <DashboardCountries />
-
-        {/* <div>Cities</div> */}
-        <DashboardCities />
-
+        </Box>
       </Box>
     </GenericPanel>
   );

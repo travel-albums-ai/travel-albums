@@ -66,16 +66,16 @@ export function useFilteredSections(): Section[] {
   const foldersData = useMemo(() => (hasData && modules.folders && sidebarOpen.folders) ? albumsWorker(photos, sortOrder) : [], [hasData, modules.folders, photos, sortOrder, sidebarOpen.folders]);
   const citiesData = useMemo(() => (hasData && modules.cities && sidebarOpen.cities) ? citiesWorker(photosGps) : [], [hasData, modules.cities, photosGps, sidebarOpen.cities]);
   const countriesData = useMemo(() => (hasData && modules.countries && sidebarOpen.countries) ? countriesWorker(photosGps) : [], [hasData, modules.countries, photosGps, sidebarOpen.countries]);
-  const viewedData = useMemo(() => (hasData && modules.views && sidebarOpen.viewed) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.viewed]);
+  const viewedData = useMemo(() => (hasData && modules.views && sidebarOpen.views) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.views]);
   const timelineData = useMemo(() => (hasData && modules.timeline && sidebarOpen.timeline) ? timelineWorker(photos) : [], [hasData, modules.timeline, photos, sidebarOpen.timeline]);
-  const mostLikedData = useMemo(() => (hasData && modules.likes && sidebarOpen.mostLiked) ? workerFilterByKey(photos, 'likes') : [], [hasData, modules.likes, photos, sidebarOpen.mostLiked]);
-  const mostCommentedData = useMemo(() => (hasData && modules.comments && sidebarOpen.mostCommented) ? workerFilterByKey(photos, 'comments') : [], [hasData, modules.comments, photos, sidebarOpen.mostCommented]);
+  const mostLikedData = useMemo(() => (hasData && modules.likes && sidebarOpen.likes) ? workerFilterByKey(photos, 'likes') : [], [hasData, modules.likes, photos, sidebarOpen.likes]);
+  const mostCommentedData = useMemo(() => (hasData && modules.comments && sidebarOpen.comments) ? workerFilterByKey(photos, 'comments') : [], [hasData, modules.comments, photos, sidebarOpen.comments]);
   const favoritesData = useMemo(() => (hasData && modules.favorites && sidebarOpen.favorites) ? grouperWorker(photos, favoritePhotoIds, 'Your favorites') : [], [hasData, modules.favorites, photos, favoritePhotoIds, sidebarOpen.favorites]);
   const tagsData = useMemo(() => (hasData && modules.tags && sidebarOpen.tags) ? tagsWorker(photos, tagsStore) : [], [hasData, modules.tags, photos, tagsStore, sidebarOpen.tags]);
   const labelsData = useMemo(() => (hasData && modules.labels && sidebarOpen.labels) ? labelsWorker(photos, labelsPrimary) : [], [hasData, modules.labels, photos, labelsPrimary, sidebarOpen.labels]);
-  const ignoredData = useMemo(() => (hasData && modules.ignored) ? grouperWorker(rawPhotos, ignoredPhotoIds, 'Your ignored') : [], [hasData, modules.ignored, rawPhotos, ignoredPhotoIds, sidebarOpen.ignored]);
-  const privateData = useMemo(() => (hasData && modules.private) ? grouperWorker(rawPhotos, privatePhotoIds, 'Your private') : [], [hasData, modules.private, rawPhotos, privatePhotoIds, sidebarOpen.private]);
-  const selectedData = useMemo(() => (hasData && modules.selected) ? grouperWorker(rawPhotos, selectedPhotos, 'Your selected') : [], [hasData, modules.selected, rawPhotos, selectedPhotos, sidebarOpen.selected]);
+  const ignoredData = useMemo(() => (hasData && modules.ignored) ? grouperWorker(rawPhotos, ignoredPhotoIds, 'Your ignored') : [], [hasData, modules.ignored, rawPhotos, ignoredPhotoIds]);
+  const privateData = useMemo(() => (hasData && modules.private) ? grouperWorker(rawPhotos, privatePhotoIds, 'Your private') : [], [hasData, modules.private, rawPhotos, privatePhotoIds]);
+  const selectedData = useMemo(() => (hasData && modules.selected) ? grouperWorker(rawPhotos, selectedPhotos, 'Your selected') : [], [hasData, modules.selected, rawPhotos, selectedPhotos]);
 
   return useMemo(() => {
     if (!hasData) return [];
@@ -86,10 +86,10 @@ export function useFilteredSections(): Section[] {
       { type: 'folders', title: t('sectionFolders'), data: foldersData },
       { type: 'cities', title: t('sectionCities'), preview: true, data: citiesData },
       { type: 'countries', title: t('sectionCountries'), preview: true, data: countriesData },
-      { type: 'viewed', title: t('sectionViews'), data: viewedData },
+      { type: 'views', title: t('sectionViews'), data: viewedData },
       { type: 'timeline', title: t('sectionTimeline'), data: timelineData },
-      { type: 'mostLiked', title: t('sectionLikes'), data: mostLikedData },
-      { type: 'mostCommented', title: t('sectionComments'), data: mostCommentedData },
+      { type: 'likes', title: t('sectionLikes'), data: mostLikedData },
+      { type: 'comments', title: t('sectionComments'), data: mostCommentedData },
       { type: 'favorites', title: t('sectionFavorites'), data: favoritesData },
       { type: 'tags', title: t('sectionTags'), data: tagsData, preview: true },
       { type: 'labels', title: t('sectionLabels'), data: labelsData },
