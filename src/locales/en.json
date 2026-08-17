@@ -153,6 +153,7 @@
   "layoutTheme": "Theme",
 
   "_comment_drawers": "Layout drawer tab names",
+  "drawerDashboard": "Dashboard",
   "drawerExplorer": "Explorer",
   "drawerFiles": "Files",
   "drawerPreview": "Preview",

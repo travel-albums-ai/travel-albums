@@ -38,6 +38,7 @@ const rightChildren = [
 ]
 
 const layoutChildren = [
+  ...tab('drawerDashboard', 'dashboard'),
   ...tab('drawerMain', 'outlet'),
   ...tab('drawerGlobe', 'globe'),
   ...tab('drawerScroller', 'scroller'),

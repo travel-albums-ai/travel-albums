@@ -48,6 +48,7 @@ type SettingsStore = {
 
   isZygote: boolean,
   drawers: {
+    dashboard: boolean,
     sidebar: boolean,
     globe: boolean,
     outlet: boolean,
@@ -124,15 +125,16 @@ const defaults: SettingsStore = {
   locale: 'en',
   isZygote: false,
   drawers: {
+    dashboard: true,
     scroller: true,
     globe: true,
-    labeler: true,
+    labeler: false,
     outlet: true,
     sidebar: true,
     files: true,
     preview: true,
     adjustments: true,
-    rows: true,
+    rows: false,
     calendar: true,
     folderHandler: true,
     autoDescription: true
