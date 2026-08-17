@@ -12,11 +12,14 @@ import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 
+import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
   const previewPhotoObj = useSettingsStoreSelector(s => s.previewPhotoObj);
+  const width = useAlbumPhotoCardStoreSelector((state) => state.width);
+  const height = useAlbumPhotoCardStoreSelector((state) => state.height);
 
   const { setSetting, setPreviewPhotoObj } = useSettings();
 
@@ -99,12 +102,12 @@ export default function LightboxWindow() {
         ]}
         thumbnails={{
           position: 'bottom',
-          width: 120,
-          height: 80,
-          border: 1,
-          borderRadius: 4,
-          padding: 4,
-          gap: 8,
+          width: width / 2,
+          height: height / 2,
+          border: 0,
+          borderRadius: 8,
+          padding: 0,
+          gap: 16,
           imageFit: 'cover',
           vignette: true,
           showToggle: true,
