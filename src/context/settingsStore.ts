@@ -4,6 +4,7 @@ import type { SupportedLanguage } from '@/lib/i18n';
 
 type SettingsStore = {
   onboarding: boolean,
+  mascot: boolean,
   indexing: boolean,
   serverOnline: boolean,
   lightboxOpen: boolean,
@@ -86,6 +87,7 @@ type SettingsStore = {
 const defaults: SettingsStore = {
   onboarding: true,
   indexing: false,
+  mascot: false,
   serverType: 'http',
   lightboxOpen: false,
   sidebarTerm: '',

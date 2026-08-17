@@ -8,39 +8,29 @@ import DashboardMetrics from '@/drawers/dashboard/DashboardMetrics';
 import DashboardSuggestions from '@/drawers/dashboard/DashboardSuggestions';
 import { Box, Typography } from '@mui/material';
 
-const bla = true
-
 export default function DashboardDrawer() {
 
   return (
     <GenericPanel id="dashboard-drawer">
-      <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+        <Box sx={{ borderBottom: '1px dotted', my: 16, borderColor: 'divider', p: 2, display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
+          <Typography color="primary" sx={{ textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
+          <DashboardSuggestions />
+          <DashboardMetrics />
+        </Box>
         <Box sx={{
           display: 'grid',
-          maxWidth: '1400px',
+          width: '1400px',
           gridTemplateColumns: 'repeat(1, 1fr)',
           alignItems: 'start',
           justifyContent: 'start',
-
-          gap: 2, px: 4 }}>
-
-
-          <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 2, display: 'flex;ex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
-            <Typography color="primary" sx={{ mt: 16, textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
-
-            <DashboardSuggestions />
-
-            <DashboardMetrics />
-          </Box>
-
-
-          {bla && <>
-            <DashboardComments />
-            <DashboardFriends />
-            <DashboardCountriesMap />
-            <DashboardCountries />
-          </>}
-
+          gap: 2, px: 4
+        }}
+        >
+          <DashboardComments />
+          <DashboardFriends />
+          <DashboardCountriesMap />
+          <DashboardCountries />
 
           <DashboardCities />
 

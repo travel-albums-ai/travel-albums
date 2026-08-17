@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 
 export default function DashboardCities() {
   const photosGps = useFilteredGpsPhotos_GLOBAL();
-  const sectionPhotos = citiesWorker(photosGps)
+  const sectionPhotos = citiesWorker(photosGps);
 
   const groupByAvatar = useMemo(() => {
     const groups = new Map<string, typeof sectionPhotos>();
@@ -26,19 +26,39 @@ export default function DashboardCities() {
     return groups;
   }, [sectionPhotos]);
 
-  console.log(sectionPhotos)
+  const groups = useMemo(
+    () =>
+      Array.from(groupByAvatar.entries()).sort(
+        (a, b) => b[1].length - a[1].length,
+      ),
+    [groupByAvatar],
+  );
 
   return (
-    <SettingsSection title="Cities" icon={<Globe />} >
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
-        gap: 4, flexWrap: 'wrap', height: '100%' }}>
-        {Array.from(groupByAvatar.entries())
-          .sort((a,b) => b[1].length - a[1].length)
-          .map(([avatar, cities]) => (
-            <DashboardCitiesItem avatar={avatar} cities={cities} key={avatar} />
-          ))}
+    <SettingsSection title="Cities" icon={<Globe />}>
+      <Box
+        sx={{
+          height: '100%',
+          overflow: 'auto',
+          columnWidth: 500,
+          columnGap: 3,
+        }}
+      >
+        {groups.map(([avatar, cities]) => (
+          <Box
+            key={avatar}
+            sx={{
+              breakInside: 'avoid',
+              WebkitColumnBreakInside: 'avoid',
+              marginBottom: 2,
+            }}
+          >
+            <DashboardCitiesItem
+              avatar={avatar}
+              cities={cities}
+            />
+          </Box>
+        ))}
       </Box>
     </SettingsSection>
   );

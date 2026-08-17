@@ -8,6 +8,9 @@ export default function DashboardCitiesItem({ avatar, cities }) {
   const citiesWithPreview = cities?.sort((a, b) => b.photos.length - a.photos.length)
     .filter((item) => item.photos.length > 100)
 
+  const citiesWithoutPreview = cities?.sort((a, b) => b.photos.length - a.photos.length)
+    .filter((item) => item.photos.length <= 100)
+
   return (
     <SettingsSection>
       <Box
@@ -27,7 +30,7 @@ export default function DashboardCitiesItem({ avatar, cities }) {
             flexShrink: 0,
           }}
         />
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'stretch', gap: 1, width: '100%' }}>
           {citiesWithPreview.length > 0 && <Box sx={{
             display: 'grid',
             width: '100%',
@@ -47,16 +50,14 @@ export default function DashboardCitiesItem({ avatar, cities }) {
 
             </>)}
           </Box>}
-          <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2 }} >
-            {cities?.sort((a, b) => b.photos.length - a.photos.length)
-              .filter((item) => item.photos.length <= 100)
-              .map((item) => <>
-                <Box key={item.name} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
-                  <Typography variant="caption" color="textDisabled">{item.name}</Typography>
-                  <SolidChip count={item.photos.length} />
-                </Box>
-              </>)}
-          </Stack>
+          {citiesWithoutPreview.length > 0 && <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2 }} >
+            {citiesWithoutPreview.map((item) => <>
+              <Box key={item.name} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
+                <Typography variant="caption" color="textDisabled">{item.name}</Typography>
+                <SolidChip count={item.photos.length} />
+              </Box>
+            </>)}
+          </Stack>}
         </Box>
       </Box>
     </SettingsSection>

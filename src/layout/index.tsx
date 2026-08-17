@@ -4,7 +4,7 @@ import MainDriver from '@/drivers/MainDriver';
 import FlexLayout from '@/layout/FlexLayout';
 import Header from '@/layout/Header';
 import StatusBar from '@/layout/StatusBar';
-import Mascot from '@/mascot/Mascot';
+import MascotWrapper from '@/mascot/MascotWrapper';
 import LightboxWindow from '@/windows/LightboxWindow';
 import NoServerWindow from '@/windows/NoServerWindow';
 import OnboardingWindow from '@/windows/OnboardingWindow';
@@ -21,7 +21,7 @@ export default function AppLayout() {
       <MainDriver />
       <LightboxWindow />
 
-      <Mascot />
+      <MascotWrapper />
 
       <WebMCPDataView
         name="check_settings_store"
