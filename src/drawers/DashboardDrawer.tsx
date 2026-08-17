@@ -13,11 +13,11 @@ export default function DashboardDrawer() {
   return (
     <GenericPanel id="dashboard-drawer">
       <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-        <Box sx={{ borderBottom: '1px dotted', my: 16, borderColor: 'divider', p: 2, display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
-          <Typography color="primary" sx={{ textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
+        {false && <Box sx={{ borderBottom: '1px dotted', my: 16, borderColor: 'divider', p: 2, display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
+          <Typography color="textPrimary" sx={{ textAlign: 'center', py: 8 }} variant="h5">Welcome to Travel-Albums</Typography>
           <DashboardSuggestions />
           <DashboardMetrics />
-        </Box>
+        </Box>}
         <Box sx={{
           display: 'grid',
           width: '1400px',
@@ -29,6 +29,7 @@ export default function DashboardDrawer() {
         >
           <DashboardComments />
           <DashboardFriends />
+
           <DashboardCountriesMap />
           <DashboardCountries />
 

@@ -41,11 +41,12 @@ export default function DashboardCities() {
           height: '100%',
           overflow: 'auto',
           columnWidth: 500,
-          columnGap: 3,
+          columnGap: 2,
         }}
       >
         {groups.map(([avatar, cities]) => (
           <Box
+            id={`dashboard-cities-item-dense-${avatar}`}
             key={avatar}
             sx={{
               breakInside: 'avoid',
