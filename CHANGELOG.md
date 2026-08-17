@@ -1,3 +1,9 @@
+## [1.133.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.132.0...v1.133.0) (2026-08-17)
+
+### ✨ Features
+
+* added cities splits ([f792109](https://github.com/travel-albums-ai/travel-albums/commit/f7921090811278fd8011734c932aa3a7c8e49d43))
+
 ## [1.132.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.131.0...v1.132.0) (2026-08-17)
 
 ### ✨ Features
