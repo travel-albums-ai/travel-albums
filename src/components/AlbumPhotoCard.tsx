@@ -1,6 +1,7 @@
 import AlbumPhotoCardTags from '@/components/albumPhotoCard/AlbumPhotoCardTags';
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import PhotoLightbox from '@/components/PhotoLightbox';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useDescriptions } from '@/context/descriptionsStore';
@@ -16,6 +17,7 @@ import {
   memo,
   useCallback,
   useMemo,
+  useState,
   type CSSProperties,
   type MouseEvent,
 } from 'react';
@@ -125,6 +127,7 @@ function AlbumPhotoCard({
 
   const { setPreviewPhotoObj, setFocusedPhoto } = useSettings();
   const { isFavorite } = useFavorites();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const favorite = isFavorite(photo.id);
   const isSelected = useSelected_isSelected(photo.id);
@@ -147,6 +150,10 @@ function AlbumPhotoCard({
   const handleClick = useCallback(() => {
     setPreviewPhotoObj(photo);
   }, [photo, setPreviewPhotoObj]);
+
+  const handleDoubleClick = useCallback(() => {
+    setLightboxOpen(true);
+  }, []);
 
   const thumbnailBorder = useMemo(() => {
     if (selectMode && isSelected) {
@@ -173,6 +180,7 @@ function AlbumPhotoCard({
         component="article"
         onMouseEnter={handleMouseEnter}
         onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
         sx={{
           ...cardSx,
           minHeight: height,
@@ -193,7 +201,7 @@ function AlbumPhotoCard({
       >
         <AlbumPhotoThumbnailBackgroundNg
           photo={photo}
-          width={photo.width}
+          width={width}
           height={height}
           original={original}
           style={{
@@ -250,6 +258,12 @@ function AlbumPhotoCard({
         </>}
 
       </Card>
+
+      <PhotoLightbox
+        photo={photo}
+        open={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+      />
 
       {inView && showFileName && <Box sx={{ display: 'block', p: 0.5, bgcolor: 'background.paper', borderRadius: 2, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
         <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>

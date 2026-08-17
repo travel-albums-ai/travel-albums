@@ -45,7 +45,7 @@ export default function AlbumPagePerDayWrapper({ photos }: { photos: any[] }) {
       <Box sx={{ flex: 1, minHeight: 0 }}>
 
         <Box sx={{ overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column', gap: 2, pt: 2, px: 1 }}>
-          {photosByMoments.map((day, index) => (
+          {photosByMoments.filter((_,i) => i < 10).map((day, index) => (
             <Box key={day.label} sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: index !== 0 ? 4 : 0, flexWrap: 'nowrap' }}
               onMouseOver={() => setSelectedDay(day.label)}
             >
