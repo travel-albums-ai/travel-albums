@@ -1,3 +1,9 @@
+## [1.124.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.123.0...v1.124.0) (2026-08-17)
+
+### ✨ Features
+
+* adjust thumbnail dimensions and styling in LightboxWindow for improved layout ([7160784](https://github.com/travel-albums-ai/travel-albums/commit/7160784576ebd066dbbe8990598c6174dcb765f9))
+
 ## [1.123.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.122.0...v1.123.0) (2026-08-17)
 
 ### ✨ Features
