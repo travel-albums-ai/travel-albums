@@ -8,6 +8,7 @@ import { SectionsProvider } from '@/context/globals/sectionsStore';
 import { UnfilteredPhotosProvider } from '@/context/globals/unfilteredPhotosStore';
 import { LayoutProvider } from '@/context/layoutStore';
 import { NegativeProvider } from '@/context/negativeStore';
+import { NotificationsProvider } from '@/context/notificationsProvider';
 import { SelectedProvider } from '@/context/selectedStore';
 import { SidebarProvider } from '@/context/sidebarStore';
 import { TagsProvider } from '@/context/tagsStore';
@@ -28,47 +29,49 @@ export default function AppProviders({ children }: Props) {
   return (
     <SettingsProvider>
       <ThemeContextProvider>
-        <TagsProvider>
-          <BYOKProvider>
-            <AISinkProvider>
-              <DescriptionsProvider>
-                <SidebarProvider>
-                  <FavoritesProvider>
-                    <PinnedProvider>
-                      <SelectedProvider>
-                        <LabelsProvider>
-                          <IgnoredProvider>
-                            <LayoutProvider>
-                              <PrivateProvider>
-                                <FilterPresetProvider>
-                                  <FilterProvider>
-                                    <AlbumPhotoCardProvider>
-                                      <NegativeProvider>
-                                        <UnfilteredPhotosProvider>
-                                          <FilteredPhotosProvider>
-                                            <FilteredGpsPhotosProvider>
-                                              <SectionsProvider>
-                                                {children}
-                                              </SectionsProvider>
-                                            </FilteredGpsPhotosProvider>
-                                          </FilteredPhotosProvider>
-                                        </UnfilteredPhotosProvider>
-                                      </NegativeProvider>
-                                    </AlbumPhotoCardProvider>
-                                  </FilterProvider>
-                                </FilterPresetProvider>
-                              </PrivateProvider>
-                            </LayoutProvider>
-                          </IgnoredProvider>
-                        </LabelsProvider>
-                      </SelectedProvider>
-                    </PinnedProvider>
-                  </FavoritesProvider>
-                </SidebarProvider>
-              </DescriptionsProvider>
-            </AISinkProvider>
-          </BYOKProvider>
-        </TagsProvider>
+        <NotificationsProvider>
+          <TagsProvider>
+            <BYOKProvider>
+              <AISinkProvider>
+                <DescriptionsProvider>
+                  <SidebarProvider>
+                    <FavoritesProvider>
+                      <PinnedProvider>
+                        <SelectedProvider>
+                          <LabelsProvider>
+                            <IgnoredProvider>
+                              <LayoutProvider>
+                                <PrivateProvider>
+                                  <FilterPresetProvider>
+                                    <FilterProvider>
+                                      <AlbumPhotoCardProvider>
+                                        <NegativeProvider>
+                                          <UnfilteredPhotosProvider>
+                                            <FilteredPhotosProvider>
+                                              <FilteredGpsPhotosProvider>
+                                                <SectionsProvider>
+                                                  {children}
+                                                </SectionsProvider>
+                                              </FilteredGpsPhotosProvider>
+                                            </FilteredPhotosProvider>
+                                          </UnfilteredPhotosProvider>
+                                        </NegativeProvider>
+                                      </AlbumPhotoCardProvider>
+                                    </FilterProvider>
+                                  </FilterPresetProvider>
+                                </PrivateProvider>
+                              </LayoutProvider>
+                            </IgnoredProvider>
+                          </LabelsProvider>
+                        </SelectedProvider>
+                      </PinnedProvider>
+                    </FavoritesProvider>
+                  </SidebarProvider>
+                </DescriptionsProvider>
+              </AISinkProvider>
+            </BYOKProvider>
+          </TagsProvider>
+        </NotificationsProvider>
       </ThemeContextProvider>
     </SettingsProvider>
   );
