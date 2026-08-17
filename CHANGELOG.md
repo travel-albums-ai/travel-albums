@@ -1,3 +1,9 @@
+## [1.121.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.120.0...v1.121.0) (2026-08-17)
+
+### ✨ Features
+
+* implement LightboxWindow for photo preview and remove PhotoLightbox component ([b18da66](https://github.com/travel-albums-ai/travel-albums/commit/b18da66e20618e29b05a19c7ccaf1af05089d220))
+
 ## [1.120.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.119.0...v1.120.0) (2026-08-17)
 
 ### ✨ Features
