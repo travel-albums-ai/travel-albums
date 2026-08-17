@@ -1,3 +1,9 @@
+## [1.138.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.137.0...v1.138.0) (2026-08-17)
+
+### ✨ Features
+
+* updated UI ([7f6ae0a](https://github.com/travel-albums-ai/travel-albums/commit/7f6ae0aa686763c17c3180745bdda3c55c6d6db6))
+
 ## [1.137.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.136.0...v1.137.0) (2026-08-17)
 
 ### ✨ Features
