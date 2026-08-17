@@ -1,4 +1,5 @@
 import ConfigSettings from '@/components/ConfigSettings';
+import IndexerContent from '@/components/IndexerContent';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { Box, Button, Dialog, Divider, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { ChevronLeft, ChevronsRight, CircleX, FolderOutput, GalleryVerticalEnd, SquareMousePointer } from 'lucide-react';
@@ -80,6 +81,7 @@ export default function OnboardingWindow() {
             height={186}
             style={{
               aspectRatio: '1/1',
+              margin: 20
             }}
           />
           <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="body1" color="textPrimary">
@@ -111,9 +113,14 @@ export default function OnboardingWindow() {
           ))}
         </Box>}
 
-        {activeStep === 2 && <Box sx={{ p: 4, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}>
-          <ConfigSettings />
-        </Box>}
+        {activeStep === 2 && <>
+          <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}>
+            <ConfigSettings />
+          </Box>
+          <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}>
+            <IndexerContent />
+          </Box>
+        </>}
 
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, gap: 1 }}>
           <Button
@@ -132,7 +139,7 @@ export default function OnboardingWindow() {
 
             }
             if (activeStep === steps.length - 1) {
-              setSetting(prev => ({ ...prev, indexing: true }));
+              // setSetting(prev => ({ ...prev, indexing: true }));
               setSetting(prev => ({ ...prev, onboarding: false }))
               setSetting(prev => ({ ...prev, tutorial: true }))
 

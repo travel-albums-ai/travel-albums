@@ -52,26 +52,21 @@ export default function DashboardCitiesItem({ avatar, cities }) {
             rowGap: 2,
             gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
           }}>
-            {citiesWithPreview.map((item) => <>
-              <Box key={item.name} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'stretch', gap: 1 }}>
-                <DashboardPreviewImages photos={item.photos} size={50} count={5} />
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2}}>
-                  <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1 }}>{item.name}</Typography>
-                  {inView && <SolidChip count={item.photos.length} />}
-                </Box>
+            {citiesWithPreview.map((item) => <Box key={item.name} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'stretch', gap: 1 }}>
+              <DashboardPreviewImages photos={item.photos} size={50} count={5} />
+              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2}}>
+                <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1 }}>{item.name}</Typography>
+                {inView && <SolidChip count={item.photos.length} />}
               </Box>
-
-            </>)}
+            </Box>)}
           </Box>}
           {citiesWithoutPreview.length > 0 && (citiesWithoutPreview.length > 10 ? inView : true) && <Stack direction={'row'} sx={{ flexWrap: 'wrap',
             borderTop: '1px dotted', borderColor: 'divider', pt: 1, mt: 1,
             gap: 2, overflow: 'auto', height: citiesWithoutPreview.length > 10 ? '250px' : 'auto' }} >
-            {citiesWithoutPreview.map((item) => <>
-              <Box key={item.name} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
-                <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1 }}>{item.name}</Typography>
-                {inView && <SolidChip count={item.photos.length} />}
-              </Box>
-            </>)}
+            {citiesWithoutPreview.map((item) => <Box key={item.name} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
+              <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1 }}>{item.name}</Typography>
+              {inView && <SolidChip count={item.photos.length} />}
+            </Box>)}
           </Stack>}
         </Box>
       </Box>

@@ -61,7 +61,7 @@ export default function DashboardSuggestions() {
           <div>
             <Typography variant="caption" color="textDisabled">{item.description}</Typography>
             <Box sx={{ display: 'flex', gap: 1, pt: 2 }}>
-              {item.labels?.map(label => <SolidChip label={label} fontSize={14} height={28} minWidth={140} />)}
+              {item.labels?.map(label => <SolidChip key={label} label={label} fontSize={14} height={28} minWidth={140} />)}
             </Box>
           </div>
           <Box sx={{ pt: 2, mt: 0.5, borderTop: '1px dotted', borderColor: 'divider' }}>

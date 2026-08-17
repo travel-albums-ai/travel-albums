@@ -17,7 +17,7 @@ const defaults: AlbumPhotoCardStore = {
   showTags: true,
   showDate: true,
   showLocation: true,
-  showFileName: true,
+  showFileName: false,
 }
 
 const {
