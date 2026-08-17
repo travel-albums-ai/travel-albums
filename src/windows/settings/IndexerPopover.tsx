@@ -3,7 +3,7 @@ import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/usePost_Config';
 import SettingsSection from '@/windows/components/SettingsSection';
 import SettingFieldRow from '@/windows/settings/components/SettingFieldRow';
-import { Code, File, Folder } from 'lucide-react';
+import { Code, DatabaseSearch, File, Folder } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const areFiles = ['JSON_PATH']
@@ -30,9 +30,8 @@ export default function IndexerPopover() {
       </>
     </SettingsSection>
 
-    <SettingsSection title="Path to cache and photos archive" icon={<Code />}>
+    <SettingsSection title="Indexer" icon={<DatabaseSearch />}>
       <IndexerContent />
     </SettingsSection>
-    {/* {content} */}
   </>
 }

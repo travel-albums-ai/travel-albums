@@ -5,13 +5,12 @@ import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
 import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
 import { Box, Button, Typography } from '@mui/material';
 import { History } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export default function IndexerContent() {
   const { setSetting } = useSettings()
   const indexing = useSettingsStoreSelector((state) => state.indexing);
-
-  const [progress, setProgress] = useState({});
+  const progress = useSettingsStoreSelector((state) => state.indexerProgress);
 
   const { turnOnJob } = useFetch_IndexerOn();
   const { turnOffJob } = useFetch_IndexerOff();
@@ -39,7 +38,7 @@ export default function IndexerContent() {
     try {
       const status = await fetchStatus();
       if(status.status === 'running' && status.progress) {
-        setProgress(status.progress);
+        setSetting(prev => ({ ...prev, indexerProgress: status.progress }));
       }
       console.log('Indexer status:', status);
     } catch (err) {
@@ -82,7 +81,7 @@ export default function IndexerContent() {
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
-        {Object.entries(progress).map(([key, value]) => <Box key={key} sx={{ flex: '0 1 20%'}}>
+        {progress && Object.entries(progress).map(([key, value]) => <Box key={key} sx={{ flex: '0 1 20%'}}>
           <IndexerMetricCard
             key={key}
             line={`${key}: ${value}`}

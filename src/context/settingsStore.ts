@@ -6,6 +6,7 @@ type SettingsStore = {
   onboarding: boolean,
   mascot: boolean,
   indexing: boolean,
+  indexerProgress: any,
   serverOnline: boolean,
   lightboxOpen: boolean,
   drawerId?: string,
@@ -87,6 +88,7 @@ type SettingsStore = {
 const defaults: SettingsStore = {
   onboarding: true,
   indexing: false,
+  indexerProgress: null,
   mascot: false,
   serverType: 'http',
   lightboxOpen: false,

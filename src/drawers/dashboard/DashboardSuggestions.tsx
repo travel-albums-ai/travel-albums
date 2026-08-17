@@ -40,7 +40,7 @@ export default function DashboardSuggestions() {
       icon: <DatabaseSearch />,
       actionTitle: 'Open Indexer',
       labels: ['discovery'],
-      action: () => { }
+      action: () => setSetting((prev) => ({ ...prev, showSettings: !prev.showSettings}))
     }
 
   ]

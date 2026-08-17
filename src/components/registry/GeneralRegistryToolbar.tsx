@@ -108,21 +108,21 @@ export default function GeneralRegistryToolbar({ group, noDivider = true, fullWi
     });
 
   return <>
-    {(leftItems.length > 0 || rightItems.length > 0) &&<Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} data-group={group} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
-      {leftItems.length > 0 && <Box data-side="left" data-items={leftItems.map(item => item.id).join(',')} sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
+    {(leftItems.length > 0 || rightItems.length > 0) && <Stack sx={{ ...wrapperSx, ...sx, width: fullWidth ? '100%' : 'auto' }} data-group={group} divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} direction="row" id="header">
+      {leftItems.length > 0 && <Stack  direction="row" data-side="left" divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} data-items={leftItems.map(item => item.id).join(',')} sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         {leftItems.map((item) => {
           const Component = toolRegistry.resolve(item);
 
           return !Component ? null : <Component key={item.id} context={context} />
         })}
-      </Box>}
-      {rightItems.length > 0 && <Box data-side="right" data-items={rightItems.map(item => item.id).join(',')} sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+      </Stack>}
+      {rightItems.length > 0 && <Stack  direction="row" data-side="right" divider={!noDivider ? <Divider orientation="vertical" flexItem /> : undefined} data-items={rightItems.map(item => item.id).join(',')} sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         {rightItems.map((item) => {
           const Component = toolRegistry.resolve(item);
 
           return !Component ? null : <Component key={item.id} context={context} />
         })}
-      </Box>}
+      </Stack>}
     </Stack>}
   </>
 }
