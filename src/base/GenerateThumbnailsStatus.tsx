@@ -1,100 +1,80 @@
-import ThumbnailsStatus from '@/components/ThumbnailsStatus';
+import PopoverButton from '@/components/PopoverButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import { useFetch_DeleteGenerateThumbnails } from '@/hooks/remote/useFetch_DeleteGenerateThumbnails';
-import { useFetch_JobGenerateThumbnails } from '@/hooks/remote/useFetch_JobGenerateThumbnails';
-import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
-import { usePost_ScriptsGenerateThumbnails } from '@/hooks/usePost_ScriptsGenerateThumbnails';
-import { useEffect, useMemo, useRef } from 'react';
+import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
+import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
+import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
+import { Button } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function GenerateThumbnailsStatus() {
   const { setSetting } = useSettings()
   const indexing = useSettingsStoreSelector((state) => state.indexing);
 
-  const { deleteJob } = useFetch_DeleteGenerateThumbnails();
-  const { run: generateThumbnails, data: generateThumbnailsData } =
-    usePost_ScriptsGenerateThumbnails();
+  const [progress, setProgress] = useState({});
 
-  const { clearCache } = useFetch_TakeoutMetadata();
+  const { turnOnJob } = useFetch_IndexerOn();
+  const { turnOffJob } = useFetch_IndexerOff();
+  const { fetchStatus } = useFetch_IndexerStatus();
 
-  const jobId = generateThumbnailsData?.jobId;
-
-  const hasJob = typeof jobId === 'string' && jobId.length > 0;
-
-  const { data: jobData, refetch: refetchJob } =
-    useFetch_JobGenerateThumbnails({
-      jobId: jobId ?? '',
-      enabled: hasJob,
-    });
-
-  const lastLine = useMemo(() => {
-    const stdout = jobData?.stdout ?? '';
-    return stdout.split('\r').filter(Boolean).slice(-1)[0] ?? '';
-  }, [jobData?.stdout]);
-
-  const refetchJobRef = useRef(refetchJob);
-  const clearCacheRef = useRef(clearCache);
-
-  useEffect(() => {
-    refetchJobRef.current = refetchJob;
-  }, [refetchJob]);
-
-  useEffect(() => {
-    clearCacheRef.current = clearCache;
-  }, [clearCache]);
-
-  // ⏱ polling logic
-  useEffect(() => {
-    if (!indexing || !hasJob) return;
-
-    const jobInterval = setInterval(() => {
-      console.log('Refetching job status...');
-      refetchJobRef.current?.();
-    }, 2000);
-
-    const dbInterval = setInterval(() => {
-      console.log('Clearing cache and refetching metadata...');
-      clearCacheRef.current?.();
-    }, 25000);
-
-    return () => {
-      clearInterval(jobInterval);
-      clearInterval(dbInterval);
-    };
-  }, [indexing, hasJob]);
-
-  useEffect(() => {
-    if (!indexing) return;
-
-    const status =
-      jobData?.status ??
-      jobData?.state ??
-      (jobData?.finished ? 'finished' : undefined);
-
-    if (status === 'finished') {
-      setSetting(prev => ({ ...prev, indexing: false }));
-    }
-  }, [jobData, indexing, setSetting]);
-
-  const handleDelete = async () => {
+  const handleTurnOn = async () => {
     try {
-      await deleteJob(jobId);
-      setSetting(prev => ({ ...prev, indexing: false }));
+      await turnOnJob();
+      setSetting(prev => ({ ...prev, indexing: true, loading: true }));
     } catch (err) {
       console.error(err);
     }
-  };
+  }
 
-  const onGenerate = () => {
-    generateThumbnails({ mode: 'async' });
-    setSetting(prev => ({ ...prev, indexing: true }));
-  };
+  const handleTurnOff = async () => {
+    try {
+      await turnOffJob();
+      setSetting(prev => ({ ...prev, indexing: false, loading: false }));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const handleGetStatus = useCallback(async () => {
+    try {
+      const status = await fetchStatus();
+      if(status.status === 'running' && status.progress) {
+        setProgress(status.progress);
+      }
+      console.log('Indexer status:', status);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [fetchStatus]);
+
+  // ⏱ polling logic
+  useEffect(() => {
+    if (!indexing) return;
+
+    const jobInterval = setInterval(() => {
+      console.log('Refetching job status...');
+      handleGetStatus()
+    }, 2000);
+
+    return () => {
+      clearInterval(jobInterval);
+    };
+  }, [indexing, handleGetStatus]);
 
   return (
-    <ThumbnailsStatus
-      busy={indexing}
-      handleDelete={handleDelete}
-      handleGenerate={onGenerate}
-      lastLine={lastLine}
-    />
+    <>
+      <PopoverButton id="indexer" upsideDown={true} width={650} label="" icon="" trigger={<Button variant="contained" color="primary">Indexer Control</Button>}>
+        <Button onClick={() => handleTurnOn()}>On</Button>
+        <Button onClick={() => handleTurnOff()}>Off</Button>
+        <Button onClick={() => handleGetStatus()}>Status</Button>
+        <div>status: {indexing ? 'indexing' : 'idle'}</div>
+        <div>progress: {progress ? JSON.stringify(progress) : 'no progress'}</div>
+        {/* <ThumbnailsStatus
+          busy={indexing}
+          handleDelete={() => {}}
+          handleGenerate={() => {}}
+          lastLine=""
+        /> */}
+      </PopoverButton>
+    </>
   );
 }
