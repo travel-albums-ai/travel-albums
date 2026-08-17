@@ -1,3 +1,13 @@
+## [1.123.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.122.0...v1.123.0) (2026-08-17)
+
+### ✨ Features
+
+* integrate thumbnails plugin in LightboxWindow for enhanced photo navigation ([f381560](https://github.com/travel-albums-ai/travel-albums/commit/f38156038aeed1627010e8d88a5b811837433fc7))
+
+### 🧹 Refactors
+
+* optimize LightboxWindow component structure and improve photo handling ([658aa20](https://github.com/travel-albums-ai/travel-albums/commit/658aa205978a4e6d391379780e4e1cb94d1ed0cb))
+
 ## [1.122.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.121.0...v1.122.0) (2026-08-17)
 
 ### ✨ Features
