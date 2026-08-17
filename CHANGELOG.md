@@ -1,3 +1,9 @@
+## [1.144.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.143.0...v1.144.0) (2026-08-17)
+
+### ✨ Features
+
+* update IndexerContent to use settings for progress and refactor GeneralRegistryToolbar for better structure ([9bfc03f](https://github.com/travel-albums-ai/travel-albums/commit/9bfc03f911baca8426b35aaa2a38c68b8b442b00))
+
 ## [1.143.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.142.0...v1.143.0) (2026-08-17)
 
 ### ✨ Features
