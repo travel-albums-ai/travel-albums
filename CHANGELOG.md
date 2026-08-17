@@ -1,3 +1,9 @@
+## [1.142.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.141.0...v1.142.0) (2026-08-17)
+
+### ✨ Features
+
+* enhance GenerateThumbnailsStatus with improved UI and indexing feedback ([68988ad](https://github.com/travel-albums-ai/travel-albums/commit/68988ad9db1687a24406ea502aff987993564420))
+
 ## [1.141.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.140.0...v1.141.0) (2026-08-17)
 
 ### ✨ Features
