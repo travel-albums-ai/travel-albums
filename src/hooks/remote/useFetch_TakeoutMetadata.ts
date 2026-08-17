@@ -68,28 +68,30 @@ async function parseNDJSONStream(body: ReadableStream<Uint8Array>): Promise<Reco
  * Avoids allocating + hashing one long composite string per photo.
  */
 function dedupePhotos(processed: GalleryPhoto[]): GalleryPhoto[] {
-  const seen = new Map<string, Set<number | string>>();
-  const result: GalleryPhoto[] = new Array(processed.length);
-  let count = 0;
+  const seen = new Map<string, { index: number; keyCount: number }>();
+  const result: GalleryPhoto[] = [];
 
-  for (let i = 0; i < processed.length; i++) {
-    const photo = processed[i];
-    const title = photo.title ?? '';
-    const ts = photo.takenAtTs ?? '';
+  for (const photo of processed) {
+    const key = `${photo.title ?? ''}\0${photo.takenAtTs ?? ''}`;
+    const keyCount = Object.keys(photo).length;
 
-    let tsSet = seen.get(title);
-    if (tsSet === undefined) {
-      tsSet = new Set();
-      seen.set(title, tsSet);
-    } else if (tsSet.has(ts)) {
+    const existing = seen.get(key);
+
+    if (existing === undefined) {
+      seen.set(key, {
+        index: result.length,
+        keyCount,
+      });
+      result.push(photo);
       continue;
     }
 
-    tsSet.add(ts);
-    result[count++] = photo;
+    if (keyCount > existing.keyCount) {
+      result[existing.index] = photo;
+      existing.keyCount = keyCount;
+    }
   }
 
-  result.length = count; // trim the preallocated array to actual size
   return result;
 }
 

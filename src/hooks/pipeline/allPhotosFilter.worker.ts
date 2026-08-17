@@ -13,6 +13,8 @@ export const filterPhotosByAllPhotosSettings = (
     showViewsMin,
     showLikes,
     showLikesMin,
+    showComments,
+    showCommentsMin,
     filterDates,
     filterCountries,
     filterFolders,
@@ -83,18 +85,32 @@ export const filterPhotosByAllPhotosSettings = (
     }
 
     if (showViews && photo.views < showViewsMin) continue;
+    if (showLikes && photo.likes < showLikesMin) continue;
+    if(showComments && photo.comments < showCommentsMin) continue;
 
-    if (showLikes) {
-      const social = photo.social;
-      if (!social) continue;
+    // if (showLikes) {
+    //   const social = photo.social;
+    //   if (!social) continue;
 
-      let likes = 0;
-      let metMin = false;
-      for (let j = 0; j < social.length; j++) {
-        if (social[j].liked && ++likes >= showLikesMin) { metMin = true; break; }
-      }
-      if (!metMin) continue;
-    }
+    //   let likes = 0;
+    //   let metMin = false;
+    //   for (let j = 0; j < social.length; j++) {
+    //     if (social[j].liked && ++likes >= showLikesMin) { metMin = true; break; }
+    //   }
+    //   if (!metMin) continue;
+    // }
+
+    // if (showComments) {
+    //   const social = photo.social;
+    //   if (!social) continue;
+
+    //   let comments = 0;
+    //   let metMin = false;
+    //   for (let j = 0; j < social.length; j++) {
+    //     if (social[j].text && ++comments >= showCommentsMin) { metMin = true; break; }
+    //   }
+    //   if (!metMin) continue;
+    // }
 
     if (datesLen > 0) {
       const ts = photo.takenAtTs * 1000;

@@ -21,6 +21,8 @@ export type FilterStore = {
   showViewsMin: number
   showLikes: boolean
   showLikesMin: number,
+  showComments: boolean
+  showCommentsMin: number,
   sortOrder: 'newestFirst' | 'oldestFirst',
   filterDates: boolean,
   filterCountries: boolean,
@@ -63,6 +65,8 @@ const defaults: FilterStore = {
   showViewsMin: 0,
   showLikes: false,
   showLikesMin: 0,
+  showComments: false,
+  showCommentsMin: 0,
   sortOrder: 'newestFirst',
   filterGps: false,
   gps: {

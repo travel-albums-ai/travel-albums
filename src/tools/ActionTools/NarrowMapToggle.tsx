@@ -1,7 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
-import { Focus, Scan } from 'lucide-react';
+import { Focus, SearchCode } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function NarrowMapToggle() {
@@ -19,11 +19,12 @@ export default function NarrowMapToggle() {
       },
       {
         value: 'contain',
+        title: "Focus",
         tooltip: t('thumbnailContain'),
         onClick: () => setSetting((prev) => ({...prev, gps: localStorage.getItem('albumGlobeViewport')
           ? JSON.parse(localStorage.getItem('albumGlobeViewport'))
           : { top: 90, left: -180, bottom: -90, right: 180 }})),
-        icon: <Scan size={20} />,
+        icon: <SearchCode size={20} />,
       }
     ] satisfies GenericToggleButtonProps[]} />
   </>
