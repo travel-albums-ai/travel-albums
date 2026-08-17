@@ -1,3 +1,9 @@
+## [1.120.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.119.0...v1.120.0) (2026-08-17)
+
+### ✨ Features
+
+* add PhotoLightbox component and integrate it into AlbumPhotoCard for image preview ([acff676](https://github.com/travel-albums-ai/travel-albums/commit/acff6763cf5aeea12fa2544b5cfba24780dddef4))
+
 ## [1.119.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.118.0...v1.119.0) (2026-08-16)
 
 ### ✨ Features
