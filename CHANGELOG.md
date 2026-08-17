@@ -1,3 +1,9 @@
+## [1.128.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.127.0...v1.128.0) (2026-08-17)
+
+### ✨ Features
+
+* enhance TwinLensMascot with eye movement tracking and refactor props ([17d86f5](https://github.com/travel-albums-ai/travel-albums/commit/17d86f5cc1aa4a78f9f1081dd59df9ef6328b19f))
+
 ## [1.127.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.126.0...v1.127.0) (2026-08-17)
 
 ### ✨ Features
