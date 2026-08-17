@@ -45,11 +45,9 @@ function AlbumScrollerItem({ photos, rows = 2, columns = 3, offset }: Props) {
         <Typography>~{photos[0]?.takenAt}</Typography>
       </Box>}
       {photos?.map((photo) => (
-        <AlbumPhotoCard
-          original={scrollerOriginal}
-          key={photo.id}
-          photo={photo}
-        />
+        <Box key={photo.id}>
+          <AlbumPhotoCard original={scrollerOriginal} photo={photo} />
+        </Box>
       ))}
     </Box>
   </>;
