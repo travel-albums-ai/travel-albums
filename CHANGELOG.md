@@ -1,3 +1,9 @@
+## [1.146.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.145.0...v1.146.0) (2026-08-17)
+
+### ✨ Features
+
+* refactor GenerateThumbnailsStatus and DashboardSuggestions for improved structure; update settings defaults ([5321d2e](https://github.com/travel-albums-ai/travel-albums/commit/5321d2ef0a89cdc1bbf56cb6ad4488e56dfe0719))
+
 ## [1.145.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.144.0...v1.145.0) (2026-08-17)
 
 ### ✨ Features
