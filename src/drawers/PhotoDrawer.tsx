@@ -4,18 +4,16 @@ import Histogram from '@/components/Histogram';
 import PhotoExifComplete from '@/components/PhotoExifComplete';
 import PhotoExifDetails from '@/components/PhotoExifDetails';
 import PopoverButton from '@/components/PopoverButton';
-import { useNotifications } from '@/context/notificationsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
 import ZoomPhoto from '@/drawers/components/ZoomPhoto';
 import DescribePhoto from '@/drawers/preview/DescribePhoto';
 import { composeUrl } from '@/lib/thumbnailService';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
-import { Box, Button, Chip, Typography } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 import { FileQuestionMark, MessageSquare } from 'lucide-react';
 
 export default function PhotoDrawer() {
-  const { addNotification } = useNotifications()
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
   const showPreviewMap = useSettingsStoreSelector((state) => state.showPreviewMap)
   const showPreviewExif = useSettingsStoreSelector((state) => state.showPreviewExif)
@@ -77,10 +75,6 @@ export default function PhotoDrawer() {
         </Box>}
 
         <DescribePhoto photoId={photo.id} />
-
-        <Button variant="outlined" onClick={() => addNotification('Hello', 'Hello from Travel Albums')}>
-          Send hello notification
-        </Button>
 
         {showPreviewComments && photo.social.length > 0 && <Box sx={{
           display: 'flex', flexDirection: 'column',

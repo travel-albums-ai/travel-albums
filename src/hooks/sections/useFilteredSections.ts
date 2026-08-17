@@ -73,9 +73,9 @@ export function useFilteredSections(): Section[] {
   const favoritesData = useMemo(() => (hasData && modules.favorites && sidebarOpen.favorites) ? grouperWorker(photos, favoritePhotoIds, 'Your favorites') : [], [hasData, modules.favorites, photos, favoritePhotoIds, sidebarOpen.favorites]);
   const tagsData = useMemo(() => (hasData && modules.tags && sidebarOpen.tags) ? tagsWorker(photos, tagsStore) : [], [hasData, modules.tags, photos, tagsStore, sidebarOpen.tags]);
   const labelsData = useMemo(() => (hasData && modules.labels && sidebarOpen.labels) ? labelsWorker(photos, labelsPrimary) : [], [hasData, modules.labels, photos, labelsPrimary, sidebarOpen.labels]);
-  const ignoredData = useMemo(() => (hasData && modules.ignored && sidebarOpen.ignored) ? grouperWorker(rawPhotos, ignoredPhotoIds, 'Your ignored') : [], [hasData, modules.ignored, rawPhotos, ignoredPhotoIds, sidebarOpen.ignored]);
-  const privateData = useMemo(() => (hasData && modules.private && sidebarOpen.private) ? grouperWorker(rawPhotos, privatePhotoIds, 'Your private') : [], [hasData, modules.private, rawPhotos, privatePhotoIds, sidebarOpen.private]);
-  const selectedData = useMemo(() => (hasData && modules.selected && sidebarOpen.selected) ? grouperWorker(rawPhotos, selectedPhotos, 'Your selected') : [], [hasData, modules.selected, rawPhotos, selectedPhotos, sidebarOpen.selected]);
+  const ignoredData = useMemo(() => (hasData && modules.ignored) ? grouperWorker(rawPhotos, ignoredPhotoIds, 'Your ignored') : [], [hasData, modules.ignored, rawPhotos, ignoredPhotoIds, sidebarOpen.ignored]);
+  const privateData = useMemo(() => (hasData && modules.private) ? grouperWorker(rawPhotos, privatePhotoIds, 'Your private') : [], [hasData, modules.private, rawPhotos, privatePhotoIds, sidebarOpen.private]);
+  const selectedData = useMemo(() => (hasData && modules.selected) ? grouperWorker(rawPhotos, selectedPhotos, 'Your selected') : [], [hasData, modules.selected, rawPhotos, selectedPhotos, sidebarOpen.selected]);
 
   return useMemo(() => {
     if (!hasData) return [];

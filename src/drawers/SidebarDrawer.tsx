@@ -2,6 +2,7 @@ import GenericPanel from '@/components/generics/GenericPanel';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
 import SidebarList from '@/drawers/sidebar/SidebarList';
+import SidebarListPermanent from '@/drawers/sidebar/SidebarListPermanent';
 import SidebarPins from '@/drawers/sidebar/SidebarPins';
 import { routeIcons } from '@/icons/IconsIndex';
 import { menuRoutes } from '@/routes';
@@ -19,6 +20,7 @@ export default function SidebarDrawer() {
         <SidebarCoreButton title={item.title} icon={routeIcons[item.path]} isActive={location.pathname === item.path} noCounts={true}  />
       </Box>)}
       <SidebarPins />
+      <SidebarListPermanent />
       <SidebarList />
     </GenericPanel>
   </>

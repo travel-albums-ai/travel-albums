@@ -4,13 +4,13 @@ import { Section } from '@/hooks/sections/useTransform_AllSections';
 import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function SidebarSectionItem({ section, item, type, icon }: {  section: Section, item: any, type: string, icon: React.ReactNode }) {
+export default function SidebarSectionItem({ section, item, type, icon, isInside = true }: {  section: Section, item: any, type: string, icon: React.ReactNode, isInside?: boolean }) {
   const location = useLocation();
   const navigate = useNavigate();
 
   return (
     <SidebarCoreButton
-      sx={{ pr: 4.25, py: 2 }}
+      sx={{ pr: isInside ? 4.25 : 1, py: isInside ? 2 : 1 }}
       onClick={() => navigate('/selectedPhotos/' + type + '/' + encodeURIComponent(item.name))}
       typographySx={{ opacity: 0.75 }}
       title={item.name}

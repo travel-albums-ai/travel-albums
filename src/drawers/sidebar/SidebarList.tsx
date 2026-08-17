@@ -28,6 +28,8 @@ type SidebarRow =
       item: Section['data'][number];
     };
 
+
+const excludedSections = [ 'ignored', 'private', 'selected'];
 export default function SidebarList() {
   const sections = useSections_GLOBAL();
   const sidebarOpen = useSidebarStoreSelector((s) => s.sidebarOpen);
@@ -40,6 +42,7 @@ export default function SidebarList() {
     const result: SidebarRow[] = [];
 
     for (const section of sections) {
+      if (excludedSections.includes(section.type)) continue;
       if(modules && !modules[section.type as keyof typeof modules]) continue;
 
       result.push({

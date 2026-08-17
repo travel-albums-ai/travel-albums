@@ -1,6 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import WebMCPDataRun from '@/components/WebMCPDataRun';
+import { useNotifications } from '@/context/notificationsStore';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { ArrowLeft, ArrowRight, Database, RefreshCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 export default function NavigationToggle() {
   const { t } = useTranslation()
   const { clearCache } = useFetch_TakeoutMetadata();
+  const { addNotification } = useNotifications()
 
   return <>
     <WebMCPDataRun
@@ -58,7 +60,10 @@ export default function NavigationToggle() {
       },
       {
         icon: <Database />,
-        onClick: () => clearCache(),
+        onClick: () => {
+          clearCache()
+          addNotification("Cache Cleared","The local cache has been successfully cleared. A fresh fetch from the server will be performed on the next data request.");
+        },
         tooltip: "Reload data from server"
       },
     ] satisfies GenericToggleButtonProps[]} variant="standard" />
