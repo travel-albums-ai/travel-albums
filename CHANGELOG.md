@@ -1,3 +1,9 @@
+## [1.135.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.134.0...v1.135.0) (2026-08-17)
+
+### ✨ Features
+
+* updated countries ([33abae9](https://github.com/travel-albums-ai/travel-albums/commit/33abae93d5e4ebb0b337d7863b89861b331353e1))
+
 ## [1.134.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.133.0...v1.134.0) (2026-08-17)
 
 ### ✨ Features
