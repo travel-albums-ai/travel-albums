@@ -1,65 +1,61 @@
-import IndexerMetricCard from '@/components/IndexerMetricCard';
+import IndexerContent from '@/components/IndexerContent';
 import PopoverButton from '@/components/PopoverButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
-import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
-import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
-import { Box, Button, Typography } from '@mui/material';
-import { DatabaseSearch, History } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import { DatabaseSearch } from 'lucide-react';
 
 export default function GenerateThumbnailsStatus() {
   const { setSetting } = useSettings()
   const indexing = useSettingsStoreSelector((state) => state.indexing);
 
-  const [progress, setProgress] = useState({});
+  // const [progress, setProgress] = useState({});
 
-  const { turnOnJob } = useFetch_IndexerOn();
-  const { turnOffJob } = useFetch_IndexerOff();
-  const { fetchStatus } = useFetch_IndexerStatus();
+  // const { turnOnJob } = useFetch_IndexerOn();
+  // const { turnOffJob } = useFetch_IndexerOff();
+  // const { fetchStatus } = useFetch_IndexerStatus();
 
-  const handleTurnOn = async () => {
-    try {
-      await turnOnJob();
-      setSetting(prev => ({ ...prev, indexing: true, loading: true }));
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  // const handleTurnOn = async () => {
+  //   try {
+  //     await turnOnJob();
+  //     setSetting(prev => ({ ...prev, indexing: true, loading: true }));
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
-  const handleTurnOff = async () => {
-    try {
-      await turnOffJob();
-      setSetting(prev => ({ ...prev, indexing: false, loading: false }));
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  // const handleTurnOff = async () => {
+  //   try {
+  //     await turnOffJob();
+  //     setSetting(prev => ({ ...prev, indexing: false, loading: false }));
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
-  const handleGetStatus = useCallback(async () => {
-    try {
-      const status = await fetchStatus();
-      if(status.status === 'running' && status.progress) {
-        setProgress(status.progress);
-      }
-      console.log('Indexer status:', status);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [fetchStatus]);
+  // const handleGetStatus = useCallback(async () => {
+  //   try {
+  //     const status = await fetchStatus();
+  //     if(status.status === 'running' && status.progress) {
+  //       setProgress(status.progress);
+  //     }
+  //     console.log('Indexer status:', status);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }, [fetchStatus]);
 
-  useEffect(() => {
-    if (!indexing) return;
+  // useEffect(() => {
+  //   if (!indexing) return;
 
-    const jobInterval = setInterval(() => {
-      console.log('Refetching job status...');
-      handleGetStatus()
-    }, 1000);
+  //   const jobInterval = setInterval(() => {
+  //     console.log('Refetching job status...');
+  //     handleGetStatus()
+  //   }, 1000);
 
-    return () => {
-      clearInterval(jobInterval);
-    };
-  }, [indexing, handleGetStatus]);
+  //   return () => {
+  //     clearInterval(jobInterval);
+  //   };
+  // }, [indexing, handleGetStatus]);
 
   return (
     <>
@@ -69,7 +65,10 @@ export default function GenerateThumbnailsStatus() {
           {indexing ? 'Indexing...' : 'Indexer'}
         </Typography>
       </Box>}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
+        <Box sx={{ height: '170px' }} >
+          <IndexerContent />
+        </Box>
+        {/* <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
           <Button disabled={indexing} variant="contained" color="primary" onClick={() => handleTurnOn()}>On</Button>
           <Button disabled={!indexing} variant="contained" color="primary" onClick={() => handleTurnOff()}>Off</Button>
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -99,7 +98,7 @@ export default function GenerateThumbnailsStatus() {
               }}
               showChart={true}
             /> </Box>)}
-        </Box>
+        </Box> */}
       </PopoverButton>
     </>
   );
