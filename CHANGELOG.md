@@ -1,3 +1,9 @@
+## [1.136.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.135.0...v1.136.0) (2026-08-17)
+
+### ✨ Features
+
+* updated dashboard ([ddfd012](https://github.com/travel-albums-ai/travel-albums/commit/ddfd012818902eaf64995a24835170abefd9f27b))
+
 ## [1.135.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.134.0...v1.135.0) (2026-08-17)
 
 ### ✨ Features
