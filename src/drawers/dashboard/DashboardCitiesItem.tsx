@@ -5,6 +5,9 @@ import { Box, Stack, Typography } from '@mui/material';
 
 export default function DashboardCitiesItem({ avatar, cities }) {
 
+  const citiesWithPreview = cities?.sort((a, b) => b.photos.length - a.photos.length)
+    .filter((item) => item.photos.length > 100)
+
   return (
     <SettingsSection>
       <Box
@@ -25,27 +28,25 @@ export default function DashboardCitiesItem({ avatar, cities }) {
           }}
         />
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 1 }}>
-          <Box sx={{
+          {citiesWithPreview.length > 0 && <Box sx={{
             display: 'grid',
             width: '100%',
             gap: 4,
             rowGap: 2,
             gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            borderBottom: '1px dotted', borderColor: 'divider', pt: 2, mt: 2
+            borderBottom: '1px dotted', borderColor: 'divider', pb: 2, mb: 2
           }}>
-            {cities?.sort((a, b) => b.photos.length - a.photos.length)
-              .filter((item) => item.photos.length > 100)
-              .map((item) => <>
-                {item.photos.length > 100 && <Box key={item.name} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'stretch', gap: 1 }}>
-                  <DashboardPreviewImages photos={item.photos} size={50} count={6} />
-                  <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <Typography variant="caption" color="textDisabled">{item.name}</Typography>
-                    <SolidChip count={item.photos.length} />
-                  </Box>
-                </Box>}
+            {citiesWithPreview.map((item) => <>
+              {item.photos.length > 100 && <Box key={item.name} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'stretch', gap: 1 }}>
+                <DashboardPreviewImages photos={item.photos} size={50} count={5} />
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Typography variant="caption" color="textDisabled">{item.name}</Typography>
+                  <SolidChip count={item.photos.length} />
+                </Box>
+              </Box>}
 
-              </>)}
-          </Box>
+            </>)}
+          </Box>}
           <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2 }} >
             {cities?.sort((a, b) => b.photos.length - a.photos.length)
               .filter((item) => item.photos.length <= 100)

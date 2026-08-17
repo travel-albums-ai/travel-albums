@@ -8,7 +8,7 @@ import DashboardMetrics from '@/drawers/dashboard/DashboardMetrics';
 import DashboardSuggestions from '@/drawers/dashboard/DashboardSuggestions';
 import { Box, Typography } from '@mui/material';
 
-const bla = false
+const bla = true
 
 export default function DashboardDrawer() {
 
