@@ -21,11 +21,13 @@ export default function DashboardDrawer() {
 
           gap: 2, px: 4 }}>
 
-          <Typography color="primary" sx={{ mt: 16, textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
+          <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 2, display: 'flex;ex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
+            <Typography color="primary" sx={{ mt: 16, textAlign: 'center' }} variant="h5">Welcome to Travel-Albums</Typography>
 
-          <DashboardSuggestions />
+            <DashboardSuggestions />
 
-          <DashboardMetrics />
+            <DashboardMetrics />
+          </Box>
 
           {/* <div>Recent files</div>  */}
 

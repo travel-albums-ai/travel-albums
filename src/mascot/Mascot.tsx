@@ -112,7 +112,7 @@ export default function Mascot() {
 
   const addRandomNotification = () => {
     const phrases = [
-      'Hello. '
+      'Hello.  The '
     ]
 
     addNotification('SpotAI', phrases[0])

@@ -12,11 +12,22 @@ export default function DashboardSuggestions() {
       title: 'Refresh Database',
       description: 'Refresh the database to ensure all data is up-to-date.',
       icon: <PersonStanding />,
+    },
+    {
+      title: 'Enable Mascot',
+      description: '...',
+      icon: <PersonStanding />,
+    },
+    {
+      title: 'Trigger Indexer',
+      description: '...',
+      icon: <PersonStanding />,
     }
+
   ]
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 2, flexWrap: 'wrap', borderBottom: '1px solid', borderColor: 'divider', p: 2 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
       {items.map((item, index) => (
         <Card key={index} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, p: 2, mb: 2 }}>
           <div>{item.icon}</div>
