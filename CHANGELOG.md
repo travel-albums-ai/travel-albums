@@ -1,3 +1,9 @@
+## [1.125.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.124.0...v1.125.0) (2026-08-17)
+
+### ✨ Features
+
+* update OpenAI response structure in DayAnalyzer and ImageAnalyzer; adjust LightboxWindow styling ([080bb44](https://github.com/travel-albums-ai/travel-albums/commit/080bb44fe2d0d8c81ae6b7724e2b93018bec6cab))
+
 ## [1.124.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.123.0...v1.124.0) (2026-08-17)
 
 ### ✨ Features
