@@ -1,3 +1,9 @@
+## [1.137.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.136.0...v1.137.0) (2026-08-17)
+
+### ✨ Features
+
+* update cities dashboard ([daf5e27](https://github.com/travel-albums-ai/travel-albums/commit/daf5e27b55553423cc79ea99d3dbdd905231d5c3))
+
 ## [1.136.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.135.0...v1.136.0) (2026-08-17)
 
 ### ✨ Features
