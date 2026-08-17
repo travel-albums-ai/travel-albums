@@ -1,3 +1,4 @@
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import TwinLensMascot from '@/mascot/TwinLensMascot';
 import { Box, Tooltip } from '@mui/material';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -7,6 +8,7 @@ const MASCOT_SIZE = 100;
 const BOTTOM = 10;
 
 export default function Mascot() {
+  const loading = useSettingsStoreSelector((state) => state.loading);
   const [x, setX] = useState<number | null>(null);
 
   const draggingRef = useRef(false);
@@ -142,7 +144,7 @@ export default function Mascot() {
         }}
       >
 
-        <TwinLensMascot />
+        <TwinLensMascot loading={loading} />
 
       </Box>
     </Tooltip>
