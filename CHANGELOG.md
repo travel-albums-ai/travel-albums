@@ -1,3 +1,9 @@
+## [1.140.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.139.0...v1.140.0) (2026-08-17)
+
+### ✨ Features
+
+* enable welcome message in DashboardDrawer ([8262fcb](https://github.com/travel-albums-ai/travel-albums/commit/8262fcb43061228b382d0d01c8058fac526290fc))
+
 ## [1.139.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.138.0...v1.139.0) (2026-08-17)
 
 ### ✨ Features
