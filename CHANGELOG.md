@@ -1,3 +1,9 @@
+## [1.127.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.126.0...v1.127.0) (2026-08-17)
+
+### ✨ Features
+
+* add Mascot component and integrate it into AppLayout ([1808d0c](https://github.com/travel-albums-ai/travel-albums/commit/1808d0c0476267af59a69a7c28fd2eb0eec74cef))
+
 ## [1.126.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.125.0...v1.126.0) (2026-08-17)
 
 ### ✨ Features
