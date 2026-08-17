@@ -7,6 +7,49 @@ import { Box, Button, Typography } from '@mui/material';
 import { History } from 'lucide-react';
 import { useCallback, useEffect } from 'react';
 
+
+import { Bug, ChevronLast, CircleCheckBig, Cpu, Gauge, Hourglass, List } from 'lucide-react';
+
+const items = [
+  {
+    key: 'processed',
+    label: 'Processed',
+    icon: <Cpu size={24} />
+  },
+  {
+    key: 'total',
+    label: 'Total',
+    // showChart: false,
+    icon: <List size={24} />
+  },
+  {
+    key: 'generated',
+    label: 'Generated',
+    icon: <CircleCheckBig size={24} />
+  },
+  {
+    key: 'skipped',
+    label: 'Remaining',
+    icon: <ChevronLast size={24} />
+  },
+  {
+    key: 'failed',
+    label: 'Failed',
+    icon: <Bug size={24} />
+  },
+  {
+    key: 'img/s',
+    label: 'Rate (img/s)',
+    icon: <Gauge size={24} />
+  },
+  {
+    key: 'ETA',
+    label: 'ETA (min)',
+    format: (value: string) => Math.round(Number(value) / 1000 / 60) + 'm',
+    icon: <Hourglass size={24} />
+  }
+]
+
 export default function IndexerContent() {
   const { setSetting } = useSettings()
   const indexing = useSettingsStoreSelector((state) => state.indexing);
