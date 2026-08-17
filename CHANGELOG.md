@@ -1,3 +1,9 @@
+## [1.141.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.140.0...v1.141.0) (2026-08-17)
+
+### ✨ Features
+
+* implement indexer control with start, stop, and status functionality ([8229ad9](https://github.com/travel-albums-ai/travel-albums/commit/8229ad9c1765dd32df7c5a64463683e30167d5e9))
+
 ## [1.140.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.139.0...v1.140.0) (2026-08-17)
 
 ### ✨ Features
