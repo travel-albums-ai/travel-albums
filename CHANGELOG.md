@@ -1,3 +1,9 @@
+## [1.139.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.138.0...v1.139.0) (2026-08-17)
+
+### ✨ Features
+
+* enhance dashboard components with improved layouts and performance optimizations ([a324a82](https://github.com/travel-albums-ai/travel-albums/commit/a324a82fe7e01f006ef87aa819da9381b3f6c20a))
+
 ## [1.138.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.137.0...v1.138.0) (2026-08-17)
 
 ### ✨ Features
