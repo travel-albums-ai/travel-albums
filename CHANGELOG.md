@@ -1,3 +1,9 @@
+## [1.131.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.130.0...v1.131.0) (2026-08-17)
+
+### ✨ Features
+
+* refactor PhotoDrawer and Sidebar components, add SidebarListPermanent for better section management ([0535594](https://github.com/travel-albums-ai/travel-albums/commit/053559492bb7ee227e3171c134e480e9ecde8f7d))
+
 ## [1.130.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.129.0...v1.130.0) (2026-08-17)
 
 ### ✨ Features
