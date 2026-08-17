@@ -1,3 +1,4 @@
+import { useNotifications } from '@/context/notificationsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import TwinLensMascot from '@/mascot/TwinLensMascot';
 import { Box, Tooltip } from '@mui/material';
@@ -9,6 +10,7 @@ const BOTTOM = 10;
 
 export default function Mascot() {
   const loading = useSettingsStoreSelector((state) => state.loading);
+  const { addNotification } = useNotifications()
   const [x, setX] = useState<number | null>(null);
 
   const draggingRef = useRef(false);
@@ -108,9 +110,18 @@ export default function Mascot() {
     return null;
   }
 
+  const addRandomNotification = () => {
+    const phrases = [
+      'Hello. '
+    ]
+
+    addNotification('SpotAI', phrases[0])
+  }
+
   return (
     <Tooltip title="This is SpotAI. Drag to reposition" placement="top" arrow>
       <Box
+        onDoubleClick={addRandomNotification}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={stopDragging}
