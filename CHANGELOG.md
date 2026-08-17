@@ -1,3 +1,9 @@
+## [1.134.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.133.0...v1.134.0) (2026-08-17)
+
+### ✨ Features
+
+* fixed missing sections due to enums ([c452322](https://github.com/travel-albums-ai/travel-albums/commit/c45232211f0f445462bc7a2d63c166f7427343b2))
+
 ## [1.133.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.132.0...v1.133.0) (2026-08-17)
 
 ### ✨ Features
