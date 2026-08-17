@@ -1,17 +1,9 @@
 import type { CSSProperties, SVGProps } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface TwinLensMascotProps extends SVGProps<SVGSVGElement> {
-  /**
-   * Transform applied to the entire mascot.
-   */
   mascotTransform?: string;
 
-  /**
-   * Individual transforms for future animation.
-   * Examples:
-   *   leftEyeTransform="rotate(5 110 105)"
-   *   rightLegTransform="translate(0 5) rotate(-8 80 180)"
-   */
   leftEyeTransform?: string;
   rightEyeTransform?: string;
 
@@ -22,10 +14,30 @@ export interface TwinLensMascotProps extends SVGProps<SVGSVGElement> {
   rightFootTransform?: string;
 
   /**
-   * Optional CSS variables for future animation/control.
+   * Maximum distance the pupils can move inside the lenses.
    */
+  eyeFollowDistance?: number;
+
   style?: CSSProperties;
 }
+
+interface EyePosition {
+  x: number;
+  y: number;
+}
+
+const VIEWBOX_WIDTH = 320;
+const VIEWBOX_HEIGHT = 320;
+
+const LEFT_EYE: EyePosition = {
+  x: 111,
+  y: 151,
+};
+
+const RIGHT_EYE: EyePosition = {
+  x: 209,
+  y: 151,
+};
 
 export function TwinLensMascot({
   mascotTransform,
@@ -35,11 +47,88 @@ export function TwinLensMascot({
   rightLegTransform = '',
   leftFootTransform = '',
   rightFootTransform = '',
+  eyeFollowDistance = 5,
   style,
   ...svgProps
 }: TwinLensMascotProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const [eyeOffset, setEyeOffset] = useState({
+    left: { x: 0, y: 0 },
+    right: { x: 0, y: 0 },
+  });
+
+  useEffect(() => {
+    let frame = 0;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      cancelAnimationFrame(frame);
+
+      frame = requestAnimationFrame(() => {
+        const svg = svgRef.current;
+
+        if (!svg) return;
+
+        const rect = svg.getBoundingClientRect();
+
+        if (!rect.width || !rect.height) return;
+
+        /*
+         * Convert the SVG eye coordinates into screen coordinates.
+         */
+        const scaleX = rect.width / VIEWBOX_WIDTH;
+        const scaleY = rect.height / VIEWBOX_HEIGHT;
+
+        const getEyeOffset = (eye: EyePosition) => {
+          const eyeScreenX =
+            rect.left + eye.x * scaleX;
+
+          const eyeScreenY =
+            rect.top + eye.y * scaleY;
+
+          const dx = event.clientX - eyeScreenX;
+          const dy = event.clientY - eyeScreenY;
+
+          const distance = Math.sqrt(
+            dx * dx + dy * dy,
+          );
+
+          if (distance === 0) {
+            return { x: 0, y: 0 };
+          }
+
+          /*
+           * Normalize the direction so the pupil moves
+           * a fixed maximum distance regardless of how far
+           * away the mouse is.
+           */
+          const nx = dx / distance;
+          const ny = dy / distance;
+
+          return {
+            x: nx * eyeFollowDistance,
+            y: ny * eyeFollowDistance,
+          };
+        };
+
+        setEyeOffset({
+          left: getEyeOffset(LEFT_EYE),
+          right: getEyeOffset(RIGHT_EYE),
+        });
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(frame);
+    };
+  }, [eyeFollowDistance]);
+
   return (
     <svg
+      ref={svgRef}
       viewBox="0 0 320 320"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
@@ -58,7 +147,7 @@ export function TwinLensMascot({
         strokeLinejoin="round"
       >
         {/* ============================================================
-            GROUND SHADOW
+            SHADOW
         ============================================================ */}
 
         <ellipse
@@ -74,7 +163,6 @@ export function TwinLensMascot({
 
         {/* ============================================================
             LEGS
-            Keep these as completely independent groups.
         ============================================================ */}
 
         <g
@@ -83,13 +171,11 @@ export function TwinLensMascot({
           stroke="#202020"
           strokeWidth="13"
         >
-          {/* Left leg */}
           <g
             id="left-leg"
             transform={leftLegTransform}
           >
             <path
-              id="left-leg-shape"
               d="
                 M 108 205
                 C 108 218, 119 222, 114 235
@@ -99,13 +185,11 @@ export function TwinLensMascot({
             />
           </g>
 
-          {/* Right leg */}
           <g
             id="right-leg"
             transform={rightLegTransform}
           >
             <path
-              id="right-leg-shape"
               d="
                 M 212 205
                 C 212 219, 201 223, 206 236
@@ -159,11 +243,10 @@ export function TwinLensMascot({
         </g>
 
         {/* ============================================================
-            CAMERA BODY
+            CAMERA
         ============================================================ */}
 
         <g id="camera">
-          {/* Main camera body */}
           <rect
             id="camera-body"
             x="42"
@@ -175,9 +258,7 @@ export function TwinLensMascot({
             strokeWidth="5"
           />
 
-          {/* Metal upper section */}
           <path
-            id="camera-top"
             d="
               M 45 103
               Q 45 93 57 93
@@ -191,9 +272,7 @@ export function TwinLensMascot({
             strokeWidth="4"
           />
 
-          {/* Leatherette center */}
           <path
-            id="leather-panel"
             d="
               M 48 119
               H 272
@@ -207,7 +286,6 @@ export function TwinLensMascot({
             stroke="none"
           />
 
-          {/* Bottom metal strip */}
           <path
             d="
               M 44 190
@@ -223,7 +301,7 @@ export function TwinLensMascot({
           />
 
           {/* ==========================================================
-              TOP / VIEWFINDER
+              VIEWFINDER
           ========================================================== */}
 
           <g id="viewfinder">
@@ -263,7 +341,7 @@ export function TwinLensMascot({
           </g>
 
           {/* ==========================================================
-              TOP DIALS
+              CONTROLS
           ========================================================== */}
 
           <g id="controls">
@@ -275,6 +353,7 @@ export function TwinLensMascot({
                 fill="#bcb9b2"
                 strokeWidth="4"
               />
+
               <circle
                 cx="68"
                 cy="106"
@@ -292,6 +371,7 @@ export function TwinLensMascot({
                 fill="#bcb9b2"
                 strokeWidth="4"
               />
+
               <circle
                 cx="244"
                 cy="106"
@@ -323,16 +403,14 @@ export function TwinLensMascot({
           </g>
 
           {/* ==========================================================
-              LEFT LENS / EYE
-        ============================================================ */}
+              LEFT EYE
+          ========================================================== */}
 
           <g
             id="left-eye"
             transform={leftEyeTransform}
           >
-            {/* Lens barrel */}
             <circle
-              id="left-lens-barrel"
               cx="111"
               cy="151"
               r="45"
@@ -340,7 +418,6 @@ export function TwinLensMascot({
               strokeWidth="5"
             />
 
-            {/* Outer metal ring */}
             <circle
               cx="111"
               cy="151"
@@ -349,7 +426,6 @@ export function TwinLensMascot({
               strokeWidth="4"
             />
 
-            {/* Inner barrel */}
             <circle
               cx="111"
               cy="151"
@@ -358,9 +434,7 @@ export function TwinLensMascot({
               strokeWidth="4"
             />
 
-            {/* Glass */}
             <circle
-              id="left-lens-glass"
               cx="111"
               cy="151"
               r="22"
@@ -368,25 +442,37 @@ export function TwinLensMascot({
               strokeWidth="3"
             />
 
-            {/* Iris */}
-            <circle
-              cx="111"
-              cy="151"
-              r="10"
-              fill="#070b0d"
-              stroke="none"
-            />
+            {/* ========================================================
+                LEFT PUPIL
+            ======================================================== */}
 
-            {/* Reflection */}
-            <ellipse
-              cx="103"
-              cy="142"
-              rx="6"
-              ry="4"
-              fill="#fff"
-              opacity="0.9"
-              stroke="none"
-            />
+            <g
+              id="left-pupil"
+              transform={`
+                translate(
+                  ${eyeOffset.left.x}
+                  ${eyeOffset.left.y}
+                )
+              `}
+            >
+              <circle
+                cx="111"
+                cy="151"
+                r="10"
+                fill="#070b0d"
+                stroke="none"
+              />
+
+              <ellipse
+                cx="103"
+                cy="142"
+                rx="6"
+                ry="4"
+                fill="#fff"
+                opacity="0.9"
+                stroke="none"
+              />
+            </g>
 
             <path
               d="M 119 165 Q 125 160 126 153"
@@ -398,16 +484,14 @@ export function TwinLensMascot({
           </g>
 
           {/* ==========================================================
-              RIGHT LENS / EYE
-          ============================================================ */}
+              RIGHT EYE
+          ========================================================== */}
 
           <g
             id="right-eye"
             transform={rightEyeTransform}
           >
-            {/* Lens barrel */}
             <circle
-              id="right-lens-barrel"
               cx="209"
               cy="151"
               r="45"
@@ -415,7 +499,6 @@ export function TwinLensMascot({
               strokeWidth="5"
             />
 
-            {/* Outer metal ring */}
             <circle
               cx="209"
               cy="151"
@@ -424,7 +507,6 @@ export function TwinLensMascot({
               strokeWidth="4"
             />
 
-            {/* Inner barrel */}
             <circle
               cx="209"
               cy="151"
@@ -433,9 +515,7 @@ export function TwinLensMascot({
               strokeWidth="4"
             />
 
-            {/* Glass */}
             <circle
-              id="right-lens-glass"
               cx="209"
               cy="151"
               r="22"
@@ -443,25 +523,37 @@ export function TwinLensMascot({
               strokeWidth="3"
             />
 
-            {/* Iris */}
-            <circle
-              cx="209"
-              cy="151"
-              r="10"
-              fill="#070b0d"
-              stroke="none"
-            />
+            {/* ========================================================
+                RIGHT PUPIL
+            ======================================================== */}
 
-            {/* Reflection */}
-            <ellipse
-              cx="201"
-              cy="142"
-              rx="6"
-              ry="4"
-              fill="#fff"
-              opacity="0.9"
-              stroke="none"
-            />
+            <g
+              id="right-pupil"
+              transform={`
+                translate(
+                  ${eyeOffset.right.x}
+                  ${eyeOffset.right.y}
+                )
+              `}
+            >
+              <circle
+                cx="209"
+                cy="151"
+                r="10"
+                fill="#070b0d"
+                stroke="none"
+              />
+
+              <ellipse
+                cx="201"
+                cy="142"
+                rx="6"
+                ry="4"
+                fill="#fff"
+                opacity="0.9"
+                stroke="none"
+              />
+            </g>
 
             <path
               d="M 217 165 Q 223 160 224 153"
@@ -477,7 +569,6 @@ export function TwinLensMascot({
           ========================================================== */}
 
           <g id="camera-details">
-            {/* Strap mounts */}
             <circle
               cx="45"
               cy="128"
@@ -494,7 +585,6 @@ export function TwinLensMascot({
               strokeWidth="3"
             />
 
-            {/* Small shutter/button */}
             <circle
               cx="67"
               cy="178"
@@ -503,7 +593,6 @@ export function TwinLensMascot({
               strokeWidth="3"
             />
 
-            {/* Tiny indicator */}
             <circle
               cx="252"
               cy="181"
