@@ -1,3 +1,9 @@
+## [1.130.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.129.0...v1.130.0) (2026-08-17)
+
+### ✨ Features
+
+* implement notifications system with context provider and add notification feature in PhotoDrawer ([3c9d632](https://github.com/travel-albums-ai/travel-albums/commit/3c9d632e49bff3f22114df25b7543b96c90b632d))
+
 ## [1.129.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.128.0...v1.129.0) (2026-08-17)
 
 ### ✨ Features
