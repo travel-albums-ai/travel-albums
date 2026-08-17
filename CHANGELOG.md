@@ -1,3 +1,9 @@
+## [1.143.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.142.0...v1.143.0) (2026-08-17)
+
+### ✨ Features
+
+* refactor indexing components and introduce IndexerContent for better structure ([9713462](https://github.com/travel-albums-ai/travel-albums/commit/971346271514a900f340d8723e9dff59bbabb1f9))
+
 ## [1.142.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.141.0...v1.142.0) (2026-08-17)
 
 ### ✨ Features
