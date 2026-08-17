@@ -1,3 +1,13 @@
+## [1.122.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.121.0...v1.122.0) (2026-08-17)
+
+### ✨ Features
+
+* add yet-another-react-lightbox for enhanced photo viewing experience ([57e96bd](https://github.com/travel-albums-ai/travel-albums/commit/57e96bd1f0b34279acfabb7b66316051900b6aa3))
+
+### 🧹 Refactors
+
+* simplify AlbumPhotoCard rendering in AlbumScrollerItem ([7657e64](https://github.com/travel-albums-ai/travel-albums/commit/7657e64a52bc3886930c18dc94254cc1bc4009c3))
+
 ## [1.121.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.120.0...v1.121.0) (2026-08-17)
 
 ### ✨ Features
