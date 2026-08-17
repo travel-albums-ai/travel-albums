@@ -5,10 +5,14 @@ import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { Lightbox } from 'yet-another-react-lightbox';
 import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
@@ -23,8 +27,13 @@ export default function LightboxWindow() {
 
   const showAll = type_name === '';
 
-  const foundSection = sections?.find((s) => s.type === type_name);
-  const foundSet = foundSection?.data?.find((d: any) => d.name === id);
+  const foundSection = sections?.find(
+    s => s.type === type_name,
+  );
+
+  const foundSet = foundSection?.data?.find(
+    (d: any) => d.name === id,
+  );
 
   const photos = showAll
     ? photosFiltered
@@ -33,17 +42,22 @@ export default function LightboxWindow() {
   const showWindow = lightboxOpen === true;
 
   const initialIndex = useMemo(() => {
-    if (!previewPhotoObj || photos.length === 0) {
+    if (!previewPhotoObj) {
       return 0;
     }
 
-    return photos.findIndex(p => p === previewPhotoObj);
+    const index = photos.findIndex(
+      p => p.id === previewPhotoObj.id,
+    );
+
+    return index >= 0 ? index : 0;
   }, [photos, previewPhotoObj]);
 
   const slides = useMemo(
     () =>
       photos.map(p => ({
         src: composeUrl(p, true),
+        thumbnail: composeUrl(p, false),
       })),
     [photos],
   );
@@ -71,7 +85,7 @@ export default function LightboxWindow() {
             lightboxOpen: false,
           }))
         }
-        index={initialIndex >= 0 ? initialIndex : 0}
+        index={initialIndex}
         slides={slides}
         carousel={{
           finite: true,
@@ -80,8 +94,21 @@ export default function LightboxWindow() {
         plugins={[
           Fullscreen,
           Slideshow,
+          Thumbnails,
           Zoom,
         ]}
+        thumbnails={{
+          position: 'bottom',
+          width: 120,
+          height: 80,
+          border: 1,
+          borderRadius: 4,
+          padding: 4,
+          gap: 8,
+          imageFit: 'cover',
+          vignette: true,
+          showToggle: true,
+        }}
         on={{
           view: ({ index }) => {
             const photo = photos[index];
