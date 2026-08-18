@@ -1,3 +1,9 @@
+## [1.148.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.147.0...v1.148.0) (2026-08-18)
+
+### ✨ Features
+
+* implement SectionsProviderForced and update components to use forced sections; add DashboardMostRecent component ([536cb54](https://github.com/travel-albums-ai/travel-albums/commit/536cb5481543526c06441a69c7097e99f84dcf0c))
+
 ## [1.147.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.146.0...v1.147.0) (2026-08-18)
 
 ### ✨ Features
