@@ -1,6 +1,6 @@
-import { draculaDarkTheme, draculaLightTheme } from '@/themes/dracula';
 import { barbieDarkTheme, barbieLightTheme } from './barbie';
 import { defaultDarkTheme, defaultLightTheme } from './default';
+import { draculaDarkTheme, draculaLightTheme } from './dracula';
 import { monokaiDarkTheme, monokaiLightTheme } from './monokai';
 import { solarizedDarkTheme, solarizedLightTheme } from './solarized';
 
