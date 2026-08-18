@@ -21,10 +21,10 @@ export default function NoPhotos() {
         src="./logo_new_240.webp"
         alt="Logo"
         width={120}
-        height={98}
-        fetchpriority="high"
+        height={93}
+        fetchPriority="high"
         style={{
-          aspectRatio: '1/1',
+          aspectRatio: '40/31',
           opacity: 0.3,
           filter: 'grayscale(100%)',
         }}
