@@ -1,3 +1,9 @@
+## [1.187.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.186.0...v1.187.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor Header component layout and integrate GeneralRegistryToolbar within Box ([61800e4](https://github.com/travel-albums-ai/travel-albums/commit/61800e49ad7bf704c1bad5aceadf074002bf0d62))
+
 ## [1.186.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.185.0...v1.186.0) (2026-08-18)
 
 ### ✨ Features
