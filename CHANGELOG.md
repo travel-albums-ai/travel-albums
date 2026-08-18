@@ -1,3 +1,9 @@
+## [1.190.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.189.0...v1.190.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance NoPhotos component with loading, empty, and error states ([9bf6ae5](https://github.com/travel-albums-ai/travel-albums/commit/9bf6ae58d6abab5cfe463f250f6804c699132519))
+
 ## [1.189.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.188.0...v1.189.0) (2026-08-18)
 
 ### ✨ Features
