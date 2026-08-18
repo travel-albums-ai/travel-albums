@@ -1,3 +1,9 @@
+## [1.149.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.148.0...v1.149.0) (2026-08-18)
+
+### ✨ Features
+
+* update labels in DomCountStatus and VersionStatus components; enable overflow in GeneralRegistryToolbar; toggle foo in DashboardDrawer ([01b6aad](https://github.com/travel-albums-ai/travel-albums/commit/01b6aadf8784e9ee0c4759b5ae40cfb15a447419))
+
 ## [1.148.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.147.0...v1.148.0) (2026-08-18)
 
 ### ✨ Features
