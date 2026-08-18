@@ -9,23 +9,33 @@ type WorkerMsg =
   | { type: 'INIT_PHOTOS'; payload: GalleryPhoto[] }
   | { type: 'UPDATE_FILTERS'; payload: any };
 
+type WorkerResult = {
+  generation: number;
+  indices: Uint32Array;
+};
+
 export const useFilter_AllPhotos = (enabled = true) => {
   const rawPhotos = useUnfilteredPhotos_GLOBAL();
   const settings = useFilterStoreSelector(s => s);
   const privatePhotos = usePrivateStoreSelector(s => s.photos);
   const ignoredPhotos = useIgnoredStoreSelector(s => s.photos);
 
-  const [indices, setIndices] = useState<Uint32Array>(new Uint32Array(0));
-  const workerRef = useRef<Worker | null>(null);
-  const photosInitializedRef = useRef(false);
+  const [indices, setIndices] = useState<Uint32Array>(
+    new Uint32Array(0)
+  );
 
-  // The photo array the worker's indices are valid against. Only updated
-  // when we actually INIT_PHOTOS, so index-mapping below always lines up
-  // with what the worker computed against — even if rawPhotos identity
-  // changes later without a re-init (see note below).
+  const workerRef = useRef<Worker | null>(null);
+
+  // The exact photo array the worker's indices refer to.
   const indexedPhotosRef = useRef<GalleryPhoto[]>([]);
 
-  // init worker once
+  // Changes every time we INIT_PHOTOS.
+  const generationRef = useRef(0);
+
+  // ------------------------------------------------------------
+  // Worker lifecycle
+  // ------------------------------------------------------------
+
   useEffect(() => {
     const worker = new Worker(
       new URL('./allPhotosFilter.worker.ts', import.meta.url),
@@ -38,34 +48,60 @@ export const useFilter_AllPhotos = (enabled = true) => {
 
     workerRef.current = worker;
 
-    return () => worker.terminate();
+    return () => {
+      worker.terminate();
+      workerRef.current = null;
+    };
   }, []);
 
-  // init photos ONCE
-  // NOTE: if rawPhotos can ever change identity after first load (e.g. a
-  // later streaming batch appends more photos), this needs to re-fire and
-  // re-INIT_PHOTOS, or indices returned here will silently map against a
-  // stale array. Currently assumes rawPhotos is loaded once and is stable.
-  useEffect(() => {
-    if (!rawPhotos || photosInitializedRef.current) return;
+  // ------------------------------------------------------------
+  // RAW PHOTOS
+  //
+  // rawPhotos is allowed to change.
+  // Every new array becomes the worker's new source of truth.
+  // ------------------------------------------------------------
 
-    workerRef.current?.postMessage({
+  useEffect(() => {
+    if (!rawPhotos) {
+      indexedPhotosRef.current = [];
+      setIndices(new Uint32Array(0));
+      return;
+    }
+
+    const worker = workerRef.current;
+    if (!worker) return;
+
+    const generation = ++generationRef.current;
+
+    // IMPORTANT:
+    // Update this BEFORE sending INIT_PHOTOS so that any result
+    // produced for this generation maps against this exact array.
+    indexedPhotosRef.current = rawPhotos;
+
+    // Clear the old result immediately.
+    setIndices(new Uint32Array(0));
+
+    worker.postMessage({
       type: 'INIT_PHOTOS',
       payload: rawPhotos,
     } satisfies WorkerMsg);
 
-    indexedPhotosRef.current = rawPhotos;
-    photosInitializedRef.current = true;
   }, [rawPhotos]);
 
-  // update filters only
+  // ------------------------------------------------------------
+  // FILTERS
+  // ------------------------------------------------------------
+
   useEffect(() => {
     if (!enabled) {
       setIndices(new Uint32Array(0));
       return;
     }
 
-    workerRef.current?.postMessage({
+    const worker = workerRef.current;
+    if (!worker) return;
+
+    worker.postMessage({
       type: 'UPDATE_FILTERS',
       payload: {
         settings,
@@ -73,17 +109,26 @@ export const useFilter_AllPhotos = (enabled = true) => {
         ignoredPhotos,
       },
     } satisfies WorkerMsg);
-  }, [enabled, settings, privatePhotos, ignoredPhotos]);
+  }, [
+    enabled,
+    settings,
+    privatePhotos,
+    ignoredPhotos,
+  ]);
 
-  // Map indices -> photo objects lazily, only when the worker actually
-  // produces a new result. This is the one place we pay for object
-  // references again, and it's a cheap array walk, not a structured clone.
+  // ------------------------------------------------------------
+  // MAP INDICES -> PHOTOS
+  // ------------------------------------------------------------
+
   const result = useMemo(() => {
     const photos = indexedPhotosRef.current;
+
     const out = new Array<GalleryPhoto>(indices.length);
+
     for (let i = 0; i < indices.length; i++) {
       out[i] = photos[indices[i]];
     }
+
     return out;
   }, [indices]);
 
