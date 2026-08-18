@@ -39,7 +39,7 @@ export const themeTokens = {
       body1: { fontSize: '1rem' },
       body2: { fontSize: '0.875rem' },
     },
-    shape: { borderRadius: 12 },
+    shape: { borderRadius: 8 },
     spacing: 8,
   } as ThemeOptions,
 }
