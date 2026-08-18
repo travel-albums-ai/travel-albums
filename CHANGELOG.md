@@ -1,3 +1,9 @@
+## [1.175.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.174.0...v1.175.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor IndexerSettings component for improved state management and UI structure ([666e546](https://github.com/travel-albums-ai/travel-albums/commit/666e5462670785d778a51d1d65795392256f611c))
+
 ## [1.174.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.173.0...v1.174.0) (2026-08-18)
 
 ### ✨ Features
