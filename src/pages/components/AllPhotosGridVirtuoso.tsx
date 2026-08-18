@@ -11,7 +11,7 @@ type Props = {
   photos: GalleryPhoto[];
 };
 
-const GRID_STYLE = { height: '100%', overflowX: 'visible' } as const;
+const GRID_STYLE = { height: '100%', overflowX: 'visible', borderRadius: '8px' } as const;
 const CARD_STYLE = { gridColumn: 'span 1', gridRow: 'span 1' } as const;
 
 const GridList = ({ style, children, width, gap, ...props }: any) => {

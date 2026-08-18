@@ -283,3 +283,7 @@ a {
 .flexlayout__theme_alpha_dark .flexlayout__tabset_tab_spacer {
   width: 0px;
 }
+
+.flexlayout__tabset, .flexlayout__tabset-selected {
+  background-color: transparent;
+}

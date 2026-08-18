@@ -52,7 +52,10 @@ export default function GenericToggleButton({
         <ToggleButton
           style={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 2, border: 0 }}
           sx={variant === 'outlined'
-            ? { borderRadius: 2, boxShadow: theme => `inset 0px 0px 0px 1px ${theme.palette.divider}` }
+            ? {
+              borderRadius: 2,
+              boxShadow: theme => `inset 0px 0px 0px 1px ${theme.palette.divider}`
+            }
             : {
               borderRadius: 2,
             }}

@@ -65,14 +65,14 @@ export default function GenericPanel({
 const wrapperSx = {
   display: 'flex',
   alignItems: 'center',
-  boxShadow: 2,
+  // boxShadow: 2,
   m: 0.75,
   mb: 0.5,
   borderRadius: 2,
   bgcolor: 'background.default',
   justifyContent: 'space-between',
   py: 0.75,
-  px: 1
+  px: 0.75
 }
 
 const boxSx = {

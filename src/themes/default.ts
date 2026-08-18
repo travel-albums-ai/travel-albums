@@ -38,6 +38,54 @@ export const defaultThemeTokens = {
   } as ThemeOptions,
 }
 
+export const clownThemeTokens = {
+  light: {
+    palette: {
+      mode: 'light',
+      primary: { main: 'red' },
+      secondary: { main: 'blue' },
+      background: { default: 'yellow', paper: 'green' },
+    },
+    shape: {
+      borderRadius: 4,
+    },
+    typography: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      button: {
+        textTransform: 'none',
+      }
+    },
+  } as ThemeOptions,
+  dark: {
+    palette: {
+      mode: 'light',
+      primary: { main: '#FF0000' },
+      secondary: { main: '#0000FF' },
+      background: {
+        default: '#5f5f0b',
+        paper: '#285e28',
+      },
+      text: {
+        primary: '#2b882b',
+        secondary: '#6c8a32',
+        disabled: '#1010be',
+      },
+      divider: '#a30f0f',
+      main: '#c01cc0',
+    },
+    shape: {
+      borderRadius: 0,
+    },
+    typography: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      button: {
+        textTransform: 'none',
+      }
+    },
+  } as ThemeOptions,
+}
+
+
 export const generateTheme = (tokens) => createTheme({
   ...tokens,
 
