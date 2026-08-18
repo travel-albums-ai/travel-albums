@@ -5,85 +5,40 @@ import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Box, Button, Typography } from '@mui/material';
 import {
+  BoxIcon,
   Bug,
-  ChevronLast,
-  CircleCheckBig,
-  Cpu,
-  Gauge,
+  Check,
   History,
-  Hourglass,
-  List,
+  Search
 } from 'lucide-react';
-import { useState } from 'react';
 
 const items = [
   {
-    key: 'processed',
-    label: 'Processed',
-    icon: <Cpu size={24} />,
+    key: 'done',
+    label: 'Done',
+    icon: <Check size={24} />,
   },
   {
-    key: 'total',
+    key: 'preindexed',
+    label: 'Pre-indexed',
+    icon: <History size={24} />,
+  },
+  {
+    key: 'totalFiles',
     label: 'Total',
-    icon: <List size={24} />,
+    icon: <BoxIcon size={24} />,
   },
   {
-    key: 'generated',
-    label: 'Generated',
-    icon: <CircleCheckBig size={24} />,
-  },
-  {
-    key: 'skipped',
-    label: 'Remaining',
-    icon: <ChevronLast size={24} />,
+    key: 'totalFound',
+    label: 'Discovered',
+    icon: <Search size={24} />,
   },
   {
     key: 'failed',
     label: 'Failed',
     icon: <Bug size={24} />,
   },
-  {
-    key: 'img/s',
-    label: 'Rate (img/s)',
-    icon: <Gauge size={24} />,
-  },
-  {
-    key: 'ETA',
-    label: 'ETA (min)',
-    format: (value: string) => Math.round(Number(value) / 1000 / 60) + 'm',
-    icon: <Hourglass size={24} />,
-  },
 ];
-
-function formatElapsed(startedAt: number): string {
-  const seconds = Math.floor((Date.now() - startedAt) / 1000);
-
-  if (seconds < 60) {
-    return 'just now';
-  }
-
-  const minutes = Math.floor(seconds / 60);
-
-  if (minutes < 60) {
-    return `${minutes} min ago`;
-  }
-
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-
-  if (hours < 24) {
-    return remainingMinutes
-      ? `${hours}h ${remainingMinutes}m ago`
-      : `${hours}h ago`;
-  }
-
-  const days = Math.floor(hours / 24);
-  const remainingHours = hours % 24;
-
-  return remainingHours
-    ? `${days}d ${remainingHours}h ago`
-    : `${days}d ago`;
-}
 
 export default function IndexerContent() {
   const { setSetting } = useSettings();
@@ -94,18 +49,15 @@ export default function IndexerContent() {
   const { turnOnJob } = useFetch_IndexerOn();
   const { turnOffJob } = useFetch_IndexerOff();
 
-  const [startedAt, setStartedAt] = useState<number | null>(null);
-
   const handleTurnOn = async () => {
     try {
       await turnOnJob();
-
-      setStartedAt(Date.now());
 
       setSetting((prev) => ({
         ...prev,
         indexing: true,
         loading: true,
+        indexerStartedAt: Date.now(),
       }));
       forceRefresh()
     } catch (err) {
@@ -117,12 +69,11 @@ export default function IndexerContent() {
     try {
       await turnOffJob();
 
-      setStartedAt(null);
-
       setSetting((prev) => ({
         ...prev,
         indexing: false,
         loading: false,
+        indexerStartedAt: null,
       }));
     } catch (err) {
       console.error(err);
@@ -149,21 +100,6 @@ export default function IndexerContent() {
         >
           Off
         </Button>
-
-        {indexing && startedAt && (
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              ml: 1,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Indexing since {formatElapsed(startedAt)} {startedAt && `(${new Date(startedAt).toLocaleTimeString()})`}
-          </Typography>
-        )}
 
         <Box
           sx={{
@@ -200,7 +136,7 @@ export default function IndexerContent() {
               <IndexerMetricCard
                 line={`${key}: ${value}`}
                 object={{
-                  icon: <History size={16} />,
+                  icon: items.find((item) => item.key === key)?.icon,
                   label: key,
                 }}
                 showChart

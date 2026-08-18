@@ -1,55 +1,8 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
-import {
-    Bug,
-    ChevronLast,
-    CircleCheckBig,
-    Cpu,
-    Gauge,
-    Hourglass,
-    List
-} from 'lucide-react';
+import { Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-
-const items = [
-  {
-    key: 'processed',
-    label: 'Processed',
-    icon: <Cpu size={24} />,
-  },
-  {
-    key: 'total',
-    label: 'Total',
-    icon: <List size={24} />,
-  },
-  {
-    key: 'generated',
-    label: 'Generated',
-    icon: <CircleCheckBig size={24} />,
-  },
-  {
-    key: 'skipped',
-    label: 'Remaining',
-    icon: <ChevronLast size={24} />,
-  },
-  {
-    key: 'failed',
-    label: 'Failed',
-    icon: <Bug size={24} />,
-  },
-  {
-    key: 'img/s',
-    label: 'Rate (img/s)',
-    icon: <Gauge size={24} />,
-  },
-  {
-    key: 'ETA',
-    label: 'ETA (min)',
-    format: (value: string) => Math.round(Number(value) / 1000 / 60) + 'm',
-    icon: <Hourglass size={24} />,
-  },
-];
 
 function formatElapsed(startedAt: number): string {
   const seconds = Math.floor((Date.now() - startedAt) / 1000);
@@ -86,6 +39,8 @@ export default function IndexerRefresh() {
   const indexing = useSettingsStoreSelector((state) => state.indexing);
   const { forceRefresh } = useFetch_TakeoutMetadata();
   const { fetchStatus } = useFetch_IndexerStatus();
+  const indexerStartedAt = useSettingsStoreSelector((state) => state.indexerStartedAt);
+  const indexerProgress = useSettingsStoreSelector((state) => state.indexerProgress);
 
   const [, setElapsedTick] = useState(0);
 
@@ -132,5 +87,11 @@ export default function IndexerRefresh() {
     };
   }, [indexing, forceRefresh]);
 
-  return null
+  return <>
+    {indexerStartedAt !== null && <>
+      <Typography variant="caption" color="primary" sx={{ lineHeight: 1 }}>
+        {formatElapsed(indexerStartedAt)} {indexerStartedAt && `(${new Date(indexerStartedAt).toLocaleTimeString()})`} | {indexerProgress.done} indexed
+      </Typography>
+    </>}
+  </>
 }
