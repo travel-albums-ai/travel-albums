@@ -1,7 +1,7 @@
 import IndexerContent from '@/components/IndexerContent';
 import IndexerSettings from '@/components/IndexerSettings';
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
-import usePost_Config from '@/hooks/usePost_Config';
+import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { DatabaseSearch } from 'lucide-react';
 import { useState } from 'react';

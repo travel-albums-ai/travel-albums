@@ -45,7 +45,7 @@ graph TD
 
 - `useLocalStorage.ts` — small, deterministic helpers that mirror state to `localStorage`. Keep them pure where possible; only the persistence side-effect is allowed.
 - `useChatGptAnswer.ts` — wrapper around the ChatGPT call flow; should expose loading / error / result and handle cancellation on unmount.
-- `usePost_Config.ts`, `usePost_ScriptsGenerateThumbnails.ts` — trigger server-side operations and return job metadata and progress hooks.
+- `useFetch_PostConfig.ts`, `usePost_ScriptsGenerateThumbnails.ts` — trigger server-side operations and return job metadata and progress hooks.
 - `useRelevantAlbumsByProximity.ts` — derive album lists from location metadata; pure computation with memoization.
 - `useTransform_*` files — convert data shapes (photos → thumbnails, photos → EXIF) and return stable references to avoid rerenders.
 

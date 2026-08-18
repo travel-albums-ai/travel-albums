@@ -1,5 +1,5 @@
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
-import usePost_Config from '@/hooks/usePost_Config';
+import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsSection from '@/windows/components/SettingsSection';
 import SettingsGeneralRow from '@/windows/settings/components/SettingsGeneralRow';
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
