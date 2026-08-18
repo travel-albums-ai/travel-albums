@@ -1,3 +1,9 @@
+## [1.156.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.155.0...v1.156.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance border radius styling and remove unused clown theme ([d94ac04](https://github.com/travel-albums-ai/travel-albums/commit/d94ac044f7d268274811a644be8909ac997cb8fb))
+
 ## [1.155.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.154.0...v1.155.0) (2026-08-18)
 
 ### ✨ Features
