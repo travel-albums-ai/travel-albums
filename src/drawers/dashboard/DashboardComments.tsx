@@ -1,13 +1,12 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
-import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
-import workerFilterByKey from '@/hooks/sections/workers/filterByKey.worker';
+import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { MessageCircle } from 'lucide-react';
 
 export default function DashboardComments() {
-  const photos = useFilteredPhotos_GLOBAL();
-  const sectionPhotos = workerFilterByKey(photos, 'comments')
+  const sectionsForced = useSections_GLOBAL_Forced();
+  const sectionPhotos = sectionsForced.find(s => s.type === 'comments')?.data
 
   return (
     <SettingsSection title="Comments" icon={<MessageCircle />}  >

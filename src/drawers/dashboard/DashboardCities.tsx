@@ -1,14 +1,13 @@
-import { useFilteredGpsPhotos_GLOBAL } from '@/context/globals/filteredGpsPhotosStore';
+import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import DashboardCitiesItem from '@/drawers/dashboard/DashboardCitiesItem';
-import citiesWorker from '@/hooks/sections/workers/cities.worker';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { Box } from '@mui/material';
 import { Globe } from 'lucide-react';
 import { useMemo } from 'react';
 
 export default function DashboardCities() {
-  const photosGps = useFilteredGpsPhotos_GLOBAL();
-  const sectionPhotos = citiesWorker(photosGps);
+  const sectionsForced = useSections_GLOBAL_Forced();
+  const sectionPhotos = sectionsForced.find(s => s.type === 'cities')?.data
 
   const groupByAvatar = useMemo(() => {
     const groups = new Map<string, typeof sectionPhotos>();

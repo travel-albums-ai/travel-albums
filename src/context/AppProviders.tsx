@@ -5,6 +5,7 @@ import { FilterPresetProvider } from '@/context/filterPresetStore';
 import { FilteredGpsPhotosProvider } from '@/context/globals/filteredGpsPhotosStore';
 import { FilteredPhotosProvider } from '@/context/globals/filteredPhotosStore';
 import { SectionsProvider } from '@/context/globals/sectionsStore';
+import { SectionsProviderForced } from '@/context/globals/sectionsStoreForced';
 import { UnfilteredPhotosProvider } from '@/context/globals/unfilteredPhotosStore';
 import { LayoutProvider } from '@/context/layoutStore';
 import { NegativeProvider } from '@/context/negativeStore';
@@ -50,7 +51,9 @@ export default function AppProviders({ children }: Props) {
                                             <FilteredPhotosProvider>
                                               <FilteredGpsPhotosProvider>
                                                 <SectionsProvider>
-                                                  {children}
+                                                  <SectionsProviderForced>
+                                                    {children}
+                                                  </SectionsProviderForced>
                                                 </SectionsProvider>
                                               </FilteredGpsPhotosProvider>
                                             </FilteredPhotosProvider>

@@ -6,26 +6,33 @@ import DashboardCountriesMap from '@/drawers/dashboard/DashboardCountriesMap';
 import DashboardFriends from '@/drawers/dashboard/DashboardFriends';
 import DashboardLikes from '@/drawers/dashboard/DashboardLikes';
 import DashboardMetrics from '@/drawers/dashboard/DashboardMetrics';
+import DashboardMostRecent from '@/drawers/dashboard/DashboardMostRecent';
 import DashboardSuggestions from '@/drawers/dashboard/DashboardSuggestions';
 import DashboardViews from '@/drawers/dashboard/DashboardViews';
 import { Box, Typography } from '@mui/material';
+
+const foo = false
 
 export default function DashboardDrawer() {
 
   return (
     <GenericPanel id="dashboard-drawer">
       <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 2}}>
-        {true && <Box sx={{ borderBottom: '1px dotted', my: 16, borderColor: 'divider', p: 2, display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
+        {foo && <Box sx={{ borderBottom: '1px dotted', my: 16, borderColor: 'divider', p: 2, display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
           <Typography color="textPrimary" sx={{ textAlign: 'center', py: 8 }} variant="h5">Welcome to Travel-Albums</Typography>
           <DashboardSuggestions />
         </Box>}
 
         <Box sx={{
+          display: 'grid',
           width: '1400px',
+          gridTemplateColumns: 'repeat(1, 1fr)',
           gap: 2,
         }}
         >
+
           <DashboardMetrics />
+          <DashboardMostRecent />
         </Box>
 
         <Box sx={{

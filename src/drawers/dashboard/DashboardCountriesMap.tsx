@@ -1,5 +1,4 @@
-import { useFilteredGpsPhotos_GLOBAL } from '@/context/globals/filteredGpsPhotosStore';
-import countriesWorker from '@/hooks/sections/workers/countries.worker';
+import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { Box } from '@mui/material';
 import L from 'leaflet';
@@ -8,8 +7,8 @@ import { Globe } from 'lucide-react';
 import { useEffect, useMemo, useRef } from 'react';
 
 export default function DashboardCountriesMap() {
-  const photosGps = useFilteredGpsPhotos_GLOBAL();
-  const sectionPhotos = countriesWorker(photosGps);
+  const sectionsForced = useSections_GLOBAL_Forced();
+  const sectionPhotos = sectionsForced.find(s => s.type === 'countries')?.data
 
   const mapElementRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);

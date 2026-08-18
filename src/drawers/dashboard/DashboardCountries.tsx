@@ -1,7 +1,6 @@
 import SolidChip from '@/components/SolidChip';
-import { useFilteredGpsPhotos_GLOBAL } from '@/context/globals/filteredGpsPhotosStore';
+import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import DashboardPreviewImages from '@/drawers/dashboard/DashboardPreviewImages';
-import countriesWorker from '@/hooks/sections/workers/countries.worker';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { Globe } from 'lucide-react';
@@ -9,11 +8,11 @@ import { Globe } from 'lucide-react';
 const size = 60;
 
 export default function DashboardCountries() {
-  const photosGps = useFilteredGpsPhotos_GLOBAL();
-  const sectionPhotos = countriesWorker(photosGps)
+  const sectionsForced = useSections_GLOBAL_Forced();
+  const sectionPhotos = sectionsForced.find(s => s.type === 'countries')?.data
 
   return (
-    <SettingsSection title="Countries" icon={<Globe />} guidance={`Total: ${sectionPhotos.length}`} gap={1} divider={false}>
+    <SettingsSection title="Countries" icon={<Globe />} guidance={`Total: ${sectionPhotos?.length ?? 0}`} gap={1} divider={false}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',

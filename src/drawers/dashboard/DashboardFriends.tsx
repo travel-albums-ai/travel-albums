@@ -1,16 +1,15 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
-import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
-import peopleAndPetsWorker from '@/hooks/sections/workers/peopleGrouping.worker';
+import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { PersonStanding } from 'lucide-react';
 
 export default function DashboardFriends() {
-  const photos = useFilteredPhotos_GLOBAL();
-  const sectionPhotos = peopleAndPetsWorker(photos)
+  const sectionsForced = useSections_GLOBAL_Forced();
+  const sectionPhotos = sectionsForced.find(s => s.type === 'peopleAndPets')?.data
 
   return (
-    <SettingsSection title="Friends" icon={<PersonStanding />} >
+    <SettingsSection title="Friends" icon={<PersonStanding />} guidance={`${sectionPhotos?.length || 0} friends`} >
       <Box sx={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',

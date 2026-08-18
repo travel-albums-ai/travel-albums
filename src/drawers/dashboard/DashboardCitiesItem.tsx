@@ -4,8 +4,7 @@ import SettingsSection from '@/windows/components/SettingsSection';
 import { Box, Stack, Typography } from '@mui/material';
 import { useInView } from 'react-intersection-observer';
 
-export default function DashboardCitiesItem({ avatar, cities }) {
-
+export default function DashboardCitiesItem({ avatar, cities } : { avatar: string, cities: { name: string, photos: any[] }[] }) {
   const limit = 100
 
   let citiesWithPreview = cities?.sort((a, b) => b.photos.length - a.photos.length)

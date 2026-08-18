@@ -25,14 +25,14 @@ export interface SectionItem {
   details: string[];
 }
 
-export function useTransform_AllSections(): Section[] {
+export function useTransform_AllSections(forced = false): Section[] {
   const sortBy = useSidebarStoreSelector(s => s.sortBy);
   const sortAsc = useSidebarStoreSelector(s => s.sortAsc);
   const term = useSettingsStoreSelector(s => s.sidebarTerm)
     .trim()
     .toLowerCase();
 
-  const filteredSections = useFilteredSections();
+  const filteredSections = useFilteredSections(forced);
 
   return useMemo(() => {
     let result = filteredSections;

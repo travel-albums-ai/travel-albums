@@ -40,7 +40,7 @@ export interface Section {
   cover?: SectionCover
 }
 
-export function useFilteredSections(): Section[] {
+export function useFilteredSections(forced = false): Section[] {
   const { t } = useTranslation()
 
   const photos = useFilteredPhotos_GLOBAL();
@@ -61,15 +61,15 @@ export function useFilteredSections(): Section[] {
   const hasData = !!photos && !!rawPhotos && !!photosGps
     && photos.length > 0 && rawPhotos.length > 0 && photosGps.length > 0;
 
-  const peopleAndPetsData = useMemo(() => (hasData && modules.peopleAndPets && sidebarOpen.peopleAndPets) ? peopleAndPetsWorker(photos) : [], [hasData, modules.peopleAndPets, photos, sidebarOpen.peopleAndPets]);
+  const peopleAndPetsData = useMemo(() => (hasData && modules.peopleAndPets && (forced || sidebarOpen.peopleAndPets)) ? peopleAndPetsWorker(photos) : [], [hasData, modules.peopleAndPets, photos, forced, sidebarOpen.peopleAndPets]);
   const nowAndThenData = useMemo(() => (hasData && modules.nowAndThen && sidebarOpen.nowAndThen) ? nowAndThenWorker(photos) : [], [hasData, modules.nowAndThen, photos, sidebarOpen.nowAndThen]);
   const foldersData = useMemo(() => (hasData && modules.folders && sidebarOpen.folders) ? albumsWorker(photos, sortOrder) : [], [hasData, modules.folders, photos, sortOrder, sidebarOpen.folders]);
-  const citiesData = useMemo(() => (hasData && modules.cities && sidebarOpen.cities) ? citiesWorker(photosGps) : [], [hasData, modules.cities, photosGps, sidebarOpen.cities]);
-  const countriesData = useMemo(() => (hasData && modules.countries && sidebarOpen.countries) ? countriesWorker(photosGps) : [], [hasData, modules.countries, photosGps, sidebarOpen.countries]);
-  const viewedData = useMemo(() => (hasData && modules.views && sidebarOpen.views) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.views]);
+  const citiesData = useMemo(() => (hasData && modules.cities && (forced || sidebarOpen.cities)) ? citiesWorker(photosGps) : [], [hasData, modules.cities, photosGps, forced, sidebarOpen.cities]);
+  const countriesData = useMemo(() => (hasData && modules.countries && (forced || sidebarOpen.countries)) ? countriesWorker(photosGps) : [], [hasData, modules.countries, photosGps, sidebarOpen.countries]);
+  const viewedData = useMemo(() => (hasData && modules.views && (forced || sidebarOpen.views)) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.views]);
   const timelineData = useMemo(() => (hasData && modules.timeline && sidebarOpen.timeline) ? timelineWorker(photos) : [], [hasData, modules.timeline, photos, sidebarOpen.timeline]);
-  const mostLikedData = useMemo(() => (hasData && modules.likes && sidebarOpen.likes) ? workerFilterByKey(photos, 'likes') : [], [hasData, modules.likes, photos, sidebarOpen.likes]);
-  const mostCommentedData = useMemo(() => (hasData && modules.comments && sidebarOpen.comments) ? workerFilterByKey(photos, 'comments') : [], [hasData, modules.comments, photos, sidebarOpen.comments]);
+  const mostLikedData = useMemo(() => (hasData && modules.likes && (forced || sidebarOpen.likes)) ? workerFilterByKey(photos, 'likes') : [], [hasData, modules.likes, photos, forced, sidebarOpen.likes]);
+  const mostCommentedData = useMemo(() => (hasData && modules.comments && (forced || sidebarOpen.comments)) ? workerFilterByKey(photos, 'comments') : [], [hasData, modules.comments, photos, forced, sidebarOpen.comments]);
   const favoritesData = useMemo(() => (hasData && modules.favorites && sidebarOpen.favorites) ? grouperWorker(photos, favoritePhotoIds, 'Your favorites') : [], [hasData, modules.favorites, photos, favoritePhotoIds, sidebarOpen.favorites]);
   const tagsData = useMemo(() => (hasData && modules.tags && sidebarOpen.tags) ? tagsWorker(photos, tagsStore) : [], [hasData, modules.tags, photos, tagsStore, sidebarOpen.tags]);
   const labelsData = useMemo(() => (hasData && modules.labels && sidebarOpen.labels) ? labelsWorker(photos, labelsPrimary) : [], [hasData, modules.labels, photos, labelsPrimary, sidebarOpen.labels]);
