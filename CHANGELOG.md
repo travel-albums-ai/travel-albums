@@ -1,3 +1,9 @@
+## [1.172.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.171.0...v1.172.0) (2026-08-18)
+
+### ✨ Features
+
+* **onboarding:** add onboarding components for folder configuration and indexer setup ([22e65ba](https://github.com/travel-albums-ai/travel-albums/commit/22e65ba86af8bbea9131fc19b8cdf18634f70b7e))
+
 ## [1.171.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.170.0...v1.171.0) (2026-08-18)
 
 ### ✨ Features
