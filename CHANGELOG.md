@@ -1,3 +1,9 @@
+## [1.183.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.182.1...v1.183.0) (2026-08-18)
+
+### ✨ Features
+
+* add service worker support with Workbox ([97e34b5](https://github.com/travel-albums-ai/travel-albums/commit/97e34b5f053df25bd8792bda2c23fd6034e95226))
+
 ## [1.182.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.182.0...v1.182.1) (2026-08-18)
 
 ### 🐛 Fixes
