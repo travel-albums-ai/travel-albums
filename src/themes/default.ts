@@ -38,6 +38,49 @@ export const defaultThemeTokens = {
   } as ThemeOptions,
 }
 
+export const clownThemeTokens = {
+  light: {
+    palette: {
+      mode: 'light',
+      primary: { main: 'red' },
+      secondary: { main: 'blue' },
+      background: { default: 'yellow', paper: 'green' },
+    },
+    shape: {
+      borderRadius: 4,
+    },
+    typography: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      button: {
+        textTransform: 'none',
+      }
+    },
+  } as ThemeOptions,
+  dark: {
+    palette: {
+      mode: 'light',
+      primary: { main: '#FF0000' },
+      secondary: { main: '#0000FF' },
+      background: { default: '#FFFF00', paper: '#00FF00' },
+      text: {
+        primary: '#99FF99',
+        secondary: '#AABB88',
+        disabled: '#4848FF',
+      },
+      divider: '#FF0000 ',
+    },
+    shape: {
+      borderRadius: 4,
+    },
+    typography: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      button: {
+        textTransform: 'none',
+      }
+    },
+  } as ThemeOptions,
+}
+
 
 export const generateTheme = (tokens) => createTheme({
   ...tokens,
@@ -93,17 +136,11 @@ export const generateTheme = (tokens) => createTheme({
           maxHeight: '75vh',
           padding: theme.spacing(2),
           overflowY: 'auto',
-          // overflow: 'visible',
           borderRadius: Number(theme.shape.borderRadius) * 4,
           backgroundColor: `${theme.palette.background.default}BD`,
           backdropFilter: 'blur(4px)',
           border: `2px solid ${theme.palette.divider}`,
           boxShadow: theme.shadows[24],
-          // background: 'transparent',
-          // backgroundImage: 'none',
-          // borderRadius: 8,
-          // boxShadow: '0px 0px 12px 4px rgba(0, 0, 0, 0.5)',
-          // overflow: 'hidden',
         }),
         backdrop: {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -176,4 +213,4 @@ export const generateTheme = (tokens) => createTheme({
 
 export const defaultLightTheme = generateTheme(defaultThemeTokens.light);
 
-export const defaultDarkTheme = generateTheme(defaultThemeTokens.dark);
+export const defaultDarkTheme = generateTheme(clownThemeTokens.dark);
