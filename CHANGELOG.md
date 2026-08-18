@@ -1,3 +1,9 @@
+## [1.163.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.162.0...v1.163.0) (2026-08-18)
+
+### ✨ Features
+
+* add dracula theme and integrate color library for enhanced theming options ([323f84a](https://github.com/travel-albums-ai/travel-albums/commit/323f84ab97c3806a3e10291d3c92080e81333d41))
+
 ## [1.162.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.161.0...v1.162.0) (2026-08-18)
 
 ### ✨ Features
