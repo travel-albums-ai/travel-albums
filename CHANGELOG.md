@@ -1,3 +1,9 @@
+## [1.179.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.178.0...v1.179.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor onboarding components to improve structure and add new phases ([d7d9e82](https://github.com/travel-albums-ai/travel-albums/commit/d7d9e827a9ea11dbd74213ce405935b6f4372628))
+
 ## [1.178.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.177.0...v1.178.0) (2026-08-18)
 
 ### ✨ Features
