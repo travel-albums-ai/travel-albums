@@ -21,13 +21,14 @@ interface GeneralRegistryToolbarProps {
   fullWidth?: boolean;
   sx?: SxProps<Theme>;
   context?: unknown;
+  noGhost?: boolean;
 }
 
 function getToolConfig(item: ToolMeta, side: 'left' | 'right') {
   return item.tool?.find((g) => g.side === side);
 }
 
-export default function GeneralRegistryToolbar({ group, noDivider = true, fullWidth = true, sx, context }: GeneralRegistryToolbarProps) {
+export default function GeneralRegistryToolbar({ group, noDivider = true, fullWidth = true, sx, context, noGhost = false }: GeneralRegistryToolbarProps) {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [retryToken, setRetryToken] = useState(0);
@@ -88,9 +89,11 @@ export default function GeneralRegistryToolbar({ group, noDivider = true, fullWi
       );
     }
 
-    return <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx, }}>
-      <Skeleton variant="rounded" width="100%" animation="wave" height={38} />
-    </Box>;
+    return !noGhost ? (
+      <Box sx={{ ...wrapperSx, minHeight: '38px', width: fullWidth ? '100%' : 'auto', ...sx, }}>
+        <Skeleton variant="rounded" width="100%" animation="wave" height={38} />
+      </Box>
+    ) : null;
   }
 
   const leftItems = toolRegistry

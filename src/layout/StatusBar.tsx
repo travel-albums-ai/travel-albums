@@ -25,6 +25,7 @@ export default function StatusBar() {
       <LoadingBar />
 
       <GeneralRegistryToolbar
+        noGhost
         noDivider={false}
         group="status-bar"
         context={{ selectedPhotos }}
