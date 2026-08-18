@@ -98,13 +98,17 @@ export function ThemeContextProvider({ children }: Props) {
           styles={(theme) => ({
             ':root': {
               '--text': theme.palette.text.primary,
+              '--text-secondary': theme.palette.text.secondary,
+              '--text-disabled': theme.palette.text.disabled,
               '--text-h': theme.palette.text.primary,
               '--text-muted': theme.palette.text.secondary,
               '--accent': theme.palette.primary.main,
               '--border': theme.palette.divider,
               '--bg-soft': alpha(theme.palette.background.paper, 0.88),
+              '--bg-drawer': theme.palette.background.drawer,
               '--bg-paper': theme.palette.background.paper,
               '--bg-default': theme.palette.background.default,
+              '--border-radius': `${theme.shape.borderRadius}px`,
             },
 
             body: {

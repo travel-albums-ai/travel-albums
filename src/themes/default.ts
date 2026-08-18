@@ -61,7 +61,11 @@ export const clownThemeTokens = {
       mode: 'light',
       primary: { main: '#FF0000' },
       secondary: { main: '#0000FF' },
-      background: { default: '#5f5f0b', paper: '#285e28' },
+      background: {
+        default: '#5f5f0b',
+        paper: '#285e28',
+        drawer: '#c01cc0',
+      },
       text: {
         primary: '#2b882b',
         secondary: '#6c8a32',
@@ -70,7 +74,7 @@ export const clownThemeTokens = {
       divider: '#a30f0f',
     },
     shape: {
-      borderRadius: 4,
+      borderRadius: 0,
     },
     typography: {
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',

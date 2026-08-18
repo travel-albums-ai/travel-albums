@@ -250,3 +250,19 @@ a {
 .flexlayout__theme_alpha_dark .flexlayout__border_tab_contents, .flexlayout__border_tab_contents {
   background-color: var(--bg-default);
 }
+
+.flexlayout__border_button--unselected {
+  background-color: var(--bg-paper);
+  color: var(--text)
+}
+
+.flexlayout__border_button--selected, .flexlayout__theme_alpha_dark .flexlayout__border_button, .flexlayout__tab_button--selected {
+  background-color: var(--bg-default);
+  color: var(--text);
+  border-radius: var(--border-radius);
+}
+
+.flexlayout__tab_button--unselected {
+  /* background-color: var(--bg-paper); */
+  color: var(--text-secondary);
+}
