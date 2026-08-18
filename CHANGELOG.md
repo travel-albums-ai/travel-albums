@@ -1,3 +1,9 @@
+## [1.154.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.153.0...v1.154.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance theme variables and styling for improved UI consistency ([f3bba9a](https://github.com/travel-albums-ai/travel-albums/commit/f3bba9a9e67188f119848dfbe782a486902d7143))
+
 ## [1.153.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.152.0...v1.153.0) (2026-08-18)
 
 ### ✨ Features
