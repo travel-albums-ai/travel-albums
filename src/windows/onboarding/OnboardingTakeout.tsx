@@ -1,8 +1,7 @@
 import OnboardingButton from '@/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
-import { FolderOutput, GalleryVerticalEnd, SquareMousePointer } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { FolderOutput, SquareMousePointer } from 'lucide-react';
 
 const phaseSteps = [
   {
@@ -17,16 +16,9 @@ const phaseSteps = [
     titleKey: 'onboardingPhaseConfigureFoldersTitle',
     descriptionKey: 'onboardingPhaseConfigureFoldersDescription',
   },
-  {
-    key: '3',
-    icon: <GalleryVerticalEnd />,
-    titleKey: 'onboardingPhaseIndexTitle',
-    descriptionKey: 'onboardingPhaseIndexDescription',
-  },
 ]
 
 export default function OnboardingTakeout() {
-  const { t } = useTranslation();
 
   return (<>
     <OnboardingWrapper>
