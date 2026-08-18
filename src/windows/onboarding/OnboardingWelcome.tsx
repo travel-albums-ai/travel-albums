@@ -1,11 +1,12 @@
-import { Box, Divider, Typography } from '@mui/material';
+import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
+import { Divider, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 export default function OnboardingWelcome() {
   const { t } = useTranslation();
 
   return (<>
-    <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, mx: 2, bgcolor: 'background.paper', border: 1, borderColor: 'divider', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+    <OnboardingWrapper>
       <img
         src="./logo_new_240.webp"
         alt="Logo"
@@ -29,7 +30,6 @@ export default function OnboardingWelcome() {
       <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="caption" color="textDisabled">
         {t('onboardingWelcomeFooter')}
       </Typography>
-
-    </Box>
+    </OnboardingWrapper>
   </>)
 }
