@@ -1,3 +1,9 @@
+## [1.189.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.188.0...v1.189.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance AlbumPhotoCard with hover effects and improved details display ([3e49804](https://github.com/travel-albums-ai/travel-albums/commit/3e498041de3cfcfdd3d4bed049e047940337eac5))
+
 ## [1.188.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.187.0...v1.188.0) (2026-08-18)
 
 ### ✨ Features
