@@ -1,3 +1,13 @@
+## [1.150.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.149.0...v1.150.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance theme configuration with default theme tokens and improve component styles ([d3a6c2c](https://github.com/travel-albums-ai/travel-albums/commit/d3a6c2ce9316ad72ddf16cc684f57f888c7e10f4))
+
+### 🧹 Refactors
+
+* format JSX in GenerateThumbnailsStatus for improved readability ([2cfeeeb](https://github.com/travel-albums-ai/travel-albums/commit/2cfeeeb067bb84b4e875553e3a045f7a49c7fa04))
+
 ## [1.149.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.148.0...v1.149.0) (2026-08-18)
 
 ### ✨ Features
