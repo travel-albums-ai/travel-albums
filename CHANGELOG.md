@@ -1,3 +1,9 @@
+## [1.167.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.166.0...v1.167.0) (2026-08-18)
+
+### ✨ Features
+
+* integrate IndexerSettings and GeneralRegistryToolbar into GenerateThumbnailsStatus; enhance IndexerContent with elapsed time display ([1afc784](https://github.com/travel-albums-ai/travel-albums/commit/1afc784e878d1d55664e0fec93b926e93758705b))
+
 ## [1.166.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.165.0...v1.166.0) (2026-08-18)
 
 ### ✨ Features
