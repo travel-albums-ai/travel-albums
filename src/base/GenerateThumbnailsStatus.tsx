@@ -8,12 +8,25 @@ export default function GenerateThumbnailsStatus() {
   const indexing = useSettingsStoreSelector((state) => state.indexing);
 
   return (
-    <PopoverButton id="indexer" upsideDown={true} width={650} label="" icon="" trigger={<Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-      <DatabaseSearch size={16} />
-      <Typography variant="caption" color="inherit" sx={{ lineHeight: 1 }}>
-        {indexing ? 'Indexing...' : 'Indexer'}
-      </Typography>
-    </Box>}>
+    <PopoverButton
+      id="indexer"
+      upsideDown={true}
+      width={650}
+      label=""
+      icon=""
+      trigger={<>
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <DatabaseSearch size={16} />
+          <Typography variant="caption" color="inherit" sx={{ lineHeight: 1 }}>
+            {indexing ? 'Indexing...' : 'Indexer'}
+          </Typography>
+        </Box>
+      </>}
+      anchorHorizontal="center"
+      anchorVertical="top"
+      transformHorizontal="center"
+      transformVertical="bottom"
+    >
       <IndexerContent />
     </PopoverButton>
   );
