@@ -1,3 +1,9 @@
+## [1.178.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.177.0...v1.178.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance Indexer components with progress tracking and UI updates ([bb30e49](https://github.com/travel-albums-ai/travel-albums/commit/bb30e49d53b02017adb674293f487b81f99e9f0c))
+
 ## [1.177.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.176.0...v1.177.0) (2026-08-18)
 
 ### ✨ Features
