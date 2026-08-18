@@ -1,3 +1,9 @@
+## [1.176.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.175.0...v1.176.0) (2026-08-18)
+
+### ✨ Features
+
+* add periodic refresh for takeout metadata in IndexerContent component ([c2b34d7](https://github.com/travel-albums-ai/travel-albums/commit/c2b34d7d86f041a319496b450fd93c23c7768aaf))
+
 ## [1.175.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.174.0...v1.175.0) (2026-08-18)
 
 ### ✨ Features
