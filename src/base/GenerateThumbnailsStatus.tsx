@@ -31,7 +31,6 @@ export default function GenerateThumbnailsStatus() {
     >
 
       <Box sx={{ p: 1}}>
-
         <IndexerSettings />
         <GeneralRegistryToolbar group={'indexer'} />
       </Box>
