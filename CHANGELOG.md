@@ -1,3 +1,9 @@
+## [1.151.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.150.0...v1.151.0) (2026-08-18)
+
+### ✨ Features
+
+* update theme generation and improve dialog styling in various windows ([d94460f](https://github.com/travel-albums-ai/travel-albums/commit/d94460f249466fb74989ac742dd18a06c333eb37))
+
 ## [1.150.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.149.0...v1.150.0) (2026-08-18)
 
 ### ✨ Features
