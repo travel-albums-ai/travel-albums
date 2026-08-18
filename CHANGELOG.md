@@ -1,3 +1,9 @@
+## [1.181.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.180.0...v1.181.0) (2026-08-18)
+
+### ✨ Features
+
+* simplify OnboardingTakeout component by removing unused imports and phase ([63e39d9](https://github.com/travel-albums-ai/travel-albums/commit/63e39d9a0c747be742439cd2f9a83aaeaa05989c))
+
 ## [1.180.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.179.0...v1.180.0) (2026-08-18)
 
 ### ✨ Features
