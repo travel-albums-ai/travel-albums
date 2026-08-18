@@ -48,13 +48,7 @@ export default function OnboardingWindow() {
 
   return (<>
     <Dialog onClose={() => { }} open={onboarding} fullWidth>
-      {onboarding && <Box sx={{
-        p: 2,
-        borderRadius: 2,
-        border: 2,
-        borderColor: 'divider',
-        bgcolor: 'background.default',
-        overflowY: 'auto',
+      <Box sx={{
       }}>
         <Box sx={{
           p: 2,
@@ -150,8 +144,7 @@ export default function OnboardingWindow() {
             {activeStep === steps.length - 1 ? 'Close onboarding' : t('onboardingNextStep')}
           </Button>
         </Box>
-
-      </Box>}
+      </Box>
     </Dialog>
   </>)
 }

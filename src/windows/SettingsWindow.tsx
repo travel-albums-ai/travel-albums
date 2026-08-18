@@ -1,6 +1,6 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import SettingsContent from '@/windows/components/SettingsContent';
-import { Box, Dialog } from '@mui/material';
+import { Dialog } from '@mui/material';
 
 export default function SettingsWindow() {
   const showSettings = useSettingsStoreSelector(s => s.showSettings)
@@ -14,17 +14,7 @@ export default function SettingsWindow() {
 
   return (<>
     <Dialog open={showWindow} fullWidth maxWidth="xl" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
-      {showWindow && <Box sx={{
-        p: 2,
-        borderRadius: 2,
-        border: 2,
-        borderColor: 'divider',
-        bgcolor: 'background.default',
-        height: '65vh',
-        overflowY: 'auto',
-      }}>
-        <SettingsContent />
-      </Box>}
+      <SettingsContent />
     </Dialog>
   </>)
 }
