@@ -1,5 +1,5 @@
-import ConfigSettings from '@/components/ConfigSettings';
 import IndexerContent from '@/components/IndexerContent';
+import IndexerSettings from '@/components/IndexerSettings';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { Box, Button, Dialog, Divider, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { ChevronLeft, ChevronsRight, CircleX, FolderOutput, GalleryVerticalEnd, SquareMousePointer } from 'lucide-react';
@@ -108,12 +108,12 @@ export default function OnboardingWindow() {
         </Box>}
 
         {activeStep === 2 && <>
-          <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}>
-            <ConfigSettings />
-          </Box>
-          <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}>
-            <IndexerContent />
-          </Box>
+          {/* <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}> */}
+          <IndexerSettings />
+          {/* </Box> */}
+          {/* <Box sx={{ p: 2, boxShadow: 1, borderRadius: 2, m: 2, bgcolor: 'background.paper' }}> */}
+          <IndexerContent />
+          {/* </Box> */}
         </>}
 
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, gap: 1 }}>
