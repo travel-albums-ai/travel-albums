@@ -13,6 +13,7 @@ export default function SelectedPhotosPage_type_name() {
   const sections = useSections_GLOBAL()
   const photosFiltered = useFilteredPhotos_GLOBAL()
   const selectMode = useSettingsStoreSelector((state) => state.selectMode)
+  const loading = useSettingsStoreSelector((state) => state.loading)
   const selectedPhotos = useSelectedStoreSelector((state) => state.photos)
 
   const showAll = type_name === ''
@@ -25,7 +26,7 @@ export default function SelectedPhotosPage_type_name() {
     <>
       <GenericPanel id="selected-photos-drawer" defaultTool toolContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
         {photos.length === 0
-          ? <NoPhotos />
+          ? <NoPhotos isLoading={loading} isEmpty={photos.length === 0} />
           : <AllPhotosGridVirtuoso key={type_name} photos={photos} />}
       </GenericPanel>
     </>
