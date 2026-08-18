@@ -1,3 +1,9 @@
+## [1.184.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.183.1...v1.184.0) (2026-08-18)
+
+### ✨ Features
+
+* add noGhost prop to GeneralRegistryToolbar and update layout styles ([2404262](https://github.com/travel-albums-ai/travel-albums/commit/2404262867ca1a562a2658720c54e8b7d3fd9240))
+
 ## [1.183.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.183.0...v1.183.1) (2026-08-18)
 
 ### 🐛 Fixes
