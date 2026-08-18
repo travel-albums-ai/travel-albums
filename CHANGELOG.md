@@ -1,3 +1,9 @@
+## [1.169.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.168.0...v1.169.0) (2026-08-18)
+
+### ✨ Features
+
+* remove demoMode references and related logic across components to streamline settings handling ([143a744](https://github.com/travel-albums-ai/travel-albums/commit/143a74404836ce04ace480b0949e4e77217bf71c))
+
 ## [1.168.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.167.0...v1.168.0) (2026-08-18)
 
 ### ✨ Features
