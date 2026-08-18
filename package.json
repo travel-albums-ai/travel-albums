@@ -7,7 +7,7 @@
     "#-----RUNNING------": "",
     "dev": "vite",
     "#-----BUILDING------": "",
-    "build": "vite build",
+    "build": "vite build --mode production",
     "postbuild": "node ./scripts/build-sw.cjs",
     "copy:dist": "cp -r ./dist/* ../trip-gallery-builder/resources/",
     "prepare:build": "npm run build && npm run copy:dist",

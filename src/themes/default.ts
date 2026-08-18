@@ -1,6 +1,5 @@
 import { ThemeOptions } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
-import Color from 'color';
 
 export const themeTokens = {
   light: {
@@ -47,20 +46,20 @@ export const themeTokens = {
 export const generateTheme = (tokens: ThemeOptions) => createTheme({
   ...tokens,
 
-  palette: {
-    ...tokens.palette,
-    background: {
-      ...tokens.palette?.background,
-      default: Color(tokens.palette?.background?.default).mix(Color(tokens.palette?.primary?.main), 0.065).hex(),
-      paper: Color(tokens.palette?.background?.paper).mix(Color(tokens.palette?.primary?.main), 0.065).hex(),
-    },
-    text: {
-      ...tokens.palette?.text,
-      primary: Color(tokens.palette?.text?.primary).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
-      secondary: Color(tokens.palette?.text?.secondary).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
-      disabled: Color(tokens.palette?.text?.disabled).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
-    },
-  },
+  // palette: {
+  //   ...tokens.palette,
+  //   background: {
+  //     ...tokens.palette?.background,
+  //     default: Color(tokens.palette?.background?.default).mix(Color(tokens.palette?.primary?.main), 0.065).hex(),
+  //     paper: Color(tokens.palette?.background?.paper).mix(Color(tokens.palette?.primary?.main), 0.065).hex(),
+  //   },
+  //   text: {
+  //     ...tokens.palette?.text,
+  //     primary: Color(tokens.palette?.text?.primary).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
+  //     secondary: Color(tokens.palette?.text?.secondary).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
+  //     disabled: Color(tokens.palette?.text?.disabled).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
+  //   },
+  // },
 
   components: {
     MuiTextField: {

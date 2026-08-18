@@ -34,8 +34,6 @@ export default function AppLayout() {
         })}
       />
 
-      {/* // Render the main layout */}
-
       <Header />
 
       <FlexLayout />
