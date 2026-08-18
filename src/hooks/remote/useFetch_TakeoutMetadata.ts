@@ -5,6 +5,7 @@ import { GalleryPhoto } from '@/lib/galleryData';
 import { processMetadata } from '@/lib/useProcessedImages.utils';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import localforage from 'localforage';
+import { useCallback } from 'react';
 
 const CACHE_VERSION = 1;
 const LOCALFORAGE_KEY = `takeout-metadata-v${CACHE_VERSION}`;
@@ -139,7 +140,7 @@ export function useFetch_TakeoutMetadata() {
     notifyOnChangeProps: ['data', 'error', 'status'],
   });
 
-  const forceRefresh = async () => {
+  const forceRefresh = useCallback(async () => {
     const data = await fetchAndProcess(setSetting, true);
 
     queryClient.setQueryData(
@@ -148,7 +149,7 @@ export function useFetch_TakeoutMetadata() {
     );
 
     return data;
-  };
+  }, [queryClient, setSetting]);
 
   return {
     data: query.data,

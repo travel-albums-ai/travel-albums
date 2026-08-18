@@ -3,6 +3,7 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
 import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
 import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
+import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Box, Button, Typography } from '@mui/material';
 import {
   Bug,
@@ -89,6 +90,7 @@ export default function IndexerContent() {
   const { setSetting } = useSettings();
   const indexing = useSettingsStoreSelector((state) => state.indexing);
   const progress = useSettingsStoreSelector((state) => state.indexerProgress);
+  const { forceRefresh } = useFetch_TakeoutMetadata();
 
   const { turnOnJob } = useFetch_IndexerOn();
   const { turnOffJob } = useFetch_IndexerOff();
@@ -149,17 +151,28 @@ export default function IndexerContent() {
   useEffect(() => {
     if (!indexing) return;
 
-    const jobInterval = setInterval(() => {
+    const interval = setInterval(() => {
       handleGetStatus();
-
-      // Re-render elapsed time
       setElapsedTick((tick) => tick + 1);
     }, 1000);
 
     return () => {
-      clearInterval(jobInterval);
+      clearInterval(interval);
     };
   }, [indexing, handleGetStatus]);
+
+  useEffect(() => {
+    if (!indexing) return;
+
+    const interval = setInterval(() => {
+      console.log('🔥 Refreshing takeout metadata...');
+      forceRefresh();
+    }, 30_000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [indexing, forceRefresh]);
 
   return (
     <>
