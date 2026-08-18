@@ -1,3 +1,9 @@
+## [1.174.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.173.0...v1.174.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance useFilter_AllPhotos with improved worker lifecycle management and state handling for raw photos and filters ([7fe6589](https://github.com/travel-albums-ai/travel-albums/commit/7fe658987230dba86306cabed6a01a65fcfcbba6))
+
 ## [1.173.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.172.0...v1.173.0) (2026-08-18)
 
 ### ✨ Features
