@@ -22,6 +22,7 @@ export default function NoPhotos() {
         alt="Logo"
         width={120}
         height={98}
+        fetchpriority="high"
         style={{
           aspectRatio: '1/1',
           opacity: 0.3,
