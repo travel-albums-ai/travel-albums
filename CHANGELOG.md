@@ -1,3 +1,9 @@
+## [1.160.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.159.0...v1.160.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor theme structure and implement new theme generation for improved consistency ([6c268ed](https://github.com/travel-albums-ai/travel-albums/commit/6c268edd9cdf6a60aceb2c72265dbe97b4ddbdc5))
+
 ## [1.159.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.158.0...v1.159.0) (2026-08-18)
 
 ### ✨ Features
