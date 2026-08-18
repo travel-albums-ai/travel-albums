@@ -1,3 +1,9 @@
+## [1.158.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.157.0...v1.158.0) (2026-08-18)
+
+### ✨ Features
+
+* update styles in GenericToggleButton and SearchWindow for improved UI consistency ([95439b1](https://github.com/travel-albums-ai/travel-albums/commit/95439b1f5400a1605bfba0e30895fd51c8db99a3))
+
 ## [1.157.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.156.0...v1.157.0) (2026-08-18)
 
 ### ✨ Features
