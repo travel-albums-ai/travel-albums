@@ -1,7 +1,7 @@
 import { ThemeOptions } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 
-export const defaultThemeTokens = {
+export const themeTokens = {
   light: {
     palette: {
       mode: 'light',
@@ -22,9 +22,9 @@ export const defaultThemeTokens = {
   dark: {
     palette: {
       mode: 'dark',
-      primary: { main: '#90caf9' },
+      primary: { main: '#a8c7fa' },
       secondary: { main: '#f48fb1' },
-      background: { default: '#373737', paper: '#2c2c2c' },
+      background: { default: '#3c3c3c', paper: '#282828' },
     },
     shape: {
       borderRadius: 4,
@@ -87,7 +87,7 @@ export const clownThemeTokens = {
       main: '#c01cc0',
     },
     shape: {
-      borderRadius: 0,
+      borderRadius: 12,
     },
     typography: {
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -99,7 +99,7 @@ export const clownThemeTokens = {
 }
 
 
-export const generateTheme = (tokens) => createTheme({
+export const generateTheme = (tokens: ThemeOptions) => createTheme({
   ...tokens,
 
   components: {
@@ -241,7 +241,8 @@ export const generateTheme = (tokens) => createTheme({
   },
 });
 
+export const lightTheme = generateTheme(themeTokens.light);
 
-export const defaultLightTheme = generateTheme(defaultThemeTokens.light);
+export const darkTheme = generateTheme(themeTokens.dark);
 
-export const defaultDarkTheme = generateTheme(defaultThemeTokens.dark);
+export { darkTheme as defaultDarkTheme, lightTheme as defaultLightTheme };
