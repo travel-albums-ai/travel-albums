@@ -1,3 +1,10 @@
+## [1.166.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.165.0...v1.166.0) (2026-08-18)
+
+### ✨ Features
+
+* add IndexerSettings component and integrate it into OnboardingWindow and IndexerPopover ([51720ac](https://github.com/travel-albums-ai/travel-albums/commit/51720acf80eb31ca0ad7ed628f80d4d1479d7a74))
+* remove ConfigSettings component to streamline configuration handling ([fc4e9da](https://github.com/travel-albums-ai/travel-albums/commit/fc4e9da6adf7e367bc51ba1608e32d27a0223e7c))
+
 ## [1.165.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.164.0...v1.165.0) (2026-08-18)
 
 ### ✨ Features
