@@ -1,3 +1,9 @@
+## [1.163.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.163.0...v1.163.1) (2026-08-18)
+
+### 🐛 Fixes
+
+* adjust borderRadius and padding in theme components for improved layout ([748e7b3](https://github.com/travel-albums-ai/travel-albums/commit/748e7b31814097ba3d774aa7624a548a9ffcbf08))
+
 ## [1.163.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.162.0...v1.163.0) (2026-08-18)
 
 ### ✨ Features
