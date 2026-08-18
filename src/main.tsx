@@ -50,3 +50,29 @@ root.render(
     </AppProviders>
   </QueryClientProvider>,
 )
+
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  import('workbox-window').then(({ Workbox }) => {
+    try {
+      const wb = new Workbox('/sw.js');
+
+      wb.addEventListener('waiting', () => {
+        const userAccepted = window.confirm('A new version is available. Update now?');
+        if (userAccepted) {
+          wb.messageSW({ type: 'SKIP_WAITING' });
+        }
+      });
+
+      wb.addEventListener('controlling', () => {
+        window.location.reload();
+      });
+
+      wb.register();
+    } catch (err) {
+      // ignore registration errors in dev
+      console.warn('SW registration failed', err);
+    }
+  }).catch(() => {
+    // dynamic import failed - skip
+  });
+}
