@@ -1,3 +1,9 @@
+## [1.165.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.164.0...v1.165.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance IndexerContent with elapsed time display and code cleanup ([78c6ea8](https://github.com/travel-albums-ai/travel-albums/commit/78c6ea89db5a4f294ab584d662cb9899f52a90bb))
+
 ## [1.164.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.163.2...v1.164.0) (2026-08-18)
 
 ### ✨ Features
