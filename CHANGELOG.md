@@ -1,3 +1,9 @@
+## [1.161.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.160.0...v1.161.0) (2026-08-18)
+
+### ✨ Features
+
+* add fontSize property to typography in clownThemeTokens for improved text readability ([23474d2](https://github.com/travel-albums-ai/travel-albums/commit/23474d2a4e380d57f98023ac758be058d68244dd))
+
 ## [1.160.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.159.0...v1.160.0) (2026-08-18)
 
 ### ✨ Features
