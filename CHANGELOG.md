@@ -1,3 +1,9 @@
+## [1.171.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.170.0...v1.171.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor OnboardingWindow and OnboardingTakeout components; streamline onboarding steps and improve structure ([4866070](https://github.com/travel-albums-ai/travel-albums/commit/4866070814c3594517218ced5136097fd2e1428e))
+
 ## [1.170.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.169.0...v1.170.0) (2026-08-18)
 
 ### ✨ Features
