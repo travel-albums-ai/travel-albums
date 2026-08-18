@@ -29,7 +29,7 @@ export default function DrawersPopover({ filter }: { filter?: string }) {
   }, []);
 
   return <>
-    <SettingsSection>
+    <SettingsSection title="Drawers">
       {toggleControls
         .filter(control => !filter || t(control.labelKey).toLowerCase().includes(filter.toLowerCase()))
         .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
