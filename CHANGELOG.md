@@ -1,3 +1,9 @@
+## [1.159.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.158.0...v1.159.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor CSS structure and remove unused styles for improved maintainability ([40bb5a9](https://github.com/travel-albums-ai/travel-albums/commit/40bb5a9ff048b96a34842400fb9c75b477866319))
+
 ## [1.158.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.157.0...v1.158.0) (2026-08-18)
 
 ### ✨ Features
