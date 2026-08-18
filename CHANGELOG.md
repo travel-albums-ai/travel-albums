@@ -1,3 +1,9 @@
+## [1.152.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.151.0...v1.152.0) (2026-08-18)
+
+### ✨ Features
+
+* add clown theme tokens for light and dark modes ([3d58c8e](https://github.com/travel-albums-ai/travel-albums/commit/3d58c8ec862bb73a62841471ade90ebfe36c373e))
+
 ## [1.151.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.150.0...v1.151.0) (2026-08-18)
 
 ### ✨ Features
