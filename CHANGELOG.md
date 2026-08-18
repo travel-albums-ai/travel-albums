@@ -1,3 +1,9 @@
+## [1.147.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.146.0...v1.147.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance DashboardDrawer with new DashboardLikes and DashboardViews components; refactor layout for better structure ([f29c3b9](https://github.com/travel-albums-ai/travel-albums/commit/f29c3b97c4ca12a539457a27d1c3655e0bad7753))
+
 ## [1.146.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.145.0...v1.146.0) (2026-08-17)
 
 ### ✨ Features
