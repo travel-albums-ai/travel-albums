@@ -15,6 +15,7 @@ export default function StatusBar() {
         alignItems: 'center',
         gap: 1.5,
         px: 0.75,
+        pl: 1.25,
         height: '28px',
         bgcolor: 'background.default',
         position: 'relative',

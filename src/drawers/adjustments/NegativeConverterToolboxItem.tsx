@@ -34,7 +34,7 @@ export default function NegativeConverterToolboxItem({
 
   return (
     <>
-      <Accordion sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+      <Accordion>
         <AccordionSummary>
           <Typography variant="subtitle2" sx={{ fontWeight: 'bold', px: 1 }}>{item.title}</Typography>
         </AccordionSummary>
