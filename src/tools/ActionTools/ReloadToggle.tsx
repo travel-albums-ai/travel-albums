@@ -1,15 +1,13 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import WebMCPDataRun from '@/components/WebMCPDataRun';
-import { useNotifications } from '@/context/notificationsStore';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Database, RotateCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function ReloadToggle() {
   const { t } = useTranslation()
-  const { clearCache } = useFetch_TakeoutMetadata();
-  const { addNotification } = useNotifications()
+  const { forceRefresh } = useFetch_TakeoutMetadata();
 
   return <>
     <WebMCPDataRun
@@ -30,8 +28,7 @@ export default function ReloadToggle() {
         if (action === 'refresh') {
           window.location.reload();
         } else if (action === 'clear_cache') {
-          clearCache()
-          addNotification("Cache Cleared","The local cache has been successfully cleared. A fresh fetch from the server will be performed on the next data request.");
+          forceRefresh()
         }
 
         return { action };
@@ -48,8 +45,7 @@ export default function ReloadToggle() {
       {
         icon: <Database />,
         onClick: () => {
-          clearCache()
-          addNotification("Cache Cleared","The local cache has been successfully cleared. A fresh fetch from the server will be performed on the next data request.");
+          forceRefresh()
         },
         tooltip: "Reload data from server"
       },

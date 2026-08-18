@@ -94,29 +94,37 @@ function dedupePhotos(processed: GalleryPhoto[]): GalleryPhoto[] {
   return result;
 }
 
-async function fetchAndProcess(setSetting: any): Promise<GalleryPhoto[]> {
+async function fetchAndProcess(
+  setSetting: any,
+  forceRefresh = false,
+): Promise<GalleryPhoto[]> {
   return benchmarkFunction(async () => {
     setSetting((prev: any) => ({ ...prev, loading: true }));
 
-    const cached = await localforage.getItem<GalleryPhoto[]>(LOCALFORAGE_KEY);
-    if (cached) {
-      setSetting((prev: any) => ({ ...prev, loading: false }));
-      return cached;
+    if (!forceRefresh) {
+      const cached = await localforage.getItem<GalleryPhoto[]>(LOCALFORAGE_KEY);
+
+      if (cached) {
+        setSetting((prev: any) => ({ ...prev, loading: false }));
+        return cached;
+      }
     }
 
-    const response = await fetch(URLS.live);
-    if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
-    if (!response.body) throw new Error('Response has no body stream');
+    const response = await fetch(URLS.live, { cache: 'no-store'});
+
+    if (!response.ok) { throw new Error(`Fetch failed: ${response.status}`) }
+    if (!response.body) { throw new Error('Response has no body stream') }
 
     const raw = await parseNDJSONStream(response.body);
     const processed = processMetadata(raw);
     const uniquePhotos = dedupePhotos(processed ?? []);
 
-    localforage.setItem(LOCALFORAGE_KEY, uniquePhotos).catch(console.error);
+    await localforage.setItem(LOCALFORAGE_KEY, uniquePhotos);
 
     setSetting((prev: any) => ({ ...prev, loading: false }));
+
     return uniquePhotos;
-  }, '💾☁️ Metadata', [])
+  }, '💾☁️ Metadata', []);
 }
 
 export function useFetch_TakeoutMetadata() {
@@ -131,9 +139,15 @@ export function useFetch_TakeoutMetadata() {
     notifyOnChangeProps: ['data', 'error', 'status'],
   });
 
-  const clearCache = async () => {
-    await localforage.removeItem(LOCALFORAGE_KEY);
-    await queryClient.invalidateQueries({ queryKey: ['takeout-metadata'] });
+  const forceRefresh = async () => {
+    const data = await fetchAndProcess(setSetting, true);
+
+    queryClient.setQueryData(
+      ['takeout-metadata'],
+      data,
+    );
+
+    return data;
   };
 
   return {
@@ -141,6 +155,6 @@ export function useFetch_TakeoutMetadata() {
     isLoading: query.isLoading,
     error: query.error,
     refetch: query.refetch,
-    clearCache,
+    forceRefresh,
   };
 }

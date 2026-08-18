@@ -7,7 +7,7 @@ import stc from 'string-to-color';
 
 export default function DashboardSuggestions() {
   const { setSetting } = useSettings()
-  const { clearCache } = useFetch_TakeoutMetadata();
+  const { refetch } = useFetch_TakeoutMetadata();
 
   const items = [
     {
@@ -24,7 +24,7 @@ export default function DashboardSuggestions() {
       icon: <Database />,
       labels: ['refresh data'],
       actionTitle: 'Clear Cache',
-      action: () => clearCache()
+      action: () => refetch()
     },
     {
       title: 'SpotAI Mascot',
