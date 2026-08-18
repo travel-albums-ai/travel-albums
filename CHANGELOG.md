@@ -1,3 +1,9 @@
+## [1.153.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.152.0...v1.153.0) (2026-08-18)
+
+### ✨ Features
+
+* update component styles and theme integration across various components ([3ef9f62](https://github.com/travel-albums-ai/travel-albums/commit/3ef9f62f3c3b2035f4f281871f26c35cf1adce5e))
+
 ## [1.152.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.151.0...v1.152.0) (2026-08-18)
 
 ### ✨ Features
