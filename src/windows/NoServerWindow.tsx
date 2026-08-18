@@ -1,5 +1,4 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingsPopover from '@/windows/settings/SettingsPopover';
 import { Box, Dialog, Typography } from '@mui/material';
 import { TriangleAlert } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +6,10 @@ import { useTranslation } from 'react-i18next';
 export default function NoServerWindow() {
   const serverOnline = useSettingsStoreSelector(s => s.serverOnline)
   const demoMode = useSettingsStoreSelector(s => s.demoMode)
+  const onboarding = useSettingsStoreSelector(s => s.onboarding)
   const { t } = useTranslation();
 
-  const showWindow = serverOnline === false && demoMode !== true
+  const showWindow = onboarding !== true || (serverOnline === false && demoMode !== true)
 
   if (!showWindow) {
     return null
@@ -22,17 +22,14 @@ export default function NoServerWindow() {
         flexDirection: 'column',
         alignItems: 'center',
         gap: 2,
-        pt: 4,
+        py: 4,
       }}>
         <TriangleAlert size={60} color="orange"  />
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{t('noServerConnectionTitle')}</Typography>
-        <Typography variant="body1" align="center" color="textSecondary">
+        <Typography variant="body1" align="center" sx={{ px: 4 }} color="textSecondary">
           {t('noServerConnectionBody')}
         </Typography>
 
-        <Box sx={{ flex: 1, width: '100%', mt: 2 }} >
-          <SettingsPopover />
-        </Box>
       </Box>
     </Dialog>
   </>)
