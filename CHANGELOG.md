@@ -1,3 +1,9 @@
+## [1.186.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.185.0...v1.186.0) (2026-08-18)
+
+### ✨ Features
+
+* add darkLightStatus control to Theme group in LayoutPopover ([2bfcaae](https://github.com/travel-albums-ai/travel-albums/commit/2bfcaaea6e584920c4dbb8387c3a63a94348327d))
+
 ## [1.185.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.184.0...v1.185.0) (2026-08-18)
 
 ### ✨ Features
