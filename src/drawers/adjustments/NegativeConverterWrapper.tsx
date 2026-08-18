@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import GenericPanel from '@/components/generics/GenericPanel';
 import { useNegativeStoreSelector } from '@/context/negativeStore';
-import { useSettingsStoreSelector } from '@/context/settingsStore';
 import GeneticBreedingGrid from '@/drawers/adjustments/GeneticBreedingGrid';
 import NegativeConverterCanvas from '@/drawers/adjustments/NegativeConverterCanvas';
 import NegativeConverterPresetSelector from '@/drawers/adjustments/NegativeConverterPresetSelector';
@@ -34,7 +33,6 @@ export default function NegativeConverterWrapper({
   hasGeneticBreeding,
 }: NegativeConverterWrapperProps) {
   const { adj, applyPreset, pipeline, preset, presets, set } = useNegativeConverterState({ initialPreset });
-  useSettingsStoreSelector(s => s.demoMode);
   const showGenetic = useNegativeStoreSelector((state) => state.showGenetic)
 
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);

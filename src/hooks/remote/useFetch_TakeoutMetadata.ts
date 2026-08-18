@@ -1,4 +1,4 @@
-import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { useSettings } from '@/context/settingsStore';
 import { SERVER_ORIGIN } from '@/hooks/remote/utils';
 import { benchmarkFunction } from '@/hooks/utils';
 import { GalleryPhoto } from '@/lib/galleryData';
@@ -7,8 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import localforage from 'localforage';
 
 const CACHE_VERSION = 1;
-const LOCALFORAGE_KEY = (demo: boolean) =>
-  `takeout-metadata-v${CACHE_VERSION}-${demo ? 'demo' : 'live'}`;
+const LOCALFORAGE_KEY = `takeout-metadata-v${CACHE_VERSION}`;
 
 const URLS = {
   live: `${SERVER_ORIGIN}/takeout-metadata`,
@@ -95,17 +94,17 @@ function dedupePhotos(processed: GalleryPhoto[]): GalleryPhoto[] {
   return result;
 }
 
-async function fetchAndProcess(demoMode: boolean, setSetting: any): Promise<GalleryPhoto[]> {
+async function fetchAndProcess(setSetting: any): Promise<GalleryPhoto[]> {
   return benchmarkFunction(async () => {
     setSetting((prev: any) => ({ ...prev, loading: true }));
 
-    const cached = await localforage.getItem<GalleryPhoto[]>(LOCALFORAGE_KEY(demoMode));
+    const cached = await localforage.getItem<GalleryPhoto[]>(LOCALFORAGE_KEY);
     if (cached) {
       setSetting((prev: any) => ({ ...prev, loading: false }));
       return cached;
     }
 
-    const response = await fetch(demoMode ? URLS.demo : URLS.live);
+    const response = await fetch(URLS.live);
     if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
     if (!response.body) throw new Error('Response has no body stream');
 
@@ -113,7 +112,7 @@ async function fetchAndProcess(demoMode: boolean, setSetting: any): Promise<Gall
     const processed = processMetadata(raw);
     const uniquePhotos = dedupePhotos(processed ?? []);
 
-    localforage.setItem(LOCALFORAGE_KEY(demoMode), uniquePhotos).catch(console.error);
+    localforage.setItem(LOCALFORAGE_KEY, uniquePhotos).catch(console.error);
 
     setSetting((prev: any) => ({ ...prev, loading: false }));
     return uniquePhotos;
@@ -122,20 +121,19 @@ async function fetchAndProcess(demoMode: boolean, setSetting: any): Promise<Gall
 
 export function useFetch_TakeoutMetadata() {
   const queryClient = useQueryClient();
-  const demoMode = useSettingsStoreSelector(s => s.demoMode);
   const { setSetting } = useSettings();
 
   const query = useQuery({
-    queryKey: ['takeout-metadata', demoMode],
-    queryFn: () => fetchAndProcess(demoMode, setSetting),
+    queryKey: ['takeout-metadata'],
+    queryFn: () => fetchAndProcess(setSetting),
     staleTime: Infinity,
     gcTime: Infinity,
     notifyOnChangeProps: ['data', 'error', 'status'],
   });
 
   const clearCache = async () => {
-    await localforage.removeItem(LOCALFORAGE_KEY(demoMode));
-    await queryClient.invalidateQueries({ queryKey: ['takeout-metadata', demoMode] });
+    await localforage.removeItem(LOCALFORAGE_KEY);
+    await queryClient.invalidateQueries({ queryKey: ['takeout-metadata'] });
   };
 
   return {

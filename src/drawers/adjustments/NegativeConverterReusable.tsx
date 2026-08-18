@@ -1,5 +1,4 @@
 
-import { useSettingsStoreSelector } from '@/context/settingsStore';
 import NegativeConverterCanvas from '@/drawers/adjustments/NegativeConverterCanvas';
 import { Adjustments } from '@/drawers/adjustments/types';
 import useNegativeConverterState from '@/hooks/useNegativeConverterState';
@@ -15,7 +14,6 @@ export default function NegativeConverterReusable({
   initialPreset,
 }: NegativeConverterWrapperProps) {
   const { pipeline } = useNegativeConverterState({ initialPreset });
-  useSettingsStoreSelector(s => s.demoMode);
   return (
     <NegativeConverterCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj)} />
   );

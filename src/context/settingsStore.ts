@@ -32,7 +32,6 @@ type SettingsStore = {
   loading: boolean,
   loadingValue: number | null,
   serverType: 'files' | 'http'
-  demoMode: boolean,
   sidebarTerm: string,
   sidebarSearchOpen: boolean,
   showPreviewMap: boolean,
@@ -94,7 +93,6 @@ const defaults: SettingsStore = {
   lightboxOpen: false,
   sidebarTerm: '',
   serverOnline: true,
-  demoMode: false,
   otherSidebar: 'photo',
   thumbnailFormat: 'cover',
   scrollerOriginal: false,

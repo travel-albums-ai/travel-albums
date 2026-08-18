@@ -5,11 +5,10 @@ import { useTranslation } from 'react-i18next';
 
 export default function NoServerWindow() {
   const serverOnline = useSettingsStoreSelector(s => s.serverOnline)
-  const demoMode = useSettingsStoreSelector(s => s.demoMode)
   const onboarding = useSettingsStoreSelector(s => s.onboarding)
   const { t } = useTranslation();
 
-  const showWindow = onboarding !== true || (serverOnline === false && demoMode !== true)
+  const showWindow = onboarding ? false : serverOnline === false
 
   if (!showWindow) {
     return null

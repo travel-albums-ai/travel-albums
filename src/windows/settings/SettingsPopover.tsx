@@ -3,9 +3,7 @@ import SettingsSection from '@/windows/components/SettingsSection';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Fragment } from 'react';
 
-const toggleControls = [
-  { key: 'demoMode', label: 'Demo mode', value: 'demo-mode', type: 'boolean' },
-] as const
+const toggleControls = [] as const
 
 export default function SettingsPopover() {
   const { setSetting } = useSettings()

@@ -20,7 +20,6 @@ export default function AlbumPhotoThumbnailBackgroundNg({
   className,
   original = false,
 }: Props) {
-  useSettingsStoreSelector(s => s.demoMode);
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
   const { setSetting } = useSettings()
 

@@ -7,7 +7,6 @@ import { TransformComponent, TransformWrapper, type ReactZoomPanPinchRef } from 
 
 export default function ZoomPhoto() {
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj);
-  useSettingsStoreSelector(s => s.demoMode);
   const containerRef = useRef<HTMLDivElement>(null);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
   const imgRef = useRef<HTMLImageElement>(null);
