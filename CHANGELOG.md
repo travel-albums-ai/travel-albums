@@ -1,3 +1,9 @@
+## [1.183.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.183.0...v1.183.1) (2026-08-18)
+
+### 🐛 Fixes
+
+* update input schema to require 'mode' property in SettingsContent component ([efb775c](https://github.com/travel-albums-ai/travel-albums/commit/efb775c9756214b628cc3d5e5f6b5145fffd8519))
+
 ## [1.183.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.182.1...v1.183.0) (2026-08-18)
 
 ### ✨ Features
