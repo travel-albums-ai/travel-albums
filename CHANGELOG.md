@@ -1,3 +1,9 @@
+## [1.155.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.154.0...v1.155.0) (2026-08-18)
+
+### ✨ Features
+
+* add title to SettingsSection in DrawersPopover for improved clarity ([465dbd7](https://github.com/travel-albums-ai/travel-albums/commit/465dbd776d8931e1ca763bdc8852431856e57981))
+
 ## [1.154.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.153.0...v1.154.0) (2026-08-18)
 
 ### ✨ Features
