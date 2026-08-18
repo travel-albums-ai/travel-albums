@@ -2,7 +2,6 @@ import IndexerMetricCard from '@/components/IndexerMetricCard';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
 import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
-import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Box, Button, Typography } from '@mui/material';
 import {
@@ -15,7 +14,7 @@ import {
   Hourglass,
   List,
 } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const items = [
   {
@@ -94,10 +93,8 @@ export default function IndexerContent() {
 
   const { turnOnJob } = useFetch_IndexerOn();
   const { turnOffJob } = useFetch_IndexerOff();
-  const { fetchStatus } = useFetch_IndexerStatus();
 
   const [startedAt, setStartedAt] = useState<number | null>(null);
-  const [, setElapsedTick] = useState(0);
 
   const handleTurnOn = async () => {
     try {
@@ -110,6 +107,7 @@ export default function IndexerContent() {
         indexing: true,
         loading: true,
       }));
+      forceRefresh()
     } catch (err) {
       console.error(err);
     }
@@ -131,51 +129,8 @@ export default function IndexerContent() {
     }
   };
 
-  const handleGetStatus = useCallback(async () => {
-    try {
-      const status = await fetchStatus();
-
-      if (status.status === 'running' && status.progress) {
-        setSetting((prev) => ({
-          ...prev,
-          indexerProgress: status.progress,
-        }));
-      }
-
-      console.log('Indexer status:', status);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [fetchStatus, setSetting]);
-
-  useEffect(() => {
-    if (!indexing) return;
-
-    const interval = setInterval(() => {
-      handleGetStatus();
-      setElapsedTick((tick) => tick + 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [indexing, handleGetStatus]);
-
-  useEffect(() => {
-    if (!indexing) return;
-
-    const interval = setInterval(() => {
-      console.log('🔥 Refreshing takeout metadata...');
-      forceRefresh();
-    }, 30_000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [indexing, forceRefresh]);
-
   return (
-    <>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1 }}>
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
         <Button
           disabled={indexing}
@@ -239,7 +194,7 @@ export default function IndexerContent() {
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
-        {progress &&
+        {Object.keys(progress).length > 0 &&
           Object.entries(progress).map(([key, value]) => (
             <Box key={key} sx={{ flex: '0 1 20%' }}>
               <IndexerMetricCard
@@ -253,6 +208,6 @@ export default function IndexerContent() {
             </Box>
           ))}
       </Box>
-    </>
+    </Box>
   );
 }

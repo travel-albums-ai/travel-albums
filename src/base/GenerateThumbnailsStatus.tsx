@@ -1,15 +1,16 @@
 import IndexerContent from '@/components/IndexerContent';
+import IndexerRefresh from '@/components/IndexerRefresh';
 import IndexerSettings from '@/components/IndexerSettings';
 import PopoverButton from '@/components/PopoverButton';
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import SettingsSection from '@/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
-import { DatabaseSearch } from 'lucide-react';
+import { Database, DatabaseSearch } from 'lucide-react';
 
 export default function GenerateThumbnailsStatus() {
   const indexing = useSettingsStoreSelector((state) => state.indexing);
 
-  return (
+  return <>
     <PopoverButton
       id="indexer"
       upsideDown={true}
@@ -30,11 +31,16 @@ export default function GenerateThumbnailsStatus() {
       transformVertical="bottom"
     >
 
-      <Box sx={{ p: 1}}>
+      <Box sx={{ p: 2, height: '450px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 1 }}>
         <IndexerSettings />
-        <GeneralRegistryToolbar group={'indexer'} />
       </Box>
-      <IndexerContent />
+      <Box sx={{ p: 2, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <SettingsSection title="Indexer" icon={<Database />}>
+          <IndexerContent />
+        </SettingsSection>
+      </Box>
+
     </PopoverButton>
-  );
+    <IndexerRefresh />
+  </>;
 }
