@@ -35,6 +35,7 @@ const groups = [
     title: "Theme",
     controls: [
       { key: 'theme', labelKey: 'layoutTheme', type: 'toolbar', toolbarComponentId: "themeMenu" },
+      { key: 'darkLightStatus', labelKey: 'toggleThemeName', type: 'toolbar', toolbarComponentId: "darkLightStatus" },
     ],
     icon: <PaintBucket />,
   }
