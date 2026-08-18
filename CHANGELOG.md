@@ -1,3 +1,9 @@
+## [1.173.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.172.0...v1.173.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor useFetch_TakeoutMetadata to replace clearCache with forceRefresh; update DashboardSuggestions and ReloadToggle components ([b989468](https://github.com/travel-albums-ai/travel-albums/commit/b989468833301f5b80d911b513b6c8850785959d))
+
 ## [1.172.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.171.0...v1.172.0) (2026-08-18)
 
 ### ✨ Features
