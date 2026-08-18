@@ -1,3 +1,9 @@
+## [1.162.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.161.0...v1.162.0) (2026-08-18)
+
+### ✨ Features
+
+* move clownThemeTokens to a new debug.ts file for better organization ([8f7dfbf](https://github.com/travel-albums-ai/travel-albums/commit/8f7dfbfead69682748997ef134ef1373a59b9978))
+
 ## [1.161.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.160.0...v1.161.0) (2026-08-18)
 
 ### ✨ Features
