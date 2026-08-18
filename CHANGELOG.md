@@ -1,3 +1,9 @@
+## [1.170.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.169.0...v1.170.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor usePost_Config to useFetch_PostConfig and update related imports; add onboarding components ([4b6781f](https://github.com/travel-albums-ai/travel-albums/commit/4b6781fc461576663fdffcbe267ff00c02e394db))
+
 ## [1.169.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.168.0...v1.169.0) (2026-08-18)
 
 ### ✨ Features
