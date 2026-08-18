@@ -1,3 +1,9 @@
+## [1.180.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.179.0...v1.180.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance onboarding components with layout improvements and mascot integration ([ccec7ba](https://github.com/travel-albums-ai/travel-albums/commit/ccec7ba1ba9032b9f7e9014176edb9bc731bdccc))
+
 ## [1.179.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.178.0...v1.179.0) (2026-08-18)
 
 ### ✨ Features
