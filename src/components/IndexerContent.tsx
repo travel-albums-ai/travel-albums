@@ -193,7 +193,7 @@ export default function IndexerContent() {
               whiteSpace: 'nowrap',
             }}
           >
-            Indexing since {formatElapsed(startedAt)}
+            Indexing since {formatElapsed(startedAt)} {startedAt && `(${new Date(startedAt).toLocaleTimeString()})`}
           </Typography>
         )}
 

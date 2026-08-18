@@ -1,5 +1,7 @@
 import IndexerContent from '@/components/IndexerContent';
+import IndexerSettings from '@/components/IndexerSettings';
 import PopoverButton from '@/components/PopoverButton';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Box, Typography } from '@mui/material';
 import { DatabaseSearch } from 'lucide-react';
@@ -27,6 +29,12 @@ export default function GenerateThumbnailsStatus() {
       transformHorizontal="center"
       transformVertical="bottom"
     >
+
+      <Box sx={{ p: 1}}>
+
+        <IndexerSettings />
+        <GeneralRegistryToolbar group={'indexer'} />
+      </Box>
       <IndexerContent />
     </PopoverButton>
   );

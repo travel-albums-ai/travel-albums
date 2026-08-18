@@ -7,6 +7,11 @@ export const meta = {
       id: 'header',
       side: 'left',
       priority: 10
+    },
+    {
+      id: 'indexer',
+      side: 'left',
+      priority: 10
     }
   ],
   loader: () => import('@/tools/ActionTools/ReloadToggle'),
