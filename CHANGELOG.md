@@ -1,3 +1,9 @@
+## [1.182.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.181.0...v1.182.0) (2026-08-18)
+
+### ✨ Features
+
+* add prefetch for logo image and set fetch priority in NoPhotos component ([1deac32](https://github.com/travel-albums-ai/travel-albums/commit/1deac32ce4bccb5111f0866076ac2070f45d8c39))
+
 ## [1.181.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.180.0...v1.181.0) (2026-08-18)
 
 ### ✨ Features
