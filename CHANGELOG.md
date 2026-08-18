@@ -1,3 +1,9 @@
+## [1.177.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.176.0...v1.177.0) (2026-08-18)
+
+### ✨ Features
+
+* integrate IndexerRefresh component and enhance GenerateThumbnailsStatus layout ([cf6cea5](https://github.com/travel-albums-ai/travel-albums/commit/cf6cea57981766ee42128d2b2cc044fd59401e3d))
+
 ## [1.176.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.175.0...v1.176.0) (2026-08-18)
 
 ### ✨ Features
