@@ -1,3 +1,9 @@
+## [1.164.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.163.2...v1.164.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance IndexerPopover with new SettingsGeneralRow component and update configuration handling ([48a0d5a](https://github.com/travel-albums-ai/travel-albums/commit/48a0d5aa3e8c7f8177930f270aea394873ecb746))
+
 ## [1.163.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.163.1...v1.163.2) (2026-08-18)
 
 ### 🐛 Fixes
