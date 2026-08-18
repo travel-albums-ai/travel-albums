@@ -52,16 +52,31 @@ function isValidToolMeta(path: string, meta: ToolMeta) {
 }
 
 async function loadToolMetadata() {
-  const loaded = await Promise.all(
-    Object.entries(modules).map(async ([path, loadMeta]) => ({
-      path,
-      meta: await loadMeta(),
-    })),
+  const entries = Object.entries(modules);
+
+  const settled = await Promise.allSettled(
+    entries.map(([path, loadMeta]) =>
+      loadMeta()
+        .then((meta) => ({ path, meta }))
+        .catch((error) => ({ path, meta: undefined, error }))
+    ),
   );
 
   const metas: ToolMeta[] = [];
 
-  for (const { path, meta } of loaded) {
+  for (const item of settled) {
+    if (item.status === 'rejected') {
+      console.warn('Failed to load module during discovery', item.reason);
+      continue;
+    }
+
+    const { path, meta, error } = item.value as { path: string; meta?: ToolMeta; error?: any };
+
+    if (error) {
+      console.warn(`${path} failed to load meta:`, error);
+      continue;
+    }
+
     if (!meta) {
       console.warn(`${path} does not export 'meta'`);
       continue;
@@ -71,7 +86,7 @@ async function loadToolMetadata() {
       continue;
     }
 
-    if(meta.enabled === false) {
+    if (meta.enabled === false) {
       console.warn(`${path} is disabled`);
       continue;
     }
@@ -79,6 +94,11 @@ async function loadToolMetadata() {
     toolRegistry.register(meta);
     metas.push(meta);
   }
+
+  // Warm component preloads asynchronously to reduce first-render latency.
+  void toolRegistry.preloadAll(metas).catch((err) => {
+    console.warn('Tool component warm preload failed', err);
+  });
 
   return metas;
 }
