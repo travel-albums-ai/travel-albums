@@ -1,3 +1,9 @@
+## [1.185.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.184.0...v1.185.0) (2026-08-18)
+
+### ✨ Features
+
+* enhance IndexerSettings with new root path input and update SettingsWindow dialog dimensions ([a9e8c2b](https://github.com/travel-albums-ai/travel-albums/commit/a9e8c2b51b4043f181ab23aceefddec237d27d2f))
+
 ## [1.184.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.183.1...v1.184.0) (2026-08-18)
 
 ### ✨ Features
