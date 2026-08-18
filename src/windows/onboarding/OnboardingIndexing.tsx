@@ -1,9 +1,9 @@
 import IndexerContent from '@/components/IndexerContent';
+import { TwinLensMascot } from '@/mascot/TwinLensMascot';
+import OnboardingPhasesList from '@/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { Coffee } from 'lucide-react';
-import { cloneElement } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const phaseSteps = [
   {
@@ -15,23 +15,18 @@ const phaseSteps = [
 ]
 
 export default function OnboardingIndexing() {
-  const { t } = useTranslation();
 
   return (<>
     <OnboardingWrapper>
       <Box sx={{ flex: 0, width: '100%', bgcolor: 'background.default', borderRadius: 2}}>
         <IndexerContent />
       </Box>
-      {phaseSteps.map((step, i) => (
-        <Box key={step.key} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, width: '100%', px: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-            {cloneElement(step.icon, { size: 16 })}
-            <Typography variant="subtitle1">{t(step.titleKey)}</Typography>
-          </Box>
-          <Typography variant="subtitle2" color="textSecondary">{t(step.descriptionKey)}</Typography>
-          {i < phaseSteps.length - 1 && <Divider sx={{ width: '100%' }} />}
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
+      <Tooltip open={true} arrow placement="bottom" title="Spot the mascot! It's SpotAI, the twin-lens mascot of Travel Albums. He loves to travel and take photos, just like you!">
+        <Box sx={{ width: '100px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <TwinLensMascot />
         </Box>
-      ))}
+      </Tooltip>
 
     </OnboardingWrapper>
   </>)

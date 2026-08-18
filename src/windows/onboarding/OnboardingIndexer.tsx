@@ -2,8 +2,8 @@ import ServerStatus from '@/base/ServerStatus';
 import OnboardingButton from '@/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
+import { Box } from '@mui/material';
 import { PackageOpen, Play, SquareMousePointer } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const phaseSteps = [
   {
@@ -27,13 +27,14 @@ const phaseSteps = [
 ]
 
 export default function OnboardingIndexer() {
-  const { t } = useTranslation();
 
   return (<>
     <OnboardingWrapper>
       <img src="/image.1.png" alt="Releases" style={{ width: '100%', borderRadius: 8 }} />
-      <OnboardingButton href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" label="Open Indexer Releases..." />
-      <ServerStatus />
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', width: '100%' }} >
+        <OnboardingButton href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" label="Open Indexer Releases..." />
+        <ServerStatus />
+      </Box>
       <OnboardingPhasesList phaseSteps={phaseSteps} />
 
     </OnboardingWrapper>
