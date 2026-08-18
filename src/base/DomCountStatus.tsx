@@ -46,8 +46,9 @@ export default function DomCountStatus() {
   return (
     <SolidChip
       count={count}
-      label={"DOM Elements"}
+      label={"DOM/e"}
       variant="text"
+      minWidth={80}
       tooltip={t('domElementsTooltip')}
     />
   )

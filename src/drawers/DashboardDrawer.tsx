@@ -11,7 +11,7 @@ import DashboardSuggestions from '@/drawers/dashboard/DashboardSuggestions';
 import DashboardViews from '@/drawers/dashboard/DashboardViews';
 import { Box, Typography } from '@mui/material';
 
-const foo = false
+const foo = true
 
 export default function DashboardDrawer() {
 

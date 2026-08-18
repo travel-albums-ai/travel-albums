@@ -131,5 +131,6 @@ const wrapperSx = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  overflow: 'auto',
   gap: 1,
 }
