@@ -13,7 +13,18 @@ export default function SettingsWindow() {
   }
 
   return (<>
-    <Dialog open={showWindow} fullWidth maxWidth="xl" onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
+    <Dialog open={showWindow} fullWidth maxWidth="xl"
+      slotProps={{
+        paper: {
+          sx: {
+            width: 1200,
+            height: 850,
+            maxWidth: 'none',
+            maxHeight: 'none',
+          },
+        },
+      }}
+      onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
       <SettingsContent />
     </Dialog>
   </>)

@@ -8,7 +8,6 @@ import IndexerPopover from '@/windows/settings/IndexerPopover';
 import LayoutPopover from '@/windows/settings/LayoutPopover';
 import MCPPopover from '@/windows/settings/MCPPopover';
 import SectionsPopover from '@/windows/settings/SectionsPopover';
-import SettingsPopover from '@/windows/settings/SettingsPopover';
 import TagsPopover from '@/windows/settings/TagsPopover';
 import ToolsPopover from '@/windows/settings/ToolsPopover';
 import { Box, Tooltip, Typography } from '@mui/material';
@@ -58,7 +57,6 @@ export default function SettingsContent() {
     { key: 'mcp', group: 'ai', title: 'WebMCP', component: <MCPPopover />, icon: <Astroid size={16} />, guidance: 'Give AI access to your data via WebMCP' },
     { key: 'indexer', group: 'indexer', title: t('indexer'), component: <IndexerPopover />, icon: <Server size={16} />, guidance: t('indexerGuidance') },
     { key: 'sections', group: 'features', title: 'Explorer', component: <SectionsPopover />, icon:  <Group size={16} />, guidance: t('sectionsGuidance') },
-    { key: 'demo', group: 'indexer', title: t('demo'), component: <SettingsPopover />, icon:  <Group size={16} />, guidance: t('demoGuidance') },
     { key: 'tags', group: 'features', title: t('tags'), component: <TagsPopover />, icon:  <Tag size={16} />, guidance: t('tagsGuidance') },
   ], [t])
 

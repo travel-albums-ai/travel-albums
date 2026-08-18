@@ -3,7 +3,7 @@ import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsSection from '@/windows/components/SettingsSection';
 import SettingsGeneralRow from '@/windows/settings/components/SettingsGeneralRow';
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
-import { Code, Database, Folder, FolderOpen, Trash } from 'lucide-react';
+import { Code, Database, Folder, FolderOpen, Plus, Trash } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
@@ -57,6 +57,28 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
               justifyContent: 'space-between',
             }}
           >
+            <TextField
+              value={newRoot}
+              size="small"
+              fullWidth
+              placeholder="Add new root path..."
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Plus size={16} />
+                    </InputAdornment>
+                  ),
+                },
+              }}
+              onChange={(event) => setNewRoot(event.target.value)}
+              onBlur={() => {
+                if (newRoot && !data?.TAKEOUT_ROOTS?.includes(newRoot)) {
+                  addRoot(newRoot);
+                  setNewRoot('');
+                }
+              }}
+            />
             {data?.TAKEOUT_ROOTS?.map((root: string) => (
               <Box
                 key={root}
@@ -100,27 +122,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
               </Box>
             ))}
 
-            <TextField
-              value={newRoot}
-              size="small"
-              fullWidth
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Folder size={16} />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              onChange={(event) => setNewRoot(event.target.value)}
-              onBlur={() => {
-                if (newRoot && !data?.TAKEOUT_ROOTS?.includes(newRoot)) {
-                  addRoot(newRoot);
-                  setNewRoot('');
-                }
-              }}
-            />
+
           </Box>
         </SettingsGeneralRow>
 
@@ -143,7 +145,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
                 input: {
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Folder size={16} />
+                      <Database size={16} />
                     </InputAdornment>
                   ),
                 },
