@@ -1,3 +1,9 @@
+## [1.168.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.167.0...v1.168.0) (2026-08-18)
+
+### ✨ Features
+
+* update NoServerWindow logic to include onboarding state; remove unused SettingsPopover component ([f552567](https://github.com/travel-albums-ai/travel-albums/commit/f55256785404390d18e3f3b6cba5c759b3e607ee))
+
 ## [1.167.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.166.0...v1.167.0) (2026-08-18)
 
 ### ✨ Features
