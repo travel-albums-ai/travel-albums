@@ -50,7 +50,7 @@ export default function GenericToggleButton({
     } placement="bottom" arrow>
       <span>
         <ToggleButton
-          style={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 2, border: 0 }}
+          style={{ display: 'flex', alignItems: 'center', gap: 2, border: 0 }}
           sx={variant === 'outlined'
             ? {
               borderRadius: 2,

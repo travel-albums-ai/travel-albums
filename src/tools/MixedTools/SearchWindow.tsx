@@ -18,7 +18,7 @@ export default function SearchWindow() {
         boxShadow: 1,
         borderRadius: 2,
         flex: 1,
-        bgcolor: 'action.selected',
+        bgcolor: 'background.paper',
         justifyContent: 'space-between',
         px: 2, py: 0.5,
         transition: 'background-color 0.25s',

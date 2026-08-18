@@ -70,6 +70,19 @@ export const clownThemeTokens = {
         secondary: '#6c8a32',
         disabled: '#1010be',
       },
+      action: {
+        active: '#771717',
+        hover: '#ec780a',
+        hoverOpacity: 0.2,
+        selected: '#10106b',
+        selectedOpacity: 0.2,
+        disabled: '#861a86',
+        disabledBackground: '#838320',
+        disabledOpacity: 0.38,
+        focus: '#0f7a0f',
+        focusOpacity: 0.12,
+
+      },
       divider: '#a30f0f',
       main: '#c01cc0',
     },
@@ -200,6 +213,7 @@ export const generateTheme = (tokens) => createTheme({
         }),
       },
     },
+
     MuiAccordion: {
       styleOverrides: {
         root: ({ theme }) => ({
