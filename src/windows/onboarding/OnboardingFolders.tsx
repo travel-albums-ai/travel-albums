@@ -1,10 +1,8 @@
-import IndexerContent from '@/components/IndexerContent';
 import IndexerSettings from '@/components/IndexerSettings';
+import OnboardingPhasesList from '@/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { Code, RefreshCw } from 'lucide-react';
-import { cloneElement } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const phaseSteps = [
   {
@@ -22,26 +20,13 @@ const phaseSteps = [
 ]
 
 export default function OnboardingFolders() {
-  const { t } = useTranslation();
 
   return (<>
     <OnboardingWrapper>
       <Box sx={{ flex: 0, width: '100%', bgcolor: 'background.default', borderRadius: 2, p: 1 }}>
         <IndexerSettings asIs />
       </Box>
-      {phaseSteps.map((step, i) => (
-        <Box key={step.key} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, width: '100%', px: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-            {cloneElement(step.icon, { size: 16 })}
-            <Typography variant="subtitle1">{t(step.titleKey)}</Typography>
-          </Box>
-          <Typography variant="subtitle2" color="textSecondary">{t(step.descriptionKey)}</Typography>
-          {i < phaseSteps.length - 1 && <Divider sx={{ width: '100%' }} />}
-        </Box>
-      ))}
-      <Box sx={{ flex: 0, width: '100%', bgcolor: 'background.default', borderRadius: 2}}>
-        <IndexerContent />
-      </Box>
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
     </OnboardingWrapper>
   </>)
 }

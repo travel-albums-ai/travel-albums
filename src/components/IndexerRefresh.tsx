@@ -80,7 +80,7 @@ export default function IndexerRefresh() {
     const interval = setInterval(() => {
       console.log('🔥 Refreshing takeout metadata...');
       forceRefresh();
-    }, 30_000);
+    }, 10_000);
 
     return () => {
       clearInterval(interval);

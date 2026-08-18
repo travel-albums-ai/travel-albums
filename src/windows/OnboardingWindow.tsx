@@ -1,6 +1,7 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import OnboardingFolders from '@/windows/onboarding/OnboardingFolders';
 import OnboardingIndexer from '@/windows/onboarding/OnboardingIndexer';
+import OnboardingIndexing from '@/windows/onboarding/OnboardingIndexing';
 import OnboardingTakeout from '@/windows/onboarding/OnboardingTakeout';
 import OnboardingWelcome from '@/windows/onboarding/OnboardingWelcome';
 import { Box, Button, Dialog, Step, StepLabel, Stepper } from '@mui/material';
@@ -19,8 +20,9 @@ export default function OnboardingWindow() {
   const steps = [
     t('onboardingStepWelcome'),
     'Google Takeout',
-    'Indexer',
-    t('onboardingStepConfigureFolders'),
+    'Install',
+    'Folders',
+    'Indexing',
   ];
 
   const showWindow = onboarding === true
@@ -30,7 +32,17 @@ export default function OnboardingWindow() {
   }
 
   return (<>
-    <Dialog onClose={() => { }} open={onboarding} fullWidth>
+    <Dialog onClose={() => { }} open={onboarding} fullWidth
+      slotProps={{
+        paper: {
+          sx: {
+            width: 700,
+            // height: 700,
+            maxWidth: 'none',
+            maxHeight: 'none',
+          },
+        },
+      }}>
       <Box sx={{
       }}>
         <Box sx={{
@@ -42,7 +54,7 @@ export default function OnboardingWindow() {
         }}>
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label) => (
-              <Step key={label} onClick={() => setActiveStep(steps.indexOf(label))} sx={{ cursor: 'pointer', width: '120px' }}>
+              <Step key={label} onClick={() => setActiveStep(steps.indexOf(label))} sx={{ cursor: 'pointer', width: '110px' }}>
                 <StepLabel >{label}</StepLabel>
               </Step>
             ))}
@@ -53,6 +65,7 @@ export default function OnboardingWindow() {
         {activeStep === 1 && <OnboardingTakeout />}
         {activeStep === 2 && <OnboardingIndexer />}
         {activeStep === 3 && <OnboardingFolders />}
+        {activeStep === 4 && <OnboardingIndexing />}
 
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, gap: 1 }}>
           <Button

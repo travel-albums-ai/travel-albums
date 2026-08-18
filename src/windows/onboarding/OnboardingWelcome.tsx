@@ -1,6 +1,29 @@
+import OnboardingPhasesList from '@/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
-import { Divider, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import { Database, LayoutPanelLeft, SquareMousePointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+const phaseSteps = [
+  {
+    key: '1',
+    icon: <SquareMousePointer />,
+    titleKey: 'Download and Prepare ',
+    descriptionKey: "Fetch your images, indexer and configure the folders to start indexing your photos.",
+  },
+  {
+    key: '2',
+    icon: <Database />,
+    titleKey: "Index the photos",
+    descriptionKey: "Let the indexer run and index your photos. This may take some time depending on the number of photos you have.",
+  },
+  {
+    key: '3',
+    icon: <LayoutPanelLeft />,
+    titleKey: '🌍 🍕 🐈 🏔️ ⛵ 🥰 Hello memories!',
+    descriptionKey: 'Enjoy your travel albums! Remember your trips, your meals, your adventures and share them with your friends and family.',
+  },
+]
 
 export default function OnboardingWelcome() {
   const { t } = useTranslation();
@@ -21,15 +44,7 @@ export default function OnboardingWelcome() {
       <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="body1" color="textPrimary">
         {t('onboardingWelcomeBody')}
       </Typography>
-
-      <Divider sx={{ width: '100%' }} />
-      <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="subtitle2" color="textSecondary">
-        {t('onboardingWelcomeSubtitle')}
-      </Typography>
-
-      <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="caption" color="textDisabled">
-        {t('onboardingWelcomeFooter')}
-      </Typography>
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
     </OnboardingWrapper>
   </>)
 }

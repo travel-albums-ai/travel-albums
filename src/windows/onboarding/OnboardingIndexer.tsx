@@ -1,8 +1,8 @@
 import ServerStatus from '@/base/ServerStatus';
+import OnboardingButton from '@/windows/onboarding/OnboardingButton';
+import OnboardingPhasesList from '@/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/windows/onboarding/OnboardingWrapper';
-import { Box, Divider, Typography } from '@mui/material';
 import { PackageOpen, Play, SquareMousePointer } from 'lucide-react';
-import { cloneElement } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const phaseSteps = [
@@ -31,18 +31,10 @@ export default function OnboardingIndexer() {
 
   return (<>
     <OnboardingWrapper>
-      <img src="/image.1.png" alt="Releases" height={235} style={{ width: '100%', borderRadius: 8 }} />
-      {phaseSteps.map((step, i) => (
-        <Box key={step.key} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, width: '100%', px: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-            {cloneElement(step.icon, { size: 16 })}
-            <Typography variant="subtitle1">{t(step.titleKey)}</Typography>
-            {i === 2 && <ServerStatus />}
-          </Box>
-          <Typography variant="subtitle2" color="textSecondary">{t(step.descriptionKey)}</Typography>
-          {i < phaseSteps.length - 1 && <Divider sx={{ width: '100%' }} />}
-        </Box>
-      ))}
+      <img src="/image.1.png" alt="Releases" style={{ width: '100%', borderRadius: 8 }} />
+      <OnboardingButton href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" label="Open Indexer Releases..." />
+      <ServerStatus />
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
 
     </OnboardingWrapper>
   </>)
