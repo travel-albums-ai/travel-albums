@@ -1,5 +1,6 @@
 import { ThemeOptions } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
+import Color from 'color';
 
 export const themeTokens = {
   light: {
@@ -25,6 +26,11 @@ export const themeTokens = {
       primary: { main: '#a8c7fa' },
       secondary: { main: '#f48fb1' },
       background: { default: '#3c3c3c', paper: '#282828' },
+      text: {
+        primary: '#e0e0e0',
+        secondary: '#b0b0b0',
+        disabled: '#808080',
+      }
     },
     shape: {
       borderRadius: 4,
@@ -40,6 +46,21 @@ export const themeTokens = {
 
 export const generateTheme = (tokens: ThemeOptions) => createTheme({
   ...tokens,
+
+  palette: {
+    ...tokens.palette,
+    background: {
+      ...tokens.palette?.background,
+      default: Color(tokens.palette?.background?.default).mix(Color(tokens.palette?.primary?.main), 0.065).hex(),
+      paper: Color(tokens.palette?.background?.paper).mix(Color(tokens.palette?.primary?.main), 0.065).hex(),
+    },
+    text: {
+      ...tokens.palette?.text,
+      primary: Color(tokens.palette?.text?.primary).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
+      secondary: Color(tokens.palette?.text?.secondary).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
+      disabled: Color(tokens.palette?.text?.disabled).mix(Color(tokens.palette?.primary?.main), 0.25).toString(),
+    },
+  },
 
   components: {
     MuiTextField: {
@@ -107,13 +128,13 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
     MuiTooltip: {
       styleOverrides: {
         tooltip: ({ theme }) => ({
-          backgroundColor: `${theme.palette.background.paper}87`,
+          backgroundColor: `${theme.palette.background.paper}BB`,
           backdropFilter: 'blur(2px)',
           color: `${theme.palette.text.primary}`,
           boxShadow: theme.shadows[4],
         }),
         arrow: ({ theme }) => ({
-          color: `${theme.palette.background.paper}87`,
+          color: `${theme.palette.background.paper}BB`,
         }),
       },
     },

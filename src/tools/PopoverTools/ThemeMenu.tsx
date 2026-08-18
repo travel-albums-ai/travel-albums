@@ -8,7 +8,7 @@ export default function ThemeMenu() {
   return <SettingSelectRow
     label={''}
     value={themeId}
-    options={['default', 'barbie', 'solarized', 'monokai']}
+    options={['default', 'barbie', 'solarized', 'monokai', 'dracula']}
     onChange={(value) => {
       setSetting((prev) => ({
         ...prev,
