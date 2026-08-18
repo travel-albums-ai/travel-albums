@@ -14,7 +14,7 @@ export function usePostConfig() {
   return useMutation({
     mutationFn: async (payload: ConfigPayload) => {
       const response = await fetch(CONFIG_URL, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
