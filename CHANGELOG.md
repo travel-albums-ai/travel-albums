@@ -1,3 +1,9 @@
+## [1.163.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.163.1...v1.163.2) (2026-08-18)
+
+### 🐛 Fixes
+
+* reorder import statement for dracula theme in index.ts ([94835c0](https://github.com/travel-albums-ai/travel-albums/commit/94835c051b07b3bab31ead975e2f431ddb3f9a38))
+
 ## [1.163.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.163.0...v1.163.1) (2026-08-18)
 
 ### 🐛 Fixes
