@@ -1,6 +1,6 @@
 import { useSidebar, useSidebarStoreSelector } from '@/context/sidebarStore';
 import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip, useTheme } from '@mui/material';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ export default function SidebarSectionHeader({ title, icon, data, type }: { titl
   const isOpen = sidebarOpen?.[type as keyof typeof sidebarOpen] ?? false
   const location = useLocation();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   return (
     <Box sx={{ display: 'flex',  alignItems: 'center', gap: 0, py: 0.25 }}>
@@ -30,7 +31,9 @@ export default function SidebarSectionHeader({ title, icon, data, type }: { titl
 
       <Tooltip title={isOpen ? 'Collapse' : 'Expand'} arrow placement="right">
         <IconButton onClick={() => setSidebarOpen(type as keyof typeof sidebarOpen, !isOpen)} size="small" sx={{ ml: 0.5, p: 0.5}}>
-          {isOpen ? <ChevronUp size={16} style={{ opacity: 0.4 }} /> : <ChevronDown size={16} style={{ opacity: 0.8 }} />}
+          {isOpen
+            ? <ChevronUp size={16} style={{ opacity: 0.4 }} color={theme.palette.text.primary} />
+            : <ChevronDown size={16} style={{ opacity: 0.8 }} color={theme.palette.text.primary} />}
         </IconButton>
       </Tooltip>
     </Box>

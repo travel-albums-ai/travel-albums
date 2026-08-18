@@ -61,13 +61,13 @@ export const clownThemeTokens = {
       mode: 'light',
       primary: { main: '#FF0000' },
       secondary: { main: '#0000FF' },
-      background: { default: '#FFFF00', paper: '#00FF00' },
+      background: { default: '#5f5f0b', paper: '#285e28' },
       text: {
-        primary: '#99FF99',
-        secondary: '#AABB88',
-        disabled: '#4848FF',
+        primary: '#2b882b',
+        secondary: '#6c8a32',
+        disabled: '#1010be',
       },
-      divider: '#FF0000 ',
+      divider: '#a30f0f',
     },
     shape: {
       borderRadius: 4,
@@ -146,6 +146,19 @@ export const generateTheme = (tokens) => createTheme({
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           backdropFilter: 'blur(1px)',
         },
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: ({ theme }) => ({
+          backgroundColor: `${theme.palette.background.paper}87`,
+          backdropFilter: 'blur(2px)',
+          color: `${theme.palette.text.primary}`,
+          boxShadow: theme.shadows[4],
+        }),
+        arrow: ({ theme }) => ({
+          color: `${theme.palette.background.paper}87`,
+        }),
       },
     },
 

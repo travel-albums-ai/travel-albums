@@ -56,7 +56,7 @@ export default function SolidChip({
       opacity: variant === 'header' ? 0.5 : 0.7,
       bgcolor: variant === 'header' ? 'action.selected' : 'transparent',
       border: borderless ? 'none' : '1px solid',
-      borderColor: 'action.selected',
+      borderColor: 'divider',
       borderRadius: 1,
       position: 'relative',
       overflow: 'hidden',

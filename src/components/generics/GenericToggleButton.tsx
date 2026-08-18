@@ -1,7 +1,7 @@
 import KeyboardChip from '@/components/KeyboardChip';
 import PopoverButtonSimple from '@/components/PopoverButtonSimple';
 import GenericHotkey from '@/components/generics/GenericHotkey';
-import { Box, ToggleButton, Tooltip, Typography } from '@mui/material';
+import { Box, ToggleButton, Tooltip, Typography, useTheme } from '@mui/material';
 import { Astroid, ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, ReactElement, ReactNode } from 'react';
 
@@ -39,6 +39,7 @@ export default function GenericToggleButton({
   size?: number,
   dropShadow?: boolean
   }) {
+  const theme = useTheme();
 
   const buttonDOM = <>
     {item.kbd && !item.disabled && <GenericHotkey item={item as any} />}
@@ -65,14 +66,18 @@ export default function GenericToggleButton({
             size,
             style: dropShadow ? {
               ...item.icon.props.style,
+              color: theme.palette.text.primary,
               filter: "drop-shadow(0px 2px 2px rgba(0,0,0,1))"
             } : {
               ...item.icon.props.style,
+              color: theme.palette.text.primary,
             } })}
-          {item.title && <Typography variant="caption" sx={{ ml: 0.5, lineHeight: 1 }}>{item.title}</Typography>}
+          {item.title && <Typography variant="caption" color="textPrimary" sx={{ ml: 0.5, lineHeight: 1 }}>{item.title}</Typography>}
 
           {item.popover && <>
-            {item.upsideDown ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+            {item.upsideDown
+              ?  <ChevronUp size={12} color={theme.palette.text.primary} />
+              : <ChevronDown size={12} color={theme.palette.text.primary} />}
           </>}
         </ToggleButton>
       </span>

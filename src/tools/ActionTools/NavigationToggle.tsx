@@ -42,7 +42,7 @@ export default function NavigationToggle() {
     <GenericToggleButtonGroup items={[
       {
         webMcp: true,
-        icon: <ArrowLeft />,
+        icon: <ArrowLeft  />,
         onClick: () => window.history.back(),
         tooltip: t('navBack')
       },
