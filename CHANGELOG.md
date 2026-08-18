@@ -1,3 +1,9 @@
+## [1.191.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.190.0...v1.191.0) (2026-08-18)
+
+### ✨ Features
+
+* update build script for production mode and clean up unused code in theme generation ([17baf21](https://github.com/travel-albums-ai/travel-albums/commit/17baf2109d3d745be34c302acb31b14f5eba8f1b))
+
 ## [1.190.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.189.0...v1.190.0) (2026-08-18)
 
 ### ✨ Features
