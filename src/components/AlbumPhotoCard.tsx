@@ -16,8 +16,9 @@ import {
   memo,
   useCallback,
   useMemo,
+  useState,
   type CSSProperties,
-  type MouseEvent
+  type MouseEvent,
 } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -47,7 +48,6 @@ const cardSx = {
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-  // height: '100%',
   overflow: 'hidden',
   borderRadius: 2,
   cursor: 'pointer',
@@ -55,25 +55,6 @@ const cardSx = {
 
   '&:hover': {
     filter: 'saturate(1.25)',
-
-    '& .album-photo-description': {
-      opacity: 0,
-      pointerEvents: 'none',
-    },
-
-    '& .album-photo-details': {
-      opacity: 1,
-      pointerEvents: 'auto',
-    },
-  },
-
-  '& .album-photo-description': {
-    opacity: 1,
-    transition: 'opacity 0.15s',
-  },
-
-  '& .album-photo-details': {
-    transition: 'opacity 0.15s',
   },
 } as const;
 
@@ -91,8 +72,8 @@ const detailsSx = {
   bottom: 8,
   left: 8,
   borderRadius: 2,
-  justifyContent: "flex-start",
-  alignItems: "center",
+  justifyContent: 'flex-start',
+  alignItems: 'center',
   gap: 1,
   zIndex: 3,
   px: 2,
@@ -106,19 +87,35 @@ function AlbumPhotoCard({
   original = false,
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
-  const { hasDescription } = useDescriptions()
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const { hasDescription } = useDescriptions();
+
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
-  const showDescription = useAlbumPhotoCardStoreSelector((state) => state.showDescription);
+  const showDescription = useAlbumPhotoCardStoreSelector(
+    (state) => state.showDescription,
+  );
   const showTags = useAlbumPhotoCardStoreSelector((state) => state.showTags);
   const showDate = useAlbumPhotoCardStoreSelector((state) => state.showDate);
-  const showLocation = useAlbumPhotoCardStoreSelector((state) => state.showLocation);
-  const showFileName = useAlbumPhotoCardStoreSelector((state) => state.showFileName);
+  const showLocation = useAlbumPhotoCardStoreSelector(
+    (state) => state.showLocation,
+  );
+  const showFileName = useAlbumPhotoCardStoreSelector(
+    (state) => state.showFileName,
+  );
+
   const selectMode = useSettingsStoreSelector((state) => state.selectMode);
-  const { ref, inView } = useInView({});
-  const isPreviewed = useSettingsStoreSelector((state) => state.previewPhotoObj?.id === photo.id);
+
+  const isPreviewed = useSettingsStoreSelector(
+    (state) => state.previewPhotoObj?.id === photo.id,
+  );
+
   const { setPreviewPhotoObj, setFocusedPhoto } = useSettings();
   const { isFavorite } = useFavorites();
+
+  const { ref, inView } = useInView();
 
   const favorite = isFavorite(photo.id);
   const isSelected = useSelected_isSelected(photo.id);
@@ -131,12 +128,18 @@ function AlbumPhotoCard({
 
   const handleMouseEnter = useCallback(
     (event: MouseEvent<HTMLElement>) => {
+      setIsHovered(true);
+
       if (hasGps && event.shiftKey) {
         setFocusedPhoto(photo.id);
       }
     },
     [hasGps, photo.id, setFocusedPhoto],
   );
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+  }, []);
 
   const handleClick = useCallback(() => {
     setPreviewPhotoObj(photo);
@@ -166,6 +169,7 @@ function AlbumPhotoCard({
         ref={ref}
         component="article"
         onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={handleClick}
         sx={{
           ...cardSx,
@@ -173,16 +177,6 @@ function AlbumPhotoCard({
           borderBottomLeftRadius: showFileName ? 0 : 8,
           borderBottomRightRadius: showFileName ? 0 : 8,
           ...style,
-
-          '& .album-photo-details': {
-            ...cardSx['& .album-photo-details'],
-            opacity: 0,
-            pointerEvents: 'none',
-          },
-          '&:hover .album-photo-details': {
-            opacity: 1,
-            pointerEvents: 'auto',
-          },
         }}
       >
         <AlbumPhotoThumbnailBackgroundNg
@@ -196,66 +190,91 @@ function AlbumPhotoCard({
           }}
         />
 
-        {inView && <>
-          {(selectMode || favorite) && (
-            <GeneralRegistryToolbar
-              fullWidth={false}
-              group="album-photo-card"
-              sx={toolbarSx}
-              context={{
-                photoId: photo.id,
-                favorite,
-                selectMode,
-              }}
-            />
-          )}
-
-          {showTags && <AlbumPhotoCardTags photo={photo} />}
-
-          {showDescription && hasDescription(photo.id) && (
-            <DescribePhotoReadOnly photoId={photo.id} className="album-photo-description" sx={detailsSx} />
-          )}
-
-          <Stack direction="row" divider={<Divider orientation="vertical" sx={{ borderStyle: 'dotted' }} flexItem />} className="album-photo-details" sx={detailsSx}>
-            {showDate && (
-              <Tooltip arrow title={photo.takenAt}>
-                <Typography
-                  variant="caption"
-                  gutterBottom={false}
-                  sx={{
-                    color: 'text.secondary',
-                    opacity: 0.9,
-                    fontWeight: 500,
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {prettyTime(photo.takenAt)}
-                </Typography>
-              </Tooltip>
+        {inView && (
+          <>
+            {(selectMode || favorite) && (
+              <GeneralRegistryToolbar
+                fullWidth={false}
+                group="album-photo-card"
+                sx={toolbarSx}
+                context={{
+                  photoId: photo.id,
+                  favorite,
+                  selectMode,
+                }}
+              />
             )}
-            <AlbumsMetaDetails
-              photos={[photo]}
-              minWidth={0}
-              filterEmpty
-              showCount={false}
-              showLocation={showLocation}
-            />
-          </Stack>
-        </>}
 
+            {showTags && <AlbumPhotoCardTags photo={photo} />}
+
+            {showDescription && hasDescription(photo.id) && (
+              <DescribePhotoReadOnly
+                photoId={photo.id}
+                className="album-photo-description"
+                sx={detailsSx}
+              />
+            )}
+
+            {isHovered && (
+              <Stack
+                direction="row"
+                divider={
+                  <Divider
+                    orientation="vertical"
+                    sx={{ borderStyle: 'dotted' }}
+                    flexItem
+                  />
+                }
+                sx={detailsSx}
+              >
+                {showDate && (
+                  <Tooltip arrow title={photo.takenAt}>
+                    <Typography
+                      variant="caption"
+                      gutterBottom={false}
+                      sx={{
+                        color: 'text.secondary',
+                        opacity: 0.9,
+                        fontWeight: 500,
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {prettyTime(photo.takenAt)}
+                    </Typography>
+                  </Tooltip>
+                )}
+
+                <AlbumsMetaDetails
+                  photos={[photo]}
+                  minWidth={0}
+                  filterEmpty
+                  showCount={false}
+                  showLocation={showLocation}
+                />
+              </Stack>
+            )}
+          </>
+        )}
       </Card>
 
-      {/* <LightboxWindow
-        photo={photo}
-        // open={lightboxOpen}
-        // onClose={() => setLightboxOpen(false)}
-      /> */}
-
-      {inView && showFileName && <Box sx={{ display: 'block', p: 0.5, bgcolor: 'background.paper', borderRadius: 2, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
-        <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>
-          <Typography variant="caption" color="textSecondary">{photo.title}</Typography>
-        </Tooltip>
-      </Box>}
+      {inView && showFileName && (
+        <Box
+          sx={{
+            display: 'block',
+            p: 0.5,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+          }}
+        >
+          <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>
+            <Typography variant="caption" color="textSecondary">
+              {photo.title}
+            </Typography>
+          </Tooltip>
+        </Box>
+      )}
     </>
   );
 }
