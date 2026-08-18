@@ -1,3 +1,9 @@
+## [1.182.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.182.0...v1.182.1) (2026-08-18)
+
+### 🐛 Fixes
+
+* correct logo image height and fetch priority attribute in NoPhotos component ([25b5129](https://github.com/travel-albums-ai/travel-albums/commit/25b5129ed904cea26e71683147017ad0f133ad44))
+
 ## [1.182.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.181.0...v1.182.0) (2026-08-18)
 
 ### ✨ Features
