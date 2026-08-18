@@ -1,7 +1,8 @@
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
-import { Filter } from 'lucide-react';
+import SettingsSection from '@/windows/components/SettingsSection';
+import { Filter, PersonStanding } from 'lucide-react';
 
 export default function DashboardMetrics() {
   const rawPhotos = useUnfilteredPhotos_GLOBAL();
@@ -10,14 +11,14 @@ export default function DashboardMetrics() {
 
 
   return (
-    // <SettingsSection title="Metrics" icon={<PersonStanding />} >
-    <AlbumsMetaDetails id="database-counts" photos={photos} minWidth={50} extraItems={[
-      ...(photosFiltered.length !== photos.length) ? [{
-        label: 'Filtered',
-        value: photosFiltered.length,
-        icon: <Filter size={14} color={photosFiltered.length === 0 ? 'red' : undefined} />
-      }] : [],
-    ]} />
-    // </SettingsSection>
+    <SettingsSection title="Metrics" icon={<PersonStanding />} >
+      <AlbumsMetaDetails id="database-counts" photos={photos} minWidth={50} extraItems={[
+        ...(photosFiltered.length !== photos.length) ? [{
+          label: 'Filtered',
+          value: photosFiltered.length,
+          icon: <Filter size={14} color={photosFiltered.length === 0 ? 'red' : undefined} />
+        }] : [],
+      ]} />
+    </SettingsSection>
   );
 }

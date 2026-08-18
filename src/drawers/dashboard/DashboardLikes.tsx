@@ -3,14 +3,14 @@ import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore'
 import workerFilterByKey from '@/hooks/sections/workers/filterByKey.worker';
 import SettingsSection from '@/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
-import { MessageCircle } from 'lucide-react';
+import { Star } from 'lucide-react';
 
-export default function DashboardComments() {
+export default function DashboardLikes() {
   const photos = useFilteredPhotos_GLOBAL();
-  const sectionPhotos = workerFilterByKey(photos, 'comments')
+  const sectionPhotos = workerFilterByKey(photos, 'likes')
 
   return (
-    <SettingsSection title="Comments" icon={<MessageCircle />}  >
+    <SettingsSection title="Likes" icon={<Star />} >
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 2, flexWrap: 'wrap', height: '100%' }}>
         {sectionPhotos?.map((item) => (
           <Box key={item.name} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
