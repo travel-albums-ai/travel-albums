@@ -1,3 +1,9 @@
+## [1.188.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.187.0...v1.188.0) (2026-08-18)
+
+### ✨ Features
+
+* refactor loadDrawerMetadata and loadToolMetadata to use Promise.allSettled for better error handling ([7b98a6d](https://github.com/travel-albums-ai/travel-albums/commit/7b98a6d4a61db9951d417cdfc01ea85f34ccf25a))
+
 ## [1.187.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.186.0...v1.187.0) (2026-08-18)
 
 ### ✨ Features
