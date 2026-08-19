@@ -1,12 +1,13 @@
 import {
   Box,
   Dialog,
-  IconButton,
-  useTheme,
+  useTheme
 } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
@@ -321,29 +322,13 @@ export default function LightboxWindowNg() {
             alignItems: 'center',
           }}
         >
-          <IconButton
-            onClick={previous}
-            disabled={currentIndex === 0}
-            aria-label="Previous photo"
-            sx={{
-              width: 52,
-              height: 52,
-
-              color: '#fff',
-              bgcolor: 'rgba(0,0,0,.45)',
-
-              '&:hover': {
-                bgcolor: 'rgba(0,0,0,.7)',
-              },
-
-              '&.Mui-disabled': {
-                color: 'rgba(255,255,255,.2)',
-                bgcolor: 'rgba(0,0,0,.2)',
-              },
-            }}
-          >
-            <ChevronLeft size={32} />
-          </IconButton>
+          <GenericToggleButtonGroup items={[{
+            tooltip: "Previous photo",
+            onClick: () => previous(),
+            icon: <ChevronLeft size={20} />,
+            selected: false,
+            disabled: currentIndex === 0,
+          }] satisfies GenericToggleButtonProps[]} variant="outlined" />
         </Box>
 
         {/* Image */}
@@ -392,29 +377,13 @@ export default function LightboxWindowNg() {
             alignItems: 'center',
           }}
         >
-          <IconButton
-            onClick={next}
-            disabled={currentIndex === photos.length - 1}
-            aria-label="Next photo"
-            sx={{
-              width: 52,
-              height: 52,
-
-              color: '#fff',
-              bgcolor: 'rgba(0,0,0,.45)',
-
-              '&:hover': {
-                bgcolor: 'rgba(0,0,0,.7)',
-              },
-
-              '&.Mui-disabled': {
-                color: 'rgba(255,255,255,.2)',
-                bgcolor: 'rgba(0,0,0,.2)',
-              },
-            }}
-          >
-            <ChevronRight size={32} />
-          </IconButton>
+          <GenericToggleButtonGroup items={[{
+            tooltip: "Next photo",
+            onClick: () => next(),
+            icon: <ChevronRight size={20} />,
+            selected: false,
+            disabled: currentIndex === photos.length - 1,
+          }] satisfies GenericToggleButtonProps[]} variant="outlined" />
         </Box>
       </Box>
 
