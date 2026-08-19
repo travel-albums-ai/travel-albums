@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import GenericPanel from '@/components/generics/GenericPanel';
+import Histogram from '@/components/Histogram';
 import { useNegativeStoreSelector } from '@/context/negativeStore';
 import GeneticBreedingGrid from '@/drawers/adjustments/GeneticBreedingGrid';
 import NegativeConverterCanvas from '@/drawers/adjustments/NegativeConverterCanvas';
@@ -100,7 +101,7 @@ export default function NegativeConverterWrapper({
         {/* {!(hasGeneticBreeding && showGenetic) && <> */}
         {hasPresetSelector || hasToolbox ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, overflow: 'auto' }}>
-
+            <Histogram imageUrl={composeUrl(previewPhotoObj)} width={100} height={50} />
             {hasToolbox && <NegativeConverterToolbox adj={selectedAdj || adj} set={set} >
               {hasPresetSelector && <NegativeConverterPresetSelector onChange={applyPreset} previewPhotoObj={previewPhotoObj} preset={preset} presets={presets} />}
             </NegativeConverterToolbox>}

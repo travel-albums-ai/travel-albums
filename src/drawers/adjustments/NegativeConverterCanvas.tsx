@@ -72,9 +72,6 @@ export default function NegativeConverterCanvas({
     <Box
       sx={{
         alignItems: 'center',
-        // border: '1px solid',
-        // borderColor: 'divider',
-        // borderRadius: 2,
         display: 'flex',
         flex: 1,
         flexDirection: 'column',

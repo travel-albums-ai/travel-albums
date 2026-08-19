@@ -3,6 +3,7 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import PopoverButton from '@/components/PopoverButton';
 import NegativeConverterReusable from '@/drawers/adjustments/NegativeConverterReusable';
 import { Adjustments } from '@/drawers/adjustments/types';
+import { GalleryPhoto } from '@/lib/galleryData';
 import { Box, Tooltip, Typography } from '@mui/material';
 
 export default function NegativeConverterPresetSelector({
@@ -12,7 +13,7 @@ export default function NegativeConverterPresetSelector({
   presets,
 }: {
   onChange: (name: string) => void;
-  previewPhotoObj: unknown;
+  previewPhotoObj: GalleryPhoto;
   preset: string;
   presets: Record<string, Partial<Adjustments>>;
 }) {
@@ -52,7 +53,9 @@ export default function NegativeConverterPresetSelector({
               borderColor: 'divider', alignItems: 'center', gap: 1, justifyContent: 'space-between',
               borderRadius: 2, '&:hover': { backgroundColor: 'action.hover' } }}
           >
-            <Box sx={{ width: 100, height: 100, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', border: '1px solid', borderColor: 'divider', boxShadow: 1 }}>
+            <Box sx={{ height: 100,
+              aspectRatio: previewPhotoObj.width / previewPhotoObj.height * -1, // or 4/3, 16/9...
+              borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', border: '1px solid', borderColor: 'divider', boxShadow: 1 }}>
               <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
             </Box>
             <Tooltip title={`Preset: ${name} - ${JSON.stringify(value)}`} placement="top" arrow>
