@@ -8,7 +8,7 @@ const CONFIG_URL = `${SERVER_ORIGIN}/config`
 
 type ConfigPayload = Record<string, unknown>
 
-export function usePostConfig() {
+export default function usePostConfig() {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -43,5 +43,3 @@ export function usePostConfig() {
     },
   })
 }
-
-export default usePostConfig

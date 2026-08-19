@@ -33,13 +33,6 @@ const startAutoFlush = () => {
   }, FLUSH_INTERVAL_MS);
 };
 
-export const stopAutoFlush = () => {
-  if (flushTimer !== null) {
-    clearInterval(flushTimer);
-    flushTimer = null;
-  }
-};
-
 export const flushBenchmarks = (label = "✨ Benchmarks") => {
   if (benchmarkBuffer.length === 0) return;
 
@@ -56,9 +49,5 @@ export const flushBenchmarks = (label = "✨ Benchmarks") => {
     );
   }
 
-  benchmarkBuffer.length = 0;
-};
-
-export const clearBenchmarks = () => {
   benchmarkBuffer.length = 0;
 };

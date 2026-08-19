@@ -1,7 +1,5 @@
-import { ReactNode } from 'react';
-
 import { AdjustmentsSlider } from '@/drawers/adjustments/AdjustmentsItem';
-import { RGB } from '@/drawers/adjustments/types';
+import { ReactNode } from 'react';
 
 export function numberSlider({
   label,
@@ -38,38 +36,4 @@ export function numberSlider({
     value,
     defaultValue,
   };
-}
-
-export function rgbSliders({
-  color,
-  label,
-  onColorChange,
-}: {
-  color: RGB;
-  label: string;
-  onColorChange: (next: RGB) => void;
-}): AdjustmentsSlider[] {
-  return [
-    numberSlider({
-      label,
-      max: 255,
-      min: 0,
-      value: color.r,
-      onValueChange: (value) => onColorChange({ ...color, r: value }),
-    }),
-    numberSlider({
-      label,
-      max: 255,
-      min: 0,
-      value: color.g,
-      onValueChange: (value) => onColorChange({ ...color, g: value }),
-    }),
-    numberSlider({
-      label,
-      max: 255,
-      min: 0,
-      value: color.b,
-      onValueChange: (value) => onColorChange({ ...color, b: value }),
-    }),
-  ];
 }
