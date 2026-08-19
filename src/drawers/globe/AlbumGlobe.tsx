@@ -48,7 +48,7 @@ export default function AlbumGlobe({ photos, multiplier = 1 }: { photos: Gallery
           }}
         />}
 
-        {mapShowPreview && (
+        {!mapShowPreview && (
           <AlbumMapPreview
             batches={batches}
             previewPhotoId={previewPhotoId}

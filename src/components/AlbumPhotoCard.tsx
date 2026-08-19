@@ -177,8 +177,9 @@ function AlbumPhotoCard({
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
         sx={{
-          ...cardSx,
           minHeight: height,
+          ...cardSx,
+
           borderBottomLeftRadius: showFileName ? 0 : 8,
           borderBottomRightRadius: showFileName ? 0 : 8,
           ...style,

@@ -1,5 +1,5 @@
+import AlbumPhotoCard from '@/components/AlbumPhotoCard';
 import { GalleryPhoto } from '@/lib/galleryData';
-import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import { Fragment, useEffect, useRef } from 'react';
 
@@ -74,27 +74,20 @@ export default function AlbumMapPreview({ batches, previewPhotoId, width, height
                     selected
                       ? theme.palette.primary.main
                       : theme.palette.divider,
-                  transition: 'all 0.3s ease',
+                  transition: 'all 1s ease',
                 }}
               >
-                <img
-                  src={composeUrl(p)}
-                  draggable={false}
+                <AlbumPhotoCard original={false} photo={p}
                   style={{
                     width: selected ? width : width / 2,
-                    height: selected ? height : height / 2,
+                    // height: selected ? height : height / 2,
+                    minHeight: selected ? height : height / 2,
                     objectFit: 'cover',
                     borderRadius: 4,
                     lineHeight: 0,
-                    transition: 'all 0.3s ease',
+                    // transition: 'all 0.3s ease',
                     display: 'block',
                     userSelect: 'none',
-                  }}
-                  onClick={() => onPreview(p)}
-                  onMouseOver={(e) => {
-                    if (e.shiftKey) {
-                      onPreview(p);
-                    }
                   }}
                 />
               </Box>

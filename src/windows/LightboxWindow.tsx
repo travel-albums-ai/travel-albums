@@ -98,7 +98,7 @@ export default function LightboxWindow() {
         slides={slides}
         carousel={{
           finite: true,
-          preload: 6,
+          preload: 2,
         }}
         plugins={[
           Fullscreen,
