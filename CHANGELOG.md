@@ -1,3 +1,9 @@
+## [1.201.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.200.0...v1.201.0) (2026-08-19)
+
+### ✨ Features
+
+* refactor NegativeConverter components to improve layout and remove unused code ([2c8a8b4](https://github.com/travel-albums-ai/travel-albums/commit/2c8a8b470427aab51357bdf0877a347c501128db))
+
 ## [1.200.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.199.0...v1.200.0) (2026-08-19)
 
 ### ✨ Features
