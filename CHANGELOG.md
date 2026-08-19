@@ -1,3 +1,9 @@
+## [1.210.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.209.0...v1.210.0) (2026-08-19)
+
+### ✨ Features
+
+* replace AlbumTimeline with AlbumScroller in ScrollerDrawer and integrate AlbumTimeline in AlbumScroller ([9888dbc](https://github.com/travel-albums-ai/travel-albums/commit/9888dbc2da262aa5762e34417fa9c40a1f2715c6))
+
 ## [1.209.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.208.1...v1.209.0) (2026-08-19)
 
 ### ✨ Features
