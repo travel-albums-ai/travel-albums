@@ -1,3 +1,9 @@
+## [1.208.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.208.0...v1.208.1) (2026-08-19)
+
+### 🐛 Fixes
+
+* adjust marker positioning in AlbumTimeline component ([6728e9a](https://github.com/travel-albums-ai/travel-albums/commit/6728e9a217fa95c3c1ee57820b680e6c93e43cef))
+
 ## [1.208.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.207.0...v1.208.0) (2026-08-19)
 
 ### ✨ Features
