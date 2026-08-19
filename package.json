@@ -47,7 +47,6 @@
     "string-to-color": "^2.2.2",
     "uplot": "^1.6.32",
     "usewebmcp": "^4.0.0",
-    "yet-another-react-lightbox": "^3.32.2",
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
