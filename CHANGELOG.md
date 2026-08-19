@@ -1,3 +1,9 @@
+## [1.220.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.219.0...v1.220.0) (2026-08-19)
+
+### ✨ Features
+
+* add mapHeight and mapWidth props to AlbumPhotoCard for customizable map dimensions ([60b6505](https://github.com/travel-albums-ai/travel-albums/commit/60b65056dcee22fc65ef3435c0cc23078e82b955))
+
 ## [1.219.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.218.0...v1.219.0) (2026-08-19)
 
 ### ✨ Features
