@@ -30,13 +30,23 @@ export default defineConfig([
       'no-restricted-imports': [
         'error',
         {
-          patterns: ['@/middleware/tools/*', 'src/middleware/tools/*'],
+          patterns: [
+            '@/middleware/tools/*',
+            '@/middleware/windows/*',
+            'src/middleware/tools/*',
+            'src/middleware/windows/*',
+          ],
         },
       ],
     },
   },
   {
-    files: ['src/toolDiscovery.ts', 'src/middleware/tools/**'],
+    files: [
+      'src/toolDiscovery.ts',
+      'src/windowDiscovery.ts',
+      'src/middleware/tools/**',
+      'src/middleware/windows/**',
+    ],
     rules: {
       'no-restricted-imports': 'off',
     },
