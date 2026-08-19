@@ -299,8 +299,6 @@ export default function LightboxWindowNg() {
           borderRadius: 2,
           gap: 2,
           alignItems: 'center',
-          p: 2,
-          bgcolor: 'background.default',
         }}
       >
         <GenericToggleButtonGroup items={[{
