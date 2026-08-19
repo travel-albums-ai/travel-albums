@@ -1,8 +1,8 @@
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
-import BYOKPersona from '@/middlewar./middleware/windows/settings/components/BYOKPersona';
-import SettingFieldRow from '@/middlewar./middleware/windows/settings/components/SettingFieldRow';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
+import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
+import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import { Box, Button, Typography } from '@mui/material';
 import { Key, PersonStanding, Plus } from 'lucide-react';
 import { Fragment } from 'react';

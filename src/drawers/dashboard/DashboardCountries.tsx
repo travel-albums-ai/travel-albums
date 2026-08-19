@@ -1,7 +1,7 @@
 import SolidChip from '@/components/SolidChip';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import DashboardPreviewImages from '@/drawers/dashboard/DashboardPreviewImages';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { Globe } from 'lucide-react';
 

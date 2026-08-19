@@ -1,6 +1,6 @@
 import SolidChip from '@/components/SolidChip';
 import DashboardPreviewImages from '@/drawers/dashboard/DashboardPreviewImages';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box, Stack, Typography } from '@mui/material';
 import { useInView } from 'react-intersection-observer';
 

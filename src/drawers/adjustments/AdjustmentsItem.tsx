@@ -1,6 +1,6 @@
 import SolidChip from '@/components/SolidChip';
 import DebouncedSlider from '@/drawers/adjustments/DebouncedSlider';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import {
   Box,
   Switch,

@@ -1,6 +1,6 @@
 import { useFilterPhotos } from '@/context/filterStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
-import AddRemoveToggle from '@/middlewar./middleware/windows/settings/components/AddRemoveToggle';
+import AddRemoveToggle from '@/middleware/windows/settings/components/AddRemoveToggle';
 import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { Trash } from 'lucide-react';
 import { Fragment } from 'react';

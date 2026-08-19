@@ -1,7 +1,7 @@
 import ServerStatus from '@/base/ServerStatus';
-import OnboardingButton from '@/middlewar./middleware/windows/onboarding/OnboardingButton';
-import OnboardingPhasesList from '@/middlewar./middleware/windows/onboarding/OnboardingPhasesList';
-import OnboardingWrapper from '@/middlewar./middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
+import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { Box } from '@mui/material';
 import { PackageOpen, Play, SquareMousePointer } from 'lucide-react';
 

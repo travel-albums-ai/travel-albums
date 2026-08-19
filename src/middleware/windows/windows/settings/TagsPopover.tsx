@@ -1,5 +1,5 @@
 import { useTagsStore, useTagsStoreSelector } from '@/context/tagsStore';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box, Button, TextField } from '@mui/material';
 import { Plus, Tag } from 'lucide-react';
 import { useState } from 'react';

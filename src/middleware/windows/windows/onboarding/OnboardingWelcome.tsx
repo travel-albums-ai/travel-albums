@@ -1,5 +1,5 @@
-import OnboardingPhasesList from '@/middlewar./middleware/windows/onboarding/OnboardingPhasesList';
-import OnboardingWrapper from '@/middlewar./middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { Typography } from '@mui/material';
 import { Database, LayoutPanelLeft, SquareMousePointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

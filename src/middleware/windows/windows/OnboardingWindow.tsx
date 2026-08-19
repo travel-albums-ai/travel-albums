@@ -1,9 +1,9 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import OnboardingFolders from '@/middlewar./middleware/windows/onboarding/OnboardingFolders';
-import OnboardingIndexer from '@/middlewar./middleware/windows/onboarding/OnboardingIndexer';
-import OnboardingIndexing from '@/middlewar./middleware/windows/onboarding/OnboardingIndexing';
-import OnboardingTakeout from '@/middlewar./middleware/windows/onboarding/OnboardingTakeout';
-import OnboardingWelcome from '@/middlewar./middleware/windows/onboarding/OnboardingWelcome';
+import OnboardingFolders from '@/middleware/windows/onboarding/OnboardingFolders';
+import OnboardingIndexer from '@/middleware/windows/onboarding/OnboardingIndexer';
+import OnboardingIndexing from '@/middleware/windows/onboarding/OnboardingIndexing';
+import OnboardingTakeout from '@/middleware/windows/onboarding/OnboardingTakeout';
+import OnboardingWelcome from '@/middleware/windows/onboarding/OnboardingWelcome';
 import { Box, Button, Dialog, Step, StepLabel, Stepper } from '@mui/material';
 import { ChevronLeft, ChevronsRight, CircleX } from 'lucide-react';
 import { useState } from 'react';

@@ -1,6 +1,6 @@
-import OnboardingButton from '@/middlewar./middleware/windows/onboarding/OnboardingButton';
-import OnboardingPhasesList from '@/middlewar./middleware/windows/onboarding/OnboardingPhasesList';
-import OnboardingWrapper from '@/middlewar./middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
+import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { FolderOutput, SquareMousePointer } from 'lucide-react';
 
 const phaseSteps = [

@@ -3,7 +3,7 @@ import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSettings } from '@/context/settingsStore';
 import ElementLabels from '@/drawers/components/ElementLabels';
-import CustomPopoverForTrigger from '@/middlewar./middleware/windows/components/CustomPopoverForTrigger';
+import CustomPopoverForTrigger from '@/middleware/windows/components/CustomPopoverForTrigger';
 import {
   Box,
   TextField,

@@ -1,7 +1,7 @@
 import IndexerContent from '@/components/IndexerContent';
 import { TwinLensMascot } from '@/mascot/TwinLensMascot';
-import OnboardingPhasesList from '@/middlewar./middleware/windows/onboarding/OnboardingPhasesList';
-import OnboardingWrapper from '@/middlewar./middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { Box, Tooltip } from '@mui/material';
 import { Coffee } from 'lucide-react';
 

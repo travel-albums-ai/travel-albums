@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import DrawersPopover from '@/middlewar./middleware/windows/settings/DrawersPopover';
+import DrawersPopover from '@/middleware/windows/settings/DrawersPopover';
 import { Box } from '@mui/material';
 import { PanelsRightBottom } from 'lucide-react';
 

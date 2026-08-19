@@ -1,5 +1,5 @@
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box } from '@mui/material';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';

@@ -1,6 +1,6 @@
 import IndexerContent from '@/components/IndexerContent';
 import IndexerSettings from '@/components/IndexerSettings';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { DatabaseSearch } from 'lucide-react';
 
 export default function IndexerPopover() {

@@ -1,9 +1,9 @@
 import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
-import SettingsComponentRow from '@/middlewar./middleware/windows/settings/components/SettingsComponentRow';
-import SettingToggleRow from '@/middlewar./middleware/windows/settings/components/SettingToggleRow';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
+import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
+import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Ban, Check, Settings } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';

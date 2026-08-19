@@ -1,6 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { PersonStanding } from 'lucide-react';
 

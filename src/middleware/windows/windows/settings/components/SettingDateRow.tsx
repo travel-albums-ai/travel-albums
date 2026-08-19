@@ -1,4 +1,4 @@
-import DatePickerCustom from '@/middlewar./middleware/windows/settings/components/DatePickerCustom';
+import DatePickerCustom from '@/middleware/windows/settings/components/DatePickerCustom';
 import { Box, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';

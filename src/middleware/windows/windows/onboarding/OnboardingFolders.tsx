@@ -1,6 +1,6 @@
 import IndexerSettings from '@/components/IndexerSettings';
-import OnboardingPhasesList from '@/middlewar./middleware/windows/onboarding/OnboardingPhasesList';
-import OnboardingWrapper from '@/middlewar./middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { Box } from '@mui/material';
 import { Code, RefreshCw } from 'lucide-react';
 

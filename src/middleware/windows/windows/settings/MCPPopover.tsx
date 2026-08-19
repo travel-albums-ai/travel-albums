@@ -1,8 +1,8 @@
 import PopoverButtonSimple from '@/components/PopoverButtonSimple';
 import SolidChip from '@/components/SolidChip';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
-import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
-import SettingToggleRow from '@/middlewar./middleware/windows/settings/components/SettingToggleRow';
+import SettingsSection from '@/middleware/windows/components/SettingsSection';
+import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Box, Typography } from '@mui/material';
 import { Code, Cog, Eye } from 'lucide-react';
 import { Fragment } from 'react';

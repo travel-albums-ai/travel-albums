@@ -1,6 +1,6 @@
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
 import { useTransform_Albums } from '@/hooks/sections/useTransform_Albums';
-import GeneralFilter from '@/middlewar./middleware/windows/settings/components/GeneralFilter';
+import GeneralFilter from '@/middleware/windows/settings/components/GeneralFilter';
 import { Folder } from 'lucide-react';
 
 export default function FoldersFilter() {
