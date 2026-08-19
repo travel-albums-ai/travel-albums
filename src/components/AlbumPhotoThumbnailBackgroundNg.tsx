@@ -22,6 +22,7 @@ export default function AlbumPhotoThumbnailBackgroundNg({
 }: Props) {
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
   const { setSetting } = useSettings()
+  const { setPreviewPhotoObj } = useSettings();
 
   const src = composeUrl(photo, original);
 
@@ -33,7 +34,10 @@ export default function AlbumPhotoThumbnailBackgroundNg({
       height={height}
       loading="lazy"
       decoding="async"
-      onDoubleClick={() => setSetting(prev => ({ ...prev, lightboxOpen: true }))}
+      onDoubleClick={() => {
+        setSetting(prev => ({ ...prev, lightboxOpen: true }));
+        setPreviewPhotoObj(photo);
+      }}
       draggable={false}
       className={className}
       style={{
