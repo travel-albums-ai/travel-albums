@@ -1,0 +1,31 @@
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import SettingsContent from '@/middlewar./middleware/windows/components/SettingsContent';
+import { Dialog } from '@mui/material';
+
+export default function SettingsWindow() {
+  const showSettings = useSettingsStoreSelector(s => s.showSettings)
+  const { setSetting } = useSettings()
+
+  const showWindow = showSettings === true
+
+  if (!showWindow) {
+    return null
+  }
+
+  return (<>
+    <Dialog open={showWindow} fullWidth maxWidth="xl"
+      slotProps={{
+        paper: {
+          sx: {
+            width: 1200,
+            height: 850,
+            maxWidth: 'none',
+            maxHeight: 'none',
+          },
+        },
+      }}
+      onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}>
+      <SettingsContent />
+    </Dialog>
+  </>)
+}

@@ -1,0 +1,32 @@
+import IndexerSettings from '@/components/IndexerSettings';
+import OnboardingPhasesList from '@/middlewar./middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingWrapper from '@/middlewar./middleware/windows/onboarding/OnboardingWrapper';
+import { Box } from '@mui/material';
+import { Code, RefreshCw } from 'lucide-react';
+
+const phaseSteps = [
+  {
+    key: '1',
+    icon: <Code />,
+    titleKey: "Configure the source and cache folder",
+    descriptionKey: 'Configure the source folder where your Google Takeout photos are located and the cache folder where the indexer will store its data.',
+  },
+  {
+    key: '2',
+    icon: <RefreshCw />,
+    titleKey: "Let it run",
+    descriptionKey: 'Wait for the indexer to finish indexing your photos. This may take some time depending on the number of photos you have.',
+  },
+]
+
+export default function OnboardingFolders() {
+
+  return (<>
+    <OnboardingWrapper>
+      <Box sx={{ flex: 0, width: '100%', bgcolor: 'background.default', borderRadius: 2, p: 1 }}>
+        <IndexerSettings asIs />
+      </Box>
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
+    </OnboardingWrapper>
+  </>)
+}

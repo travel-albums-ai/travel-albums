@@ -1,6 +1,6 @@
 import { WindowMeta, windowRegistry } from '@/windowRegistry';
 
-const modules = import.meta.glob<WindowMeta | undefined>('./windows/*.meta.ts', {
+const modules = import.meta.glob<WindowMeta | undefined>('./middleware/windows/*.meta.ts', {
   import: 'meta',
 });
 

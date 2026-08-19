@@ -2,8 +2,8 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
-import SettingsSection from '@/windows/components/SettingsSection';
-import SettingsGeneralRow from '@/windows/settings/components/SettingsGeneralRow';
+import SettingsSection from '@/middlewar./middleware/windows/components/SettingsSection';
+import SettingsGeneralRow from '@/middlewar./middleware/windows/settings/components/SettingsGeneralRow';
 import { Box, InputAdornment, TextField, useTheme } from '@mui/material';
 import { Code, Database, Folder, FolderOpen, Plus, Trash } from 'lucide-react';
 import { useEffect, useState } from 'react';

@@ -1,7 +1,7 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { ensureThemeDiscovery } from '@/themeDiscovery';
 import { themeNames } from '@/themes';
-import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
+import SettingSelectRow from '@/middlewar./middleware/windows/settings/components/SettingSelectRow';
 import { useEffect, useState } from 'react';
 
 export default function ThemeMenu() {

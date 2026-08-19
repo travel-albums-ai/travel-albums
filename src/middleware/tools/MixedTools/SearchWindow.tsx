@@ -1,5 +1,5 @@
 import BreadcrumbsTool from '@/components/BreadcrumbsTool/BreadcrumbsTool';
-import SearchFiles from '@/windows/components/SearchFiles';
+import SearchFiles from '@/middlewar./middleware/windows/components/SearchFiles';
 import { Box } from '@mui/material';
 import { CircleX } from 'lucide-react';
 import { useState } from 'react';
