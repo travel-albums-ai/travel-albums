@@ -1,3 +1,9 @@
+## [1.207.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.206.2...v1.207.0) (2026-08-19)
+
+### ✨ Features
+
+* implement draggable photo track for AlbumScroller component ([4c890ea](https://github.com/travel-albums-ai/travel-albums/commit/4c890eaf73a0e31ab6276981bc21c2feb88f7599))
+
 ## [1.206.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.206.1...v1.206.2) (2026-08-19)
 
 ### 🐛 Fixes
