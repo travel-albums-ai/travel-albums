@@ -1,3 +1,13 @@
+## [1.215.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.214.0...v1.215.0) (2026-08-19)
+
+### ✨ Features
+
+* refactor AlbumGlobe to use AlbumMapPreview for improved photo display ([e46aac4](https://github.com/travel-albums-ai/travel-albums/commit/e46aac4a7af9a839a6265bc2cff209e6e27fe818))
+
+### 🐛 Fixes
+
+* reorder imports in AlbumMapPreview for consistency ([6a3a253](https://github.com/travel-albums-ai/travel-albums/commit/6a3a253c23580677c1dc8f0fe3cb0764cc55524d))
+
 ## [1.214.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.213.0...v1.214.0) (2026-08-19)
 
 ### ✨ Features
