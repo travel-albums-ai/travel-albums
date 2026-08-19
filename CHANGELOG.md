@@ -1,3 +1,9 @@
+## [1.195.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.194.0...v1.195.0) (2026-08-19)
+
+### ✨ Features
+
+* refactor theme imports to use utils for centralized theme generation ([a9be695](https://github.com/travel-albums-ai/travel-albums/commit/a9be695ae18ed9fa39ae371df3aca6fe75ddb84a))
+
 ## [1.194.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.193.0...v1.194.0) (2026-08-19)
 
 ### ✨ Features
