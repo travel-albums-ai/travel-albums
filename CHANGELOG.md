@@ -1,3 +1,9 @@
+## [1.197.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.196.0...v1.197.0) (2026-08-19)
+
+### ✨ Features
+
+* implement theme discovery and registry for dynamic theme management ([dbe0de8](https://github.com/travel-albums-ai/travel-albums/commit/dbe0de83e5828b7de50f1abd27efadfb473d71b4))
+
 ## [1.196.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.195.0...v1.196.0) (2026-08-19)
 
 ### ✨ Features
