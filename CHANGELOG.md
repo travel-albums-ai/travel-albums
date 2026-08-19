@@ -1,3 +1,9 @@
+## [1.193.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.192.0...v1.193.0) (2026-08-19)
+
+### ✨ Features
+
+* refactor workerFilterByKey for improved performance and clarity by optimizing bucket sorting and reducing property lookups ([19a7c18](https://github.com/travel-albums-ai/travel-albums/commit/19a7c1868786b5fa177509d0b1128cb4f447491f))
+
 ## [1.192.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.191.0...v1.192.0) (2026-08-19)
 
 ### ✨ Features
