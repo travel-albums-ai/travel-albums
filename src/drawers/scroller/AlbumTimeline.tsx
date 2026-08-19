@@ -1,5 +1,5 @@
 import { Box, Tooltip, Typography } from '@mui/material';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { GalleryPhoto } from '@/lib/galleryData';
 
@@ -7,6 +7,7 @@ type Props = {
   photos: GalleryPhoto[];
   chunkSize: number;
   onIndexChange?: (index: number, chunkIndex: number) => void;
+  currentChunk?: number;
   rows?: number;
   columns?: number;
 };
@@ -22,6 +23,7 @@ export default function AlbumTimeline({
   photos,
   chunkSize = 6,
   onIndexChange,
+  currentChunk,
 }: Props) {
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -233,6 +235,22 @@ export default function AlbumTimeline({
       onIndexChange,
     ],
   );
+
+  // When parent scroller changes current chunk, update the timeline
+  // scrubber position to match.
+  useEffect(() => {
+    if (typeof currentChunk !== 'number' || !timeline) return;
+
+    const index = Math.min(
+      timeline.sorted.length - 1,
+      currentChunk * chunkSize,
+    );
+
+    const ts = Number(timeline.sorted[index].takenAtTs);
+    const pos = timeline.getPosition(ts);
+
+    setPosition(pos);
+  }, [currentChunk, timeline, chunkSize]);
 
   const handlePointerDown = useCallback(
     (

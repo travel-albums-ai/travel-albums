@@ -340,9 +340,14 @@ export default function AlbumScroller({
           pointerEvents: 'auto',
         }}
       >
-        <AlbumTimeline photos={photos} chunkSize={rows * columns} onIndexChange={(index, chunkIndex) => {
-          setCurrent(chunkIndex);
-        }}   />
+        <AlbumTimeline
+          photos={photos}
+          chunkSize={rows * columns}
+          currentChunk={current}
+          onIndexChange={(index, chunkIndex) => {
+            setCurrent(chunkIndex);
+          }}
+        />
       </Box>
 
       <Box
