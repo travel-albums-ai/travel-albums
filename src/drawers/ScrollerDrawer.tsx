@@ -3,7 +3,7 @@ import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore'
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSelectedStoreSelector } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import AlbumScroller from '@/drawers/scroller/AlbumScroller';
+import AlbumTimeline from '@/drawers/scroller/AlbumTimeline';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { useParams } from 'react-router-dom';
 
@@ -22,7 +22,8 @@ export default function ScrollerDrawer() {
 
   return (
     <GenericPanel id="scroller-drawer" defaultTool toolContext={{ showAll, selectedPhotos: selectedPhotos.length > 0, photosIds: photos.map((p: GalleryPhoto) => p.id), selectMode }}>
-      <AlbumScroller photos={photos} columns={4} rows={3} />
+      {/* <AlbumScroller photos={photos} columns={4} rows={3} /> */}
+      <AlbumTimeline photos={photos} />
     </GenericPanel>
   );
 }
