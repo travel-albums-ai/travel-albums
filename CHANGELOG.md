@@ -1,3 +1,9 @@
+## [1.196.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.195.0...v1.196.0) (2026-08-19)
+
+### ✨ Features
+
+* refactor theme structure by consolidating theme files and updating imports ([507aebd](https://github.com/travel-albums-ai/travel-albums/commit/507aebdb80ab473251738cebdf73aabe4d9a223f))
+
 ## [1.195.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.194.0...v1.195.0) (2026-08-19)
 
 ### ✨ Features
