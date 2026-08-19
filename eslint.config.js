@@ -5,8 +5,30 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+const restrictedMiddlewareImports = {
+  base: [
+    '@/middleware/tools/**',
+    '@/middleware/windows/**',
+    'src/middleware/tools/**',
+    'src/middleware/windows/**',
+  ],
+  windows: [
+    '@/middleware/tools/**',
+    '@/middleware/base/**',
+    'src/middleware/tools/**',
+    'src/middleware/base/**',
+  ],
+  tools: [
+    '@/middleware/windows/**',
+    '@/middleware/base/**',
+    'src/middleware/windows/**',
+    'src/middleware/base/**',
+  ],
+};
+
 export default defineConfig([
   globalIgnores(['dist']),
+
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -26,32 +48,63 @@ export default defineConfig([
     },
     rules: {
       indent: ['error', 2, { SwitchCase: 1 }],
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
-      'no-restricted-imports': [
+      'no-unused-vars': [
         'error',
         {
-          patterns: [
-            '@/middleware/tools/*',
-            '@/middleware/windows/*',
-            '@/middleware/base/*',
-            'src/middleware/tools/*',
-            'src/middleware/windows/*',
-            'src/middleware/base/*',
-          ],
+          varsIgnorePattern: '^[A-Z_]',
+          argsIgnorePattern: '^_',
         },
       ],
     },
   },
+
+  // base → base only
+  {
+    files: ['src/middleware/base/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: restrictedMiddlewareImports.base,
+        },
+      ],
+    },
+  },
+
+  // windows → windows only
+  {
+    files: ['src/middleware/windows/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: restrictedMiddlewareImports.windows,
+        },
+      ],
+    },
+  },
+
+  // tools → tools only
+  {
+    files: ['src/middleware/tools/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: restrictedMiddlewareImports.tools,
+        },
+      ],
+    },
+  },
+
+  // Discovery services are the controlled entry points.
   {
     files: [
       'src/toolDiscovery.ts',
       'src/windowDiscovery.ts',
-      'src/middleware/tools/**',
-      'src/middleware/windows/**',
-      'src/middleware/base/**',
     ],
     rules: {
       'no-restricted-imports': 'off',
     },
   },
-])
+]);
