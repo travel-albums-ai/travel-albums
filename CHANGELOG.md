@@ -1,3 +1,9 @@
+## [1.199.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.198.0...v1.199.0) (2026-08-19)
+
+### ✨ Features
+
+* refactor SelectedPhotosPage to use new SelectedPhotosAll and SelectedPhotosSection components ([16c1d2a](https://github.com/travel-albums-ai/travel-albums/commit/16c1d2a918e58d9d2c49b429b9684001d6703779))
+
 ## [1.198.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.197.0...v1.198.0) (2026-08-19)
 
 ### ✨ Features
