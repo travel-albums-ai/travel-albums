@@ -1,3 +1,9 @@
+## [1.218.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.217.0...v1.218.0) (2026-08-19)
+
+### ✨ Features
+
+* replace IconButton with GenericToggleButtonGroup for navigation in LightboxWindowNg ([a773508](https://github.com/travel-albums-ai/travel-albums/commit/a7735085d45cfcfd79b0efd3603c36ae2d6031a1))
+
 ## [1.217.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.216.0...v1.217.0) (2026-08-19)
 
 ### ✨ Features
