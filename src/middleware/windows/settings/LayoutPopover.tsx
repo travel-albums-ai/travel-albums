@@ -1,6 +1,6 @@
 import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
+import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { CreditCard, GalleryHorizontal, PaintBucket } from 'lucide-react';

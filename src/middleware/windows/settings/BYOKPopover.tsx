@@ -1,6 +1,6 @@
+import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { sectionIcons } from '@/icons/IconsIndex';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import { Box, Button, Typography } from '@mui/material';

@@ -1,6 +1,6 @@
 import PopoverButton from '@/components/PopoverButton';
+import SettingsSection from '@/components/SettingsSection';
 import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import FilterPresets from '@/middleware/windows/settings/components/FilterPresets';
 import SettingComponentRow from '@/middleware/windows/settings/components/SettingComponentRow';
 import SettingDateRow from '@/middleware/windows/settings/components/SettingDateRow';

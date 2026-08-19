@@ -1,6 +1,6 @@
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
+import SettingsSection from '@/components/SettingsSection';
 import { toolRegistry } from '@/toolRegistry';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { Bug } from 'lucide-react';
 

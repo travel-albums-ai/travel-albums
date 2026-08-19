@@ -1,6 +1,6 @@
+import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import DashboardCitiesItem from '@/drawers/dashboard/DashboardCitiesItem';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box } from '@mui/material';
 import { Globe } from 'lucide-react';
 import { useMemo } from 'react';

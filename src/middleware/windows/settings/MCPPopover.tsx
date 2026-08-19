@@ -1,7 +1,7 @@
 import PopoverButtonSimple from '@/components/PopoverButtonSimple';
+import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Box, Typography } from '@mui/material';
 import { Code, Cog, Eye } from 'lucide-react';

@@ -1,6 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box, Typography } from '@mui/material';
 import { Star } from 'lucide-react';
 

@@ -1,7 +1,7 @@
+import SettingsSection from '@/components/SettingsSection';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { ensureDrawerDiscovery } from '@/drawerDiscovery';
 import { drawerRegistry } from '@/drawerRegistry';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Ban, Check } from 'lucide-react';
 import { Fragment, useEffect, useState } from 'react';

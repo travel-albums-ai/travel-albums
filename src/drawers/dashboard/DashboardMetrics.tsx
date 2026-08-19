@@ -1,6 +1,6 @@
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import SettingsSection from '@/components/SettingsSection';
 import { useUnfilteredPhotos_GLOBAL } from '@/context/globals/unfilteredPhotosStore';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { PersonStanding } from 'lucide-react';
 
 export default function DashboardMetrics() {

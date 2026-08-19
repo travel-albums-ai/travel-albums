@@ -1,6 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import SettingsSection from '@/components/SettingsSection';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
-import SettingsSection from '@/middleware/windows/components/SettingsSection';
 import { Box } from '@mui/material';
 import { Clock } from 'lucide-react';
 
