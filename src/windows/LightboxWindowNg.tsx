@@ -272,12 +272,13 @@ export default function LightboxWindowNg() {
   return (
     <Dialog
       fullWidth
-      maxWidth="xl"
+      fullScreen
       open={showWindow}
       onClose={close}
       slotProps={{
         paper: {
           sx: {
+            width: '90vw',
             height: '90vh',
             maxHeight: '90vh',
             overflow: 'hidden',
