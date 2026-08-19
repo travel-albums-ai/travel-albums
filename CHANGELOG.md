@@ -1,3 +1,9 @@
+## [1.205.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.204.0...v1.205.0) (2026-08-19)
+
+### ✨ Features
+
+* integrate Histogram component into NegativeConverterWrapper and adjust layout ([2c0f827](https://github.com/travel-albums-ai/travel-albums/commit/2c0f8275db8798fd282e0f033ff0b072eba3278b))
+
 ## [1.204.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.203.0...v1.204.0) (2026-08-19)
 
 ### ✨ Features
