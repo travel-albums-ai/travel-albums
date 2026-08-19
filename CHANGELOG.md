@@ -1,3 +1,17 @@
+## [1.206.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.205.0...v1.206.0) (2026-08-19)
+
+### ✨ Features
+
+* add new version notification dialog and update settings management ([cadc511](https://github.com/travel-albums-ai/travel-albums/commit/cadc511dffa6b78bc5dec8d5af1ff39c11694d8f))
+
+### 🧹 Refactors
+
+* enhance Adjustments components structure and integrate SettingsSection ([6a7fed0](https://github.com/travel-albums-ai/travel-albums/commit/6a7fed0acc857e9a985bf3703f8620d4028d562a))
+* integrate GenericToggleButtonGroup in IndexerSettings and clean up imports ([c40c884](https://github.com/travel-albums-ai/travel-albums/commit/c40c884224d76d01ae3ea49782a48d23a9e729fe))
+* rename NegativeConverter components and update related imports ([b101c1a](https://github.com/travel-albums-ai/travel-albums/commit/b101c1a06cb9e6067b59ddb86517889c074677d3))
+* rename NegativeConverter references to adjustments and remove unused toolbox ([412b7ff](https://github.com/travel-albums-ai/travel-albums/commit/412b7ffeea418a5b8e64f42633186be267af910e))
+* restructure adjustments drawer components and state management ([2a7cdf8](https://github.com/travel-albums-ai/travel-albums/commit/2a7cdf8a1310f3dfec6b587ba0b5c8b559f6875b))
+
 ## [1.205.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.204.0...v1.205.0) (2026-08-19)
 
 ### ✨ Features
