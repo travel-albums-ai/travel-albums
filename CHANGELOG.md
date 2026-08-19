@@ -1,3 +1,13 @@
+## [1.221.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.221.0...v1.221.1) (2026-08-19)
+
+### 🐛 Fixes
+
+* ensure setPreviewPhotoObj is called on double click in AlbumPhotoThumbnailBackgroundNg ([f6c4374](https://github.com/travel-albums-ai/travel-albums/commit/f6c4374dcd644b4327e2d4eb15198c792becea49))
+
+### 🧹 Refactors
+
+* remove yet-another-react-lightbox dependency and associated styles ([7c86236](https://github.com/travel-albums-ai/travel-albums/commit/7c86236d779b5b51a6b064af1dfc7afce4569795))
+
 ## [1.221.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.220.1...v1.221.0) (2026-08-19)
 
 ### ✨ Features
