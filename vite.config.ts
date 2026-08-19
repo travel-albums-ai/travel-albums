@@ -189,6 +189,10 @@ export default defineConfig(({ command }) => {
                         return 'vendor-storage-localforage';
                       }
 
+                      if (id.includes('flexlayout-react')) {
+                        return 'vendor-ux-flexlayout';
+                      }
+
                       if (id.includes('@tanstack')) {
                         return 'vendor-render-tanstack';
                       }
