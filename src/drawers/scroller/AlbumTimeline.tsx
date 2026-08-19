@@ -194,7 +194,8 @@ export default function AlbumTimeline({ photos }: Props) {
               sx={{
                 position: 'absolute',
                 left: `${left}%`,
-                top: 0,
+                top: isYear ? 0 : undefined,
+                bottom: !isYear ? 0 : undefined,
                 transform: 'translateX(-50%)',
                 pointerEvents: 'none',
                 zIndex: isYear ? 2 : 1,
