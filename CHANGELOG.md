@@ -1,3 +1,13 @@
+## [1.222.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.221.1...v1.222.0) (2026-08-19)
+
+### ✨ Features
+
+* add vendor alias for flexlayout-react in Vite config ([6560651](https://github.com/travel-albums-ai/travel-albums/commit/65606511378d98f80d21d8bf87d768f911f17d48))
+
+### 🧹 Refactors
+
+* remove unused filterPhotosByAllPhotosSettings function to streamline photo filtering logic ([f6e565b](https://github.com/travel-albums-ai/travel-albums/commit/f6e565b3c1fa6b2bebc6bf25430f6a1ca49b75c0))
+
 ## [1.221.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.221.0...v1.221.1) (2026-08-19)
 
 ### 🐛 Fixes
