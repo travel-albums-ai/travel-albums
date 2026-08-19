@@ -2,7 +2,7 @@ import {
   Box,
   Dialog,
   IconButton,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -16,11 +16,15 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function LightboxWindowNg() {
   const theme = useTheme();
+
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
   const previewPhotoObj = useSettingsStoreSelector(s => s.previewPhotoObj);
+
   const width = useAlbumPhotoCardStoreSelector(state => state.width);
   const height = useAlbumPhotoCardStoreSelector(state => state.height);
+
   const { setSetting, setPreviewPhotoObj } = useSettings();
+
   const { type_name = '', id = '' } = useParams();
 
   const sections = useSections_GLOBAL();
@@ -36,7 +40,9 @@ export default function LightboxWindowNg() {
     (d: any) => d.name === id,
   );
 
-  const photos = showAll ? photosFiltered : foundSet?.photos || [];
+  const photos = showAll
+    ? photosFiltered
+    : foundSet?.photos || [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -231,7 +237,6 @@ export default function LightboxWindowNg() {
           borderRadius: 1,
           overflow: 'hidden',
           cursor: 'pointer',
-          position: 'relative',
 
           border: active
             ? `3px solid ${theme.palette.primary.main}`
@@ -260,153 +265,176 @@ export default function LightboxWindowNg() {
             objectFit: 'cover',
           }}
         />
-
-        {active && (
-          <Box
-            sx={{
-              position: 'absolute',
-              inset: 0,
-              boxShadow: `inset 0 0 0 1px ${theme.palette.background.paper}`,
-              pointerEvents: 'none',
-            }}
-          />
-        )}
       </Box>
     );
   };
 
   return (
     <Dialog
-      maxWidth={'xl'}
-      fullScreen
+      fullWidth
+      maxWidth="xl"
       open={showWindow}
       onClose={close}
+      slotProps={{
+        paper: {
+          sx: {
+            height: '90vh',
+            maxHeight: '90vh',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+          },
+        },
+      }}
     >
       {/* Main image area */}
       <Box
         sx={{
-          position: 'absolute',
-          inset: 0,
+          flex: 1,
+          minHeight: 0,
+          minWidth: 0,
 
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-
-          pb: `${thumbHeight + 48}px`,
-          px: {
-            xs: 6,
-            md: 10,
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '48px minmax(0, 1fr) 48px',
+            md: '72px minmax(0, 1fr) 72px',
           },
+
+          alignItems: 'center',
+
+          px: {
+            xs: 1,
+            md: 2,
+          },
+
+          py: 2,
+
+          bgcolor: 'background.default',
         }}
       >
-        <Box
-          component="img"
-          src={currentSrc}
-          draggable={false}
-          sx={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            width: 'auto',
-            height: 'auto',
-
-            objectFit: 'contain',
-
-            userSelect: 'none',
-
-            boxShadow:
-              '0 12px 50px rgba(0,0,0,.5)',
-          }}
-        />
-
         {/* Previous button */}
-        <IconButton
-          onClick={previous}
-          disabled={currentIndex === 0}
-          aria-label="Previous photo"
+        <Box
           sx={{
-            position: 'absolute',
-            left: {
-              xs: 8,
-              md: 24,
-            },
-
-            top: '50%',
-            transform: 'translateY(-50%)',
-
-            width: 52,
-            height: 52,
-
-            color: '#fff',
-            bgcolor: 'rgba(0,0,0,.45)',
-
-            '&:hover': {
-              bgcolor: 'rgba(0,0,0,.7)',
-            },
-
-            '&.Mui-disabled': {
-              color: 'rgba(255,255,255,.2)',
-              bgcolor: 'rgba(0,0,0,.2)',
-            },
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          <ChevronLeft fontSize="large" />
-        </IconButton>
+          <IconButton
+            onClick={previous}
+            disabled={currentIndex === 0}
+            aria-label="Previous photo"
+            sx={{
+              width: 52,
+              height: 52,
+
+              color: '#fff',
+              bgcolor: 'rgba(0,0,0,.45)',
+
+              '&:hover': {
+                bgcolor: 'rgba(0,0,0,.7)',
+              },
+
+              '&.Mui-disabled': {
+                color: 'rgba(255,255,255,.2)',
+                bgcolor: 'rgba(0,0,0,.2)',
+              },
+            }}
+          >
+            <ChevronLeft size={32} />
+          </IconButton>
+        </Box>
+
+        {/* Image */}
+        <Box
+          sx={{
+            minWidth: 0,
+            minHeight: 0,
+
+            height: '100%',
+
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+
+            overflow: 'hidden',
+          }}
+        >
+          <Box
+            component="img"
+            src={currentSrc}
+            draggable={false}
+            sx={{
+              display: 'block',
+
+              maxWidth: '100%',
+              maxHeight: '100%',
+
+              width: 'auto',
+              height: 'auto',
+
+              objectFit: 'contain',
+
+              userSelect: 'none',
+
+              boxShadow:
+                '0 12px 50px rgba(0,0,0,.5)',
+            }}
+          />
+        </Box>
 
         {/* Next button */}
-        <IconButton
-          onClick={next}
-          disabled={currentIndex === photos.length - 1}
-          aria-label="Next photo"
+        <Box
           sx={{
-            position: 'absolute',
-            right: {
-              xs: 8,
-              md: 24,
-            },
-
-            top: '50%',
-            transform: 'translateY(-50%)',
-
-            width: 52,
-            height: 52,
-
-            color: '#fff',
-            bgcolor: 'rgba(0,0,0,.45)',
-
-            '&:hover': {
-              bgcolor: 'rgba(0,0,0,.7)',
-            },
-
-            '&.Mui-disabled': {
-              color: 'rgba(255,255,255,.2)',
-              bgcolor: 'rgba(0,0,0,.2)',
-            },
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          <ChevronRight fontSize="large" />
-        </IconButton>
+          <IconButton
+            onClick={next}
+            disabled={currentIndex === photos.length - 1}
+            aria-label="Next photo"
+            sx={{
+              width: 52,
+              height: 52,
+
+              color: '#fff',
+              bgcolor: 'rgba(0,0,0,.45)',
+
+              '&:hover': {
+                bgcolor: 'rgba(0,0,0,.7)',
+              },
+
+              '&.Mui-disabled': {
+                color: 'rgba(255,255,255,.2)',
+                bgcolor: 'rgba(0,0,0,.2)',
+              },
+            }}
+          >
+            <ChevronRight size={32} />
+          </IconButton>
+        </Box>
       </Box>
 
       {/* Filmstrip */}
       <Box
         sx={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 15,
+          flex: '0 0 auto',
 
           px: {
             xs: 1,
             md: 3,
           },
+
+          pt: 1,
           pb: {
             xs: 1,
             md: 2,
           },
 
-          background:
-            'linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.65), transparent)',
+          // background:
+          //   'linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.65), transparent)',
         }}
       >
         <Box
@@ -417,6 +445,7 @@ export default function LightboxWindowNg() {
             gap: 1,
 
             overflow: 'hidden',
+
             minHeight: thumbHeight + 12,
           }}
         >
@@ -429,6 +458,7 @@ export default function LightboxWindowNg() {
               justifyContent: 'flex-end',
 
               overflow: 'hidden',
+              minWidth: 0,
             }}
           >
             {previousPhotos.map(photo => {
@@ -444,7 +474,6 @@ export default function LightboxWindowNg() {
           <Box
             sx={{
               flex: '0 0 auto',
-              position: 'relative',
             }}
           >
             {renderThumbnail(
@@ -462,6 +491,7 @@ export default function LightboxWindowNg() {
               justifyContent: 'flex-start',
 
               overflow: 'hidden',
+              minWidth: 0,
             }}
           >
             {nextPhotos.map(photo => {
