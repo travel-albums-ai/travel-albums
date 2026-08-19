@@ -6,7 +6,7 @@ import {
   Typography
 } from "@mui/material";
 
-export interface NegativeConverterSlider {
+export interface AdjustmentsSlider {
   label: string;
   skipLabel?: boolean;
   preIcon?: React.ReactNode;
@@ -19,14 +19,14 @@ export interface NegativeConverterSlider {
   onChange: (_event: Event, _value: number | number[]) => void;
 }
 
-export interface NegativeConverterItemProps {
+export interface AdjustmentsItemProps {
   title: string;
   checked: boolean;
   onChange: (_checked: boolean) => void;
-  sliders?: NegativeConverterSlider[];
+  sliders?: AdjustmentsSlider[];
 }
 
-export default function NegativeConverterItem({ title, checked, onChange, sliders }: NegativeConverterItemProps) {
+export default function AdjustmentsItem({ title, checked, onChange, sliders }: AdjustmentsItemProps) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', m: 0, justifyContent: 'space-between', gap: 1, px: 2, minHeight: 42, borderBottom: '1px dotted', borderColor: 'divider', mb: 0.5, pb: 0.5 }}>

@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { runPipeline } from '@/drawers/adjustments/canvasProcessing';
 import { Stage } from '@/drawers/adjustments/types';
 
-export default function NegativeConverterCanvas({
+export default function AdjustmentsCanvas({
   pipeline,
   url,
   sx,

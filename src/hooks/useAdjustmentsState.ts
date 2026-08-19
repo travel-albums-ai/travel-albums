@@ -28,11 +28,11 @@ import {
   whitesBlacksStage
 } from '@/drawers/adjustments/utils';
 
-type UseNegativeConverterStateOptions = {
+type UseAdjustmentsStateOptions = {
   initialPreset?: Partial<Adjustments>;
 };
 
-export default function useNegativeConverterState({ initialPreset }: UseNegativeConverterStateOptions = {}) {
+export default function useAdjustmentsState({ initialPreset }: UseAdjustmentsStateOptions = {}) {
   const [preset, setPreset] = useState('Clean Digital');
   const [adj, setAdj] = useState<Adjustments>(() => ({ ...DEFAULTS, ...initialPreset }));
 

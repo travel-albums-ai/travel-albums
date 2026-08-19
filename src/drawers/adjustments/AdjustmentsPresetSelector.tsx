@@ -1,12 +1,12 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import PopoverButton from '@/components/PopoverButton';
-import NegativeConverterReusable from '@/drawers/adjustments/NegativeConverterReusable';
+import AdjustmentsReusable from '@/drawers/adjustments/AdjustmentsReusable';
 import { Adjustments } from '@/drawers/adjustments/types';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { Box, Tooltip, Typography } from '@mui/material';
 
-export default function NegativeConverterPresetSelector({
+export default function AdjustmentsPresetSelector({
   onChange,
   previewPhotoObj,
   preset,
@@ -28,7 +28,7 @@ export default function NegativeConverterPresetSelector({
                 .filter(([name], index) => index < 3)
                 .map(([name, value]) => (
                   <Box key={name} sx={{ width: 16, height: 16, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', ml: -1.75, border: '1px solid', borderColor: 'divider', boxShadow: 1, cursor: 'pointer' }}>
-                    <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
+                    <AdjustmentsReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
                   </Box>
                 ))}
             </Box>
@@ -56,7 +56,7 @@ export default function NegativeConverterPresetSelector({
             <Box sx={{ height: 100,
               aspectRatio: previewPhotoObj.width / previewPhotoObj.height * -1, // or 4/3, 16/9...
               borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', border: '1px solid', borderColor: 'divider', boxShadow: 1 }}>
-              <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
+              <AdjustmentsReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
             </Box>
             <Tooltip title={`Preset: ${name} - ${JSON.stringify(value)}`} placement="top" arrow>
               <Typography variant="caption" sx={{ p: 1 }} color="textSecondary">

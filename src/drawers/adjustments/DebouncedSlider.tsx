@@ -1,9 +1,9 @@
-import { NegativeConverterSlider } from '@/drawers/adjustments/NegativeConverterItem';
+import { AdjustmentsSlider } from '@/drawers/adjustments/AdjustmentsItem';
 import { Slider } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 type DebouncedSliderProps = {
-  slider: NegativeConverterSlider;
+  slider: AdjustmentsSlider;
   checked: boolean;
 };
 

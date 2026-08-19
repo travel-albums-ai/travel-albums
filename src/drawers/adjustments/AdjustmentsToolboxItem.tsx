@@ -1,7 +1,7 @@
-import { useNegativeStoreSelector } from '@/context/negativeStore';
-import NegativeConverterItem from '@/drawers/adjustments/NegativeConverterItem';
+import { useAdjustmentsStoreSelector } from '@/context/adjustmentsStore';
+import AdjustmentsItem from '@/drawers/adjustments/AdjustmentsItem';
 
-export default function NegativeConverterToolboxItem({
+export default function AdjustmentsToolboxItem({
   item,
 }: {
   item: {
@@ -15,13 +15,13 @@ export default function NegativeConverterToolboxItem({
     }[];
   };
 }) {
-  const showGenetic = useNegativeStoreSelector((state) => state.showGenetic)
+  const showGenetic = useAdjustmentsStoreSelector((state) => state.showGenetic)
 
   if (showGenetic) {
     return <>
       {item.list
         .filter(subItem => subItem.checked)
-        .map((subItem) => <NegativeConverterItem
+        .map((subItem) => <AdjustmentsItem
           key={subItem.title}
           title={subItem.title}
           checked={subItem.checked}
@@ -33,7 +33,7 @@ export default function NegativeConverterToolboxItem({
 
   return (
     <>
-      {item.list?.map((subItem) => <NegativeConverterItem
+      {item.list?.map((subItem) => <AdjustmentsItem
         key={subItem.title}
         title={subItem.title}
         checked={subItem.checked}

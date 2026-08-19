@@ -1,3 +1,4 @@
+import { AdjustmentsProvider } from '@/context/adjustmentsStore';
 import { AISinkProvider } from '@/context/aiSinkStore';
 import { BYOKProvider } from '@/context/byokStore';
 import { DescriptionsProvider } from '@/context/descriptionsStore';
@@ -8,7 +9,6 @@ import { SectionsProvider } from '@/context/globals/sectionsStore';
 import { SectionsProviderForced } from '@/context/globals/sectionsStoreForced';
 import { UnfilteredPhotosProvider } from '@/context/globals/unfilteredPhotosStore';
 import { LayoutProvider } from '@/context/layoutStore';
-import { NegativeProvider } from '@/context/negativeStore';
 import { NotificationsProvider } from '@/context/notificationsProvider';
 import { SelectedProvider } from '@/context/selectedStore';
 import { SidebarProvider } from '@/context/sidebarStore';
@@ -46,7 +46,7 @@ export default function AppProviders({ children }: Props) {
                                   <FilterPresetProvider>
                                     <FilterProvider>
                                       <AlbumPhotoCardProvider>
-                                        <NegativeProvider>
+                                        <AdjustmentsProvider>
                                           <UnfilteredPhotosProvider>
                                             <FilteredPhotosProvider>
                                               <FilteredGpsPhotosProvider>
@@ -58,7 +58,7 @@ export default function AppProviders({ children }: Props) {
                                               </FilteredGpsPhotosProvider>
                                             </FilteredPhotosProvider>
                                           </UnfilteredPhotosProvider>
-                                        </NegativeProvider>
+                                        </AdjustmentsProvider>
                                       </AlbumPhotoCardProvider>
                                     </FilterProvider>
                                   </FilterPresetProvider>
