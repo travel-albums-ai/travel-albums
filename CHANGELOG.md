@@ -1,3 +1,9 @@
+## [1.213.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.212.0...v1.213.0) (2026-08-19)
+
+### ✨ Features
+
+* implement TimelineScroller component for improved photo navigation ([7a70cd7](https://github.com/travel-albums-ai/travel-albums/commit/7a70cd70b1382527a86facb8fc03694274f19ed9))
+
 ## [1.212.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.211.0...v1.212.0) (2026-08-19)
 
 ### ✨ Features
