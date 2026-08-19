@@ -296,6 +296,7 @@ export default function LightboxWindowNg() {
           minHeight: 0,
           minWidth: 0,
           display: 'flex',
+          borderRadius: 2,
           gap: 2,
           alignItems: 'center',
           p: 2,
@@ -330,6 +331,8 @@ export default function LightboxWindowNg() {
               height: '100%',
               objectFit: 'contain',
             }}
+            mapWidth={300}
+            mapHeight={300}
             style={{
               width: '100%',
               height: '100%',

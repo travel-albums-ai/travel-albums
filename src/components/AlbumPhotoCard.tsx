@@ -22,7 +22,7 @@ import {
   useMemo,
   useState,
   type CSSProperties,
-  type MouseEvent,
+  type MouseEvent
 } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -31,6 +31,8 @@ interface AlbumPhotoCardProps {
   style?: CSSProperties;
   thumbnailSx?: CSSProperties;
   original?: boolean;
+  mapHeight?: number;
+  mapWidth?: number;
 }
 
 function prettyTime(dateInput: string) {
@@ -91,6 +93,8 @@ function AlbumPhotoCard({
   style,
   original = false,
   thumbnailSx = {},
+  mapHeight,
+  mapWidth,
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
 
@@ -220,7 +224,16 @@ function AlbumPhotoCard({
               onClick: () => setShowGps(!showGps),
             },
           ] satisfies GenericToggleButtonProps[]} />
-          {showGps && <AlbumMapPanel photos={[photo]} height={height * 0.65} />}
+
+
+
+          {showGps && (
+            <Box sx={{ width: mapWidth || width * 0.75, height: mapHeight || height * 0.65 }}>
+              <AlbumMapPanel photos={[photo]} height={mapHeight || height * 0.65} />
+            </Box>
+          )}
+
+          {/* {showGps && <Box><AlbumMapPanel photos={[photo]} height={100} /></Box>} */}
         </Box>}
         {inView && (
           <>
