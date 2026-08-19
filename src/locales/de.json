@@ -27,6 +27,10 @@
   "serverHealthStatus": "Server-Status",
   "noServerConnectionTitle": "Keine Serververbindung",
   "noServerConnectionBody": "Travel Albums benötigt einen Backend-Server, um zu funktionieren. Bitte stellen Sie sicher, dass der Server läuft und erreichbar ist.",
+  "newVersionAvailableTitle": "Neue Version verfügbar",
+  "newVersionAvailableBody": "Eine neue Version ist verfügbar. Bitte neu laden, um das Update anzuwenden.",
+  "updateNow": "Jetzt aktualisieren",
+  "later": "Später",
 
   "_comment_onboarding": "Onboarding modal",
   "onboardingStepWelcome": "Willkommen",

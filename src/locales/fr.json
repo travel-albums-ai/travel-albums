@@ -1,5 +1,9 @@
 {
   "loading": "Chargement…",
+  "newVersionAvailableTitle": "Nouvelle version disponible",
+  "newVersionAvailableBody": "Une nouvelle version est prête. Rechargez pour appliquer la mise à jour.",
+  "updateNow": "Mettre à jour",
+  "later": "Plus tard",
   "sampleFormat": "Format exemple: Exemple C:\\Users\\person\\Photos",
   "settings": "Paramètres",
   "filterPhotos": "Filtrer les photos",

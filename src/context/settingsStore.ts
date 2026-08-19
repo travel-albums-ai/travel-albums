@@ -4,6 +4,7 @@ import type { SupportedLanguage } from '@/lib/i18n';
 
 type SettingsStore = {
   onboarding: boolean,
+  newVersion?: boolean,
   mascot: boolean,
   indexing: boolean,
   indexerProgress: any,
@@ -87,6 +88,7 @@ type SettingsStore = {
 
 const defaults: SettingsStore = {
   onboarding: true,
+  newVersion: true,
   indexing: false,
   indexerProgress: { totalFound: 0, totalFiles: 0, done: 0, preindexed: 0, failed: 0 },
   mascot: false,
@@ -169,6 +171,7 @@ const {
   useSetStore,
   useStoreSelector: useSettingsStoreSelector,
   getStore: getSettingsStore,
+  setStore: setSettingsStore,
 } = createLocalStorageStoreNg<SettingsStore>(defaults, 'settingsStore')
 
 export const useSettings = () => {
@@ -209,4 +212,4 @@ export const useSettings = () => {
   }
 }
 
-export { getSettingsStore, SettingsProvider, useSettingsStoreSelector };
+export { getSettingsStore, setSettingsStore, SettingsProvider, useSettingsStoreSelector };

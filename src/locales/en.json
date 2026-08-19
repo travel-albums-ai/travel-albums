@@ -27,6 +27,10 @@
   "serverHealthStatus": "Server health status",
   "noServerConnectionTitle": "No Server Connection",
   "noServerConnectionBody": "Travel Albums relies on a backend server to function. Please ensure that the server is running and accessible.",
+  "newVersionAvailableTitle": "New version available",
+  "newVersionAvailableBody": "A new version is ready. Reload to apply the update.",
+  "updateNow": "Update now",
+  "later": "Later",
 
   "_comment_onboarding": "Onboarding modal",
   "onboardingStepWelcome": "Welcome",

@@ -1,4 +1,5 @@
 import AppRoutes from '@/components/AppRoutes';
+import { setSettingsStore } from '@/context/settingsStore';
 import '@/lib/i18n';
 import { warmThemeDiscovery } from '@/themeDiscovery';
 import { warmToolDiscovery, warmToolGroup } from '@/toolDiscovery';
@@ -57,11 +58,15 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   import('workbox-window').then(({ Workbox }) => {
     try {
       const wb = new Workbox('/sw.js');
+      // expose workbox instance so the UI can trigger skip-waiting
+      try { (window as any).__WORKBOX = wb } catch {}
 
       wb.addEventListener('waiting', () => {
-        const userAccepted = window.confirm('A new version is available. Update now?');
-        if (userAccepted) {
-          wb.messageSW({ type: 'SKIP_WAITING' });
+        // signal UI to show the update dialog instead of using window.confirm
+        try {
+          setSettingsStore((prev: any) => ({ ...prev, newVersion: true }))
+        } catch (e) {
+          // ignore
         }
       });
 

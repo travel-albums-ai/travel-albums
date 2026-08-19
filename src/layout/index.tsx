@@ -6,6 +6,7 @@ import Header from '@/layout/Header';
 import StatusBar from '@/layout/StatusBar';
 import MascotWrapper from '@/mascot/MascotWrapper';
 import LightboxWindow from '@/windows/LightboxWindow';
+import NewVersionWindow from '@/windows/NewVersionWindow';
 import NoServerWindow from '@/windows/NoServerWindow';
 import OnboardingWindow from '@/windows/OnboardingWindow';
 import SettingsWindow from '@/windows/SettingsWindow';
@@ -16,6 +17,7 @@ export default function AppLayout() {
   return (
     <>
       <NoServerWindow />
+      <NewVersionWindow />
       <OnboardingWindow />
       <SettingsWindow />
       <MainDriver />
