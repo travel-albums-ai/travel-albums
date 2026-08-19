@@ -1,8 +1,8 @@
-import { barbieDarkTheme, barbieLightTheme } from './barbie';
-import { defaultDarkTheme, defaultLightTheme } from './default';
-import { draculaDarkTheme, draculaLightTheme } from './dracula';
-import { monokaiDarkTheme, monokaiLightTheme } from './monokai';
-import { solarizedDarkTheme, solarizedLightTheme } from './solarized';
+import { barbieDarkTheme, barbieLightTheme } from './barbie.theme';
+import { defaultDarkTheme, defaultLightTheme } from './default.theme';
+import { draculaDarkTheme, draculaLightTheme } from './dracula.theme';
+import { monokaiDarkTheme, monokaiLightTheme } from './monokai.theme';
+import { solarizedDarkTheme, solarizedLightTheme } from './solarized.theme';
 
 export type ThemeName = 'default' | 'barbie' | 'solarized' | 'monokai' | 'dracula'
 export type ThemeMode = 'light' | 'dark'
