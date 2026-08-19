@@ -1,3 +1,9 @@
+## [1.206.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.206.0...v1.206.1) (2026-08-19)
+
+### 🐛 Fixes
+
+* update default newVersion setting to false ([4ccb64c](https://github.com/travel-albums-ai/travel-albums/commit/4ccb64c6b86f6260bfd563f62dc4a7f530dda8d2))
+
 ## [1.206.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.205.0...v1.206.0) (2026-08-19)
 
 ### ✨ Features
