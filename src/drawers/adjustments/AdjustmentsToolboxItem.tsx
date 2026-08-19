@@ -17,10 +17,10 @@ export default function AdjustmentsToolboxItem({
 }) {
   const showGenetic = useAdjustmentsStoreSelector((state) => state.showGenetic)
 
-  if (showGenetic) {
-    return <>
-      {item.list
-        .filter(subItem => subItem.checked)
+  return (
+    <>
+      {(item.list || [])
+        .filter(subItem => showGenetic ? subItem.checked : true)
         .map((subItem) => <AdjustmentsItem
           key={subItem.title}
           title={subItem.title}
@@ -28,18 +28,6 @@ export default function AdjustmentsToolboxItem({
           onChange={subItem.onChange}
           sliders={subItem.sliders}
         />)}
-    </>;
-  }
-
-  return (
-    <>
-      {item.list?.map((subItem) => <AdjustmentsItem
-        key={subItem.title}
-        title={subItem.title}
-        checked={subItem.checked}
-        onChange={subItem.onChange}
-        sliders={subItem.sliders}
-      />)}
     </>
   );
 }

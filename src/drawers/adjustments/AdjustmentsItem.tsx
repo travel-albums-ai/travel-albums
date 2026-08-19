@@ -1,5 +1,6 @@
 import SolidChip from '@/components/SolidChip';
 import DebouncedSlider from '@/drawers/adjustments/DebouncedSlider';
+import SettingsSection from '@/windows/components/SettingsSection';
 import {
   Box,
   Switch,
@@ -29,27 +30,29 @@ export interface AdjustmentsItemProps {
 export default function AdjustmentsItem({ title, checked, onChange, sliders }: AdjustmentsItemProps) {
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', m: 0, justifyContent: 'space-between', gap: 1, px: 2, minHeight: 42, borderBottom: '1px dotted', borderColor: 'divider', mb: 0.5, pb: 0.5 }}>
-      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }} onClick={() => onChange(!checked)}>
-        <Typography variant="caption" sx={{ cursor: 'pointer', fontWeight: checked ? 'bold' : 'normal' }}  color={checked ? 'textPrimary' : 'textDisabled'}>{title}</Typography>
-      </Box>
+    <SettingsSection>
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, px: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }} onClick={() => onChange(!checked)}>
+          <Typography variant="caption" sx={{ cursor: 'pointer', fontWeight: checked ? 'bold' : 'normal' }}  color={checked ? 'textPrimary' : 'textDisabled'}>{title}</Typography>
+        </Box>
 
-      {sliders && sliders.length > 0 && <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'flex-end', opacity: checked ? 1 : 0.25, pointerEvents: checked ? 'auto' : 'none' }}>
-        {sliders.map((slider, index) => (
-          <Box key={index} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, py: 0.5, justifyContent: 'flex-end' }} >
-            {sliders.length !== 1 && !slider.skipLabel && <Typography variant="caption" color={checked ? 'textPrimary' : 'textDisabled'}>{slider.label}</Typography>}
-            {slider.preIcon}
-            <DebouncedSlider
-              slider={slider}
-              checked={checked}
-            />
-            <SolidChip count={Math.round(Math.round(slider.value * 1000) / 1000 / (slider.scale ?? 1) * 100) / 100} minWidth={50} />
-          </Box>
-        ))}
-      </Box>}
-      {sliders && sliders.length === 0 && <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', opacity: checked ? 1 : 0.25, pointerEvents: checked ? 'auto' : 'none' }}>
-        <Switch checked={checked} onChange={(e) => onChange(e.target.checked)} size="small" />
-      </Box>}
-    </Box>
+        {sliders && sliders.length > 0 && <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'flex-end', opacity: checked ? 1 : 0.25, pointerEvents: checked ? 'auto' : 'none' }}>
+          {sliders.map((slider, index) => (
+            <Box key={index} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, py: 0.5, justifyContent: 'flex-end' }} >
+              {sliders.length !== 1 && !slider.skipLabel && <Typography variant="caption" color={checked ? 'textPrimary' : 'textDisabled'}>{slider.label}</Typography>}
+              {slider.preIcon}
+              <DebouncedSlider
+                slider={slider}
+                checked={checked}
+              />
+              <SolidChip count={Math.round(Math.round(slider.value * 1000) / 1000 / (slider.scale ?? 1) * 100) / 100} minWidth={50} />
+            </Box>
+          ))}
+        </Box>}
+        {sliders && sliders.length === 0 && <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', opacity: checked ? 1 : 0.25, pointerEvents: checked ? 'auto' : 'none' }}>
+          <Switch checked={checked} onChange={(e) => onChange(e.target.checked)} size="small" />
+        </Box>}
+      </Box>
+    </SettingsSection>
   );
 }

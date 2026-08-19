@@ -67,7 +67,6 @@ export default function AdjustmentsWrapper({
               propagateSelection={(adj) => setSelectedAdj(adj)}
               key={JSON.stringify(adj)}
               url={url}
-              // url={imageUrl(`${previewPhotoObj.folder}/${previewPhotoObj.title}`, false)}
               basePreset={adj}
             />
           </Box>
@@ -98,14 +97,14 @@ export default function AdjustmentsWrapper({
           </Box>
         </Box>}
 
-        {hasPresetSelector || hasToolbox ? (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, overflow: 'auto' }}>
-            <Histogram imageUrl={composeUrl(previewPhotoObj)} width={100} height={50} />
-            {hasToolbox && <AdjustmentsToolbox adj={selectedAdj || adj} set={set} >
-              {hasPresetSelector && <AdjustmentsPresetSelector onChange={applyPreset} previewPhotoObj={previewPhotoObj} preset={preset} presets={presets} />}
-            </AdjustmentsToolbox>}
-          </Box>
-        ) : null}
+        {(hasPresetSelector || hasToolbox) &&
+          <AdjustmentsToolbox
+            adj={selectedAdj || adj}
+            set={set}
+            histogram={<Histogram imageUrl={composeUrl(previewPhotoObj)} width={160} height={80} />}
+            presetSelector={hasPresetSelector ? <AdjustmentsPresetSelector onChange={applyPreset} previewPhotoObj={previewPhotoObj} preset={preset} presets={presets} /> : undefined}
+          />
+        }
       </Box>
     </GenericPanel>
   );

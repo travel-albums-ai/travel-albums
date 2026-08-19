@@ -24,11 +24,13 @@ function ComposedDots({firstChild, children} : {firstChild: React.ReactNode; chi
 export default function AdjustmentsToolbox({
   adj,
   set,
-  children,
+  histogram,
+  presetSelector
 }: {
   adj: Adjustments;
   set: <K extends keyof Adjustments>(_key: K, _value: Adjustments[K]) => void;
-  children?: React.ReactNode;
+  histogram?: React.ReactNode;
+  presetSelector?: React.ReactNode;
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
@@ -552,29 +554,33 @@ export default function AdjustmentsToolbox({
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, overflow: 'auto', alignItems: 'center', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap' }}>
-        <GenericToggleButtonGroup items={[
-          ...items.map((item, index) => ({
-            tooltip: item.title,
-            icon: item.icon,
-            onClick: () => setSelectedIndex(index),
-            title: <><SolidChip
-              height={16}
-              count={item.list.filter((subItem) => subItem.checked).length}
-              variant={item.list.filter((subItem) => subItem.checked).length > 0 ? 'header' : 'text'}
-              minWidth={20}
-            /></>,
-            selected: index === selectedIndex,
-          })),
-        ] satisfies GenericToggleButtonProps[]} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
 
-        {children}
+          {presetSelector}
+          <GenericToggleButtonGroup items={[
+            ...items.map((item, index) => ({
+              tooltip: item.title,
+              icon: item.icon,
+              onClick: () => setSelectedIndex(index),
+              title: <><SolidChip
+                height={16}
+                count={item.list.filter((subItem) => subItem.checked).length}
+                variant={item.list.filter((subItem) => subItem.checked).length > 0 ? 'header' : 'text'}
+                minWidth={20}
+              /></>,
+              selected: index === selectedIndex,
+            })),
+          ] satisfies GenericToggleButtonProps[]} />
+        </Box>
+        {histogram}
       </Box>
-      {items
-        .filter((item, index) => index === selectedIndex)
-        .map((item) => <Box key={item.key}>
-          <AdjustmentsToolboxItem item={item} />
-        </Box>)}
+      <Box sx={{ overflow: 'auto', flexGrow: 1, height: '0' }}>
+        {items
+          .filter((item, index) => index === selectedIndex)
+          .map((item) => <Box key={item.key}>
+            <AdjustmentsToolboxItem item={item} />
+          </Box>)}
+      </Box>
     </>
   );
 }
-
