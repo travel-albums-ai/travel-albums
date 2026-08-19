@@ -1,3 +1,9 @@
+## [1.219.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.218.0...v1.219.0) (2026-08-19)
+
+### ✨ Features
+
+* enhance AlbumPhotoCard with thumbnail styling and integrate into LightboxWindowNg ([7e76598](https://github.com/travel-albums-ai/travel-albums/commit/7e765982ced1b67969a26398752f3383ec31d34f))
+
 ## [1.218.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.217.0...v1.218.0) (2026-08-19)
 
 ### ✨ Features
