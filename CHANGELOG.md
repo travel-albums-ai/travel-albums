@@ -1,3 +1,9 @@
+## [1.220.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.220.0...v1.220.1) (2026-08-19)
+
+### 🐛 Fixes
+
+* remove padding and background color from LightboxWindowNg button group styling ([bed93f1](https://github.com/travel-albums-ai/travel-albums/commit/bed93f11b6e1fa1059d82ac5dd8d1577ad788194))
+
 ## [1.220.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.219.0...v1.220.0) (2026-08-19)
 
 ### ✨ Features
