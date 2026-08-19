@@ -1,6 +1,10 @@
 import { Box } from '@mui/material';
-import { AudioLines, BicepsFlexed, BrickWall, Camera, Contrast, DraftingCompass, Gem, Lightbulb, Mountain, Paintbrush, Palette, Pipette, SlidersHorizontal, Sun, SwatchBook, Thermometer } from 'lucide-react';
+import { AudioLines, BicepsFlexed, BrickWall, Camera, CircleDotDashed, Contrast, DraftingCompass, EyeDashed, Gem, Lightbulb, Mountain, Paintbrush, Palette, Pipette, Slice, SlidersHorizontal, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import SolidChip from '@/components/SolidChip';
+import AdjustmentsToolboxItem from '@/drawers/adjustments/AdjustmentsToolboxItem';
 import { numberSlider } from '@/drawers/adjustments/sliderBuilders';
 import { ADJUSTMENTS_RANGES } from '@/drawers/adjustments/state';
 import { Adjustments } from '@/drawers/adjustments/types';
@@ -383,4 +387,192 @@ export default function AdjustmentsToolbox({
             }),
           ]
         },
-*** End Patch
+        {
+          title: "White Point RGB",
+          checked: adj.whitePointOn,
+          onChange: (checked: boolean) => set('whitePointOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Red',
+              preIcon: <ComposedDots firstChild={<ChannelDot color="white" />} children={<ChannelDot color="red" />} />,
+              skipLabel: true,
+              value: adj.whiteR,
+              ...ADJUSTMENTS_RANGES.whiteR,
+              onValueChange: (value) => set('whiteR', value),
+            }),
+            numberSlider({
+              label: 'Green',
+              preIcon: <ComposedDots firstChild={<ChannelDot color="white" />} children={<ChannelDot color="green" />} />,
+              skipLabel: true,
+              value: adj.whiteG,
+              ...ADJUSTMENTS_RANGES.whiteG,
+              onValueChange: (value) => set('whiteG', value),
+            }),
+            numberSlider({
+              label: 'Blue',
+              preIcon: <ComposedDots firstChild={<ChannelDot color="white" />} children={<ChannelDot color="blue" />} />,
+              skipLabel: true,
+              value: adj.whiteB,
+              ...ADJUSTMENTS_RANGES.whiteB,
+              onValueChange: (value) => set('whiteB', value),
+            }),
+          ]
+        },
+        {
+          title: "Midtones RGB",
+          checked: adj.midtonesOn,
+          onChange: (checked: boolean) => set('midtonesOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Red',
+              preIcon: <ChannelDot color="red" />,
+              skipLabel: true,
+              value: adj.midtonesR,
+              ...ADJUSTMENTS_RANGES.midtonesR,
+              onValueChange: (value) => set('midtonesR', value),
+            }),
+            numberSlider({
+              label: 'Green',
+              preIcon: <ChannelDot color="green" />,
+              skipLabel: true,
+              value: adj.midtonesG,
+              ...ADJUSTMENTS_RANGES.midtonesG,
+              onValueChange: (value) => set('midtonesG', value),
+            }),
+            numberSlider({
+              label: 'Blue',
+              preIcon: <ChannelDot color="blue" />,
+              skipLabel: true,
+              value: adj.midtonesB,
+              ...ADJUSTMENTS_RANGES.midtonesB,
+              onValueChange: (value) => set('midtonesB', value),
+            }),
+          ]
+        },
+        {
+          title: "Black Point RGB",
+          checked: adj.blackPointOn,
+          onChange: (checked: boolean) => set('blackPointOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Red',
+              preIcon: <ComposedDots firstChild={<ChannelDot color="black" />} children={<ChannelDot color="red" />} />,
+              skipLabel: true,
+              value: adj.blackR,
+              ...ADJUSTMENTS_RANGES.blackR,
+              onValueChange: (value) => set('blackR', value),
+            }),
+            numberSlider({
+              label: 'Green',
+              preIcon: <ComposedDots firstChild={<ChannelDot color="black" />} children={<ChannelDot color="green" />} />,
+              skipLabel: true,
+              value: adj.blackG,
+              ...ADJUSTMENTS_RANGES.blackG,
+              onValueChange: (value) => set('blackG', value),
+            }),
+            numberSlider({
+              label: 'Blue',
+              preIcon: <ComposedDots firstChild={<ChannelDot color="black" />} children={<ChannelDot color="blue" />} />,
+              skipLabel: true,
+              value: adj.blackB,
+              ...ADJUSTMENTS_RANGES.blackB,
+              onValueChange: (value) => set('blackB', value),
+            }),
+          ]
+        }
+      ],
+      title: 'Black & White',
+    },
+    {
+      key: 'decorative',
+      icon: <CircleDotDashed size={16} />,
+      list: [
+        {
+          title: 'Sharpen',
+          checked: adj.sharpenOn,
+          onChange: (checked: boolean) => set('sharpenOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Sharpen',
+              preIcon: <Slice size={16} />,
+              value: adj.sharpen,
+              onValueChange: (value) => set('sharpen', value),
+              ...ADJUSTMENTS_RANGES.sharpen,
+            }),
+          ],
+        },
+        {
+          title: 'Fade',
+          checked: adj.fadeOn,
+          onChange: (checked: boolean) => set('fadeOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Fade',
+              preIcon: <EyeDashed size={16} />,
+              value: adj.fade,
+              onValueChange: (value) => set('fade', value),
+              ...ADJUSTMENTS_RANGES.fade,
+            }),
+          ],
+        },
+        {
+          title: 'Vignette',
+          checked: adj.vignetteOn,
+          onChange: (checked: boolean) => set('vignetteOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Vignette',
+              preIcon: <Theater size={16} />,
+              value: adj.vignette,
+              onValueChange: (value) => set('vignette', value),
+              ...ADJUSTMENTS_RANGES.vignette,
+            }),
+          ],
+        },
+        {
+          title: 'Grain',
+          checked: adj.grainOn,
+          onChange: (checked: boolean) => set('grainOn', checked),
+          sliders: [
+            numberSlider({
+              label: 'Grain',
+              value: adj.grain,
+              preIcon: <Wheat size={16} />,
+              onValueChange: (value) => set('grain', value),
+              ...ADJUSTMENTS_RANGES.grain,
+            }),
+          ],
+        },
+      ],
+      title: 'Decorative',
+    },
+  ]
+
+  return (
+    <>
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, overflow: 'auto', alignItems: 'center', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap' }}>
+        <GenericToggleButtonGroup items={[
+          ...items.map((item, index) => ({
+            tooltip: item.title,
+            icon: item.icon,
+            onClick: () => setSelectedIndex(index),
+            title: <><SolidChip
+              height={16}
+              count={item.list.filter((subItem) => subItem.checked).length}
+              variant={item.list.filter((subItem) => subItem.checked).length > 0 ? 'header' : 'text'}
+              minWidth={20}
+            /></>,
+            selected: index === selectedIndex,
+          })),
+        ] satisfies GenericToggleButtonProps[]} />
+
+        {children}
+      </Box>
+      {items
+        .filter((item, index) => index === selectedIndex)
+        .map((item) => <Box key={item.key}>
+          <AdjustmentsToolboxItem item={item} />
+        </Box>)}
+    </>
+  );
+}

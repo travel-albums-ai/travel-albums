@@ -1,13 +1,13 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import { useNegative, useNegativeStoreSelector } from '@/context/negativeStore';
+import { useAdjustments, useAdjustmentsStoreSelector } from '@/context/adjustmentsStore';
 import { GitGraph } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function GeneticAlgoToggle() {
-  const { setSetting } = useNegative()
+  const { setSetting } = useAdjustments()
   const { t } = useTranslation()
-  const showGenetic = useNegativeStoreSelector((state) => state.showGenetic)
+  const showGenetic = useAdjustmentsStoreSelector((state) => state.showGenetic)
 
   return <GenericToggleButtonGroup items={[
     {

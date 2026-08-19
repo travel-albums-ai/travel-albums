@@ -177,7 +177,7 @@ export const OLD_SCHOOL_PRESETS: Record<string, Partial<Adjustments>> = {
   },
 };
 
-export const NEGATIVE_CONVERSION_PRESETS: Record<string, Partial<Adjustments>> = {
+export const ADJUSTMENTS_CONVERSION_PRESETS: Record<string, Partial<Adjustments>> = {
   'Ilford HP5 Plus (B&W Negative)': {
     invert: true,
     saturationOn: true, saturation: -100,
@@ -213,6 +213,6 @@ export const PRESETS: Record<string, Partial<Adjustments>> = {
   'Default': {},
   ...INSTAGRAM_PRESETS,
   ...OLD_SCHOOL_PRESETS,
-  ...NEGATIVE_CONVERSION_PRESETS,
+  ...ADJUSTMENTS_CONVERSION_PRESETS,
   ...OTHER_PRESETS,
 };

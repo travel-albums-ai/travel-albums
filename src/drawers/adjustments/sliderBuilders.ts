@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { NegativeConverterSlider } from '@/drawers/adjustments/NegativeConverterItem';
+import { AdjustmentsSlider } from '@/drawers/adjustments/AdjustmentsItem';
 import { RGB } from '@/drawers/adjustments/types';
 
 export function numberSlider({
@@ -25,7 +25,7 @@ export function numberSlider({
   scale?: number;
   value: number;
   defaultValue?: number;
-}): NegativeConverterSlider {
+}): AdjustmentsSlider {
   return {
     label,
     max,
@@ -48,7 +48,7 @@ export function rgbSliders({
   color: RGB;
   label: string;
   onColorChange: (next: RGB) => void;
-}): NegativeConverterSlider[] {
+}): AdjustmentsSlider[] {
   return [
     numberSlider({
       label,

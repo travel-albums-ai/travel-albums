@@ -4,10 +4,10 @@ import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBac
 import GenericPanel from '@/components/generics/GenericPanel';
 import Histogram from '@/components/Histogram';
 import { useAdjustmentsStoreSelector } from '@/context/adjustmentsStore';
-import GeneticBreedingGrid from '@/drawers/adjustments/GeneticBreedingGrid';
 import AdjustmentsCanvas from '@/drawers/adjustments/AdjustmentsCanvas';
 import AdjustmentsPresetSelector from '@/drawers/adjustments/AdjustmentsPresetSelector';
 import AdjustmentsToolbox from '@/drawers/adjustments/AdjustmentsToolbox';
+import GeneticBreedingGrid from '@/drawers/adjustments/GeneticBreedingGrid';
 import { Adjustments } from '@/drawers/adjustments/types';
 import useAdjustmentsState from '@/hooks/useAdjustmentsState';
 import { composeUrl } from '@/lib/thumbnailService';

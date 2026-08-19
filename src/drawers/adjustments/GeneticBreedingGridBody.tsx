@@ -1,4 +1,4 @@
-import NegativeConverterNaked from '@/drawers/adjustments/NegativeConverterNaked';
+import AdjustmentsNaked from '@/drawers/adjustments/AdjustmentsNaked';
 import { Adjustments } from '@/drawers/adjustments/types';
 import { Box } from '@mui/material';
 import { useKeyHold } from '@tanstack/react-hotkeys';
@@ -82,7 +82,7 @@ export default function GeneticBreedingGridBody({
                 transform: `translate(${-x * 100 / 3}%, ${-y * 100 / 3}%)`,
                 transformOrigin: 'center',
               }}>
-              <NegativeConverterNaked
+              <AdjustmentsNaked
                 sxCanvas={{ width: '100%' }}
                 url={url}
                 initialPreset={g}  />
@@ -92,7 +92,7 @@ export default function GeneticBreedingGridBody({
       </Box>
 
       {hoveredIndex !== null && isShiftHeld && <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-        <NegativeConverterNaked
+        <AdjustmentsNaked
           sxCanvas={{ width: '100%' }}
           url={url}
           initialPreset={population.at(hoveredIndex )}  />
