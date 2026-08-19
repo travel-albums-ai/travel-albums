@@ -1,3 +1,13 @@
+## [1.225.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.224.0...v1.225.0) (2026-08-19)
+
+### ✨ Features
+
+* add various toggle components for settings, sorting, thumbnails, and more ([8579a93](https://github.com/travel-albums-ai/travel-albums/commit/8579a93dded5d7798d9432902b2640a0c869c2b4))
+
+### 🧹 Refactors
+
+* update import paths to use middleware directory for tools ([797240c](https://github.com/travel-albums-ai/travel-albums/commit/797240c5d6416b6b3d3985de383d04e2cf799d65))
+
 ## [1.224.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.223.0...v1.224.0) (2026-08-19)
 
 ### ✨ Features
