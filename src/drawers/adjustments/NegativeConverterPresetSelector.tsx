@@ -18,27 +18,15 @@ export default function NegativeConverterPresetSelector({
 }) {
   return (<>
     <PopoverButton icon={null} label="" width={800} trigger={<>
-
-      {/* <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
-        {Object.entries(presets)
-          .filter(([name], index) => index < 5)
-          .map(([name, value]) => (
-            <Box key={name} sx={{ width: 30, height: 30, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', ml: -2, border: '1px solid', borderColor: 'divider', boxShadow: 1, cursor: 'pointer' }}>
-              <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
-            </Box>
-          ))}
-      </Box> */}
-
       <GenericToggleButtonGroup items={[
         {
           tooltip: 'Open Preset Selector',
-          // icon: <BookDashed size={16} />,
           icon: <>
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, ml: 1 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, ml: 1.75 }}>
               {Object.entries(presets)
                 .filter(([name], index) => index < 3)
                 .map(([name, value]) => (
-                  <Box key={name} sx={{ width: 16, height: 16, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', ml: -1, border: '1px solid', borderColor: 'divider', boxShadow: 1, cursor: 'pointer' }}>
+                  <Box key={name} sx={{ width: 16, height: 16, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', ml: -1.75, border: '1px solid', borderColor: 'divider', boxShadow: 1, cursor: 'pointer' }}>
                     <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
                   </Box>
                 ))}
