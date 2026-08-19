@@ -1,3 +1,9 @@
+## [1.215.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.215.0...v1.215.1) (2026-08-19)
+
+### 🐛 Fixes
+
+* adjust preload setting in LightboxWindow for performance optimization ([57d2873](https://github.com/travel-albums-ai/travel-albums/commit/57d2873588ac5654bf01de9201ae55f76e57d01f))
+
 ## [1.215.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.214.0...v1.215.0) (2026-08-19)
 
 ### ✨ Features
