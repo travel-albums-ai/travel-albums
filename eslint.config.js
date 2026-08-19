@@ -33,8 +33,10 @@ export default defineConfig([
           patterns: [
             '@/middleware/tools/*',
             '@/middleware/windows/*',
+            '@/middleware/base/*',
             'src/middleware/tools/*',
             'src/middleware/windows/*',
+            'src/middleware/base/*',
           ],
         },
       ],
@@ -46,6 +48,7 @@ export default defineConfig([
       'src/windowDiscovery.ts',
       'src/middleware/tools/**',
       'src/middleware/windows/**',
+      'src/middleware/base/**',
     ],
     rules: {
       'no-restricted-imports': 'off',
