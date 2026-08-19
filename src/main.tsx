@@ -1,6 +1,7 @@
 import AppRoutes from '@/components/AppRoutes';
 import '@/lib/i18n';
 import { warmToolDiscovery, warmToolGroup } from '@/toolDiscovery';
+import { warmThemeDiscovery } from '@/themeDiscovery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -28,6 +29,7 @@ declare global {
 const warmTool = () => {
   warmToolDiscovery();
   warmToolGroup('header');
+  warmThemeDiscovery();
 };
 
 if (typeof window !== 'undefined') {

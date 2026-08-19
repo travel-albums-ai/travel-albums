@@ -1,28 +1,40 @@
-import { barbieDarkTheme, barbieLightTheme } from './barbie.theme';
-import { defaultDarkTheme, defaultLightTheme } from './default.theme';
-import { draculaDarkTheme, draculaLightTheme } from './dracula.theme';
-import { monokaiDarkTheme, monokaiLightTheme } from './monokai.theme';
-import { solarizedDarkTheme, solarizedLightTheme } from './solarized.theme';
+import { themeRegistry } from '@/themeRegistry';
+import { lightTheme as defaultLightTheme, darkTheme as defaultDarkTheme } from './default.theme';
 
-export type ThemeName = 'default' | 'barbie' | 'solarized' | 'monokai' | 'dracula'
-export type ThemeMode = 'light' | 'dark'
+export type ThemeName = string;
+export type ThemeMode = 'light' | 'dark';
+
+function selectThemeFromModule(mod: any, id: string, mode: ThemeMode) {
+  if (!mod) return null;
+
+  const light = mod.lightTheme ?? mod.defaultLightTheme ?? mod[`${id}LightTheme`];
+  const dark = mod.darkTheme ?? mod.defaultDarkTheme ?? mod[`${id}DarkTheme`];
+
+  return mode === 'light' ? light ?? dark : dark ?? light;
+}
 
 export function getTheme(name: ThemeName, mode: ThemeMode) {
-  if (name === 'barbie') return mode === 'light' ? barbieLightTheme : barbieDarkTheme
-  if (name === 'solarized') return mode === 'light' ? solarizedLightTheme : solarizedDarkTheme
-  if (name === 'monokai') return mode === 'light' ? monokaiLightTheme : monokaiDarkTheme
-  if (name === 'dracula') return mode === 'light' ? draculaLightTheme : draculaDarkTheme
-  return mode === 'light' ? defaultLightTheme : defaultDarkTheme
+  const meta = themeRegistry.get(name);
+
+  if (meta?.module) {
+    const resolved = selectThemeFromModule(meta.module, meta.id, mode);
+    if (resolved) return resolved;
+  }
+
+  // fallback: try to use default theme from registry
+  const def = themeRegistry.get('default');
+  if (def?.module) {
+    const resolved = selectThemeFromModule(def.module, def.id, mode);
+    if (resolved) return resolved;
+  }
+
+  // last resort: return bundled default theme
+  return mode === 'light' ? defaultLightTheme : defaultDarkTheme;
 }
 
+export const themeNames = () => themeRegistry.all().map((m) => m.id);
+
 export default {
-  defaultLightTheme,
-  defaultDarkTheme,
-  barbieLightTheme,
-  barbieDarkTheme,
-  solarizedLightTheme,
-  solarizedDarkTheme,
-  monokaiLightTheme,
-  monokaiDarkTheme,
   getTheme,
-}
+  themeNames,
+};
