@@ -1,3 +1,9 @@
+## [1.216.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.215.1...v1.216.0) (2026-08-19)
+
+### ✨ Features
+
+* replace LightboxWindow with LightboxWindowNg for enhanced functionality ([d009b2f](https://github.com/travel-albums-ai/travel-albums/commit/d009b2f022f52d6bb067d26f95ffa7bdb82f85fb))
+
 ## [1.215.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.215.0...v1.215.1) (2026-08-19)
 
 ### 🐛 Fixes
