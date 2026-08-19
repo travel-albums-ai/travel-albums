@@ -33,6 +33,7 @@ interface AlbumPhotoCardProps {
   original?: boolean;
   mapHeight?: number;
   mapWidth?: number;
+  naked?: boolean;
 }
 
 function prettyTime(dateInput: string) {
@@ -95,6 +96,7 @@ function AlbumPhotoCard({
   thumbnailSx = {},
   mapHeight,
   mapWidth,
+  naked = false,
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
 
@@ -202,124 +204,107 @@ function AlbumPhotoCard({
             borderRadius: 8,
           }}
         />
-        {!selectMode && isHovered && hasGps && <Box
-          onMouseLeave={() => setShowGps(false)}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            left: 8,
-            borderRadius: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 1,
-            zIndex: 3,
-            px: 0.25,
-            py: 0.25,
-          }}>
-          <GenericToggleButtonGroup variant="outlined" items={[
-            {
-              tooltip: "Show photo location on map",
-              icon: <Satellite size={16} />,
-              onClick: () => setShowGps(!showGps),
-            },
-          ] satisfies GenericToggleButtonProps[]} />
+        {!naked && <>
+          {!selectMode && isHovered && hasGps && <Box
+            onMouseLeave={() => setShowGps(false)}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              left: 8,
+              borderRadius: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 1,
+              zIndex: 3,
+              px: 0.25,
+              py: 0.25,
+            }}>
+            <GenericToggleButtonGroup variant="outlined" items={[
+              {
+                tooltip: "Show photo location on map",
+                icon: <Satellite size={16} />,
+                onClick: () => setShowGps(!showGps),
+              },
+            ] satisfies GenericToggleButtonProps[]} />
 
 
 
-          {showGps && (
-            <Box sx={{ width: mapWidth || width * 0.75, height: mapHeight || height * 0.65 }}>
-              <AlbumMapPanel photos={[photo]} height={mapHeight || height * 0.65} />
-            </Box>
-          )}
-
-          {/* {showGps && <Box><AlbumMapPanel photos={[photo]} height={100} /></Box>} */}
-        </Box>}
-        {inView && (
-          <>
-            {(selectMode || favorite) && (
-              <GeneralRegistryToolbar
-                fullWidth={false}
-                group="album-photo-card"
-                sx={toolbarSx}
-                context={{
-                  photoId: photo.id,
-                  favorite,
-                  selectMode,
-                }}
-              />
+            {showGps && (
+              <Box sx={{ width: mapWidth || width * 0.75, height: mapHeight || height * 0.65 }}>
+                <AlbumMapPanel photos={[photo]} height={mapHeight || height * 0.65} />
+              </Box>
             )}
 
-            {showTags && <AlbumPhotoCardTags photo={photo} />}
-
-            {showDescription && hasDescription(photo.id) && (
-              <DescribePhotoReadOnly
-                photoId={photo.id}
-                className="album-photo-description"
-                sx={detailsSx}
-              />
-            )}
-
-            {isHovered && (
-              <Stack
-                direction="row"
-                divider={
-                  <Divider
-                    orientation="vertical"
-                    sx={{ borderStyle: 'dotted' }}
-                    flexItem
-                  />
-                }
-                sx={detailsSx}
-              >
-                {showDate && (
-                  <Tooltip arrow title={photo.takenAt}>
-                    <Typography
-                      variant="caption"
-                      gutterBottom={false}
-                      sx={{
-                        color: 'text.secondary',
-                        opacity: 0.9,
-                        fontWeight: 500,
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {prettyTime(photo.takenAt)}
-                    </Typography>
-                  </Tooltip>
-                )}
-
-                <AlbumsMetaDetails
-                  photos={[photo]}
-                  minWidth={0}
-                  filterEmpty
-                  showCount={false}
-                  showLocation={showLocation}
+            {/* {showGps && <Box><AlbumMapPanel photos={[photo]} height={100} /></Box>} */}
+          </Box>}
+          {inView && (
+            <>
+              {(selectMode || favorite) && (
+                <GeneralRegistryToolbar
+                  fullWidth={false}
+                  group="album-photo-card"
+                  sx={toolbarSx}
+                  context={{
+                    photoId: photo.id,
+                    favorite,
+                    selectMode,
+                  }}
                 />
-              </Stack>
-            )}
-          </>
-        )}
-      </Card>
+              )}
 
-      {inView && showFileName && (
-        <Box
-          sx={{
-            display: 'block',
-            p: 0.5,
-            bgcolor: 'background.paper',
-            borderRadius: 2,
-            borderTopLeftRadius: 0,
-            borderTopRightRadius: 0,
-          }}
-        >
-          <Tooltip title={`${photo.folder} / ${photo.title}`} arrow>
-            <Typography variant="caption" color="textSecondary">
-              {photo.title}
-            </Typography>
-          </Tooltip>
-        </Box>
-      )}
+              {showTags && <AlbumPhotoCardTags photo={photo} />}
+
+              {showDescription && hasDescription(photo.id) && (
+                <DescribePhotoReadOnly
+                  photoId={photo.id}
+                  className="album-photo-description"
+                  sx={detailsSx}
+                />
+              )}
+
+              {isHovered && (
+                <Stack
+                  direction="row"
+                  divider={
+                    <Divider
+                      orientation="vertical"
+                      sx={{ borderStyle: 'dotted' }}
+                      flexItem
+                    />
+                  }
+                  sx={detailsSx}
+                >
+                  {showDate && (
+                    <Tooltip arrow title={photo.takenAt}>
+                      <Typography
+                        variant="caption"
+                        gutterBottom={false}
+                        sx={{
+                          color: 'text.secondary',
+                          opacity: 0.9,
+                          fontWeight: 500,
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {prettyTime(photo.takenAt)}
+                      </Typography>
+                    </Tooltip>
+                  )}
+
+                  <AlbumsMetaDetails
+                    photos={[photo]}
+                    minWidth={0}
+                    filterEmpty
+                    showCount={false}
+                    showLocation={showLocation}
+                  />
+                </Stack>
+              )}
+            </>
+          )}
+        </>}
+      </Card>
     </>
   );
 }

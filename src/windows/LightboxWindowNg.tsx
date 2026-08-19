@@ -234,15 +234,10 @@ export default function LightboxWindowNg() {
         onClick={() => goTo(index)}
         sx={{
           flex: '0 0 auto',
-          width: thumbWidth,
-          height: thumbHeight,
+          height: '150px',
           borderRadius: 1,
           overflow: 'hidden',
           cursor: 'pointer',
-
-          border: active
-            ? `3px solid ${theme.palette.primary.main}`
-            : '2px solid transparent',
 
           opacity: active ? 1 : 0.65,
 
@@ -255,16 +250,16 @@ export default function LightboxWindowNg() {
           },
         }}
       >
-        <Box
-          component="img"
-          src={composeUrl(photo, false)}
-          loading="lazy"
-          draggable={false}
-          sx={{
+        <AlbumPhotoCard original={false} photo={photo} naked={true}
+          thumbnailSx={{
+            width: '150px',
+            height: '150px',
+            objectFit: 'contain',
+          }}
+          style={{
             width: '100%',
             height: '100%',
-            display: 'block',
-            objectFit: 'cover',
+            objectFit: 'contain',
           }}
         />
       </Box>
@@ -315,11 +310,9 @@ export default function LightboxWindowNg() {
             minHeight: 0,
             flex: 1,
             height: '100%',
-
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-
             overflow: 'hidden',
           }}
         >
