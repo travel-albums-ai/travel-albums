@@ -29,6 +29,7 @@ import { useInView } from 'react-intersection-observer';
 interface AlbumPhotoCardProps {
   photo: GalleryPhoto;
   style?: CSSProperties;
+  thumbnailSx?: CSSProperties;
   original?: boolean;
 }
 
@@ -89,6 +90,7 @@ function AlbumPhotoCard({
   photo,
   style,
   original = false,
+  thumbnailSx = {},
 }: AlbumPhotoCardProps) {
   const theme = useTheme();
 
@@ -191,6 +193,7 @@ function AlbumPhotoCard({
           height={height}
           original={original}
           style={{
+            ...thumbnailSx,
             border: thumbnailBorder,
             borderRadius: 8,
           }}

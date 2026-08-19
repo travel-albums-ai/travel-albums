@@ -6,6 +6,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import AlbumPhotoCard from '@/components/AlbumPhotoCard';
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
@@ -289,54 +290,31 @@ export default function LightboxWindowNg() {
         },
       }}
     >
-      {/* Main image area */}
       <Box
         sx={{
           flex: 1,
           minHeight: 0,
           minWidth: 0,
-
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: '48px minmax(0, 1fr) 48px',
-            md: '72px minmax(0, 1fr) 72px',
-          },
-
+          display: 'flex',
+          gap: 2,
           alignItems: 'center',
-
-          px: {
-            xs: 1,
-            md: 2,
-          },
-
-          py: 2,
-
+          p: 2,
           bgcolor: 'background.default',
         }}
       >
-        {/* Previous button */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <GenericToggleButtonGroup items={[{
-            tooltip: "Previous photo",
-            onClick: () => previous(),
-            icon: <ChevronLeft size={20} />,
-            selected: false,
-            disabled: currentIndex === 0,
-          }] satisfies GenericToggleButtonProps[]} variant="outlined" />
-        </Box>
+        <GenericToggleButtonGroup items={[{
+          tooltip: "Previous photo",
+          onClick: () => previous(),
+          icon: <ChevronLeft size={20} />,
+          selected: false,
+          disabled: currentIndex === 0,
+        }] satisfies GenericToggleButtonProps[]} variant="outlined" />
 
-        {/* Image */}
         <Box
           sx={{
             minWidth: 0,
             minHeight: 0,
-
+            flex: 1,
             height: '100%',
 
             display: 'flex',
@@ -346,45 +324,27 @@ export default function LightboxWindowNg() {
             overflow: 'hidden',
           }}
         >
-          <Box
-            component="img"
-            src={currentSrc}
-            draggable={false}
-            sx={{
-              display: 'block',
-
-              maxWidth: '100%',
-              maxHeight: '100%',
-
-              width: 'auto',
-              height: 'auto',
-
+          <AlbumPhotoCard original={true} photo={currentPhoto}
+            thumbnailSx={{
+              width: '100%',
+              height: '100%',
               objectFit: 'contain',
-
-              userSelect: 'none',
-
-              boxShadow:
-                '0 12px 50px rgba(0,0,0,.5)',
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
             }}
           />
         </Box>
 
-        {/* Next button */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <GenericToggleButtonGroup items={[{
-            tooltip: "Next photo",
-            onClick: () => next(),
-            icon: <ChevronRight size={20} />,
-            selected: false,
-            disabled: currentIndex === photos.length - 1,
-          }] satisfies GenericToggleButtonProps[]} variant="outlined" />
-        </Box>
+        <GenericToggleButtonGroup items={[{
+          tooltip: "Next photo",
+          onClick: () => next(),
+          icon: <ChevronRight size={20} />,
+          selected: false,
+          disabled: currentIndex === photos.length - 1,
+        }] satisfies GenericToggleButtonProps[]} variant="outlined" />
       </Box>
 
       {/* Filmstrip */}
