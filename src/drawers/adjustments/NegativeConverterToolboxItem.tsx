@@ -1,6 +1,5 @@
 import { useNegativeStoreSelector } from '@/context/negativeStore';
 import NegativeConverterItem from '@/drawers/adjustments/NegativeConverterItem';
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 
 export default function NegativeConverterToolboxItem({
   item,
@@ -34,20 +33,20 @@ export default function NegativeConverterToolboxItem({
 
   return (
     <>
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary>
           <Typography variant="subtitle2" sx={{ fontWeight: 'bold', px: 1 }}>{item.title}</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{ p: 1, py: 0, pb: 1}}>
-          {item.list?.map((subItem) => <NegativeConverterItem
-            key={subItem.title}
-            title={subItem.title}
-            checked={subItem.checked}
-            onChange={subItem.onChange}
-            sliders={subItem.sliders}
-          />)}
-        </AccordionDetails>
-      </Accordion>
+        <AccordionDetails sx={{ p: 1, py: 0, pb: 1}}> */}
+      {item.list?.map((subItem) => <NegativeConverterItem
+        key={subItem.title}
+        title={subItem.title}
+        checked={subItem.checked}
+        onChange={subItem.onChange}
+        sliders={subItem.sliders}
+      />)}
+      {/* </AccordionDetails>
+      </Accordion> */}
     </>
   );
 }

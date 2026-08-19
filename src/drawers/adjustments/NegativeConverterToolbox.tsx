@@ -1,10 +1,13 @@
 import { Box } from '@mui/material';
-import { BicepsFlexed, BrickWall, Contrast, DraftingCompass, EyeDashed, Gem, Lightbulb, Mountain, Paintbrush, Palette, Pipette, Slice, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { AudioLines, BicepsFlexed, BrickWall, Camera, CircleDotDashed, Contrast, DraftingCompass, EyeDashed, Gem, Lightbulb, Mountain, Paintbrush, Palette, Pipette, Slice, SlidersHorizontal, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import NegativeConverterToolboxItem from '@/drawers/adjustments/NegativeConverterToolboxItem';
 import { numberSlider } from '@/drawers/adjustments/sliderBuilders';
 import { ADJUSTMENTS_RANGES } from '@/drawers/adjustments/state';
 import { Adjustments } from '@/drawers/adjustments/types';
+import { useState } from 'react';
 
 function ChannelDot({ color, style }: { color: string; style?: React.CSSProperties }) {
   return <Box sx={{ backgroundColor: color, borderRadius: '50%', height: 16, width: 16, ...style }} />;
@@ -20,15 +23,19 @@ function ComposedDots({firstChild, children} : {firstChild: React.ReactNode; chi
 export default function NegativeConverterToolbox({
   adj,
   set,
+  children,
 }: {
   adj: Adjustments;
   set: <K extends keyof Adjustments>(_key: K, _value: Adjustments[K]) => void;
+  children?: React.ReactNode;
 }) {
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const items = [
     {
       key: 'base',
       title: 'Base',
+      icon: <Camera size={16} />,
       list: [
         {
           title: 'Invert',
@@ -95,6 +102,7 @@ export default function NegativeConverterToolbox({
     },
     {
       key: 'basics',
+      icon: <SlidersHorizontal size={16} />,
       list: [
         {
           title: 'Exposure',
@@ -184,6 +192,7 @@ export default function NegativeConverterToolbox({
     },
     {
       key: 'levels',
+      icon: <AudioLines size={16} />,
       title: 'Levels',
       list: [
         {
@@ -248,6 +257,7 @@ export default function NegativeConverterToolbox({
     {
       key: 'colors',
       title: 'Colors',
+      icon: <SwatchBook size={16} />,
       list: [
         {
           title: 'Per-channel Gamma',
@@ -351,6 +361,7 @@ export default function NegativeConverterToolbox({
     },
     {
       key: 'blackAndWhite',
+      icon: <Contrast size={16} />,
       list: [
         {
           title: 'Black/White',
@@ -473,6 +484,7 @@ export default function NegativeConverterToolbox({
     },
     {
       key: 'decorative',
+      icon: <CircleDotDashed size={16} />,
       list: [
         {
           title: 'Sharpen',
@@ -537,9 +549,26 @@ export default function NegativeConverterToolbox({
 
   return (
     <>
-      {items.map((item) => <Box key={item.key}>
-        <NegativeConverterToolboxItem item={item} />
-      </Box>)}
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, overflow: 'auto', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <GenericToggleButtonGroup items={[
+          ...items.map((item, index) => ({
+            tooltip: item.title,
+            icon: item.icon,
+            onClick: () => {
+              setSelectedIndex(index)
+            },
+            title: '',
+            selected: index === selectedIndex,
+          })),
+        ] satisfies GenericToggleButtonProps[]} />
+
+        {children}
+      </Box>
+      {items
+        .filter((item, index) => index === selectedIndex)
+        .map((item) => <Box key={item.key}>
+          <NegativeConverterToolboxItem item={item} />
+        </Box>)}
     </>
   );
 }

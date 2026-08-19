@@ -78,6 +78,10 @@ export default function NegativeConverterWrapper({
             overflow: 'hidden',
             alignItems: 'center',
             justifyContent: 'center',
+            border: '1px solid',
+            borderColor: 'divider',
+            borderRadius: 2,
+            boxShadow: 2,
           }}
         >
           <Box
@@ -96,8 +100,10 @@ export default function NegativeConverterWrapper({
         {/* {!(hasGeneticBreeding && showGenetic) && <> */}
         {hasPresetSelector || hasToolbox ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, overflow: 'auto' }}>
-            {hasPresetSelector && <NegativeConverterPresetSelector onChange={applyPreset} previewPhotoObj={previewPhotoObj} preset={preset} presets={presets} />}
-            {hasToolbox && <NegativeConverterToolbox adj={selectedAdj || adj} set={set} />}
+
+            {hasToolbox && <NegativeConverterToolbox adj={selectedAdj || adj} set={set} >
+              {hasPresetSelector && <NegativeConverterPresetSelector onChange={applyPreset} previewPhotoObj={previewPhotoObj} preset={preset} presets={presets} />}
+            </NegativeConverterToolbox>}
           </Box>
         ) : null}
         {/* </>} */}
