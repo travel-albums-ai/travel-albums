@@ -126,6 +126,8 @@ export default function AlbumScroller({
   const blockCount = blocks.length;
   const maxIndex = Math.max(0, blockCount - 1);
   const previewRaf = useRef<number | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const draggingRef = useRef(false);
 
   useEffect(() => {
     setCurrent(0);
@@ -201,6 +203,39 @@ export default function AlbumScroller({
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [go]);
+
+  const updateIndexFromClientX = useCallback((clientX: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const frac = Math.max(0, Math.min(1, x / rect.width));
+    const next = Math.round(frac * maxIndex);
+    setCurrent((v) => (v === next ? v : next));
+  }, [maxIndex]);
+
+  const onTrackPointerDown = useCallback((e: any) => {
+    const target = e.currentTarget as Element;
+    (target as Element).setPointerCapture(e.pointerId);
+    draggingRef.current = true;
+    updateIndexFromClientX(e.clientX);
+    lockRef.current = true;
+  }, [updateIndexFromClientX]);
+
+  const onTrackPointerMove = useCallback((e: any) => {
+    if (!draggingRef.current) return;
+    updateIndexFromClientX(e.clientX);
+  }, [updateIndexFromClientX]);
+
+  const onTrackPointerUp = useCallback((e: any) => {
+    const target = e.currentTarget as Element;
+    try { (target as Element).releasePointerCapture(e.pointerId); } catch {}
+    draggingRef.current = false;
+    // small timeout so other inputs don't immediately fight the release
+    window.setTimeout(() => {
+      lockRef.current = false;
+    }, INPUT_LOCK_MS);
+  }, []);
 
   useEffect(() => {
     const THRESHOLD = 15;
@@ -285,6 +320,42 @@ export default function AlbumScroller({
             />
           </Box>
         ))}
+      </Box>
+
+      <Box
+        onPointerDown={onTrackPointerDown}
+        onPointerMove={onTrackPointerMove}
+        onPointerUp={onTrackPointerUp}
+        sx={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 12,
+          height: 28,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 199,
+          pointerEvents: 'auto',
+        }}
+      >
+        <Box ref={(el) => (trackRef.current = el)} sx={{ width: '90%', height: 6, bgcolor: 'rgba(0,0,0,0.12)', borderRadius: 3, position: 'relative' }}>
+          {/* thumb */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 12,
+              height: 12,
+              borderRadius: '50%',
+              bgcolor: 'primary.main',
+              boxShadow: 2,
+              cursor: 'pointer',
+            }}
+            style={{ left: `${(maxIndex > 0 ? (current / maxIndex) * 100 : 0)}%` }}
+          />
+        </Box>
       </Box>
     </Box>
   );
