@@ -1,3 +1,9 @@
+## [1.211.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.210.0...v1.211.0) (2026-08-19)
+
+### ✨ Features
+
+* add currentChunk prop to AlbumTimeline and synchronize position with parent scroller ([284656a](https://github.com/travel-albums-ai/travel-albums/commit/284656af9dad9e88149c81cb29e91f875b8f35e0))
+
 ## [1.210.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.209.0...v1.210.0) (2026-08-19)
 
 ### ✨ Features
