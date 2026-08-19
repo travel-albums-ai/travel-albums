@@ -1,3 +1,13 @@
+## [1.217.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.216.0...v1.217.0) (2026-08-19)
+
+### ✨ Features
+
+* update LightboxWindowNg to use full-screen mode for improved user experience ([7985c0d](https://github.com/travel-albums-ai/travel-albums/commit/7985c0d24a47e9cd718c966bb45fbc1e1ffc9328))
+
+### 🧹 Refactors
+
+* clean up imports and improve layout in LightboxWindowNg ([bf8e5fc](https://github.com/travel-albums-ai/travel-albums/commit/bf8e5fc419bf95be9acc566e598f2555710e5c3c))
+
 ## [1.216.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.215.1...v1.216.0) (2026-08-19)
 
 ### ✨ Features
