@@ -1,10 +1,12 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { GalleryPhoto } from '@/lib/galleryData';
 
 type Props = {
   photos: GalleryPhoto[];
+  chunkSize: number;
+  onIndexChange?: (index: number, chunkIndex: number) => void;
   rows?: number;
   columns?: number;
 };
@@ -16,9 +18,14 @@ type TimelineMarker = {
   count: number;
 };
 
-export default function AlbumTimeline({ photos }: Props) {
+export default function AlbumTimeline({
+  photos,
+  chunkSize = 6,
+  onIndexChange,
+}: Props) {
   const barRef = useRef<HTMLDivElement>(null);
 
+  // 0 = latest, 100 = oldest
   const [position, setPosition] = useState(0);
 
   const timeline = useMemo(() => {
@@ -26,12 +33,25 @@ export default function AlbumTimeline({ photos }: Props) {
       return null;
     }
 
-    const sorted = [...photos].sort(
-      (a, b) => Number(a.takenAtTs) - Number(b.takenAtTs),
-    );
+    // IMPORTANT:
+    // Timeline and indexes are both newest -> oldest.
+    const sorted = [...photos]
+      .filter((photo) =>
+        Number.isFinite(Number(photo.takenAtTs)),
+      )
+      .sort(
+        (a, b) =>
+          Number(b.takenAtTs) - Number(a.takenAtTs),
+      );
 
-    const minTs = Number(sorted[0].takenAtTs);
-    const maxTs = Number(sorted[sorted.length - 1].takenAtTs);
+    if (!sorted.length) {
+      return null;
+    }
+
+    const maxTs = Number(sorted[0].takenAtTs);
+    const minTs = Number(
+      sorted[sorted.length - 1].takenAtTs,
+    );
 
     const range = Math.max(maxTs - minTs, 1);
 
@@ -40,11 +60,6 @@ export default function AlbumTimeline({ photos }: Props) {
 
     for (const photo of sorted) {
       const timestamp = Number(photo.takenAtTs);
-
-      if (!Number.isFinite(timestamp)) {
-        continue;
-      }
-
       const date = new Date(timestamp * 1000);
 
       const year = date.getFullYear();
@@ -65,23 +80,23 @@ export default function AlbumTimeline({ photos }: Props) {
 
     const markers: TimelineMarker[] = [];
 
+    // Month markers
     for (const [key, count] of months) {
       const [yearString, monthString] = key.split('-');
 
       const year = Number(yearString);
       const month = Number(monthString);
 
-      const timestamp =
-        new Date(year, month, 1).getTime() / 1000;
-
       markers.push({
-        timestamp,
+        timestamp:
+          new Date(year, month, 1).getTime() / 1000,
         label: String(month + 1),
         type: 'month',
         count,
       });
     }
 
+    // Year markers
     for (const [year, count] of years) {
       markers.push({
         timestamp:
@@ -92,23 +107,88 @@ export default function AlbumTimeline({ photos }: Props) {
       });
     }
 
+    // Newest -> oldest
     markers.sort(
-      (a, b) => a.timestamp - b.timestamp,
+      (a, b) => b.timestamp - a.timestamp,
     );
 
+    /**
+     * Convert timestamp to timeline position.
+     *
+     * 0%   = newest
+     * 100% = oldest
+     */
     const getPosition = (timestamp: number) =>
-      ((timestamp - minTs) / range) * 100;
+      100 - ((timestamp - minTs) / range) * 100;
 
+    /**
+     * Convert timeline position back to timestamp.
+     *
+     * 0%   = newest timestamp
+     * 100% = oldest timestamp
+     */
     const getTimestamp = (percent: number) =>
-      minTs + (range * percent) / 100;
+      maxTs - (range * percent) / 100;
+
+    /**
+     * Find the actual photo index closest to a timestamp.
+     *
+     * `sorted` is newest -> oldest, so binary search
+     * accordingly.
+     */
+    const getPhotoIndex = (timestamp: number) => {
+      let low = 0;
+      let high = sorted.length - 1;
+
+      while (low < high) {
+        const mid = Math.floor(
+          (low + high) / 2,
+        );
+
+        const midTs = Number(
+          sorted[mid].takenAtTs,
+        );
+
+        if (midTs > timestamp) {
+          low = mid + 1;
+        } else {
+          high = mid;
+        }
+      }
+
+      // Check neighbouring photo too, so we return the
+      // genuinely closest photo rather than merely the
+      // first one crossing the timestamp.
+      const index = low;
+
+      if (index === 0) {
+        return 0;
+      }
+
+      const currentDistance = Math.abs(
+        Number(sorted[index].takenAtTs) -
+          timestamp,
+      );
+
+      const previousDistance = Math.abs(
+        Number(sorted[index - 1].takenAtTs) -
+          timestamp,
+      );
+
+      return previousDistance <= currentDistance
+        ? index - 1
+        : index;
+    };
 
     return {
+      sorted,
       minTs,
       maxTs,
       range,
       markers,
       getPosition,
       getTimestamp,
+      getPhotoIndex,
     };
   }, [photos]);
 
@@ -118,20 +198,46 @@ export default function AlbumTimeline({ photos }: Props) {
         return;
       }
 
-      const rect = barRef.current.getBoundingClientRect();
+      const rect =
+        barRef.current.getBoundingClientRect();
 
       const nextPosition =
         ((clientX - rect.left) / rect.width) * 100;
 
-      setPosition(
-        Math.max(0, Math.min(100, nextPosition)),
+      const clampedPosition = Math.max(
+        0,
+        Math.min(100, nextPosition),
+      );
+
+      setPosition(clampedPosition);
+
+      const timestamp =
+        timeline.getTimestamp(
+          clampedPosition,
+        );
+
+      const index =
+        timeline.getPhotoIndex(timestamp);
+
+      const chunkIndex =
+        Math.floor(index / chunkSize);
+
+      onIndexChange?.(
+        index,
+        chunkIndex,
       );
     },
-    [timeline],
+    [
+      timeline,
+      chunkSize,
+      onIndexChange,
+    ],
   );
 
   const handlePointerDown = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
+    (
+      event: React.PointerEvent<HTMLDivElement>,
+    ) => {
       event.currentTarget.setPointerCapture(
         event.pointerId,
       );
@@ -142,7 +248,9 @@ export default function AlbumTimeline({ photos }: Props) {
   );
 
   const handlePointerMove = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
+    (
+      event: React.PointerEvent<HTMLDivElement>,
+    ) => {
       if (
         !event.currentTarget.hasPointerCapture(
           event.pointerId,
@@ -163,7 +271,16 @@ export default function AlbumTimeline({ photos }: Props) {
   const timestamp =
     timeline.getTimestamp(position);
 
-  const selectedDate = new Date(timestamp * 1000);
+  const selectedDate =
+    new Date(timestamp * 1000);
+
+  const selectedIndex =
+    timeline.getPhotoIndex(timestamp);
+
+  const selectedChunk =
+    Math.floor(
+      selectedIndex / chunkSize,
+    );
 
   return (
     <Box
@@ -180,10 +297,12 @@ export default function AlbumTimeline({ photos }: Props) {
           height: 64,
         }}
       >
-        {/* Timeline labels */}
+        {/* Timeline markers */}
         {timeline.markers.map((marker) => {
           const left =
-            timeline.getPosition(marker.timestamp);
+            timeline.getPosition(
+              marker.timestamp,
+            );
 
           const isYear =
             marker.type === 'year';
@@ -194,26 +313,30 @@ export default function AlbumTimeline({ photos }: Props) {
               sx={{
                 position: 'absolute',
                 left: `${left}%`,
-                top: isYear ? 0 : undefined,
-                bottom: !isYear ? 0 : undefined,
-                transform: 'translateX(-50%)',
+                top: isYear ? 0 : 20,
+                // bottom: !isYear ? 0 : undefined,
+                transform:
+                  'translateX(-50%)',
                 pointerEvents: 'none',
                 zIndex: isYear ? 2 : 1,
               }}
             >
-              <Typography
+
+
+              {isYear && <Typography
                 sx={{
-                  fontSize: isYear ? 11 : 10,
-                  fontWeight: isYear ? 700 : 400,
-                  color: isYear
-                    ? 'text.primary'
-                    : 'text.secondary',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: 'text.primary',
                   lineHeight: 1,
                   userSelect: 'none',
                 }}
               >
                 {marker.label}
-              </Typography>
+              </Typography>}
+
+              {!isYear && <Box sx={{ width: '0.5px', height: '8px', bgcolor: 'text.secondary'}}></Box>}
+
             </Box>
           );
         })}
@@ -236,36 +359,42 @@ export default function AlbumTimeline({ photos }: Props) {
           }}
         >
           {/* Handle */}
-          <Box
-            sx={{
-              position: 'absolute',
-              left: `${position}%`,
-              top: '50%',
-              width: 16,
-              height: 28,
-              transform: 'translate(-50%, -50%)',
-              borderRadius: 2,
-              bgcolor: 'background.paper',
-              border: 2,
-              borderColor: 'text.primary',
-              boxShadow: 2,
-              cursor: 'grab',
+          <Tooltip title={selectedDate.toDateString()} placement="bottom" arrow open={true}>
+            <Box
+              sx={{
+                position: 'absolute',
+                left: `${position}%`,
+                top: '50%',
+                width: 16,
+                height: 28,
+                transform:
+                'translate(-50%, -50%)',
+                borderRadius: 2,
+                bgcolor:
+                'background.paper',
+                border: 2,
+                borderColor:
+                'text.primary',
+                boxShadow: 2,
+                cursor: 'grab',
 
-              '&:active': {
-                cursor: 'grabbing',
-              },
-            }}
-          />
+                '&:active': {
+                  cursor: 'grabbing',
+                },
+              }}
+            />
+          </Tooltip>
         </Box>
       </Box>
 
-      {/* Current value */}
+      {/* Current position */}
       <Typography
         variant="body2"
         sx={{
           mt: 0.5,
           color: 'text.secondary',
-          fontVariantNumeric: 'tabular-nums',
+          fontVariantNumeric:
+            'tabular-nums',
         }}
       >
         {selectedDate.getFullYear()}-
@@ -276,6 +405,10 @@ export default function AlbumTimeline({ photos }: Props) {
         {String(
           selectedDate.getDate(),
         ).padStart(2, '0')}
+        {' · '}
+        #{selectedIndex.toLocaleString()}
+        {' · '}
+        chunk {selectedChunk.toLocaleString()}
       </Typography>
     </Box>
   );
