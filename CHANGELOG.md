@@ -1,3 +1,9 @@
+## [1.198.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.197.0...v1.198.0) (2026-08-19)
+
+### ✨ Features
+
+* add new themes (Catppuccin and Tokyo Night) and update theme structure ([c935828](https://github.com/travel-albums-ai/travel-albums/commit/c93582889c6164fd47a462a349fff5bf4f16d8a0))
+
 ## [1.197.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.196.0...v1.197.0) (2026-08-19)
 
 ### ✨ Features
