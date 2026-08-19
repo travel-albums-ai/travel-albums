@@ -5,18 +5,55 @@ export const themeTokens = {
   light: {
     palette: {
       mode: 'light',
-      primary: { main: '#1976d2' },
-      secondary: { main: '#dc004e' },
-      background: { default: '#fafafa', paper: '#ffffff' },
+
+      primary: {
+        main: '#7C4DFF',
+      },
+
+      secondary: {
+        main: '#0097A7',
+      },
+
+      error: {
+        main: '#E53935',
+      },
+
+      warning: {
+        main: '#F39C12',
+      },
+
+      info: {
+        main: '#0097A7',
+      },
+
+      success: {
+        main: '#16A05D',
+      },
+
+      background: {
+        default: '#F6F6F9',
+        paper: '#FFFFFF',
+      },
+
+      text: {
+        primary: '#24242B',
+        secondary: '#6E7080',
+        disabled: '#A5A6B0',
+      },
+
+      divider: '#E1E1E7',
     },
+
     shape: {
       borderRadius: 4,
     },
+
     typography: {
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+
       button: {
         textTransform: 'none',
-      }
+      },
     },
   } as ThemeOptions,
   dark: {

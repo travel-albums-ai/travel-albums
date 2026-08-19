@@ -1,5 +1,5 @@
 import { themeRegistry } from '@/themeRegistry';
-import { lightTheme as defaultLightTheme, darkTheme as defaultDarkTheme } from './default.theme';
+import { darkTheme as defaultDarkTheme, lightTheme as defaultLightTheme } from './default.theme';
 
 export type ThemeName = string;
 export type ThemeMode = 'light' | 'dark';

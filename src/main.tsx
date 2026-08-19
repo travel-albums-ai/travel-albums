@@ -1,7 +1,7 @@
 import AppRoutes from '@/components/AppRoutes';
 import '@/lib/i18n';
-import { warmToolDiscovery, warmToolGroup } from '@/toolDiscovery';
 import { warmThemeDiscovery } from '@/themeDiscovery';
+import { warmToolDiscovery, warmToolGroup } from '@/toolDiscovery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";

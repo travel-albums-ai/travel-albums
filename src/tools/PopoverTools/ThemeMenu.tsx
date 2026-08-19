@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
-import { themeNames } from '@/themes';
 import { ensureThemeDiscovery } from '@/themeDiscovery';
+import { themeNames } from '@/themes';
+import SettingSelectRow from '@/windows/settings/components/SettingSelectRow';
+import { useEffect, useState } from 'react';
 
 export default function ThemeMenu() {
   const themeId = useSettingsStoreSelector((state) => state.themeId);
