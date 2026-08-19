@@ -1,3 +1,9 @@
+## [1.209.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.208.1...v1.209.0) (2026-08-19)
+
+### ✨ Features
+
+* enhance AlbumTimeline with chunking and tooltip for current position ([7cef726](https://github.com/travel-albums-ai/travel-albums/commit/7cef726252e69c758897fc1b978d8bf471b54ff8))
+
 ## [1.208.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.208.0...v1.208.1) (2026-08-19)
 
 ### 🐛 Fixes
