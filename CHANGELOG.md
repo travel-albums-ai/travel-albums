@@ -1,3 +1,9 @@
+## [1.200.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.199.0...v1.200.0) (2026-08-19)
+
+### ✨ Features
+
+* enhance NegativeConverter components with new layout and icon integration ([7e8cd1d](https://github.com/travel-albums-ai/travel-albums/commit/7e8cd1df9cccb3552d046b3f6e75e53b7dda261b))
+
 ## [1.199.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.198.0...v1.199.0) (2026-08-19)
 
 ### ✨ Features
