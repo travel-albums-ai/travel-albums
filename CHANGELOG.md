@@ -1,3 +1,9 @@
+## [1.206.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.206.1...v1.206.2) (2026-08-19)
+
+### 🐛 Fixes
+
+* update background color in generateTheme function ([c14930f](https://github.com/travel-albums-ai/travel-albums/commit/c14930fda3583aa5fc80610caff3dcc161c27eae))
+
 ## [1.206.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.206.0...v1.206.1) (2026-08-19)
 
 ### 🐛 Fixes
