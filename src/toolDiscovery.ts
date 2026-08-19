@@ -1,6 +1,6 @@
 import { ToolMeta, toolRegistry } from '@/toolRegistry';
 
-const modules = import.meta.glob<ToolMeta | undefined>(['./middleware/tools/**/*.meta.ts', './base/**/*.meta.ts'], {
+const modules = import.meta.glob<ToolMeta | undefined>(['./middleware/tools/**/*.meta.ts', './middleware/base/**/*.meta.ts'], {
   import: 'meta',
 });
 

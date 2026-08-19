@@ -8,5 +8,5 @@ export const meta = {
     priority: 200,
     visible: (context: any) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
   }],
-  loader: () => import('@/base/SelectionCountStatus'),
+  loader: () => import('@/middleware/base/SelectionCountStatus'),
 } as ToolMeta;

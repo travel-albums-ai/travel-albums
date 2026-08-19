@@ -7,5 +7,5 @@ export const meta = {
     side: 'right',
     priority: 0,
   }],
-  loader: () => import('@/base/SectionCountStatus'),
+  loader: () => import('@/middleware/base/SectionCountStatus'),
 } as ToolMeta;

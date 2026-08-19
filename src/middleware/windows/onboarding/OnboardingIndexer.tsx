@@ -1,4 +1,4 @@
-import ServerStatus from '@/base/ServerStatus';
+import ServerStatus from '@/middleware/base/ServerStatus';
 import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';

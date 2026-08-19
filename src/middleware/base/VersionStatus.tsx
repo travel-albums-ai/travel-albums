@@ -1,5 +1,5 @@
 import SolidChip from '@/components/SolidChip';
-import packageJson from '../../package.json';
+import packageJson from '../../../package.json';
 
 export default function VersionStatus() {
 
