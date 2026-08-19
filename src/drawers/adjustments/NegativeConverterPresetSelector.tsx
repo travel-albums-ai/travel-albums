@@ -1,7 +1,9 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import PopoverButton from '@/components/PopoverButton';
 import NegativeConverterReusable from '@/drawers/adjustments/NegativeConverterReusable';
 import { Adjustments } from '@/drawers/adjustments/types';
-import { Box, IconButton, Tooltip, Typography } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 import { BookDashed } from 'lucide-react';
 
 export default function NegativeConverterPresetSelector({
@@ -28,10 +30,13 @@ export default function NegativeConverterPresetSelector({
           ))}
       </Box>
 
-
-
-
-      <IconButton size="small" ><BookDashed size={16} /> </IconButton>
+      <GenericToggleButtonGroup items={[
+        {
+          tooltip: 'Open Preset Selector',
+          icon: <BookDashed size={16} />,
+          title: 'Presets' + (preset ? `: ${preset}` : ''),
+        },
+      ] satisfies GenericToggleButtonProps[]} />
     </>}>
 
       <Box sx={{
@@ -42,7 +47,6 @@ export default function NegativeConverterPresetSelector({
         gap: 1,
         p: 1,
       }}>
-        {/* <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flexWrap: 'wrap', justifyContent: 'center' }}> */}
         {Object.entries(presets).map(([name, value]) => (
           <Box key={name}
             onClick={() => onChange(name)}
@@ -60,7 +64,6 @@ export default function NegativeConverterPresetSelector({
             </Tooltip>
           </Box>
         ))}
-        {/* </Box> */}
       </Box>
     </PopoverButton>
   </>

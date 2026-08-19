@@ -33,11 +33,6 @@ export default function NegativeConverterToolboxItem({
 
   return (
     <>
-      {/* <Accordion>
-        <AccordionSummary>
-          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', px: 1 }}>{item.title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ p: 1, py: 0, pb: 1}}> */}
       {item.list?.map((subItem) => <NegativeConverterItem
         key={subItem.title}
         title={subItem.title}
@@ -45,8 +40,6 @@ export default function NegativeConverterToolboxItem({
         onChange={subItem.onChange}
         sliders={subItem.sliders}
       />)}
-      {/* </AccordionDetails>
-      </Accordion> */}
     </>
   );
 }
