@@ -1,3 +1,9 @@
+## [1.204.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.203.0...v1.204.0) (2026-08-19)
+
+### ✨ Features
+
+* enhance NegativeConverterToolbox layout with SolidChip component and improved button display ([cc8d31a](https://github.com/travel-albums-ai/travel-albums/commit/cc8d31a227f9185babcf6cbbd93dbba9750c0907))
+
 ## [1.203.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.202.0...v1.203.0) (2026-08-19)
 
 ### ✨ Features
