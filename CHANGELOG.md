@@ -1,3 +1,9 @@
+## [1.194.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.193.0...v1.194.0) (2026-08-19)
+
+### ✨ Features
+
+* enhance layout structure in index.html by adding a flex container for improved UI organization ([5d272e2](https://github.com/travel-albums-ai/travel-albums/commit/5d272e2b23fa45308846fc2a450e75b0a0bb4fd6))
+
 ## [1.193.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.192.0...v1.193.0) (2026-08-19)
 
 ### ✨ Features
