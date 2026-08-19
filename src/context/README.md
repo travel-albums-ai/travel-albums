@@ -111,8 +111,8 @@ Mounted at app root in `src/main.tsx`.
   - Sidebar sorting and expanded/collapsed section state.
   - Section names are typed from constant tuple for safety.
 
-- `negativeStore.ts`
-  - Minimal store for negative-converter display state (`showGenetic`).
+ - `adjustmentsStore.ts`
+  - Minimal store for adjustments display state (`showGenetic`).
 
 - `types.d.ts`
   - Shared literal labels (`PHOTO_LABELS`) and `PhotoLabel` union type.

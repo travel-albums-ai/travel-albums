@@ -45,7 +45,7 @@ type SettingsStore = {
   showSettings: boolean,
   otherSidebar: 'photo' | 'summary' | 'exif' | 'similar',
   selectMode: boolean,
-  albumType: 'segmented' | 'perDay' | 'flow' | 'default' | 'globe' | 'labeler' | 'scroller' | 'rows' | 'negative',
+  albumType: 'segmented' | 'perDay' | 'flow' | 'default' | 'globe' | 'labeler' | 'scroller' | 'rows' | 'adjustments',
   locale: SupportedLanguage,
 
   isZygote: boolean,

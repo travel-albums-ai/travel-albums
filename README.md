@@ -13,13 +13,13 @@ Travel Albums is a Vite/React interface for exploring a Google Takeout-style pho
 
 [![Travel Albums](/readme/features.png)](https://github.com/rand0mC0d3r/trip-gallery)
 
-- 🖼️ Browse all indexed photos in grid, row, scroller, day, or negative-conversion views.
+ - 🖼️ Browse all indexed photos in grid, row, scroller, day, or adjustments views.
 - 🧭 Group collections into dashboard sections such as albums, countries, cities, people/pets, trips, timeline, tags, and “now and then”.
 - 📍 Use EXIF/GPS metadata for location-aware views and nearby-place suggestions.
 - 🔎 Filter, sort, search, pin, select, favorite, tag, ignore, or mark photos private.
 - ⌨️ Navigate and select photos with keyboard shortcuts.
 - 🗂️ Explore indexed thumbnails and normalized metadata from Takeout sidecar JSON files.
-- 🎞️ Inspect EXIF details, maps, charts, collages, and image-negative conversion tools and adjustments tools.
+ - 🎞️ Inspect EXIF details, maps, charts, collages, and image-negative conversion and adjustments tools.
 
 ## 🚀 Quick start
 
@@ -44,7 +44,7 @@ This starts the Vite development client at `http://localhost:5173`.
 | --- | --- |
 | Browse everything | Open **All Photos** |
 | Discover groups | Open the **Dashboard** and select a populated section |
-| Change presentation | Use the gallery-type control to switch grid, rows, scroller, per-day, or negative modes |
+| Change presentation | Use the gallery-type control to switch grid, rows, scroller, per-day, or adjustments mode |
 | Compare or curate | Turn on selection mode, select photos, then apply favorite/private/ignore/tag actions |
 | Navigate efficiently | Use `←` / `→` to move the preview; in selection mode, use `Enter` to toggle the current photo |
 | Refresh source data | Reload the indexed data available to the client |

@@ -227,6 +227,7 @@ export default function AdjustmentsToolbox({
               label: 'Shadow tint',
               value: adj.shadowTintB,
               preIcon: <ChannelDot color="blue" />,
+              skipLabel: true,
               ...ADJUSTMENTS_RANGES.shadowTintB,
               onValueChange: (value) => set('shadowTintB', value),
             }),
@@ -576,3 +577,4 @@ export default function AdjustmentsToolbox({
     </>
   );
 }
+
