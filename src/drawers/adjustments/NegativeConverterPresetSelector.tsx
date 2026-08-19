@@ -4,7 +4,6 @@ import PopoverButton from '@/components/PopoverButton';
 import NegativeConverterReusable from '@/drawers/adjustments/NegativeConverterReusable';
 import { Adjustments } from '@/drawers/adjustments/types';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { BookDashed } from 'lucide-react';
 
 export default function NegativeConverterPresetSelector({
   onChange,
@@ -20,7 +19,7 @@ export default function NegativeConverterPresetSelector({
   return (<>
     <PopoverButton icon={null} label="" width={800} trigger={<>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+      {/* <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
         {Object.entries(presets)
           .filter(([name], index) => index < 5)
           .map(([name, value]) => (
@@ -28,12 +27,23 @@ export default function NegativeConverterPresetSelector({
               <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
             </Box>
           ))}
-      </Box>
+      </Box> */}
 
       <GenericToggleButtonGroup items={[
         {
           tooltip: 'Open Preset Selector',
-          icon: <BookDashed size={16} />,
+          // icon: <BookDashed size={16} />,
+          icon: <>
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, ml: 1 }}>
+              {Object.entries(presets)
+                .filter(([name], index) => index < 3)
+                .map(([name, value]) => (
+                  <Box key={name} sx={{ width: 16, height: 16, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', ml: -1, border: '1px solid', borderColor: 'divider', boxShadow: 1, cursor: 'pointer' }}>
+                    <NegativeConverterReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
+                  </Box>
+                ))}
+            </Box>
+          </>,
           title: 'Presets' + (preset ? `: ${preset}` : ''),
         },
       ] satisfies GenericToggleButtonProps[]} />
