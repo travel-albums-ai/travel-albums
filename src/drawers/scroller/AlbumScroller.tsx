@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AlbumScrollerItem from '@/drawers/scroller/AlbumScrollerItem';
+import AlbumTimeline from '@/drawers/scroller/AlbumTimeline';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -320,6 +321,28 @@ export default function AlbumScroller({
             />
           </Box>
         ))}
+      </Box>
+
+      <Box
+        // onPointerDown={onTrackPointerDown}
+        // onPointerMove={onTrackPointerMove}
+        // onPointerUp={onTrackPointerUp}
+        sx={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 42,
+          height: 48,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 199,
+          pointerEvents: 'auto',
+        }}
+      >
+        <AlbumTimeline photos={photos} chunkSize={rows * columns} onIndexChange={(index, chunkIndex) => {
+          setCurrent(chunkIndex);
+        }}   />
       </Box>
 
       <Box
