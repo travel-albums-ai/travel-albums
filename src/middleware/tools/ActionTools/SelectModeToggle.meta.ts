@@ -24,5 +24,5 @@ export const meta = {
       priority: 400
     },
   ],
-  loader: () => import('@/tools/ActionTools/SelectModeToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/SelectModeToggle'),
 }  as ToolMeta;

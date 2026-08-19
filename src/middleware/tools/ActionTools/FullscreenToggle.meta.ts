@@ -9,5 +9,5 @@ export const meta = {
       priority: 700
     }
   ],
-  loader: () => import('@/tools/ActionTools/FullscreenToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/FullscreenToggle'),
 } as ToolMeta;

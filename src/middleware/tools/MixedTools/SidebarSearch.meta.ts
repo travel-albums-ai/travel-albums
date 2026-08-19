@@ -8,5 +8,5 @@ export const meta = {
       priority: 0
     }
   ],
-  loader: () => import('@/tools/MixedTools/SidebarSearch'),
+  loader: () => import('@/middleware/tools/MixedTools/SidebarSearch'),
 } as ToolMeta;

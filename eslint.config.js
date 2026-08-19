@@ -30,13 +30,13 @@ export default defineConfig([
       'no-restricted-imports': [
         'error',
         {
-          patterns: ['@/tools/*', 'src/tools/*'],
+          patterns: ['@/middleware/tools/*', 'src/middleware/tools/*'],
         },
       ],
     },
   },
   {
-    files: ['src/toolDiscovery.ts', 'src/tools/**'],
+    files: ['src/toolDiscovery.ts', 'src/middleware/tools/**'],
     rules: {
       'no-restricted-imports': 'off',
     },

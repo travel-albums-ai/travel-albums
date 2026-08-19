@@ -10,5 +10,5 @@ export const meta = {
       visible: (context: any) => context?.selectedPhotos === undefined ? false : context.selectedPhotos === true,
     })),
   ],
-  loader: () => import('@/tools/ActionTools/AllToTagsToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/AllToTagsToggle'),
 } as ToolMeta;

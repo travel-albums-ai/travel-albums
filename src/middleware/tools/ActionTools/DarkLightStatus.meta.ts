@@ -9,5 +9,5 @@ export const meta = {
       priority: 600
     }
   ],
-  loader: () => import('@/tools/ActionTools/DarkLightStatus'),
+  loader: () => import('@/middleware/tools/ActionTools/DarkLightStatus'),
 } as ToolMeta;

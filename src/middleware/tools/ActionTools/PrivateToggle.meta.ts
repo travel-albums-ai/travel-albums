@@ -9,5 +9,5 @@ export const meta = {
       priority: 100
     }
   ],
-  loader: () => import('@/tools/ActionTools/PrivateToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/PrivateToggle'),
 } as ToolMeta;

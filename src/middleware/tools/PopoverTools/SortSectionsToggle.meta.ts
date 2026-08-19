@@ -10,5 +10,5 @@ export const meta = {
       visible: (context: any) => !context.sidebarSearchOpen,
     }
   ],
-  loader: () => import('@/tools/PopoverTools/SortSectionsToggle'),
+  loader: () => import('@/middleware/tools/PopoverTools/SortSectionsToggle'),
 } as ToolMeta;

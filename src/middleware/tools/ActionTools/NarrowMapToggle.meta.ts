@@ -9,5 +9,5 @@ export const meta = {
       priority: 0
     }
   ],
-  loader: () => import('@/tools/ActionTools/NarrowMapToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/NarrowMapToggle'),
 } as ToolMeta;

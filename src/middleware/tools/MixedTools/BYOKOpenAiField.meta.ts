@@ -9,5 +9,5 @@ export const meta = {
       priority: 0
     }
   ],
-  loader: () => import('@/tools/MixedTools/BYOKOpenAiField'),
+  loader: () => import('@/middleware/tools/MixedTools/BYOKOpenAiField'),
 } as ToolMeta;

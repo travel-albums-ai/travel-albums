@@ -9,5 +9,5 @@ export const meta = {
       priority: 800
     }
   ],
-  loader: () => import('@/tools/ActionTools/ScrollerColumnsToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/ScrollerColumnsToggle'),
 } as ToolMeta;

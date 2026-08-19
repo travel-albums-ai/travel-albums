@@ -9,5 +9,5 @@ export const meta = {
       priority: 800
     }
   ],
-  loader: () => import('@/tools/ActionTools/TutorialToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/TutorialToggle'),
 } as ToolMeta;

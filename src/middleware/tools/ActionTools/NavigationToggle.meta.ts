@@ -9,5 +9,5 @@ export const meta = {
       priority: 0
     }
   ],
-  loader: () => import('@/tools/ActionTools/NavigationToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/NavigationToggle'),
 } as ToolMeta;

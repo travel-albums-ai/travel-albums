@@ -9,5 +9,5 @@ export const meta = {
       priority: 200
     }
   ],
-  loader: () => import('@/tools/ActionTools/PreviewCommentsToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/PreviewCommentsToggle'),
 } as ToolMeta;

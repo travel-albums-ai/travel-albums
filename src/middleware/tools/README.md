@@ -111,8 +111,8 @@ When creating a new tool, follow this checklist:
 ### Recommended implementation template
 
 ```tsx
-import { GenericToggleButtonProps } from '@/tools/shared/GenericToggleButton';
-import GenericToggleButtonGroup from '@/tools/shared/GenericToggleButtonGroup';
+import { GenericToggleButtonProps } from '@/middleware/tools/shared/GenericToggleButton';
+import GenericToggleButtonGroup from '@/middleware/tools/shared/GenericToggleButtonGroup';
 import { SomeIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

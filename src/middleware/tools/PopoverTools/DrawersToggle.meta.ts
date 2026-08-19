@@ -9,5 +9,5 @@ export const meta = {
       priority: 900
     }
   ],
-  loader: () => import('@/tools/PopoverTools/DrawersToggle'),
+  loader: () => import('@/middleware/tools/PopoverTools/DrawersToggle'),
 } as ToolMeta;

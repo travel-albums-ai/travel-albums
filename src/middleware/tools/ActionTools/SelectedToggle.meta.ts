@@ -16,5 +16,5 @@ export const meta = {
       visible: (context: any) => context?.selectMode === undefined ? false : context.selectMode === true,
     }
   ],
-  loader: () => import('@/tools/ActionTools/SelectedToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/SelectedToggle'),
 } as ToolMeta;

@@ -28,5 +28,5 @@ export const meta = {
       visible: (context) => context?.showAll === undefined ? true : context.showAll === false
     },
   ],
-  loader: () => import('@/tools/ActionTools/PinnedToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/PinnedToggle'),
 } as ToolMeta;

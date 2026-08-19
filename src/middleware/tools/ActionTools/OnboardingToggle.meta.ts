@@ -9,5 +9,5 @@ export const meta = {
       priority: 200
     }
   ],
-  loader: () => import('@/tools/ActionTools/OnboardingToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/OnboardingToggle'),
 } as ToolMeta;

@@ -9,5 +9,5 @@ export const meta = {
       priority: 100
     }
   ],
-  loader: () => import('@/tools/ActionTools/PreviewExifToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/PreviewExifToggle'),
 } as ToolMeta;

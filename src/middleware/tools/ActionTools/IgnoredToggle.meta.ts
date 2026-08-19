@@ -9,5 +9,5 @@ export const meta = {
       priority: 300
     }
   ],
-  loader: () => import('@/tools/ActionTools/IgnoredToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/IgnoredToggle'),
 } as ToolMeta;

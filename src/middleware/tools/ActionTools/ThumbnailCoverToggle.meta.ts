@@ -9,5 +9,5 @@ export const meta = {
       priority: 1200,
     })),
   ],
-  loader: () => import('@/tools/ActionTools/ThumbnailCoverToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/ThumbnailCoverToggle'),
 } as ToolMeta;

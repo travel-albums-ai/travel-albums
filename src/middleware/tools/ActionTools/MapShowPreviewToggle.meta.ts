@@ -9,5 +9,5 @@ export const meta = {
       priority: 300
     }
   ],
-  loader: () => import('@/tools/ActionTools/MapShowPreviewToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/MapShowPreviewToggle'),
 } as ToolMeta;

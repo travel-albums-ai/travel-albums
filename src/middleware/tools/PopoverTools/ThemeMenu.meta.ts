@@ -9,5 +9,5 @@ export const meta = {
     //   priority: 1000
     // }
   ],
-  loader: () => import('@/tools/PopoverTools/ThemeMenu'),
+  loader: () => import('@/middleware/tools/PopoverTools/ThemeMenu'),
 } as ToolMeta;

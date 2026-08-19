@@ -21,5 +21,5 @@ export const meta = {
       visible: (context: any) => context?.favorite === undefined ? false : context.favorite === true,
     }
   ],
-  loader: () => import('@/tools/ActionTools/FavoriteToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/FavoriteToggle'),
 } as ToolMeta;

@@ -14,5 +14,5 @@ export const meta = {
       priority: 10
     }
   ],
-  loader: () => import('@/tools/ActionTools/ReloadToggle'),
+  loader: () => import('@/middleware/tools/ActionTools/ReloadToggle'),
 } as ToolMeta;
