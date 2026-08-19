@@ -1,3 +1,9 @@
+## [1.192.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.191.0...v1.192.0) (2026-08-19)
+
+### ✨ Features
+
+* optimize photo filtering by implementing a compact representation and caching excluded photos ([599f28a](https://github.com/travel-albums-ai/travel-albums/commit/599f28ae2622963ff184011ed99e7337d85c1433))
+
 ## [1.191.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.190.0...v1.191.0) (2026-08-18)
 
 ### ✨ Features
