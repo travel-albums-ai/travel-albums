@@ -88,7 +88,7 @@ type SettingsStore = {
 
 const defaults: SettingsStore = {
   onboarding: true,
-  newVersion: true,
+  newVersion: false,
   indexing: false,
   indexerProgress: { totalFound: 0, totalFiles: 0, done: 0, preindexed: 0, failed: 0 },
   mascot: false,
