@@ -1,3 +1,9 @@
+## [1.214.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.213.0...v1.214.0) (2026-08-19)
+
+### ✨ Features
+
+* add GPS toggle functionality to AlbumPhotoCard for map display ([8a045e5](https://github.com/travel-albums-ai/travel-albums/commit/8a045e558b3d376929da64f652716aa1fa42c9ff))
+
 ## [1.213.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.212.0...v1.213.0) (2026-08-19)
 
 ### ✨ Features
