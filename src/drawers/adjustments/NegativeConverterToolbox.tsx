@@ -3,6 +3,7 @@ import { AudioLines, BicepsFlexed, BrickWall, Camera, CircleDotDashed, Contrast,
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import SolidChip from '@/components/SolidChip';
 import NegativeConverterToolboxItem from '@/drawers/adjustments/NegativeConverterToolboxItem';
 import { numberSlider } from '@/drawers/adjustments/sliderBuilders';
 import { ADJUSTMENTS_RANGES } from '@/drawers/adjustments/state';
@@ -549,15 +550,18 @@ export default function NegativeConverterToolbox({
 
   return (
     <>
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, overflow: 'auto', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, overflow: 'auto', alignItems: 'center', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap' }}>
         <GenericToggleButtonGroup items={[
           ...items.map((item, index) => ({
             tooltip: item.title,
             icon: item.icon,
-            onClick: () => {
-              setSelectedIndex(index)
-            },
-            title: '',
+            onClick: () => setSelectedIndex(index),
+            title: <><SolidChip
+              height={16}
+              count={item.list.filter((subItem) => subItem.checked).length}
+              variant={item.list.filter((subItem) => subItem.checked).length > 0 ? 'header' : 'text'}
+              minWidth={20}
+            /></>,
             selected: index === selectedIndex,
           })),
         ] satisfies GenericToggleButtonProps[]} />
