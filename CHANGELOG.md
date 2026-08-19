@@ -1,3 +1,9 @@
+## [1.202.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.201.0...v1.202.0) (2026-08-19)
+
+### ✨ Features
+
+* update NegativeConverterPresetSelector to enhance preset display and remove unused code ([0902d8f](https://github.com/travel-albums-ai/travel-albums/commit/0902d8f9c500cbaa6937a0f8f4f9987830cdc146))
+
 ## [1.201.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.200.0...v1.201.0) (2026-08-19)
 
 ### ✨ Features
