@@ -1,3 +1,14 @@
+## [1.223.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.222.0...v1.223.0) (2026-08-19)
+
+### ✨ Features
+
+* implement window discovery and registry system for dynamic window management ([2a048e5](https://github.com/travel-albums-ai/travel-albums/commit/2a048e5c53b033a77b28446bcf6d11f4116e6c4e))
+
+### 🧹 Refactors
+
+* enhance GenericToggleButton component structure and improve type definitions ([5a5b654](https://github.com/travel-albums-ai/travel-albums/commit/5a5b654bc9ff4e4c92c788b3dc5352d71876adff))
+* standardize import statements and enhance ESLint configuration rules ([999e563](https://github.com/travel-albums-ai/travel-albums/commit/999e563cca2fc478e9a85bc14eda30d49d0f40a0))
+
 ## [1.222.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.221.1...v1.222.0) (2026-08-19)
 
 ### ✨ Features
