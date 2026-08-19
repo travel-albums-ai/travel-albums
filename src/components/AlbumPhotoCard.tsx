@@ -1,6 +1,8 @@
 import AlbumPhotoCardTags from '@/components/albumPhotoCard/AlbumPhotoCardTags';
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useDescriptions } from '@/context/descriptionsStore';
@@ -9,9 +11,11 @@ import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import DescribePhotoReadOnly from '@/drawers/preview/DescribePhotoReadOnly';
 import { type GalleryPhoto } from '@/lib/galleryData';
+import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
 import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import { type Theme } from '@mui/material/styles';
 import dayjs from 'dayjs';
+import { Satellite } from 'lucide-react';
 import {
   memo,
   useCallback,
@@ -89,6 +93,7 @@ function AlbumPhotoCard({
   const theme = useTheme();
 
   const [isHovered, setIsHovered] = useState(false);
+  const [showGps, setShowGps] = useState(false);
 
   const { hasDescription } = useDescriptions();
 
@@ -189,7 +194,30 @@ function AlbumPhotoCard({
             borderRadius: 8,
           }}
         />
-
+        {!selectMode && isHovered && hasGps && <Box
+          onMouseLeave={() => setShowGps(false)}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            left: 8,
+            borderRadius: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+            zIndex: 3,
+            px: 0.25,
+            py: 0.25,
+          }}>
+          <GenericToggleButtonGroup variant="outlined" items={[
+            {
+              tooltip: "Show photo location on map",
+              icon: <Satellite size={16} />,
+              onClick: () => setShowGps(!showGps),
+            },
+          ] satisfies GenericToggleButtonProps[]} />
+          {showGps && <AlbumMapPanel photos={[photo]} height={height * 0.65} />}
+        </Box>}
         {inView && (
           <>
             {(selectMode || favorite) && (
