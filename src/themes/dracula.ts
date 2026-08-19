@@ -1,4 +1,4 @@
-import { generateTheme } from '@/themes/default';
+import { generateTheme } from '@/themes/utils';
 import { ThemeOptions } from '@mui/material';
 
 export const themeTokens = {
