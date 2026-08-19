@@ -1,13 +1,16 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsSection from '@/windows/components/SettingsSection';
 import SettingsGeneralRow from '@/windows/settings/components/SettingsGeneralRow';
-import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Box, InputAdornment, TextField, useTheme } from '@mui/material';
 import { Code, Database, Folder, FolderOpen, Plus, Trash } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
   const { data } = useFetch_Config();
+  const theme = useTheme();
   const { mutate } = usePost_Config();
 
   const [newRoot, setNewRoot] = useState('');
@@ -111,13 +114,13 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
                     justifyContent: 'flex-end',
                   }}
                 >
-                  <IconButton
-                    onClick={() => deleteRoot(root)}
-                    size="small"
-                    color="error"
-                  >
-                    <Trash size={16} />
-                  </IconButton>
+                  <GenericToggleButtonGroup variant="standard" items={[
+                    {
+                      tooltip: "Delete folder",
+                      icon: <Trash size={16} color={theme.palette.error.main} />,
+                      onClick: () => deleteRoot(root),
+                    },
+                  ] satisfies GenericToggleButtonProps[]} />
                 </Box>
               </Box>
             ))}
