@@ -1,7 +1,7 @@
+import { GalleryPhoto } from '@/lib/galleryData';
+import { composeUrl } from '@/lib/thumbnailService';
 import { Box } from '@mui/material';
 import { Fragment, useEffect, useRef } from 'react';
-import { composeUrl } from '@/lib/thumbnailService';
-import { GalleryPhoto } from '@/lib/galleryData';
 
 type Props = {
   batches: any[];
