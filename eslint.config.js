@@ -1,9 +1,9 @@
-import js from '@eslint/js'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -27,6 +27,18 @@ export default defineConfig([
     rules: {
       indent: ['error', 2, { SwitchCase: 1 }],
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['@/tools/*', 'src/tools/*'],
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/toolDiscovery.ts', 'src/tools/**'],
+    rules: {
+      'no-restricted-imports': 'off',
     },
   },
 ])
