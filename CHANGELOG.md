@@ -1,3 +1,9 @@
+## [1.224.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.223.0...v1.224.0) (2026-08-19)
+
+### ✨ Features
+
+* implement GeneralRegistryWindow component for dynamic window management ([6cc35ef](https://github.com/travel-albums-ai/travel-albums/commit/6cc35efc3a7851019dc3ac402686694d5993d943))
+
 ## [1.223.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.222.0...v1.223.0) (2026-08-19)
 
 ### ✨ Features
