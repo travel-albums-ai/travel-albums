@@ -2,118 +2,6 @@ import { FilterStore } from '@/context/filterStore';
 import { GalleryPhoto } from '@/lib/galleryData';
 
 // ---------------------------------------------------------------------------
-// Original exported function — UNCHANGED. Kept as-is for any other callers
-// that pass real GalleryPhoto[] (e.g. non-worker code, tests).
-// ---------------------------------------------------------------------------
-export const filterPhotosByAllPhotosSettings = (
-  photos: GalleryPhoto[],
-  settings: FilterStore,
-  excludedPhotos: Set<string>,
-): Uint32Array => {
-  const {
-    showWithWithoutPersons,
-    showWithWithoutGps,
-    showViews,
-    showViewsMin,
-    showLikes,
-    showLikesMin,
-    showComments,
-    showCommentsMin,
-    filterDates,
-    filterCountries,
-    filterFolders,
-    filterPeopleAndPets,
-    dates,
-    sections,
-    filterGps,
-    sortOrder,
-    gps,
-  } = settings;
-
-  const activeDates = filterDates ? dates.filter((d) => d.active) : null;
-  const datesLen = activeDates?.length ?? 0;
-
-  const activeSections: { isInclude: boolean; set: Set<string> }[] = [];
-  const sectionKeys = Object.keys(sections);
-  for (let k = 0; k < sectionKeys.length; k++) {
-    const key = sectionKeys[k];
-    if (key === 'peopleAndPets' && !filterPeopleAndPets) continue;
-    if (key === 'folders' && !filterFolders) continue;
-    if (key === 'countries' && !filterCountries) continue;
-
-    const section = sections[key];
-    if (section.included.length > 0 && section.includedPhotos) {
-      activeSections.push({ isInclude: true, set: section.includedPhotos });
-    }
-    if (section.excluded.length > 0 && section.excludedPhotos) {
-      activeSections.push({ isInclude: false, set: section.excludedPhotos });
-    }
-  }
-  const sectionsLen = activeSections.length;
-
-  const n = photos.length;
-  const reversed = sortOrder !== 'newestFirst';
-
-  const matched = new Uint32Array(n);
-  let count = 0;
-
-  for (let idx = 0; idx < n; idx++) {
-    const i = reversed ? n - 1 - idx : idx;
-    const photo = photos[i];
-    const photoId = photo.id;
-
-    if (excludedPhotos.has(photoId)) continue;
-
-    if (filterGps) {
-      const { latitude, longitude } = photo;
-      if (latitude === 0 && longitude === 0) continue;
-      if (latitude === undefined && longitude === undefined) continue;
-      if (latitude < gps.south || latitude > gps.north || longitude < gps.west || longitude > gps.east) {
-        continue;
-      }
-    }
-
-    if (showWithWithoutPersons !== null) {
-      const hasPersons = (photo.people?.length ?? 0) > 0;
-      if (showWithWithoutPersons ? hasPersons : !hasPersons) continue;
-    }
-
-    if (showWithWithoutGps !== null) {
-      const hasGps = photo.latitude !== undefined && photo.longitude !== undefined;
-      if (showWithWithoutGps ? hasGps : !hasGps) continue;
-    }
-
-    if (showViews && photo.views < showViewsMin) continue;
-    if (showLikes && photo.likes < showLikesMin) continue;
-    if (showComments && photo.comments < showCommentsMin) continue;
-
-    if (datesLen > 0) {
-      const ts = photo.takenAtTs * 1000;
-      let inRange = false;
-      for (let j = 0; j < datesLen; j++) {
-        const d = activeDates![j];
-        if (ts >= d.startDate && ts <= d.endDate) { inRange = true; break; }
-      }
-      if (!inRange) continue;
-    }
-
-    let sectionFailed = false;
-    for (let j = 0; j < sectionsLen; j++) {
-      const { isInclude, set } = activeSections[j];
-      if (isInclude ? !set.has(photoId) : set.has(photoId)) {
-        sectionFailed = true;
-        break;
-      }
-    }
-    if (sectionFailed) continue;
-
-    matched[count++] = i;
-  }
-
-  return matched.subarray(0, count);
-};
-
-// ---------------------------------------------------------------------------
 // Worker-only compact representation.
 //
 // A GalleryPhoto carries many fields (paths, thumbnails, tags, people[],
@@ -239,12 +127,12 @@ function filterPhotoIndex(
 
     if (showWithWithoutPersons !== null) {
       const has = hasPersons[i] === 1;
-      if (showWithWithoutPersons ? !has : has) continue;
+      if (showWithWithoutPersons ? has : !has) continue;
     }
 
     if (showWithWithoutGps !== null) {
       const has = !Number.isNaN(lat[i]) && !Number.isNaN(lng[i]);
-      if (showWithWithoutGps ? !has : has) continue;
+      if (showWithWithoutGps ? has : !has) continue;
     }
 
     if (showViews && views[i] < showViewsMin) continue;
