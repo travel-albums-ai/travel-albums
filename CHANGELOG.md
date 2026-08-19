@@ -1,3 +1,9 @@
+## [1.212.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.211.0...v1.212.0) (2026-08-19)
+
+### ✨ Features
+
+* remove AlbumTimeline component and adjust AlbumScroller layout ([0126bae](https://github.com/travel-albums-ai/travel-albums/commit/0126bae9f1991607268952341ce1c8ec87d54878))
+
 ## [1.211.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.210.0...v1.211.0) (2026-08-19)
 
 ### ✨ Features
