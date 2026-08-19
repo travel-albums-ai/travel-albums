@@ -1,3 +1,9 @@
+## [1.221.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.220.1...v1.221.0) (2026-08-19)
+
+### ✨ Features
+
+* add naked prop to AlbumPhotoCard for conditional rendering and update LightboxWindowNg to utilize it ([706b243](https://github.com/travel-albums-ai/travel-albums/commit/706b243250febb9f71b0f7198fb39e31e0652a76))
+
 ## [1.220.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.220.0...v1.220.1) (2026-08-19)
 
 ### 🐛 Fixes
