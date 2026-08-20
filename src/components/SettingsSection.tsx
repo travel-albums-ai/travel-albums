@@ -10,7 +10,7 @@ export default function SettingsSection({ title, icon, guidance, children, gap =
         <Typography variant="subtitle2" sx={{ lineHeight: 1 }} color="textPrimary">{title}</Typography>
         {guidance && <Typography variant="caption" sx={{ flex: 1, textAlign: 'right' }} color="textSecondary">{guidance}</Typography>}
       </Box>}
-      <Stack sx={{ gap }} divider={divider ? <Divider /> : undefined}>
+      <Stack sx={{ gap, px: 0.5 }} divider={divider ? <Divider /> : undefined}>
         {children}
       </Stack>
     </Box>

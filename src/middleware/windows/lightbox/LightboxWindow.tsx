@@ -137,10 +137,7 @@ export default function LightboxWindow() {
 
   return (
     <>
-
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-
-
         <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 1, minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
           <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1 }}>
             <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
@@ -159,13 +156,23 @@ export default function LightboxWindow() {
           </Box>
 
         </Box>
-        {currentPhoto && <Box key={currentPhoto.id} sx={{ flex: '0 0 480px', minHeight: 0, minWidth: 0 }}>
+        {currentPhoto && <Box key={currentPhoto.id} sx={{
+          flex: '0 0 500px',
+          minHeight: 0,
+          minWidth: 0,
+          overflowY: 'auto',
+          p: 1,
+          px: 2,
+          mr: 0.5,
+          boxShadow: theme => `inset 18px 0px 10px -15px ${theme.palette.divider}`,
+          borderLeft: '1px solid',
+          borderColor: 'divider',
+        }}>
 
           <LocationSection photo={currentPhoto} />
           <EXIFSection photo={currentPhoto} />
 
           <SettingsSection>
-            {/* <PhotoExifDetails photo={currentPhoto} /> */}
             <AlbumsMetaDetails photos={[currentPhoto]} minWidth={25} />
             <DescribePhoto photoId={currentPhoto.id} />
           </SettingsSection>

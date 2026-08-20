@@ -14,7 +14,7 @@ export default function LocationSection({ photo }: { photo: GalleryPhoto }) {
 
   return (
     <>
-      <SettingsSection title="Location" icon={<Pin />} gap={1} divider={false}>
+      <SettingsSection title="Location" icon={<Pin />} gap={0} divider={false}>
         <AlbumMapPanel photos={[photo]} />
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
           <Stack divider={<Divider orientation="vertical" flexItem />} direction="row" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>

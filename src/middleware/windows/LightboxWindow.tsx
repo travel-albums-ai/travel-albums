@@ -25,7 +25,8 @@ export default function LightboxWindow() {
             maxWidth: '95vw',
             overflow: 'hidden',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            p: 0,
           }}}}
     >
       <LightboxWindowInner />
