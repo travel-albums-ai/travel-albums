@@ -1,4 +1,4 @@
-import AlbumPhotoCard from '@/components/AlbumPhotoCard';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import { Box } from '@mui/material';
 
 type FilmstripProps = {
@@ -26,11 +26,12 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
         sx={{
           flex: '0 0 auto',
           height: '150px',
-          borderRadius: 1,
+          borderRadius: 4,
           overflow: 'hidden',
           cursor: 'pointer',
 
           opacity: active ? 1 : 0.65,
+          border: active ? '2px solid #1976d2' : '2px solid transparent',
 
           transition: 'opacity 120ms ease, border-color 120ms ease, transform 120ms ease',
 
@@ -40,7 +41,20 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
           },
         }}
       >
-        <AlbumPhotoCard
+        <AlbumPhotoThumbnailBackgroundNg
+          photo={photo}
+          original={false}
+          style={{
+            width: 'fit-content',
+            zIndex: 1,
+            height: '100%',
+            overflow: 'hidden',
+            objectFit: 'contain',
+            borderRadius: 16,
+            boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.5)',
+          }}
+        />
+        {/* <AlbumPhotoCard
           original={false}
           photo={photo}
           naked={true}
@@ -54,7 +68,7 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
             height: '100%',
             objectFit: 'contain',
           }}
-        />
+        /> */}
       </Box>
     );
   };
@@ -70,7 +84,7 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
 
       <Box sx={{ flex: '0 0 auto' }}>{renderThumbnail(photos[currentIndex], currentIndex)}</Box>
 
-      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'flex-start', overflow: 'hidden', minWidth: 0 }}>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'flex-start', overflow: 'hidden', minWidth: 0 }}>
         {nextPhotos.map(photo => {
           const index = photos.findIndex(p => p.id === photo.id);
           return renderThumbnail(photo, index);
