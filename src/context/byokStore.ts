@@ -3,13 +3,10 @@ import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 type Persona = {
   name: string;
   description: string;
-
-  webMcp: boolean;
-
-  registeredMcpTools: any[]
 }
 
 type BYOKStore = {
+  enableAI: boolean,
   byokOpenAIKey?: string,
 
   mainPersona: Persona,
@@ -22,6 +19,7 @@ type BYOKStore = {
 }
 
 const defaults: BYOKStore = {
+  enableAI: true,
   byokOpenAIKey: '',
   mainPersona: {
     name: '',

@@ -16,9 +16,7 @@ type SettingsStore = {
   themeMode?: 'light' | 'dark',
   themeId: string,
   thumbnailFormat: 'cover' | 'contain',
-
   showSidebar: boolean,
-
   thumbnailGenerator: boolean,
   thumbnailJobId?: string,
   drawerWidth?: number,
@@ -37,7 +35,6 @@ type SettingsStore = {
   sidebarTerm: string,
   sidebarSearchOpen: boolean,
   showPreviewMap: boolean,
-
   showMapAll: boolean,
   showSides: boolean,
   showPreviewExif: boolean,
@@ -48,7 +45,6 @@ type SettingsStore = {
   selectMode: boolean,
   albumType: 'segmented' | 'perDay' | 'flow' | 'default' | 'globe' | 'labeler' | 'scroller' | 'rows' | 'adjustments',
   locale: SupportedLanguage,
-
   isZygote: boolean,
   drawers: {
     dashboard: boolean,

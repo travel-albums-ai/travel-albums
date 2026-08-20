@@ -21,7 +21,7 @@ export default function SettingToggleRow({
   disabled = false
 }: SettingToggleRowProps) {
   return (
-    <Box sx={boxSx} onClick={onChange}>
+    <Box sx={boxSx}>
       {icon && cloneElement(icon, { size: 16, style: { opacity: !selected ? 1 : 0.5, marginRight: 4 } })}
       <Typography variant="caption" color="textSecondary" sx={{ flex: 1, lineHeight: 1 }}>{label}</Typography>
       {activeIcon && cloneElement(activeIcon, { size: 16, style: { opacity: !selected ? 1 : 0.5 } })}
