@@ -16,7 +16,7 @@ export default function LightboxViewer({ photo }: ViewerProps) {
         zIndex: 1,
         height: '100%',
         overflow: 'hidden',
-        objectFit: 'contain',
+        // objectFit: 'contain',
         borderRadius: 16,
         boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.5)',
       }}
