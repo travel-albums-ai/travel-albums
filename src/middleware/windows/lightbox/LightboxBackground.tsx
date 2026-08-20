@@ -13,11 +13,13 @@ export default function LightboxBackground({ photo }: ViewerProps) {
       position: 'absolute',
       top: 0,
       left: 0,
+      bottom: 0,
+      right: 0,
       width: '100%',
       height: '100%',
-      opacity: 0.35,
+      opacity: 0.25,
       filter: 'blur(12px) saturate(1.75)',
-      borderRadius: 4,
+      borderRadius: 16,
       overflow: 'hidden',
       zIndex: 0,
     }} >
@@ -27,9 +29,6 @@ export default function LightboxBackground({ photo }: ViewerProps) {
         style={{
           width: '100%',
           height: '100%',
-          borderRadius: 16,
-          overflow: 'hidden',
-          padding: 8,
         }}
       />
     </Box>
