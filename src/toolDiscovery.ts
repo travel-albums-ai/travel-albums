@@ -1,4 +1,5 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
+import { processLoadedEntries } from '@/discovery/utils';
 import { ToolMeta, toolRegistry } from '@/toolRegistry';
 
 const modules = import.meta.glob<ToolMeta | undefined>(['./middleware/tools/**/*.meta.ts', './middleware/base/**/*.meta.ts'], {
@@ -7,88 +8,65 @@ const modules = import.meta.glob<ToolMeta | undefined>(['./middleware/tools/**/*
 
 let discoveryPromise: Promise<ToolMeta[]> | null = null;
 
-function isToolSide(value: unknown): value is 'left' | 'right' {
-  return value === 'left' || value === 'right';
-}
-
-function isValidToolMeta(path: string, meta: ToolMeta) {
-  if (typeof meta.id !== 'string' || meta.id.length === 0) {
-    console.warn(`${path} has invalid tool meta id`);
-    return false;
-  }
-
-  if (typeof meta.loader !== 'function') {
-    console.warn(`${path} has invalid tool meta loader`);
-    return false;
-  }
-
-  if (!Array.isArray(meta.tool)) {
-    console.warn(`${path} has invalid tool entries`);
-    return false;
-  }
-
-  for (const entry of meta.tool) {
-    if (typeof entry.id !== 'string' || entry.id.length === 0) {
-      console.warn(`${path} has tool entry with invalid group id`);
-      return false;
-    }
-
-    if (!isToolSide(entry.side)) {
-      console.warn(`${path} has tool entry with invalid side`);
-      return false;
-    }
-
-    if (entry.priority !== undefined && typeof entry.priority !== 'number') {
-      console.warn(`${path} has tool entry with invalid priority`);
-      return false;
-    }
-
-    if (entry.visible !== undefined && typeof entry.visible !== 'function') {
-      console.warn(`${path} has tool entry with invalid visible predicate`);
-      return false;
-    }
-  }
-
-  return true;
-}
-
 async function loadToolMetadata() {
   const items = await loadGlobEntries<ToolMeta | undefined>(modules);
 
-  const metas: ToolMeta[] = [];
+  return await processLoadedEntries<ToolMeta | undefined, ToolMeta>(items, {
+    validate: (path, meta) => {
+      if (!meta) {
+        console.warn(`${path} does not export 'meta'`);
+        return null;
+      }
 
-  for (const item of items) {
-    const { path, value: meta, error } = item as { path: string; value?: ToolMeta; error?: any };
+      if (typeof meta.id !== 'string' || meta.id.length === 0) {
+        console.warn(`${path} has invalid tool meta id`);
+        return null;
+      }
 
-    if (error) {
-      console.warn('Failed to load module during discovery', error);
-      continue;
-    }
+      if (typeof meta.loader !== 'function') {
+        console.warn(`${path} has invalid tool meta loader`);
+        return null;
+      }
 
-    if (!meta) {
-      console.warn(`${path} does not export 'meta'`);
-      continue;
-    }
+      if (!Array.isArray(meta.tool)) {
+        console.warn(`${path} has invalid tool entries`);
+        return null;
+      }
 
-    if (!isValidToolMeta(path, meta)) {
-      continue;
-    }
+      for (const entry of meta.tool) {
+        if (typeof entry.id !== 'string' || entry.id.length === 0) {
+          console.warn(`${path} has tool entry with invalid group id`);
+          return null;
+        }
 
-    if (meta.enabled === false) {
-      console.warn(`${path} is disabled`);
-      continue;
-    }
+        if (entry.side !== 'left' && entry.side !== 'right') {
+          console.warn(`${path} has tool entry with invalid side`);
+          return null;
+        }
 
-    toolRegistry.register(meta);
-    metas.push(meta);
-  }
+        if (entry.priority !== undefined && typeof entry.priority !== 'number') {
+          console.warn(`${path} has tool entry with invalid priority`);
+          return null;
+        }
 
-  // Warm component preloads asynchronously to reduce first-render latency.
-  void toolRegistry.preloadAll(metas).catch((err) => {
-    console.warn('Tool component warm preload failed', err);
+        if (entry.visible !== undefined && typeof entry.visible !== 'function') {
+          console.warn(`${path} has tool entry with invalid visible predicate`);
+          return null;
+        }
+      }
+
+      if (meta.enabled === false) {
+        console.warn(`${path} is disabled`);
+        return null;
+      }
+
+      return meta as ToolMeta;
+    },
+    register: (m) => toolRegistry.register(m),
+    preload: async (ms) => toolRegistry.preloadAll(ms),
+    missingMessage: "does not export 'meta'",
+    failedMessage: 'Failed to load module during discovery',
   });
-
-  return metas;
 }
 
 export function ensureToolDiscovery() {

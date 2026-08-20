@@ -1,4 +1,5 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
+import { processLoadedEntries } from '@/discovery/utils';
 import { ThemeMeta, themeRegistry } from '@/themeRegistry';
 
 const modules = import.meta.glob<Record<string, any>>(['./themes/**/*.theme.ts', './themes/*.theme.ts']);
@@ -14,40 +15,30 @@ function basenameFromPath(path: string) {
 async function loadThemeModules() {
   const items = await loadGlobEntries<Record<string, any>>(modules);
 
-  const metas: ThemeMeta[] = [];
+  return await processLoadedEntries<Record<string, any>, ThemeMeta>(items, {
+    validate: (path, mod) => {
+      if (!mod) {
+        console.warn(`${path} did not export a theme`);
+        return null;
+      }
 
-  for (const item of items) {
-    const { path, value: mod, error } = item as { path: string; value?: Record<string, any>; error?: any };
+      const name = mod?.default?.name ?? mod?.name ?? mod?.themeName ?? basenameFromPath(path);
+      const id = String(name).replace(/\s+/g, '-').toLowerCase();
 
-    if (error) {
-      console.warn(`${path} failed to load theme:`, error);
-      continue;
-    }
+      const meta: ThemeMeta = {
+        id,
+        name,
+        loader: () => Promise.resolve(mod),
+        path,
+        module: mod,
+      };
 
-    if (!mod) {
-      console.warn(`${path} did not export a theme`);
-      continue;
-    }
-
-    // Derive a human-friendly name from common exports or filename
-    const name = mod?.default?.name ?? mod?.name ?? mod?.themeName ?? basenameFromPath(path);
-
-    const id = String(name).replace(/\s+/g, '-').toLowerCase();
-
-    // register the meta and attach the loaded module for synchronous access
-    const meta: ThemeMeta = {
-      id,
-      name,
-      loader: () => Promise.resolve(mod),
-      path,
-      module: mod,
-    };
-
-    themeRegistry.register(meta);
-    metas.push(meta);
-  }
-
-  return metas;
+      return meta;
+    },
+    register: (m) => themeRegistry.register(m),
+    missingMessage: 'did not export a theme',
+    failedMessage: 'Failed to load theme module during discovery',
+  });
 }
 
 export function ensureThemeDiscovery() {

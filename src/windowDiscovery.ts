@@ -1,42 +1,34 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
+import { processLoadedEntries } from '@/discovery/utils';
 import { WindowMeta, windowRegistry } from '@/windowRegistry';
 
 const modules = import.meta.glob<WindowMeta | undefined>('./middleware/windows/*.meta.ts', {
   import: 'meta',
 });
 
-let discoveryPromise: Promise<void> | null = null;
+let discoveryPromise: Promise<WindowMeta[]> | null = null;
 
 async function loadWindowMetadata() {
   const items = await loadGlobEntries<WindowMeta | undefined>(modules);
 
-  const metas: Array<WindowMeta> = [];
+  return await processLoadedEntries<WindowMeta | undefined, WindowMeta>(items, {
+    validate: (path, meta) => {
+      if (typeof meta.id !== 'string' || meta.id.length === 0) {
+        console.warn(`${path} has invalid window meta id`);
+        return null;
+      }
 
-  for (const item of items) {
-    const { path, value: meta, error } = item as { path: string; value?: WindowMeta; error?: any };
+      if (typeof meta.loader !== 'function') {
+        console.warn(`${path} has invalid window meta loader`);
+        return null;
+      }
 
-    if (error) {
-      console.warn(`${path} failed to load meta:`, error);
-      continue;
-    }
-
-    if (!meta) {
-      console.warn(`${path} does not export 'meta'`);
-      continue;
-    }
-
-    if (typeof meta.id !== 'string' || meta.id.length === 0 || typeof meta.loader !== 'function') {
-      console.warn(`${path} has invalid window metadata`);
-      continue;
-    }
-
-    windowRegistry.register(meta);
-    metas.push(meta);
-  }
-
-  // Warm window component caches asynchronously.
-  void Promise.allSettled(metas.map((m) => windowRegistry.preload(m))).catch((err) => {
-    console.warn('Window component warm preload failed', err);
+      return meta as WindowMeta;
+    },
+    register: (m) => windowRegistry.register(m),
+    preload: async (ms) => Promise.allSettled(ms.map((m) => windowRegistry.preload(m))),
+    missingMessage: "does not export 'meta'",
+    failedMessage: 'Failed to load window module during discovery',
   });
 }
 

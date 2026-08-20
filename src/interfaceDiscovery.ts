@@ -1,42 +1,34 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
+import { processLoadedEntries } from '@/discovery/utils';
 import { InterfaceMeta, interfaceRegistry } from '@/interfaceRegistry';
 
 const modules = import.meta.glob<InterfaceMeta | undefined>('./middleware/interface/*.meta.ts', {
   import: 'meta',
 });
 
-let discoveryPromise: Promise<void> | null = null;
+let discoveryPromise: Promise<InterfaceMeta[]> | null = null;
 
 async function loadInterfaceMetadata() {
   const items = await loadGlobEntries<InterfaceMeta | undefined>(modules);
 
-  const metas: Array<InterfaceMeta> = [];
+  return await processLoadedEntries<InterfaceMeta | undefined, InterfaceMeta>(items, {
+    validate: (path, meta) => {
+      if (typeof meta.id !== 'string' || meta.id.length === 0) {
+        console.warn(`${path} has invalid interface meta id`);
+        return null;
+      }
 
-  for (const item of items) {
-    const { path, value: meta, error } = item as { path: string; value?: InterfaceMeta; error?: any };
+      if (typeof meta.loader !== 'function') {
+        console.warn(`${path} has invalid interface meta loader`);
+        return null;
+      }
 
-    if (error) {
-      console.warn(`${path} failed to load meta:`, error);
-      continue;
-    }
-
-    if (!meta) {
-      console.warn(`${path} does not export 'meta'`);
-      continue;
-    }
-
-    if (typeof meta.id !== 'string' || meta.id.length === 0 || typeof meta.loader !== 'function') {
-      console.warn(`${path} has invalid interface metadata`);
-      continue;
-    }
-
-    interfaceRegistry.register(meta);
-    metas.push(meta);
-  }
-
-  // Warm interface component caches asynchronously.
-  void Promise.allSettled(metas.map((m) => interfaceRegistry.preload(m))).catch((err) => {
-    console.warn('Interface component warm preload failed', err);
+      return meta as InterfaceMeta;
+    },
+    register: (m) => interfaceRegistry.register(m),
+    preload: async (ms) => Promise.allSettled(ms.map((m) => interfaceRegistry.preload(m))),
+    missingMessage: "does not export 'meta'",
+    failedMessage: 'Failed to load interface module during discovery',
   });
 }
 
