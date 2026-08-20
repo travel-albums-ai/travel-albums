@@ -1,5 +1,5 @@
-import { ensureWindowDiscovery } from '@/windowDiscovery';
-import { windowRegistry } from '@/windowRegistry';
+import { ensureWindowDiscovery } from '@/discovery/windowDiscovery';
+import { windowRegistry } from '@/discovery/windowRegistry';
 import { useEffect, useState } from 'react';
 
 function RenderWindow({ id }: { id: string }) {

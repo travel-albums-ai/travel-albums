@@ -1,4 +1,4 @@
-import { WindowMeta } from '@/windowRegistry';
+import { WindowMeta } from '@/discovery/windowRegistry';
 
 export const meta = {
   id: 'settings',

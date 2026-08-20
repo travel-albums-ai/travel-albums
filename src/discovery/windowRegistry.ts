@@ -1,5 +1,5 @@
-import { AsyncComponentRegistry } from './discovery/registry';
-import type { WindowMeta } from './discovery/registryTypes';
+import { AsyncComponentRegistry } from './registry';
+import type { WindowMeta } from './registryTypes';
 
 class WindowRegistry extends AsyncComponentRegistry<WindowMeta> {
   list() {

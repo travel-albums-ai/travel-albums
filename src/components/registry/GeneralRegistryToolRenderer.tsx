@@ -1,5 +1,5 @@
-import { ensureToolDiscovery } from '@/toolDiscovery';
-import { ToolComponentProps, toolRegistry } from '@/toolRegistry';
+import { ensureToolDiscovery } from '@/discovery/toolDiscovery';
+import { ToolComponentProps, toolRegistry } from '@/discovery/toolRegistry';
 import { ComponentType, useEffect, useState } from 'react';
 
 interface GeneralRegistryToolRendererProps {

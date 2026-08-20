@@ -1,8 +1,8 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
 import { processLoadedEntries } from '@/discovery/utils';
-import { ToolMeta, toolRegistry } from '@/toolRegistry';
+import { ToolMeta, toolRegistry } from '@/discovery/toolRegistry';
 
-const modules = import.meta.glob<ToolMeta | undefined>(['./middleware/tools/**/*.meta.ts', './middleware/base/**/*.meta.ts'], {
+const modules = import.meta.glob<ToolMeta | undefined>(['../middleware/tools/**/*.meta.ts', '../middleware/base/**/*.meta.ts'], {
   import: 'meta',
 });
 

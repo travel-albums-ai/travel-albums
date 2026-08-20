@@ -1,5 +1,5 @@
-import { BaseRegistry } from './discovery/registry';
-import type { ThemeMeta } from './discovery/registryTypes';
+import { BaseRegistry } from './registry';
+import type { ThemeMeta } from './registryTypes';
 
 class ThemeRegistry extends BaseRegistry<ThemeMeta> {
   register(meta: ThemeMeta) {

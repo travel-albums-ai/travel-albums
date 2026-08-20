@@ -49,7 +49,7 @@ This folder contains the "base" status items used in the app's status bar. Each 
 1. `*.meta.ts` files export a `ToolMeta`-shaped object — example from this folder:
 
 ```ts
-import { ToolMeta } from '@/toolRegistry';
+import { ToolMeta } from '@/discovery/toolRegistry';
 
 export const meta = {
   id: 'serverStatus',

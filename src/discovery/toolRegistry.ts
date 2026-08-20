@@ -1,5 +1,5 @@
-import { AsyncComponentRegistry } from './discovery/registry';
-import type { ToolMeta } from './discovery/registryTypes';
+import { AsyncComponentRegistry } from './registry';
+import type { ToolMeta } from './registryTypes';
 
 class ToolRegistry extends AsyncComponentRegistry<ToolMeta> {
   private groupCache = new Map<string, ToolMeta[]>();

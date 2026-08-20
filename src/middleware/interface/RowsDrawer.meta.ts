@@ -1,4 +1,4 @@
-import { InterfaceMeta } from '@/interfaceRegistry';
+import { InterfaceMeta } from '@/discovery/interfaceRegistry';
 import { LayoutList } from 'lucide-react';
 
 export const meta = {

@@ -1,4 +1,4 @@
-import { themeRegistry } from '@/themeRegistry';
+import { themeRegistry } from '@/discovery/themeRegistry';
 import { darkTheme as defaultDarkTheme, lightTheme as defaultLightTheme } from './default.theme';
 
 export type ThemeName = string;

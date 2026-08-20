@@ -1,8 +1,8 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
 import { processLoadedEntries } from '@/discovery/utils';
-import { ThemeMeta, themeRegistry } from '@/themeRegistry';
+import { ThemeMeta, themeRegistry } from '@/discovery/themeRegistry';
 
-const modules = import.meta.glob<Record<string, any>>(['./themes/**/*.theme.ts', './themes/*.theme.ts']);
+const modules = import.meta.glob<Record<string, any>>(['../themes/**/*.theme.ts', '../themes/*.theme.ts']);
 
 let discoveryPromise: Promise<ThemeMeta[]> | null = null;
 

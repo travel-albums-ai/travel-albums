@@ -1,4 +1,4 @@
-import type { ToolMeta } from '@/toolRegistry';
+import type { ToolMeta } from '@/discovery/toolRegistry';
 
 export const meta = {
   id: "previewPhotoTitle",

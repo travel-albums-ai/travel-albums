@@ -1,6 +1,6 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { ensureInterfaceDiscovery } from '@/interfaceDiscovery';
-import { interfaceRegistry } from '@/interfaceRegistry';
+import { ensureInterfaceDiscovery } from '@/discovery/interfaceDiscovery';
+import { interfaceRegistry } from '@/discovery/interfaceRegistry';
 import { Box } from '@mui/material';
 import {
   IJsonModel,

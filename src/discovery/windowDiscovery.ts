@@ -1,8 +1,8 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
 import { processLoadedEntries } from '@/discovery/utils';
-import { WindowMeta, windowRegistry } from '@/windowRegistry';
+import { WindowMeta, windowRegistry } from '@/discovery/windowRegistry';
 
-const modules = import.meta.glob<WindowMeta | undefined>('./middleware/windows/*.meta.ts', {
+const modules = import.meta.glob<WindowMeta | undefined>('../middleware/windows/*.meta.ts', {
   import: 'meta',
 });
 

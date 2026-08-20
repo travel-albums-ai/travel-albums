@@ -1,4 +1,4 @@
-import { ToolMeta } from '@/toolRegistry';
+import { ToolMeta } from '@/discovery/toolRegistry';
 
 export const meta = {
   id: "reload_toggle",

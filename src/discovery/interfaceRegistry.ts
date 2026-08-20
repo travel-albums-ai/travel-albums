@@ -1,5 +1,5 @@
-import { AsyncComponentRegistry } from './discovery/registry';
-import type { InterfaceMeta } from './discovery/registryTypes';
+import { AsyncComponentRegistry } from './registry';
+import type { InterfaceMeta } from './registryTypes';
 
 class InterfaceRegistry extends AsyncComponentRegistry<InterfaceMeta> {}
 

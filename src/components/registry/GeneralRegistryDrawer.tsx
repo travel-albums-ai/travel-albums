@@ -1,4 +1,4 @@
-import { interfaceRegistry } from '@/interfaceRegistry';
+import { interfaceRegistry } from '@/discovery/interfaceRegistry';
 import { useEffect, useState } from 'react';
 
 interface GeneralRegistryDrawerProps {

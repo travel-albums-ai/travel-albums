@@ -1,5 +1,5 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import { ensureThemeDiscovery } from '@/themeDiscovery';
+import { ensureThemeDiscovery } from '@/discovery/themeDiscovery';
 import { themeNames } from '@/themes';
 import SettingSelectRow from '@/middleware/windows/settings/components/SettingSelectRow';
 import { useEffect, useState } from 'react';

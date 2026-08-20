@@ -1,8 +1,8 @@
-import { ensureToolGroupPreload } from '@/toolDiscovery';
+import { ensureToolGroupPreload } from '@/discovery/toolDiscovery';
 import {
   ToolMeta,
   toolRegistry,
-} from '@/toolRegistry';
+} from '@/discovery/toolRegistry';
 import {
   Box,
   Button,
