@@ -5,16 +5,11 @@ type FilmstripProps = {
   photos: any[];
   currentIndex: number;
   goTo: (index: number) => void;
-  width: number;
-  height: number;
 };
 
-export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, height }: FilmstripProps) {
+export default function LightboxFilmstripNg({ photos, currentIndex, goTo }: FilmstripProps) {
   const previousPhotos = photos.slice(Math.max(0, currentIndex - 5), currentIndex);
   const nextPhotos = photos.slice(currentIndex + 1, currentIndex + 6);
-
-  const thumbWidth = Math.max(72, Math.min(120, width / 9));
-  const thumbHeight = Math.max(56, Math.min(90, height / 7));
 
   const renderThumbnail = (photo: any, index: number) => {
     const active = index === currentIndex;
@@ -25,8 +20,8 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
         onClick={() => goTo(index)}
         sx={{
           flex: '0 0 auto',
-          height: '150px',
-          width: '150px',
+          height: active ? '200px' : '150px',
+          width: active ? '200px' : '150px',
           borderRadius: 4,
           overflow: 'hidden',
           cursor: 'pointer',
@@ -59,7 +54,7 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: thumbHeight + 12 }}>
+    <Box sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 1, height: '160px', overflow: 'visible', zIndex: 1 }}>
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'flex-end', overflow: 'hidden', minWidth: 0 }}>
         {previousPhotos.map(photo => {
           const index = photos.findIndex(p => p.id === photo.id);

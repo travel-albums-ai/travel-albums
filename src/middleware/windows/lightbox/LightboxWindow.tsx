@@ -3,7 +3,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ControlButton from './LightboxControls';
-import LightboxFilmstrip from './LightboxFilmstrip';
 import LightboxViewer from './LightboxViewer';
 
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
@@ -17,6 +16,7 @@ import { composeUrl } from '@/lib/thumbnailService';
 import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
 import EXIFSection from '@/middleware/windows/lightbox/EXIFSection';
 import LightboxBackground from '@/middleware/windows/lightbox/LightboxBackground';
+import LightboxFilmstripNg from '@/middleware/windows/lightbox/LightboxFilmstripNg';
 import LocationSection from '@/middleware/windows/lightbox/LocationSection';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -147,12 +147,12 @@ export default function LightboxWindow() {
             </Box>
           </Box>
 
-          <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1 }}>
+          <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1, overflow: 'visible' }}>
             <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
 
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}>
-              <LightboxFilmstrip photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
-            </Box>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}> */}
+            <LightboxFilmstripNg photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
+            {/* </Box> */}
 
             <ControlButton tooltip="Next photo" onClick={() => next()} icon={<ChevronRight size={20} />} disabled={currentIndex === photos.length - 1} />
           </Box>
