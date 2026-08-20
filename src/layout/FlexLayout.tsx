@@ -1,6 +1,6 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { ensureDrawerDiscovery } from '@/drawerDiscovery';
-import { drawerRegistry } from '@/drawerRegistry';
+import { ensureInterfaceDiscovery } from '@/interfaceDiscovery';
+import { interfaceRegistry } from '@/interfaceRegistry';
 import { Box } from '@mui/material';
 import {
   IJsonModel,
@@ -126,16 +126,16 @@ export default function FlexLayout() {
   const [drawerDiscoveryReady, setDrawerDiscoveryReady] = useState(false);
 
   useEffect(() => {
-    ensureDrawerDiscovery().then(() => setDrawerDiscoveryReady(true));
+    ensureInterfaceDiscovery().then(() => setDrawerDiscoveryReady(true));
   }, []);
 
   const factory = useCallback((node: TabNode) => {
     const component = node.getComponent();
-    return drawerRegistry.has(component) ? <GeneralRegistryDrawer id={component} /> : null;
+    return interfaceRegistry.has(component) ? <GeneralRegistryDrawer id={component} /> : null;
   }, []);
 
   const renderTab = useCallback((node: TabNode, renderValues: ITabRenderValues) => {
-    const Icon = drawerRegistry.get(node.getComponent())?.icon;
+    const Icon = interfaceRegistry.get(node.getComponent())?.icon;
     renderValues.leading = Icon ? <Icon size={14} strokeWidth={2} aria-hidden="true" /> : null;
   }, []);
 

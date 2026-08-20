@@ -1,6 +1,6 @@
 import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SidebarCoreButton from '@/drawers/sidebar/SidebarCoreButton';
+import SidebarCoreButton from '@/middleware/interface/sidebar/SidebarCoreButton';
 import BYOKPopover from '@/middleware/windows/settings/BYOKPopover';
 import DrawersPopover from '@/middleware/windows/settings/DrawersPopover';
 import FilterPhotosPopover from '@/middleware/windows/settings/FilterPhotosPopover';

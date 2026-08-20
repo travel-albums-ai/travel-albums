@@ -1,4 +1,4 @@
-import { drawerRegistry } from '@/drawerRegistry';
+import { interfaceRegistry } from '@/interfaceRegistry';
 import { useEffect, useState } from 'react';
 
 interface GeneralRegistryDrawerProps {
@@ -10,7 +10,7 @@ export default function GeneralRegistryDrawer({ id }: GeneralRegistryDrawerProps
 
   useEffect(() => {
     let mounted = true;
-    const meta = drawerRegistry.get(id);
+    const meta = interfaceRegistry.get(id);
 
     if (!meta) {
       return () => {
@@ -18,7 +18,7 @@ export default function GeneralRegistryDrawer({ id }: GeneralRegistryDrawerProps
       };
     }
 
-    drawerRegistry.preload(meta).then((loadedComponent) => {
+    interfaceRegistry.preload(meta).then((loadedComponent) => {
       if (mounted) {
         setComponent(() => loadedComponent);
       }

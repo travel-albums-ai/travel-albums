@@ -1,5 +1,5 @@
 import PopoverButton from '@/components/PopoverButton';
-import ElementLabels from '@/drawers/components/ElementLabels';
+import ElementLabels from '@/middleware/interface/components/ElementLabels';
 import { Box } from '@mui/material';
 import { List } from 'lucide-react';
 

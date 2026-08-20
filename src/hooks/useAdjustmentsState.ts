@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
-import { DEFAULTS, PRESETS } from '@/drawers/adjustments/state';
-import { Adjustments, Stage } from '@/drawers/adjustments/types';
+import { DEFAULTS, PRESETS } from '@/middleware/interface/adjustments/state';
+import { Adjustments, Stage } from '@/middleware/interface/adjustments/types';
 import {
   applyIf,
   brightnessStage,
@@ -26,7 +26,7 @@ import {
   vibranceStage,
   vignetteStage,
   whitesBlacksStage
-} from '@/drawers/adjustments/utils';
+} from '@/middleware/interface/adjustments/utils';
 
 type UseAdjustmentsStateOptions = {
   initialPreset?: Partial<Adjustments>;

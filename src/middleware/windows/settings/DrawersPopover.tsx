@@ -1,7 +1,7 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import { ensureDrawerDiscovery } from '@/drawerDiscovery';
-import { drawerRegistry } from '@/drawerRegistry';
+import { ensureInterfaceDiscovery } from '@/interfaceDiscovery';
+import { interfaceRegistry } from '@/interfaceRegistry';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Ban, Check } from 'lucide-react';
 import { Fragment, useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ export default function DrawersPopover({ filter }: { filter?: string }) {
   const [drawerDiscoveryReady, setDrawerDiscoveryReady] = useState(false);
 
   useEffect(() => {
-    ensureDrawerDiscovery().then(() => setDrawerDiscoveryReady(true));
+    ensureInterfaceDiscovery().then(() => setDrawerDiscoveryReady(true));
   }, []);
 
   return <>
@@ -35,7 +35,7 @@ export default function DrawersPopover({ filter }: { filter?: string }) {
         .sort((a, b) => t(a.labelKey).localeCompare(t(b.labelKey)))
         .sort((a, b) => (a.disabled !== b.disabled ? (a.disabled ? 1 : -1) : 0))
         .map((control) => {
-          const Icon = drawerDiscoveryReady ? drawerRegistry.get(control.key)?.icon : undefined;
+          const Icon = drawerDiscoveryReady ? interfaceRegistry.get(control.key)?.icon : undefined;
 
           return <Fragment key={control.key}>
             {control.type === 'boolean' && <SettingToggleRow

@@ -111,6 +111,7 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, 'src'),
+        '@/middleware/interface': path.resolve(import.meta.dirname, 'src/middleware/interface'),
       },
     },
 
