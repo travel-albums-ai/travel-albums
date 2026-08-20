@@ -1,5 +1,6 @@
 import PopoverButton from '@/components/PopoverButton';
 import SettingsSection from '@/components/SettingsSection';
+import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
 import { SectionType } from '@/hooks/sections/sectionTypes';
 import FilterPresets from '@/middleware/windows/settings/components/FilterPresets';
 import SettingComponentRow from '@/middleware/windows/settings/components/SettingComponentRow';
@@ -15,7 +16,6 @@ import PeopleAndPetsFilter from '@/middleware/windows/settings/filters/PeopleAnd
 import { Box } from '@mui/material';
 import { Calendar, Folder, Image, LocateFixed, LocateOff, MessageCircle, ThumbsUp, Users } from 'lucide-react';
 import { Fragment } from 'react';
-import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
 import { useTranslation } from 'react-i18next';
 
 export default function FilterPhotosPopover({ filter }: { filter?: string }) {

@@ -1,13 +1,10 @@
 import GenericPanel from '@/components/generics/GenericPanel';
 import NoPhotos from '@/components/NoPhotos';
-import SolidChip from '@/components/SolidChip';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { SectionType } from '@/hooks/sections/sectionTypes';
 import GroupingPreviewItemNg from '@/pages/components/GroupingPreviewItemNg';
-import { Box, Divider, Stack, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 export default function SelectedPage_type() {
@@ -15,32 +12,12 @@ export default function SelectedPage_type() {
   const sidebarTerm = useSettingsStoreSelector((state) => state.sidebarTerm)
   const sections = useSections_GLOBAL()
   const { width } = useAlbumPhotoCardStoreSelector((state) => state)
-  const { t } = useTranslation()
 
   const foundSection = sections?.find((s) => s.type === type_name)
 
   return (
     <>
-      <GenericPanel id="selected-page-drawer" tool={
-        <>
-          {type_name === SectionType.NowAndThen && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
-            <Typography sx={{ fontStyle: 'italic' }} variant="subtitle2" color="textPrimary">{t('nowAndThenTagline')}</Typography>
-            <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled">{t('nowAndThenYearsBack', { count: foundSection?.data?.length || 0 })}</Typography>
-          </Stack>}
-
-          {type_name === SectionType.Timeline && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
-            <Typography sx={{ fontStyle: 'italic' }} variant="subtitle2" color="textPrimary">{t('timelineTagline')}</Typography>
-            <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled">{t('timelineMonthsBack', { count: foundSection?.data?.length || 0 })}</Typography>
-          </Stack>}
-
-          {type_name === SectionType.PeopleAndPets && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
-            <Typography sx={{ fontStyle: 'italic' }} variant="body2" color="textPrimary">{t('peopleTagline')}</Typography>
-            <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled">{t('peopleCount', { count: foundSection?.data?.length || 0 })}</Typography>
-          </Stack>}
-
-          <SolidChip count={foundSection?.data?.length || 0} height={32} fontSize={14} minWidth={60} />
-        </>
-      }>
+      <GenericPanel id="selected-page-drawer">
         {foundSection?.data.length > 0 && <Box sx={{
           display: 'grid',
           gridTemplateColumns: `repeat(auto-fill, minmax(${width * 1.5}px, 1fr))`,
