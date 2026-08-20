@@ -60,12 +60,10 @@ export default function AdjustmentsCanvas({
     };
 
     img.src = url;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   useEffect(() => {
     render();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pipeline]);
 
   return (

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso';
 
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
@@ -39,7 +39,9 @@ export default function AllPhotosGridVirtuoso({ photos }: Props) {
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
 
   const photosRef = useRef(photos);
-  photosRef.current = photos;
+  useEffect(() => {
+    photosRef.current = photos;
+  }, [photos]);
 
   useEffect(() => {
     if (!previewPhotoObj) return;
@@ -65,13 +67,7 @@ export default function AllPhotosGridVirtuoso({ photos }: Props) {
     [photos]
   );
 
-  const List = useMemo(() => {
-    const Comp = (props: any) => (
-      <GridList {...props} width={width} gap={1} />
-    );
-    Comp.displayName = 'VirtuosoGridList';
-    return Comp;
-  }, [width]);
+  const List = (props: any) => <GridList {...props} width={width} gap={1} />;
 
   return (
     <VirtuosoGrid

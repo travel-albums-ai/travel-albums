@@ -28,6 +28,7 @@ export const useFilter_AllPhotos = (enabled = true) => {
 
   // The exact photo array the worker's indices refer to.
   const indexedPhotosRef = useRef<GalleryPhoto[]>([]);
+  const [indexedPhotos, setIndexedPhotos] = useState<GalleryPhoto[]>([]);
 
   // Changes every time we INIT_PHOTOS.
   const generationRef = useRef(0);
@@ -77,6 +78,7 @@ export const useFilter_AllPhotos = (enabled = true) => {
     // Update this BEFORE sending INIT_PHOTOS so that any result
     // produced for this generation maps against this exact array.
     indexedPhotosRef.current = rawPhotos;
+    setIndexedPhotos(rawPhotos);
 
     // Clear the old result immediately.
     setIndices(new Uint32Array(0));
@@ -121,7 +123,7 @@ export const useFilter_AllPhotos = (enabled = true) => {
   // ------------------------------------------------------------
 
   const result = useMemo(() => {
-    const photos = indexedPhotosRef.current;
+    const photos = indexedPhotos;
 
     const out = new Array<GalleryPhoto>(indices.length);
 

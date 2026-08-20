@@ -40,7 +40,9 @@ export interface Section {
 }
 
 function useSection(enabled: boolean, compute: () => any[], deps: DependencyList): any[] {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // deps is a dynamic dependency list; disable the lint rule that requires
+  // an array literal for this specific line.
+  // eslint-disable-next-line react-hooks/use-memo
   return useMemo(() => (enabled ? compute() : []), [enabled, ...deps]);
 }
 

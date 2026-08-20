@@ -6,7 +6,7 @@ import SettingDateRow from '@/middleware/windows/settings/components/SettingDate
 import SparklineDates from '@/middleware/windows/settings/SparklineDates';
 import { Box, IconButton } from '@mui/material';
 import { PlusCircle, Square, SquareCheck, Trash } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
@@ -27,8 +27,14 @@ export default function DatesFilter() {
 
   const sortedRawPhotos = rawPhotos ? [...rawPhotos].sort((a, b) => a.takenAtTs - b.takenAtTs) : []
 
-  const firstPhotoDate = sortedRawPhotos[0]?.takenAtTs ? sortedRawPhotos[0].takenAtTs * 1000 : Date.now()
-  const lastPhotoDate = sortedRawPhotos[sortedRawPhotos.length - 1]?.takenAtTs ? sortedRawPhotos[sortedRawPhotos.length - 1].takenAtTs * 1000 : Date.now()
+  const [nowFallback, setNowFallback] = useState<number | null>(null);
+
+  useEffect(() => {
+    setNowFallback(Date.now());
+  }, []);
+
+  const firstPhotoDate = sortedRawPhotos[0]?.takenAtTs ? sortedRawPhotos[0].takenAtTs * 1000 : (nowFallback ?? 0)
+  const lastPhotoDate = sortedRawPhotos[sortedRawPhotos.length - 1]?.takenAtTs ? sortedRawPhotos[sortedRawPhotos.length - 1].takenAtTs * 1000 : (nowFallback ?? 0)
 
   return <Box sx={{ p : 2 }}>
 

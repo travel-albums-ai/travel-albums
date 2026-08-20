@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Section, useTransform_AllSections } from '@/hooks/sections/useTransform_AllSections';
 import { createContext, useContext, type ReactNode } from 'react';
 

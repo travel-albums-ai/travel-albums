@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import type { GalleryPhoto } from '@/lib/galleryData';
 import { createContext, useContext, type ReactNode } from 'react';

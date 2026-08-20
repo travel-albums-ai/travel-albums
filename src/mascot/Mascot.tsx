@@ -15,6 +15,7 @@ export default function Mascot() {
 
   const draggingRef = useRef(false);
   const dragOffsetRef = useRef(0);
+  const [dragging, setDragging] = useState(false);
 
   // Restore saved position
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function Mascot() {
       if (x === null) return;
 
       draggingRef.current = true;
+      setDragging(true);
 
       // Remember where inside the mascot the user grabbed it.
       dragOffsetRef.current = event.clientX - x;
@@ -96,6 +98,7 @@ export default function Mascot() {
     if (!draggingRef.current) return;
 
     draggingRef.current = false;
+    setDragging(false);
 
     setX((current) => {
       if (current !== null) {
@@ -140,7 +143,7 @@ export default function Mascot() {
           justifyContent: 'center',
           alignItems: 'center',
 
-          cursor: draggingRef.current ? 'grabbing' : 'grab',
+          cursor: dragging ? 'grabbing' : 'grab',
 
           pointerEvents: 'auto',
 

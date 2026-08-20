@@ -64,75 +64,7 @@ export default function RGBHistogram({
   const [hoverInfo, setHoverInfo] =
     useState<HoverInfo | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    const load = async () => {
-      const img = new Image();
-
-      img.crossOrigin = 'anonymous';
-
-      await new Promise<void>((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = reject;
-        img.src = imageUrl;
-      });
-
-      if (cancelled) return;
-
-      const off = document.createElement('canvas');
-
-      off.width = img.naturalWidth;
-      off.height = img.naturalHeight;
-
-      const ctx = off.getContext('2d', {
-        willReadFrequently: true,
-      });
-
-      if (!ctx) return;
-
-      ctx.drawImage(img, 0, 0);
-
-      const { data } = ctx.getImageData(
-        0,
-        0,
-        off.width,
-        off.height,
-      );
-
-      const r = new Uint32Array(256);
-      const g = new Uint32Array(256);
-      const b = new Uint32Array(256);
-
-      for (let i = 0; i < data.length; i += 4) {
-        r[data[i]]++;
-        g[data[i + 1]]++;
-        b[data[i + 2]]++;
-      }
-
-      histogramRef.current = {
-        r,
-        g,
-        b,
-        max: Math.max(...r, ...g, ...b),
-        totalPixels: data.length / 4,
-      };
-
-      drawHistogram();
-    };
-
-    load();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [imageUrl]);
-
-  useEffect(() => {
-    drawHistogram();
-  }, [hoveredChannel, width, height]);
-
-  const drawHistogram = () => {
+  function drawHistogram() {
     const histogram = histogramRef.current;
     const canvas = canvasRef.current;
 
@@ -229,7 +161,76 @@ export default function RGBHistogram({
 
       ctx.stroke();
     }
-  };
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      const img = new Image();
+
+      img.crossOrigin = 'anonymous';
+
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = reject;
+        img.src = imageUrl;
+      });
+
+      if (cancelled) return;
+
+      const off = document.createElement('canvas');
+
+      off.width = img.naturalWidth;
+      off.height = img.naturalHeight;
+
+      const ctx = off.getContext('2d', {
+        willReadFrequently: true,
+      });
+
+      if (!ctx) return;
+
+      ctx.drawImage(img, 0, 0);
+
+      const { data } = ctx.getImageData(
+        0,
+        0,
+        off.width,
+        off.height,
+      );
+
+      const r = new Uint32Array(256);
+      const g = new Uint32Array(256);
+      const b = new Uint32Array(256);
+
+      for (let i = 0; i < data.length; i += 4) {
+        r[data[i]]++;
+        g[data[i + 1]]++;
+        b[data[i + 2]]++;
+      }
+
+      histogramRef.current = {
+        r,
+        g,
+        b,
+        max: Math.max(...r, ...g, ...b),
+        totalPixels: data.length / 4,
+      };
+
+      drawHistogram();
+    };
+
+    load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [imageUrl]);
+
+  useEffect(() => {
+    drawHistogram();
+  }, [hoveredChannel, width, height]);
+
 
   const handleMouseMove = (
     event: React.MouseEvent<HTMLCanvasElement>,

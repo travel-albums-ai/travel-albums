@@ -4,7 +4,30 @@ import { useEffect, useState } from 'react';
 
 function RenderWindow({ id }: { id: string }) {
   const meta = windowRegistry.get(id);
-  const Comp = meta ? windowRegistry.resolve(meta) : null;
+  const [Comp, setComp] = useState<null | any>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    if (!meta) {
+      setComp(null);
+      return;
+    }
+
+    const cached = windowRegistry.resolve(meta);
+    if (cached) {
+      setComp(() => cached);
+      return;
+    }
+
+    windowRegistry.preload(meta).then((c) => {
+      if (mounted) setComp(() => c);
+    }).catch(() => {});
+
+    return () => {
+      mounted = false;
+    };
+  }, [meta?.id]);
+
   return Comp ? <Comp /> : null;
 }
 

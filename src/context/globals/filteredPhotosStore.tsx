@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useFilter_AllPhotos } from '@/hooks/pipeline/useFilter_AllPhotos';
 import type { GalleryPhoto } from '@/lib/galleryData';
 import { createContext, useContext, type ReactNode } from 'react';
