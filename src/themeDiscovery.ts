@@ -80,8 +80,3 @@ export function warmThemeDiscovery() {
     console.warn('Theme discovery warmup failed', error);
   });
 }
-
-export async function ensureThemeById(id: string) {
-  await ensureThemeDiscovery();
-  return themeRegistry.get(id);
-}
