@@ -1,3 +1,14 @@
+## [1.228.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.228.0...v1.228.1) (2026-08-20)
+
+### 🐛 Fixes
+
+* set transparent prop to true in SettingsSection and update placeholder in DescribePhoto ([a35f64e](https://github.com/travel-albums-ai/travel-albums/commit/a35f64e13210fa299ab8e6069a53fd66f4298931))
+
+### 🧹 Refactors
+
+* replace CircularProgress with Skeleton in PhotoExifComplete and enhance PhotoExifDetails with loading states ([c11abff](https://github.com/travel-albums-ai/travel-albums/commit/c11abffd7ea39e9be6c007615c0168f720a7ae7d))
+* simplify LightboxBackground by removing layer management and streamline rendering ([f5c4357](https://github.com/travel-albums-ai/travel-albums/commit/f5c43578c054f809c466319cfd237eec74b8bdb5))
+
 ## [1.228.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.227.0...v1.228.0) (2026-08-20)
 
 ### ✨ Features
