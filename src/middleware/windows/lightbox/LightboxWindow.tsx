@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -6,16 +6,22 @@ import ControlButton from './LightboxControls';
 import LightboxFilmstrip from './LightboxFilmstrip';
 import LightboxViewer from './LightboxViewer';
 
+import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import PhotoExifDetails from '@/components/PhotoExifDetails';
+import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
+import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
+import { ChevronLeft, ChevronRight, Pin } from 'lucide-react';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
-  const previewPhotoObj = useSettingsStoreSelector(s => s.previewPhotoObj);
+  const previewPhotoObj: GalleryPhoto | undefined = useSettingsStoreSelector(s => s.previewPhotoObj);
 
   const width = useAlbumPhotoCardStoreSelector(state => state.width);
   const height = useAlbumPhotoCardStoreSelector(state => state.height);
@@ -131,21 +137,45 @@ export default function LightboxWindow() {
 
   return (
     <>
-      {/* // <Dialog fullWidth fullScreen open={showWindow} onClose={close} slotProps={{ paper: { sx: { width: '90vw', height: '90vh', maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' } } }}> */}
-      <Box sx={{ flex: 1, minHeight: 0, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center' }}>
+
+      <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1, width: '100%' }}>
         <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
 
-        <LightboxViewer photo={currentPhoto} />
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}>
+          <LightboxFilmstrip photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
+        </Box>
 
         <ControlButton tooltip="Next photo" onClick={() => next()} icon={<ChevronRight size={20} />} disabled={currentIndex === photos.length - 1} />
       </Box>
 
-      <Box sx={{ flex: '0 0 auto', px: { xs: 1, md: 3 }, pt: 1, pb: { xs: 1, md: 2 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}>
-          <LightboxFilmstrip photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
+      <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
+        <Box sx={{ flex: 1, minHeight: 0, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center' }}>
+          <LightboxViewer photo={currentPhoto} />
         </Box>
+
+        {currentPhoto && <Box key={currentPhoto.id} sx={{ flex: '0 0 480px', minHeight: 0, minWidth: 0 }}>
+          <SettingsSection title="Location" icon={<Pin />} gap={1} divider={false}>
+            <AlbumMapPanel photos={[currentPhoto]} />
+            {currentPhoto.city.name}
+            <a
+              href={`https://maps.google.com/?q=${currentPhoto.latitude},${currentPhoto.longitude}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button variant="outlined" fullWidth color="primary" size="small" >
+              🗺️ Google Maps
+              </Button>
+            </a>
+
+          </SettingsSection>
+          <SettingsSection>
+            <PhotoExifDetails photo={currentPhoto} />
+            <AlbumsMetaDetails photos={[currentPhoto]} minWidth={25} />
+            <DescribePhoto photoId={currentPhoto.id} />
+          </SettingsSection>
+        </Box>}
+
       </Box>
-      {/* </Dialog> */}
     </>
   );
 }
