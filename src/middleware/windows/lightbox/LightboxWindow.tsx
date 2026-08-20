@@ -16,6 +16,7 @@ import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
 import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
 import EXIFSection from '@/middleware/windows/lightbox/EXIFSection';
+import LightboxBackground from '@/middleware/windows/lightbox/LightboxBackground';
 import LocationSection from '@/middleware/windows/lightbox/LocationSection';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -138,7 +139,14 @@ export default function LightboxWindow() {
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 1, minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
+        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 1, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative' }}>
+          <LightboxBackground photo={currentPhoto} />
+          <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
+            <Box sx={{ flex: 1, minHeight: 0, mt: 2, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center', justifyContent: 'center', }}>
+              <LightboxViewer photo={currentPhoto} />
+            </Box>
+          </Box>
+
           <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1 }}>
             <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
 
@@ -149,11 +157,7 @@ export default function LightboxWindow() {
             <ControlButton tooltip="Next photo" onClick={() => next()} icon={<ChevronRight size={20} />} disabled={currentIndex === photos.length - 1} />
           </Box>
 
-          <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-            <Box sx={{ flex: 1, minHeight: 0, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center' }}>
-              <LightboxViewer photo={currentPhoto} />
-            </Box>
-          </Box>
+
 
         </Box>
         {currentPhoto && <Box key={currentPhoto.id} sx={{
@@ -162,9 +166,8 @@ export default function LightboxWindow() {
           minWidth: 0,
           overflowY: 'auto',
           p: 1,
-          px: 2,
-          mr: 0.5,
-          boxShadow: theme => `inset 18px 0px 10px -15px ${theme.palette.divider}`,
+          px: 1,
+          mr: 0.25,
           borderLeft: '1px solid',
           borderColor: 'divider',
         }}>

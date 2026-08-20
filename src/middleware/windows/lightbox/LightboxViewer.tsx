@@ -1,5 +1,4 @@
-import AlbumPhotoCard from '@/components/AlbumPhotoCard';
-import { Box } from '@mui/material';
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 
 type ViewerProps = {
   photo: any;
@@ -9,34 +8,18 @@ export default function LightboxViewer({ photo }: ViewerProps) {
   if (!photo) return null;
 
   return (
-    <Box
-      sx={{
-        minWidth: 0,
-        minHeight: 0,
-        flex: 1,
+    <AlbumPhotoThumbnailBackgroundNg
+      photo={photo}
+      original={true}
+      style={{
+        width: 'fit-content',
+        zIndex: 1,
         height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         overflow: 'hidden',
+        objectFit: 'contain',
+        borderRadius: 16,
+        boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.5)',
       }}
-    >
-      <AlbumPhotoCard
-        original={true}
-        photo={photo}
-        thumbnailSx={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'contain',
-        }}
-        mapWidth={300}
-        mapHeight={300}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'contain',
-        }}
-      />
-    </Box>
+    />
   );
 }
