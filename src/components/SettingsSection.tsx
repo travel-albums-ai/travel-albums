@@ -1,16 +1,21 @@
 import { Box, Divider, Stack, Typography } from '@mui/material';
 import { cloneElement } from 'react';
 
-export default function SettingsSection({ title, icon, guidance, children, gap = 0.5, divider = true } : { title?: string, icon?: React.ReactNode, guidance?: string, children: React.ReactNode, gap?: number, divider?: boolean }) {
+export default function SettingsSection({ title, icon, guidance, children, gap = 0.5, divider = true, transparent = false } : { title?: string, icon?: React.ReactNode, guidance?: string, children: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean }) {
 
   return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, overflow: 'auto' }}>
     <Box sx={{
-      bgcolor: theme => theme.palette.background.paper + 'BD',
+      bgcolor: theme => transparent ? theme.palette.background.paper + '18' : theme.palette.background.paper + 'BD',
       mb: 1,
       border: '1px solid',
-      borderColor: 'divider',
+      borderColor: theme => transparent ? 'transparent' : theme.palette.divider,
       p: 1,
-      borderRadius: 2
+      borderRadius: 2,
+      transition: 'box-shadow 0.2s ease-in-out',
+      boxShadow: theme => transparent ? 2 : 1,
+      '&:hover': {
+        boxShadow: theme => transparent ? 4 : 2,
+      },
     }}
     >
       {(title || icon) && <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, mb: 1, px: 0.5 }}>

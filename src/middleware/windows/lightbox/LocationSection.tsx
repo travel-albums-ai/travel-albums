@@ -13,7 +13,7 @@ export default function LocationSection({ photo }: { photo: GalleryPhoto }) {
   if (!photo) return null;
 
   return (
-    <SettingsSection title="Location" icon={<Pin />} gap={0} divider={false}>
+    <SettingsSection title="Location" icon={<Pin />} gap={0} divider={false} transparent={true}>
       <AlbumMapPanel photos={[photo]} />
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
         <Stack divider={<Divider orientation="vertical" flexItem />} direction="row" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
