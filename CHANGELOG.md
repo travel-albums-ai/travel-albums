@@ -1,3 +1,13 @@
+## [1.228.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.227.0...v1.228.0) (2026-08-20)
+
+### ✨ Features
+
+* add wheel navigation support in LightboxWindow for improved user experience ([03520c5](https://github.com/travel-albums-ai/travel-albums/commit/03520c5c46948454c814601523f2c5abeaa9bf15))
+
+### 🧹 Refactors
+
+* update LightboxWindow layout and enhance SettingsSection with metadata title and icon ([63e6f2d](https://github.com/travel-albums-ai/travel-albums/commit/63e6f2d75f5caa523af6a70879c49a8467441699))
+
 ## [1.227.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.226.0...v1.227.0) (2026-08-20)
 
 ### ✨ Features
