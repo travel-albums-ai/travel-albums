@@ -1,4 +1,4 @@
-import { Box, Dialog } from '@mui/material';
+import { Box } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -130,7 +130,8 @@ export default function LightboxWindow() {
   if (!showWindow || !currentPhoto) return null;
 
   return (
-    <Dialog fullWidth fullScreen open={showWindow} onClose={close} slotProps={{ paper: { sx: { width: '90vw', height: '90vh', maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' } } }}>
+    <>
+      {/* // <Dialog fullWidth fullScreen open={showWindow} onClose={close} slotProps={{ paper: { sx: { width: '90vw', height: '90vh', maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' } } }}> */}
       <Box sx={{ flex: 1, minHeight: 0, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center' }}>
         <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
 
@@ -144,6 +145,7 @@ export default function LightboxWindow() {
           <LightboxFilmstrip photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
         </Box>
       </Box>
-    </Dialog>
+      {/* </Dialog> */}
+    </>
   );
 }
