@@ -8,11 +8,9 @@ export default function LightboxWindow() {
 
   const showWindow = lightboxOpen === true;
 
-  if (!showWindow) {
-    return null
-  }
+  if (!showWindow) return null
 
-  return (<>
+  return (
     <Dialog
       fullWidth
       fullScreen
@@ -31,5 +29,5 @@ export default function LightboxWindow() {
     >
       <LightboxWindowInner />
     </Dialog>
-  </>)
+  )
 }

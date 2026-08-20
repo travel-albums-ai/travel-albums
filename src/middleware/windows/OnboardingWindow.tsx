@@ -7,15 +7,13 @@ export default function OnboardingWindow() {
 
   const showWindow = onboarding === true
 
-  if (!showWindow) {
-    return null
-  }
+  if (!showWindow) return null
 
-  return (<>
+  return (
     <Dialog
-      onClose={() => { }}
-      open={onboarding}
       fullWidth
+      open={onboarding}
+      onClose={() => { }}
       slotProps={{
         paper: {
           sx: {
@@ -29,5 +27,5 @@ export default function OnboardingWindow() {
     >
       <Onboarding />
     </Dialog>
-  </>)
+  )
 }

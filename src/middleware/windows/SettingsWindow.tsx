@@ -8,15 +8,14 @@ export default function SettingsWindow() {
 
   const showWindow = showSettings === true
 
-  if (!showWindow) {
-    return null
-  }
+  if (!showWindow) return null
 
-  return (<>
+  return (
     <Dialog
-      open={showWindow}
       fullWidth
       maxWidth="xl"
+      open={showWindow}
+      onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}
       slotProps={{
         paper: {
           sx: {
@@ -27,9 +26,8 @@ export default function SettingsWindow() {
           },
         },
       }}
-      onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}
     >
       <SettingsContent />
     </Dialog>
-  </>)
+  )
 }
