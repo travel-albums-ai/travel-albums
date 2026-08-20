@@ -1,3 +1,23 @@
+## [1.226.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.225.0...v1.226.0) (2026-08-20)
+
+### ✨ Features
+
+* add album photo row and scroller components ([8ed39a3](https://github.com/travel-albums-ai/travel-albums/commit/8ed39a31aa4804f64c428152f4b14a9e4130a01a))
+
+### 🧹 Refactors
+
+* clean up unused functions and update imports in various files ([26d088b](https://github.com/travel-albums-ai/travel-albums/commit/26d088bbddcecec7dc990ac7856fd2c369eef203))
+* enhance ESLint configuration with structured restricted imports for middleware ([6bfb172](https://github.com/travel-albums-ai/travel-albums/commit/6bfb1723264d3f7c679fbc3da80f38cd6ec9d3e6))
+* migrate status components to middleware directory and update imports ([e08551c](https://github.com/travel-albums-ai/travel-albums/commit/e08551c43cb7a4c4cd8c980b7224b448b5c6c5f6))
+* remove unused imports and simplify SelectedPage_type component structure ([140fb1f](https://github.com/travel-albums-ai/travel-albums/commit/140fb1fd75aa5b48ad3ceafe9e940eadb8812c2b))
+* replace string literals with SectionType enum for improved type safety and maintainability ([efa7623](https://github.com/travel-albums-ai/travel-albums/commit/efa7623e1eefcc152eaff92c73a316cb6e91f8d5))
+* restructure lightbox components and update imports ([4e1e280](https://github.com/travel-albums-ai/travel-albums/commit/4e1e2805bc39f6d6ecf21621afcbdd4ae0fff4a6))
+* simplify section data retrieval by encapsulating logic in useSection hook ([d09d84c](https://github.com/travel-albums-ai/travel-albums/commit/d09d84c842d8ad03831fe50cd6c2090bca1fd796))
+* streamline sidebarSections definition by using Object.values for improved maintainability ([dcf1dfb](https://github.com/travel-albums-ai/travel-albums/commit/dcf1dfb4b1999064aac7fc3de74e530fa5ef42d8))
+* update components and localization for improved internationalization support ([2c2f551](https://github.com/travel-albums-ai/travel-albums/commit/2c2f5511406777508f55a223b1ecde6a8c33d89f))
+* update ESLint configuration to include additional restricted imports and files ([9492861](https://github.com/travel-albums-ai/travel-albums/commit/9492861223f361cf96360b33c4bd039add78c35c))
+* update ESLint configuration to include additional restricted imports for middleware base ([89fce2b](https://github.com/travel-albums-ai/travel-albums/commit/89fce2b05f7da09fa7b1ba64c43830a6fdeee2ce))
+
 ## [1.225.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.224.0...v1.225.0) (2026-08-19)
 
 ### ✨ Features
