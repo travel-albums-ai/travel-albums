@@ -1,3 +1,9 @@
+## [1.231.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.230.0...v1.231.0) (2026-08-20)
+
+### ✨ Features
+
+* refactor AlbumPhotoCard and EXIFSection components for improved functionality and layout ([7cf4422](https://github.com/travel-albums-ai/travel-albums/commit/7cf4422cb5de597475f56fbb49b2b814cdb77ed0))
+
 ## [1.230.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.229.0...v1.230.0) (2026-08-20)
 
 ### ✨ Features
