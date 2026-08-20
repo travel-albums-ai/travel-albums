@@ -1,7 +1,7 @@
 import GeneralRegistryWindow from '@/components/registry/GeneralRegistryWindow';
+import MainDriver from '@/components/tutorial/MainDriver';
 import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import MainDriver from '@/drivers/MainDriver';
 import FlexLayout from '@/layout/FlexLayout';
 import Header from '@/layout/Header';
 import StatusBar from '@/layout/StatusBar';
