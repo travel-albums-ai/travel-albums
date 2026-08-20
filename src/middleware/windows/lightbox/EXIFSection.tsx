@@ -13,9 +13,9 @@ export default function EXIFSection({ photo }: { photo: GalleryPhoto }) {
   return (
     <>
       <SettingsSection title="EXIF" icon={<Camera />} gap={1} divider={false}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, py: 1, alignItems: 'center', justifyContent: 'center' }}>
           <PhotoExifDetails photo={photo} />
-          <Box sx={{ height: '350px', overflowY: 'auto', overflowX: 'hidden', p: 1, borderRadius: 2, border: '1px solid', borderColor: 'divider', boxShadow: 2 }}>
+          <Box sx={{ height: '350px', overflowY: 'auto', overflowX: 'hidden', width: '100%', borderRadius: 2, border: '1px solid', borderColor: 'divider', boxShadow: 2 }}>
             <PhotoExifComplete photo={photo} />
           </Box>
         </Box>

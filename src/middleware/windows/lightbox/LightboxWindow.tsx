@@ -188,10 +188,7 @@ export default function LightboxWindow() {
             />
 
             <Box>
-              <GeneralRegistryToolbar
-                // noGhost={true}
-                group="lightbox"
-              />
+              <GeneralRegistryToolbar group="lightbox" />
             </Box>
           </Box>
 
