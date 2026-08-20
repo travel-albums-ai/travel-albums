@@ -6,7 +6,7 @@ import { composeUrl } from '@/lib/thumbnailService';
 import {
   Alert,
   Box,
-  CircularProgress,
+  Skeleton,
   Typography
 } from '@mui/material';
 
@@ -39,15 +39,28 @@ export default function PhotoExifComplete({ photo }: { photo?: GalleryPhoto }) {
           <Box
             sx={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
               gap: 1,
 
             }}
           >
-            <CircularProgress size={18} />
-            <Typography variant="body2">
-              Reading EXIF...
-            </Typography>
+            {Array.from({ length: 30 }).map((_, index) => (<Box key={index} sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 1,
+              alignItems: 'center',
+              width: '100%',
+              px: 0.5,
+              pb: 0.5,
+              mb: 0.5,
+              borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+            }}>
+              <Box sx={{ width: 150, flex: '0 0 auto' }}>
+                <Skeleton key={index} variant="text" width={Math.random() * 150} height={20} />
+              </Box>
+              <Skeleton key={index} variant="text" width={100} height={20} />
+            </Box>))}
           </Box>
         )}
 
@@ -56,6 +69,7 @@ export default function PhotoExifComplete({ photo }: { photo?: GalleryPhoto }) {
             {error}
           </Alert>
         )}
+
 
         {!!exif && (
           <Box

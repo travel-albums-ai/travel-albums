@@ -1,15 +1,15 @@
 import useTransform_Photo2Exif from '@/hooks/useTransform_Photo2Exif';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
-import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, Divider, Skeleton, Stack, Tooltip, Typography } from '@mui/material';
 import { Aperture, Camera, Focus, Rabbit, SquareFunction, Timer } from 'lucide-react';
 
 export default function PhotoExifDetails({ photo }: { photo?: GalleryPhoto }) {
   const { exif } = useTransform_Photo2Exif(composeUrl(photo))
 
-  if (!photo) {
-    return null
-  }
+  // if (!photo) {
+  //   return null
+  // }
 
   const items = [
     {
@@ -50,16 +50,18 @@ export default function PhotoExifDetails({ photo }: { photo?: GalleryPhoto }) {
       divider={<Divider orientation="vertical" flexItem />}
       spacing={1}
     >
-      {items.filter(item => item.value).map(item => (
-        <Tooltip title={item.key + ": " + (item.value ?? '')} arrow key={item.key}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'center', width: '60px' }}>
-            <Box sx={{ opacity: 0.7, color: 'text.disabled' }}>
-              { item.icon }
+      {items
+        .map(item => (
+          <Tooltip title={item.key + ": " + (item.value ?? '')} arrow key={item.key}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'center', width: '60px' }}>
+              <Box sx={{ opacity: 0.7, color: 'text.disabled' }}>
+                { item.icon }
+              </Box>
+              {item.value && <Typography variant="caption" sx={{ width: '65px', fontSize: '11px' }} align="center" noWrap color="textSecondary" >{item.value || '0'}</Typography>}
+              {!item.value && <Skeleton variant="text" width={40} height={20} />}
             </Box>
-            <Typography variant="caption" sx={{ width: '65px', fontSize: '11px' }} align="center" noWrap color="textSecondary" >{item.value}</Typography>
-          </Box>
-        </Tooltip>
-      ))}
+          </Tooltip>
+        ))}
     </Stack>
   )
 }
