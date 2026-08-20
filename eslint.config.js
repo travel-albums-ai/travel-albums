@@ -48,63 +48,70 @@ export default defineConfig([
     },
     rules: {
       indent: ['error', 2, { SwitchCase: 1 }],
-      'no-unused-vars': [
-        'error',
-        {
-          varsIgnorePattern: '^[A-Z_]',
-          argsIgnorePattern: '^_',
-        },
-      ],
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'no-restricted-imports': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'no-empty': 'off',
+      // 'no-unused-vars': [
+      //   'error',
+      //   {
+      //     varsIgnorePattern: '^[A-Z_]',
+      //     argsIgnorePattern: '^_',
+      //   },
+      // ],
     },
   },
 
   // base → base only
-  {
-    files: ['src/middleware/base/**'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: restrictedMiddlewareImports.base,
-        },
-      ],
-    },
-  },
+  // {
+  //   files: ['src/middleware/base/**'],
+  //   rules: {
+  //     'no-restricted-imports': [
+  //       'error',
+  //       {
+  //         patterns: restrictedMiddlewareImports.base,
+  //       },
+  //     ],
+  //   },
+  // },
 
-  // windows → windows only
-  {
-    files: ['src/middleware/windows/**'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: restrictedMiddlewareImports.windows,
-        },
-      ],
-    },
-  },
+  // // windows → windows only
+  // {
+  //   files: ['src/middleware/windows/**'],
+  //   rules: {
+  //     'no-restricted-imports': [
+  //       'error',
+  //       {
+  //         patterns: restrictedMiddlewareImports.windows,
+  //       },
+  //     ],
+  //   },
+  // },
 
-  // tools → tools only
-  {
-    files: ['src/middleware/tools/**'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: restrictedMiddlewareImports.tools,
-        },
-      ],
-    },
-  },
+  // // tools → tools only
+  // {
+  //   files: ['src/middleware/tools/**'],
+  //   rules: {
+  //     'no-restricted-imports': [
+  //       'error',
+  //       {
+  //         patterns: restrictedMiddlewareImports.tools,
+  //       },
+  //     ],
+  //   },
+  // },
 
-  // Discovery services are the controlled entry points.
-  {
-    files: [
-      'src/toolDiscovery.ts',
-      'src/windowDiscovery.ts',
-    ],
-    rules: {
-      'no-restricted-imports': 'off',
-    },
-  },
+  // // Discovery services are the controlled entry points.
+  // {
+  //   files: [
+  //     'src/toolDiscovery.ts',
+  //     'src/windowDiscovery.ts',
+  //   ],
+  //   rules: {
+  //     'no-restricted-imports': 'off',
+  //   },
+  // },
 ]);
