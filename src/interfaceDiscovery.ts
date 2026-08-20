@@ -1,3 +1,4 @@
+import { loadGlobEntries } from '@/discovery/globLoader';
 import { InterfaceMeta, interfaceRegistry } from '@/interfaceRegistry';
 
 const modules = import.meta.glob<InterfaceMeta | undefined>('./middleware/interface/*.meta.ts', {
@@ -7,25 +8,12 @@ const modules = import.meta.glob<InterfaceMeta | undefined>('./middleware/interf
 let discoveryPromise: Promise<void> | null = null;
 
 async function loadInterfaceMetadata() {
-  const entries = Object.entries(modules);
-
-  const settled = await Promise.allSettled(
-    entries.map(([path, loadMeta]) =>
-      loadMeta()
-        .then((meta) => ({ path, meta }))
-        .catch((error) => ({ path, meta: undefined, error }))
-    ),
-  );
+  const items = await loadGlobEntries<InterfaceMeta | undefined>(modules);
 
   const metas: Array<InterfaceMeta> = [];
 
-  for (const item of settled) {
-    if (item.status === 'rejected') {
-      console.warn('Failed to load interface module during discovery', item.reason);
-      continue;
-    }
-
-    const { path, meta, error } = item.value as { path: string; meta?: InterfaceMeta; error?: any };
+  for (const item of items) {
+    const { path, value: meta, error } = item as { path: string; value?: InterfaceMeta; error?: any };
 
     if (error) {
       console.warn(`${path} failed to load meta:`, error);

@@ -1,3 +1,4 @@
+import { loadGlobEntries } from '@/discovery/globLoader';
 import { ToolMeta, toolRegistry } from '@/toolRegistry';
 
 const modules = import.meta.glob<ToolMeta | undefined>(['./middleware/tools/**/*.meta.ts', './middleware/base/**/*.meta.ts'], {
@@ -52,28 +53,15 @@ function isValidToolMeta(path: string, meta: ToolMeta) {
 }
 
 async function loadToolMetadata() {
-  const entries = Object.entries(modules);
-
-  const settled = await Promise.allSettled(
-    entries.map(([path, loadMeta]) =>
-      loadMeta()
-        .then((meta) => ({ path, meta }))
-        .catch((error) => ({ path, meta: undefined, error }))
-    ),
-  );
+  const items = await loadGlobEntries<ToolMeta | undefined>(modules);
 
   const metas: ToolMeta[] = [];
 
-  for (const item of settled) {
-    if (item.status === 'rejected') {
-      console.warn('Failed to load module during discovery', item.reason);
-      continue;
-    }
-
-    const { path, meta, error } = item.value as { path: string; meta?: ToolMeta; error?: any };
+  for (const item of items) {
+    const { path, value: meta, error } = item as { path: string; value?: ToolMeta; error?: any };
 
     if (error) {
-      console.warn(`${path} failed to load meta:`, error);
+      console.warn('Failed to load module during discovery', error);
       continue;
     }
 
@@ -117,20 +105,8 @@ export function ensureToolDiscovery() {
   return discoveryPromise;
 }
 
-export function warmToolDiscovery() {
-  void ensureToolDiscovery().catch((error) => {
-    console.warn('Tool discovery warmup failed', error);
-  });
-}
-
 export async function ensureToolGroupPreload(group: string) {
   await ensureToolDiscovery();
   const metas = toolRegistry.tool(group);
   await toolRegistry.preloadAll(metas);
-}
-
-export function warmToolGroup(group: string) {
-  void ensureToolGroupPreload(group).catch((error) => {
-    console.warn(`Tool group warmup failed for '${group}'`, error);
-  });
 }

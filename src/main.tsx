@@ -1,8 +1,6 @@
 import AppRoutes from '@/components/AppRoutes';
 import { setSettingsStore } from '@/context/settingsStore';
 import '@/lib/i18n';
-import { warmThemeDiscovery } from '@/themeDiscovery';
-import { warmToolDiscovery, warmToolGroup } from '@/toolDiscovery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -23,20 +21,6 @@ export const debug = true
 declare global {
   interface Window {
     __ROOT__?: Root;
-  }
-}
-
-const warmTool = () => {
-  warmToolDiscovery();
-  warmToolGroup('header');
-  warmThemeDiscovery();
-};
-
-if (typeof window !== 'undefined') {
-  if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(warmTool, { timeout: 250 });
-  } else {
-    globalThis.setTimeout(warmTool, 0);
   }
 }
 

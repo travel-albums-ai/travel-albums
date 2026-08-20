@@ -1,3 +1,4 @@
+import { loadGlobEntries } from '@/discovery/globLoader';
 import { ThemeMeta, themeRegistry } from '@/themeRegistry';
 
 const modules = import.meta.glob<Record<string, any>>(['./themes/**/*.theme.ts', './themes/*.theme.ts']);
@@ -11,25 +12,12 @@ function basenameFromPath(path: string) {
 }
 
 async function loadThemeModules() {
-  const entries = Object.entries(modules);
-
-  const settled = await Promise.allSettled(
-    entries.map(([path, loader]) =>
-      loader()
-        .then((mod) => ({ path, mod }))
-        .catch((error) => ({ path, mod: undefined, error }))
-    ),
-  );
+  const items = await loadGlobEntries<Record<string, any>>(modules);
 
   const metas: ThemeMeta[] = [];
 
-  for (const item of settled) {
-    if (item.status === 'rejected') {
-      console.warn('Failed to load theme module during discovery', item.reason);
-      continue;
-    }
-
-    const { path, mod, error } = item.value as { path: string; mod?: Record<string, any>; error?: any };
+  for (const item of items) {
+    const { path, value: mod, error } = item as { path: string; value?: Record<string, any>; error?: any };
 
     if (error) {
       console.warn(`${path} failed to load theme:`, error);
@@ -73,10 +61,4 @@ export function ensureThemeDiscovery() {
   });
 
   return discoveryPromise;
-}
-
-export function warmThemeDiscovery() {
-  void ensureThemeDiscovery().catch((error) => {
-    console.warn('Theme discovery warmup failed', error);
-  });
 }

@@ -1,3 +1,4 @@
+import { loadGlobEntries } from '@/discovery/globLoader';
 import { WindowMeta, windowRegistry } from '@/windowRegistry';
 
 const modules = import.meta.glob<WindowMeta | undefined>('./middleware/windows/*.meta.ts', {
@@ -7,25 +8,12 @@ const modules = import.meta.glob<WindowMeta | undefined>('./middleware/windows/*
 let discoveryPromise: Promise<void> | null = null;
 
 async function loadWindowMetadata() {
-  const entries = Object.entries(modules);
-
-  const settled = await Promise.allSettled(
-    entries.map(([path, loadMeta]) =>
-      loadMeta()
-        .then((meta) => ({ path, meta }))
-        .catch((error) => ({ path, meta: undefined, error }))
-    ),
-  );
+  const items = await loadGlobEntries<WindowMeta | undefined>(modules);
 
   const metas: Array<WindowMeta> = [];
 
-  for (const item of settled) {
-    if (item.status === 'rejected') {
-      console.warn('Failed to load window module during discovery', item.reason);
-      continue;
-    }
-
-    const { path, meta, error } = item.value as { path: string; meta?: WindowMeta; error?: any };
+  for (const item of items) {
+    const { path, value: meta, error } = item as { path: string; value?: WindowMeta; error?: any };
 
     if (error) {
       console.warn(`${path} failed to load meta:`, error);
