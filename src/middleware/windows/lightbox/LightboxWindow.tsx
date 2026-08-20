@@ -139,7 +139,7 @@ export default function LightboxWindow() {
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 1, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative' }}>
+        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 0, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative' }}>
           <LightboxBackground photo={currentPhoto} />
           <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
             <Box sx={{ flex: 1, minHeight: 0, m: 1, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center', justifyContent: 'center', }}>

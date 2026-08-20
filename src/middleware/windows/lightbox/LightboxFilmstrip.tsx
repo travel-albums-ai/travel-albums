@@ -31,7 +31,8 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
           cursor: 'pointer',
 
           opacity: active ? 1 : 0.65,
-          border: active ? '2px solid #1976d2' : '2px solid transparent',
+          border: '2px solid',
+          borderColor: active ? 'primary.main' : 'transparent',
 
           transition: 'opacity 120ms ease, border-color 120ms ease, transform 120ms ease',
 
@@ -54,21 +55,6 @@ export default function LightboxFilmstrip({ photos, currentIndex, goTo, width, h
             boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.5)',
           }}
         />
-        {/* <AlbumPhotoCard
-          original={false}
-          photo={photo}
-          naked={true}
-          thumbnailSx={{
-            width: '150px',
-            height: '150px',
-            objectFit: 'contain',
-          }}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
-          }}
-        /> */}
       </Box>
     );
   };
