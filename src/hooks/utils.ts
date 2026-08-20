@@ -25,6 +25,21 @@ export const benchmarkFunction = <T>(fn: () => T, file: string, details?: string
   return result;
 };
 
+export const benchmarkFunctionAsync = async <T>(fn: () => Promise<T>, file: string, details?: string[]): Promise<T> => {
+  if (!debug) {
+    return fn();
+  }
+
+  const t0 = performance.now();
+  const result = await fn();
+  const durationMs = performance.now() - t0;
+
+  benchmarkBuffer.push({ file, durationMs, details });
+  startAutoFlush();
+
+  return result;
+};
+
 const startAutoFlush = () => {
   if (flushTimer !== null) return; // already running
 
@@ -44,7 +59,7 @@ export const flushBenchmarks = (label = "✨ Benchmarks") => {
       'color: inherit;',
       'color: #eaf63b; font-weight: 600;', // blue label
       'color: inherit;',
-      'color: #464c9b; font-weight: 700;',  // red time
+      'color: #6970d1; font-weight: 700;',  // red time
       'color: inherit;',
     );
   }
