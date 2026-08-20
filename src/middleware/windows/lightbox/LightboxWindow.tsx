@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -7,21 +7,17 @@ import LightboxFilmstrip from './LightboxFilmstrip';
 import LightboxViewer from './LightboxViewer';
 
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
-import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
-import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import PhotoExifComplete from '@/components/PhotoExifComplete';
-import PhotoExifDetails from '@/components/PhotoExifDetails';
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import countriesJSON from '@/data/countries.json';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
 import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
-import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
-import { Building2, Camera, ChevronLeft, ChevronRight, ExternalLink, Map, Pin } from 'lucide-react';
+import EXIFSection from '@/middleware/windows/lightbox/EXIFSection';
+import LocationSection from '@/middleware/windows/lightbox/LocationSection';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
@@ -142,65 +138,31 @@ export default function LightboxWindow() {
   return (
     <>
 
-      <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1, width: '100%' }}>
-        <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
-
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}>
-          <LightboxFilmstrip photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
-        </Box>
-
-        <ControlButton tooltip="Next photo" onClick={() => next()} icon={<ChevronRight size={20} />} disabled={currentIndex === photos.length - 1} />
-      </Box>
-
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-        <Box sx={{ flex: 1, minHeight: 0, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center' }}>
-          <LightboxViewer photo={currentPhoto} />
-        </Box>
 
+
+        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 1, minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
+          <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1 }}>
+            <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
+
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}>
+              <LightboxFilmstrip photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
+            </Box>
+
+            <ControlButton tooltip="Next photo" onClick={() => next()} icon={<ChevronRight size={20} />} disabled={currentIndex === photos.length - 1} />
+          </Box>
+
+          <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
+            <Box sx={{ flex: 1, minHeight: 0, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center' }}>
+              <LightboxViewer photo={currentPhoto} />
+            </Box>
+          </Box>
+
+        </Box>
         {currentPhoto && <Box key={currentPhoto.id} sx={{ flex: '0 0 480px', minHeight: 0, minWidth: 0 }}>
 
-          <SettingsSection title="Location" icon={<Pin />} gap={1} divider={false}>
-            <AlbumMapPanel photos={[currentPhoto]} />
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
-              <Stack divider={<Divider orientation="vertical" flexItem />} direction="row" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
-                <div className={`fflag fflag-${currentPhoto.city.country}`} style={{ width: 16, height: 16, borderRadius: 10 }} />
-
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1}}>
-                  <Building2 size={16} />
-                  <Typography color="textPrimary" variant="subtitle2">{currentPhoto.city.name}</Typography>
-                </Box>
-
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, opacity: 0.7 }}>
-                  <Map size={16} />
-                  <Typography color="textPrimary" variant="subtitle2">
-                    {countriesJSON.data.countries.find(country => country.country === currentPhoto.city.country)?.countryName}
-                  </Typography>
-                </Box>
-              </Stack>
-
-              <GenericToggleButtonGroup
-                variant="standard"
-                items={[
-                  {
-                    tooltip: "Open in Google Maps",
-                    icon:  <ExternalLink />,
-                    onClick: () => window.open(`https://maps.google.com/?q=${currentPhoto.latitude},${currentPhoto.longitude}`, '_blank', 'noreferrer'),
-                    selected: false,
-                  },
-                ] satisfies GenericToggleButtonProps[]}
-              />
-            </Box>
-
-          </SettingsSection>
-
-          <SettingsSection title="EXIF" icon={<Camera />} gap={1} divider={false}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <PhotoExifDetails photo={currentPhoto} />
-              <Box sx={{ height: '350px', overflowY: 'auto', overflowX: 'hidden', p: 1, borderRadius: 2, border: '1px solid', borderColor: 'divider', boxShadow: 2 }}>
-                <PhotoExifComplete photo={currentPhoto} />
-              </Box>
-            </Box>
-          </SettingsSection>
+          <LocationSection photo={currentPhoto} />
+          <EXIFSection photo={currentPhoto} />
 
           <SettingsSection>
             {/* <PhotoExifDetails photo={currentPhoto} /> */}
@@ -208,7 +170,6 @@ export default function LightboxWindow() {
             <DescribePhoto photoId={currentPhoto.id} />
           </SettingsSection>
         </Box>}
-
       </Box>
     </>
   );
