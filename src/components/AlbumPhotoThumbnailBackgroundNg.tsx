@@ -38,6 +38,9 @@ export default function AlbumPhotoThumbnailBackgroundNg({
         setSetting(prev => ({ ...prev, lightboxOpen: true }));
         setPreviewPhotoObj(photo);
       }}
+      onClick={() => {
+        setPreviewPhotoObj(photo);
+      }}
       draggable={false}
       className={className}
       style={{

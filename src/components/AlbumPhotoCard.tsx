@@ -8,7 +8,7 @@ import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useDescriptions } from '@/context/descriptionsStore';
 import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
-import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import DescribePhotoReadOnly from '@/middleware/interface/preview/DescribePhotoReadOnly';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
@@ -125,7 +125,6 @@ function AlbumPhotoCard({
     (state) => state.previewPhotoObj?.id === photo.id,
   );
 
-  const { setPreviewPhotoObj, setFocusedPhoto } = useSettings();
   const { isFavorite } = useFavorites();
 
   const { ref, inView } = useInView();
@@ -139,24 +138,13 @@ function AlbumPhotoCard({
     photo.latitude !== 0 &&
     photo.longitude !== 0;
 
-  const handleMouseEnter = useCallback(
-    (event: MouseEvent<HTMLElement>) => {
-      setIsHovered(true);
-
-      if (hasGps && event.shiftKey) {
-        setFocusedPhoto(photo.id);
-      }
-    },
-    [hasGps, photo.id, setFocusedPhoto],
-  );
+  const handleMouseEnter = useCallback((event: MouseEvent<HTMLElement>) => {
+    setIsHovered(true);
+  }, [hasGps, photo.id]);
 
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false);
   }, []);
-
-  const handleClick = useCallback(() => {
-    setPreviewPhotoObj(photo);
-  }, [photo, setPreviewPhotoObj]);
 
   const thumbnailBorder = useMemo(() => {
     if (selectMode && isSelected) {
@@ -183,7 +171,6 @@ function AlbumPhotoCard({
         component="article"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
         sx={{
           minHeight: height,
           ...cardSx,
