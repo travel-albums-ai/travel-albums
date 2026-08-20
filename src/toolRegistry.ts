@@ -1,41 +1,8 @@
-import { ComponentType } from 'react';
+import { AsyncComponentRegistry } from './discovery/registry';
+import type { ToolMeta } from './discovery/registryTypes';
 
-export interface ToolComponentProps {
-  context?: unknown;
-}
-
-export interface ToolMeta {
-  id: string;
-
-  enabled?: boolean;
-
-  tool?: {
-    id: string;
-    side: 'left' | 'right';
-    priority?: number;
-    visible?: (_context: unknown) => boolean;
-  }[];
-
-  loader: () => Promise<{
-    default: ComponentType<ToolComponentProps>;
-  }>;
-}
-
-class ToolRegistry {
-  private items = new Map<string, ToolMeta>();
-
-  private componentCache = new WeakMap<
-    ToolMeta['loader'],
-    ComponentType<ToolComponentProps>
-  >();
-
-  private preloadCache = new WeakMap<
-    ToolMeta['loader'],
-    Promise<ComponentType<ToolComponentProps>>
-  >();
-
+class ToolRegistry extends AsyncComponentRegistry<ToolMeta> {
   private groupCache = new Map<string, ToolMeta[]>();
-
   private groupSideCache = new Map<string, ToolMeta[]>();
 
   private sidePriority(meta: ToolMeta, side: 'left' | 'right') {
@@ -43,24 +10,21 @@ class ToolRegistry {
   }
 
   register(meta: ToolMeta) {
-    const existing = this.items.get(meta.id);
+    const existing = this.get(meta.id);
 
     if (existing && existing.loader !== meta.loader) {
+
       console.warn(`Duplicate tool meta id '${meta.id}' detected. Skipping registration.`);
       return;
     }
 
-    this.items.set(meta.id, meta);
+    super.register(meta);
     this.groupCache.clear();
     this.groupSideCache.clear();
   }
 
-  hasItems() {
-    return this.items.size > 0;
-  }
-
   all() {
-    return [...this.items.values()];
+    return super.all();
   }
 
   tool(group: string) {
@@ -70,9 +34,7 @@ class ToolRegistry {
       return cached;
     }
 
-    const items = this.all().filter((x) =>
-      x.tool?.some((g) => g.id === group)
-    );
+    const items = this.all().filter((x) => x.tool?.some((g) => g.id === group));
 
     this.groupCache.set(group, items);
     return items;
@@ -92,40 +54,6 @@ class ToolRegistry {
 
     this.groupSideCache.set(cacheKey, items);
     return items;
-  }
-
-  async preload(meta: ToolMeta) {
-    const cached = this.componentCache.get(meta.loader);
-
-    if (cached) {
-      return cached;
-    }
-
-    const inFlight = this.preloadCache.get(meta.loader);
-
-    if (inFlight) {
-      return inFlight;
-    }
-
-    const loading = meta.loader()
-      .then((mod) => {
-        this.componentCache.set(meta.loader, mod.default);
-        return mod.default;
-      })
-      .finally(() => {
-        this.preloadCache.delete(meta.loader);
-      });
-
-    this.preloadCache.set(meta.loader, loading);
-    return loading;
-  }
-
-  preloadAll(metas: ToolMeta[]) {
-    return Promise.all(metas.map((meta) => this.preload(meta)));
-  }
-
-  resolve(meta: ToolMeta) {
-    return this.componentCache.get(meta.loader) ?? null;
   }
 }
 
