@@ -28,7 +28,6 @@ export default function NoServerWindow() {
         <Typography variant="body1" align="center" sx={{ px: 4 }} color="textSecondary">
           {t('noServerConnectionBody')}
         </Typography>
-
       </Box>
     </Dialog>
   </>)
