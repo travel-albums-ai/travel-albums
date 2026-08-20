@@ -20,7 +20,7 @@ export default function BYOKPopover() {
   const { t } = useTranslation()
 
   return <>
-    <SettingsSection title="Bring Your Own Key (BYOK)" icon={<Key />}>
+    <SettingsSection title="Bring Your Own Key (BYOK)" icon={<Key />} transparent={true}>
       {toggleControls
         .map((control) => (
           <Fragment key={control.key}>

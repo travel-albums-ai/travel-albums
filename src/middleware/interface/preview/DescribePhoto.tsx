@@ -9,6 +9,7 @@ export default function DescribePhoto({ photoId }: { photoId: string }) {
     <Box>
       <TextField
         fullWidth
+        placeholder="Add a description... (or let AI generate one for you)"
         multiline
         minRows={3}
         value={currentDescription}
