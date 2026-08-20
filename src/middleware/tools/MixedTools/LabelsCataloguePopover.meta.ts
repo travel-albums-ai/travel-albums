@@ -1,4 +1,4 @@
-import { ToolMeta } from '@/discovery/toolRegistry';
+import type { ToolMeta } from '@/discovery/registryTypes';
 
 export const meta = {
   id: "labels-catalogue-popover",

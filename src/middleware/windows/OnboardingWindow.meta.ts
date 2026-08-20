@@ -1,7 +1,7 @@
-import { WindowMeta } from '@/discovery/windowRegistry';
+import { WindowMeta } from '@/discovery/registryTypes';
 
 export const meta = {
   id: 'onboarding',
   loader: () => import('@/middleware/windows/OnboardingWindow'),
-  enabled: true 
+  enabled: true
 } as WindowMeta;

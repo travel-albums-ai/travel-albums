@@ -1,7 +1,7 @@
-import { WindowMeta } from '@/discovery/windowRegistry';
+import { WindowMeta } from '@/discovery/registryTypes';
 
 export const meta = {
   id: 'settings',
   loader: () => import('@/middleware/windows/SettingsWindow'),
-  enabled: true 
+  enabled: true
 } as WindowMeta;

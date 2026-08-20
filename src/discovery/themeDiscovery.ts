@@ -1,6 +1,7 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
+import type { ThemeMeta } from '@/discovery/registryTypes';
+import { themeRegistry } from '@/discovery/themeRegistry';
 import { processLoadedEntries } from '@/discovery/utils';
-import { ThemeMeta, themeRegistry } from '@/discovery/themeRegistry';
 
 const modules = import.meta.glob<Record<string, any>>(['../themes/**/*.theme.ts', '../themes/*.theme.ts']);
 

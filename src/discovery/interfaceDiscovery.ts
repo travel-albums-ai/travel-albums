@@ -1,6 +1,7 @@
 import { loadGlobEntries } from '@/discovery/globLoader';
+import { interfaceRegistry } from '@/discovery/interfaceRegistry';
+import { InterfaceMeta } from '@/discovery/registryTypes';
 import { processLoadedEntries } from '@/discovery/utils';
-import { InterfaceMeta, interfaceRegistry } from '@/discovery/interfaceRegistry';
 
 const modules = import.meta.glob<InterfaceMeta | undefined>('../middleware/interface/*.meta.ts', {
   import: 'meta',
