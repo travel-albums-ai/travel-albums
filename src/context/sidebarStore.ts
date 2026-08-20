@@ -1,27 +1,8 @@
 import { SectionType } from '@/hooks/sections/sectionTypes';
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 
-const sidebarSections = [
-  SectionType.PeopleAndPets,
-  SectionType.Cities,
-  SectionType.NowAndThen,
-  SectionType.Folders,
-  'trips',
-  'places',
-  SectionType.Views,
-  SectionType.Timeline,
-  SectionType.Likes,
-  SectionType.Comments,
-  SectionType.Favorites,
-  SectionType.Ignored,
-  SectionType.Private,
-  SectionType.Selected,
-  SectionType.Countries,
-  SectionType.Tags,
-  SectionType.Labels,
-] as const;
-
-type SidebarSection = typeof sidebarSections[number];
+const sidebarSections = Object.values(SectionType) as SectionType[];
+type SidebarSection = SectionType;
 
 type SidebarStore = {
   sortBy: 'name' | 'count' | 'original';
