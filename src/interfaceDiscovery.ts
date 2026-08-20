@@ -13,6 +13,11 @@ async function loadInterfaceMetadata() {
 
   return await processLoadedEntries<InterfaceMeta | undefined, InterfaceMeta>(items, {
     validate: (path, meta) => {
+      if (!meta) {
+        console.warn(`${path} does not export 'meta'`);
+        return null;
+      }
+
       if (typeof meta.id !== 'string' || meta.id.length === 0) {
         console.warn(`${path} has invalid interface meta id`);
         return null;
