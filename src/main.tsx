@@ -16,7 +16,7 @@ import './freakflags.css';
 import './index.css';
 
 const queryClient = new QueryClient()
-export const debug = true
+export const debug = process.env.NODE_ENV === 'development' || process.env.DEBUG === 'true'
 
 declare global {
   interface Window {
