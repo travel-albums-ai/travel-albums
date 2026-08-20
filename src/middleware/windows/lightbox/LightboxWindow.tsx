@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import LightboxViewer from './LightboxViewer';
@@ -80,6 +80,7 @@ export default function LightboxWindow() {
     if (photo) setPreviewPhotoObj(photo);
   }, [photos, setPreviewPhotoObj]);
 
+
   const previous = useCallback(() => {
     setCurrentIndex(index => {
       const nextIndex = Math.max(0, index - 1);
@@ -97,6 +98,38 @@ export default function LightboxWindow() {
       return nextIndex;
     });
   }, [photos, setPreviewPhotoObj]);
+
+  const lastWheelRef = useRef(0);
+  const viewerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleWheel = useCallback((e: any) => {
+    if (!showWindow) return;
+
+    const delta = e.deltaY;
+    if (Math.abs(delta) < 10) return;
+
+    const now = Date.now();
+    // throttle wheel navigation to once per 300ms
+    if (now - lastWheelRef.current < 150) return;
+    lastWheelRef.current = now;
+
+    e.preventDefault();
+    if (delta > 0) {
+      next();
+    } else {
+      previous();
+    }
+  }, [showWindow, next, previous]);
+
+  useEffect(() => {
+    if (!showWindow) return;
+    const el = viewerRef.current;
+    if (!el) return;
+
+    const fn = (ev: WheelEvent) => handleWheel(ev as any);
+    el.addEventListener('wheel', fn, { passive: false });
+    return () => el.removeEventListener('wheel', fn);
+  }, [showWindow, handleWheel]);
 
   useEffect(() => {
     if (!showWindow) return;
@@ -145,7 +178,10 @@ export default function LightboxWindow() {
         <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 0, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
 
           <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-            <Box sx={{ flex: 1, minHeight: 0, m: 2, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center', justifyContent: 'center', }}>
+            <Box
+              ref={viewerRef}
+              sx={{ flex: 1, minHeight: 0, m: 2, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center', justifyContent: 'center', }}
+            >
               <LightboxViewer photo={currentPhoto} />
             </Box>
           </Box>
