@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -7,17 +7,20 @@ import LightboxFilmstrip from './LightboxFilmstrip';
 import LightboxViewer from './LightboxViewer';
 
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import PhotoExifDetails from '@/components/PhotoExifDetails';
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import countriesJSON from '@/data/countries.json';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
 import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
-import { ChevronLeft, ChevronRight, Pin } from 'lucide-react';
+import { Building2, ChevronLeft, ChevronRight, ExternalLink, Map, Pin } from 'lucide-react';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
@@ -156,16 +159,35 @@ export default function LightboxWindow() {
         {currentPhoto && <Box key={currentPhoto.id} sx={{ flex: '0 0 480px', minHeight: 0, minWidth: 0 }}>
           <SettingsSection title="Location" icon={<Pin />} gap={1} divider={false}>
             <AlbumMapPanel photos={[currentPhoto]} />
-            {currentPhoto.city.name}
-            <a
-              href={`https://maps.google.com/?q=${currentPhoto.latitude},${currentPhoto.longitude}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button variant="outlined" fullWidth color="primary" size="small" >
-              🗺️ Google Maps
-              </Button>
-            </a>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
+              <Stack divider={<Divider orientation="vertical" flexItem />} direction="row" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
+                <div className={`fflag fflag-${currentPhoto.city.country}`} style={{ width: 16, height: 16, borderRadius: 10 }} />
+
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1}}>
+                  <Building2 size={16} />
+                  <Typography color="textPrimary" variant="subtitle2">{currentPhoto.city.name}</Typography>
+                </Box>
+
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, opacity: 0.7 }}>
+                  <Map size={16} />
+                  <Typography color="textPrimary" variant="subtitle2">
+                    {countriesJSON.data.countries.find(country => country.country === currentPhoto.city.country)?.countryName}
+                  </Typography>
+                </Box>
+              </Stack>
+
+              <GenericToggleButtonGroup
+                variant="standard"
+                items={[
+                  {
+                    tooltip: "Open in Google Maps",
+                    icon:  <ExternalLink />,
+                    onClick: () => window.open(`https://maps.google.com/?q=${currentPhoto.latitude},${currentPhoto.longitude}`, '_blank', 'noreferrer'),
+                    selected: false,
+                  },
+                ] satisfies GenericToggleButtonProps[]}
+              />
+            </Box>
 
           </SettingsSection>
           <SettingsSection>
