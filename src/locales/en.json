@@ -1,4 +1,21 @@
 {
+
+  "peopleAndPets": "People & Pets",
+  "cities": "Cities",
+  "nowAndThen": "Now & Then",
+  "folders": "Folders",
+  "views": "Viewed",
+  "timeline": "Timeline",
+  "likes": "Most Liked",
+  "comments": "Most Commented",
+  "favorites": "Favorites",
+  "countries": "Countries",
+  "ignored": "Ignored",
+  "private": "Private",
+  "selected": "Selected",
+  "tags": "Tags",
+  "labels": "Labels",
+
   "loading": "Loading…",
   "sampleFormat": "Sample format: Sample C:\\Users\\person\\Photos",
   "settings": "Settings",
@@ -7,7 +24,6 @@
   "indexer": "Indexer",
   "sections": "Sections",
   "demo": "Demo",
-  "tags": "Tags",
   "filterPhotosGuidance": "Configure your default filters for the library",
 
   "_comment_settings": "Settings page",

@@ -22,21 +22,3 @@ export const sectionIcons: Record<string, React.ReactElement> = {
   'tags': <Tag size={16} />,
   'labels': <Bookmark size={16} />
 }
-
-export const sectionTitles: Record<string, string> = {
-  'peopleAndPets': "People & Pets",
-  'cities': "Cities",
-  'nowAndThen': "Now & Then",
-  'folders': "Folders",
-  'views': "Viewed",
-  'timeline': "Timeline",
-  'likes': "Most Liked",
-  'comments': "Most Commented",
-  'favorites': "Favorites",
-  'countries': "Countries",
-  'ignored': "Ignored",
-  'private': "Private",
-  'selected': "Selected",
-  'tags': "Tags",
-  'labels': "Labels"
-}

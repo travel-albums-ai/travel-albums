@@ -255,7 +255,7 @@ function AlbumPhotoCard({
 
               {showTags && <AlbumPhotoCardTags photo={photo} />}
 
-              {showDescription && hasDescription(photo.id) && (
+              {showDescription && !isHovered && hasDescription(photo.id) && (
                 <DescribePhotoReadOnly
                   photoId={photo.id}
                   className="album-photo-description"

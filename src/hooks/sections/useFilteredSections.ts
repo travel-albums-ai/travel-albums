@@ -23,7 +23,6 @@ import timelineWorker from '@/hooks/sections/workers/timeline.worker';
 import { benchmarkFunction } from '@/hooks/utils';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export interface SectionCover {
   title: string,
@@ -32,7 +31,6 @@ export interface SectionCover {
 
 export interface Section {
   type: string,
-  title: string,
   data: any,
   preview?: boolean,
   secondary?: boolean,
@@ -41,8 +39,6 @@ export interface Section {
 }
 
 export function useFilteredSections(forced = false): Section[] {
-  const { t } = useTranslation()
-
   const photos = useFilteredPhotos_GLOBAL();
   const rawPhotos = useUnfilteredPhotos_GLOBAL();
   const photosGps = useFilteredGpsPhotos_GLOBAL();
@@ -65,8 +61,8 @@ export function useFilteredSections(forced = false): Section[] {
   const nowAndThenData = useMemo(() => (hasData && modules.nowAndThen && sidebarOpen.nowAndThen) ? nowAndThenWorker(photos) : [], [hasData, modules.nowAndThen, photos, sidebarOpen.nowAndThen]);
   const foldersData = useMemo(() => (hasData && modules.folders && sidebarOpen.folders) ? albumsWorker(photos, sortOrder) : [], [hasData, modules.folders, photos, sortOrder, sidebarOpen.folders]);
   const citiesData = useMemo(() => (hasData && modules.cities && (forced || sidebarOpen.cities)) ? citiesWorker(photosGps) : [], [hasData, modules.cities, photosGps, forced, sidebarOpen.cities]);
-  const countriesData = useMemo(() => (hasData && modules.countries && (forced || sidebarOpen.countries)) ? countriesWorker(photosGps) : [], [hasData, modules.countries, photosGps, sidebarOpen.countries]);
-  const viewedData = useMemo(() => (hasData && modules.views && (forced || sidebarOpen.views)) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.views]);
+  const countriesData = useMemo(() => (hasData && modules.countries && (forced || sidebarOpen.countries)) ? countriesWorker(photosGps) : [], [hasData, modules.countries, photosGps, sidebarOpen.countries, forced]);
+  const viewedData = useMemo(() => (hasData && modules.views && (forced || sidebarOpen.views)) ? workerFilterByKey(photos, 'views') : [], [hasData, modules.views, photos, sidebarOpen.views, forced]);
   const timelineData = useMemo(() => (hasData && modules.timeline && sidebarOpen.timeline) ? timelineWorker(photos) : [], [hasData, modules.timeline, photos, sidebarOpen.timeline]);
   const mostLikedData = useMemo(() => (hasData && modules.likes && (forced || sidebarOpen.likes)) ? workerFilterByKey(photos, 'likes') : [], [hasData, modules.likes, photos, forced, sidebarOpen.likes]);
   const mostCommentedData = useMemo(() => (hasData && modules.comments && (forced || sidebarOpen.comments)) ? workerFilterByKey(photos, 'comments') : [], [hasData, modules.comments, photos, forced, sidebarOpen.comments]);
@@ -81,25 +77,24 @@ export function useFilteredSections(forced = false): Section[] {
     if (!hasData) return [];
 
     return benchmarkFunction(() => ([
-      { type: 'peopleAndPets', title: t('sectionPeopleAndPets'), data: peopleAndPetsData, preview: true },
-      { type: 'nowAndThen', title: t('sectionNowAndThen'), data: nowAndThenData },
-      { type: 'folders', title: t('sectionFolders'), data: foldersData },
-      { type: 'cities', title: t('sectionCities'), preview: true, data: citiesData },
-      { type: 'countries', title: t('sectionCountries'), preview: true, data: countriesData },
-      { type: 'views', title: t('sectionViews'), data: viewedData },
-      { type: 'timeline', title: t('sectionTimeline'), data: timelineData },
-      { type: 'likes', title: t('sectionLikes'), data: mostLikedData },
-      { type: 'comments', title: t('sectionComments'), data: mostCommentedData },
-      { type: 'favorites', title: t('sectionFavorites'), data: favoritesData },
-      { type: 'tags', title: t('sectionTags'), data: tagsData, preview: true },
-      { type: 'labels', title: t('sectionLabels'), data: labelsData },
-      { type: 'ignored', title: t('sectionIgnored'), data: ignoredData },
-      { type: 'private', title: t('sectionPrivate'), data: privateData },
-      { type: 'selected', title: t('sectionSelected'), data: selectedData },
+      { type: 'peopleAndPets', data: peopleAndPetsData, preview: true },
+      { type: 'nowAndThen', data: nowAndThenData },
+      { type: 'folders', data: foldersData },
+      { type: 'cities', preview: true, data: citiesData },
+      { type: 'countries', preview: true, data: countriesData },
+      { type: 'views', data: viewedData },
+      { type: 'timeline', data: timelineData },
+      { type: 'likes', data: mostLikedData },
+      { type: 'comments', data: mostCommentedData },
+      { type: 'favorites', data: favoritesData },
+      { type: 'tags', data: tagsData, preview: true },
+      { type: 'labels', data: labelsData },
+      { type: 'ignored', data: ignoredData },
+      { type: 'private', data: privateData },
+      { type: 'selected', data: selectedData },
     ] satisfies Section[]), 'useFilteredSections', [`${photos?.length ?? 0} photos`]);
   }, [
-    hasData, t,
-    peopleAndPetsData, nowAndThenData, foldersData, citiesData,
+    hasData, peopleAndPetsData, nowAndThenData, foldersData, citiesData,
     countriesData, viewedData, timelineData, mostLikedData, mostCommentedData,
     favoritesData, tagsData, labelsData, ignoredData, privateData, selectedData,
     photos,

@@ -1,12 +1,14 @@
-import { routeIcons, sectionIcons, sectionTitles } from '@/icons/IconsIndex';
+import { routeIcons, sectionIcons } from '@/icons/IconsIndex';
 import { getRouteDetailsByPath } from '@/routes';
 import { Box, Breadcrumbs, Link, Theme, Typography } from '@mui/material';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 
 export default function BreadcrumbsTool({ asIs = false }: { asIs?: boolean }) {
   const { pathname } = useLocation()
   const { type_name = '', id = '' } = useParams()
+  const { t } = useTranslation()
 
   const routeDetails = useMemo(
     () => getRouteDetailsByPath(pathname),
@@ -16,7 +18,7 @@ export default function BreadcrumbsTool({ asIs = false }: { asIs?: boolean }) {
   const breadcrumbTitle = routeDetails?.title ?? 'Page'
   const breadcrumbIcon = routeIcons[routeDetails?.path ?? '']
 
-  const foundSection = sectionTitles[type_name]
+  const foundSection = t(type_name) || type_name
   const foundSectionIcon = sectionIcons[type_name]
 
   return (

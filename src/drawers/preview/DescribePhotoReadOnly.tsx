@@ -6,7 +6,7 @@ export default function DescribePhotoReadOnly({ photoId, className, sx }: { phot
   const { getDescription } = useDescriptions()
 
   return <Box className={className} sx={{...sx, display: 'flex', alignItems: 'center', gap: 1 }}>
-    <Astroid size={12} />
+    <Astroid size={12} style={{ width: '22px'}} />
     <Typography variant="caption" color="textSecondary">
       {getDescription(photoId)}
     </Typography>

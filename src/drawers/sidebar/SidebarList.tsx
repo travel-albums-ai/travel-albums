@@ -11,6 +11,7 @@ import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarSectionHeader from '@/drawers/sidebar/SidebarSectionHeader';
 import SidebarSectionItem from '@/drawers/sidebar/SidebarSectionItem';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type Section = ReturnType<typeof useSections_GLOBAL>[number];
@@ -37,6 +38,7 @@ export default function SidebarList() {
   const navigate = useNavigate();
   const { setSidebarOpen } = useSidebar()
   const location = useLocation();
+  const { t } = useTranslation()
 
   const rows = useMemo<SidebarRow[]>(() => {
     const result: SidebarRow[] = [];
@@ -149,7 +151,7 @@ export default function SidebarList() {
         if (row.type === 'header') {
           return (
             <SidebarSectionHeader
-              title={row.section.title}
+              title={t(row.section.type)}
               icon={icon}
               data={row.section.data}
               type={row.section.type}
