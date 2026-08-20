@@ -151,4 +151,4 @@ export {
   lightTheme as catppuccinLightTheme
 };
 
-export const name = 'Catppuccin';
+export const name = '🐈 Catppuccin';

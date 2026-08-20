@@ -50,4 +50,4 @@ export const darkTheme = generateTheme(themeTokens.dark);
 
 export { darkTheme as barbieDarkTheme, lightTheme as barbieLightTheme };
 
-export const name = 'Barbie';
+export const name = '💖 Barbie';

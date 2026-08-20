@@ -1,10 +1,12 @@
 import { Box, MenuItem, Select, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
+type OptionItem = string | { value: string; label?: string };
+
 type SettingSelectRowProps = {
   label: string;
   value: string;
-  options: string[];
+  options: OptionItem[];
 
   onChange: (newValue: string) => void;
 
@@ -53,11 +55,16 @@ export default function SettingSelectRow({
           </MenuItem>
         )}
 
-        {options.map((opt) => (
-          <MenuItem key={opt} value={opt}>
-            {opt}
-          </MenuItem>
-        ))}
+        {options.map((opt) => {
+          const val = typeof opt === 'string' ? opt : opt.value;
+          const label = typeof opt === 'string' ? opt : (opt.label ?? opt.value);
+
+          return (
+            <MenuItem key={val} value={val}>
+              {label}
+            </MenuItem>
+          );
+        })}
       </Select>
     </Box>
   );

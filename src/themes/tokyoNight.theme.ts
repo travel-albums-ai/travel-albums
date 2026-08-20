@@ -151,4 +151,4 @@ export {
   lightTheme as tokyoNightLightTheme
 };
 
-export const name = 'Tokyo Night';
+export const name = '🌃 Tokyo Night';

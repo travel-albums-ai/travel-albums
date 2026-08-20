@@ -8,6 +8,15 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const groups = [
+
+  {
+    title: "Theme",
+    controls: [
+      { key: 'theme', labelKey: 'layoutTheme', type: 'toolbar', toolbarComponentId: "themeMenu" },
+      { key: 'darkLightStatus', labelKey: 'toggleThemeName', type: 'toolbar', toolbarComponentId: "darkLightStatus" },
+    ],
+    icon: <PaintBucket />,
+  },
   {
     title: "Card",
     controls: [
@@ -31,14 +40,7 @@ const groups = [
     ],
     icon: <GalleryHorizontal />,
   },
-  {
-    title: "Theme",
-    controls: [
-      { key: 'theme', labelKey: 'layoutTheme', type: 'toolbar', toolbarComponentId: "themeMenu" },
-      { key: 'darkLightStatus', labelKey: 'toggleThemeName', type: 'toolbar', toolbarComponentId: "darkLightStatus" },
-    ],
-    icon: <PaintBucket />,
-  }
+
 ]
 
 export default function LayoutPopover() {

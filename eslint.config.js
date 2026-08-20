@@ -90,45 +90,45 @@ export default defineConfig([
       },
     ],
   },
-}
+},
   // base → base only
-  // {
-  //   files: ['src/middleware/base/**'],
-  //   rules: {
-  //     'no-restricted-imports': [
-  //       'error',
-  //       {
-  //         patterns: restrictedMiddlewareImports.base,
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    files: ['src/middleware/base/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: restrictedMiddlewareImports.base,
+        },
+      ],
+    },
+  },
 
   // // windows → windows only
-  // {
-  //   files: ['src/middleware/windows/**'],
-  //   rules: {
-  //     'no-restricted-imports': [
-  //       'error',
-  //       {
-  //         patterns: restrictedMiddlewareImports.windows,
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    files: ['src/middleware/windows/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: restrictedMiddlewareImports.windows,
+        },
+      ],
+    },
+  },
 
   // // tools → tools only
-  // {
-  //   files: ['src/middleware/tools/**'],
-  //   rules: {
-  //     'no-restricted-imports': [
-  //       'error',
-  //       {
-  //         patterns: restrictedMiddlewareImports.tools,
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    files: ['src/middleware/tools/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: restrictedMiddlewareImports.tools,
+        },
+      ],
+    },
+  },
 
   // // Discovery services are the controlled entry points.
   // {

@@ -34,7 +34,12 @@ export function getTheme(name: ThemeName, mode: ThemeMode) {
 
 export const themeNames = () => themeRegistry.all().map((m) => m.id);
 
+export type ThemeOption = { value: string; label: string };
+export const themeOptions = (): ThemeOption[] =>
+  themeRegistry.all().map((m) => ({ value: m.id, label: m.name ?? m.id }));
+
 export default {
   getTheme,
   themeNames,
+  themeOptions,
 };
