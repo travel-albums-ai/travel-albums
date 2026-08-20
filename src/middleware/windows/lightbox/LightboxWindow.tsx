@@ -140,9 +140,10 @@ export default function LightboxWindow() {
 
   return (
     <>
-      <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
-        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 0, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative' }}>
-          <LightboxBackground photo={currentPhoto} />
+      <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1, position: 'relative' }}>
+        <LightboxBackground photo={currentPhoto} />
+        <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 0, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+
           <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
             <Box sx={{ flex: 1, minHeight: 0, m: 1, minWidth: 0, display: 'flex', borderRadius: 2, gap: 2, alignItems: 'center', justifyContent: 'center', }}>
               <LightboxViewer photo={currentPhoto} />
@@ -159,14 +160,12 @@ export default function LightboxWindow() {
           minHeight: 0,
           minWidth: 0,
           overflowY: 'auto',
-          p: 1,
-          px: 1,
-          pl: 1.5,
-          mr: 0.25,
+          p: 2,
+          zIndex: 2,
           borderLeft: '1px solid',
           borderColor: 'divider',
         }}>
-          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, pb: 1, alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
 
             <GenericToggleButtonGroup
               items={[{
@@ -195,7 +194,7 @@ export default function LightboxWindow() {
           <LocationSection photo={currentPhoto} />
           <EXIFSection photo={currentPhoto} />
 
-          <SettingsSection>
+          <SettingsSection transparent={true} gap={1} divider={false}>
             <AlbumsMetaDetails photos={[currentPhoto]} minWidth={25} />
             <DescribePhoto photoId={currentPhoto.id} />
           </SettingsSection>

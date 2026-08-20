@@ -3,14 +3,14 @@ import { cloneElement } from 'react';
 
 export default function SettingsSection({ title, icon, guidance, children, gap = 0.5, divider = true, transparent = false } : { title?: string, icon?: React.ReactNode, guidance?: string, children: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean }) {
 
-  return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, overflow: 'auto' }}>
+  return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, m: 0.25, overflow: 'visible' }}>
     <Box sx={{
-      bgcolor: theme => transparent ? theme.palette.background.paper + '18' : theme.palette.background.paper + 'BD',
+      bgcolor: theme => transparent ? theme.palette.divider : theme.palette.background.paper + 'BD',
       mb: 1,
       border: '1px solid',
       borderColor: theme => transparent ? 'transparent' : theme.palette.divider,
       p: 1,
-      borderRadius: 2,
+      borderRadius: transparent ? 3 : 2,
       transition: 'box-shadow 0.2s ease-in-out',
       boxShadow: theme => transparent ? 2 : 1,
       '&:hover': {
