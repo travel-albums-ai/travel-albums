@@ -1,3 +1,9 @@
+## [1.229.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.228.1...v1.229.0) (2026-08-20)
+
+### ✨ Features
+
+* restructure settings components and enhance IndexerContent layout ([0c59f47](https://github.com/travel-albums-ai/travel-albums/commit/0c59f47c645c4c5d2232be58f41a5ed0dde43184))
+
 ## [1.228.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.228.0...v1.228.1) (2026-08-20)
 
 ### 🐛 Fixes
