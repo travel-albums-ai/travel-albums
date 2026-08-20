@@ -1,3 +1,44 @@
+## [1.227.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.226.0...v1.227.0) (2026-08-20)
+
+### ✨ Features
+
+* enhance SettingsSection with transparent background option and update EXIFSection and LightboxWindow for improved layout ([0a744f7](https://github.com/travel-albums-ai/travel-albums/commit/0a744f72c17af227b3d8ef286d48a76ee120a5bb))
+
+### 🧹 Refactors
+
+* add transparent prop to SettingsSection for customizable background ([b0b5f8f](https://github.com/travel-albums-ai/travel-albums/commit/b0b5f8f90ff4880e762a822fc802cd276ff83dc7))
+* add warning for missing meta exports in interface and window metadata loading ([3410ff7](https://github.com/travel-albums-ai/travel-albums/commit/3410ff779f7f3a16c39f65d668b291f558b3e95d))
+* adjust layout and styling in LightboxViewer and LightboxWindow for improved consistency ([1d18cab](https://github.com/travel-albums-ai/travel-albums/commit/1d18cabaa245aa6fe4fa527ed40ad7207845620d))
+* adjust padding and gap in SettingsSection and LocationSection for improved layout consistency ([45eb110](https://github.com/travel-albums-ai/travel-albums/commit/45eb110ed2fd0d9afb7476070f338a9333609edd))
+* consolidate registry classes and improve duplicate detection logic ([4575bd1](https://github.com/travel-albums-ai/travel-albums/commit/4575bd186f298e3994c1809c0e2a80bc19e2f472))
+* disable specific ESLint rules and clean up configuration ([4c84539](https://github.com/travel-albums-ai/travel-albums/commit/4c845397f0687f5731409c5421ca7830ffda7089))
+* enhance BYOKPopover with toggle functionality for AI settings and update related components ([0b4378d](https://github.com/travel-albums-ai/travel-albums/commit/0b4378d1b11574c81dfc5d08246233d97f95dd3d))
+* enhance globLoader with benchmarkFunctionAsync for improved performance tracking ([47f1585](https://github.com/travel-albums-ai/travel-albums/commit/47f1585209e9fbd87fea2ccc45326ece58827f2a))
+* enhance LightboxFilmstripNg component with improved thumbnail rendering and interaction ([c5a7388](https://github.com/travel-albums-ai/travel-albums/commit/c5a73881b36c7557313a6a8d9af92c0dac60cec1))
+* enhance LightboxWindow by improving location display and integrating toggle button for Google Maps ([0a72dec](https://github.com/travel-albums-ai/travel-albums/commit/0a72dec393fed829e37385ae5d7aabc78b5e0bfb))
+* enhance LightboxWindow by integrating EXIF and Location sections for improved photo details ([4fac16a](https://github.com/travel-albums-ai/travel-albums/commit/4fac16afa7215baeaddd1b6f60b67f432311aaeb))
+* enhance LightboxWindow by integrating SettingsSection and improving layout structure ([08e12eb](https://github.com/travel-albums-ai/travel-albums/commit/08e12eb09d1909f96cad22626a67fae731169b53))
+* enhance LightboxWindow layout by adding background and improving structure; update LocationSection for cleaner rendering ([acc3529](https://github.com/travel-albums-ai/travel-albums/commit/acc3529132c421bfcacef599e7269b456b707bcf))
+* format meta object properties for consistency across various components ([0f1bba8](https://github.com/travel-albums-ai/travel-albums/commit/0f1bba8c124d98502ab5ec0b650fd0738bbeddf2))
+* implement LightboxFilmstripNg component for enhanced thumbnail display and interaction ([46129e2](https://github.com/travel-albums-ai/travel-albums/commit/46129e211909a05f81bd997a07024668a9d69bcb))
+* implement loadGlobEntries utility for improved module loading and error handling ([3f7652e](https://github.com/travel-albums-ai/travel-albums/commit/3f7652e151c469c6fd1ee91abda00a855dfb939d))
+* improve layout and styling in PhotoExifComplete and EXIFSection components ([abb6b8e](https://github.com/travel-albums-ai/travel-albums/commit/abb6b8e2c8c18dcb18e0b7c9c6669ca82c68683c))
+* improve LightboxBackground styling by adjusting opacity and border radius for better visual effect ([b0760d9](https://github.com/travel-albums-ai/travel-albums/commit/b0760d9e94abcdb0e287a6f5776dd8db53e4b6e6))
+* introduce processLoadedEntries utility for streamlined metadata processing and validation ([f6de53a](https://github.com/travel-albums-ai/travel-albums/commit/f6de53a93839f1c077aba8040603782d100bd673))
+* move MainDriver component to a new file and restructure tutorial popovers ([08031de](https://github.com/travel-albums-ai/travel-albums/commit/08031dea9ba63bb2e31de071b548952500f72621))
+* optimize component state management and cleanup effects in various components ([348700c](https://github.com/travel-albums-ai/travel-albums/commit/348700cae4ea0d3aea5eab60a37998990ceb1593))
+* remove hasItems method from BaseRegistry and update debug export for consistency ([08fa11b](https://github.com/travel-albums-ai/travel-albums/commit/08fa11bdbbdcad9068ea5be8ed4c03eb8c4efd8f))
+* remove unused color dependency and clean up theme discovery functions ([5290918](https://github.com/travel-albums-ai/travel-albums/commit/5290918eebfca76dbd93671a374a2d81e977c337))
+* restructure onboarding logic and enhance Onboarding component ([abec011](https://github.com/travel-albums-ai/travel-albums/commit/abec0118ee29f94f2eeaee9f88828f8803e1ba6e))
+* simplify withTimeout function and streamline loadGlobEntries logic ([54b85e8](https://github.com/travel-albums-ai/travel-albums/commit/54b85e88a1cd57120489f5bbed86d4527ff00a4e))
+* streamline window components by removing unused code and enhancing structure ([79360e4](https://github.com/travel-albums-ai/travel-albums/commit/79360e4f77c5cbbae6d22b5218d232e095ebd4a0))
+* update debug export to reflect environment settings ([c19ee68](https://github.com/travel-albums-ai/travel-albums/commit/c19ee684c3d5b7691d3acde2e3f6f00a539515b2))
+* update LightboxBackground and LightboxFilmstrip components for improved photo display and layout consistency ([f123867](https://github.com/travel-albums-ai/travel-albums/commit/f123867df3ca6be07478e62f04115f1d43a11010))
+* update LightboxFilmstrip and LightboxWindow components for improved styling and layout consistency ([b622e69](https://github.com/travel-albums-ai/travel-albums/commit/b622e69b84f5adac4c08bb932c6303020876bc85))
+* update LightboxWindow component to improve structure and remove unused Dialog component ([bb489e2](https://github.com/travel-albums-ai/travel-albums/commit/bb489e2d35d89fcc0795bdd82e660d321fa8258c))
+* update LightboxWindow component to integrate GenericToggleButtonGroup for navigation ([128c456](https://github.com/travel-albums-ai/travel-albums/commit/128c456b70f344cb515d9f66a3268be00af42863))
+* update LightboxWindow layout by adjusting dimensions and enhancing EXIF section with detailed photo information ([b622f19](https://github.com/travel-albums-ai/travel-albums/commit/b622f1960afead2dd944576d3021562ea92daebe))
+
 ## [1.226.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.225.0...v1.226.0) (2026-08-20)
 
 ### ✨ Features
