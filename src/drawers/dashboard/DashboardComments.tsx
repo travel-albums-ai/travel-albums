@@ -1,12 +1,13 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box, Typography } from '@mui/material';
 import { MessageCircle } from 'lucide-react';
 
 export default function DashboardComments() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'comments')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.Comments)?.data
 
   return (
     <SettingsSection title="Comments" icon={<MessageCircle />}  >

@@ -2,6 +2,7 @@ import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import DashboardPreviewImages from '@/drawers/dashboard/DashboardPreviewImages';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box, Typography } from '@mui/material';
 import { Globe } from 'lucide-react';
 
@@ -9,7 +10,7 @@ const size = 60;
 
 export default function DashboardCountries() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'countries')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.Countries)?.data
 
   return (
     <SettingsSection title="Countries" icon={<Globe />} guidance={`Total: ${sectionPhotos?.length ?? 0}`} gap={1} divider={false}>

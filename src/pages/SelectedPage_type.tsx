@@ -4,6 +4,7 @@ import SolidChip from '@/components/SolidChip';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import GroupingPreviewItemNg from '@/pages/components/GroupingPreviewItemNg';
 import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -22,17 +23,17 @@ export default function SelectedPage_type() {
     <>
       <GenericPanel id="selected-page-drawer" tool={
         <>
-          {type_name === 'nowAndThen' && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
+          {type_name === SectionType.NowAndThen && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
             <Typography sx={{ fontStyle: 'italic' }} variant="subtitle2" color="textPrimary">{t('nowAndThenTagline')}</Typography>
             <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled">{t('nowAndThenYearsBack', { count: foundSection?.data?.length || 0 })}</Typography>
           </Stack>}
 
-          {type_name === 'timeline' && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
+          {type_name === SectionType.Timeline && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
             <Typography sx={{ fontStyle: 'italic' }} variant="subtitle2" color="textPrimary">{t('timelineTagline')}</Typography>
             <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled">{t('timelineMonthsBack', { count: foundSection?.data?.length || 0 })}</Typography>
           </Stack>}
 
-          {type_name === 'peopleAndPets' && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
+          {type_name === SectionType.PeopleAndPets && <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} divider={<Divider orientation="vertical" flexItem />}>
             <Typography sx={{ fontStyle: 'italic' }} variant="body2" color="textPrimary">{t('peopleTagline')}</Typography>
             <Typography variant="caption" sx={{ lineHeight: 1 }} color="textDisabled">{t('peopleCount', { count: foundSection?.data?.length || 0 })}</Typography>
           </Stack>}

@@ -1,12 +1,13 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box, Typography } from '@mui/material';
 import { Star } from 'lucide-react';
 
 export default function DashboardLikes() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'likes')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.Likes)?.data
 
   return (
     <SettingsSection title="Likes" icon={<Star />} >

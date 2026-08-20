@@ -23,6 +23,7 @@ import timelineWorker from '@/hooks/sections/workers/timeline.worker';
 import { benchmarkFunction } from '@/hooks/utils';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { useMemo } from 'react';
+import { SectionType } from './sectionTypes';
 
 export interface SectionCover {
   title: string,
@@ -30,7 +31,7 @@ export interface SectionCover {
 }
 
 export interface Section {
-  type: string,
+  type: SectionType,
   data: any,
   preview?: boolean,
   secondary?: boolean,
@@ -68,10 +69,10 @@ export function useFilteredSections(forced = false): Section[] {
   const foldersData = useSection(gate(modules.folders && sidebarOpen.folders), () => albumsWorker(photos, sortOrder), [photos, sortOrder]);
   const citiesData = useSection(gate(modules.cities && (forced || sidebarOpen.cities)), () => citiesWorker(photosGps), [photosGps]);
   const countriesData = useSection(gate(modules.countries && (forced || sidebarOpen.countries)), () => countriesWorker(photosGps), [photosGps]);
-  const viewedData = useSection(gate(modules.views && (forced || sidebarOpen.views)), () => workerFilterByKey(photos, 'views'), [photos]);
+  const viewedData = useSection(gate(modules.views && (forced || sidebarOpen.views)), () => workerFilterByKey(photos, SectionType.Views), [photos]);
   const timelineData = useSection(gate(modules.timeline && sidebarOpen.timeline), () => timelineWorker(photos), [photos]);
-  const mostLikedData = useSection(gate(modules.likes && (forced || sidebarOpen.likes)), () => workerFilterByKey(photos, 'likes'), [photos]);
-  const mostCommentedData = useSection(gate(modules.comments && (forced || sidebarOpen.comments)), () => workerFilterByKey(photos, 'comments'), [photos]);
+  const mostLikedData = useSection(gate(modules.likes && (forced || sidebarOpen.likes)), () => workerFilterByKey(photos, SectionType.Likes), [photos]);
+  const mostCommentedData = useSection(gate(modules.comments && (forced || sidebarOpen.comments)), () => workerFilterByKey(photos, SectionType.Comments), [photos]);
   const favoritesData = useSection(gate(modules.favorites && sidebarOpen.favorites), () => grouperWorker(photos, favoritePhotoIds, 'Your favorites'), [photos, favoritePhotoIds]);
   const tagsData = useSection(gate(modules.tags && sidebarOpen.tags), () => tagsWorker(photos, tagsStore), [photos, tagsStore]);
   const labelsData = useSection(gate(modules.labels && sidebarOpen.labels), () => labelsWorker(photos, labelsPrimary), [photos, labelsPrimary]);
@@ -83,21 +84,21 @@ export function useFilteredSections(forced = false): Section[] {
     if (!hasData) return [];
 
     return benchmarkFunction(() => ([
-      { type: 'peopleAndPets', data: peopleAndPetsData, preview: true },
-      { type: 'nowAndThen', data: nowAndThenData },
-      { type: 'folders', data: foldersData },
-      { type: 'cities', preview: true, data: citiesData },
-      { type: 'countries', preview: true, data: countriesData },
-      { type: 'views', data: viewedData },
-      { type: 'timeline', data: timelineData },
-      { type: 'likes', data: mostLikedData },
-      { type: 'comments', data: mostCommentedData },
-      { type: 'favorites', data: favoritesData },
-      { type: 'tags', data: tagsData, preview: true },
-      { type: 'labels', data: labelsData },
-      { type: 'ignored', data: ignoredData },
-      { type: 'private', data: privateData },
-      { type: 'selected', data: selectedData },
+      { type: SectionType.PeopleAndPets, data: peopleAndPetsData, preview: true },
+      { type: SectionType.NowAndThen, data: nowAndThenData },
+      { type: SectionType.Folders, data: foldersData },
+      { type: SectionType.Cities, preview: true, data: citiesData },
+      { type: SectionType.Countries, preview: true, data: countriesData },
+      { type: SectionType.Views, data: viewedData },
+      { type: SectionType.Timeline, data: timelineData },
+      { type: SectionType.Likes, data: mostLikedData },
+      { type: SectionType.Comments, data: mostCommentedData },
+      { type: SectionType.Favorites, data: favoritesData },
+      { type: SectionType.Tags, data: tagsData, preview: true },
+      { type: SectionType.Labels, data: labelsData },
+      { type: SectionType.Ignored, data: ignoredData },
+      { type: SectionType.Private, data: privateData },
+      { type: SectionType.Selected, data: selectedData },
     ] satisfies Section[]), 'useFilteredSections', [`${photos?.length ?? 0} photos`]);
   }, [
     hasData, peopleAndPetsData, nowAndThenData, foldersData, citiesData,

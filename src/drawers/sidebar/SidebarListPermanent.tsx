@@ -6,6 +6,7 @@ import { sectionIcons } from '@/icons/IconsIndex';
 
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarSectionItem from '@/drawers/sidebar/SidebarSectionItem';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 
 type Section = ReturnType<typeof useSections_GLOBAL>[number];
 
@@ -21,7 +22,7 @@ type SidebarRow =
       section: Section;
       item: Section['data'][number];
     };
-const excludedSections = [ 'ignored', 'private', 'selected'];
+const excludedSections = [ SectionType.Ignored, SectionType.Private, SectionType.Selected];
 
 export default function SidebarListPermanent() {
   const sections = useSections_GLOBAL();

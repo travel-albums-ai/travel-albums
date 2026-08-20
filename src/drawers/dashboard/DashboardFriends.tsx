@@ -1,12 +1,13 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box, Typography } from '@mui/material';
 import { PersonStanding } from 'lucide-react';
 
 export default function DashboardFriends() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'peopleAndPets')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.PeopleAndPets)?.data
 
   return (
     <SettingsSection title="Friends" icon={<PersonStanding />} guidance={`${sectionPhotos?.length || 0} friends`} >

@@ -1,6 +1,7 @@
 import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
 import SettingsSection from '@/components/SettingsSection';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { sectionIcons } from '@/icons/IconsIndex';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
@@ -9,20 +10,20 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  { key: 'peopleAndPets', icon: sectionIcons.peopleAndPets, labelKey: 'sectionPeopleAndPets', value: 'show-people-and-pets', type: 'boolean' },
-  { key: 'countries', icon: sectionIcons.countries, labelKey: 'sectionCountries', value: 'show-countries', type: 'boolean' },
-  { key: 'nowAndThen', icon: sectionIcons.nowAndThen, labelKey: 'sectionNowAndThen', value: 'show-now-and-then', type: 'boolean' },
-  { key: 'views', icon: sectionIcons.views, labelKey: 'sectionViews', value: 'show-views', type: 'boolean' },
-  { key: 'likes', icon: sectionIcons.likes, labelKey: 'sectionLikes', value: 'show-likes', type: 'boolean' },
-  { key: 'comments', icon: sectionIcons.comments, labelKey: 'sectionComments', value: 'show-comments', type: 'boolean' },
-  { key: 'favorites', icon: sectionIcons.favorites, labelKey: 'sectionFavorites', value: 'show-favorites', type: 'boolean' },
-  { key: 'timeline', icon: sectionIcons.timeline, labelKey: 'sectionTimeline', value: 'show-timeline', type: 'boolean' },
-  { key: 'ignored', icon: sectionIcons.ignored, labelKey: 'sectionIgnored', value: 'show-ignored', type: 'boolean', disabled: true },
-  { key: 'private', icon: sectionIcons.private, labelKey: 'sectionPrivate', value: 'show-private', type: 'boolean', disabled: true },
-  { key: 'selected', icon: sectionIcons.selected, labelKey: 'sectionSelected', value: 'show-selected', type: 'boolean', disabled: true },
-  { key: 'tags', icon: sectionIcons.tags, labelKey: 'sectionTags', value: 'show-tags', type: 'boolean'},
-  { key: 'labels', icon: sectionIcons.labels, labelKey: 'sectionLabels', value: 'show-labels', type: 'boolean' },
-  { key: 'cities', icon: sectionIcons.cities, labelKey: 'sectionCities', value: 'show-cities', type: 'boolean' },
+  { key: SectionType.PeopleAndPets, icon: sectionIcons[SectionType.PeopleAndPets], labelKey: 'sectionPeopleAndPets', value: 'show-people-and-pets', type: 'boolean' },
+  { key: SectionType.Countries, icon: sectionIcons[SectionType.Countries], labelKey: 'sectionCountries', value: 'show-countries', type: 'boolean' },
+  { key: SectionType.NowAndThen, icon: sectionIcons[SectionType.NowAndThen], labelKey: 'sectionNowAndThen', value: 'show-now-and-then', type: 'boolean' },
+  { key: SectionType.Views, icon: sectionIcons[SectionType.Views], labelKey: 'sectionViews', value: 'show-views', type: 'boolean' },
+  { key: SectionType.Likes, icon: sectionIcons[SectionType.Likes], labelKey: 'sectionLikes', value: 'show-likes', type: 'boolean' },
+  { key: SectionType.Comments, icon: sectionIcons[SectionType.Comments], labelKey: 'sectionComments', value: 'show-comments', type: 'boolean' },
+  { key: SectionType.Favorites, icon: sectionIcons[SectionType.Favorites], labelKey: 'sectionFavorites', value: 'show-favorites', type: 'boolean' },
+  { key: SectionType.Timeline, icon: sectionIcons[SectionType.Timeline], labelKey: 'sectionTimeline', value: 'show-timeline', type: 'boolean' },
+  { key: SectionType.Ignored, icon: sectionIcons[SectionType.Ignored], labelKey: 'sectionIgnored', value: 'show-ignored', type: 'boolean', disabled: true },
+  { key: SectionType.Private, icon: sectionIcons[SectionType.Private], labelKey: 'sectionPrivate', value: 'show-private', type: 'boolean', disabled: true },
+  { key: SectionType.Selected, icon: sectionIcons[SectionType.Selected], labelKey: 'sectionSelected', value: 'show-selected', type: 'boolean', disabled: true },
+  { key: SectionType.Tags, icon: sectionIcons[SectionType.Tags], labelKey: 'sectionTags', value: 'show-tags', type: 'boolean'},
+  { key: SectionType.Labels, icon: sectionIcons[SectionType.Labels], labelKey: 'sectionLabels', value: 'show-labels', type: 'boolean' },
+  { key: SectionType.Cities, icon: sectionIcons[SectionType.Cities], labelKey: 'sectionCities', value: 'show-cities', type: 'boolean' },
 ] as const
 
 const explorerTools = [

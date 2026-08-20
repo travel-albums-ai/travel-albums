@@ -1,23 +1,24 @@
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 
 const sidebarSections = [
-  'peopleAndPets',
-  'cities',
-  'nowAndThen',
-  'folders',
+  SectionType.PeopleAndPets,
+  SectionType.Cities,
+  SectionType.NowAndThen,
+  SectionType.Folders,
   'trips',
   'places',
-  'views',
-  'timeline',
-  'likes',
-  'comments',
-  'favorites',
-  'ignored',
-  'private',
-  'selected',
-  'countries',
-  'tags',
-  'labels',
+  SectionType.Views,
+  SectionType.Timeline,
+  SectionType.Likes,
+  SectionType.Comments,
+  SectionType.Favorites,
+  SectionType.Ignored,
+  SectionType.Private,
+  SectionType.Selected,
+  SectionType.Countries,
+  SectionType.Tags,
+  SectionType.Labels,
 ] as const;
 
 type SidebarSection = typeof sidebarSections[number];

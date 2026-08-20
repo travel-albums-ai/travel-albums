@@ -11,6 +11,7 @@ import WebMCPDataView from '@/components/WebMCPDataView';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarSectionHeader from '@/drawers/sidebar/SidebarSectionHeader';
 import SidebarSectionItem from '@/drawers/sidebar/SidebarSectionItem';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -30,7 +31,7 @@ type SidebarRow =
     };
 
 
-const excludedSections = [ 'ignored', 'private', 'selected'];
+const excludedSections = [ SectionType.Ignored, SectionType.Private, SectionType.Selected];
 export default function SidebarList() {
   const sections = useSections_GLOBAL();
   const sidebarOpen = useSidebarStoreSelector((s) => s.sidebarOpen);

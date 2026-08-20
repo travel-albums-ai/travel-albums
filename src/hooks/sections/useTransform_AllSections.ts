@@ -1,5 +1,6 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { useSidebarStoreSelector } from '@/context/sidebarStore';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { useFilteredSections } from '@/hooks/sections/useFilteredSections';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { useMemo } from 'react';
@@ -10,7 +11,7 @@ export interface SectionCover {
 }
 
 export interface Section {
-  type: string;
+  type: SectionType | string;
   title: string;
   data: any;
   preview?: boolean;

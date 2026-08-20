@@ -1,13 +1,14 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
 import DashboardCitiesItem from '@/drawers/dashboard/DashboardCitiesItem';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box } from '@mui/material';
 import { Globe } from 'lucide-react';
 import { useMemo } from 'react';
 
 export default function DashboardCities() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'cities')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.Cities)?.data
 
   const groupByAvatar = useMemo(() => {
     const groups = new Map<string, typeof sectionPhotos>();

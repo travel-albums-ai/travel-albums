@@ -1,14 +1,12 @@
 import { benchmarkFunction } from '@/hooks/utils';
 import { GalleryPhoto } from '@/lib/galleryData';
-
-type NumericKey = 'views' | 'likes' | 'comments';
 type BucketId = 0 | 1 | 2 | 3;
 
 const BUCKET_NAMES = ['over 100', 'over 50', 'over 10', '10 or less'] as const;
 
 // Monomorphic accessor: chosen once outside the hot loop instead of
 // doing `(photo as any)[keyName]` per element (megamorphic lookup).
-function getAccessor(key: NumericKey): (p: GalleryPhoto) => unknown {
+function getAccessor(key: string): (p: GalleryPhoto) => unknown {
   switch (key) {
     case 'views': return (p) => p.views;
     case 'likes': return (p) => p.likes;
@@ -24,7 +22,7 @@ function bucketOf(value: number): BucketId | -1 {
   return 3;
 }
 
-export default function workerFilterByKey(photos: GalleryPhoto[], key: NumericKey) {
+export default function workerFilterByKey(photos: GalleryPhoto[], key: string) {
   if (!photos?.length) return [];
 
   return benchmarkFunction(

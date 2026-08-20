@@ -1,6 +1,6 @@
 import PopoverButton from '@/components/PopoverButton';
 import SettingsSection from '@/components/SettingsSection';
-import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import FilterPresets from '@/middleware/windows/settings/components/FilterPresets';
 import SettingComponentRow from '@/middleware/windows/settings/components/SettingComponentRow';
 import SettingDateRow from '@/middleware/windows/settings/components/SettingDateRow';
@@ -15,13 +15,13 @@ import PeopleAndPetsFilter from '@/middleware/windows/settings/filters/PeopleAnd
 import { Box } from '@mui/material';
 import { Calendar, Folder, Image, LocateFixed, LocateOff, MessageCircle, ThumbsUp, Users } from 'lucide-react';
 import { Fragment } from 'react';
+import { useFilterPhotos, useFilterStoreSelector } from '@/context/filterStore';
 import { useTranslation } from 'react-i18next';
 
 export default function FilterPhotosPopover({ filter }: { filter?: string }) {
   const { setSetting } = useFilterPhotos()
-  const settings =  useFilterStoreSelector((state) => state)
+  const settings = useFilterStoreSelector((state) => state)
   const { t } = useTranslation()
-
   const categories = [
     { key: 'date', label: t('filterCategoryDate'), icon: <Calendar size={ 16} /> },
     { key: 'people', label: t('filterCategoryPeople'), tile: true, icon: <Users size={ 16} /> },
@@ -35,12 +35,12 @@ export default function FilterPhotosPopover({ filter }: { filter?: string }) {
   const toggleControls = [
     { key: 'showWithWithoutPersons', label: t('filterNarrowByPersons'), value: 'show-without-persons', type: 'trilean', category: 'people', activeIcon: <Users size={16} />, inactiveIcon: <Image size={16} /> },
     { key: 'filterPeopleAndPets', label: t('filterByPeopleAndPets'), value: 'filter-people-and-pets', type: 'boolean', category: 'people' },
-    { key: 'peopleAndPets2', label: t('filterIncludeExcludePeopleAndPets'), value: 'show-without-persons', type: 'component', category: 'people', component: <PopoverButton  triggerNaked={ false} width={450} trigger={<GeneralRow type="peopleAndPets" label={t('filterCategoryPeople')} />}><PeopleAndPetsFilter /></PopoverButton> },
+    { key: 'peopleAndPets2', label: t('filterIncludeExcludePeopleAndPets'), value: 'show-without-persons', type: 'component', category: 'people', component: <PopoverButton  triggerNaked={ false} width={450} trigger={<GeneralRow type={SectionType.PeopleAndPets} label={t('filterCategoryPeople')} />}><PeopleAndPetsFilter /></PopoverButton> },
 
     { key: 'showWithWithoutGps', label: t('filterShowGps'), value: 'show-without-gps', type: 'trilean', category: 'locations', activeIcon: <LocateFixed size={16} />, inactiveIcon: <LocateOff size={16} /> },
     { key: 'filterCountries', label: t('filterByCountries'), value: 'filter-countries', type: 'boolean', category: 'locations' },
     {
-      key: 'countries2', label: t('filterIncludeExcludeCountries'), value: 'countries', type: 'component', category: 'locations', component: <PopoverButton width={550}  triggerNaked={ false} trigger={<GeneralRow type="countries" label={t('sectionCountries')} />}>
+      key: 'countries2', label: t('filterIncludeExcludeCountries'), value: 'countries', type: 'component', category: 'locations', component: <PopoverButton width={550}  triggerNaked={ false} trigger={<GeneralRow type={SectionType.Countries} label={t('sectionCountries')} />}>
         <CountriesFilter />
       </PopoverButton>
     },
@@ -54,7 +54,7 @@ export default function FilterPhotosPopover({ filter }: { filter?: string }) {
     { key: 'filterDates', label: t('filterByDates'), value: 'filter-dates', type: 'boolean', category: 'date' },
 
     { key: 'filterFolders', label: t('filterByFolders'), value: 'filter-folders', type: 'boolean', category: 'folders' },
-    { key: 'folders2', label: t('filterIncludeExcludeFolders'), value: 'folders', type: 'component', category: 'folders', component: <PopoverButton width={450} triggerNaked={ false} trigger={<GeneralRow type="folders" label={t('filterCategoryFolders')} />}><FoldersFilter /></PopoverButton> },
+    { key: 'folders2', label: t('filterIncludeExcludeFolders'), value: 'folders', type: 'component', category: 'folders', component: <PopoverButton width={450} triggerNaked={ false} trigger={<GeneralRow type={SectionType.Folders} label={t('filterCategoryFolders')} />}><FoldersFilter /></PopoverButton> },
 
     { key: 'filterGps', label: t('filterNarrowByGps'), value: 'filter-gps', type: 'boolean', category: 'locations' },
 

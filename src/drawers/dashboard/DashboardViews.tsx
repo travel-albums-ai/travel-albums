@@ -1,12 +1,13 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box, Typography } from '@mui/material';
 import { Eye } from 'lucide-react';
 
 export default function DashboardViews() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'views')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.Views)?.data
 
   return (
     <SettingsSection title="Views" icon={<Eye />} >

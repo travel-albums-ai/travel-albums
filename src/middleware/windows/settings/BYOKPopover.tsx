@@ -1,5 +1,6 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { sectionIcons } from '@/icons/IconsIndex';
 import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
@@ -9,7 +10,7 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  { key: 'byokOpenAIKey', icon: sectionIcons.peopleAndPets, labelKey: 'Open AI', value: 'show-people-and-pets', type: 'field' },
+  { key: 'byokOpenAIKey', icon: sectionIcons[SectionType.PeopleAndPets], labelKey: 'Open AI', value: 'show-people-and-pets', type: 'field' },
 ] as const
 
 export default function BYOKPopover() {

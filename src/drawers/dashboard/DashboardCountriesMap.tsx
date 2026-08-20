@@ -1,5 +1,6 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useSections_GLOBAL_Forced } from '@/context/globals/sectionsStoreForced';
+import { SectionType } from '@/hooks/sections/sectionTypes';
 import { Box } from '@mui/material';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,7 +9,7 @@ import { useEffect, useMemo, useRef } from 'react';
 
 export default function DashboardCountriesMap() {
   const sectionsForced = useSections_GLOBAL_Forced();
-  const sectionPhotos = sectionsForced.find(s => s.type === 'countries')?.data
+  const sectionPhotos = sectionsForced.find(s => s.type === SectionType.Countries)?.data
 
   const mapElementRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
