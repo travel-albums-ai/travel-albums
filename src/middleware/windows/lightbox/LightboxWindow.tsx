@@ -2,10 +2,12 @@ import { Box } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ControlButton from './LightboxControls';
 import LightboxViewer from './LightboxViewer';
 
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
@@ -148,18 +150,10 @@ export default function LightboxWindow() {
           </Box>
 
           <Box sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, p: 1, overflow: 'visible' }}>
-            <ControlButton tooltip="Previous photo" onClick={() => previous()} icon={<ChevronLeft size={20} />} disabled={currentIndex === 0} />
-
-            {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, overflow: 'hidden', minHeight: Math.max(56, Math.min(90, height / 7)) + 12 }}> */}
             <LightboxFilmstripNg photos={photos} currentIndex={currentIndex} goTo={goTo} width={width} height={height} />
-            {/* </Box> */}
-
-            <ControlButton tooltip="Next photo" onClick={() => next()} icon={<ChevronRight size={20} />} disabled={currentIndex === photos.length - 1} />
           </Box>
-
-
-
         </Box>
+
         {currentPhoto && <Box key={currentPhoto.id} sx={{
           flex: '0 0 500px',
           minHeight: 0,
@@ -167,10 +161,39 @@ export default function LightboxWindow() {
           overflowY: 'auto',
           p: 1,
           px: 1,
+          pl: 1.5,
           mr: 0.25,
           borderLeft: '1px solid',
           borderColor: 'divider',
         }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, pb: 1, alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
+
+            <GenericToggleButtonGroup
+              items={[{
+                tooltip: "Previous photo",
+                onClick: () => previous(),
+                icon: <ChevronLeft />,
+                selected: false,
+                disabled: currentIndex === 0,
+              },
+              {
+                tooltip: "Next photo",
+                onClick: () => next(),
+                icon: <ChevronRight />,
+                selected: false,
+                disabled: currentIndex === photos.length - 1,
+              }
+              ] as GenericToggleButtonProps[]}
+              variant="outlined"
+            />
+
+            <Box>
+              <GeneralRegistryToolbar
+                // noGhost={true}
+                group="lightbox"
+              />
+            </Box>
+          </Box>
 
           <LocationSection photo={currentPhoto} />
           <EXIFSection photo={currentPhoto} />
