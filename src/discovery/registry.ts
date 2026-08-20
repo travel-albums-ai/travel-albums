@@ -37,10 +37,6 @@ export class BaseRegistry<T extends { id: string }> {
   all() {
     return [...this.items.values()];
   }
-
-  hasItems() {
-    return this.items.size > 0;
-  }
 }
 
 export class AsyncComponentRegistry<T extends { loader: () => Promise<{ default: ComponentType }> }> extends BaseRegistry<T> {
