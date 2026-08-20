@@ -12,52 +12,48 @@ export async function loadGlobEntries<T>(
 ): Promise<LoadEntry<T>[]> {
   const entries = Object.entries(modules);
 
-  function withTimeout<P>(p: Promise<P>, ms: number) {
-    if (!ms || ms <= 0) return p;
-
-    let id: number | undefined;
+  const withTimeout = <P>(promise: Promise<P>, ms: number): Promise<P> => {
+    if (ms <= 0) return promise;
 
     return new Promise<P>((resolve, reject) => {
-      id = setTimeout(() => reject(new Error('loader timeout')), ms);
+      const id = setTimeout(() => reject(new Error('loader timeout')), ms);
 
-      p.then(
-        (v) => {
-          if (id !== undefined) clearTimeout(id);
-          resolve(v);
+      promise.then(
+        (value) => {
+          clearTimeout(id);
+          resolve(value);
         },
-        (e) => {
-          if (id !== undefined) clearTimeout(id);
-          reject(e);
+        (error) => {
+          clearTimeout(id);
+          reject(error);
         },
       );
     });
-  }
+  };
 
-  const settled = await benchmarkFunctionAsync<PromiseSettledResult<{ path: string; value?: T; error?: any }>[]>(
+  return benchmarkFunctionAsync(
     () =>
-      Promise.allSettled(
-        entries.map(([path, loader]) =>
-          withTimeout(loader(), timeoutMs)
-            .then((value) => ({ path, value }))
-            .catch((error) => ({
+      Promise.all(
+        entries.map(async ([path, loader]) => {
+          try {
+            return {
               path,
-              value: undefined as unknown as T,
+              value: await withTimeout(loader(), timeoutMs),
+            };
+          } catch (error) {
+            return {
+              path,
               error,
-            })),
-        ),
+            };
+          }
+        }),
       ),
     '👀 loadGlobEntries',
-    [`${entries.length} modules`, `${entries.map(([path]) => path.split('/').pop()?.replaceAll('.meta.ts', '')).join(', ')} loaded`],
+    [
+      `${entries.length} modules`,
+      `${entries
+        .map(([path]) => path.split('/').pop()?.replaceAll('.meta.ts', ''))
+        .join(', ')} loaded`,
+    ],
   );
-
-  return settled.map((item, i) => {
-    if (item.status === 'rejected') {
-      return {
-        path: entries[i][0],
-        error: item.reason,
-      };
-    }
-
-    return item.value as LoadEntry<T>;
-  });
 }
