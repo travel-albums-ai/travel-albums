@@ -19,9 +19,10 @@ export default function LightboxWindow() {
       slotProps={{
         paper: {
           sx: {
-            width: '90vw',
-            height: '90vh',
-            maxHeight: '90vh',
+            width: '95vw',
+            height: '95vh',
+            maxHeight: '95vh',
+            maxWidth: '95vw',
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column'

@@ -9,6 +9,7 @@ import LightboxViewer from './LightboxViewer';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import PhotoExifComplete from '@/components/PhotoExifComplete';
 import PhotoExifDetails from '@/components/PhotoExifDetails';
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
@@ -20,7 +21,7 @@ import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
 import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
 import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
-import { Building2, ChevronLeft, ChevronRight, ExternalLink, Map, Pin } from 'lucide-react';
+import { Building2, Camera, ChevronLeft, ChevronRight, ExternalLink, Map, Pin } from 'lucide-react';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
@@ -157,6 +158,7 @@ export default function LightboxWindow() {
         </Box>
 
         {currentPhoto && <Box key={currentPhoto.id} sx={{ flex: '0 0 480px', minHeight: 0, minWidth: 0 }}>
+
           <SettingsSection title="Location" icon={<Pin />} gap={1} divider={false}>
             <AlbumMapPanel photos={[currentPhoto]} />
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
@@ -190,8 +192,18 @@ export default function LightboxWindow() {
             </Box>
 
           </SettingsSection>
+
+          <SettingsSection title="EXIF" icon={<Camera />} gap={1} divider={false}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <PhotoExifDetails photo={currentPhoto} />
+              <Box sx={{ height: '350px', overflowY: 'auto', overflowX: 'hidden', p: 1, borderRadius: 2, border: '1px solid', borderColor: 'divider', boxShadow: 2 }}>
+                <PhotoExifComplete photo={currentPhoto} />
+              </Box>
+            </Box>
+          </SettingsSection>
+
           <SettingsSection>
-            <PhotoExifDetails photo={currentPhoto} />
+            {/* <PhotoExifDetails photo={currentPhoto} /> */}
             <AlbumsMetaDetails photos={[currentPhoto]} minWidth={25} />
             <DescribePhoto photoId={currentPhoto.id} />
           </SettingsSection>
