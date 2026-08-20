@@ -1,3 +1,9 @@
+## [1.230.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.229.0...v1.230.0) (2026-08-20)
+
+### ✨ Features
+
+* update theme names with emojis and enhance theme options in settings ([29964e3](https://github.com/travel-albums-ai/travel-albums/commit/29964e30044bb7c9e89a379b93d3a6b2162b5a2c))
+
 ## [1.229.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.228.1...v1.229.0) (2026-08-20)
 
 ### ✨ Features
