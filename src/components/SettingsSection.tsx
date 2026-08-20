@@ -1,11 +1,12 @@
 import { Box, Divider, Stack, Typography } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { cloneElement } from 'react';
 
 export default function SettingsSection({ title, icon, guidance, children, gap = 0.5, divider = true, transparent = false } : { title?: string, icon?: React.ReactNode, guidance?: string, children: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean }) {
 
   return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, m: 0.25, overflow: 'visible' }}>
     <Box sx={{
-      bgcolor: theme => transparent ? theme.palette.divider : theme.palette.background.paper + 'BD',
+      bgcolor: theme => transparent ? alpha(theme.palette.background.default, 0.55) : theme.palette.background.paper + 'BD',
       mb: 1,
       border: '1px solid',
       borderColor: theme => transparent ? 'transparent' : theme.palette.divider,

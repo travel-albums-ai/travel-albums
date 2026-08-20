@@ -6,24 +6,53 @@ type ViewerProps = {
   photo: any;
 };
 
+type Layer = {
+  photo: any;
+  key: string;
+};
+
+const getPhotoKey = (photo: any) => photo?.id ?? photo?.path;
+
 export default function LightboxBackground({ photo }: ViewerProps) {
-  const [displayPhoto, setDisplayPhoto] = useState(photo);
-  const [visible, setVisible] = useState(true);
+  const [layers, setLayers] = useState<Layer[]>(() =>
+    photo
+      ? [{ photo, key: getPhotoKey(photo) }]
+      : [],
+  );
 
   useEffect(() => {
-    if (!photo || photo === displayPhoto) return;
+    if (!photo) {
+      setLayers([]);
+      return;
+    }
 
-    setVisible(false);
+    const key = getPhotoKey(photo);
+
+    if (layers.some(layer => layer.key === key)) {
+      return;
+    }
+
+    // Keep the current image and mount the new one underneath it.
+    setLayers(current => [
+      ...current.slice(-1),
+      {
+        photo,
+        key,
+      },
+    ]);
+  }, [photo, layers]);
+
+  useEffect(() => {
+    if (layers.length < 2) return;
 
     const timeout = window.setTimeout(() => {
-      setDisplayPhoto(photo);
-      setVisible(true);
-    }, 150);
+      setLayers(current => current.slice(-1));
+    }, 350);
 
     return () => window.clearTimeout(timeout);
-  }, [photo, displayPhoto]);
+  }, [layers]);
 
-  if (!displayPhoto) return null;
+  if (!layers.length) return null;
 
   return (
     <Box
@@ -32,23 +61,38 @@ export default function LightboxBackground({ photo }: ViewerProps) {
         inset: 0,
         width: '100%',
         height: '100%',
-        opacity: visible ? 0.25 : 0,
-        filter: 'blur(12px) saturate(1.75)',
-        borderRadius: 16,
+        borderRadius: 4,
         overflow: 'hidden',
         zIndex: 0,
-        transition: 'opacity 300ms ease-in-out',
       }}
     >
-      <AlbumPhotoThumbnailBackgroundNg
-        key={displayPhoto.id ?? displayPhoto.path}
-        photo={displayPhoto}
-        original={true}
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
-      />
+      {layers.map((layer, index) => {
+        const isCurrent = index === layers.length - 1;
+
+        return (
+          <Box
+            key={layer.key}
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              opacity: isCurrent ? 0.25 : 0,
+              filter: 'blur(12px) saturate(1.75)',
+              transition: 'opacity 350ms ease-in-out',
+            }}
+          >
+            <AlbumPhotoThumbnailBackgroundNg
+              photo={layer.photo}
+              original={true}
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          </Box>
+        );
+      })}
     </Box>
   );
 }
