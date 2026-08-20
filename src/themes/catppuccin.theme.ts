@@ -150,3 +150,5 @@ export {
   darkTheme as catppuccinDarkTheme,
   lightTheme as catppuccinLightTheme
 };
+
+export const name = 'Catppuccin';

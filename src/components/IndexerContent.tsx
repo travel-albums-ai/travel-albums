@@ -1,4 +1,5 @@
 import IndexerMetricCard from '@/components/IndexerMetricCard';
+import SettingsSection from '@/components/SettingsSection';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
 import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
@@ -8,6 +9,7 @@ import {
   BoxIcon,
   Bug,
   Check,
+  Database,
   History,
   Search
 } from 'lucide-react';
@@ -81,56 +83,57 @@ export default function IndexerContent() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, p: 1 }}>
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
-        <Button
-          disabled={indexing}
-          variant="contained"
-          color="primary"
-          onClick={handleTurnOn}
-        >
+    <SettingsSection title="Indexer" icon={<Database />}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+          <Button
+            disabled={indexing}
+            variant="contained"
+            color="primary"
+            onClick={handleTurnOn}
+          >
           On
-        </Button>
+          </Button>
 
-        <Button
-          disabled={!indexing}
-          variant="contained"
-          color="primary"
-          onClick={handleTurnOff}
-        >
+          <Button
+            disabled={!indexing}
+            variant="contained"
+            color="primary"
+            onClick={handleTurnOff}
+          >
           Off
-        </Button>
-
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 1,
-            flex: 1,
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="caption" color="text.secondary">
-            {indexing ? 'Indexer is running' : 'Indexer is stopped'}
-          </Typography>
+          </Button>
 
           <Box
             sx={{
-              borderRadius: '50%',
-              width: 10,
-              height: 10,
-              mr: 2,
-              backgroundColor: indexing ? 'success.main' : 'divider',
-              opacity: indexing ? 0.5 : 1,
-              transition: 'background-color 0.3s ease, opacity 0.3s ease',
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 1,
+              flex: 1,
+              justifyContent: 'flex-end',
+              alignItems: 'center',
             }}
-          />
-        </Box>
-      </Box>
+          >
+            <Typography variant="caption" color="text.secondary">
+              {indexing ? 'Indexer is running' : 'Indexer is stopped'}
+            </Typography>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 1 }}>
-        {Object.keys(progress).length > 0 &&
+            <Box
+              sx={{
+                borderRadius: '50%',
+                width: 10,
+                height: 10,
+                mr: 2,
+                backgroundColor: indexing ? 'success.main' : 'divider',
+                opacity: indexing ? 0.5 : 1,
+                transition: 'background-color 0.3s ease, opacity 0.3s ease',
+              }}
+            />
+          </Box>
+        </Box>
+
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+          {Object.keys(progress).length > 0 &&
           Object.entries(progress).map(([key, value]) => (
             <Box key={key} sx={{ flex: '0 1 20%' }}>
               <IndexerMetricCard
@@ -143,7 +146,8 @@ export default function IndexerContent() {
               />
             </Box>
           ))}
+        </Box>
       </Box>
-    </Box>
+    </SettingsSection>
   );
 }

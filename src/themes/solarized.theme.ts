@@ -27,3 +27,5 @@ export const lightTheme = generateTheme(themeTokens.light);
 export const darkTheme = generateTheme(themeTokens.dark);
 
 export { darkTheme as solarizedDarkTheme, lightTheme as solarizedLightTheme };
+
+export const name = 'Solarized';

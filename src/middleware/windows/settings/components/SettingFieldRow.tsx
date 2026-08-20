@@ -32,7 +32,7 @@ export default function SettingFieldRow({
       <TextField
         value={localValue}
         size="small"
-        variant="standard"
+        variant="outlined"
         onChange={(event) => setLocalValue(event.target.value)}
         onBlur={handleBlur}
         sx={{ width: '350px' }}

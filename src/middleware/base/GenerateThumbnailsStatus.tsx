@@ -34,7 +34,9 @@ export default function GenerateThumbnailsStatus() {
       <Box sx={{ p: 2, height: '450px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 1 }}>
         <IndexerSettings />
       </Box>
-      <IndexerContent />
+      <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <IndexerContent />
+      </Box>
 
     </PopoverButton>
 

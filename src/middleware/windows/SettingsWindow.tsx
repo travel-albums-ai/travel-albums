@@ -1,5 +1,5 @@
-import SettingsContent from '@/components/SettingsContent';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import SettingsContent from '@/middleware/windows/settings/SettingsContent';
 import { Dialog } from '@mui/material';
 
 export default function SettingsWindow() {

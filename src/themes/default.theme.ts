@@ -48,3 +48,5 @@ export const lightTheme = generateTheme(themeTokens.light);
 export const darkTheme = generateTheme(themeTokens.dark);
 
 export { darkTheme as defaultDarkTheme, lightTheme as defaultLightTheme };
+
+export const name = 'Default';

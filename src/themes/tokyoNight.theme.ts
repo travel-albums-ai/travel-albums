@@ -150,3 +150,5 @@ export {
   darkTheme as tokyoNightDarkTheme,
   lightTheme as tokyoNightLightTheme
 };
+
+export const name = 'Tokyo Night';

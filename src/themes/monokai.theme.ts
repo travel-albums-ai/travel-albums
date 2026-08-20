@@ -27,3 +27,5 @@ export const lightTheme = generateTheme(themeTokens.light);
 export const darkTheme = generateTheme(themeTokens.dark);
 
 export { darkTheme as monokaiDarkTheme, lightTheme as monokaiLightTheme };
+
+export const name = 'Monokai';

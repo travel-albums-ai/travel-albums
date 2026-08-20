@@ -4,13 +4,13 @@ import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Box, Button, Typography } from '@mui/material';
-import { Key, PersonStanding, Plus } from 'lucide-react';
+import { Astroid, Key, PersonStanding, Plus } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  { key: 'enableAI', labelKey: 'Open AI', value: 'show-people-and-pets', type: 'boolean' },
-  { key: 'byokOpenAIKey', labelKey: 'Open AI Key', value: 'show-people-and-pets', type: 'field' },
+  { key: 'enableAI', labelKey: 'Open AI', value: 'show-people-and-pets', type: 'boolean', icon: <Astroid size={16} /> },
+  { key: 'byokOpenAIKey', labelKey: 'Open AI Key', value: 'show-people-and-pets', type: 'field', icon: <Key size={16} /> },
 ] as const
 
 export default function BYOKPopover() {
@@ -20,11 +20,12 @@ export default function BYOKPopover() {
   const { t } = useTranslation()
 
   return <>
-    <SettingsSection title="Bring Your Own Key (BYOK)" icon={<Key />} transparent={true}>
+    <SettingsSection title="AI via Bring Your Own Key (BYOK)" icon={<Key />} transparent={true}>
       {toggleControls
         .map((control) => (
           <Fragment key={control.key}>
             {control.type === 'boolean' && <SettingToggleRow
+              icon={control.icon}
               label={t(control.labelKey)}
               selected={byokStore[control.key]}
               onChange={() => {
@@ -33,7 +34,7 @@ export default function BYOKPopover() {
               }}
             />}
             {control.type === 'field' &&   <SettingFieldRow
-              icon={<Key size={16} />}
+              icon={control.icon}
               key={control.key}
               label={t(control.labelKey)}
               value={byokStore[control.key]}

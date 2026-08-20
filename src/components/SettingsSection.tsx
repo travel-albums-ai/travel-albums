@@ -13,9 +13,9 @@ export default function SettingsSection({ title, icon, guidance, children, gap =
       p: 1,
       borderRadius: transparent ? 3 : 2,
       transition: 'box-shadow 0.2s ease-in-out',
-      boxShadow: theme => transparent ? 2 : 1,
+      boxShadow: transparent ? 2 : 1,
       '&:hover': {
-        boxShadow: theme => transparent ? 4 : 2,
+        boxShadow: transparent ? 4 : 2,
       },
     }}
     >
@@ -24,7 +24,7 @@ export default function SettingsSection({ title, icon, guidance, children, gap =
         <Typography variant="subtitle2" sx={{ lineHeight: 1 }} color="textPrimary">{title}</Typography>
         {guidance && <Typography variant="caption" sx={{ flex: 1, textAlign: 'right' }} color="textSecondary">{guidance}</Typography>}
       </Box>}
-      <Stack sx={{ gap, px: 0.5 }} divider={divider ? <Divider /> : undefined}>
+      <Stack sx={{ gap, px: 0.5, pb: 0.5 }} divider={divider ? <Divider /> : undefined}>
         {children}
       </Stack>
     </Box>

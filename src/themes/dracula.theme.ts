@@ -111,3 +111,5 @@ export const lightTheme = generateTheme(themeTokens.light);
 export const darkTheme = generateTheme(themeTokens.dark);
 
 export { darkTheme as draculaDarkTheme, lightTheme as draculaLightTheme };
+
+export const name = 'Dracula';
