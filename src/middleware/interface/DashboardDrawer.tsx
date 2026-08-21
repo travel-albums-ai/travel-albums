@@ -48,17 +48,15 @@ export default function DashboardDrawer() {
           <DashboardViews />
           <DashboardLikes />
         </Box>
-
         <Box sx={{
-          display: 'grid',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
           width: '1400px',
-          gridTemplateColumns: 'repeat(1, 1fr)',
-          alignItems: 'start',
-          justifyContent: 'start',
-          gap: 2, mb: 8,
+          justifyContent: 'stretch',
+          gap: 2
         }}
         >
-
           <DashboardFriends />
           <DashboardCountriesMap />
           <DashboardCountries />

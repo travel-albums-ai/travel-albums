@@ -13,6 +13,8 @@ import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import useKeyboardNav from '@/hooks/useKeyboardNav';
+import useWheelNav from '@/hooks/useWheelNav';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { composeUrl } from '@/lib/thumbnailService';
 import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
@@ -99,61 +101,11 @@ export default function LightboxWindow() {
     });
   }, [photos, setPreviewPhotoObj]);
 
-  const lastWheelRef = useRef(0);
   const viewerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleWheel = useCallback((e: any) => {
-    if (!showWindow) return;
+  useWheelNav({ enabled: showWindow, ref: viewerRef, next, previous, threshold: 10, throttleMs: 150 });
 
-    const delta = e.deltaY;
-    if (Math.abs(delta) < 10) return;
-
-    const now = Date.now();
-    // throttle wheel navigation to once per 300ms
-    if (now - lastWheelRef.current < 150) return;
-    lastWheelRef.current = now;
-
-    e.preventDefault();
-    if (delta > 0) {
-      next();
-    } else {
-      previous();
-    }
-  }, [showWindow, next, previous]);
-
-  useEffect(() => {
-    if (!showWindow) return;
-    const el = viewerRef.current;
-    if (!el) return;
-
-    const fn = (ev: WheelEvent) => handleWheel(ev as any);
-    el.addEventListener('wheel', fn, { passive: false });
-    return () => el.removeEventListener('wheel', fn);
-  }, [showWindow, handleWheel]);
-
-  useEffect(() => {
-    if (!showWindow) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      switch (event.key) {
-        case 'ArrowLeft':
-          event.preventDefault();
-          previous();
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          next();
-          break;
-        case 'Escape':
-          event.preventDefault();
-          close();
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showWindow, previous, next, close]);
+  useKeyboardNav({ enabled: showWindow, next, previous, close });
 
   useEffect(() => {
     if (!showWindow) return;
