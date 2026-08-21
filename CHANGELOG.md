@@ -1,3 +1,9 @@
+## [1.232.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.231.0...v1.232.0) (2026-08-21)
+
+### ✨ Features
+
+* optimize AllPhotosGridVirtuoso component by removing unused code and enhancing List memoization ([0015009](https://github.com/travel-albums-ai/travel-albums/commit/00150090597d64cc6815e8f9073293497fbe4ff6))
+
 ## [1.231.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.230.0...v1.231.0) (2026-08-20)
 
 ### ✨ Features
