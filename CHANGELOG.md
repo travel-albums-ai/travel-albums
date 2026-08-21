@@ -1,3 +1,9 @@
+## [1.233.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.232.0...v1.233.0) (2026-08-21)
+
+### ✨ Features
+
+* implement keyboard and wheel navigation hooks for enhanced user experience in LightboxWindow ([6ba9f47](https://github.com/travel-albums-ai/travel-albums/commit/6ba9f47ca21772de87c26c64fcd2695573ad9f3d))
+
 ## [1.232.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.231.0...v1.232.0) (2026-08-21)
 
 ### ✨ Features
