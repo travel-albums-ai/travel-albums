@@ -1,3 +1,9 @@
+## [1.244.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.243.0...v1.244.0) (2026-08-24)
+
+### ✨ Features
+
+* add usage statistics tracking and new BYOK components for cost estimation and Open AI settings ([e4b9606](https://github.com/travel-albums-ai/travel-albums/commit/e4b960696d9cd05ee549a15644f8f3e4c44b8574))
+
 ## [1.243.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.242.0...v1.243.0) (2026-08-24)
 
 ### ✨ Features
