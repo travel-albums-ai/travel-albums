@@ -1,3 +1,9 @@
+## [1.242.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.241.0...v1.242.0) (2026-08-24)
+
+### ✨ Features
+
+* enhance SettingsSection with collapsible functionality and add UUID prop to improve state management ([d0a2963](https://github.com/travel-albums-ai/travel-albums/commit/d0a296308e07cc2543ab5b3b6f35fc44865f6695))
+
 ## [1.241.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.240.0...v1.241.0) (2026-08-24)
 
 ### ✨ Features
