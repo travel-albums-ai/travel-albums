@@ -1,3 +1,9 @@
+## [1.239.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.238.0...v1.239.0) (2026-08-24)
+
+### ✨ Features
+
+* add SSD/HDD mode settings to IndexerPerformancePopover and enhance SettingsSliderRow with SolidChip ([901ce10](https://github.com/travel-albums-ai/travel-albums/commit/901ce1020428e1aabbc4613813159b179ed0e321))
+
 ## [1.238.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.237.0...v1.238.0) (2026-08-24)
 
 ### ✨ Features
