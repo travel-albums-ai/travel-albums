@@ -1,3 +1,9 @@
+## [1.234.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.233.0...v1.234.0) (2026-08-24)
+
+### ✨ Features
+
+* add SegmentedControl component for improved navigation options ([e095a77](https://github.com/travel-albums-ai/travel-albums/commit/e095a7703d46e77d20c42e4957177dc445b42771))
+
 ## [1.233.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.232.0...v1.233.0) (2026-08-21)
 
 ### ✨ Features
