@@ -1,3 +1,9 @@
+## [1.235.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.234.0...v1.235.0) (2026-08-24)
+
+### ✨ Features
+
+* add IndexerPerformancePopover component for performance settings management ([b9d81aa](https://github.com/travel-albums-ai/travel-albums/commit/b9d81aadc908c6ae622fcc1437db1b168f43568a))
+
 ## [1.234.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.233.0...v1.234.0) (2026-08-24)
 
 ### ✨ Features
