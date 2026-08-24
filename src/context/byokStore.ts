@@ -5,6 +5,22 @@ type Persona = {
   description: string;
 }
 
+type Usage = {
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+
+  input_tokens_details: Record<string, number>;
+  output_tokens_details: Record<string, number>;
+  total_tokens_details?: Record<string, number>;
+}
+
+type UsageStat = {
+  created_at: string;
+  model: string;
+  usage: Usage;
+}
+
 type BYOKStore = {
   enableAI: boolean,
   byokOpenAIKey?: string,
@@ -16,6 +32,7 @@ type BYOKStore = {
   webMcp?: boolean,
 
   registeredMcpTools?: any[],
+  usageStats?: UsageStat[],
 }
 
 const defaults: BYOKStore = {
@@ -26,6 +43,7 @@ const defaults: BYOKStore = {
     description: '',
   },
   additionalPersonas: [],
+  usageStats: [],
 }
 
 const {
@@ -45,6 +63,12 @@ export const useBYOK = () => {
       setSetting(prev => ({
         ...prev,
         mainPersona: persona,
+      }))
+    },
+    addUsageStat: (usageStat: UsageStat) => {
+      setSetting(prev => ({
+        ...prev,
+        usageStats: [...(prev.usageStats || []), usageStat],
       }))
     },
     addAdditionalPersona: (persona: Persona) => {

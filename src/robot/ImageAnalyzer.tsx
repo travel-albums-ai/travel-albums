@@ -1,6 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import { useAISinkStoreSelector } from '@/context/aiSinkStore';
-import { useBYOKStoreSelector } from '@/context/byokStore';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import { useDescriptions } from '@/context/descriptionsStore';
 import { GalleryPhoto } from '@/lib/galleryData';
 import {
@@ -67,6 +67,9 @@ export default function ImageAnalyzer({ photos, context }: Props) {
     mainPersona,
     additionalPersonas,
   } = useBYOKStoreSelector((state) => state);
+
+  const { addUsageStat } = useBYOK()
+
 
   const imageBase64 = useAISinkStoreSelector(
     (state) => state.autoDescriptionPreview,
@@ -174,6 +177,16 @@ export default function ImageAnalyzer({ photos, context }: Props) {
       };
 
       setResults(parsed.results);
+      addUsageStat({
+        created_at: data.created_at ?? new Date().toISOString(),
+        model: data.model,
+        usage: data.usage ?? {
+          input_tokens: 0,
+          output_tokens: 0,
+          total_tokens: 0,
+          input_tokens_details: {},
+          output_tokens_details: {},
+        } });
     } catch (e) {
       console.error(e);
 
