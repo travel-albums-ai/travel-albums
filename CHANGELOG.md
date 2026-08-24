@@ -1,3 +1,9 @@
+## [1.238.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.237.0...v1.238.0) (2026-08-24)
+
+### ✨ Features
+
+* reduce interval time in IndexerRefresh for improved responsiveness ([803a8f7](https://github.com/travel-albums-ai/travel-albums/commit/803a8f7b87a39f36c055d7e1616a6d4e17fae77d))
+
 ## [1.237.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.236.0...v1.237.0) (2026-08-24)
 
 ### ✨ Features
