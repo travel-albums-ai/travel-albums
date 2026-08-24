@@ -1,3 +1,9 @@
+## [1.237.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.236.0...v1.237.0) (2026-08-24)
+
+### ✨ Features
+
+* add turnOffJob functionality to IndexerRefresh for improved job management ([7b61905](https://github.com/travel-albums-ai/travel-albums/commit/7b61905cdbb1813171339fb1254db29cb6612993))
+
 ## [1.236.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.235.0...v1.236.0) (2026-08-24)
 
 ### ✨ Features
