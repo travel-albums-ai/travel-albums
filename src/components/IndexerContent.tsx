@@ -72,8 +72,6 @@ export default function IndexerContent() {
   const { turnOnJob } = useFetch_IndexerOn();
   const { turnOffJob } = useFetch_IndexerOff();
 
-  console.log(progress)
-
   const handleTurnOn = async () => {
     try {
       await turnOnJob();
@@ -106,7 +104,7 @@ export default function IndexerContent() {
   };
 
   return (
-    <SettingsSection title="Indexer" icon={<Database />} gap={2}>
+    <SettingsSection title="Indexer" icon={<Database />} gap={2} uuid="indexer-content">
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1}}>
         <Button
           disabled={indexing}

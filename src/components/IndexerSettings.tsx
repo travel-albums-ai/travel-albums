@@ -44,6 +44,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
         divider
         title="Path to cache and photos archive"
         icon={<Code />}
+        uuid="indexer-settings"
       >
         <SettingsGeneralRow icon={<Database />} label="Cache">
           <Box

@@ -74,7 +74,7 @@ export default function IndexerPerformancePopover() {
   return <>
 
     {groups.map((group) => (
-      <SettingsSection key={group.title} title={group.title} icon={group.icon}>
+      <SettingsSection key={group.title} title={group.title} icon={group.icon} uuid="indexer-performance">
         <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
           <SegmentedControl defaultValue="hdd" onChange={(_, value) => value === 'hdd' ? updateHDDMode() : updateSSDMode()}>
             <SegmentedControlItem value="hdd" disabled={!isCustomMode() && isHDDMode()}>HDD (Slow)</SegmentedControlItem>
