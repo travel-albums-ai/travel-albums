@@ -27,11 +27,6 @@ const items = [
     label: 'Pre-indexed',
     icon: <History size={24} />,
   },
-  // {
-  //   key: 'totalFiles',
-  //   label: 'Total',
-  //   icon: <BoxIcon size={24} />,
-  // },
   {
     key: 'totalFound',
     label: 'Discovered',
@@ -111,62 +106,61 @@ export default function IndexerContent() {
   };
 
   return (
-    <SettingsSection title="Indexer" icon={<Database />}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
-          <Button
-            disabled={indexing}
-            variant="contained"
-            color="primary"
-            onClick={handleTurnOn}
-          >
+    <SettingsSection title="Indexer" icon={<Database />} gap={2}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1}}>
+        <Button
+          disabled={indexing}
+          variant="contained"
+          color="primary"
+          onClick={handleTurnOn}
+        >
           On
-          </Button>
+        </Button>
 
-          <Button
-            disabled={!indexing}
-            variant="contained"
-            color="primary"
-            onClick={handleTurnOff}
-          >
+        <Button
+          disabled={!indexing}
+          variant="contained"
+          color="primary"
+          onClick={handleTurnOff}
+        >
           Off
-          </Button>
+        </Button>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 1,
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="caption" color="text.secondary">
+            {indexing ? 'Indexer is running' : 'Indexer is stopped'}
+          </Typography>
 
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: 1,
-              flex: 1,
-              justifyContent: 'flex-end',
-              alignItems: 'center',
+              borderRadius: '50%',
+              width: 10,
+              height: 10,
+              mr: 2,
+              backgroundColor: indexing ? 'success.main' : 'divider',
+              opacity: indexing ? 0.5 : 1,
+              transition: 'background-color 0.3s ease, opacity 0.3s ease',
             }}
-          >
-            <Typography variant="caption" color="text.secondary">
-              {indexing ? 'Indexer is running' : 'Indexer is stopped'}
-            </Typography>
-
-            <Box
-              sx={{
-                borderRadius: '50%',
-                width: 10,
-                height: 10,
-                mr: 2,
-                backgroundColor: indexing ? 'success.main' : 'divider',
-                opacity: indexing ? 0.5 : 1,
-                transition: 'background-color 0.3s ease, opacity 0.3s ease',
-              }}
-            />
-          </Box>
+          />
         </Box>
+      </Box>
 
-        <Box sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: 1,
-        }}
-        >
-          {Object.keys(progress).length > 0 &&
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: 1,
+      }}
+      >
+        {Object.keys(progress).length > 0 &&
           Object.entries(progress)
             .filter(([key]) => items.some((item) => item.key === key))
             .map(([key, value]) => (
@@ -181,7 +175,6 @@ export default function IndexerContent() {
                 />
               </Box>
             ))}
-        </Box>
       </Box>
     </SettingsSection>
   );

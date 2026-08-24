@@ -38,19 +38,14 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
     mutate({ TARGET_ROOT: root });
   };
 
-  const DOM = (
+  return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1,
-          justifyContent: 'space-between',
-          mb: 1,
-          flexDirection: 'column',
-        }}
+      <SettingsSection
+        divider
+        title="Path to cache and photos archive"
+        icon={<Code />}
       >
-        <SettingsGeneralRow icon={<Folder />} label="Takeout sources">
+        <SettingsGeneralRow icon={<Database />} label="Cache">
           <Box
             sx={{
               width: '350px',
@@ -61,27 +56,40 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
             }}
           >
             <TextField
-              value={newRoot}
+              value={targetRoot}
               size="small"
               fullWidth
-              placeholder="Add new root path..."
+              disabled={!data}
               slotProps={{
                 input: {
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Plus size={16} />
+                      <Database size={16} />
                     </InputAdornment>
                   ),
                 },
               }}
-              onChange={(event) => setNewRoot(event.target.value)}
+              onChange={(event) => setTargetRoot(event.target.value)}
               onBlur={() => {
-                if (newRoot && !data?.TAKEOUT_ROOTS?.includes(newRoot)) {
-                  addRoot(newRoot);
-                  setNewRoot('');
+                if (targetRoot && targetRoot !== data?.TARGET_ROOT) {
+                  updateTargetRoot(targetRoot);
                 }
               }}
             />
+          </Box>
+        </SettingsGeneralRow>
+
+        <SettingsGeneralRow icon={<Folder />} label="Takeout sources">
+          <Box
+            sx={{
+              width: '350px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 1,
+              justifyContent: 'space-between',
+            }}
+          >
+
             {data?.TAKEOUT_ROOTS?.map((root: string) => (
               <Box
                 key={root}
@@ -124,60 +132,33 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
                 </Box>
               </Box>
             ))}
-
-
-          </Box>
-        </SettingsGeneralRow>
-
-        <SettingsGeneralRow icon={<Database />} label="Cache">
-          <Box
-            sx={{
-              width: '350px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
-              justifyContent: 'space-between',
-            }}
-          >
             <TextField
-              value={targetRoot}
+              value={newRoot}
               size="small"
               fullWidth
-              disabled={!data}
+              placeholder="Add new root path..."
               slotProps={{
                 input: {
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Database size={16} />
+                      <Plus size={16} />
                     </InputAdornment>
                   ),
                 },
               }}
-              onChange={(event) => setTargetRoot(event.target.value)}
+              onChange={(event) => setNewRoot(event.target.value)}
               onBlur={() => {
-                if (targetRoot && targetRoot !== data?.TARGET_ROOT) {
-                  updateTargetRoot(targetRoot);
+                if (newRoot && !data?.TAKEOUT_ROOTS?.includes(newRoot)) {
+                  addRoot(newRoot);
+                  setNewRoot('');
                 }
               }}
             />
+
           </Box>
         </SettingsGeneralRow>
-      </Box>
-    </>
-  );
 
-  return (
-    <>
-      {asIs ? (
-        DOM
-      ) : (
-        <SettingsSection
-          title="Path to cache and photos archive"
-          icon={<Code />}
-        >
-          {DOM}
-        </SettingsSection>
-      )}
+      </SettingsSection>
     </>
   );
 }
