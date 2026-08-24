@@ -19,6 +19,21 @@ export default function SidebarDrawer() {
       {sidebarTerm === '' && menuRoutes.map((item) => <Box component={NavLink} to={item.path} key={item.path}>
         <SidebarCoreButton title={item.title} icon={routeIcons[item.path]} isActive={location.pathname === item.path} noCounts={true}  />
       </Box>)}
+
+
+      {/* <SegmentedControl defaultValue="photos">
+        <SegmentedControlItem value="photos">
+    Photos
+        </SegmentedControlItem>
+
+        <SegmentedControlItem value="albums">
+    Albums
+        </SegmentedControlItem>
+
+        <SegmentedControlItem value="map">
+    Map
+        </SegmentedControlItem>
+      </SegmentedControl> */}
       <SidebarPins />
       <SidebarListPermanent />
       <SidebarList />
