@@ -1,5 +1,10 @@
 {
 
+  "CONCURRENCY": "Concurrency limit",
+  "IMAGE_CONCURRENCY": "Photo processing concurrency",
+  "THUMBNAIL_SIZE": "Thumbnail size",
+  "THUMBNAIL_QUALITY": "Thumbnail quality",
+
   "peopleAndPets": "People & Pets",
   "cities": "Cities",
   "nowAndThen": "Now & Then",

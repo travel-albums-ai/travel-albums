@@ -87,7 +87,7 @@ export default function IndexerRefresh() {
     const interval = setInterval(() => {
       handleGetStatus();
       setElapsedTick((tick) => tick + 1);
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(interval);
