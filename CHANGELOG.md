@@ -1,3 +1,9 @@
+## [1.243.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.242.0...v1.243.0) (2026-08-24)
+
+### ✨ Features
+
+* add UUID props to SettingsSection components for improved identification ([6434d21](https://github.com/travel-albums-ai/travel-albums/commit/6434d21854fbb9acf3fad917e89b8ea67e70874b))
+
 ## [1.242.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.241.0...v1.242.0) (2026-08-24)
 
 ### ✨ Features
