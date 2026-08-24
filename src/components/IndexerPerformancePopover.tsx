@@ -1,7 +1,9 @@
+import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedControl';
 import SettingsSection from '@/components/SettingsSection';
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsSliderRow from '@/middleware/windows/settings/components/SettingsSliderRow';
+import { Box } from '@mui/material';
 import { t } from 'i18next';
 import { Turtle } from 'lucide-react';
 import { Fragment } from 'react';
@@ -29,9 +31,38 @@ export default function IndexerPerformancePopover() {
     mutate({ [key]: value });
   }
 
+  const updateSettings = (settings: Record<string, number>) => {
+    mutate(settings);
+  }
+
+  const updateSSDMode = () => {
+    updateSettings({
+      CONCURRENCY: 8,
+      IMAGE_CONCURRENCY: 16,
+      THUMBNAIL_SIZE: 700,
+      THUMBNAIL_QUALITY: 80
+    })
+  }
+
+  const updateHDDMode = () => {
+    updateSettings({
+      CONCURRENCY: 4,
+      IMAGE_CONCURRENCY: 4,
+      THUMBNAIL_SIZE: 600,
+      THUMBNAIL_QUALITY: 72
+    })
+  }
+
   return <>
+
     {groups.map((group) => (
-      <SettingsSection key={group.title} title={group.title} icon={group.icon} >
+      <SettingsSection key={group.title} title={group.title} icon={group.icon}>
+        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
+          <SegmentedControl defaultValue="hdd" onChange={(_, value) => value === 'hdd' ? updateHDDMode() : updateSSDMode()}>
+            <SegmentedControlItem value="hdd">HDD (Slow)</SegmentedControlItem>
+            <SegmentedControlItem value="ssd">SSD (Fast)</SegmentedControlItem>
+          </SegmentedControl>
+        </Box>
         {group.controls
           .map((control) => (
             <Fragment key={control.key}>
