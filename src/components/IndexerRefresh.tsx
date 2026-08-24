@@ -1,4 +1,5 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { useFetch_IndexerOff } from '@/hooks/remote/useFetch_IndexerOff';
 import { useFetch_IndexerStatus } from '@/hooks/remote/useFetch_IndexerStatus';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Typography } from '@mui/material';
@@ -39,6 +40,7 @@ export default function IndexerRefresh() {
   const indexing = useSettingsStoreSelector((state) => state.indexing);
   const { forceRefresh } = useFetch_TakeoutMetadata();
   const { fetchStatus } = useFetch_IndexerStatus();
+  const { turnOffJob } = useFetch_IndexerOff();
   const indexerStartedAt = useSettingsStoreSelector((state) => state.indexerStartedAt);
   const indexerProgress = useSettingsStoreSelector((state) => state.indexerProgress);
 
@@ -55,11 +57,29 @@ export default function IndexerRefresh() {
         }));
       }
 
+      // If the indexer reports it's idle, make sure the UI/job state is turned off
+      if (status.status === 'done') {
+        try {
+          // attempt to inform server to stop job (noop if already stopped)
+          await turnOffJob();
+        } catch (err) {
+          // ignore errors from turnOffJob here
+        }
+
+        setSetting((prev) => ({
+          ...prev,
+          indexing: false,
+          loading: false,
+          indexerStartedAt: null,
+          indexerProgress: status.progress || prev.indexerProgress,
+        }));
+      }
+
       console.log('Indexer status:', status);
     } catch (err) {
       console.error(err);
     }
-  }, [fetchStatus, setSetting]);
+  }, [fetchStatus, setSetting, turnOffJob]);
 
   useEffect(() => {
     if (!indexing) return;

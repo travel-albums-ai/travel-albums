@@ -76,6 +76,8 @@ export default function IndexerContent() {
   const { turnOnJob } = useFetch_IndexerOn();
   const { turnOffJob } = useFetch_IndexerOff();
 
+  console.log(progress)
+
   const handleTurnOn = async () => {
     try {
       await turnOnJob();
