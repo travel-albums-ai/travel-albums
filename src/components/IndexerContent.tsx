@@ -11,7 +11,8 @@ import {
   Check,
   Database,
   History,
-  Search
+  Search,
+  Turtle
 } from 'lucide-react';
 
 const items = [
@@ -40,6 +41,30 @@ const items = [
     label: 'Failed',
     icon: <Bug size={24} />,
   },
+  {
+    key: 'imagesPerSecond',
+    label: 'Images per Second',
+    icon: <Turtle size={24} />,
+    format: (value: number) => value.toFixed(2),
+  },
+  {
+    key: 'bytesConsumed',
+    label: "MB Consumed",
+    icon: <Database size={24} />,
+    format: (value: number) => (value / (1024 * 1024)).toFixed(2),
+  },
+  {
+    key: 'ramUsageBytes',
+    label: "RAM Usage",
+    icon: <Database size={24} />,
+    format: (value: number) => (value / (1024 * 1024)).toFixed(2),
+  },
+  {
+    key: 'cpuUsagePercent',
+    label: "CPU Usage",
+    icon: <Database size={24} />,
+    format: (value: number) => value.toFixed(2),
+  }
 ];
 
 export default function IndexerContent() {
@@ -132,15 +157,20 @@ export default function IndexerContent() {
           </Box>
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+        <Box sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: 1,
+        }}
+        >
           {Object.keys(progress).length > 0 &&
           Object.entries(progress).map(([key, value]) => (
             <Box key={key} sx={{ flex: '0 1 20%' }}>
               <IndexerMetricCard
-                line={`${key}: ${value}`}
+                line={`${key}: ${items.find((item) => item.key === key)?.format ? items.find((item) => item.key === key)?.format(value) : value}`}
                 object={{
                   icon: items.find((item) => item.key === key)?.icon,
-                  label: key,
+                  label: items.find((item) => item.key === key)?.label || key,
                 }}
                 showChart
               />
