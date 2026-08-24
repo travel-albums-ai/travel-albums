@@ -53,14 +53,32 @@ export default function IndexerPerformancePopover() {
     })
   }
 
+  const isSSDMode = () => {
+    return data?.CONCURRENCY === 8 &&
+      data?.IMAGE_CONCURRENCY === 16 &&
+      data?.THUMBNAIL_SIZE === 700 &&
+      data?.THUMBNAIL_QUALITY === 80;
+  }
+
+  const isHDDMode = () => {
+    return data?.CONCURRENCY === 4 &&
+      data?.IMAGE_CONCURRENCY === 4 &&
+      data?.THUMBNAIL_SIZE === 600 &&
+      data?.THUMBNAIL_QUALITY === 72;
+  }
+
+  const isCustomMode = () => {
+    return !isSSDMode() && !isHDDMode();
+  }
+
   return <>
 
     {groups.map((group) => (
       <SettingsSection key={group.title} title={group.title} icon={group.icon}>
         <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
           <SegmentedControl defaultValue="hdd" onChange={(_, value) => value === 'hdd' ? updateHDDMode() : updateSSDMode()}>
-            <SegmentedControlItem value="hdd">HDD (Slow)</SegmentedControlItem>
-            <SegmentedControlItem value="ssd">SSD (Fast)</SegmentedControlItem>
+            <SegmentedControlItem value="hdd" disabled={!isCustomMode() && isHDDMode()}>HDD (Slow)</SegmentedControlItem>
+            <SegmentedControlItem value="ssd" disabled={!isCustomMode() && isSSDMode()}>SSD (Fast)</SegmentedControlItem>
           </SegmentedControl>
         </Box>
         {group.controls

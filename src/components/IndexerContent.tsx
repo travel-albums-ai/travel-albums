@@ -6,7 +6,6 @@ import { useFetch_IndexerOn } from '@/hooks/remote/useFetch_IndexerOn';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Box, Button, Typography } from '@mui/material';
 import {
-  BoxIcon,
   Bug,
   Check,
   Database,
@@ -14,6 +13,8 @@ import {
   Search,
   Turtle
 } from 'lucide-react';
+
+const systemCores = navigator.hardwareConcurrency || 4; // Fallback to 4 if unavailable
 
 const items = [
   {
@@ -26,11 +27,11 @@ const items = [
     label: 'Pre-indexed',
     icon: <History size={24} />,
   },
-  {
-    key: 'totalFiles',
-    label: 'Total',
-    icon: <BoxIcon size={24} />,
-  },
+  // {
+  //   key: 'totalFiles',
+  //   label: 'Total',
+  //   icon: <BoxIcon size={24} />,
+  // },
   {
     key: 'totalFound',
     label: 'Discovered',
@@ -61,9 +62,9 @@ const items = [
   },
   {
     key: 'cpuUsagePercent',
-    label: "CPU Usage",
+    label: `CPU Usage (${systemCores} cores)`,
     icon: <Database size={24} />,
-    format: (value: number) => value.toFixed(2),
+    format: (value: number) => (value / systemCores).toFixed(2),
   }
 ];
 
@@ -166,18 +167,20 @@ export default function IndexerContent() {
         }}
         >
           {Object.keys(progress).length > 0 &&
-          Object.entries(progress).map(([key, value]) => (
-            <Box key={key} sx={{ flex: '0 1 20%' }}>
-              <IndexerMetricCard
-                line={`${key}: ${items.find((item) => item.key === key)?.format ? items.find((item) => item.key === key)?.format(value) : value}`}
-                object={{
-                  icon: items.find((item) => item.key === key)?.icon,
-                  label: items.find((item) => item.key === key)?.label || key,
-                }}
-                showChart
-              />
-            </Box>
-          ))}
+          Object.entries(progress)
+            .filter(([key]) => items.some((item) => item.key === key))
+            .map(([key, value]) => (
+              <Box key={key} sx={{ flex: '0 1 20%' }}>
+                <IndexerMetricCard
+                  line={`${key}: ${items.find((item) => item.key === key)?.format ? items.find((item) => item.key === key)?.format(value) : value}`}
+                  object={{
+                    icon: items.find((item) => item.key === key)?.icon,
+                    label: items.find((item) => item.key === key)?.label || key,
+                  }}
+                  showChart
+                />
+              </Box>
+            ))}
         </Box>
       </Box>
     </SettingsSection>
