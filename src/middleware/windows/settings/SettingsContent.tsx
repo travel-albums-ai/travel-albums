@@ -115,11 +115,13 @@ export default function SettingsContent() {
 
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%" }} id="settings-content">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
-        {Object.entries(groupedSections).map(([group, groupSections]) => (
+        {Object.entries(groupedSections).map(([group, groupSections], index) => (
           <Fragment key={group}>
-            <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', p: 1, borderRadius: 2, gap: 1 }}>
-              {sectionsMetadata[group]?.icon}
-              <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group]?.title || group}</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', borderBottom: '1px dotted', mt: index === 0 ? 0 : 4, borderColor: 'divider', p: 1, gap: 1, justifyContent: 'space-between' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 0, justifyContent: 'flex-start' }}>
+                <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group]?.icon}</Typography>
+                <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group]?.title || group}</Typography>
+              </Box>
               <Tooltip title={sectionsMetadata[group]?.guidance || ''} placement="top" arrow>
                 <Info size={16} />
               </Tooltip>

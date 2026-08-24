@@ -36,7 +36,7 @@ export default function MCPPopover() {
         ))}
     </SettingsSection>
 
-    <SettingsSection title="View Tools" icon={<Eye />}>
+    <SettingsSection title="View Tools" icon={<Eye />} uuid="mcp-view-tools">
       {registeredTools
         .filter(tool => tool.type === 'view')
         .map((tool) => (
@@ -47,7 +47,7 @@ export default function MCPPopover() {
         ))}
     </SettingsSection>
 
-    <SettingsSection title="Run Tools" icon={<Cog />}>
+    <SettingsSection title="Run Tools" icon={<Cog />} uuid="mcp-run-tools">
       {registeredTools
         .filter(tool => tool.type === 'run')
         .map((tool) => (

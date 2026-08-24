@@ -92,7 +92,7 @@ export default function FilterPhotosPopover({ filter }: { filter?: string }) {
       {Object.entries(groupedControls)
         .map(([category, controls], i) => (
           <Box key={category} sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-            <SettingsSection icon={categories.find(c => c.key === category)?.icon} title={categories.find(c => c.key === category)?.label ?? category}>
+            <SettingsSection icon={categories.find(c => c.key === category)?.icon} title={categories.find(c => c.key === category)?.label ?? category} uuid={`filter-photos-${category}`}>
               {controls
                 .filter(control => !filter || control.label.toLowerCase().includes(filter.toLowerCase()))
                 .map((control) => (

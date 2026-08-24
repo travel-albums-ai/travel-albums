@@ -44,7 +44,7 @@ export default function BYOKPopover() {
         ))}
     </SettingsSection>
 
-    <SettingsSection title="AI identifiable personas" icon={<PersonStanding />}>
+    <SettingsSection title="AI identifiable personas" icon={<PersonStanding />} uuid="byok-personas">
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, justifyContent: 'space-between' }}>
         <Typography variant="subtitle2">Identify personas in photos</Typography>
         <Button variant="outlined" size="small" color="primary" onClick={() => addAdditionalPersona({ name: '', description: '' })}><Plus size={16} /></Button>
