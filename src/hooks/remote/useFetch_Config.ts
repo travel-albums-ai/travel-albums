@@ -5,7 +5,11 @@ const TAKEOUT_METADATA_URL = `${SERVER_ORIGIN}/config`
 
 type ConfigPayload = {
   TAKEOUT_ROOTS?: string[]
-  TARGET_ROOT?: string
+  TARGET_ROOT?: string,
+  CONCURRENCY: number,
+  IMAGE_CONCURRENCY: number,
+  THUMBNAIL_SIZE: number,
+  THUMBNAIL_QUALITY: number
 }
 
 export const useFetch_Config = () => {
