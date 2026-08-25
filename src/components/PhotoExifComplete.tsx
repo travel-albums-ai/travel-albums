@@ -17,7 +17,7 @@ const splitByCamelCaseAll = (str: string) => {
 };
 
 export default function PhotoExifComplete({ photo }: { photo?: GalleryPhoto }) {
-  const { exif, loading, error } = useTransform_Photo2Exif(composeUrl(photo));
+  const { exif, loading, error } = useTransform_Photo2Exif(composeUrl(photo, true));
 
   const ignoredKeys = [
     'YCbCrSubSampling', 'YCbCrPositioning', 'XResolution', 'YResolution', 'ResolutionUnit',

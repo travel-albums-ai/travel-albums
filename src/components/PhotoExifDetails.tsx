@@ -6,7 +6,7 @@ import { Aperture, Camera, Focus, Rabbit, SquareFunction, Timer } from 'lucide-r
 import { cloneElement } from 'react';
 
 export default function PhotoExifDetails({ photo }: { photo?: GalleryPhoto }) {
-  const { exif } = useTransform_Photo2Exif(composeUrl(photo))
+  const { exif } = useTransform_Photo2Exif(composeUrl(photo, true))
 
   const items = [
     {
