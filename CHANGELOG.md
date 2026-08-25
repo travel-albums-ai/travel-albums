@@ -1,3 +1,9 @@
+## [1.260.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.260.0...v1.260.1) (2026-08-25)
+
+### 🐛 Fixes
+
+* correct total cost calculation in CostAnalyzer component ([b454433](https://github.com/travel-albums-ai/travel-albums/commit/b454433ba7a9dd1bfd5f5460081cb3d695334a2c))
+
 ## [1.260.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.259.0...v1.260.0) (2026-08-25)
 
 ### ✨ Features
