@@ -1,3 +1,9 @@
+## [1.245.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.244.0...v1.245.0) (2026-08-25)
+
+### ✨ Features
+
+* added stuff ([d00f432](https://github.com/travel-albums-ai/travel-albums/commit/d00f432f9f57146ebe6c2989ba1a03af42afb84e))
+
 ## [1.244.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.243.0...v1.244.0) (2026-08-24)
 
 ### ✨ Features
