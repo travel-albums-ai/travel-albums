@@ -1,3 +1,13 @@
+## [1.260.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.259.0...v1.260.0) (2026-08-25)
+
+### ✨ Features
+
+* implement batch processing mode in ImageAnalyzer for analyzing multiple images ([05e5c6f](https://github.com/travel-albums-ai/travel-albums/commit/05e5c6ffcf0a5f118fcc1f1e9760ea7a9bc8e0c6))
+
+### 🧹 Refactors
+
+* remove unused BYOK store selector and commented-out code in AutoDescriptionDrawer ([f759160](https://github.com/travel-albums-ai/travel-albums/commit/f759160721773df524cceab931020b0537966253))
+
 ## [1.259.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.258.0...v1.259.0) (2026-08-25)
 
 ### ✨ Features
