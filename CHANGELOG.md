@@ -1,3 +1,9 @@
+## [1.247.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.246.0...v1.247.0) (2026-08-25)
+
+### ✨ Features
+
+* enhance indexing settings and performance popover with improved state management ([d805f09](https://github.com/travel-albums-ai/travel-albums/commit/d805f0901a6814be77b4dfc1be46c00f76bdea89))
+
 ## [1.246.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.245.0...v1.246.0) (2026-08-25)
 
 ### ✨ Features
