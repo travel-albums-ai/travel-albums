@@ -1,6 +1,7 @@
 import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
 import { useBYOKStoreSelector } from '@/context/byokStore';
+import CostAnalyzer from '@/robot/CostAnalyzer';
 import { Box, Typography } from '@mui/material';
 import { Astroid, BoxIcon, Clock, Coins, LogIn, LogOut } from 'lucide-react';
 
@@ -51,8 +52,13 @@ export default function BYOKCosts() {
         <SolidChip count={totalInputTokens / 1000} label={`M Input`} icon={<LogIn size={16} />} />
         <SolidChip count={totalOutputTokens / 1000} label={`M Output`} icon={<LogOut size={16} />} />
         <SolidChip count={totalTokens / 1000} label={`M tokens`} icon={<BoxIcon size={16} />} fontSize={13} />
-
       </Box>
+
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.5, p: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
+        <CostAnalyzer />
+      </Box>
+
+
     </SettingsSection>
 
 

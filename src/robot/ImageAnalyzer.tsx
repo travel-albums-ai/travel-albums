@@ -66,6 +66,8 @@ export default function ImageAnalyzer({ photos, context }: Props) {
     byokOpenAIKey,
     mainPersona,
     additionalPersonas,
+    model,
+    serviceTier,
   } = useBYOKStoreSelector((state) => state);
 
   const { addUsageStat } = useBYOK()
@@ -126,8 +128,8 @@ export default function ImageAnalyzer({ photos, context }: Props) {
           Authorization: `Bearer ${byokOpenAIKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-5.6-luna',
-          service_tier: 'flex',
+          model,
+          service_tier: serviceTier,
 
           input: [{
             role: 'user',
