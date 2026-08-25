@@ -1,3 +1,9 @@
+## [1.259.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.258.0...v1.259.0) (2026-08-25)
+
+### ✨ Features
+
+* update AiLoadingBar component with new styling and integrate loading state ([a443269](https://github.com/travel-albums-ai/travel-albums/commit/a443269ff118377bda6ac81b15d6ca3ddb072e45))
+
 ## [1.258.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.257.0...v1.258.0) (2026-08-25)
 
 ### ✨ Features
