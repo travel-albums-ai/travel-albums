@@ -1,3 +1,9 @@
+## [1.251.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.250.0...v1.251.0) (2026-08-25)
+
+### ✨ Features
+
+* enhance CostAnalyzer with improved prompts and error handling ([3aa3b48](https://github.com/travel-albums-ai/travel-albums/commit/3aa3b4809192f8f39b907c0b210426701fe528b3))
+
 ## [1.250.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.249.0...v1.250.0) (2026-08-25)
 
 ### ✨ Features
