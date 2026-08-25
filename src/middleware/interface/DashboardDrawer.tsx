@@ -1,4 +1,9 @@
 import GenericPanel from '@/components/generics/GenericPanel';
+import { useBYOKStoreSelector } from '@/context/byokStore';
+import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
+import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
+import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
+import SemanticPhotoSearch from '@/middleware/interface/autoDescription/SemanticPhotoSearch';
 import DashboardCities from '@/middleware/interface/dashboard/DashboardCities';
 import DashboardComments from '@/middleware/interface/dashboard/DashboardComments';
 import DashboardCountries from '@/middleware/interface/dashboard/DashboardCountries';
@@ -10,11 +15,20 @@ import DashboardMostRecent from '@/middleware/interface/dashboard/DashboardMostR
 import DashboardSuggestions from '@/middleware/interface/dashboard/DashboardSuggestions';
 import DashboardViews from '@/middleware/interface/dashboard/DashboardViews';
 import { Box, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 const foo = true
 
 export default function DashboardDrawer() {
+  const { type_name = '', id = '' } = useParams()
+  const sections = useSections_GLOBAL()
+  const filteredPhotos = useFilteredPhotos_GLOBAL();
+  const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey)
+  const descriptionsStore = useDescriptionsStoreSelector(state => state.descriptions)
 
+  const foundSection = sections?.find((s) => s.type === type_name)
+  const foundSet = foundSection?.data?.find((d: any) => d.name === id)
+  const photos = type_name === '' ? filteredPhotos : foundSet?.photos || []
   return (
     <GenericPanel id="dashboard-drawer">
       <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 2}}>
@@ -22,6 +36,12 @@ export default function DashboardDrawer() {
           <Typography color="textPrimary" sx={{ textAlign: 'center', py: 8 }} variant="h5">Welcome to Travel-Albums</Typography>
           <DashboardSuggestions />
         </Box>}
+
+        <SemanticPhotoSearch
+          apiKey={byokOpenAIKey || ''}
+          descriptions={descriptionsStore}
+          photos={photos}
+        />
 
         <Box sx={{
           display: 'grid',

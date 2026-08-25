@@ -155,7 +155,7 @@ export default function AutoTileCanvas({
       src={previewUrl}
       alt=""
       draggable={false}
-      style={{ display: 'block', width: '50%', height: 'auto' }}
+      style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 8, overflow: 'hidden' }}
     />
   )
 }

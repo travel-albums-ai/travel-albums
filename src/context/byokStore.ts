@@ -24,23 +24,20 @@ type UsageStat = {
 
 type BYOKStore = {
   enableAI: boolean,
+  aiLoading: boolean,
   byokOpenAIKey?: string,
-
   serviceTier?: string,
   model?: string,
-
   mainPersona: Persona,
-
   additionalPersonas?: Persona[],
-
   webMcp?: boolean,
-
   registeredMcpTools?: any[],
   usageStats?: UsageStat[],
 }
 
 const defaults: BYOKStore = {
   enableAI: true,
+  aiLoading: false,
   byokOpenAIKey: '',
   serviceTier: 'flex',
   model: 'gpt-5.6-luna',
@@ -65,6 +62,12 @@ export const useBYOK = () => {
 
   return {
     setSetting,
+    setAILoading: (loading: boolean) => {
+      setSetting(prev => ({
+        ...prev,
+        aiLoading: loading,
+      }))
+    },
     setMainPersona: (persona: Persona) => {
       setSetting(prev => ({
         ...prev,

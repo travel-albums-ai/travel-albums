@@ -1,3 +1,4 @@
+import AiLoadingBar from '@/components/AiLoadingBar';
 import GeneralRegistryWindow from '@/components/registry/GeneralRegistryWindow';
 import MainDriver from '@/components/tutorial/MainDriver';
 import WebMCPDataView from '@/components/WebMCPDataView';
@@ -16,6 +17,8 @@ export default function AppLayout() {
       <MainDriver />
 
       <MascotWrapper />
+
+      <AiLoadingBar />
 
       <WebMCPDataView
         name="check_settings_store"

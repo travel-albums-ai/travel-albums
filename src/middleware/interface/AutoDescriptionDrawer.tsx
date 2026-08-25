@@ -6,11 +6,10 @@ import { useDescriptionsStoreSelector } from '@/context/descriptionsStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { GalleryPhoto } from '@/lib/galleryData';
-import SemanticPhotoSearch from '@/middleware/interface/autoDescription/SemanticPhotoSearch';
 import BYOKCosts from '@/middleware/windows/settings/byok/BYOKCosts';
 import ImageAnalyzer from '@/robot/ImageAnalyzer';
 import { Box, Button, IconButton } from '@mui/material';
-import { Minus, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -46,24 +45,36 @@ export default function AutoDescriptionDrawer() {
           <Plus size={16} />
         </IconButton>
       </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center' }}>
+        <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>
+          <ChevronLeft size={16} />
+        </Button>
+        <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)} disabled={(renderedIndex + 1) * batchSize >= photos.length}>
+          <ChevronRight size={16} />
+        </Button>
+      </Box>
     </>}>
 
-      <SemanticPhotoSearch
+      {/* <SemanticPhotoSearch
         apiKey={byokOpenAIKey || ''}
         descriptions={descriptionsStore}
         photos={photos}
-      />
+      /> */}
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'flex-start', flexDirection: 'column' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, alignItems: 'center', flexDirection: 'row', width: '100%', borderBottom: '1px solid', borderColor: 'divider', pb: 1, mb: 1 }}>
-          <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>-</Button>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, alignItems: 'center', flexDirection: 'row', width: '100%', boxShadow: 2, borderRadius: 2 }}>
+          {/* <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex - 1)} disabled={renderedIndex <= 0}>
+            <ChevronLeft size={16} />
+          </Button> */}
           <AutoTileCanvas
             photos={selectedPhotos}
             tileSize={175}
             columns={5}
             gap={10}
           />
-          <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)} disabled={(renderedIndex + 1) * batchSize >= photos.length}>+</Button>
+          {/* <Button variant="outlined" onClick={() => setRenderedIndex(renderedIndex + 1)} disabled={(renderedIndex + 1) * batchSize >= photos.length}>
+            <ChevronRight size={16} />
+          </Button> */}
         </Box>
 
         <Box sx={{ flex: 1 }} >

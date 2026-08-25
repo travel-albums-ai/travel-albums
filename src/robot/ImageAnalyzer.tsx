@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { Astroid } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 type Result = {
@@ -69,13 +70,11 @@ export default function ImageAnalyzer({ photos, context }: Props) {
     model,
     serviceTier,
   } = useBYOKStoreSelector((state) => state);
+  const { aiLoading } = useBYOKStoreSelector((state) => state);
 
-  const { addUsageStat } = useBYOK()
+  const { addUsageStat, setAILoading } = useBYOK()
 
-
-  const imageBase64 = useAISinkStoreSelector(
-    (state) => state.autoDescriptionPreview,
-  );
+  const imageBase64 = useAISinkStoreSelector((state) => state.autoDescriptionPreview);
 
   const { describePhoto } = useDescriptions();
 
@@ -102,13 +101,13 @@ export default function ImageAnalyzer({ photos, context }: Props) {
   }), [mainPersona, additionalPersonas]);
 
   const [results, setResults] = useState<Result[]>([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function analyze() {
-    if (!imageBase64 || !byokOpenAIKey || loading) return;
+    if (!imageBase64 || !byokOpenAIKey || aiLoading) return;
 
-    setLoading(true);
+    setAILoading(true);
     setError(null);
     setResults([]);
 
@@ -201,7 +200,7 @@ export default function ImageAnalyzer({ photos, context }: Props) {
           : 'Analysis failed',
       );
     } finally {
-      setLoading(false);
+      setAILoading(false);
     }
   }
 
@@ -289,11 +288,12 @@ export default function ImageAnalyzer({ photos, context }: Props) {
 
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
+            startIcon={<Astroid size={16} />}
             variant="contained"
             onClick={analyze}
-            disabled={!imageBase64 || !byokOpenAIKey || loading}
+            disabled={!imageBase64 || !byokOpenAIKey || aiLoading}
           >
-            {loading ? 'Analyzing…' : 'Analyze'}
+            {aiLoading ? 'Analyzing…' : 'Analyze'}
           </Button>
 
           <Button
@@ -302,7 +302,7 @@ export default function ImageAnalyzer({ photos, context }: Props) {
             disabled={
               !imageBase64 ||
               !byokOpenAIKey ||
-              loading ||
+              aiLoading ||
               results.length === 0
             }
           >
