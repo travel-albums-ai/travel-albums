@@ -1,3 +1,9 @@
+## [1.252.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.251.0...v1.252.0) (2026-08-25)
+
+### ✨ Features
+
+* update CostAnalyzer prompts for improved API usage analysis and remove unused token fields ([0e14abe](https://github.com/travel-albums-ai/travel-albums/commit/0e14abeb71c2e9ef169620f2afd403364770f4ea))
+
 ## [1.251.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.250.0...v1.251.0) (2026-08-25)
 
 ### ✨ Features
