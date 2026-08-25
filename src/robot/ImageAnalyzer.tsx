@@ -10,8 +10,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { Astroid } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { Astroid, ListChecks } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 type Result = {
   index: number;
@@ -103,6 +103,8 @@ export default function ImageAnalyzer({ photos, context }: Props) {
   const [results, setResults] = useState<Result[]>([]);
   // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [batchMode, setBatchMode] = useState(false);
+  const lastAnalyzedImageRef = useRef<string | null>(null);
 
   async function analyze() {
     if (!imageBase64 || !byokOpenAIKey || aiLoading) return;
@@ -216,6 +218,33 @@ export default function ImageAnalyzer({ photos, context }: Props) {
     setResults([]);
   }
 
+  // Drives the batch loop: analyze -> wait -> add all descriptions -> wait for the next batch's image -> repeat.
+  useEffect(() => {
+    if (!batchMode) return;
+
+    if (photos.length === 0 || !byokOpenAIKey) {
+      setBatchMode(false);
+      return;
+    }
+
+    if (error) {
+      setBatchMode(false);
+      return;
+    }
+
+    if (aiLoading) return;
+
+    if (results.length > 0) {
+      addAllDescriptions();
+      return;
+    }
+
+    if (imageBase64 && imageBase64 !== lastAnalyzedImageRef.current) {
+      lastAnalyzedImageRef.current = imageBase64;
+      analyze();
+    }
+  }, [batchMode, aiLoading, results, imageBase64, error, photos.length, byokOpenAIKey]);
+
   return (
     <Box
       sx={{
@@ -226,23 +255,6 @@ export default function ImageAnalyzer({ photos, context }: Props) {
         flexWrap: 'wrap',
       }}
     >
-
-      {/* {imageBase64 && (
-        <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src={imageBase64}
-            alt="Image being analyzed"
-            sx={{
-              display: 'block',
-              maxWidth: 220,
-              maxHeight: 220,
-              objectFit: 'contain',
-              borderRadius: 1,
-            }}
-          />
-        </Box>
-      )} */}
       <Box
         sx={{
           display: 'flex',
@@ -291,7 +303,7 @@ export default function ImageAnalyzer({ photos, context }: Props) {
             startIcon={<Astroid size={16} />}
             variant="contained"
             onClick={analyze}
-            disabled={!imageBase64 || !byokOpenAIKey || aiLoading}
+            disabled={!imageBase64 || !byokOpenAIKey || aiLoading || batchMode}
           >
             {aiLoading ? 'Analyzing…' : 'Analyze'}
           </Button>
@@ -303,10 +315,21 @@ export default function ImageAnalyzer({ photos, context }: Props) {
               !imageBase64 ||
               !byokOpenAIKey ||
               aiLoading ||
+              batchMode ||
               results.length === 0
             }
           >
             Add All Descriptions
+          </Button>
+
+          <Button
+            startIcon={<ListChecks size={16} />}
+            variant={batchMode ? 'contained' : 'outlined'}
+            color={batchMode ? 'secondary' : 'primary'}
+            onClick={() => setBatchMode((prev) => !prev)}
+            disabled={!byokOpenAIKey || photos.length === 0}
+          >
+            {batchMode ? 'Stop Batch' : 'Run Batch'}
           </Button>
         </Box>
       </Box>
