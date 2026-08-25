@@ -1,3 +1,9 @@
+## [1.248.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.247.0...v1.248.0) (2026-08-25)
+
+### ✨ Features
+
+* update button styles for OpenAI links to inherit color ([372722e](https://github.com/travel-albums-ai/travel-albums/commit/372722e2d5b6fddafea50b302d2b51f9528fcf69))
+
 ## [1.247.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.246.0...v1.247.0) (2026-08-25)
 
 ### ✨ Features
