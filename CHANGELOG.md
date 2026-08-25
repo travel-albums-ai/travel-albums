@@ -1,3 +1,9 @@
+## [1.264.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.263.0...v1.264.0) (2026-08-25)
+
+### ✨ Features
+
+* add Dutch localization file with initial translations ([a44b028](https://github.com/travel-albums-ai/travel-albums/commit/a44b028f687b322f8cb8d1c7ab056eb1dd7db4cd))
+
 ## [1.263.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.262.0...v1.263.0) (2026-08-25)
 
 ### ✨ Features
