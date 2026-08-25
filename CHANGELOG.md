@@ -1,3 +1,9 @@
+## [1.246.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.245.0...v1.246.0) (2026-08-25)
+
+### ✨ Features
+
+* enable full URL composition for EXIF data retrieval in PhotoExif components ([a646a3b](https://github.com/travel-albums-ai/travel-albums/commit/a646a3b05ad87dfdab1ef9ce624522381a73d22c))
+
 ## [1.245.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.244.0...v1.245.0) (2026-08-25)
 
 ### ✨ Features
