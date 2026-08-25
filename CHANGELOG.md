@@ -1,3 +1,9 @@
+## [1.258.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.257.0...v1.258.0) (2026-08-25)
+
+### ✨ Features
+
+* implement AiLoadingBar component and integrate loading state in ImageAnalyzer and DashboardDrawer ([97861fc](https://github.com/travel-albums-ai/travel-albums/commit/97861fc10600af7f87bdec8b2226ebb47b6fdf36))
+
 ## [1.257.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.256.0...v1.257.0) (2026-08-25)
 
 ### ✨ Features
