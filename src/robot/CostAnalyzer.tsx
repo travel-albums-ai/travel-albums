@@ -71,7 +71,7 @@ export default function CostAnalyzer() {
 
       const myCosts = data?.data?.options?.find((option) => option.tier === serviceTier && option.provider_name === 'OpenAI' && option.provider_model_id === model);
 
-      setResults({ total_cost_euro: myCosts?.total_cost / 1000 });
+      setResults({ total_cost_euro: myCosts?.total_cost / 100 });
     } catch (e) {
       console.error(e);
 
