@@ -1,6 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import SettingsSection from '@/components/SettingsSection';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsGeneralRow from '@/middleware/windows/settings/components/SettingsGeneralRow';
@@ -12,6 +13,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
   const { data } = useFetch_Config();
   const theme = useTheme();
   const { mutate } = usePost_Config();
+  const indexing = useSettingsStoreSelector((state) => state.indexing);
 
   const [newRoot, setNewRoot] = useState('');
   const [targetRoot, setTargetRoot] = useState('');
@@ -42,14 +44,14 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
     <>
       <SettingsSection
         divider
-        title="Path to cache and photos archive"
+        title="Cache & Takeout"
         icon={<Code />}
         uuid="indexer-settings"
       >
         <SettingsGeneralRow icon={<Database />} label="Cache">
           <Box
             sx={{
-              width: '350px',
+              width: '450px',
               display: 'flex',
               flexDirection: 'column',
               gap: 1,
@@ -60,7 +62,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
               value={targetRoot}
               size="small"
               fullWidth
-              disabled={!data}
+              disabled={!data || indexing}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -83,7 +85,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
         <SettingsGeneralRow icon={<Folder />} label="Takeout sources">
           <Box
             sx={{
-              width: '350px',
+              width: '450px',
               display: 'flex',
               flexDirection: 'column',
               gap: 1,
@@ -123,13 +125,14 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
                     justifyContent: 'flex-end',
                   }}
                 >
-                  <GenericToggleButtonGroup variant="standard" items={[
+                  {!indexing && <GenericToggleButtonGroup variant="standard" items={[
                     {
+                      disabled: indexing,
                       tooltip: "Delete folder",
                       icon: <Trash size={16} color={theme.palette.error.main} />,
                       onClick: () => deleteRoot(root),
                     },
-                  ] satisfies GenericToggleButtonProps[]} />
+                  ] satisfies GenericToggleButtonProps[]} />}
                 </Box>
               </Box>
             ))}
@@ -137,6 +140,7 @@ export default function IndexerSettings({ asIs = false }: { asIs?: boolean }) {
               value={newRoot}
               size="small"
               fullWidth
+              disabled={!data || indexing}
               placeholder="Add new root path..."
               slotProps={{
                 input: {

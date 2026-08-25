@@ -1,5 +1,6 @@
 import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedControl';
 import SettingsSection from '@/components/SettingsSection';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { useFetch_Config } from '@/hooks/remote/useFetch_Config';
 import usePost_Config from '@/hooks/remote/useFetch_PostConfig';
 import SettingsSliderRow from '@/middleware/windows/settings/components/SettingsSliderRow';
@@ -26,6 +27,7 @@ const groups = [
 export default function IndexerPerformancePopover() {
   const { data } = useFetch_Config();
   const { mutate } = usePost_Config();
+  const indexing = useSettingsStoreSelector((state) => state.indexing);
 
   const updateSetting = (key: string, value: number) => {
     mutate({ [key]: value });
@@ -77,8 +79,8 @@ export default function IndexerPerformancePopover() {
       <SettingsSection key={group.title} title={group.title} icon={group.icon} uuid="indexer-performance">
         <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
           <SegmentedControl defaultValue="hdd" onChange={(_, value) => value === 'hdd' ? updateHDDMode() : updateSSDMode()}>
-            <SegmentedControlItem value="hdd" disabled={!isCustomMode() && isHDDMode()}>HDD (Slow)</SegmentedControlItem>
-            <SegmentedControlItem value="ssd" disabled={!isCustomMode() && isSSDMode()}>SSD (Fast)</SegmentedControlItem>
+            <SegmentedControlItem value="hdd" disabled={indexing || (!isCustomMode() && isHDDMode())}>HDD (Slow)</SegmentedControlItem>
+            <SegmentedControlItem value="ssd" disabled={indexing || (!isCustomMode() && isSSDMode())}>SSD (Fast)</SegmentedControlItem>
           </SegmentedControl>
         </Box>
         {group.controls
@@ -87,6 +89,7 @@ export default function IndexerPerformancePopover() {
               {control.type === 'number' && <SettingsSliderRow
                 label={t(control.labelKey)}
                 max={control.max}
+                disabled={indexing}
                 value={data?.[control.key] || 0}
                 onChange={(value) => updateSetting(control.key, value)}
               />}

@@ -1,4 +1,5 @@
 import IndexerContent from '@/components/IndexerContent';
+import IndexerPerformancePopover from '@/components/IndexerPerformancePopover';
 import IndexerRefresh from '@/components/IndexerRefresh';
 import IndexerSettings from '@/components/IndexerSettings';
 import PopoverButton from '@/components/PopoverButton';
@@ -13,7 +14,7 @@ export default function GenerateThumbnailsStatus() {
     <PopoverButton
       id="indexer"
       upsideDown={true}
-      width={650}
+      width={750}
       label=""
       icon=""
       trigger={<>
@@ -30,15 +31,11 @@ export default function GenerateThumbnailsStatus() {
       transformHorizontal="center"
       transformVertical="bottom"
     >
-
-      <Box sx={{ p: 2, height: '450px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <Box sx={{ p: 1, height: '850px', overflowY: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch', flexWrap: 'nowrap' }}>
         <IndexerSettings />
-      </Box>
-      <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <IndexerPerformancePopover />
         <IndexerContent />
       </Box>
-
     </PopoverButton>
-
   </>;
 }

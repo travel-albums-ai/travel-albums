@@ -18,7 +18,7 @@ export default function SettingsSection({ uuid, title, icon, guidance, children,
     localStorage.setItem(collapseStorageKey(uuid), String(next))
   }
 
-  return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, m: 0.25, overflow: 'visible' }}>
+  return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 0, m: 0.25, overflow: 'visible' }}>
     <Box sx={{
       bgcolor: theme => transparent ? alpha(theme.palette.background.default, 0.55) : theme.palette.background.paper + 'BD',
       mb: 1,
