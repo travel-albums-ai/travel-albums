@@ -1,3 +1,9 @@
+## [1.256.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.255.0...v1.256.0) (2026-08-25)
+
+### ✨ Features
+
+* add clearUsageStats function and integrate it into CostAnalyzer component ([07e1cf9](https://github.com/travel-albums-ai/travel-albums/commit/07e1cf9318503ac103e44f338379c32724eb6b48))
+
 ## [1.255.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.254.0...v1.255.0) (2026-08-25)
 
 ### ✨ Features
