@@ -9,7 +9,6 @@ type Usage = {
   input_tokens: number;
   output_tokens: number;
   total_tokens: number;
-
   input_tokens_details: Record<string, number>;
   output_tokens_details: Record<string, number>;
   total_tokens_details?: Record<string, number>;
@@ -27,6 +26,9 @@ type BYOKStore = {
   enableAI: boolean,
   byokOpenAIKey?: string,
 
+  serviceTier?: string,
+  model?: string,
+
   mainPersona: Persona,
 
   additionalPersonas?: Persona[],
@@ -40,6 +42,8 @@ type BYOKStore = {
 const defaults: BYOKStore = {
   enableAI: true,
   byokOpenAIKey: '',
+  serviceTier: 'flex',
+  model: 'gpt-5.6-luna',
   mainPersona: {
     name: '',
     description: '',
