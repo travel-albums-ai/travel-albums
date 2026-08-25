@@ -1,3 +1,9 @@
+## [1.257.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.256.0...v1.257.0) (2026-08-25)
+
+### ✨ Features
+
+* integrate BYOKCosts component into AutoDescriptionDrawer and adjust cost calculation in CostAnalyzer ([673bd17](https://github.com/travel-albums-ai/travel-albums/commit/673bd176e6c667ee74e6dcacadd7523f54e6e130))
+
 ## [1.256.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.255.0...v1.256.0) (2026-08-25)
 
 ### ✨ Features
