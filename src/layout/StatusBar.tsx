@@ -24,8 +24,6 @@ export default function StatusBar() {
     >
       <LoadingBar />
 
-      {/* <AiLoadingBar /> */}
-
       <GeneralRegistryToolbar
         noGhost
         noDivider={false}
