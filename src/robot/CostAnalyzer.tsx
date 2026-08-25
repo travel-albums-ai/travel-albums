@@ -1,6 +1,6 @@
-import { useBYOKStoreSelector } from '@/context/byokStore';
-import { Box, Button, Typography } from '@mui/material';
-import { Astroid } from 'lucide-react';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { Box, Button, IconButton, Typography } from '@mui/material';
+import { Astroid, Trash } from 'lucide-react';
 import { useState } from 'react';
 
 type CostAnalysis = {
@@ -24,9 +24,8 @@ const CLOUDPRICE_BASE_URL = 'https://ai.cloudprice.net/api/v1/models';
 
 
 export default function CostAnalyzer() {
-  const { usageStats, model, serviceTier } = useBYOKStoreSelector(
-    (state) => state,
-  );
+  const { usageStats, model, serviceTier } = useBYOKStoreSelector((state) => state);
+  const { clearUsageStats } = useBYOK()
 
   const [results, setResults] =
     useState<CostAnalysis | null>(null);
@@ -105,6 +104,16 @@ export default function CostAnalyzer() {
         </Typography>
       )}
 
+      <IconButton
+        // variant="outlined"
+        // startIcon={<Trash size={16} />}
+        size="small"
+        color="inherit"
+        onClick={clearUsageStats}
+        disabled={loading || !usageStats?.length}
+      >
+        <Trash size={16} />
+      </IconButton>
       <Button
         variant="outlined"
         startIcon={<Astroid size={16} />}

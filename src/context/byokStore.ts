@@ -71,6 +71,12 @@ export const useBYOK = () => {
         mainPersona: persona,
       }))
     },
+    clearUsageStats: () => {
+      setSetting(prev => ({
+        ...prev,
+        usageStats: [],
+      }))
+    },
     addUsageStat: (usageStat: UsageStat) => {
       setSetting(prev => ({
         ...prev,
