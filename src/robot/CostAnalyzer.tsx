@@ -46,12 +46,6 @@ const RESPONSE_SCHEMA = {
     results: {
       type: 'object',
       properties: {
-        total_input_tokens: {
-          type: 'string',
-        },
-        total_output_tokens: {
-          type: 'string',
-        },
         total_tokens: {
           type: 'string',
         },
@@ -60,8 +54,6 @@ const RESPONSE_SCHEMA = {
         },
       },
       required: [
-        'total_input_tokens',
-        'total_output_tokens',
         'total_tokens',
         'total_cost_euro',
       ],
@@ -87,24 +79,26 @@ export default function CostAnalyzer({
 
   const prompts = useMemo(() => {
     const mainPrompt = [
-      'Look at these API usage costs and provide a summary.',
-      'Calculate the total input tokens, total output tokens, total tokens used, and total cost in Euro.',
-      'Use today\'s EUR/USD exchange rate.',
+      'Look at these API usage records and calculate the totals.',
+      'You MUST use web search to find:',
+      '1. The current official OpenAI API pricing for each model in the records.',
+      '2. The current USD to EUR exchange rate.',
+      'Use the official OpenAI pricing page for model pricing when available.',
+      'Use a current reliable source for the USD/EUR exchange rate.',
+      'Calculate the total cost in EUR from the actual token counts and model pricing.',
+      'Do not say pricing or exchange rate is unavailable if it can be found on the web.',
       'Return JSON with exactly these keys:',
-      'total_input_tokens, total_output_tokens, total_tokens, total_cost_euro.',
+      'total_tokens, total_cost_euro.',
+      'Return strings.',
       'Do not include any other text or explanation.',
     ].join(' ');
 
     const calls = (usageStats ?? []).map((stat) => {
-      const inputTokens = stat.usage.input_tokens * 1000;
-      const outputTokens = stat.usage.output_tokens * 1000;
       const totalTokens = stat.usage.total_tokens * 1000;
 
       return [
         `Model: ${stat.model}`,
-        `Service tier: ${stat.service_tier || 'auto'}`,
-        `Input Tokens: ${inputTokens}`,
-        `Output Tokens: ${outputTokens}`,
+        `Tier: ${stat.service_tier || 'auto'}`,
         `Total Tokens: ${totalTokens}`,
       ].join(', ');
     });
@@ -157,7 +151,11 @@ export default function CostAnalyzer({
               ],
             },
           ],
-
+          tools: [
+            {
+              type: 'web_search',
+            },
+          ],
           text: {
             format: {
               type: 'json_schema',
