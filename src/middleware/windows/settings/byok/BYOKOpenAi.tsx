@@ -25,11 +25,11 @@ export default function BYOKOpenAi() {
       </SettingsGeneralRow>
 
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
-        <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start' }}>
-          <Button size="small" startIcon={<ScrollText size={16} />} variant="outlined">Explore the costs</Button>
+        <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
+          <Button size="small" startIcon={<ScrollText size={16} />} color="inherit" variant="outlined">Explore the costs</Button>
         </a>
-        <a href="https://platform.openai.com/usage" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start' }}>
-          <Button size="small" startIcon={<Coins size={16} />} variant="outlined">Explore usage</Button>
+        <a href="https://platform.openai.com/usage" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
+          <Button size="small" startIcon={<Coins size={16} />} color="inherit" variant="outlined">Explore usage</Button>
         </a>
       </Box>
 

@@ -46,8 +46,8 @@ export default function BYOKPopover() {
         ))}
 
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
-        <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start'}}>
-          <Button startIcon={<UserKey size={16} />} size="small" variant="outlined">Get your OpenAI API key</Button>
+        <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
+          <Button startIcon={<UserKey size={16} />} size="small" color="inherit" variant="outlined">Get your OpenAI API key</Button>
         </a>
       </Box>
     </SettingsSection>
