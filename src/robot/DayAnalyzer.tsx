@@ -1,4 +1,4 @@
-import { useBYOKStoreSelector } from '@/context/byokStore';
+import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import {
   Alert,
   Box,
@@ -46,8 +46,11 @@ export default function DayAnalyzer({ context }: Props) {
   const {
     byokOpenAIKey,
     mainPersona,
+    model,
+    serviceTier,
     additionalPersonas,
   } = useBYOKStoreSelector((state) => state);
+  const { addUsageStat, setAILoading } = useBYOK()
 
   const prompts = useMemo(() => ({
     main:
@@ -133,12 +136,13 @@ export default function DayAnalyzer({ context }: Props) {
           Authorization: `Bearer ${byokOpenAIKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-5.6-luna',
+          model,
+          service_tier: serviceTier,
           input,
           text: {
             format: {
               type: 'json_schema',
-              name: 'image_analysis',
+              name: 'day_analysis',
               strict: true,
               schema: {
                 type: 'object',
@@ -179,6 +183,18 @@ export default function DayAnalyzer({ context }: Props) {
       localStorage.setItem(cacheKey, value);
 
       setResult(value);
+      addUsageStat({
+        created_at: data.created_at ?? new Date().toISOString(),
+        model: data.model,
+        call_type: 'day_analysis',
+        service_tier: data.service_tier,
+        usage: data.usage ?? {
+          input_tokens: 0,
+          output_tokens: 0,
+          total_tokens: 0,
+          input_tokens_details: {},
+          output_tokens_details: {},
+        } });
       setCached(false);
     } catch (e) {
       console.error(e);
