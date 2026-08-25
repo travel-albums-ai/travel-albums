@@ -7,6 +7,7 @@ import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore'
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
 import { GalleryPhoto } from '@/lib/galleryData';
 import SemanticPhotoSearch from '@/middleware/interface/autoDescription/SemanticPhotoSearch';
+import BYOKCosts from '@/middleware/windows/settings/byok/BYOKCosts';
 import ImageAnalyzer from '@/robot/ImageAnalyzer';
 import { Box, Button, IconButton } from '@mui/material';
 import { Minus, Plus } from 'lucide-react';
@@ -69,6 +70,8 @@ export default function AutoDescriptionDrawer() {
           <ImageAnalyzer photos={selectedPhotos} context={{ photoLocations: 'Photo where these photos were taken: ' + uniquePlaces.join(', ') }} />
         </Box>
       </Box>
+
+      <BYOKCosts />
 
     </GenericPanel>
   )
