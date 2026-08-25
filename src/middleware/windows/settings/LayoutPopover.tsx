@@ -3,12 +3,18 @@ import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
-import { CreditCard, GalleryHorizontal, PaintBucket } from 'lucide-react';
+import { CreditCard, GalleryHorizontal, Languages, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const groups = [
-
+  {
+    title: "Locale",
+    controls: [
+      { key: 'locale', labelKey: 'layoutLocale', type: 'toolbar', toolbarComponentId: "localeToggle" },
+    ],
+    icon: <Languages />,
+  },
   {
     title: "Theme",
     controls: [
@@ -40,7 +46,6 @@ const groups = [
     ],
     icon: <GalleryHorizontal />,
   },
-
 ]
 
 export default function LayoutPopover() {

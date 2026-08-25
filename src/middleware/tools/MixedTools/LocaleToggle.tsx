@@ -3,25 +3,18 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { supportedLanguages, type SupportedLanguage } from '@/lib/i18n';
 import { ToggleButtonGroup } from '@mui/material';
 
-const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
-  en: 'EN',
-  de: 'DE',
-  fr: 'FR',
-  es: 'ES',
+// language codes whose flag country differs from the language code itself
+const FLAG_COUNTRY_OVERRIDES: Partial<Record<string, string>> = {
+  en: 'GB',
 };
 
-const LANGUAGE_TOOLTIPS: Record<SupportedLanguage, string> = {
-  en: 'English',
-  de: 'Deutsch',
-  fr: 'Français',
-  es: 'Español',
-};
+const languageDisplayNames = new Intl.DisplayNames(['en'], { type: 'language' });
 
 const ITEMS = supportedLanguages.map((lang) => ({
   value: lang,
-  tooltip: LANGUAGE_TOOLTIPS[lang],
+  tooltip: languageDisplayNames.of(lang) ?? lang,
   title: '',
-  icon: <div className={`fflag fflag-${lang === 'en' ? 'GB' : lang.toUpperCase()}`} style={{ width: 16, height: 16, borderRadius: 10 }} />,
+  icon: <div className={`fflag fflag-${FLAG_COUNTRY_OVERRIDES[lang] ?? lang.toUpperCase()}`} style={{ width: 16, height: 16, borderRadius: 10 }} />,
 })) as GenericToggleButtonProps[];
 
 export default function LocaleToggle() {

@@ -1,23 +1,28 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import de from '@/locales/de.json';
-import en from '@/locales/en.json';
-import es from '@/locales/es.json';
-import fr from '@/locales/fr.json';
+// Auto-discover locale files: src/locales/<lang>.json
+const localeModules = import.meta.glob<Record<string, unknown>>('../locales/*.json', {
+  eager: true,
+  import: 'default',
+});
 
-export const supportedLanguages = ['en', 'de', 'fr', 'es'] as const;
+const resources: Record<string, { translation: Record<string, unknown> }> = {};
+
+for (const [path, translation] of Object.entries(localeModules)) {
+  const lang = path.split('/').pop()?.replace(/\.json$/, '');
+  if (lang) {
+    resources[lang] = { translation };
+  }
+}
+
+export const supportedLanguages = Object.keys(resources).sort() as [string, ...string[]];
 export type SupportedLanguage = typeof supportedLanguages[number];
 
 i18n
   .use(initReactI18next)
   .init({
-    resources: {
-      en: { translation: en },
-      de: { translation: de },
-      fr: { translation: fr },
-      es: { translation: es },
-    },
+    resources,
     lng: 'en',
     fallbackLng: 'en',
     interpolation: {
