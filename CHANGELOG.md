@@ -1,3 +1,9 @@
+## [1.255.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.254.0...v1.255.0) (2026-08-25)
+
+### ✨ Features
+
+* enhance BYOKCosts component with improved usage stats display and new icons ([a17bf38](https://github.com/travel-albums-ai/travel-albums/commit/a17bf38786d16cdd90a55dc7442671c87df6d390))
+
 ## [1.254.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.253.0...v1.254.0) (2026-08-25)
 
 ### ✨ Features
