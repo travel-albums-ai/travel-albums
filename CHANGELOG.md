@@ -1,3 +1,9 @@
+## [1.262.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.261.0...v1.262.0) (2026-08-25)
+
+### ✨ Features
+
+* updated theme name ([922cbdd](https://github.com/travel-albums-ai/travel-albums/commit/922cbdd60b31bf1c12cfb4b3920be9741f57445e))
+
 ## [1.261.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.260.1...v1.261.0) (2026-08-25)
 
 ### ✨ Features
