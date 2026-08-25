@@ -1,7 +1,7 @@
-import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { useBYOKStoreSelector } from '@/context/byokStore';
 import { Box, Button, Typography } from '@mui/material';
 import { Astroid } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 type CostAnalysis = {
   total_input_tokens: number;
@@ -15,199 +15,143 @@ type Props = {
   context?: Record<string, unknown>;
 };
 
-type OpenAIResponse = {
-  created_at?: string;
-  model?: string;
-  service_tier?: string;
-  output?: Array<{
-    type?: string;
-    content?: Array<{
-      type?: string;
-      text?: string;
-    }>;
-  }>;
-  usage?: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-    input_tokens_details?: Record<string, unknown>;
-    output_tokens_details?: Record<string, unknown>;
-  };
-  error?: {
-    message?: string;
-  };
+type CloudPriceResponse = {
+  input_tokens?: number;
+  output_tokens?: number;
+  total_tokens?: number;
+
+  input_cost?: number;
+  output_cost?: number;
+  total_cost?: number;
+
+  cost?: number;
+
+  currency?: string;
+
+  error?: string;
+  message?: string;
 };
 
-const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses';
+const CLOUDPRICE_BASE_URL = 'https://ai.cloudprice.net/api/v1/models';
 
-const RESPONSE_SCHEMA = {
-  type: 'object',
-  properties: {
-    results: {
-      type: 'object',
-      properties: {
-        total_tokens: {
-          type: 'string',
-        },
-        total_cost_euro: {
-          type: 'string',
-        },
-      },
-      required: [
-        'total_tokens',
-        'total_cost_euro',
-      ],
-      additionalProperties: false,
-    },
-  },
-  required: ['results'],
-  additionalProperties: false,
-} as const;
+/**
+ * Maps the model name returned by OpenAI to the CloudPrice model slug.
+ *
+ * Example:
+ *   gpt-5.6-luna -> openai-gpt-5-6-sol
+ *
+ * Add other models here as needed.
+ */
+function getCloudPriceModelSlug(modelName: string): string {
+  const normalized = modelName.toLowerCase();
 
-export default function CostAnalyzer({
-  photos: _photos,
-  context: _context,
-}: Props = {}) {
-  const {
-    byokOpenAIKey,
-    model,
-    serviceTier,
-    usageStats,
-  } = useBYOKStoreSelector((state) => state);
+  const knownModels: Record<string, string> = {
+    'gpt-5.6-luna': 'openai-gpt-5-6-sol',
+  };
 
-  const { addUsageStat } = useBYOK();
+  return (
+    knownModels[normalized] ??
+    normalized
+      .replace(/^gpt-/, 'openai-gpt-')
+      .replace(/\./g, '-')
+  );
+}
 
-  const prompts = useMemo(() => {
-    const mainPrompt = [
-      'Look at these API usage records and calculate the totals.',
-      'You MUST use web search to find:',
-      '1. The current official OpenAI API pricing for each model in the records.',
-      '2. The current USD to EUR exchange rate.',
-      'Use the official OpenAI pricing page for model pricing when available.',
-      'Use a current reliable source for the USD/EUR exchange rate.',
-      'Calculate the total cost in EUR from the actual token counts and model pricing.',
-      'Do not say pricing or exchange rate is unavailable if it can be found on the web.',
-      'Return JSON with exactly these keys:',
-      'total_tokens, total_cost_euro.',
-      'Return strings.',
-      'Do not include any other text or explanation.',
-    ].join(' ');
+export default function CostAnalyzer() {
+  const { usageStats } = useBYOKStoreSelector((state) => state);
 
-    const calls = (usageStats ?? []).map((stat) => {
-      const totalTokens = stat.usage.total_tokens * 1000;
+  const [results, setResults] =
+    useState<CostAnalysis | null>(null);
 
-      return [
-        `Model: ${stat.model}`,
-        `Tier: ${stat.service_tier || 'auto'}`,
-        `Total Tokens: ${totalTokens}`,
-      ].join(', ');
-    });
+  const [loading, setLoading] =
+    useState(false);
 
-    return {
-      main: mainPrompt,
-      calls,
-    };
-  }, [usageStats]);
+  const [error, setError] =
+    useState<string | null>(null);
 
-  const [results, setResults] = useState<CostAnalysis | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  async function calculateCost() {
+    if (loading) return;
 
-  async function analyze() {
-    if (!byokOpenAIKey || loading) return;
+    if (!usageStats?.length) {
+      setError('No API usage records available.');
+      return;
+    }
 
     setLoading(true);
     setError(null);
     setResults(null);
 
     try {
-      const input = [
-        prompts.main,
-        ...prompts.calls,
-      ]
-        .filter(Boolean)
-        .join('\n\n');
+      let totalInputTokens = 0;
+      let totalOutputTokens = 0;
+      let totalCost = 0;
 
-      console.log('CostAnalyzer input:', input);
+      for (const stat of usageStats) {
+        const inputTokens =
+          stat.usage.input_tokens * 1000;
 
-      const response = await fetch(OPENAI_RESPONSES_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${byokOpenAIKey}`,
-        },
-        body: JSON.stringify({
-          model,
-          service_tier: serviceTier,
+        const outputTokens =
+          stat.usage.output_tokens * 1000;
 
-          input: [
-            {
-              role: 'user',
-              content: [
-                {
-                  type: 'input_text',
-                  text: input,
-                },
-              ],
-            },
-          ],
-          tools: [
-            {
-              type: 'web_search',
-            },
-          ],
-          text: {
-            format: {
-              type: 'json_schema',
-              name: 'cost_analysis',
-              strict: true,
-              schema: RESPONSE_SCHEMA,
-            },
-          },
-        }),
-      });
+        const modelSlug =
+          getCloudPriceModelSlug(stat.model);
 
-      const data = (await response.json()) as OpenAIResponse;
-
-      if (!response.ok) {
-        throw new Error(
-          data.error?.message ||
-            `OpenAI request failed (${response.status})`,
+        const url = new URL(
+          `${CLOUDPRICE_BASE_URL}/${modelSlug}/pricing/calculate`,
         );
+
+        url.searchParams.set(
+          'input_tokens',
+          String(inputTokens),
+        );
+
+        url.searchParams.set(
+          'output_tokens',
+          String(outputTokens),
+        );
+
+        console.log(
+          'CloudPrice request:',
+          url.toString(),
+        );
+
+        const response = await fetch(url);
+
+        const data =
+          (await response.json()) as CloudPriceResponse;
+
+        if (!response.ok) {
+          throw new Error(
+            data.error ||
+              data.message ||
+              `CloudPrice request failed (${response.status})`,
+          );
+        }
+
+        /**
+         * CloudPrice returns the calculated cost.
+         *
+         * Prefer total_cost, then cost, then the
+         * sum of input/output costs.
+         */
+        const cost =
+          data.total_cost ??
+          data.cost ??
+          ((data.input_cost ?? 0) +
+            (data.output_cost ?? 0));
+
+        totalInputTokens += inputTokens;
+        totalOutputTokens += outputTokens;
+        totalCost += cost;
       }
 
-      const outputText = data.output
-        ?.filter((item) => item.type === 'message')
-        .flatMap((item) => item.content ?? [])
-        .find((content) => content.type === 'output_text')
-        ?.text;
-
-      if (!outputText) {
-        throw new Error('OpenAI returned an empty response');
-      }
-
-      const parsed = JSON.parse(outputText) as {
-        results: CostAnalysis;
-      };
-
-      if (!parsed.results) {
-        throw new Error('OpenAI returned invalid cost analysis data');
-      }
-
-      setResults(parsed.results);
-
-      addUsageStat({
-        created_at: data.created_at ?? new Date().toISOString(),
-        model: data.model ?? model,
-        call_type: 'cost_analysis',
-        service_tier: data.service_tier,
-        usage: data.usage ?? {
-          input_tokens: 0,
-          output_tokens: 0,
-          total_tokens: 0,
-          input_tokens_details: {},
-          output_tokens_details: {},
-        },
+      setResults({
+        total_input_tokens: totalInputTokens,
+        total_output_tokens: totalOutputTokens,
+        total_tokens:
+          totalInputTokens +
+          totalOutputTokens,
+        total_cost_euro: totalCost,
       });
     } catch (e) {
       console.error(e);
@@ -215,7 +159,7 @@ export default function CostAnalyzer({
       setError(
         e instanceof Error
           ? e.message
-          : 'Analysis failed',
+          : 'Cost calculation failed',
       );
     } finally {
       setLoading(false);
@@ -236,10 +180,10 @@ export default function CostAnalyzer({
         startIcon={<Astroid size={16} />}
         size="small"
         color="inherit"
-        onClick={analyze}
-        disabled={!byokOpenAIKey || loading}
+        onClick={calculateCost}
+        disabled={loading || !usageStats?.length}
       >
-        {loading ? 'Analyzing…' : 'Analyze'}
+        {loading ? 'Calculating…' : 'Calculate cost'}
       </Button>
 
       {error && (
@@ -253,14 +197,35 @@ export default function CostAnalyzer({
 
       {results && (
         <Box
-          component="pre"
           sx={{
-            m: 0,
-            fontSize: 12,
-            fontFamily: 'monospace',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 0.25,
+            fontSize: 13,
           }}
         >
-          {JSON.stringify(results, null, 2)}
+          <Typography variant="body2">
+            Input:{' '}
+            {results.total_input_tokens.toLocaleString()}
+          </Typography>
+
+          <Typography variant="body2">
+            Output:{' '}
+            {results.total_output_tokens.toLocaleString()}
+          </Typography>
+
+          <Typography variant="body2">
+            Total:{' '}
+            {results.total_tokens.toLocaleString()}
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{ fontWeight: 700 }}
+          >
+            Cost:{' '}
+            €{results.total_cost_euro.toFixed(6)}
+          </Typography>
         </Box>
       )}
     </Box>
