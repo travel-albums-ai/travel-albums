@@ -1,3 +1,9 @@
+## [1.249.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.248.0...v1.249.0) (2026-08-25)
+
+### ✨ Features
+
+* add service tier and model options to BYOK settings ([e559c89](https://github.com/travel-albums-ai/travel-albums/commit/e559c89b7777a26c836804c927679c771bc728b4))
+
 ## [1.248.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.247.0...v1.248.0) (2026-08-25)
 
 ### ✨ Features
