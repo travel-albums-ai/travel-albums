@@ -19,6 +19,8 @@ type UsageStat = {
   created_at: string;
   model: string;
   usage: Usage;
+  call_type?: string;
+  service_tier?: string;
 }
 
 type BYOKStore = {

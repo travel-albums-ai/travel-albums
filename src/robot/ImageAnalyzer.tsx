@@ -127,6 +127,7 @@ export default function ImageAnalyzer({ photos, context }: Props) {
         },
         body: JSON.stringify({
           model: 'gpt-5.6-luna',
+          service_tier: 'flex',
 
           input: [{
             role: 'user',
@@ -180,6 +181,8 @@ export default function ImageAnalyzer({ photos, context }: Props) {
       addUsageStat({
         created_at: data.created_at ?? new Date().toISOString(),
         model: data.model,
+        call_type: 'image_analysis',
+        service_tier: data.service_tier,
         usage: data.usage ?? {
           input_tokens: 0,
           output_tokens: 0,

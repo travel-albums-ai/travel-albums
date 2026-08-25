@@ -6,7 +6,7 @@ import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Box, Button, Typography } from '@mui/material';
-import { Astroid, Key, PersonStanding, Plus } from 'lucide-react';
+import { Astroid, Key, PersonStanding, Plus, UserKey } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,7 +22,7 @@ export default function BYOKPopover() {
   const { t } = useTranslation()
 
   return <>
-    <SettingsSection title="AI via Bring Your Own Key (BYOK)" icon={<Key />} transparent={true}>
+    <SettingsSection title="AI via Bring Your Own Key (BYOK)" icon={<Key />} transparent={true} uuid="byok-toggle-ai">
       {toggleControls
         .map((control) => (
           <Fragment key={control.key}>
@@ -44,6 +44,12 @@ export default function BYOKPopover() {
             />}
           </Fragment>
         ))}
+
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
+        <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start'}}>
+          <Button startIcon={<UserKey size={16} />} size="small" variant="outlined">Get your OpenAI API key</Button>
+        </a>
+      </Box>
     </SettingsSection>
 
     <BYOKOpenAi />
