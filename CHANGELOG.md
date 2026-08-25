@@ -1,3 +1,9 @@
+## [1.250.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.249.0...v1.250.0) (2026-08-25)
+
+### ✨ Features
+
+* add CostAnalyzer component and integrate with BYOKCosts and ImageAnalyzer ([cc08f8d](https://github.com/travel-albums-ai/travel-albums/commit/cc08f8d9d0b6df4e742fe302addfb7e1071ad6c6))
+
 ## [1.249.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.248.0...v1.249.0) (2026-08-25)
 
 ### ✨ Features
