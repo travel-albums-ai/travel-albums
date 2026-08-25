@@ -1,3 +1,9 @@
+## [1.261.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.260.1...v1.261.0) (2026-08-25)
+
+### ✨ Features
+
+* enhance DayAnalyzer to utilize dynamic model and service tier from BYOK store ([a23627e](https://github.com/travel-albums-ai/travel-albums/commit/a23627eaae9c5a2f99276bb4dabdf2eed5af58c2))
+
 ## [1.260.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.260.0...v1.260.1) (2026-08-25)
 
 ### 🐛 Fixes
