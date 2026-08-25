@@ -1,3 +1,9 @@
+## [1.263.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.262.0...v1.263.0) (2026-08-25)
+
+### ✨ Features
+
+* implement dynamic locale loading and add Portuguese and Romanian translations ([c4f380b](https://github.com/travel-albums-ai/travel-albums/commit/c4f380b47ab52df0f7877db57868f690e3ff74a3))
+
 ## [1.262.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.261.0...v1.262.0) (2026-08-25)
 
 ### ✨ Features
