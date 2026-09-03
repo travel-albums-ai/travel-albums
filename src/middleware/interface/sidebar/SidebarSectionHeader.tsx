@@ -13,7 +13,7 @@ export default function SidebarSectionHeader({ title, icon, data, type }: { titl
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: 'flex',  alignItems: 'center', gap: 0, py: 0.25 }}>
+    <Box sx={{ display: 'flex',  alignItems: 'center', gap: 0, py: 0.25 }} id={`sidebar-section-${type}`}>
       <SidebarCoreButton
         onClick={() => {
           if(!isOpen) {

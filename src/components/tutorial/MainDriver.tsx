@@ -22,21 +22,29 @@ const sidebar = [
     },
   },
   {
-    element: "#settings-sections-toggle",
+    element: "#sidebar-section-peopleAndPets",
     popover: {
-      title: "Settings",
-      description: "Use this toggle to access the settings for your sections.",
+      title: "People & Pets",
+      description: "Discover your friends and pets in your photos.",
       side: "bottom",
     },
   },
   {
-    element: "#search-filters-toggle",
+    element: "#sidebar-section-folders",
     popover: {
-      title: "Search Filters",
-      description: "Use this toggle to apply global filters to your search results.",
+      title: "Folders",
+      description: "Find what what was indexed in your folders.",
       side: "bottom",
     },
   },
+  {
+    element: "#sidebar-section-countries",
+    popover: {
+      title: "Countries",
+      description: "Discover the countries where your photos were taken.",
+      side: "bottom",
+    },
+  }
 ]
 
 const statusBar = [
@@ -100,6 +108,30 @@ const header = [
     },
   },
   {
+    element: "#search-filters-toggle",
+    popover: {
+      title: "Search Filters",
+      description: "Use this toggle to apply global filters to your search results.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#settings-toggle",
+    popover: {
+      title: "Settings",
+      description: "Use this toggle to open and close the settings modal.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#dark-light-toggle",
+    popover: {
+      title: "Dark/Light Mode",
+      description: "Use this toggle to switch between dark and light themes.",
+      side: "bottom",
+    },
+  },
+  {
     element: "#fullscreen-toggle",
     popover: {
       title: "Fullscreen Toggle",
@@ -136,6 +168,14 @@ export default function MainDriver() {
           popover: {
             title: "Outlet Drawer",
             description: "This is where your main content is displayed. Psst: is has draggable tabs",
+            side: "top",
+          },
+        },
+        {
+          element: ".flexlayout__tabset_tabbar_inner",
+          popover: {
+            title: "Different views",
+            description: "Switch between different views of your content using these tabs.",
             side: "top",
           },
         },

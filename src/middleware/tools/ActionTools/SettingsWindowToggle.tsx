@@ -20,7 +20,7 @@ export default function SettingsWindowToggle() {
       }}
     />
 
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="settings-toggle" items={[
       {
         webMcp: true,
         tooltip: 'Toggle Settings Modal',

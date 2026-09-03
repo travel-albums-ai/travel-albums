@@ -36,7 +36,7 @@ export default function DarkLightStatus() {
       }}
     />
 
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="dark-light-toggle" items={[
       {
         tooltip: t('toggleThemeTooltip'),
         webMcp: true,
