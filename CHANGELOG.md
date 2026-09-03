@@ -1,3 +1,9 @@
+## [1.267.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.266.0...v1.267.0) (2026-09-03)
+
+### ✨ Features
+
+* update onboarding components with improved styles and video integration ([5589d80](https://github.com/travel-albums-ai/travel-albums/commit/5589d805d1a9712966f40ded11bfd11b109115ff))
+
 ## [1.266.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.265.0...v1.266.0) (2026-09-03)
 
 ### ✨ Features
