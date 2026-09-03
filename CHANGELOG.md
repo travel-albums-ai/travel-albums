@@ -1,3 +1,9 @@
+## [1.266.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.265.0...v1.266.0) (2026-09-03)
+
+### ✨ Features
+
+* enhance onboarding components with new wrappers and improved styles ([42e42f6](https://github.com/travel-albums-ai/travel-albums/commit/42e42f640a5d33667289fc2054a00820ba1a3788))
+
 ## [1.265.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.264.0...v1.265.0) (2026-09-03)
 
 ### ✨ Features
