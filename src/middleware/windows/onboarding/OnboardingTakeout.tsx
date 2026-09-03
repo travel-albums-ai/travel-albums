@@ -22,7 +22,34 @@ export default function OnboardingTakeout() {
 
   return (<>
     <OnboardingWrapper>
-      <img src="/googleTakeout.png" alt="Google Takeout"  style={{ width: '100%', height: '271px', borderRadius: 8 }} />
+      {/* <img src="/googleTakeout.png" alt="Google Takeout"  style={{ width: '100%', height: '271px', borderRadius: 8 }} /> */}
+
+
+
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "16 / 9",
+          overflow: "hidden",
+          borderRadius: 4,
+        }}
+      >
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/nTLMbpX_4hQ"
+          title="YouTube video"
+          style={{
+            position: "absolute",
+            backgroundColor: 'transparent',
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            border: 0,
+          }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
       <OnboardingButton href="https://takeout.google.com/settings/takeout" label={'Open Google Takeout...'} />
     </OnboardingWrapper>
     <OnboardingWrapper light={true}>

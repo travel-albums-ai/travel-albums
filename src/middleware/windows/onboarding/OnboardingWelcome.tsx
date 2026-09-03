@@ -20,7 +20,7 @@ const phaseSteps = [
   {
     key: '3',
     icon: <LayoutPanelLeft />,
-    titleKey: '🌍 🍕 🐈 🏔️ ⛵ 🥰 Hello memories!',
+    titleKey: 'Hello memories! 🌍 🍕 🐈 🏔️ ⛵ 🥰 ',
     descriptionKey: 'Enjoy your travel albums! Remember your trips, your meals, your adventures and share them with your friends and family.',
   },
 ]
@@ -41,7 +41,7 @@ export default function OnboardingWelcome() {
           margin: 20
         }}
       />
-      <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="body1" color="textPrimary">
+      <Typography sx={{ p: 2, pt: 0, lineHeight: 2, textAlign: 'center' }} variant="body1" color="textPrimary">
         {t('onboardingWelcomeBody')}
       </Typography>
     </OnboardingWrapper>

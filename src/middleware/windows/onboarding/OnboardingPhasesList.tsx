@@ -10,7 +10,7 @@ export default function OnboardingPhasesList({ phaseSteps } : { phaseSteps: { ke
       <Box key={step.key} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1, width: '100%', px: 2 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
           {cloneElement(step.icon, { size: 16 })}
-          <Typography variant="subtitle1">{t(step.titleKey)}</Typography>
+          <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>{t(step.titleKey)}</Typography>
         </Box>
         <Typography variant="subtitle2" color="textSecondary">{t(step.descriptionKey)}</Typography>
         {i < phaseSteps.length - 1 && <Divider sx={{ width: '100%' }} />}
