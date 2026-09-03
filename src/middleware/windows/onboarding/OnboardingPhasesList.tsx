@@ -7,7 +7,7 @@ export default function OnboardingPhasesList({ phaseSteps } : { phaseSteps: { ke
 
   return (<>
     {phaseSteps.map((step, i) => (
-      <Box key={step.key} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, width: '100%', px: 2 }}>
+      <Box key={step.key} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1, width: '100%', px: 2 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
           {cloneElement(step.icon, { size: 16 })}
           <Typography variant="subtitle1">{t(step.titleKey)}</Typography>

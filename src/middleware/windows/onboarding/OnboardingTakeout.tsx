@@ -22,8 +22,10 @@ export default function OnboardingTakeout() {
 
   return (<>
     <OnboardingWrapper>
-      <img src="/googleTakeout.png" alt="Google Takeout"  style={{ width: '100%', borderRadius: 8 }} />
+      <img src="/googleTakeout.png" alt="Google Takeout"  style={{ width: '100%', height: '271px', borderRadius: 8 }} />
       <OnboardingButton href="https://takeout.google.com/settings/takeout" label={'Open Google Takeout...'} />
+    </OnboardingWrapper>
+    <OnboardingWrapper light={true}>
       <OnboardingPhasesList phaseSteps={phaseSteps} />
     </OnboardingWrapper>
   </>)

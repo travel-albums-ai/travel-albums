@@ -35,20 +35,28 @@ export default function Onboarding() {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+        <Stepper activeStep={activeStep} alternativeLabel nonLinear={true} >
           {steps.map((label) => (
-            <Step key={label} onClick={() => setActiveStep(steps.indexOf(label))} sx={{ cursor: 'pointer', width: '110px' }}>
+            <Step key={label}
+            // onClick={() => setActiveStep(steps.indexOf(label))}
+              sx={{
+                // cursor: 'pointer',
+                width: '110px'
+              }}
+            >
               <StepLabel >{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
       </Box>
 
-      {activeStep === 0 && <OnboardingWelcome />}
-      {activeStep === 1 && <OnboardingTakeout />}
-      {activeStep === 2 && <OnboardingIndexer />}
-      {activeStep === 3 && <OnboardingFolders />}
-      {activeStep === 4 && <OnboardingIndexing />}
+      <Box sx={{ height: '780px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {activeStep === 0 && <OnboardingWelcome />}
+        {activeStep === 1 && <OnboardingTakeout />}
+        {activeStep === 2 && <OnboardingIndexer />}
+        {activeStep === 3 && <OnboardingFolders />}
+        {activeStep === 4 && <OnboardingIndexing />}
+      </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, gap: 1 }}>
         <Button

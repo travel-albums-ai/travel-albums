@@ -30,13 +30,15 @@ export default function OnboardingIndexer() {
 
   return (<>
     <OnboardingWrapper>
-      <img src="/image.1.png" alt="Releases" style={{ width: '100%', borderRadius: 8 }} />
+      <img src="/image.1.png" alt="Releases" style={{ width: '100%', borderRadius: 8, height: '312px' }} />
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', width: '100%' }} >
         <OnboardingButton href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" label="Open Indexer Releases..." />
         <ServerStatus />
       </Box>
-      <OnboardingPhasesList phaseSteps={phaseSteps} />
+    </OnboardingWrapper>
 
+    <OnboardingWrapper light={true}>
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
     </OnboardingWrapper>
   </>)
 }

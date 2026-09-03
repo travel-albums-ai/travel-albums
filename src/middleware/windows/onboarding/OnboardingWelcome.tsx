@@ -44,6 +44,8 @@ export default function OnboardingWelcome() {
       <Typography sx={{ p: 2, pt: 0, lineHeight: 2 }} variant="body1" color="textPrimary">
         {t('onboardingWelcomeBody')}
       </Typography>
+    </OnboardingWrapper>
+    <OnboardingWrapper light={true}>
       <OnboardingPhasesList phaseSteps={phaseSteps} />
     </OnboardingWrapper>
   </>)

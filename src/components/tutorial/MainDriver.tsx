@@ -179,6 +179,14 @@ export default function MainDriver() {
             side: "top",
           },
         },
+        {
+          element: "#photo-drawer",
+          popover: {
+            title: "Photo Drawer",
+            description: "This drawer contains your photo content and image details.",
+            side: "top",
+          },
+        },
       ],
       onDestroyed: () => {
         setSetting((prev) => ({

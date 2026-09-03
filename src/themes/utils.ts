@@ -71,7 +71,7 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
           padding: theme.spacing(2),
           overflowY: 'auto',
           borderRadius: Number(theme.shape.borderRadius) * 4,
-          backgroundColor: `${theme.palette.background.paper}DB`,
+          backgroundColor: `${theme.palette.background.paper}CC`,
           backdropFilter: 'blur(4px)',
           border: `2px solid ${theme.palette.divider}`,
           boxShadow: theme.shadows[24],
