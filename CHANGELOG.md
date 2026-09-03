@@ -1,3 +1,9 @@
+## [1.268.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.267.0...v1.268.0) (2026-09-03)
+
+### ✨ Features
+
+* add PlatformDownloadButton for OS-specific downloads in onboarding ([c7a7e70](https://github.com/travel-albums-ai/travel-albums/commit/c7a7e7003d1c655f9fc0b76822de6f61d2287c89))
+
 ## [1.267.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.266.0...v1.267.0) (2026-09-03)
 
 ### ✨ Features
