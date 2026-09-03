@@ -2,6 +2,7 @@ import ServerStatus from '@/middleware/base/ServerStatus';
 import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
+import { PlatformDownloadButton } from '@/middleware/windows/onboarding/PlatformDownload';
 import { Box } from '@mui/material';
 import { PackageOpen, Play, SquareMousePointer } from 'lucide-react';
 
@@ -35,6 +36,8 @@ export default function OnboardingIndexer() {
         <OnboardingButton href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" label="Open Indexer Releases..." />
         <ServerStatus />
       </Box>
+
+      <PlatformDownloadButton />
     </OnboardingWrapper>
 
     <OnboardingWrapper light={true}>
