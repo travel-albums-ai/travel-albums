@@ -1,3 +1,9 @@
+## [1.265.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.264.0...v1.265.0) (2026-09-03)
+
+### ✨ Features
+
+* enhance sidebar popovers and add IDs for accessibility ([f461497](https://github.com/travel-albums-ai/travel-albums/commit/f4614970a691a9c65e1fda82980feb7e3a38ec6b))
+
 ## [1.264.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.263.0...v1.264.0) (2026-08-25)
 
 ### ✨ Features
