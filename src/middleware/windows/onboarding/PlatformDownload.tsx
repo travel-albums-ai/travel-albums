@@ -1,6 +1,5 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import SolidChip from '@/components/SolidChip';
 import { Box, Divider, Stack } from '@mui/material';
 import { useEffect, useState } from "react";
 
@@ -263,6 +262,12 @@ export function PlatformDownloadButton() {
         <GenericToggleButtonGroup  items={[
           {
             tooltip: "Download for Windows",
+            icon: <span>🏢</span>,
+            title: 'arm64',
+            selected: false,
+          },
+          {
+            tooltip: "Download for Windows",
             icon: <span>🪟</span>,
             selected: platform.os === "windows" && platform.architecture === "arm64",
             onClick: () => {
@@ -286,12 +291,17 @@ export function PlatformDownloadButton() {
             }
           }
         ] satisfies GenericToggleButtonProps[]} />
-        <SolidChip label="ARM64" fontSize={13} height={32} minWidth={50} />
+
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <SolidChip label="x64" fontSize={13} height={32} minWidth={50} />
         <GenericToggleButtonGroup  items={[
+          {
+            tooltip: "Download for Windows",
+            icon: <span>🏛️</span>,
+            title: 'arm64',
+            selected: false,
+          },
           {
             tooltip: "Download for Windows",
             icon: <span>🪟</span>,

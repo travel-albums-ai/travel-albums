@@ -1,6 +1,7 @@
 import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
 import { FolderOutput, SquareMousePointer } from 'lucide-react';
 
 const phaseSteps = [
@@ -22,10 +23,6 @@ export default function OnboardingTakeout() {
 
   return (<>
     <OnboardingWrapper>
-      {/* <img src="/googleTakeout.png" alt="Google Takeout"  style={{ width: '100%', height: '271px', borderRadius: 8 }} /> */}
-
-
-
       <div
         style={{
           position: "relative",
@@ -52,8 +49,8 @@ export default function OnboardingTakeout() {
       </div>
       <OnboardingButton href="https://takeout.google.com/settings/takeout" label={'Open Google Takeout...'} />
     </OnboardingWrapper>
-    <OnboardingWrapper light={true}>
+    <OnboardingWrapperInfo light={true}>
       <OnboardingPhasesList phaseSteps={phaseSteps} />
-    </OnboardingWrapper>
+    </OnboardingWrapperInfo>
   </>)
 }

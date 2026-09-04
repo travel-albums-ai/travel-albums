@@ -58,7 +58,7 @@ export default function Onboarding() {
         {activeStep === 4 && <OnboardingIndexing />}
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, gap: 1 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, gap: 1 }}>
         <Button
           disabled={activeStep === 0}
           startIcon={ <ChevronLeft size={16} /> }

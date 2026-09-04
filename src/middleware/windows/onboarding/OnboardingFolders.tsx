@@ -1,6 +1,7 @@
 import IndexerSettings from '@/components/IndexerSettings';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
 import { Box } from '@mui/material';
 import { Code, RefreshCw } from 'lucide-react';
 
@@ -23,10 +24,12 @@ export default function OnboardingFolders() {
 
   return (<>
     <OnboardingWrapper>
-      <Box sx={{ flex: 0, width: '100%', bgcolor: 'background.default', borderRadius: 2, p: 1 }}>
+      <Box sx={{ flex: 0, width: '100%', p: 1 }}>
         <IndexerSettings asIs />
       </Box>
-      <OnboardingPhasesList phaseSteps={phaseSteps} />
     </OnboardingWrapper>
+    <OnboardingWrapperInfo light={true}>
+      <OnboardingPhasesList phaseSteps={phaseSteps} />
+    </OnboardingWrapperInfo>
   </>)
 }

@@ -1,5 +1,6 @@
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
+import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
 import { Typography } from '@mui/material';
 import { Database, LayoutPanelLeft, SquareMousePointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -45,8 +46,8 @@ export default function OnboardingWelcome() {
         {t('onboardingWelcomeBody')}
       </Typography>
     </OnboardingWrapper>
-    <OnboardingWrapper light={true}>
+    <OnboardingWrapperInfo light={true}>
       <OnboardingPhasesList phaseSteps={phaseSteps} />
-    </OnboardingWrapper>
+    </OnboardingWrapperInfo>
   </>)
 }
