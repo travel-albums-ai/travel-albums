@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { Box } from '@mui/material';
 
+import { useAdjustments } from '@/context/adjustmentsStore';
 import { runPipeline } from '@/middleware/interface/adjustments/canvasProcessing';
 import { Stage } from '@/middleware/interface/adjustments/types';
 
@@ -16,6 +17,7 @@ export default function AdjustmentsCanvas({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originalRef = useRef<ImageData | null>(null);
+  const { setSetting } = useAdjustments();
 
   const render = () => {
     const canvas = canvasRef.current;
@@ -33,6 +35,9 @@ export default function AdjustmentsCanvas({
 
     runPipeline(img, pipeline);
     ctx.putImageData(img, 0, 0);
+
+    const base64 = canvas.toDataURL('image/jpeg', 1);
+    setSetting({ processedBase64: base64 });
   };
 
   useEffect(() => {
@@ -66,16 +71,13 @@ export default function AdjustmentsCanvas({
     render();
   }, [pipeline]);
 
+
   return (
     <Box
       sx={{
-        alignItems: 'center',
-        display: 'flex',
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
+        width: '1px',
+        height: '1px',
         overflow: 'hidden',
-        ...sx,
       }}
     >
       <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />

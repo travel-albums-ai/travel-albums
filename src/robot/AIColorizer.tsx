@@ -1,14 +1,10 @@
-import { useAdjustmentsStoreSelector } from '@/context/adjustmentsStore';
+import { useAdjustments, useAdjustmentsStoreSelector } from '@/context/adjustmentsStore';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import {
   Alert,
   Box,
   Button,
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-  Typography,
+  Typography
 } from '@mui/material';
 import { Sparkles } from 'lucide-react';
 import { useState } from 'react';
@@ -68,6 +64,7 @@ type CostBreakdown = {
 export default function AIColorizer() {
   const { byokOpenAIKey, aiLoading } = useBYOKStoreSelector((state) => state);
   const { processedBase64 } = useAdjustmentsStoreSelector((state) => state)
+  const { setSetting } = useAdjustments();
   const { setAILoading, addUsageStat } = useBYOK();
 
   const [resultImage, setResultImage] = useState<string | null>(null);
@@ -158,6 +155,8 @@ export default function AIColorizer() {
       const outputImage = `data:image/jpeg;base64,${base64}`;
 
       setResultImage(outputImage);
+
+      setSetting({ processedBase64: outputImage });
       setUsage(data.usage ?? null);
 
       const calculatedCost = calculateCost(data.usage);
@@ -248,7 +247,7 @@ export default function AIColorizer() {
 
       {/* Result */}
       {/* {resultImage && ( */}
-      <Card>
+      {/* <Card>
         <CardContent>
           <Stack spacing={2}>
             <Box
@@ -261,7 +260,6 @@ export default function AIColorizer() {
                 gap: 2,
               }}
             >
-              {/* Original */}
               <Box>
                 <Typography
                   variant="caption"
@@ -287,7 +285,6 @@ export default function AIColorizer() {
                 />
               </Box>
 
-              {/* Result */}
               <Box>
                 <Typography
                   variant="caption"
@@ -316,7 +313,6 @@ export default function AIColorizer() {
 
             <Divider />
 
-            {/* Cost */}
             {cost && (
               <Box>
                 <Typography
@@ -370,7 +366,7 @@ export default function AIColorizer() {
             )}
           </Stack>
         </CardContent>
-      </Card>
+      </Card> */}
       {/* )} */}
     </Box>
   );

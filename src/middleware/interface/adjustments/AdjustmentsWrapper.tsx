@@ -65,6 +65,7 @@ export default function AdjustmentsWrapper({
 }: AdjustmentsWrapperProps) {
   const { adj, applyPreset, pipeline, preset, presets, set } = useAdjustmentsState({ initialPreset });
   const showGenetic = useAdjustmentsStoreSelector((state) => state.showGenetic)
+  const processedBase64 = useAdjustmentsStoreSelector((state) => state.processedBase64)
 
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
@@ -129,10 +130,23 @@ export default function AdjustmentsWrapper({
           >
             <ReactCompareSlider
               itemOne={<AlbumPhotoThumbnailBackgroundNg photo={previewPhotoObj} original={true} />}
-              itemTwo={<AdjustmentsCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, true)} />}
+              // itemTwo={<AdjustmentsCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, true)} />}
+              itemTwo={<Box
+                component="img"
+                src={processedBase64}
+                alt="Colorized"
+                sx={{
+                  display: 'block',
+                  width: '100%',
+                  height: '200px',
+                  borderRadius: 2,
+                }}
+              />}
             />
           </Box>
         </Box>}
+
+        <AdjustmentsCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, false)} />
 
         <ImageUrlToBase64 imageUrl={composeUrl(previewPhotoObj, false)} />
         <AIColorizer />
