@@ -5,9 +5,11 @@ import {
   Controls,
   MiniMap,
   ReactFlow,
+  ReactFlowProvider,
   reconnectEdge,
   useEdgesState,
   useNodesState,
+  useReactFlow,
   type Connection,
   type Edge,
   type Node,
@@ -24,6 +26,7 @@ import {
 import BrightnessNode from "./BrightnessNode";
 import FlipNode from "./FlipNode";
 import InvertNode from "./InvertNode";
+import NodeToolbox from "./NodeToolbox";
 import SourceNode from "./SourceNode";
 import ViewerNode from "./ViewerNode";
 import { evaluatePipeline } from "./evaluatePipeline";
@@ -101,25 +104,25 @@ const initialEdges: Edge[] = [
     id: "source-invert",
     source: "source",
     sourceHandle: "image",
-    target: "invert",
-    targetHandle: "image",
-  },
-
-  {
-    id: "invert-flip",
-    source: "invert",
-    sourceHandle: "image",
-    target: "flip",
-    targetHandle: "image",
-  },
-
-  {
-    id: "flip-brightness",
-    source: "flip",
-    sourceHandle: "image",
     target: "brightness",
     targetHandle: "image",
   },
+
+  // {
+  //   id: "invert-flip",
+  //   source: "invert",
+  //   sourceHandle: "image",
+  //   target: "flip",
+  //   targetHandle: "image",
+  // },
+
+  // {
+  //   id: "flip-brightness",
+  //   source: "flip",
+  //   sourceHandle: "image",
+  //   target: "brightness",
+  //   targetHandle: "image",
+  // },
 
   {
     id: "brightness-viewer",
@@ -134,12 +137,15 @@ const initialEdges: Edge[] = [
 // App
 // ============================================================
 
-export default function ReactFlowWrapper() {
+function Pipeline() {
   const [nodes, setNodes, onNodesChange] =
     useNodesState(initialNodes);
 
   const [edges, setEdges, onEdgesChange] =
     useEdgesState(initialEdges);
+
+  const { screenToFlowPosition } = useReactFlow();
+  const nodeIdRef = useRef(0);
 
   const evaluationId = useRef(0);
 
@@ -274,23 +280,80 @@ export default function ReactFlowWrapper() {
     [setEdges]
   );
 
+  const onDragOver = useCallback(
+    (event: React.DragEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    },
+    []
+  );
+
+  // Drops a node dragged from the toolbox at the cursor position.
+  const onDrop = useCallback(
+    (event: React.DragEvent<HTMLDivElement>) => {
+      event.preventDefault();
+
+      const type = event.dataTransfer.getData(
+        "application/reactflow"
+      );
+
+      if (!type || !(type in nodeTypes)) {
+        return;
+      }
+
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+
+      const id = `${type}-${++nodeIdRef.current}`;
+
+      setNodes((current) => [
+        ...current,
+        {
+          id,
+          type,
+          position,
+          data: {},
+        },
+      ]);
+    },
+    [screenToFlowPosition, setNodes]
+  );
+
   return (
     <Box className="app" sx={{ width: '100%', height: '100%' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        nodeTypes={nodeTypes}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        onReconnect={onReconnect}
-        deleteKeyCode={["Backspace", "Delete"]}
-        fitView
+      <NodeToolbox />
+
+      <div
+        className="reactflow-canvas"
+        onDragOver={onDragOver}
+        onDrop={onDrop}
       >
-        <Background />
-        <Controls />
-        <MiniMap />
-      </ReactFlow>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          nodeTypes={nodeTypes}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onReconnect={onReconnect}
+          deleteKeyCode={["Backspace", "Delete"]}
+          fitView
+        >
+          <Background />
+          <Controls />
+          <MiniMap />
+        </ReactFlow>
+      </div>
     </Box>
+  );
+}
+
+export default function ReactFlowWrapper() {
+  return (
+    <ReactFlowProvider>
+      <Pipeline />
+    </ReactFlowProvider>
   );
 }
