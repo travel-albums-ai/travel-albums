@@ -3,8 +3,35 @@ import type { Edge, Node } from "@xyflow/react";
 import type { GalleryPhoto } from "../../../lib/galleryData";
 import { composeUrl } from "../../../lib/thumbnailService";
 import type { Stage } from "../../interface/adjustments/types";
-import { brightnessStage, invertStage } from "../../interface/adjustments/utils";
+import {
+  brightnessStage,
+  contrastStage,
+  exposureStage,
+  gammaStage,
+  grainStage,
+  invertStage,
+  luminosityStage,
+  saturationStage,
+  sharpenStage,
+  vibranceStage,
+  vignetteStage,
+} from "../../interface/adjustments/utils";
 import type { ImageArray, ImageValue, NodeOutputs, PipelineNodeDefinition } from "./types";
+
+// Node types whose only parameter is a single slider value
+// stored on node.data.amount.
+const SLIDER_NODE_TYPES = new Set([
+  "brightness",
+  "gamma",
+  "luminosity",
+  "exposure",
+  "contrast",
+  "saturation",
+  "vibrance",
+  "vignette",
+  "grain",
+  "sharpen",
+]);
 
 // Viewer only ever displays this many photos.
 const MAX_VIEWER_PHOTOS = 10;
@@ -230,6 +257,168 @@ const nodeDefinitions: Record<
     },
   },
 
+  gamma: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 1;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        gammaStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  luminosity: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        luminosityStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  exposure: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        exposureStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  contrast: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        contrastStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  saturation: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        saturationStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  vibrance: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        vibranceStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  vignette: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        vignetteStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  grain: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        grainStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
+  sharpen: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
+        sharpenStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
   viewer: {
     async execute(inputs) {
       await Promise.resolve();
@@ -324,8 +513,8 @@ export async function evaluatePipeline(
       }
 
       // Special case:
-      // Brightness node gets its amount from node.data.
-      if (node.type === "brightness") {
+      // Slider nodes get their amount from node.data.
+      if (SLIDER_NODE_TYPES.has(node.type ?? "")) {
         inputs.amount = node.data.amount;
       }
 

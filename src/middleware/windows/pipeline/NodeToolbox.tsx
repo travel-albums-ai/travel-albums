@@ -12,6 +12,15 @@ const paletteItems: Array<{
   { type: "invert", label: "Invert", icon: "☯️" },
   { type: "flip", label: "Flip 180°", icon: "🔄" },
   { type: "brightness", label: "Brightness", icon: "☀️" },
+  { type: "gamma", label: "Gamma", icon: "🎚️" },
+  { type: "luminosity", label: "Luminosity", icon: "💡" },
+  { type: "exposure", label: "Exposure", icon: "📸" },
+  { type: "contrast", label: "Contrast", icon: "◐" },
+  { type: "saturation", label: "Saturation", icon: "🎨" },
+  { type: "vibrance", label: "Vibrance", icon: "🌈" },
+  { type: "vignette", label: "Vignette", icon: "⚫" },
+  { type: "grain", label: "Grain", icon: "🌾" },
+  { type: "sharpen", label: "Sharpen", icon: "🔪" },
   { type: "viewer", label: "Viewer", icon: "🖼️" },
 ];
 

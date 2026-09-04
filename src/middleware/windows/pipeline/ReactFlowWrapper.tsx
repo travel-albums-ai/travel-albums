@@ -24,12 +24,21 @@ import {
 } from "react";
 
 import BrightnessNode from "./BrightnessNode";
+import ContrastNode from "./ContrastNode";
+import ExposureNode from "./ExposureNode";
 import FlipNode from "./FlipNode";
+import GammaNode from "./GammaNode";
+import GrainNode from "./GrainNode";
 import InvertNode from "./InvertNode";
+import LuminosityNode from "./LuminosityNode";
 import NodeToolbox from "./NodeToolbox";
+import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
+import SharpenNode from "./SharpenNode";
 import SourceNode from "./SourceNode";
+import VibranceNode from "./VibranceNode";
 import ViewerNode from "./ViewerNode";
+import VignetteNode from "./VignetteNode";
 import { evaluatePipeline } from "./evaluatePipeline";
 
 // ============================================================
@@ -42,6 +51,15 @@ const nodeTypes = {
   invert: InvertNode,
   flip: FlipNode,
   brightness: BrightnessNode,
+  gamma: GammaNode,
+  luminosity: LuminosityNode,
+  exposure: ExposureNode,
+  contrast: ContrastNode,
+  saturation: SaturationNode,
+  vibrance: VibranceNode,
+  vignette: VignetteNode,
+  grain: GrainNode,
+  sharpen: SharpenNode,
   viewer: ViewerNode,
 };
 
