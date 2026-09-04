@@ -30,7 +30,7 @@ export interface AdjustmentsItemProps {
 export default function AdjustmentsItem({ title, checked, onChange, sliders }: AdjustmentsItemProps) {
 
   return (
-    <SettingsSection>
+    <SettingsSection transparent uuid="sfdsfsd">
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, px: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }} onClick={() => onChange(!checked)}>
           <Typography variant="caption" sx={{ cursor: 'pointer', fontWeight: checked ? 'bold' : 'normal' }}  color={checked ? 'textPrimary' : 'textDisabled'}>{title}</Typography>

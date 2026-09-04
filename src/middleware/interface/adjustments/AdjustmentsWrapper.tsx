@@ -129,7 +129,7 @@ export default function AdjustmentsWrapper({
             }}
           >
             <ReactCompareSlider
-              itemOne={<AlbumPhotoThumbnailBackgroundNg photo={previewPhotoObj} original={true} />}
+              itemOne={<AlbumPhotoThumbnailBackgroundNg photo={previewPhotoObj} original={false} />}
               // itemTwo={<AdjustmentsCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, true)} />}
               itemTwo={<Box
                 component="img"
