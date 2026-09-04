@@ -83,6 +83,10 @@ body {
   width: 340px;
 }
 
+.source {
+  width: 4px;
+}
+
 .viewer-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
