@@ -1,3 +1,9 @@
+## [1.290.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.289.0...v1.290.0) (2026-09-04)
+
+### ✨ Features
+
+* refactor SelectionNode to use global state for photo filtering and improve data synchronization ([e82ffa6](https://github.com/travel-albums-ai/travel-albums/commit/e82ffa6f50eceed7e072b274ffdebc87415fcec4))
+
 ## [1.289.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.288.0...v1.289.0) (2026-09-04)
 
 ### ✨ Features
