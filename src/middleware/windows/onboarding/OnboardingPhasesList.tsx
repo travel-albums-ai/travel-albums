@@ -12,7 +12,6 @@ export default function OnboardingPhasesList({ phaseSteps } : { phaseSteps: { ke
         display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1, width: '100%', px: 2, py: 2,
         borderBottom: '1px solid',
         borderColor: 'divider',
-        userSelect: 'none',
         transition: 'background-color 0.3s',
         '&:hover': {
           backgroundColor: 'action.hover',

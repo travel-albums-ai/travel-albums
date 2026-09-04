@@ -10,7 +10,9 @@ import AdjustmentsCanvas from '@/middleware/interface/adjustments/AdjustmentsCan
 import AdjustmentsPresetSelector from '@/middleware/interface/adjustments/AdjustmentsPresetSelector';
 import AdjustmentsToolbox from '@/middleware/interface/adjustments/AdjustmentsToolbox';
 import GeneticBreedingGrid from '@/middleware/interface/adjustments/GeneticBreedingGrid';
+import ImageUrlToBase64 from '@/middleware/interface/adjustments/ImageUrlToBase64';
 import { Adjustments } from '@/middleware/interface/adjustments/types';
+import AIColorizer from '@/robot/AIColorizer';
 import { useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 
@@ -23,6 +25,34 @@ type AdjustmentsWrapperProps = {
   sxCanvas?: Record<string, unknown>;
   hasGeneticBreeding?: boolean;
 };
+
+async function imageUrlToBase64(url: string): Promise<string> {
+  const image = new Image();
+
+  image.crossOrigin = 'anonymous';
+
+  image.src = url;
+
+  await new Promise<void>((resolve, reject) => {
+    image.onload = () => resolve();
+    image.onerror = () => reject(new Error('Failed to load image'));
+  });
+
+  const canvas = document.createElement('canvas');
+
+  canvas.width = image.naturalWidth;
+  canvas.height = image.naturalHeight;
+
+  const ctx = canvas.getContext('2d');
+
+  if (!ctx) {
+    throw new Error('Could not create canvas context');
+  }
+
+  ctx.drawImage(image, 0, 0);
+
+  return canvas.toDataURL('image/jpeg', 0.95);
+}
 
 export default function AdjustmentsWrapper({
   previewPhotoObj,
@@ -37,6 +67,13 @@ export default function AdjustmentsWrapper({
   const showGenetic = useAdjustmentsStoreSelector((state) => state.showGenetic)
 
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);
+  const [base64Image, setBase64Image] = useState<string | null>(null);
+
+  const processImage = async (url: string) => {
+    return await imageUrlToBase64(composeUrl(previewPhotoObj, true)).then((base64) => base64);
+  };
+
+  // const base64Image = await imageUrlToBase64(composeUrl(previewPhotoObj, true));
 
   return (
     <GenericPanel id="adjustments-drawer" defaultTool>
@@ -96,6 +133,9 @@ export default function AdjustmentsWrapper({
             />
           </Box>
         </Box>}
+
+        <ImageUrlToBase64 imageUrl={composeUrl(previewPhotoObj, false)} />
+        <AIColorizer />
 
         {(hasPresetSelector || hasToolbox) &&
           <AdjustmentsToolbox

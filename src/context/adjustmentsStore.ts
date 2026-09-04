@@ -2,10 +2,14 @@ import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 
 type AdjustmentsStore = {
   showGenetic: boolean;
+  originalBase64: string | null;
+  processedBase64: string | null;
 };
 
 const defaults: AdjustmentsStore = {
   showGenetic: false,
+  originalBase64: null,
+  processedBase64: null,
 };
 
 const {

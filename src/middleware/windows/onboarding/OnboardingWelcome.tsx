@@ -42,7 +42,7 @@ export default function OnboardingWelcome() {
           margin: 20
         }}
       />
-      <Typography sx={{ p: 2, pt: 0, lineHeight: 2, textAlign: 'center' }} variant="body1" color="textPrimary">
+      <Typography sx={{ p: 2, pt: 0, lineHeight: 2, textAlign: 'center', userSelect: 'none' }} variant="body1" color="textPrimary">
         {t('onboardingWelcomeBody')}
       </Typography>
     </OnboardingWrapper>

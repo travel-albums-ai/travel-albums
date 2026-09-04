@@ -17,6 +17,7 @@ export default function OnboardingWindow() {
       slotProps={{
         paper: {
           sx: {
+            userSelect: 'none',
             backgroundColor: 'transparent',
             width: 700,
             height: 980,

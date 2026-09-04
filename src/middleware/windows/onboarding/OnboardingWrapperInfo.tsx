@@ -5,7 +5,7 @@ export default function OnboardingWrapperInfo({ children, light = false }: { chi
 
   return (<>
     <Box sx={{
-      boxShadow: 4,
+      boxShadow: 1,
       borderRadius: 2,
       mx: 2,
       bgcolor: !light ? `${theme.palette.background.paper}CC` : `${theme.palette.background.default}CC`,
@@ -15,6 +15,11 @@ export default function OnboardingWrapperInfo({ children, light = false }: { chi
       flexDirection: 'column',
       alignItems: 'center',
       overflowY: 'auto',
+      transition: 'all 0.5s',
+      '&:hover': {
+        boxShadow: 4,
+        // backgroundColor: 'action.hover',
+      }
     }}>
       {children}
     </Box>
