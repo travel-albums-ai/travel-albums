@@ -1,3 +1,9 @@
+## [1.279.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.278.0...v1.279.0) (2026-09-04)
+
+### ✨ Features
+
+* implement pipeline evaluation logic and node definitions for image processing ([b79a829](https://github.com/travel-albums-ai/travel-albums/commit/b79a8295699a4200bb017fd05dc8cf955e5a6bec))
+
 ## [1.278.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.277.0...v1.278.0) (2026-09-04)
 
 ### ✨ Features
