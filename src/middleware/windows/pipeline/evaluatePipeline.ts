@@ -2,7 +2,10 @@ import type { Edge, Node } from "@xyflow/react";
 
 import type { Stage } from "../../interface/adjustments/types";
 import { brightnessStage, invertStage } from "../../interface/adjustments/utils";
-import type { ImageValue, NodeOutputs, PipelineNodeDefinition } from "./types";
+import type { ImageArray, ImageValue, NodeOutputs, PipelineNodeDefinition } from "./types";
+
+// Viewer only ever displays this many photos.
+const MAX_VIEWER_PHOTOS = 10;
 
 // ============================================================
 // Utility: load a File as an HTMLImageElement
@@ -31,6 +34,11 @@ function loadImage(file: File): Promise<ImageValue> {
 
     image.src = url;
   });
+}
+
+// Loads a batch of files in parallel.
+function loadImages(files: File[]): Promise<ImageArray> {
+  return Promise.all(files.map(loadImage));
 }
 
 // ============================================================
@@ -85,6 +93,27 @@ async function renderImage(
   };
 }
 
+// Applies a render operation to every photo in the batch, in parallel.
+function renderImages(
+  sources: ImageArray,
+  draw: (
+    ctx: CanvasRenderingContext2D,
+    canvas: HTMLCanvasElement,
+    source: ImageValue
+  ) => void,
+  transformPixels?: Stage
+): Promise<ImageArray> {
+  return Promise.all(
+    sources.map((source) =>
+      renderImage(
+        source,
+        (ctx, canvas) => draw(ctx, canvas, source),
+        transformPixels
+      )
+    )
+  );
+}
+
 // ============================================================
 // Node implementations
 // ============================================================
@@ -95,11 +124,11 @@ const nodeDefinitions: Record<
 > = {
   source: {
     async execute(inputs) {
-      const file = inputs.file as File | undefined;
+      const files = inputs.files as File[] | undefined;
 
-      if (!file) { return { image: null } }
+      if (!files || files.length === 0) { return { image: [] } }
 
-      const image = await loadImage(file);
+      const image = await loadImages(files);
 
       return { image };
     },
@@ -107,13 +136,13 @@ const nodeDefinitions: Record<
 
   invert: {
     async execute(inputs) {
-      const source = inputs.image as ImageValue | null;
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
 
-      if (!source) { return { image: null } }
+      if (sources.length === 0) { return { image: [] } }
 
-      const image = await renderImage(
-        source,
-        (ctx) => ctx.drawImage(source.image, 0, 0),
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
         invertStage()
       );
 
@@ -123,13 +152,13 @@ const nodeDefinitions: Record<
 
   flip: {
     async execute(inputs) {
-      const source = inputs.image as ImageValue | null;
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
 
-      if (!source) { return { image: null } }
+      if (sources.length === 0) { return { image: [] } }
 
-      const image = await renderImage(
-        source,
-        (ctx, canvas) => {
+      const image = await renderImages(
+        sources,
+        (ctx, canvas, source) => {
           // Rotate 180deg around the canvas center.
           ctx.translate(canvas.width, canvas.height);
           ctx.rotate(Math.PI);
@@ -143,15 +172,15 @@ const nodeDefinitions: Record<
 
   brightness: {
     async execute(inputs) {
-      const source = inputs.image as ImageValue | null;
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
 
-      if (!source) { return { image: null } }
+      if (sources.length === 0) { return { image: [] } }
 
       const amount = (inputs.amount as number | undefined) ?? 0;
 
-      const image = await renderImage(
-        source,
-        (ctx) => ctx.drawImage(source.image, 0, 0),
+      const image = await renderImages(
+        sources,
+        (ctx, _canvas, source) => ctx.drawImage(source.image, 0, 0),
         brightnessStage(amount)
       );
 
@@ -163,8 +192,11 @@ const nodeDefinitions: Record<
     async execute(inputs) {
       await Promise.resolve();
 
+      const images = (inputs.image as ImageArray | undefined) ?? [];
+
+      // The viewer only ever displays the first N photos.
       return {
-        image: inputs.image ?? null,
+        image: images.slice(0, MAX_VIEWER_PHOTOS),
       };
     },
   },
@@ -238,9 +270,9 @@ export async function evaluatePipeline(
         Object.fromEntries(inputEntries);
 
       // Special case:
-      // Source node gets its File from node.data.
+      // Source node gets its Files from node.data.
       if (node.type === "source") {
-        inputs.file = node.data.file;
+        inputs.files = node.data.files;
       }
 
       // Special case:

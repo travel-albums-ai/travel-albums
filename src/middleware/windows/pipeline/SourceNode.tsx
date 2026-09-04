@@ -1,9 +1,11 @@
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
-function SourceNode({ data }: NodeProps<Node<{ file?: File }>>) {
-  const [fileName, setFileName] = useState(
-    data.file?.name ?? "Choose image"
+function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
+  const [label, setLabel] = useState(
+    data.files?.length
+      ? `${data.files.length} photo${data.files.length === 1 ? "" : "s"} selected`
+      : "Choose photos"
   );
 
   return (
@@ -13,13 +15,16 @@ function SourceNode({ data }: NodeProps<Node<{ file?: File }>>) {
       <input
         type="file"
         accept="image/*"
+        multiple
         onChange={(event) => {
-          const file = event.target.files?.[0];
+          const files = Array.from(event.target.files ?? []);
 
-          if (!file) return;
+          if (files.length === 0) return;
 
-          data.file = file;
-          setFileName(file.name);
+          data.files = files;
+          setLabel(
+            `${files.length} photo${files.length === 1 ? "" : "s"} selected`
+          );
 
           // Tell the pipeline engine that this node changed.
           window.dispatchEvent(
@@ -28,7 +33,7 @@ function SourceNode({ data }: NodeProps<Node<{ file?: File }>>) {
         }}
       />
 
-      <small>{fileName}</small>
+      <small>{label}</small>
 
       <Handle
         type="source"

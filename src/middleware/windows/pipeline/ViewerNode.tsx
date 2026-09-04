@@ -1,9 +1,11 @@
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
-import type { ImageValue } from "./types";
+import type { ImageArray } from "./types";
 
 function ViewerNode({
   data,
-}: NodeProps<Node<{ image?: ImageValue | null }>>) {
+}: NodeProps<Node<{ image?: ImageArray }>>) {
+  const images = data.image ?? [];
+
   return (
     <div className="node viewer">
       <Handle
@@ -14,14 +16,21 @@ function ViewerNode({
 
       <strong>🖼️ Viewer</strong>
 
-      {data.image?.image ? (
-        <img
-          src={data.image.image.src}
-          alt=""
-        />
+      <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
+
+      {images.length > 0 ? (
+        <div className="viewer-grid">
+          {images.map((value, index) => (
+            <img
+              key={index}
+              src={value.image.src}
+              alt=""
+            />
+          ))}
+        </div>
       ) : (
         <div className="empty">
-          Waiting for image...
+          Waiting for photos...
         </div>
       )}
     </div>
