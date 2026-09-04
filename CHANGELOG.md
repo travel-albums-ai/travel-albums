@@ -1,3 +1,14 @@
+## [1.275.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.274.0...v1.275.0) (2026-09-04)
+
+### ✨ Features
+
+* add AIDenoiser component for image denoising functionality ([d9e703f](https://github.com/travel-albums-ai/travel-albums/commit/d9e703f2b8f8201a445014226842bfaa2b909c17))
+
+### 🧹 Refactors
+
+* clean up AIColorizer component by removing unused state and pricing logic ([abbd8fb](https://github.com/travel-albums-ai/travel-albums/commit/abbd8fb87f52f1a2b32a08d4631642839a189f03))
+* remove unused image processing functions and update canvas handling in Adjustments components ([446c2d8](https://github.com/travel-albums-ai/travel-albums/commit/446c2d871b340727a02d81a608a965222019c925))
+
 ## [1.274.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.273.0...v1.274.0) (2026-09-04)
 
 ### ✨ Features
