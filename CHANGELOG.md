@@ -1,3 +1,9 @@
+## [1.283.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.282.0...v1.283.0) (2026-09-04)
+
+### ✨ Features
+
+* add edge reconnect functionality to ReactFlowWrapper ([1a7db42](https://github.com/travel-albums-ai/travel-albums/commit/1a7db429c5901eec049703ab4abb86163401b736))
+
 ## [1.282.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.281.0...v1.282.0) (2026-09-04)
 
 ### ✨ Features
