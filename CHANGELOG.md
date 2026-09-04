@@ -1,3 +1,9 @@
+## [1.292.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.291.0...v1.292.0) (2026-09-04)
+
+### ✨ Features
+
+* add new image adjustment nodes (gamma, luminosity, exposure, contrast, saturation, vibrance, vignette, grain, sharpen) and corresponding slider components ([2630f66](https://github.com/travel-albums-ai/travel-albums/commit/2630f66dc1e583d811cff7133127aca9d8eabfc6))
+
 ## [1.291.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.290.0...v1.291.0) (2026-09-04)
 
 ### ✨ Features
