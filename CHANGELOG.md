@@ -1,3 +1,9 @@
+## [1.281.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.280.0...v1.281.0) (2026-09-04)
+
+### ✨ Features
+
+* update image processing pipeline to use Stage type for pixel transformations and simplify node execution logic ([a2f978d](https://github.com/travel-albums-ai/travel-albums/commit/a2f978d410b93855f21e3f4e933c212b00996734))
+
 ## [1.280.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.279.0...v1.280.0) (2026-09-04)
 
 ### ✨ Features
