@@ -14,6 +14,7 @@ import ImageUrlToBase64 from '@/middleware/interface/adjustments/ImageUrlToBase6
 import { Adjustments } from '@/middleware/interface/adjustments/types';
 import AIColorizer from '@/robot/AIColorizer';
 import AIDenoiser from '@/robot/AIDenoiser';
+import AIRestoring from '@/robot/AIRestoring';
 import { useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 
@@ -112,10 +113,19 @@ export default function AdjustmentsWrapper({
         </Box>}
 
         <AdjustmentsProcess pipeline={pipeline} />
-
         <ImageUrlToBase64 imageUrl={composeUrl(previewPhotoObj, false)} />
-        <AIColorizer />
-        <AIDenoiser />
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 2,
+          }}
+        >
+          <AIColorizer />
+          <AIDenoiser />
+          <AIRestoring />
+        </Box>
 
         {(hasPresetSelector || hasToolbox) &&
           <AdjustmentsToolbox
