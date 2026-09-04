@@ -1,3 +1,9 @@
+## [1.284.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.283.0...v1.284.0) (2026-09-04)
+
+### ✨ Features
+
+* enhance pipeline evaluation with error handling and re-evaluation logic ([c70e352](https://github.com/travel-albums-ai/travel-albums/commit/c70e3523150b81a0f9c2749f1cbc3fdf84e5c2f1))
+
 ## [1.283.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.282.0...v1.283.0) (2026-09-04)
 
 ### ✨ Features
