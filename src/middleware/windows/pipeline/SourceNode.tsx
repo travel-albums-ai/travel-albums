@@ -23,7 +23,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
     : "Choose photos";
 
   return (
-    <div className="node source">
+    <div className="node source" style={{ width: '500px'}}>
       <strong>📷 Image Source</strong>
 
       <input

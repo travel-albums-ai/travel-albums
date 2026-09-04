@@ -44,7 +44,7 @@ function SelectionNode({
   }, [id, photos, setNodes]);
 
   return (
-    <div className="node source">
+    <div className="node source" style={{ width: '500px'}}>
       <strong>🗂️ Gallery Selection</strong>
 
       <small>
