@@ -13,6 +13,7 @@ import GeneticBreedingGrid from '@/middleware/interface/adjustments/GeneticBreed
 import ImageUrlToBase64 from '@/middleware/interface/adjustments/ImageUrlToBase64';
 import { Adjustments } from '@/middleware/interface/adjustments/types';
 import AIColorizer from '@/robot/AIColorizer';
+import AIDenoiser from '@/robot/AIDenoiser';
 import { useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 
@@ -114,6 +115,7 @@ export default function AdjustmentsWrapper({
 
         <ImageUrlToBase64 imageUrl={composeUrl(previewPhotoObj, false)} />
         <AIColorizer />
+        <AIDenoiser />
 
         {(hasPresetSelector || hasToolbox) &&
           <AdjustmentsToolbox
