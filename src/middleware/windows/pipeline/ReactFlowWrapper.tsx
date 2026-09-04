@@ -146,30 +146,20 @@ export default function ReactFlowWrapper() {
   const evaluate = useCallback(async () => {
     const id = ++evaluationId.current;
 
-    const results =
-      await evaluatePipeline(nodes, edges);
+    let results;
+
+    try {
+      results = await evaluatePipeline(nodes, edges);
+    } catch (error) {
+      console.error("Pipeline evaluation failed:", error);
+      return;
+    }
 
     // Don't allow an old evaluation to overwrite
     // a newer graph state.
     if (id !== evaluationId.current) {
       return;
     }
-
-    setNodes((current) =>
-      current.map((node) => {
-        const result =
-          results.get(node.id);
-
-        if (!result) {
-          return node;
-        }
-
-        // We need to resolve the promise here
-        // because React Flow node data itself
-        // contains the actual value.
-        return node;
-      })
-    );
 
     // Update viewer nodes with their resolved result.
     for (const node of nodes) {
@@ -181,7 +171,17 @@ export default function ReactFlowWrapper() {
 
       if (!promise) continue;
 
-      const result = await promise;
+      let result;
+
+      try {
+        result = await promise;
+      } catch (error) {
+        console.error(
+          `Pipeline evaluation failed for node "${node.id}":`,
+          error
+        );
+        continue;
+      }
 
       if (
         id !== evaluationId.current
@@ -209,11 +209,30 @@ export default function ReactFlowWrapper() {
     setNodes,
   ]);
 
-  // Automatically evaluate whenever
-  // the graph changes.
+  // Re-evaluate when nodes/edges are added, removed, disconnected,
+  // or reconnected. Node data mutated in place (e.g. slider drags)
+  // doesn't change this signature, so it won't trigger extra runs.
+  const graphSignatureRef = useRef("");
+
   useEffect(() => {
-    // evaluate();
-  }, [evaluate]);
+    const signature = JSON.stringify({
+      nodeIds: nodes.map((node) => node.id).sort(),
+      edges: edges
+        .map(
+          (edge) =>
+            `${edge.id}:${edge.source}:${edge.sourceHandle}->${edge.target}:${edge.targetHandle}`
+        )
+        .sort(),
+    });
+
+    if (signature === graphSignatureRef.current) {
+      return;
+    }
+
+    graphSignatureRef.current = signature;
+
+    evaluate();
+  }, [nodes, edges, evaluate]);
 
   // File selection changes node.data directly,
   // so listen for the explicit pipeline event.
