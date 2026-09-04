@@ -1,3 +1,9 @@
+## [1.285.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.284.0...v1.285.0) (2026-09-04)
+
+### ✨ Features
+
+* implement NodeToolbox for draggable node types and enhance ReactFlowWrapper layout ([58a7205](https://github.com/travel-albums-ai/travel-albums/commit/58a7205c31fdf61bf2bc5763394a086174abc65e))
+
 ## [1.284.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.283.0...v1.284.0) (2026-09-04)
 
 ### ✨ Features
