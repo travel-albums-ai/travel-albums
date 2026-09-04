@@ -1,3 +1,9 @@
+## [1.291.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.290.0...v1.291.0) (2026-09-04)
+
+### ✨ Features
+
+* set fixed width for SelectionNode and SourceNode components ([c85689d](https://github.com/travel-albums-ai/travel-albums/commit/c85689d832c5aa93089c0a25273d36354c53b859))
+
 ## [1.290.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.289.0...v1.290.0) (2026-09-04)
 
 ### ✨ Features
