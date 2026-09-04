@@ -1,3 +1,9 @@
+## [1.272.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.272.1...v1.272.2) (2026-09-04)
+
+### 🐛 Fixes
+
+* update AdjustmentsItem to include transparent prop in SettingsSection and adjust image preview in AdjustmentsWrapper ([bd9be6a](https://github.com/travel-albums-ai/travel-albums/commit/bd9be6a43a745b0e7dbc13c307d2755135c1ec8f))
+
 ## [1.272.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.272.0...v1.272.1) (2026-09-04)
 
 ### 🐛 Fixes
