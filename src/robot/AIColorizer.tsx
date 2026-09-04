@@ -3,25 +3,13 @@ import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import {
   Alert,
   Box,
-  Button,
-  Typography
+  Button
 } from '@mui/material';
 import { Sparkles } from 'lucide-react';
 import { useState } from 'react';
 
 const OPENAI_IMAGES_EDIT_URL = 'https://api.openai.com/v1/images/edits';
-
 const IMAGE_MODEL = 'gpt-image-2';
-
-// Current GPT-Image-2 pricing.
-// Image input: $8 / 1M image tokens
-// Image output: $32 / 1M image tokens
-// Text input: $5 / 1M text tokens
-const PRICING = {
-  textInputPerMillion: 5,
-  imageInputPerMillion: 8,
-  imageOutputPerMillion: 32,
-};
 
 type OpenAIImageResponse = {
   data?: Array<{
@@ -50,16 +38,6 @@ type OpenAIImageResponse = {
   };
 };
 
-type Props = {
-  imageBase64: string | null;
-};
-
-type CostBreakdown = {
-  textInput: number;
-  imageInput: number;
-  imageOutput: number;
-  total: number;
-};
 
 export default function AIColorizer() {
   const { byokOpenAIKey, aiLoading } = useBYOKStoreSelector((state) => state);
@@ -67,11 +45,6 @@ export default function AIColorizer() {
   const { setSetting } = useAdjustments();
   const { setAILoading, addUsageStat } = useBYOK();
 
-  const [resultImage, setResultImage] = useState<string | null>(null);
-  const [cost, setCost] = useState<CostBreakdown | null>(null);
-  const [usage, setUsage] = useState<OpenAIImageResponse['usage'] | null>(
-    null,
-  );
   const [error, setError] = useState<string | null>(null);
 
   async function colorize() {
@@ -81,9 +54,6 @@ export default function AIColorizer() {
 
     setAILoading(true);
     setError(null);
-    setResultImage(null);
-    setCost(null);
-    setUsage(null);
 
     try {
       const imageBlob = await base64ToBlob(processedBase64);
@@ -119,13 +89,8 @@ export default function AIColorizer() {
         'source.jpg',
       );
 
-      // Let GPT-Image-2 choose the output dimensions.
       formData.append('size', 'auto');
-
-      // Good balance for an actual photo restoration.
       formData.append('quality', 'medium');
-
-      // JPEG keeps the returned photo reasonably sized.
       formData.append('output_format', 'jpeg');
       formData.append('output_compression', '90');
 
@@ -154,14 +119,7 @@ export default function AIColorizer() {
 
       const outputImage = `data:image/jpeg;base64,${base64}`;
 
-      setResultImage(outputImage);
-
       setSetting({ processedBase64: outputImage });
-      setUsage(data.usage ?? null);
-
-      const calculatedCost = calculateCost(data.usage);
-
-      setCost(calculatedCost);
 
       addUsageStat({
         created_at: data.created
@@ -212,7 +170,6 @@ export default function AIColorizer() {
         gap: 2,
       }}
     >
-      {/* Controls */}
       <Box
         sx={{
           display: 'flex',
@@ -228,15 +185,6 @@ export default function AIColorizer() {
         >
           {aiLoading ? 'Colorizing…' : 'Colorize Photo'}
         </Button>
-
-        {cost && (
-          <Typography
-            variant="body2"
-            color="text.secondary"
-          >
-            Cost: <strong>${cost.total.toFixed(4)}</strong>
-          </Typography>
-        )}
       </Box>
 
       {error && (
@@ -244,165 +192,6 @@ export default function AIColorizer() {
           {error}
         </Alert>
       )}
-
-      {/* Result */}
-      {/* {resultImage && ( */}
-      {/* <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: {
-                  xs: '1fr',
-                  md: '1fr 1fr',
-                },
-                gap: 2,
-              }}
-            >
-              <Box>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{
-                    display: 'block',
-                    mb: 1,
-                  }}
-                >
-                    ORIGINAL
-                </Typography>
-
-                <Box
-                  component="img"
-                  src={processedBase64 ?? undefined}
-                  alt="Original"
-                  sx={{
-                    display: 'block',
-                    width: '100%',
-                    height: '200px',
-                    borderRadius: 2,
-                  }}
-                />
-              </Box>
-
-              <Box>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{
-                    display: 'block',
-                    mb: 1,
-                  }}
-                >
-                    COLORIZED
-                </Typography>
-
-                <Box
-                  component="img"
-                  src={resultImage}
-                  alt="Colorized"
-                  sx={{
-                    display: 'block',
-                    width: '100%',
-                    height: '200px',
-                    borderRadius: 2,
-                  }}
-                />
-              </Box>
-            </Box>
-
-            <Divider />
-
-            {cost && (
-              <Box>
-                <Typography
-                  variant="subtitle2"
-                  sx={{ mb: 1 }}
-                >
-                    AI usage
-                </Typography>
-
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns:
-                        'repeat(auto-fit, minmax(160px, 1fr))',
-                    gap: 1,
-                  }}
-                >
-                  <UsageItem
-                    label="Text input"
-                    value={`$${cost.textInput.toFixed(5)}`}
-                  />
-
-                  <UsageItem
-                    label="Image input"
-                    value={`$${cost.imageInput.toFixed(5)}`}
-                  />
-
-                  <UsageItem
-                    label="Image output"
-                    value={`$${cost.imageOutput.toFixed(5)}`}
-                  />
-
-                  <UsageItem
-                    label="Total"
-                    value={`$${cost.total.toFixed(5)}`}
-                    strong
-                  />
-                </Box>
-              </Box>
-            )}
-
-            {usage && (
-              <Typography
-                variant="caption"
-                color="text.secondary"
-              >
-                {usage.input_tokens ?? 0} input tokens ·{' '}
-                {usage.output_tokens ?? 0} output tokens ·{' '}
-                {usage.total_tokens ?? 0} total · {IMAGE_MODEL}
-              </Typography>
-            )}
-          </Stack>
-        </CardContent>
-      </Card> */}
-      {/* )} */}
-    </Box>
-  );
-}
-
-function UsageItem({
-  label,
-  value,
-  strong = false,
-}: {
-  label: string;
-  value: string;
-  strong?: boolean;
-}) {
-  return (
-    <Box
-      sx={{
-        p: 1.25,
-        borderRadius: 1.5,
-        bgcolor: 'action.hover',
-      }}
-    >
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        display="block"
-      >
-        {label}
-      </Typography>
-
-      <Typography
-        variant="body2"
-        fontWeight={strong ? 700 : 400}
-      >
-        {value}
-      </Typography>
     </Box>
   );
 }
@@ -412,38 +201,4 @@ async function base64ToBlob(
 ): Promise<Blob> {
   const response = await fetch(base64);
   return response.blob();
-}
-
-function calculateCost(
-  usage: OpenAIImageResponse['usage'],
-): CostBreakdown {
-  const textInputTokens =
-    usage?.input_tokens_details?.text_tokens ?? 0;
-
-  const imageInputTokens =
-    usage?.input_tokens_details?.image_tokens ?? 0;
-
-  const imageOutputTokens =
-    usage?.output_tokens_details?.image_tokens ??
-    usage?.output_tokens ??
-    0;
-
-  const textInput =
-    (textInputTokens / 1_000_000) *
-    PRICING.textInputPerMillion;
-
-  const imageInput =
-    (imageInputTokens / 1_000_000) *
-    PRICING.imageInputPerMillion;
-
-  const imageOutput =
-    (imageOutputTokens / 1_000_000) *
-    PRICING.imageOutputPerMillion;
-
-  return {
-    textInput,
-    imageInput,
-    imageOutput,
-    total: textInput + imageInput + imageOutput,
-  };
 }
