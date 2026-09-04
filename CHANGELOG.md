@@ -1,3 +1,9 @@
+## [1.276.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.275.0...v1.276.0) (2026-09-04)
+
+### ✨ Features
+
+* add AIRestoring component for photo restoration functionality and update AdjustmentsWrapper to include it ([708f825](https://github.com/travel-albums-ai/travel-albums/commit/708f8252115e487c7669ec89206c7638ad508730))
+
 ## [1.275.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.274.0...v1.275.0) (2026-09-04)
 
 ### ✨ Features
