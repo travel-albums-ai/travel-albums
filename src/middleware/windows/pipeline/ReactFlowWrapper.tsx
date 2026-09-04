@@ -20,6 +20,7 @@ import {
   useRef,
 } from "react";
 
+import BrightnessNode from "./BrightnessNode";
 import FlipNode from "./FlipNode";
 import InvertNode from "./InvertNode";
 import SourceNode from "./SourceNode";
@@ -34,6 +35,7 @@ const nodeTypes = {
   source: SourceNode,
   invert: InvertNode,
   flip: FlipNode,
+  brightness: BrightnessNode,
   viewer: ViewerNode,
 };
 
@@ -73,10 +75,20 @@ const initialNodes: Node[] = [
   },
 
   {
+    id: "brightness",
+    type: "brightness",
+    position: {
+      x: 950,
+      y: 200,
+    },
+    data: {},
+  },
+
+  {
     id: "viewer",
     type: "viewer",
     position: {
-      x: 950,
+      x: 1250,
       y: 200,
     },
     data: {},
@@ -101,8 +113,16 @@ const initialEdges: Edge[] = [
   },
 
   {
-    id: "flip-viewer",
+    id: "flip-brightness",
     source: "flip",
+    sourceHandle: "image",
+    target: "brightness",
+    targetHandle: "image",
+  },
+
+  {
+    id: "brightness-viewer",
+    source: "brightness",
     sourceHandle: "image",
     target: "viewer",
     targetHandle: "image",

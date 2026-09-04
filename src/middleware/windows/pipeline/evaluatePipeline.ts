@@ -1,7 +1,7 @@
 import type { Edge, Node } from "@xyflow/react";
 
 import type { Stage } from "../../interface/adjustments/types";
-import { invertStage } from "../../interface/adjustments/utils";
+import { brightnessStage, invertStage } from "../../interface/adjustments/utils";
 import type { ImageValue, NodeOutputs, PipelineNodeDefinition } from "./types";
 
 // ============================================================
@@ -141,6 +141,24 @@ const nodeDefinitions: Record<
     },
   },
 
+  brightness: {
+    async execute(inputs) {
+      const source = inputs.image as ImageValue | null;
+
+      if (!source) { return { image: null } }
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+
+      const image = await renderImage(
+        source,
+        (ctx) => ctx.drawImage(source.image, 0, 0),
+        brightnessStage(amount)
+      );
+
+      return { image };
+    },
+  },
+
   viewer: {
     async execute(inputs) {
       await Promise.resolve();
@@ -223,6 +241,12 @@ export async function evaluatePipeline(
       // Source node gets its File from node.data.
       if (node.type === "source") {
         inputs.file = node.data.file;
+      }
+
+      // Special case:
+      // Brightness node gets its amount from node.data.
+      if (node.type === "brightness") {
+        inputs.amount = node.data.amount;
       }
 
       console.log(
