@@ -6,8 +6,8 @@ import Histogram from '@/components/Histogram';
 import { useAdjustmentsStoreSelector } from '@/context/adjustmentsStore';
 import useAdjustmentsState from '@/hooks/useAdjustmentsState';
 import { composeUrl } from '@/lib/thumbnailService';
-import AdjustmentsCanvas from '@/middleware/interface/adjustments/AdjustmentsCanvas';
 import AdjustmentsPresetSelector from '@/middleware/interface/adjustments/AdjustmentsPresetSelector';
+import AdjustmentsProcess from '@/middleware/interface/adjustments/AdjustmentsProcess';
 import AdjustmentsToolbox from '@/middleware/interface/adjustments/AdjustmentsToolbox';
 import GeneticBreedingGrid from '@/middleware/interface/adjustments/GeneticBreedingGrid';
 import ImageUrlToBase64 from '@/middleware/interface/adjustments/ImageUrlToBase64';
@@ -139,7 +139,7 @@ export default function AdjustmentsWrapper({
           </Box>
         </Box>}
 
-        <AdjustmentsCanvas pipeline={pipeline} url={composeUrl(previewPhotoObj, false)} />
+        <AdjustmentsProcess pipeline={pipeline} />
 
         <ImageUrlToBase64 imageUrl={composeUrl(previewPhotoObj, false)} />
         <AIColorizer />
