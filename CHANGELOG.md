@@ -1,3 +1,9 @@
+## [1.273.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.272.2...v1.273.0) (2026-09-04)
+
+### ✨ Features
+
+* replace SettingsSection with OnboardingWrapperInfo in AdjustmentsItem and enhance styling in AdjustmentsToolbox ([a5d1de7](https://github.com/travel-albums-ai/travel-albums/commit/a5d1de70fefb9d6e7be90b6c9a76ea27ad1e6f19))
+
 ## [1.272.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.272.1...v1.272.2) (2026-09-04)
 
 ### 🐛 Fixes
