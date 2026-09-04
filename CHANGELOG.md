@@ -1,3 +1,9 @@
+## [1.286.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.285.0...v1.286.0) (2026-09-04)
+
+### ✨ Features
+
+* add double-click functionality to remove edges in ReactFlowWrapper ([4722f65](https://github.com/travel-albums-ai/travel-albums/commit/4722f65f30eb095b7619a346301d5baf8b2ada34))
+
 ## [1.285.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.284.0...v1.285.0) (2026-09-04)
 
 ### ✨ Features
