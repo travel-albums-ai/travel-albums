@@ -2,10 +2,13 @@ import { Handle, Position, useReactFlow, type Node, type NodeProps } from "@xyfl
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
+import SettingsSection from '@/components/SettingsSection';
 import { useFilteredPhotos_GLOBAL } from "@/context/globals/filteredPhotosStore";
 import { useSections_GLOBAL } from "@/context/globals/sectionsStore";
 import type { GalleryPhoto } from "@/lib/galleryData";
 import { composeUrl } from "@/lib/thumbnailService";
+import { Box } from '@mui/material';
+import { Folder } from 'lucide-react';
 
 function SelectionNode({
   id,
@@ -43,33 +46,38 @@ function SelectionNode({
     window.dispatchEvent(new CustomEvent("pipeline:changed"));
   }, [id, photos, setNodes]);
 
-  return (
-    <div className="node source" style={{ width: '500px'}}>
-      <strong>🗂️ Gallery Selection</strong>
-
+  return <>
+    <SettingsSection title="Gallery Selection" icon={<Folder />} uuid="selection-node-reactflow" gap={2}>
       <small>
         {photos.length} photo{photos.length === 1 ? "" : "s"} matched
       </small>
 
       {photos.length > 0 && (
-        <div className="viewer-grid">
-          {photos.slice(0, 10).map((photo) => (
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
+          {photos.map((photo) => (
             <img
               key={photo.id}
               src={composeUrl(photo)}
               alt=""
+              style={{
+                display: 'block',
+                width: '100%',
+                height: '100px',
+                objectFit: 'cover',
+                borderRadius: '6px',
+                background: '#eee',
+              }}
             />
           ))}
-        </div>
+        </Box>
       )}
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
-    </div>
-  );
+    </SettingsSection>
+    <Handle
+      type="source"
+      position={Position.Right}
+      id="image"
+    />
+  </>;
 }
 
 export default SelectionNode;

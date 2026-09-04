@@ -1,3 +1,4 @@
+import SettingsSection from '@/components/SettingsSection';
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
@@ -7,14 +8,12 @@ function BrightnessNode({
   const [amount, setAmount] = useState(data.amount ?? 0);
 
   return (
-    <div className="node">
+    <SettingsSection title="Brightness">
       <Handle
         type="target"
         position={Position.Left}
         id="image"
       />
-
-      <strong>☀️ Brightness</strong>
 
       <input
         type="range"
@@ -42,7 +41,7 @@ function BrightnessNode({
         position={Position.Right}
         id="image"
       />
-    </div>
+    </SettingsSection>
   );
 }
 

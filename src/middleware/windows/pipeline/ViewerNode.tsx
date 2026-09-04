@@ -1,4 +1,7 @@
+import SettingsSection from '@/components/SettingsSection';
+import { Box } from '@mui/material';
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { Eye } from 'lucide-react';
 import type { ImageArray } from "./types";
 
 function ViewerNode({
@@ -7,33 +10,39 @@ function ViewerNode({
   const images = data.image ?? [];
 
   return (
-    <div className="node viewer">
+    <SettingsSection title="Viewer Node" icon={<Eye />} uuid="viewer-node-reactflow" gap={2}>
       <Handle
         type="target"
         position={Position.Left}
         id="image"
       />
 
-      <strong>🖼️ Viewer</strong>
-
       <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
 
       {images.length > 0 ? (
-        <div className="viewer-grid">
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
           {images.map((value, index) => (
             <img
               key={index}
               src={value.image.src}
               alt=""
+              style={{
+                display: 'block',
+                width: '100%',
+                height: '100px',
+                objectFit: 'cover',
+                borderRadius: '6px',
+                background: '#eee',
+              }}
             />
           ))}
-        </div>
+        </Box>
       ) : (
         <div className="empty">
           Waiting for photos...
         </div>
       )}
-    </div>
+    </SettingsSection>
   );
 }
 

@@ -19,10 +19,13 @@ export default function PipelineWindow() {
       slotProps={{
         paper: {
           sx: {
-            width: 1900,
-            height: 950,
-            maxWidth: 'none',
-            maxHeight: 'none',
+            width: '95vw',
+            height: '95vh',
+            maxHeight: '95vh',
+            maxWidth: '95vw',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
           },
         },
       }}

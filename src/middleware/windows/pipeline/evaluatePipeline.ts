@@ -34,7 +34,7 @@ const SLIDER_NODE_TYPES = new Set([
 ]);
 
 // Viewer only ever displays this many photos.
-const MAX_VIEWER_PHOTOS = 10;
+const MAX_VIEWER_PHOTOS = 25;
 
 // ============================================================
 // Utility: load a File as an HTMLImageElement
@@ -427,7 +427,7 @@ const nodeDefinitions: Record<
 
       // The viewer only ever displays the first N photos.
       return {
-        image: images.slice(0, MAX_VIEWER_PHOTOS),
+        image: images,
       };
     },
   },

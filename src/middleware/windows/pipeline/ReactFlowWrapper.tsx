@@ -68,15 +68,15 @@ const nodeTypes = {
 // ============================================================
 
 const initialNodes: Node[] = [
-  {
-    id: "source",
-    type: "source",
-    position: {
-      x: 50,
-      y: 200,
-    },
-    data: {},
-  },
+  // {
+  //   id: "source",
+  //   type: "source",
+  //   position: {
+  //     x: 50,
+  //     y: 200,
+  //   },
+  //   data: {},
+  // },
 
   // {
   //   id: "invert",
@@ -97,6 +97,16 @@ const initialNodes: Node[] = [
   //   },
   //   data: {},
   // },
+
+  {
+    id: "selection",
+    type: "selection",
+    position: {
+      x: 50,
+      y: 200,
+    },
+    data: {},
+  },
 
   {
     id: "brightness",
@@ -122,7 +132,7 @@ const initialNodes: Node[] = [
 const initialEdges: Edge[] = [
   {
     id: "source-invert",
-    source: "source",
+    source: "selection",
     sourceHandle: "image",
     target: "brightness",
     targetHandle: "image",
@@ -366,6 +376,7 @@ function Pipeline() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+
           onReconnect={onReconnect}
           onEdgeDoubleClick={onEdgeDoubleClick}
           deleteKeyCode={["Backspace", "Delete"]}

@@ -21,6 +21,7 @@ export function createSliderNode(config: SliderNodeConfig) {
     );
 
     return (
+
       <div className="node">
         <Handle
           type="target"
