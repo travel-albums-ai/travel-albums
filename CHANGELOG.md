@@ -1,3 +1,9 @@
+## [1.288.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.287.0...v1.288.0) (2026-09-04)
+
+### ✨ Features
+
+* update SourceNode to manage file uploads and display previews ([4f14c4d](https://github.com/travel-albums-ai/travel-albums/commit/4f14c4d53c889abfd8a7b87244bfa7b7059237b6))
+
 ## [1.287.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.286.0...v1.287.0) (2026-09-04)
 
 ### ✨ Features
