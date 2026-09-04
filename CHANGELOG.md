@@ -1,3 +1,9 @@
+## [1.269.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.268.0...v1.269.0) (2026-09-04)
+
+### ✨ Features
+
+* enhance onboarding with PlatformDownloadButton and improved download options ([b468bd0](https://github.com/travel-albums-ai/travel-albums/commit/b468bd0cfe9ac8740e0ad3a1751fc12c7cefd9e3))
+
 ## [1.268.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.267.0...v1.268.0) (2026-09-03)
 
 ### ✨ Features
