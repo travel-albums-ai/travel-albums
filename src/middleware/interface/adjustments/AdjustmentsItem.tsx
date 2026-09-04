@@ -1,6 +1,6 @@
-import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
 import DebouncedSlider from '@/middleware/interface/adjustments/DebouncedSlider';
+import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
 import {
   Box,
   Switch,
@@ -30,8 +30,8 @@ export interface AdjustmentsItemProps {
 export default function AdjustmentsItem({ title, checked, onChange, sliders }: AdjustmentsItemProps) {
 
   return (
-    <SettingsSection transparent uuid="sfdsfsd">
-      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, px: 1 }}>
+    <OnboardingWrapperInfo light={true} sx={{ m: 0}}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1, px: 1, py: 1, width: '100%' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }} onClick={() => onChange(!checked)}>
           <Typography variant="caption" sx={{ cursor: 'pointer', fontWeight: checked ? 'bold' : 'normal' }}  color={checked ? 'textPrimary' : 'textDisabled'}>{title}</Typography>
         </Box>
@@ -53,6 +53,6 @@ export default function AdjustmentsItem({ title, checked, onChange, sliders }: A
           <Switch checked={checked} onChange={(e) => onChange(e.target.checked)} size="small" />
         </Box>}
       </Box>
-    </SettingsSection>
+    </OnboardingWrapperInfo>
   );
 }

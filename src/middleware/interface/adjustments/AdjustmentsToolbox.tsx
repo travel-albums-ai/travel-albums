@@ -577,7 +577,7 @@ export default function AdjustmentsToolbox({
       <Box sx={{ overflow: 'auto', flexGrow: 1, height: '0' }}>
         {items
           .filter((item, index) => index === selectedIndex)
-          .map((item) => <Box key={item.key}>
+          .map((item) => <Box key={item.key} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             <AdjustmentsToolboxItem item={item} />
           </Box>)}
       </Box>

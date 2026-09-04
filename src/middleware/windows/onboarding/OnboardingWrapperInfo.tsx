@@ -1,6 +1,6 @@
 import { Box, useTheme } from '@mui/material';
 
-export default function OnboardingWrapperInfo({ children, light = false }: { children: React.ReactNode, light?: boolean }) {
+export default function OnboardingWrapperInfo({ children, light = false, sx }: { children: React.ReactNode, light?: boolean, sx?: Record<string, unknown> }) {
   const theme = useTheme();
 
   return (<>
@@ -18,8 +18,8 @@ export default function OnboardingWrapperInfo({ children, light = false }: { chi
       transition: 'all 0.5s',
       '&:hover': {
         boxShadow: 4,
-        // backgroundColor: 'action.hover',
-      }
+      },
+      ...sx,
     }}>
       {children}
     </Box>

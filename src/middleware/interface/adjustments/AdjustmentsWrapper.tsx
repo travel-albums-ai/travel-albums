@@ -68,13 +68,6 @@ export default function AdjustmentsWrapper({
   const processedBase64 = useAdjustmentsStoreSelector((state) => state.processedBase64)
 
   const [selectedAdj, setSelectedAdj] = useState<Adjustments | null>(null);
-  const [base64Image, setBase64Image] = useState<string | null>(null);
-
-  const processImage = async (url: string) => {
-    return await imageUrlToBase64(composeUrl(previewPhotoObj, true)).then((base64) => base64);
-  };
-
-  // const base64Image = await imageUrlToBase64(composeUrl(previewPhotoObj, true));
 
   return (
     <GenericPanel id="adjustments-drawer" defaultTool>
