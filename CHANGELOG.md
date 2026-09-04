@@ -1,3 +1,9 @@
+## [1.278.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.277.0...v1.278.0) (2026-09-04)
+
+### ✨ Features
+
+* add SourceNode, InvertNode, and ViewerNode components for image processing pipeline ([862ccfc](https://github.com/travel-albums-ai/travel-albums/commit/862ccfc26029fff3282be21ec090f0c9b341df18))
+
 ## [1.277.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.276.0...v1.277.0) (2026-09-04)
 
 ### ✨ Features
