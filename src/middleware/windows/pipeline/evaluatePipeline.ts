@@ -1,5 +1,7 @@
 import type { Edge, Node } from "@xyflow/react";
 
+import type { Stage } from "../../interface/adjustments/types";
+import { invertStage } from "../../interface/adjustments/utils";
 import type { ImageValue, NodeOutputs, PipelineNodeDefinition } from "./types";
 
 // ============================================================
@@ -42,7 +44,7 @@ async function renderImage(
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement
   ) => void,
-  transformPixels?: (data: Uint8ClampedArray) => void
+  transformPixels?: Stage
 ): Promise<ImageValue> {
   const canvas = document.createElement("canvas");
 
@@ -65,7 +67,7 @@ async function renderImage(
       canvas.height
     );
 
-    transformPixels(pixels.data);
+    transformPixels(pixels);
 
     ctx.putImageData(pixels, 0, 0);
   }
@@ -95,17 +97,11 @@ const nodeDefinitions: Record<
     async execute(inputs) {
       const file = inputs.file as File | undefined;
 
-      if (!file) {
-        return {
-          image: null,
-        };
-      }
+      if (!file) { return { image: null } }
 
       const image = await loadImage(file);
 
-      return {
-        image,
-      };
+      return { image };
     },
   },
 
@@ -113,33 +109,15 @@ const nodeDefinitions: Record<
     async execute(inputs) {
       const source = inputs.image as ImageValue | null;
 
-      if (!source) {
-        return {
-          image: null,
-        };
-      }
-
-      // Pretend this is expensive.
-      // In reality this could be WebGPU, WASM, AI, etc.
-      await new Promise((resolve) =>
-        setTimeout(resolve, 100)
-      );
+      if (!source) { return { image: null } }
 
       const image = await renderImage(
         source,
         (ctx) => ctx.drawImage(source.image, 0, 0),
-        (data) => {
-          for (let i = 0; i < data.length; i += 4) {
-            data[i] = 255 - data[i];
-            data[i + 1] = 255 - data[i + 1];
-            data[i + 2] = 255 - data[i + 2];
-          }
-        }
+        invertStage()
       );
 
-      return {
-        image,
-      };
+      return { image };
     },
   },
 
@@ -147,11 +125,7 @@ const nodeDefinitions: Record<
     async execute(inputs) {
       const source = inputs.image as ImageValue | null;
 
-      if (!source) {
-        return {
-          image: null,
-        };
-      }
+      if (!source) { return { image: null } }
 
       const image = await renderImage(
         source,
@@ -163,17 +137,12 @@ const nodeDefinitions: Record<
         }
       );
 
-      return {
-        image,
-      };
+      return { image };
     },
   },
 
   viewer: {
     async execute(inputs) {
-      // Viewer is technically a pipeline node too.
-      // It simply receives the image.
-
       await Promise.resolve();
 
       return {
