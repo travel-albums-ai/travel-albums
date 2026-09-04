@@ -5,6 +5,7 @@ import {
   Controls,
   MiniMap,
   ReactFlow,
+  reconnectEdge,
   useEdgesState,
   useNodesState,
   type Connection,
@@ -243,9 +244,19 @@ export default function ReactFlowWrapper() {
     [setEdges]
   );
 
+  // Dragging an existing edge's endpoint onto a new handle
+  // rewires it instead of creating a duplicate connection.
+  const onReconnect = useCallback(
+    (oldEdge: Edge, newConnection: Connection) => {
+      setEdges((current) =>
+        reconnectEdge(oldEdge, newConnection, current)
+      );
+    },
+    [setEdges]
+  );
+
   return (
     <Box className="app" sx={{ width: '100%', height: '100%' }}>
-      ddd
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -253,6 +264,8 @@ export default function ReactFlowWrapper() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onReconnect={onReconnect}
+        deleteKeyCode={["Backspace", "Delete"]}
         fitView
       >
         <Background />
