@@ -32,6 +32,58 @@ function loadImage(file: File): Promise<ImageValue> {
 }
 
 // ============================================================
+// Utility: render a source image onto a canvas, optionally
+// applying a per-pixel transform, and return the result.
+// ============================================================
+
+async function renderImage(
+  source: ImageValue,
+  draw: (
+    ctx: CanvasRenderingContext2D,
+    canvas: HTMLCanvasElement
+  ) => void,
+  transformPixels?: (data: Uint8ClampedArray) => void
+): Promise<ImageValue> {
+  const canvas = document.createElement("canvas");
+
+  canvas.width = source.width;
+  canvas.height = source.height;
+
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    throw new Error("Could not create canvas context");
+  }
+
+  draw(ctx, canvas);
+
+  if (transformPixels) {
+    const pixels = ctx.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    transformPixels(pixels.data);
+
+    ctx.putImageData(pixels, 0, 0);
+  }
+
+  const result = new Image();
+
+  result.src = canvas.toDataURL("image/png");
+
+  await result.decode();
+
+  return {
+    image: result,
+    width: canvas.width,
+    height: canvas.height,
+  };
+}
+
+// ============================================================
 // Node implementations
 // ============================================================
 
@@ -73,48 +125,46 @@ const nodeDefinitions: Record<
         setTimeout(resolve, 100)
       );
 
-      const canvas = document.createElement("canvas");
-
-      canvas.width = source.width;
-      canvas.height = source.height;
-
-      const ctx = canvas.getContext("2d");
-
-      if (!ctx) {
-        throw new Error("Could not create canvas context");
-      }
-
-      ctx.drawImage(source.image, 0, 0);
-
-      const pixels = ctx.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
+      const image = await renderImage(
+        source,
+        (ctx) => ctx.drawImage(source.image, 0, 0),
+        (data) => {
+          for (let i = 0; i < data.length; i += 4) {
+            data[i] = 255 - data[i];
+            data[i + 1] = 255 - data[i + 1];
+            data[i + 2] = 255 - data[i + 2];
+          }
+        }
       );
 
-      for (let i = 0; i < pixels.data.length; i += 4) {
-        pixels.data[i] = 255 - pixels.data[i];
-        pixels.data[i + 1] =
-          255 - pixels.data[i + 1];
-        pixels.data[i + 2] =
-          255 - pixels.data[i + 2];
+      return {
+        image,
+      };
+    },
+  },
+
+  flip: {
+    async execute(inputs) {
+      const source = inputs.image as ImageValue | null;
+
+      if (!source) {
+        return {
+          image: null,
+        };
       }
 
-      ctx.putImageData(pixels, 0, 0);
-
-      const inverted = new Image();
-
-      inverted.src = canvas.toDataURL("image/png");
-
-      await inverted.decode();
+      const image = await renderImage(
+        source,
+        (ctx, canvas) => {
+          // Rotate 180deg around the canvas center.
+          ctx.translate(canvas.width, canvas.height);
+          ctx.rotate(Math.PI);
+          ctx.drawImage(source.image, 0, 0);
+        }
+      );
 
       return {
-        image: {
-          image: inverted,
-          width: canvas.width,
-          height: canvas.height,
-        },
+        image,
       };
     },
   },

@@ -20,6 +20,7 @@ import {
   useRef,
 } from "react";
 
+import FlipNode from "./FlipNode";
 import InvertNode from "./InvertNode";
 import SourceNode from "./SourceNode";
 import ViewerNode from "./ViewerNode";
@@ -32,6 +33,7 @@ import { evaluatePipeline } from "./evaluatePipeline";
 const nodeTypes = {
   source: SourceNode,
   invert: InvertNode,
+  flip: FlipNode,
   viewer: ViewerNode,
 };
 
@@ -61,10 +63,20 @@ const initialNodes: Node[] = [
   },
 
   {
+    id: "flip",
+    type: "flip",
+    position: {
+      x: 650,
+      y: 200,
+    },
+    data: {},
+  },
+
+  {
     id: "viewer",
     type: "viewer",
     position: {
-      x: 650,
+      x: 950,
       y: 200,
     },
     data: {},
@@ -81,8 +93,16 @@ const initialEdges: Edge[] = [
   },
 
   {
-    id: "invert-viewer",
+    id: "invert-flip",
     source: "invert",
+    sourceHandle: "image",
+    target: "flip",
+    targetHandle: "image",
+  },
+
+  {
+    id: "flip-viewer",
+    source: "flip",
     sourceHandle: "image",
     target: "viewer",
     targetHandle: "image",
