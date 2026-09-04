@@ -1,0 +1,66 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  background: #111;
+}
+
+.node {
+  min-width: 180px;
+  padding: 14px;
+  border-radius: 12px;
+  background: white;
+  color: #111;
+  border: 1px solid #ccc;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node strong {
+  font-size: 14px;
+}
+
+.node small {
+  color: #666;
+}
+
+.node input {
+  max-width: 180px;
+}
+
+.viewer {
+  width: 300px;
+}
+
+.viewer img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #eee;
+}
+
+.empty {
+  height: 150px;
+
+  display: grid;
+  place-items: center;
+
+  background: #eee;
+  border-radius: 8px;
+  color: #888;
+}
