@@ -1,3 +1,9 @@
+## [1.277.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.276.0...v1.277.0) (2026-09-04)
+
+### ✨ Features
+
+* add PipelineWindow and ReactFlowWrapper components with styling and functionality for image processing ([8d9d6b6](https://github.com/travel-albums-ai/travel-albums/commit/8d9d6b6ac7db8b0949fc45e1e582d158df8ec971))
+
 ## [1.276.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.275.0...v1.276.0) (2026-09-04)
 
 ### ✨ Features
