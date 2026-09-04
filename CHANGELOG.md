@@ -1,3 +1,9 @@
+## [1.282.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.281.0...v1.282.0) (2026-09-04)
+
+### ✨ Features
+
+* add BrightnessNode component and integrate it into the image processing pipeline ([92b2dc9](https://github.com/travel-albums-ai/travel-albums/commit/92b2dc919db64c9d5e624d72f33c35c768e1a7b7))
+
 ## [1.281.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.280.0...v1.281.0) (2026-09-04)
 
 ### ✨ Features
