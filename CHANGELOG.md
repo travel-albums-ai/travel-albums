@@ -1,3 +1,9 @@
+## [1.272.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.271.0...v1.272.0) (2026-09-04)
+
+### ✨ Features
+
+* integrate processedBase64 handling in AdjustmentsCanvas and AIColorizer for enhanced image processing ([c6c6a87](https://github.com/travel-albums-ai/travel-albums/commit/c6c6a871b2c6ac01e0a29514f4340459a53b9f02))
+
 ## [1.271.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.270.0...v1.271.0) (2026-09-04)
 
 ### ✨ Features
