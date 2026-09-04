@@ -1,3 +1,9 @@
+## [1.274.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.273.0...v1.274.0) (2026-09-04)
+
+### ✨ Features
+
+* introduce AdjustmentsProcess component to handle image processing pipeline ([3f8bb49](https://github.com/travel-albums-ai/travel-albums/commit/3f8bb49bef029db4c89d148eed3e471919d8bac2))
+
 ## [1.273.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.272.2...v1.273.0) (2026-09-04)
 
 ### ✨ Features
