@@ -27,6 +27,7 @@ import BrightnessNode from "./BrightnessNode";
 import FlipNode from "./FlipNode";
 import InvertNode from "./InvertNode";
 import NodeToolbox from "./NodeToolbox";
+import SelectionNode from "./SelectionNode";
 import SourceNode from "./SourceNode";
 import ViewerNode from "./ViewerNode";
 import { evaluatePipeline } from "./evaluatePipeline";
@@ -37,6 +38,7 @@ import { evaluatePipeline } from "./evaluatePipeline";
 
 const nodeTypes = {
   source: SourceNode,
+  selection: SelectionNode,
   invert: InvertNode,
   flip: FlipNode,
   brightness: BrightnessNode,

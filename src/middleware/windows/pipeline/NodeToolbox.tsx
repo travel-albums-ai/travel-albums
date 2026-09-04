@@ -8,6 +8,7 @@ const paletteItems: Array<{
   icon: string;
 }> = [
   { type: "source", label: "Image Source", icon: "📷" },
+  { type: "selection", label: "Gallery Selection", icon: "🗂️" },
   { type: "invert", label: "Invert", icon: "☯️" },
   { type: "flip", label: "Flip 180°", icon: "🔄" },
   { type: "brightness", label: "Brightness", icon: "☀️" },

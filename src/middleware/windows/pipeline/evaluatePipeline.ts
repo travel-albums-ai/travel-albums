@@ -1,5 +1,7 @@
 import type { Edge, Node } from "@xyflow/react";
 
+import type { GalleryPhoto } from "../../../lib/galleryData";
+import { composeUrl } from "../../../lib/thumbnailService";
 import type { Stage } from "../../interface/adjustments/types";
 import { brightnessStage, invertStage } from "../../interface/adjustments/utils";
 import type { ImageArray, ImageValue, NodeOutputs, PipelineNodeDefinition } from "./types";
@@ -39,6 +41,32 @@ function loadImage(file: File): Promise<ImageValue> {
 // Loads a batch of files in parallel.
 function loadImages(files: File[]): Promise<ImageArray> {
   return Promise.all(files.map(loadImage));
+}
+
+function loadImageFromUrl(url: string): Promise<ImageValue> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.crossOrigin = "anonymous";
+
+    image.onload = () => {
+      resolve({
+        image,
+        width: image.naturalWidth,
+        height: image.naturalHeight,
+      });
+    };
+
+    image.onerror = () => {
+      reject(new Error(`Failed to load image from ${url}`));
+    };
+
+    image.src = url;
+  });
+}
+
+function loadImagesFromUrls(urls: string[]): Promise<ImageArray> {
+  return Promise.all(urls.map(loadImageFromUrl));
 }
 
 // ============================================================
@@ -129,6 +157,20 @@ const nodeDefinitions: Record<
       if (!files || files.length === 0) { return { image: [] } }
 
       const image = await loadImages(files);
+
+      return { image };
+    },
+  },
+
+  selection: {
+    async execute(inputs) {
+      const photos = inputs.photos as GalleryPhoto[] | undefined;
+
+      if (!photos || photos.length === 0) { return { image: [] } }
+
+      const image = await loadImagesFromUrls(
+        photos.map((photo) => composeUrl(photo))
+      );
 
       return { image };
     },
@@ -273,6 +315,12 @@ export async function evaluatePipeline(
       // Source node gets its Files from node.data.
       if (node.type === "source") {
         inputs.files = node.data.files;
+      }
+
+      // Special case:
+      // Selection node gets its GalleryPhotos from node.data.
+      if (node.type === "selection") {
+        inputs.photos = node.data.photos;
       }
 
       // Special case:
