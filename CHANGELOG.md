@@ -1,3 +1,13 @@
+## [1.287.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.286.0...v1.287.0) (2026-09-04)
+
+### ✨ Features
+
+* enhance SourceNode and ViewerNode to support multiple image uploads and display ([0e8cf7e](https://github.com/travel-albums-ai/travel-albums/commit/0e8cf7eb5d44e112d9d9c8bb21555800a5039faa))
+
+### 🧹 Refactors
+
+* comment out unused node types and adjust brightness node position ([322d573](https://github.com/travel-albums-ai/travel-albums/commit/322d573d8087828e5ba172df561a9a260535d08f))
+
 ## [1.286.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.285.0...v1.286.0) (2026-09-04)
 
 ### ✨ Features
