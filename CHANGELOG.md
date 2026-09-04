@@ -1,3 +1,9 @@
+## [1.293.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.292.0...v1.293.0) (2026-09-04)
+
+### ✨ Features
+
+* enhance UI components with responsive design and improved layout for PipelineWindow, SelectionNode, ViewerNode; increase max viewer photos limit ([142052b](https://github.com/travel-albums-ai/travel-albums/commit/142052b0852f034403334714b9a2cc8b72b9ed23))
+
 ## [1.292.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.291.0...v1.292.0) (2026-09-04)
 
 ### ✨ Features
