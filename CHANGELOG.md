@@ -1,3 +1,9 @@
+## [1.272.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.272.0...v1.272.1) (2026-09-04)
+
+### 🐛 Fixes
+
+* adjust height of AdjustmentsWrapper to auto for better responsiveness ([f719b23](https://github.com/travel-albums-ai/travel-albums/commit/f719b23f3bc7cebaa0e1cb1e117d5de804fd3064))
+
 ## [1.272.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.271.0...v1.272.0) (2026-09-04)
 
 ### ✨ Features
