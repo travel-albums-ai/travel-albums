@@ -1,3 +1,9 @@
+## [1.270.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.269.0...v1.270.0) (2026-09-04)
+
+### ✨ Features
+
+* introduce OnboardingWrapperInfo for enhanced onboarding UI and refactor onboarding components ([d073776](https://github.com/travel-albums-ai/travel-albums/commit/d073776c3547dd396af14d632dcef050fee037c4))
+
 ## [1.269.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.268.0...v1.269.0) (2026-09-04)
 
 ### ✨ Features
