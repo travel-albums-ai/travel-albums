@@ -280,6 +280,15 @@ function Pipeline() {
     [setEdges]
   );
 
+  const onEdgeDoubleClick = useCallback(
+    (_event: React.MouseEvent, edge: Edge) => {
+      setEdges((current) =>
+        current.filter((e) => e.id !== edge.id)
+      );
+    },
+    [setEdges]
+  );
+
   const onDragOver = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
@@ -338,6 +347,7 @@ function Pipeline() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           onReconnect={onReconnect}
+          onEdgeDoubleClick={onEdgeDoubleClick}
           deleteKeyCode={["Backspace", "Delete"]}
           fitView
         >
