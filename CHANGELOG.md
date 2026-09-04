@@ -1,3 +1,9 @@
+## [1.280.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.279.0...v1.280.0) (2026-09-04)
+
+### ✨ Features
+
+* add FlipNode component and integrate it into the image processing pipeline ([385b75b](https://github.com/travel-albums-ai/travel-albums/commit/385b75bad2edad84d3fa45506af35003d71c945e))
+
 ## [1.279.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.278.0...v1.279.0) (2026-09-04)
 
 ### ✨ Features
