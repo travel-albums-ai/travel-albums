@@ -1,3 +1,9 @@
+## [1.271.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.270.0...v1.271.0) (2026-09-04)
+
+### ✨ Features
+
+* add ImageUrlToBase64 component for image conversion and integrate AIColorizer for enhanced photo editing ([3c382ca](https://github.com/travel-albums-ai/travel-albums/commit/3c382caf2c0ccc17b125f0e47cc4d05050fa6709))
+
 ## [1.270.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.269.0...v1.270.0) (2026-09-04)
 
 ### ✨ Features
