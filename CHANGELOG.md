@@ -1,3 +1,9 @@
+## [1.289.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.288.0...v1.289.0) (2026-09-04)
+
+### ✨ Features
+
+* add SelectionNode for gallery photo selection and update pipeline ([675d9e1](https://github.com/travel-albums-ai/travel-albums/commit/675d9e1ce23503b704f868e1ed53b4a92221b07a))
+
 ## [1.288.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.287.0...v1.288.0) (2026-09-04)
 
 ### ✨ Features
