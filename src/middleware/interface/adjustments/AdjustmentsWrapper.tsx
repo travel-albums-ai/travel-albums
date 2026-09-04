@@ -138,7 +138,7 @@ export default function AdjustmentsWrapper({
                 sx={{
                   display: 'block',
                   width: '100%',
-                  height: '200px',
+                  height: 'auto',
                   borderRadius: 2,
                 }}
               />}

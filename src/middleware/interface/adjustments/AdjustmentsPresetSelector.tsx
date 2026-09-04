@@ -29,13 +29,13 @@ export default function AdjustmentsPresetSelector({
             tooltip: 'Open Preset Selector',
             icon: <>
               <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, ml: 1.75 }}>
-                {Object.entries(presets)
+                {/* {Object.entries(presets)
                   .filter(([name], index) => index < 3)
                   .map(([name, value]) => (
                     <Box key={name} sx={{ width: 16, height: 16, borderRadius: 21, overflow: 'hidden', display: 'flex', flexDirection: 'row', ml: -1.75, border: '1px solid', borderColor: 'divider', boxShadow: 1, cursor: 'pointer' }}>
                       <AdjustmentsReusable previewPhotoObj={previewPhotoObj} initialPreset={value as Partial<Adjustments>} />
                     </Box>
-                  ))}
+                  ))} */}
               </Box>
             </>,
             title: 'Presets' + (preset ? `: ${preset}` : ''),
