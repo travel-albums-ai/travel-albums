@@ -58,31 +58,31 @@ const initialNodes: Node[] = [
     data: {},
   },
 
-  {
-    id: "invert",
-    type: "invert",
-    position: {
-      x: 350,
-      y: 200,
-    },
-    data: {},
-  },
+  // {
+  //   id: "invert",
+  //   type: "invert",
+  //   position: {
+  //     x: 350,
+  //     y: 200,
+  //   },
+  //   data: {},
+  // },
 
-  {
-    id: "flip",
-    type: "flip",
-    position: {
-      x: 650,
-      y: 200,
-    },
-    data: {},
-  },
+  // {
+  //   id: "flip",
+  //   type: "flip",
+  //   position: {
+  //     x: 650,
+  //     y: 200,
+  //   },
+  //   data: {},
+  // },
 
   {
     id: "brightness",
     type: "brightness",
     position: {
-      x: 950,
+      x: 650,
       y: 200,
     },
     data: {},
