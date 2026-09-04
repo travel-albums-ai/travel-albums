@@ -1,10 +1,9 @@
 import ServerStatus from '@/middleware/base/ServerStatus';
-import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { PlatformDownloadButton } from '@/middleware/windows/onboarding/PlatformDownload';
-import { Box } from '@mui/material';
-import { PackageOpen, Play, SquareMousePointer } from 'lucide-react';
+import { Box, Button } from '@mui/material';
+import { ExternalLink, PackageOpen, Play, SquareMousePointer } from 'lucide-react';
 
 const phaseSteps = [
   {
@@ -32,12 +31,16 @@ export default function OnboardingIndexer() {
   return (<>
     <OnboardingWrapper>
       <img src="/image.1.png" alt="Releases" style={{ width: '100%', borderRadius: 8, height: '312px' }} />
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', width: '100%' }} >
-        <OnboardingButton href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" label="Open Indexer Releases..." />
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', width: '100%', justifyContent: 'space-between' }} >
+        <PlatformDownloadButton />
         <ServerStatus />
+        <a href="https://github.com/travel-albums-ai/albums-google-photos-indexer/releases" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+          <Button variant="outlined" color="primary">
+            <ExternalLink size={16} style={{ marginRight: 8 }} />
+        More...
+          </Button>
+        </a>
       </Box>
-
-      <PlatformDownloadButton />
     </OnboardingWrapper>
 
     <OnboardingWrapper light={true}>

@@ -1,6 +1,7 @@
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import SolidChip from '@/components/SolidChip';
-import { Box, Button } from '@mui/material';
-import { DownloadIcon } from 'lucide-react';
+import { Box, Divider, Stack } from '@mui/material';
 import { useEffect, useState } from "react";
 
 type OS =
@@ -116,12 +117,6 @@ async function detectArchitecture(os: OS): Promise<Architecture> {
   const ua = navigator.userAgent;
   const uaData = getUAData();
 
-  /*
-   * ------------------------------------------------------------
-   * 1. Chromium User-Agent Client Hints
-   * ------------------------------------------------------------
-   */
-
   if (uaData?.getHighEntropyValues) {
     try {
       const data = await uaData.getHighEntropyValues([
@@ -134,20 +129,10 @@ async function detectArchitecture(os: OS): Promise<Architecture> {
       const architecture = normalizeArchitecture(data.architecture);
 
       if (architecture !== "unknown") {
-        /*
-         * Windows ARM browsers may report x86/x64 because the
-         * browser itself is emulated.
-         *
-         * "arm64" is trustworthy when explicitly reported.
-         */
         if (architecture === "arm64") {
           return "arm64";
         }
 
-        /*
-         * ARM Windows machines sometimes expose ARM through the
-         * device model rather than the architecture field.
-         */
         if (os === "windows") {
           const model = data.model?.toLowerCase() ?? "";
 
@@ -167,12 +152,6 @@ async function detectArchitecture(os: OS): Promise<Architecture> {
     }
   }
 
-  /*
-   * ------------------------------------------------------------
-   * 2. Explicit ARM indicators in the User Agent
-   * ------------------------------------------------------------
-   */
-
   if (/arm64|aarch64/i.test(ua)) {
     return "arm64";
   }
@@ -181,34 +160,12 @@ async function detectArchitecture(os: OS): Promise<Architecture> {
     return "arm64";
   }
 
-  /*
-   * ------------------------------------------------------------
-   * 3. Windows ARM-specific browser hints
-   * ------------------------------------------------------------
-   *
-   * Some Chromium builds expose "ARM" through WOW64-related
-   * information while still presenting an x64 UA.
-   */
-
   if (os === "windows") {
     const platform = navigator.platform?.toLowerCase() ?? "";
 
     if (/arm64|aarch64|arm/i.test(platform)) {
       return "arm64";
     }
-
-    /*
-     * Windows ARM machines commonly present:
-     *
-     * Win64; x64
-     *
-     * because the browser is running under emulation.
-     *
-     * Unfortunately there is no universally reliable synchronous
-     * browser API that distinguishes this from native x64.
-     *
-     * We therefore inspect known ARM device names.
-     */
 
     if (
       /snapdragon|qualcomm|surface pro x|surface pro 9|surface laptop 7|copilot\+ pc/i.test(
@@ -219,31 +176,13 @@ async function detectArchitecture(os: OS): Promise<Architecture> {
     }
   }
 
-  /*
-   * ------------------------------------------------------------
-   * 4. Standard x64 detection
-   * ------------------------------------------------------------
-   */
-
   if (/x86_64|win64|wow64|x64|amd64/i.test(ua)) {
     return "x64";
   }
 
-  /*
-   * ------------------------------------------------------------
-   * 5. 32-bit x86
-   * ------------------------------------------------------------
-   */
-
   if (/x86|i[3-6]86|ia32/i.test(ua)) {
     return "x86";
   }
-
-  /*
-   * ------------------------------------------------------------
-   * 6. Apple
-   * ------------------------------------------------------------
-   */
 
   if (os === "macos") {
     /*
@@ -307,57 +246,80 @@ export function PlatformDownloadButton() {
     return null;
   }
 
-  let downloadUrl: string | null = null;
-
-  if (platform.os === "windows") {
-    if (platform.architecture === "arm64") {
-      downloadUrl = "/downloads/myapp-windows-arm64.exe";
-    } else if (platform.architecture === "x64") {
-      downloadUrl = "/downloads/myapp-windows-x64.exe";
-    }
-  }
-
-  if (platform.os === "macos") {
-    downloadUrl =
-      platform.architecture === "arm64"
-        ? "/downloads/myapp-macos-arm64.dmg"
-        : "/downloads/myapp-macos-x64.dmg";
-  }
-
-  if (platform.os === "linux") {
-    downloadUrl =
-      platform.architecture === "arm64"
-        ? "/downloads/myapp-linux-arm64.AppImage"
-        : "/downloads/myapp-linux-x64.AppImage";
-  }
+  const downloadUrlButton = (url: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop() ?? "download";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
 
 
   return (<>
+    <Stack direction={'row'} sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'nowrap' }} divider={<Divider orientation="vertical" flexItem />}>
 
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <GenericToggleButtonGroup  items={[
+          {
+            tooltip: "Download for Windows",
+            icon: <span>🪟</span>,
+            selected: platform.os === "windows" && platform.architecture === "arm64",
+            onClick: () => {
+              downloadUrlButton("https://github.com/travel-albums-ai/albums-google-photos-indexer/releases/latest/download/TravelAlbums-windows-arm64.zip");
+            }
+          },
+          {
+            tooltip: "Download for macOS",
+            icon: <span>🍎</span>,
+            selected: platform.os === "macos" && platform.architecture === "arm64",
+            onClick: () => {
+              downloadUrlButton("https://github.com/travel-albums-ai/albums-google-photos-indexer/releases/latest/download/TravelAlbums-macos-arm64.tar.gz");
+            }
+          },
+          {
+            tooltip: "Download for Linux",
+            icon: <span>🐧</span>,
+            selected: platform.os === "linux" && platform.architecture === "arm64",
+            onClick: () => {
+              downloadUrlButton("https://github.com/travel-albums-ai/albums-google-photos-indexer/releases/latest/download/TravelAlbums-ubuntu-arm64.tar.gz");
+            }
+          }
+        ] satisfies GenericToggleButtonProps[]} />
+        <SolidChip label="ARM64" fontSize={13} height={32} minWidth={50} />
+      </Box>
 
-      <Button variant="contained" startIcon={<DownloadIcon size={16} />}>Download Indexer</Button>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <SolidChip label="x64" fontSize={13} height={32} minWidth={50} />
+        <GenericToggleButtonGroup  items={[
+          {
+            tooltip: "Download for Windows",
+            icon: <span>🪟</span>,
+            selected: platform.os === "windows" && platform.architecture === "x64",
+            onClick: () => {
+              downloadUrlButton("https://github.com/travel-albums-ai/albums-google-photos-indexer/releases/latest/download/TravelAlbums-windows-x64.zip");
+            }
+          },
+          {
+            tooltip: "Download for macOS",
+            icon: <span>🍎</span>,
+            selected: platform.os === "macos" && platform.architecture === "x64",
+            onClick: () => {
+              downloadUrlButton("https://github.com/travel-albums-ai/albums-google-photos-indexer/releases/latest/download/TravelAlbums-macos-x64.tar.gz");
+            }
+          },
+          {
+            tooltip: "Download for Linux",
+            icon: <span>🐧</span>,
+            selected: platform.os === "linux" && platform.architecture === "x64",
+            onClick: () => {
+              downloadUrlButton("https://github.com/travel-albums-ai/albums-google-photos-indexer/releases/latest/download/TravelAlbums-ubuntu-x64.tar.gz");
+            }
+          }
+        ] satisfies GenericToggleButtonProps[]} />
+      </Box>
 
-      {platform.os === 'windows' && <SolidChip label="🪟 Windows" fontSize={13} height={32} minWidth={90} />}
-      {platform.os === 'macos' && <SolidChip label="🍎 macOS" fontSize={13} height={32} minWidth={80} />}
-      {platform.os === 'linux' && <SolidChip label="🐧 Linux" fontSize={13} height={32} minWidth={80} />}
-
-      <SolidChip count={platform.architecture}  label="Architecture" fontSize={13} height={32} minWidth={130} />
-
-    </Box>
-
-
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-
-      <Button variant="contained" startIcon={<DownloadIcon size={16} />}>Download Indexer</Button>
-
-      {platform.os === 'windows' && <SolidChip label="🪟 Windows" fontSize={13} height={32} minWidth={90} />}
-      {platform.os === 'macos' && <SolidChip label="🍎 macOS" fontSize={13} height={32} minWidth={80} />}
-      {platform.os === 'linux' && <SolidChip label="🐧 Linux" fontSize={13} height={32} minWidth={80} />}
-
-      <SolidChip count={platform.architecture}  label="Architecture" fontSize={13} height={32} minWidth={130} />
-
-    </Box>
+    </Stack>
   </>
   );
 }
