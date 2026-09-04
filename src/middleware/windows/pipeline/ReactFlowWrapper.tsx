@@ -3,16 +3,13 @@ import {
   addEdge,
   Background,
   Controls,
-  Handle,
   MiniMap,
-  Position,
   ReactFlow,
   useEdgesState,
   useNodesState,
   type Connection,
   type Edge,
   type Node,
-  type NodeProps,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import './styles.css';
@@ -21,27 +18,16 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState,
 } from "react";
 
-// ============================================================
-// Types
-// ============================================================
-
-type ImageValue = {
-  image: HTMLImageElement;
-  width: number;
-  height: number;
-};
-
-type NodeInputs = Record<string, unknown>;
-type NodeOutputs = Record<string, unknown>;
-
-type PipelineNodeDefinition = {
-  execute: (
-    inputs: NodeInputs
-  ) => Promise<NodeOutputs>;
-};
+import InvertNode from "./InvertNode";
+import SourceNode from "./SourceNode";
+import ViewerNode from "./ViewerNode";
+import type {
+  ImageValue,
+  NodeOutputs,
+  PipelineNodeDefinition,
+} from "./types";
 
 // ============================================================
 // Utility: load a File as an HTMLImageElement
@@ -173,103 +159,6 @@ const nodeDefinitions: Record<
     },
   },
 };
-
-// ============================================================
-// React Flow node components
-// ============================================================
-
-function SourceNode({
-  data,
-}: NodeProps<Node<{ file?: File }>>) {
-  const [fileName, setFileName] = useState(
-    data.file?.name ?? "Choose image"
-  );
-
-  return (
-    <div className="node">
-      <strong>📷 Image Source</strong>
-
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(event) => {
-          const file = event.target.files?.[0];
-
-          if (!file) return;
-
-          data.file = file;
-          setFileName(file.name);
-
-          // Tell the pipeline engine that this node changed.
-          window.dispatchEvent(
-            new CustomEvent("pipeline:changed")
-          );
-        }}
-      />
-
-      <small>{fileName}</small>
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
-    </div>
-  );
-}
-
-// ------------------------------------------------------------
-
-function InvertNode() {
-  return (
-    <div className="node">
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
-
-      <strong>☯️ Invert</strong>
-
-      <small>Async image operation</small>
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
-    </div>
-  );
-}
-
-// ------------------------------------------------------------
-
-function ViewerNode({
-  data,
-}: NodeProps<Node<{ image?: ImageValue | null }>>) {
-  return (
-    <div className="node viewer">
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
-
-      <strong>🖼️ Viewer</strong>
-
-      {data.image?.image ? (
-        <img
-          src={data.image.image.src}
-          alt=""
-        />
-      ) : (
-        <div className="empty">
-          Waiting for image...
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ============================================================
 // React Flow node registry
