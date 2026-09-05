@@ -20,6 +20,7 @@ import type {
   PipelineWorkerNode,
   PipelineWorkerOutbound,
 } from "./types";
+import { VIEWER_NODE_TYPES } from "./types";
 
 // node.data keys the engine reads. Everything else (viewer results,
 // React Flow internals) stays on the main thread.
@@ -211,7 +212,7 @@ export async function evaluatePipeline(
   const results = new Map<string, Promise<ImageArray>>();
 
   for (const node of nodes) {
-    if (node.type !== "viewer") {
+    if (!VIEWER_NODE_TYPES.has(node.type ?? "")) {
       continue;
     }
 

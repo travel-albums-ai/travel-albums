@@ -37,6 +37,7 @@ import type {
   PipelineViewerImagePayload,
   PipelineWorkerOutbound,
 } from "./types";
+import { VIEWER_NODE_TYPES } from "./types";
 
 // ============================================================
 // Worker scope
@@ -621,6 +622,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       };
     },
   },
+
+  "viewer-single": {
+    async execute(inputs) {
+      await Promise.resolve();
+
+      return {
+        image: (inputs.image as WorkerImage[] | undefined) ?? [],
+      };
+    },
+  },
 };
 
 // ============================================================
@@ -761,7 +772,7 @@ async function runEvaluation(
   // Post each viewer's result as soon as it is ready instead of
   // waiting for the whole graph to finish.
   const viewerPosts = nodes
-    .filter((node) => node.type === "viewer")
+    .filter((node) => VIEWER_NODE_TYPES.has(node.type ?? ""))
     .map((node) =>
       evaluateNode(node.id)
         .then(async (nodeOutputs) => {

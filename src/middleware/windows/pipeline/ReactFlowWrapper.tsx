@@ -44,11 +44,13 @@ import RescaleNode from "./RescaleNode";
 import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
 import SharpenNode from "./SharpenNode";
+import SinglePhotoViewerNode from "./SinglePhotoViewerNode";
 import SourceNode from "./SourceNode";
 import VibranceNode from "./VibranceNode";
 import ViewerNode from "./ViewerNode";
 import VignetteNode from "./VignetteNode";
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
+import { VIEWER_NODE_TYPES } from "./types";
 
 // ============================================================
 // React Flow node registry
@@ -77,6 +79,7 @@ const nodeTypes = {
   fade: FadeNode,
   rescale: RescaleNode,
   viewer: ViewerNode,
+  "viewer-single": SinglePhotoViewerNode,
 };
 
 // ============================================================
@@ -225,7 +228,7 @@ function Pipeline() {
 
     // Update viewer nodes with their resolved result.
     for (const node of nodes) {
-      if (node.type !== "viewer") {
+      if (!VIEWER_NODE_TYPES.has(node.type ?? "")) {
         continue;
       }
 

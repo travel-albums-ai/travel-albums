@@ -33,6 +33,7 @@ const paletteItems: Array<{
   { type: "fade", label: "Fade", icon: "🌫️", group: "decorative" },
   { type: "rescale", label: "Rescale", icon: "📐", group: "utility" },
   { type: "viewer", label: "Viewer", icon: "🖼️", group: "output" },
+  { type: "viewer-single", label: "Single Photo Viewer", icon: "🏞️", group: "output" },
 ];
 
 const groupedPaletteItems = paletteItems.reduce((acc, item) => {
