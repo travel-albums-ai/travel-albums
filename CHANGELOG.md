@@ -1,3 +1,9 @@
+## [1.299.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.298.0...v1.299.0) (2026-09-05)
+
+### ✨ Features
+
+* update ViewerNode image height for improved display ([9148452](https://github.com/travel-albums-ai/travel-albums/commit/91484529ac221fde75a70c0ca74bfd12a18b95ce))
+
 ## [1.298.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.297.0...v1.298.0) (2026-09-05)
 
 ### ✨ Features
