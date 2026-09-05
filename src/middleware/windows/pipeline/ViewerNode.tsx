@@ -19,29 +19,31 @@ function ViewerNode({
 
       <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
 
-      {images.length > 0 ? (
-        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
-          {images.map((value, index) => (
-            <img
-              key={index}
-              src={value.image.src}
-              alt=""
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '100px',
-                objectFit: 'cover',
-                borderRadius: '6px',
-                background: '#eee',
-              }}
-            />
-          ))}
-        </Box>
-      ) : (
-        <div className="empty">
+      <Box sx={{ height: '500px', width: '900px', overflow: 'auto' }}>
+        {images.length > 0 ? (
+          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
+            {images.map((value, index) => (
+              <img
+                key={index}
+                src={value.image.src}
+                alt=""
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: '100px',
+                  objectFit: 'cover',
+                  borderRadius: '6px',
+                  background: '#eee',
+                }}
+              />
+            ))}
+          </Box>
+        ) : (
+          <div className="empty">
           Waiting for photos...
-        </div>
-      )}
+          </div>
+        )}
+      </Box>
     </SettingsSection>
   );
 }

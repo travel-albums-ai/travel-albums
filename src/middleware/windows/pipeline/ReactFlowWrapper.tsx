@@ -170,8 +170,15 @@ function Pipeline() {
   const [edges, setEdges, onEdgesChange] =
     useEdgesState(initialGraph.edges);
 
-  const { screenToFlowPosition } = useReactFlow();
+  const { screenToFlowPosition, fitView } = useReactFlow();
   const nodeIdRef = useRef(0);
+
+  // Nodes are measured asynchronously, so fitView is deferred a frame
+  // to ensure it accounts for the restored graph's actual dimensions.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => fitView());
+    return () => cancelAnimationFrame(frame);
+  }, [fitView]);
 
   const evaluationId = useRef(0);
 
