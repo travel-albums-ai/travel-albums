@@ -1,3 +1,9 @@
+## [1.314.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.313.0...v1.314.0) (2026-09-05)
+
+### ✨ Features
+
+* add PhotoHistogramNode and integrate with pipeline, update Histogram component to support base64 images ([13e0664](https://github.com/travel-albums-ai/travel-albums/commit/13e06641f9dd11decaba6ae51bedff82200a9749))
+
 ## [1.313.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.312.0...v1.313.0) (2026-09-05)
 
 ### ✨ Features
