@@ -1,3 +1,9 @@
+## [1.306.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.305.0...v1.306.0) (2026-09-05)
+
+### ✨ Features
+
+* implement RescaleNode with input/output handles and scaling functionality ([03e1142](https://github.com/travel-albums-ai/travel-albums/commit/03e1142c2c6970dcca500221035562fe8fe6d52f))
+
 ## [1.305.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.304.0...v1.305.0) (2026-09-05)
 
 ### ✨ Features
