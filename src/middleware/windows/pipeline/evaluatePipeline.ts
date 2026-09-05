@@ -37,11 +37,14 @@ const SLIDER_NODE_TYPES = new Set([
 const MAX_VIEWER_PHOTOS = 25;
 
 // ============================================================
-// AI Async Colorizer config
+// AI Async image-edit nodes (colorizer, denoiser, ...)
 // ============================================================
 
 const OPENAI_IMAGES_EDIT_URL = "https://api.openai.com/v1/images/edits";
-const AI_COLORIZER_MODEL = "gpt-image-2";
+const AI_IMAGE_EDIT_MODEL = "gpt-image-2";
+
+// Node types that share the passthru/apiKey data shape.
+const AI_IMAGE_EDIT_NODE_TYPES = new Set(["ai-colorizer", "ai-denoiser"]);
 
 const AI_COLORIZER_PROMPT = [
   "Colorize this photograph realistically.",
@@ -57,17 +60,24 @@ const AI_COLORIZER_PROMPT = [
   "The result should look like the original photograph was naturally captured in color.",
 ].join(" ");
 
-// Monotonic counter so the UI can discard progress from a superseded run.
-let aiColorizerRunSeq = 0;
+const AI_DENOISER_PROMPT = [
+  "Reduce excessive film grain, scan noise, and digital noise while preserving the natural texture and fine detail of the original photograph.",
+  "Remove noise selectively rather than applying aggressive smoothing, with particular care around faces, hair, skin, fabric, foliage, architecture, and other areas containing genuine texture.",
+  "Preserve authentic film grain where it contributes to the original photographic character.",
+  "Do not introduce artificial sharpening, plastic-looking skin, invented texture, excessive smoothing, HDR effects, or a modern digital appearance.",
+  "Preserve the original composition, geometry, identity, facial features, expressions, poses, objects, lighting, tonal relationships, and photographic character.",
+  "The result should look like the same photograph captured or scanned with less distracting degradation, not like a newly generated image.",
+].join(" ");
 
-function dispatchAIColorizerProgress(
+function dispatchAIImageEditProgress(
+  nodeType: string,
   nodeId: string,
   runId: number,
   completed: number,
   total: number
 ) {
   window.dispatchEvent(
-    new CustomEvent("ai-colorizer:progress", {
+    new CustomEvent(`${nodeType}:progress`, {
       detail: { nodeId, runId, completed, total },
     })
   );
@@ -100,16 +110,17 @@ function imageValueToBlob(source: ImageValue): Promise<Blob> {
   });
 }
 
-async function colorizeImage(
+async function requestOpenAIImageEdit(
   source: ImageValue,
-  apiKey: string
+  apiKey: string,
+  prompt: string
 ): Promise<ImageValue> {
   const blob = await imageValueToBlob(source);
 
   const formData = new FormData();
 
-  formData.append("model", AI_COLORIZER_MODEL);
-  formData.append("prompt", AI_COLORIZER_PROMPT);
+  formData.append("model", AI_IMAGE_EDIT_MODEL);
+  formData.append("prompt", prompt);
   formData.append("image[]", blob, "source.jpg");
   formData.append("size", "auto");
   formData.append("quality", "medium");
@@ -148,6 +159,81 @@ async function colorizeImage(
     image: result,
     width: result.naturalWidth,
     height: result.naturalHeight,
+  };
+}
+
+// Builds a node definition for an OpenAI image-edit operation (colorize,
+// denoise, ...). Each instance gets its own run counter and result cache,
+// so re-running the pipeline on an already-processed image reuses the
+// cached result instead of calling OpenAI again.
+function createAIImageEditNodeDefinition(
+  nodeType: string,
+  label: string,
+  prompt: string
+): PipelineNodeDefinition {
+  let runSeq = 0;
+  const cache = new Map<string, ImageValue>();
+
+  async function editImage(
+    source: ImageValue,
+    apiKey: string
+  ): Promise<ImageValue> {
+    const cacheKey = source.image.src;
+    const cached = cache.get(cacheKey);
+
+    if (cached) {
+      return cached;
+    }
+
+    const edited = await requestOpenAIImageEdit(source, apiKey, prompt);
+
+    cache.set(cacheKey, edited);
+
+    return edited;
+  }
+
+  return {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const passthru = (inputs.passthru as boolean | undefined) ?? true;
+      const nodeId = inputs.nodeId as string;
+
+      if (passthru) {
+        return { image: sources };
+      }
+
+      const apiKey = inputs.apiKey as string | undefined;
+
+      if (!apiKey) {
+        console.error(`${label}: missing OpenAI API key`);
+        return { image: sources };
+      }
+
+      const runId = ++runSeq;
+      const total = sources.length;
+      let completed = 0;
+
+      dispatchAIImageEditProgress(nodeType, nodeId, runId, completed, total);
+
+      const image = await Promise.all(
+        sources.map(async (source) => {
+          try {
+            return await editImage(source, apiKey);
+          } catch (error) {
+            console.error(`${label} failed for an image:`, error);
+            return source;
+          } finally {
+            completed += 1;
+            dispatchAIImageEditProgress(nodeType, nodeId, runId, completed, total);
+          }
+        })
+      );
+
+      return { image };
+    },
   };
 }
 
@@ -534,49 +620,17 @@ const nodeDefinitions: Record<
     },
   },
 
-  "ai-colorizer": {
-    async execute(inputs) {
-      const sources = (inputs.image as ImageArray | undefined) ?? [];
+  "ai-colorizer": createAIImageEditNodeDefinition(
+    "ai-colorizer",
+    "AI Colorizer",
+    AI_COLORIZER_PROMPT
+  ),
 
-      if (sources.length === 0) { return { image: [] } }
-
-      const passthru = (inputs.passthru as boolean | undefined) ?? true;
-      const nodeId = inputs.nodeId as string;
-
-      if (passthru) {
-        return { image: sources };
-      }
-
-      const apiKey = inputs.apiKey as string | undefined;
-
-      if (!apiKey) {
-        console.error("AI Colorizer: missing OpenAI API key");
-        return { image: sources };
-      }
-
-      const runId = ++aiColorizerRunSeq;
-      const total = sources.length;
-      let completed = 0;
-
-      dispatchAIColorizerProgress(nodeId, runId, completed, total);
-
-      const image = await Promise.all(
-        sources.map(async (source) => {
-          try {
-            return await colorizeImage(source, apiKey);
-          } catch (error) {
-            console.error("AI Colorizer failed for an image:", error);
-            return source;
-          } finally {
-            completed += 1;
-            dispatchAIColorizerProgress(nodeId, runId, completed, total);
-          }
-        })
-      );
-
-      return { image };
-    },
-  },
+  "ai-denoiser": createAIImageEditNodeDefinition(
+    "ai-denoiser",
+    "AI Denoiser",
+    AI_DENOISER_PROMPT
+  ),
 
   viewer: {
     async execute(inputs) {
@@ -678,8 +732,8 @@ export async function evaluatePipeline(
       }
 
       // Special case:
-      // AI Colorizer gets its passthru toggle and BYOK key from node.data.
-      if (node.type === "ai-colorizer") {
+      // AI image-edit nodes get their passthru toggle and BYOK key from node.data.
+      if (AI_IMAGE_EDIT_NODE_TYPES.has(node.type ?? "")) {
         inputs.passthru = node.data.passthru;
         inputs.apiKey = node.data.apiKey;
         inputs.nodeId = node.id;

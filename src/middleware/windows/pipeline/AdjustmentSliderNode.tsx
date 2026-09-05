@@ -1,4 +1,6 @@
 import SettingsSection from '@/components/SettingsSection';
+import SolidChip from '@/components/SolidChip';
+import { Box } from '@mui/material';
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
@@ -21,45 +23,43 @@ export function createSliderNode(config: SliderNodeConfig) {
       data.amount ?? config.defaultValue
     );
 
-    return (
+    return <>
+      <Handle
+        type="target"
+        position={Position.Left}
+        id="image"
+      />
+      <SettingsSection title={config.label} icon={<span>{config.icon}</span>}>
 
-      <SettingsSection title={config.label}>
-        <Handle
-          type="target"
-          position={Position.Left}
-          id="image"
-        />
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <input
+            type="range"
+            min={config.min}
+            max={config.max}
+            step={config.step}
+            value={amount}
+            onChange={(event) => {
+              const value = Number(event.target.value);
 
-        <strong>{config.icon} {config.label}</strong>
+              data.amount = value;
+              setAmount(value);
 
-        <input
-          type="range"
-          min={config.min}
-          max={config.max}
-          step={config.step}
-          value={amount}
-          onChange={(event) => {
-            const value = Number(event.target.value);
+              // Tell the pipeline engine that this node changed.
+              window.dispatchEvent(
+                new CustomEvent("pipeline:changed")
+              );
+            }}
+          />
+          <SolidChip count={amount} />
+        </Box>
 
-            data.amount = value;
-            setAmount(value);
-
-            // Tell the pipeline engine that this node changed.
-            window.dispatchEvent(
-              new CustomEvent("pipeline:changed")
-            );
-          }}
-        />
-
-        <small>{amount}</small>
-
-        <Handle
-          type="source"
-          position={Position.Right}
-          id="image"
-        />
       </SettingsSection>
-    );
+      <Handle
+        type="source"
+        position={Position.Right}
+        id="image"
+      />
+    </>;
   }
 
   return SliderNode;

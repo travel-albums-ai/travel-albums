@@ -7,7 +7,7 @@ function collapseStorageKey(uuid: string) {
   return `settings-section-${uuid}`;
 }
 
-export default function SettingsSection({ uuid, title, icon, guidance, children, gap = 0.5, divider = true, transparent = true } : { uuid?: string, title?: string, icon?: React.ReactNode, guidance?: string, children: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean }) {
+export default function SettingsSection({ uuid, title, icon, guidance, children, gap = 0.5, divider = true, transparent = true } : { uuid?: string, title?: string, icon?: React.ReactNode, guidance?: string, children?: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean }) {
 
   const [collapsed, setCollapsed] = useState(() => uuid ? localStorage.getItem(collapseStorageKey(uuid)) === 'true' : false)
 
@@ -33,7 +33,7 @@ export default function SettingsSection({ uuid, title, icon, guidance, children,
       },
     }}
     >
-      {(title || icon) && <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, mb: !collapsed ? 1 : 0, px: 0.5 }}>
+      {(title || icon) && <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, mb: children ? (!collapsed ? 1 : 0) : 0, px: 0.5 }}>
         {icon && cloneElement(icon as React.ReactElement<{ size: number }>, { size: 16 })}
         <Typography variant="subtitle2" sx={{ lineHeight: 1 }} color="textPrimary">{title}</Typography>
         {guidance && <Typography variant="caption" sx={{ flex: 1, textAlign: 'right' }} color="textSecondary">{guidance}</Typography>}
@@ -46,7 +46,7 @@ export default function SettingsSection({ uuid, title, icon, guidance, children,
           {collapsed ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
         </IconButton>}
       </Box>}
-      {!collapsed && <Stack sx={{ gap, px: 0.5, pb: 0.5 }} divider={divider ? <Divider /> : undefined}>
+      {!collapsed && children && <Stack sx={{ gap, px: 0.5, pb: 0.5 }} divider={divider ? <Divider /> : undefined}>
         {children}
       </Stack>}
     </Box>

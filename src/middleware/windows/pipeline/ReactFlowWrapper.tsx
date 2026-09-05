@@ -25,6 +25,7 @@ import {
 } from "react";
 
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
+import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BrightnessNode from "./BrightnessNode";
 import ContrastNode from "./ContrastNode";
 import ExposureNode from "./ExposureNode";
@@ -51,6 +52,7 @@ const nodeTypes = {
   source: SourceNode,
   selection: SelectionNode,
   "ai-colorizer": AIAsyncColorizerNode,
+  "ai-denoiser": AIAsyncDenoiserNode,
   invert: InvertNode,
   flip: FlipNode,
   brightness: BrightnessNode,
