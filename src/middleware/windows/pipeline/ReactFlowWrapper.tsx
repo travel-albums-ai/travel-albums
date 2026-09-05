@@ -27,15 +27,19 @@ import {
 
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
+import BlackAndWhiteNode from "./BlackAndWhiteNode";
 import BrightnessNode from "./BrightnessNode";
 import ContrastNode from "./ContrastNode";
 import ExposureNode from "./ExposureNode";
+import FadeNode from "./FadeNode";
 import FlipNode from "./FlipNode";
 import GammaNode from "./GammaNode";
 import GrainNode from "./GrainNode";
+import HdrNode from "./HdrNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
 import NodeToolbox from "./NodeToolbox";
+import PopNode from "./PopNode";
 import RescaleNode from "./RescaleNode";
 import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
@@ -56,6 +60,7 @@ const nodeTypes = {
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
   invert: InvertNode,
+  "black-white": BlackAndWhiteNode,
   flip: FlipNode,
   brightness: BrightnessNode,
   gamma: GammaNode,
@@ -67,6 +72,9 @@ const nodeTypes = {
   vignette: VignetteNode,
   grain: GrainNode,
   sharpen: SharpenNode,
+  pop: PopNode,
+  hdr: HdrNode,
+  fade: FadeNode,
   rescale: RescaleNode,
   viewer: ViewerNode,
 };

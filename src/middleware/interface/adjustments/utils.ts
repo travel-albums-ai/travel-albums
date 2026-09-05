@@ -17,6 +17,18 @@ export const invertStage = (): Stage => {
   };
 };
 
+export const blackAndWhiteStage = (): Stage => {
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const lum = clamp(0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]);
+      d[i] = lum;
+      d[i + 1] = lum;
+      d[i + 2] = lum;
+    }
+  };
+};
+
 export const brightnessStage = (amount: number): Stage => {
   return (img) => {
     const d = img.data;

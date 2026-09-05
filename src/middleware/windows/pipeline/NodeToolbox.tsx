@@ -15,18 +15,22 @@ const paletteItems: Array<{
   { type: "selection", label: "Gallery Selection", icon: "🗂️", group: "input" },
   { type: "ai-colorizer", label: "AI Async Colorizer", icon: "✨", group: "ai" },
   { type: "ai-denoiser", label: "AI Async Denoiser", icon: "🧹", group: "ai" },
-  { type: "invert", label: "Invert", icon: "☯️", group: "adjustment" },
-  { type: "flip", label: "Flip 180°", icon: "🔄", group: "adjustment" },
-  { type: "brightness", label: "Brightness", icon: "☀️", group: "adjustment" },
+  { type: "invert", label: "Invert", icon: "☯️", group: "base" },
+  { type: "black-white", label: "Black & White", icon: "⬛", group: "base" },
+  { type: "flip", label: "Flip 180°", icon: "🔄", group: "utility" },
+  { type: "brightness", label: "Brightness", icon: "☀️", group: "basics" },
   { type: "gamma", label: "Gamma", icon: "🎚️", group: "adjustment" },
   { type: "luminosity", label: "Luminosity", icon: "💡", group: "adjustment" },
-  { type: "exposure", label: "Exposure", icon: "📸", group: "adjustment" },
-  { type: "contrast", label: "Contrast", icon: "◐", group: "adjustment" },
+  { type: "exposure", label: "Exposure", icon: "📸", group: "basics" },
+  { type: "contrast", label: "Contrast", icon: "◐", group: "basics" },
   { type: "saturation", label: "Saturation", icon: "🎨", group: "adjustment" },
   { type: "vibrance", label: "Vibrance", icon: "🌈", group: "adjustment" },
-  { type: "vignette", label: "Vignette", icon: "⚫", group: "adjustment" },
-  { type: "grain", label: "Grain", icon: "🌾", group: "adjustment" },
-  { type: "sharpen", label: "Sharpen", icon: "🔪", group: "adjustment" },
+  { type: "vignette", label: "Vignette", icon: "⚫", group: "decorative" },
+  { type: "grain", label: "Grain", icon: "🌾", group: "decorative" },
+  { type: "sharpen", label: "Sharpen", icon: "🔪", group: "decorative" },
+  { type: "pop", label: "Pop", icon: "🎇", group: "basics" },
+  { type: "hdr", label: "HDR Effect", icon: "🌇", group: "basics" },
+  { type: "fade", label: "Fade", icon: "🌫️", group: "decorative" },
   { type: "rescale", label: "Rescale", icon: "📐", group: "utility" },
   { type: "viewer", label: "Viewer", icon: "🖼️", group: "output" },
 ];
@@ -55,12 +59,17 @@ function NodeToolbox() {
     <Box sx={{
       display: 'flex', flexDirection: 'column',
       gap: 0,
-      px: 1, borderRight: '1px solid',
+      borderRight: '1px solid',
       borderColor: 'divider',
-      pr: 3
+      pr: 2
     }}>
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
-        <Box key={group} sx={{ borderBottom: '1px dotted', borderColor: 'divider', pb: 1, mb: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box key={group}
+          sx={{
+            borderBottom: '1px dotted', borderColor: 'divider', pb: 0.5, mb: 2,
+            display: 'flex', flexDirection: 'column', gap: 0
+          }}
+        >
           <Typography variant="subtitle2" sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
             {group}
           </Typography>

@@ -14,13 +14,17 @@ import type { GalleryPhoto } from "../../../lib/galleryData";
 import { composeUrl } from "../../../lib/thumbnailService";
 import type { Stage } from "../../interface/adjustments/types";
 import {
+  blackAndWhiteStage,
   brightnessStage,
   contrastStage,
   exposureStage,
+  fadeStage,
   gammaStage,
   grainStage,
+  hdrEffectStage,
   invertStage,
   luminosityStage,
+  popStage,
   saturationStage,
   sharpenStage,
   vibranceStage,
@@ -443,6 +447,9 @@ const SLIDER_NODE_TYPES = new Set([
   "vignette",
   "grain",
   "sharpen",
+  "pop",
+  "hdr",
+  "fade",
 ]);
 
 const drawSource = (
@@ -532,6 +539,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   },
 
   invert: stageNode(invertStage),
+  "black-white": stageNode(blackAndWhiteStage),
 
   flip: {
     async execute(inputs) {
@@ -564,6 +572,9 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   vignette: amountStageNode(vignetteStage, 0),
   grain: amountStageNode(grainStage, 0),
   sharpen: amountStageNode(sharpenStage, 0),
+  pop: amountStageNode(popStage, 0),
+  hdr: amountStageNode(hdrEffectStage, 0),
+  fade: amountStageNode(fadeStage, 0),
 
   "ai-colorizer": createAIImageEditNodeDefinition(
     "ai-colorizer",
