@@ -379,6 +379,52 @@ function renderImages(
 }
 
 // ============================================================
+// Utility: scale an image to a percentage of its original size,
+// preserving aspect ratio.
+// ============================================================
+
+async function scaleImage(
+  source: ImageValue,
+  scale: number
+): Promise<ImageValue> {
+  const width = Math.max(1, Math.round(source.width * scale));
+  const height = Math.max(1, Math.round(source.height * scale));
+
+  const canvas = document.createElement("canvas");
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    throw new Error("Could not create canvas context");
+  }
+
+  ctx.drawImage(source.image, 0, 0, width, height);
+
+  const result = new Image();
+
+  result.src = canvas.toDataURL("image/png");
+
+  await result.decode();
+
+  return {
+    image: result,
+    width,
+    height,
+    name: source.name,
+  };
+}
+
+function scaleImages(
+  sources: ImageArray,
+  scale: number
+): Promise<ImageArray> {
+  return Promise.all(sources.map((source) => scaleImage(source, scale)));
+}
+
+// ============================================================
 // Node implementations
 // ============================================================
 
@@ -640,6 +686,24 @@ const nodeDefinitions: Record<
     AI_DENOISER_PROMPT
   ),
 
+  rescale: {
+    async execute(inputs) {
+      const sources = (inputs.image as ImageArray | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const scale = (inputs.scale as number | undefined) ?? 1;
+
+      if (scale === 1) {
+        return { image: sources };
+      }
+
+      const image = await scaleImages(sources, scale);
+
+      return { image };
+    },
+  },
+
   viewer: {
     async execute(inputs) {
       await Promise.resolve();
@@ -745,6 +809,12 @@ export async function evaluatePipeline(
         inputs.passthru = node.data.passthru;
         inputs.apiKey = node.data.apiKey;
         inputs.nodeId = node.id;
+      }
+
+      // Special case:
+      // Rescale node gets its scale factor from node.data.
+      if (node.type === "rescale") {
+        inputs.scale = node.data.scale;
       }
 
       console.log(

@@ -1,7 +1,9 @@
 import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Box } from '@mui/material';
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
 export type SliderNodeConfig = {
@@ -24,11 +26,8 @@ export function createSliderNode(config: SliderNodeConfig) {
     );
 
     return <>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
+      <InputHandle id="image" />
+
       <SettingsSection title={config.label} icon={<span>{config.icon}</span>}>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -54,11 +53,8 @@ export function createSliderNode(config: SliderNodeConfig) {
         </Box>
 
       </SettingsSection>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
+
+      <OutputHandle id="image" />
     </>;
   }
 

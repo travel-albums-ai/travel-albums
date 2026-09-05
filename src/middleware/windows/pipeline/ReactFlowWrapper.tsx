@@ -36,6 +36,7 @@ import GrainNode from "./GrainNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
 import NodeToolbox from "./NodeToolbox";
+import RescaleNode from "./RescaleNode";
 import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
 import SharpenNode from "./SharpenNode";
@@ -66,6 +67,7 @@ const nodeTypes = {
   vignette: VignetteNode,
   grain: GrainNode,
   sharpen: SharpenNode,
+  rescale: RescaleNode,
   viewer: ViewerNode,
 };
 

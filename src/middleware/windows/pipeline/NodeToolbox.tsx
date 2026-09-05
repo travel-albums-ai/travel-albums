@@ -26,6 +26,7 @@ const paletteItems: Array<{
   { type: "vignette", label: "Vignette", icon: "⚫" },
   { type: "grain", label: "Grain", icon: "🌾" },
   { type: "sharpen", label: "Sharpen", icon: "🔪" },
+  { type: "rescale", label: "Rescale", icon: "📐" },
   { type: "viewer", label: "Viewer", icon: "🖼️" },
 ];
 

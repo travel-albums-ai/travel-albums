@@ -1,4 +1,4 @@
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import SettingsSection from '@/components/SettingsSection';
 import { useFilteredPhotos_GLOBAL } from "@/context/globals/filteredPhotosStore";
 import { useSections_GLOBAL } from "@/context/globals/sectionsStore";
 import type { GalleryPhoto } from "@/lib/galleryData";
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
 import { Box } from '@mui/material';
 import { Folder } from 'lucide-react';
@@ -82,11 +83,7 @@ function SelectionNode({
       </Box>
 
     </SettingsSection>
-    <Handle
-      type="source"
-      position={Position.Right}
-      id="image"
-    />
+    <OutputHandle id="image" position={Position.Top} />
   </>;
 }
 

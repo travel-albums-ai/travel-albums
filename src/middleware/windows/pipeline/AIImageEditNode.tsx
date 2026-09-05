@@ -1,7 +1,8 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOKStoreSelector } from '@/context/byokStore';
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Alert, Box, Button, LinearProgress, Typography } from '@mui/material';
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 import { Sparkles } from 'lucide-react';
 import { useEffect, useState } from "react";
 
@@ -72,7 +73,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
         uuid={`${config.type}-node-reactflow`}
         gap={2}
       >
-        <Handle type="target" position={Position.Left} id="image" />
+        <InputHandle id="image" />
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Button
@@ -102,7 +103,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
           </Box>
         )}
 
-        <Handle type="source" position={Position.Right} id="image" />
+        <OutputHandle id="image" />
       </SettingsSection>
     );
   }

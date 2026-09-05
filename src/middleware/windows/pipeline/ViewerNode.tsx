@@ -1,6 +1,7 @@
 import SettingsSection from '@/components/SettingsSection';
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import { Box, Button } from '@mui/material';
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { Position, type Node, type NodeProps } from "@xyflow/react";
 import JSZip from 'jszip';
 import { Download, Eye } from 'lucide-react';
 import { useState } from 'react';
@@ -65,11 +66,7 @@ function ViewerNode({
 
   return (
     <SettingsSection title="Viewer Node" icon={<Eye />} uuid="viewer-node-reactflow" gap={2}>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
+      <InputHandle id="image" position={Position.Top} />
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
