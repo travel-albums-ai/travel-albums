@@ -1,3 +1,9 @@
+## [1.294.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.293.0...v1.294.0) (2026-09-05)
+
+### ✨ Features
+
+* refactor slider and invert nodes to use SettingsSection for consistent UI; update SelectionNode to utilize AllPhotosGridVirtuoso for improved photo display ([6ae6a1a](https://github.com/travel-albums-ai/travel-albums/commit/6ae6a1ae70a12a5eccd21b83338cc4066ee902a0))
+
 ## [1.293.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.292.0...v1.293.0) (2026-09-04)
 
 ### ✨ Features
