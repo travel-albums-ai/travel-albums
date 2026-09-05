@@ -1,3 +1,9 @@
+## [1.296.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.295.0...v1.296.0) (2026-09-05)
+
+### ✨ Features
+
+* enhance ViewerNode to include a fitView effect and improve photo display layout ([7d7825c](https://github.com/travel-albums-ai/travel-albums/commit/7d7825c4cb44f34f45d5ebaa8d39d2f99de6e3d1))
+
 ## [1.295.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.294.0...v1.295.0) (2026-09-05)
 
 ### ✨ Features
