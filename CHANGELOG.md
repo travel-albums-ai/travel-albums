@@ -1,3 +1,9 @@
+## [1.312.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.311.0...v1.312.0) (2026-09-05)
+
+### ✨ Features
+
+* update SourceNode to handle file persistence and enhance UI with SettingsSection ([3e47470](https://github.com/travel-albums-ai/travel-albums/commit/3e47470041176c14b55746a916e5df9b64d12611))
+
 ## [1.311.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.310.0...v1.311.0) (2026-09-05)
 
 ### ✨ Features
