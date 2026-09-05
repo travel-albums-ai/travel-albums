@@ -442,6 +442,21 @@ function Pipeline() {
     [screenToFlowPosition, setNodes]
   );
 
+  // Double-clicking the empty canvas re-centers the view instead of the
+  // default zoom-in, which only fires when the pane itself is the target.
+  const onPaneDoubleClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      const target = event.target as HTMLElement;
+
+      if (!target.classList.contains("react-flow__pane")) {
+        return;
+      }
+
+      fitView();
+    },
+    [fitView]
+  );
+
   return (
     <Box className="app" sx={{ width: '100%', height: '100%' }}>
       <NodeToolbox />
@@ -450,6 +465,7 @@ function Pipeline() {
         className="reactflow-canvas"
         onDragOver={onDragOver}
         onDrop={onDrop}
+        onDoubleClick={onPaneDoubleClick}
       >
         <ReactFlow
           nodes={nodes}
@@ -464,6 +480,7 @@ function Pipeline() {
           onNodeDrag={onNodeDrag}
           onNodeDragStop={onNodeDragStop}
           deleteKeyCode={["Backspace", "Delete"]}
+          zoomOnDoubleClick={false}
           fitView
         >
           <Background />
