@@ -1,3 +1,13 @@
+## [1.295.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.294.0...v1.295.0) (2026-09-05)
+
+### ✨ Features
+
+* add pipeline window toggle functionality and persist graph state in localStorage ([a8f21d6](https://github.com/travel-albums-ai/travel-albums/commit/a8f21d6640fe35af80becde03f8520f295f16ed8))
+
+### 🧹 Refactors
+
+* remove commented-out initial nodes and edges from ReactFlowWrapper; clean up SelectionNode layout ([5d9f1ee](https://github.com/travel-albums-ai/travel-albums/commit/5d9f1ee25b19e1fbc236e98561ea8f16845b4f6b))
+
 ## [1.294.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.293.0...v1.294.0) (2026-09-05)
 
 ### ✨ Features
