@@ -64,6 +64,7 @@ function NodeToolbox() {
       gap: 0,
       borderRight: '1px solid',
       borderColor: 'divider',
+      overflowY: 'auto', // Enable vertical scrolling if content exceeds the viewport height
       pr: 2
     }}>
       {Object.entries(groupedPaletteItems).map(([group, items]) => (

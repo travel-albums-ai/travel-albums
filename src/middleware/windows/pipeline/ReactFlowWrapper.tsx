@@ -493,6 +493,7 @@ function Pipeline() {
         <ReactFlow
           nodes={nodes}
           edges={edges}
+          minZoom={0.25}
           nodeTypes={nodeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
