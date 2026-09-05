@@ -147,7 +147,7 @@ function loadStoredGraph(): { nodes: Node[]; edges: Edge[] } {
 // so they're stripped before saving to keep localStorage small.
 function saveStoredGraph(nodes: Node[], edges: Edge[]) {
   const strippedNodes = nodes.map((node) => {
-    const { image: _image, ...rest } = node.data as Record<string, unknown>;
+    const { image: _image, photos: _photos, ...rest } = node.data as Record<string, unknown>;
     return { ...node, data: rest };
   });
 

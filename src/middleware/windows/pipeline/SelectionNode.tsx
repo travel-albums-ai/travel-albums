@@ -1,5 +1,5 @@
-import { Handle, Position, useReactFlow, type Node, type NodeProps } from "@xyflow/react";
-import { useEffect, useMemo } from "react";
+import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import SettingsSection from '@/components/SettingsSection';
@@ -11,13 +11,12 @@ import { Box } from '@mui/material';
 import { Folder } from 'lucide-react';
 
 function SelectionNode({
-  id,
-}: NodeProps<Node<{ photos?: GalleryPhoto[] }>>) {
+  data,
+}: NodeProps<Node<{ photos?: GalleryPhoto[]; limit?: number }>>) {
   // Same route-driven photo resolution as ScrollerDrawer.
   const { type_name = "", id: sectionId = "" } = useParams();
   const sections = useSections_GLOBAL();
   const photosFiltered = useFilteredPhotos_GLOBAL();
-  const { setNodes } = useReactFlow();
 
   const showAll = type_name === "";
 
@@ -32,28 +31,54 @@ function SelectionNode({
     return foundSet?.photos ?? [];
   }, [showAll, sections, photosFiltered, type_name, sectionId]);
 
-  // Keep this node's data (and the pipeline engine's view of it)
-  // in sync with whatever the current route matches.
+  // How many of the matched photos are actually used downstream.
+  // Defaults to 10 once the real photo count is known, unless a
+  // previously saved limit already exists.
+  const [limit, setLimit] = useState(() => data.limit ?? Math.min(10, photos.length));
+  const limitInitializedRef = useRef(data.limit !== undefined);
+
   useEffect(() => {
-    setNodes((current) =>
-      current.map((node) =>
-        node.id === id
-          ? { ...node, data: { ...node.data, photos } }
-          : node
-      )
-    );
+    if (limitInitializedRef.current || photos.length === 0) return;
+
+    limitInitializedRef.current = true;
+    setLimit(Math.min(10, photos.length));
+  }, [photos.length]);
+
+  useEffect(() => {
+    setLimit((current) => Math.min(current, photos.length));
+  }, [photos.length]);
+
+  const selectedPhotos = useMemo(
+    () => photos.slice(0, limit),
+    [photos, limit]
+  );
+
+  // Mutate data in place (like the slider nodes) so the pipeline engine
+  // always reads the latest value, even from a listener bound this render.
+  useEffect(() => {
+    data.photos = selectedPhotos;
+    data.limit = limit;
 
     window.dispatchEvent(new CustomEvent("pipeline:changed"));
-  }, [id, photos, setNodes]);
+  }, [data, selectedPhotos, limit]);
 
   return <>
     <SettingsSection title="Gallery Selection" icon={<Folder />} uuid="selection-node-reactflow" gap={2}>
       <small>
-        {photos.length} photo{photos.length === 1 ? "" : "s"} matched
+        {selectedPhotos.length} of {photos.length} photo{photos.length === 1 ? "" : "s"} used
       </small>
 
+      <input
+        type="range"
+        min={0}
+        max={photos.length}
+        step={1}
+        value={limit}
+        onChange={(event) => setLimit(Number(event.target.value))}
+      />
+
       <Box sx={{ height: '500px', width: '900px', overflow: 'auto' }}>
-        <AllPhotosGridVirtuoso photos={photos} width={200} height={100} />
+        <AllPhotosGridVirtuoso photos={selectedPhotos} width={200} height={100} />
       </Box>
 
     </SettingsSection>
