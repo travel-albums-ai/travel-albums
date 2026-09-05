@@ -2,6 +2,8 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
+import { Box } from '@mui/material';
+
 const paletteItems: Array<{
   type: string;
   label: string;
@@ -37,8 +39,16 @@ function NodeToolbox() {
   };
 
   return (
-    <aside className="toolbox">
-      <strong>Nodes</strong>
+    <Box sx={{
+      width: '450px',
+      padding: 1, borderRight: '1px solid', borderColor: 'divider',
+      pr: 3,
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+      gap: 1,
+      gridTemplateRows: 'repeat(auto-fill, minmax(50px, 1fr))',
+    }}>
+      {/* <strong>Nodes</strong> */}
 
       {paletteItems.map((item) => (
         <div
@@ -53,7 +63,7 @@ function NodeToolbox() {
           {item.label}
         </div>
       ))}
-    </aside>
+    </Box>
   );
 }
 
