@@ -1,4 +1,6 @@
+import SettingsSection from '@/components/SettingsSection';
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { Image } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
@@ -9,7 +11,11 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    const urls = files.map((file) => URL.createObjectURL(file));
+    // Stale localStorage may still hold non-File placeholders from
+    // before `files` was excluded from persistence; skip those.
+    const urls = files
+      .filter((file): file is File => file instanceof File)
+      .map((file) => URL.createObjectURL(file));
 
     setPreviewUrls(urls);
 
@@ -23,9 +29,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
     : "Choose photos";
 
   return (
-    <div className="node source" style={{ width: '500px'}}>
-      <strong>📷 Image Source</strong>
-
+    <SettingsSection title="Images Source" icon={<Image />} uuid="viewer-node-reactflow" gap={2}>
       <input
         type="file"
         accept="image/*"
@@ -60,7 +64,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
         position={Position.Right}
         id="image"
       />
-    </div>
+    </SettingsSection>
   );
 }
 

@@ -168,10 +168,12 @@ function loadStoredGraph(): { nodes: Node[]; edges: Edge[] } {
 // Evaluated results (e.g. viewer `image`) are regenerated on load,
 // so they're stripped before saving to keep localStorage small.
 // The BYOK API key is also re-synced from its own store, so it's
-// never persisted a second time here.
+// never persisted a second time here. `files` (File objects) can't
+// survive JSON serialization either — they'd come back as empty
+// plain objects — so uploaded sources are dropped on save too.
 function saveStoredGraph(nodes: Node[], edges: Edge[]) {
   const strippedNodes = nodes.map((node) => {
-    const { image: _image, photos: _photos, apiKey: _apiKey, ...rest } = node.data as Record<string, unknown>;
+    const { image: _image, photos: _photos, apiKey: _apiKey, files: _files, ...rest } = node.data as Record<string, unknown>;
     return { ...node, data: rest };
   });
 
