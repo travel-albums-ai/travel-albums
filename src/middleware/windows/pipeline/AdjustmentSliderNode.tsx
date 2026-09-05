@@ -1,3 +1,4 @@
+import SettingsSection from '@/components/SettingsSection';
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
@@ -22,7 +23,7 @@ export function createSliderNode(config: SliderNodeConfig) {
 
     return (
 
-      <div className="node">
+      <SettingsSection title={config.label}>
         <Handle
           type="target"
           position={Position.Left}
@@ -57,7 +58,7 @@ export function createSliderNode(config: SliderNodeConfig) {
           position={Position.Right}
           id="image"
         />
-      </div>
+      </SettingsSection>
     );
   }
 

@@ -8,6 +8,8 @@ import AlbumPhotoCard from '../../components/AlbumPhotoCard';
 
 type Props = {
   photos: GalleryPhoto[];
+  width?: number;
+  height?: number;
 };
 
 const GRID_STYLE = { height: '100%', overflowX: 'visible', borderRadius: '8px' } as const;
@@ -31,9 +33,9 @@ const GridList = ({ style, children, width, gap, ...props }: any) => {
   );
 };
 
-export default function AllPhotosGridVirtuoso({ photos }: Props) {
-  const width = useAlbumPhotoCardStoreSelector((state) => state.width);
-  const height = useAlbumPhotoCardStoreSelector((state) => state.height);
+export default function AllPhotosGridVirtuoso({ photos, width: propWidth, height: propHeight }: Props) {
+  const width = propWidth ?? useAlbumPhotoCardStoreSelector((state) => state.width);
+  const height = propHeight ?? useAlbumPhotoCardStoreSelector((state) => state.height);
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
   // const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
 

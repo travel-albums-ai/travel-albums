@@ -1,15 +1,14 @@
+import SettingsSection from '@/components/SettingsSection';
 import { Handle, Position } from "@xyflow/react";
 
 function InvertNode() {
   return (
-    <div className="node">
+    <SettingsSection title="Invert">
       <Handle
         type="target"
         position={Position.Left}
         id="image"
       />
-
-      <strong>☯️ Invert</strong>
 
       <small>Async image operation</small>
 
@@ -18,7 +17,7 @@ function InvertNode() {
         position={Position.Right}
         id="image"
       />
-    </div>
+    </SettingsSection>
   );
 }
 

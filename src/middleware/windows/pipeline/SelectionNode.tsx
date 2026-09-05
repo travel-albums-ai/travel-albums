@@ -6,7 +6,7 @@ import SettingsSection from '@/components/SettingsSection';
 import { useFilteredPhotos_GLOBAL } from "@/context/globals/filteredPhotosStore";
 import { useSections_GLOBAL } from "@/context/globals/sectionsStore";
 import type { GalleryPhoto } from "@/lib/galleryData";
-import { composeUrl } from "@/lib/thumbnailService";
+import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
 import { Box } from '@mui/material';
 import { Folder } from 'lucide-react';
 
@@ -52,25 +52,11 @@ function SelectionNode({
         {photos.length} photo{photos.length === 1 ? "" : "s"} matched
       </small>
 
-      {photos.length > 0 && (
-        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
-          {photos.map((photo) => (
-            <img
-              key={photo.id}
-              src={composeUrl(photo)}
-              alt=""
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '100px',
-                objectFit: 'cover',
-                borderRadius: '6px',
-                background: '#eee',
-              }}
-            />
-          ))}
-        </Box>
-      )}
+      <Box sx={{ height: '500px', width: '900px', overflow: 'auto' }}>
+
+        <AllPhotosGridVirtuoso photos={photos} width={200} height={100} />
+      </Box>
+
     </SettingsSection>
     <Handle
       type="source"
