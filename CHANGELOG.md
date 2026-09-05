@@ -1,3 +1,9 @@
+## [1.309.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.308.0...v1.309.0) (2026-09-05)
+
+### ✨ Features
+
+* add black and white, fade, HDR, and pop nodes with corresponding stages ([322a2e5](https://github.com/travel-albums-ai/travel-albums/commit/322a2e564ea660ee0aaf25dcdd82cad5ad4c528e))
+
 ## [1.308.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.307.0...v1.308.0) (2026-09-05)
 
 ### ✨ Features
