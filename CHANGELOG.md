@@ -1,3 +1,9 @@
+## [1.304.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.303.0...v1.304.0) (2026-09-05)
+
+### ✨ Features
+
+* increase height of photo display boxes in SelectionNode and ViewerNode ([22f38c3](https://github.com/travel-albums-ai/travel-albums/commit/22f38c35d3e2b9c9d9ed1ea1a4e0f7e7a7cb5c52))
+
 ## [1.303.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.302.0...v1.303.0) (2026-09-05)
 
 ### ✨ Features
