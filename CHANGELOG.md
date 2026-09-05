@@ -1,3 +1,9 @@
+## [1.301.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.300.0...v1.301.0) (2026-09-05)
+
+### ✨ Features
+
+* implement AI Async Denoiser node and refactor AI Async Colorizer integration ([c415cf8](https://github.com/travel-albums-ai/travel-albums/commit/c415cf801253ef5706ff5052befa5150e607c31b))
+
 ## [1.300.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.299.0...v1.300.0) (2026-09-05)
 
 ### ✨ Features
