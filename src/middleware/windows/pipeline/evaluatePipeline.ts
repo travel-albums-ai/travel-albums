@@ -159,6 +159,7 @@ async function requestOpenAIImageEdit(
     image: result,
     width: result.naturalWidth,
     height: result.naturalHeight,
+    name: source.name,
   };
 }
 
@@ -254,6 +255,7 @@ function loadImage(file: File): Promise<ImageValue> {
         image,
         width: image.naturalWidth,
         height: image.naturalHeight,
+        name: file.name,
       });
     };
 
@@ -271,7 +273,7 @@ function loadImages(files: File[]): Promise<ImageArray> {
   return Promise.all(files.map(loadImage));
 }
 
-function loadImageFromUrl(url: string): Promise<ImageValue> {
+function loadImageFromUrl(url: string, name?: string): Promise<ImageValue> {
   return new Promise((resolve, reject) => {
     const image = new Image();
 
@@ -282,6 +284,7 @@ function loadImageFromUrl(url: string): Promise<ImageValue> {
         image,
         width: image.naturalWidth,
         height: image.naturalHeight,
+        name,
       });
     };
 
@@ -293,8 +296,12 @@ function loadImageFromUrl(url: string): Promise<ImageValue> {
   });
 }
 
-function loadImagesFromUrls(urls: string[]): Promise<ImageArray> {
-  return Promise.all(urls.map(loadImageFromUrl));
+function loadImagesFromUrls(
+  entries: Array<{ url: string; name?: string }>
+): Promise<ImageArray> {
+  return Promise.all(
+    entries.map((entry) => loadImageFromUrl(entry.url, entry.name))
+  );
 }
 
 // ============================================================
@@ -346,6 +353,7 @@ async function renderImage(
     image: result,
     width: canvas.width,
     height: canvas.height,
+    name: source.name,
   };
 }
 
@@ -397,7 +405,7 @@ const nodeDefinitions: Record<
       if (!photos || photos.length === 0) { return { image: [] } }
 
       const image = await loadImagesFromUrls(
-        photos.map((photo) => composeUrl(photo))
+        photos.map((photo) => ({ url: composeUrl(photo), name: photo.title }))
       );
 
       return { image };

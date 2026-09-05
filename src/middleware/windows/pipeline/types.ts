@@ -2,6 +2,9 @@ export type ImageValue = {
   image: HTMLImageElement;
   width: number;
   height: number;
+  // Original GalleryPhoto title / uploaded file name, carried through
+  // every pipeline stage so the viewer can export with a sensible name.
+  name?: string;
 };
 
 // Every node passes around an array of photos so the whole
