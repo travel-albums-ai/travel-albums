@@ -50,29 +50,19 @@ function NodeToolbox() {
       alignContent: 'start',
       gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
       gap: 1,
-      // gridTemplateRows: 'repeat(auto-fill, minmax(50px, 1fr))',
     }}>
-      {/* <strong>Nodes</strong> */}
-
       {paletteItems.map((item) => (
-        // <SettingsSection title={item.label} icon={<span>{item.icon}</span>}>
         <div
           id={item.type}
           style={{ cursor: 'grab' }}
           key={item.type}
-          // className="toolbox-item"
           draggable
           onDragStart={(event) =>
             onDragStart(event, item.type)
           }
         >
-          <SettingsSection title={item.label} icon={<span>{item.icon}</span>} transparent>
-            {/* <GripVertical /> */}
-          </SettingsSection>
-          {/* <span>{item.icon}</span> */}
-          {/* {item.label} */}
+          <SettingsSection title={item.label} icon={<span>{item.icon}</span>} />
         </div>
-        // </SettingsSection>
       ))}
     </Box>
   );
