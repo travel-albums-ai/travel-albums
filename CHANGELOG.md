@@ -1,3 +1,9 @@
+## [1.297.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.296.0...v1.297.0) (2026-09-05)
+
+### ✨ Features
+
+* update SelectionNode to manage photo selection limit and improve data handling ([be83efe](https://github.com/travel-albums-ai/travel-albums/commit/be83efe306c25230c2cd384abe868f4b8236d3ca))
+
 ## [1.296.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.295.0...v1.296.0) (2026-09-05)
 
 ### ✨ Features
