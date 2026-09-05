@@ -19,7 +19,7 @@ function ViewerNode({
 
       <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
 
-      <Box sx={{ height: '500px', width: '900px', overflow: 'auto' }}>
+      <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
         {images.length > 0 ? (
           <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
             {images.map((value, index) => (

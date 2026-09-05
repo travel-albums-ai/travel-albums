@@ -77,7 +77,7 @@ function SelectionNode({
         onChange={(event) => setLimit(Number(event.target.value))}
       />
 
-      <Box sx={{ height: '500px', width: '900px', overflow: 'auto' }}>
+      <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
         <AllPhotosGridVirtuoso photos={selectedPhotos} width={200} height={100} />
       </Box>
 
