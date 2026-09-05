@@ -1,3 +1,9 @@
+## [1.308.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.307.0...v1.308.0) (2026-09-05)
+
+### ✨ Features
+
+* enhance NodeToolbox with grouped palette items and improved layout ([8d4b3c3](https://github.com/travel-albums-ai/travel-albums/commit/8d4b3c36f85f5cfaf703238a23ed2598df600426))
+
 ## [1.307.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.306.0...v1.307.0) (2026-09-05)
 
 ### ✨ Features
