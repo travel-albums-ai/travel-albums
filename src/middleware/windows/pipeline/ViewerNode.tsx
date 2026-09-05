@@ -30,10 +30,9 @@ function ViewerNode({
                 style={{
                   display: 'block',
                   width: '100%',
-                  height: '100px',
+                  height: '300px',
                   objectFit: 'cover',
                   borderRadius: '6px',
-                  background: '#eee',
                 }}
               />
             ))}
