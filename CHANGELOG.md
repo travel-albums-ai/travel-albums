@@ -1,3 +1,9 @@
+## [1.303.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.302.0...v1.303.0) (2026-09-05)
+
+### ✨ Features
+
+* add double-click functionality to re-center view on empty canvas ([a6ba7aa](https://github.com/travel-albums-ai/travel-albums/commit/a6ba7aa14c979e9d9ab1f0f1ca9afe8bae671752))
+
 ## [1.302.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.301.0...v1.302.0) (2026-09-05)
 
 ### ✨ Features
