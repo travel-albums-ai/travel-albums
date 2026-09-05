@@ -53,7 +53,6 @@ function SelectionNode({
       </small>
 
       <Box sx={{ height: '500px', width: '900px', overflow: 'auto' }}>
-
         <AllPhotosGridVirtuoso photos={photos} width={200} height={100} />
       </Box>
 

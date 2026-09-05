@@ -68,36 +68,6 @@ const nodeTypes = {
 // ============================================================
 
 const initialNodes: Node[] = [
-  // {
-  //   id: "source",
-  //   type: "source",
-  //   position: {
-  //     x: 50,
-  //     y: 200,
-  //   },
-  //   data: {},
-  // },
-
-  // {
-  //   id: "invert",
-  //   type: "invert",
-  //   position: {
-  //     x: 350,
-  //     y: 200,
-  //   },
-  //   data: {},
-  // },
-
-  // {
-  //   id: "flip",
-  //   type: "flip",
-  //   position: {
-  //     x: 650,
-  //     y: 200,
-  //   },
-  //   data: {},
-  // },
-
   {
     id: "selection",
     type: "selection",
@@ -137,22 +107,6 @@ const initialEdges: Edge[] = [
     target: "brightness",
     targetHandle: "image",
   },
-
-  // {
-  //   id: "invert-flip",
-  //   source: "invert",
-  //   sourceHandle: "image",
-  //   target: "flip",
-  //   targetHandle: "image",
-  // },
-
-  // {
-  //   id: "flip-brightness",
-  //   source: "flip",
-  //   sourceHandle: "image",
-  //   target: "brightness",
-  //   targetHandle: "image",
-  // },
 
   {
     id: "brightness-viewer",
