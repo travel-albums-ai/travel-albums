@@ -1,3 +1,9 @@
+## [1.305.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.304.0...v1.305.0) (2026-09-05)
+
+### ✨ Features
+
+* add zip download functionality for images in ViewerNode ([e5d09ec](https://github.com/travel-albums-ai/travel-albums/commit/e5d09ec078c2d10ef4c3116ecf551155e44cba75))
+
 ## [1.304.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.303.0...v1.304.0) (2026-09-05)
 
 ### ✨ Features
