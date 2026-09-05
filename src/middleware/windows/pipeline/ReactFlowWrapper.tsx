@@ -44,7 +44,7 @@ import SourceNode from "./SourceNode";
 import VibranceNode from "./VibranceNode";
 import ViewerNode from "./ViewerNode";
 import VignetteNode from "./VignetteNode";
-import { evaluatePipeline } from "./evaluatePipeline";
+import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 
 // ============================================================
 // React Flow node registry
@@ -191,6 +191,10 @@ function Pipeline() {
     return () => cancelAnimationFrame(frame);
   }, [fitView]);
 
+  // Free the worker thread (and its in-memory AI result cache)
+  // when the pipeline page unmounts.
+  useEffect(() => () => terminatePipelineWorker(), []);
+
   const evaluationId = useRef(0);
 
   const evaluate = useCallback(async () => {
@@ -246,7 +250,7 @@ function Pipeline() {
               ...n,
               data: {
                 ...n.data,
-                image: result.image,
+                image: result,
               },
             }
             : n

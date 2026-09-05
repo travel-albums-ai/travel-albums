@@ -19,7 +19,7 @@ async function downloadAsZip(images: ImageArray) {
 
   await Promise.all(
     images.map(async (value, index) => {
-      const response = await fetch(value.image.src);
+      const response = await fetch(value.src);
       const blob = await response.blob();
 
       const extension = blob.type === "image/png" ? "png" : "jpg";
@@ -89,7 +89,7 @@ function ViewerNode({
             {images.map((value, index) => (
               <img
                 key={index}
-                src={value.image.src}
+                src={value.src}
                 alt=""
                 style={{
                   display: 'block',

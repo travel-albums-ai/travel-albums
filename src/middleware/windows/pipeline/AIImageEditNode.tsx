@@ -3,11 +3,12 @@ import { useBYOKStoreSelector } from '@/context/byokStore';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Alert, Box, Button, LinearProgress, Typography } from '@mui/material';
+import type { Node, NodeProps } from "@xyflow/react";
 import { Sparkles } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 export type AIImageEditNodeConfig = {
-  // Must match the nodeDefinitions key in evaluatePipeline.ts, which is
+  // Must match the nodeDefinitions key in pipeline.worker.ts, which is
   // also used as the progress event name prefix ("<type>:progress").
   type: string;
   title: string;
@@ -37,8 +38,9 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
       window.dispatchEvent(new CustomEvent("pipeline:changed"));
     }, [data, byokOpenAIKey, engaged]);
 
-    // Progress is reported by evaluatePipeline via a global event since it
-    // has no direct handle back to this component.
+    // Progress is posted by the pipeline worker and relayed by
+    // pipelineWorkerClient as a global event, since the worker has no
+    // direct handle back to this component.
     useEffect(() => {
       const handler = (event: Event) => {
         const detail = (event as CustomEvent<
