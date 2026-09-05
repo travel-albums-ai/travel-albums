@@ -1,3 +1,9 @@
+## [1.313.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.312.0...v1.313.0) (2026-09-05)
+
+### ✨ Features
+
+* enable vertical scrolling in NodeToolbox and set minimum zoom level in ReactFlow ([790c4f3](https://github.com/travel-albums-ai/travel-albums/commit/790c4f34a020100fce7f74f39eb8c13e9c781199))
+
 ## [1.312.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.311.0...v1.312.0) (2026-09-05)
 
 ### ✨ Features
