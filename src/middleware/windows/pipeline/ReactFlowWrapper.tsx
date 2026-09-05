@@ -17,6 +17,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
+import { Trash2 } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -178,6 +179,8 @@ function Pipeline() {
 
   const { screenToFlowPosition, fitView } = useReactFlow();
   const nodeIdRef = useRef(0);
+  const trashRef = useRef<HTMLDivElement>(null);
+  const [trashActive, setTrashActive] = useState(false);
 
   // Nodes are measured asynchronously, so fitView is deferred a frame
   // to ensure it accounts for the restored graph's actual dimensions.
@@ -362,6 +365,50 @@ function Pipeline() {
     []
   );
 
+  const isOverTrash = useCallback((event: MouseEvent | TouchEvent) => {
+    const rect = trashRef.current?.getBoundingClientRect();
+
+    if (!rect) return false;
+
+    const point =
+      "touches" in event
+        ? event.touches[0] ?? event.changedTouches[0]
+        : event;
+
+    if (!point) return false;
+
+    return (
+      point.clientX >= rect.left &&
+      point.clientX <= rect.right &&
+      point.clientY >= rect.top &&
+      point.clientY <= rect.bottom
+    );
+  }, []);
+
+  const onNodeDrag = useCallback(
+    (event: MouseEvent | TouchEvent) => {
+      setTrashActive(isOverTrash(event));
+    },
+    [isOverTrash]
+  );
+
+  // Dropping a node onto the trash can removes it and any edges attached to it.
+  const onNodeDragStop = useCallback(
+    (event: MouseEvent | TouchEvent, node: Node) => {
+      if (isOverTrash(event)) {
+        setNodes((current) => current.filter((n) => n.id !== node.id));
+        setEdges((current) =>
+          current.filter(
+            (edge) => edge.source !== node.id && edge.target !== node.id
+          )
+        );
+      }
+
+      setTrashActive(false);
+    },
+    [isOverTrash, setNodes, setEdges]
+  );
+
   // Drops a node dragged from the toolbox at the cursor position.
   const onDrop = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
@@ -414,6 +461,8 @@ function Pipeline() {
 
           onReconnect={onReconnect}
           onEdgeDoubleClick={onEdgeDoubleClick}
+          onNodeDrag={onNodeDrag}
+          onNodeDragStop={onNodeDragStop}
           deleteKeyCode={["Backspace", "Delete"]}
           fitView
         >
@@ -421,6 +470,31 @@ function Pipeline() {
           <Controls />
           <MiniMap />
         </ReactFlow>
+
+        <Box
+          ref={trashRef}
+          sx={{
+            position: 'absolute',
+            top: 24,
+            right: 24,
+            zIndex: 10,
+            width: 56,
+            height: 56,
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '1px solid',
+            borderColor: trashActive ? 'error.main' : 'divider',
+            bgcolor: trashActive ? 'error.main' : 'background.paper',
+            color: trashActive ? 'error.contrastText' : 'text.secondary',
+            boxShadow: 3,
+            transform: trashActive ? 'scale(1.15)' : 'scale(1)',
+            transition: 'transform 0.15s ease-in-out, background-color 0.15s ease-in-out',
+          }}
+        >
+          <Trash2 size={22} />
+        </Box>
       </div>
     </Box>
   );
