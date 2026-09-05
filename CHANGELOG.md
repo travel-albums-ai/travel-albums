@@ -1,3 +1,9 @@
+## [1.315.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.314.0...v1.315.0) (2026-09-05)
+
+### ✨ Features
+
+* add tint prop to SettingsSection for dynamic background color customization in various nodes ([ac662f8](https://github.com/travel-albums-ai/travel-albums/commit/ac662f8b7616104942ad576a7875af3bae7bf19b))
+
 ## [1.314.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.313.0...v1.314.0) (2026-09-05)
 
 ### ✨ Features
