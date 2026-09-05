@@ -38,9 +38,11 @@ import GrainNode from "./GrainNode";
 import HdrNode from "./HdrNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
+import MirrorNode from "./MirrorNode";
 import NodeToolbox from "./NodeToolbox";
 import PopNode from "./PopNode";
 import RescaleNode from "./RescaleNode";
+import RotateNode from "./RotateNode";
 import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
 import SharpenNode from "./SharpenNode";
@@ -64,6 +66,8 @@ const nodeTypes = {
   invert: InvertNode,
   "black-white": BlackAndWhiteNode,
   flip: FlipNode,
+  mirror: MirrorNode,
+  rotate: RotateNode,
   brightness: BrightnessNode,
   gamma: GammaNode,
   luminosity: LuminosityNode,

@@ -18,6 +18,8 @@ const paletteItems: Array<{
   { type: "invert", label: "Invert", icon: "☯️", group: "base" },
   { type: "black-white", label: "Black & White", icon: "⬛", group: "base" },
   { type: "flip", label: "Flip 180°", icon: "🔄", group: "utility" },
+  { type: "mirror", label: "Mirror", icon: "🪞", group: "utility" },
+  { type: "rotate", label: "Rotate", icon: "🔁", group: "utility" },
   { type: "brightness", label: "Brightness", icon: "☀️", group: "basics" },
   { type: "gamma", label: "Gamma", icon: "🎚️", group: "adjustment" },
   { type: "luminosity", label: "Luminosity", icon: "💡", group: "adjustment" },

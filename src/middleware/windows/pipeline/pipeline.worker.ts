@@ -451,6 +451,7 @@ const SLIDER_NODE_TYPES = new Set([
   "pop",
   "hdr",
   "fade",
+  "rotate",
 ]);
 
 const drawSource = (
@@ -555,6 +556,53 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
           // Rotate 180deg around the canvas center.
           ctx.translate(canvas.width, canvas.height);
           ctx.rotate(Math.PI);
+          ctx.drawImage(source.bitmap, 0, 0);
+        }
+      );
+
+      return { image };
+    },
+  },
+
+  mirror: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const image = await renderImages(
+        sources,
+        inputs.evaluationId as number,
+        (ctx, canvas, source) => {
+          // Flip horizontally around the canvas's vertical center axis.
+          ctx.translate(canvas.width, 0);
+          ctx.scale(-1, 1);
+          ctx.drawImage(source.bitmap, 0, 0);
+        }
+      );
+
+      return { image };
+    },
+  },
+
+  rotate: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const angle = (inputs.amount as number | undefined) ?? 0;
+      const radians = (angle * Math.PI) / 180;
+
+      const image = await renderImages(
+        sources,
+        inputs.evaluationId as number,
+        (ctx, canvas, source) => {
+          // Rotate around the canvas center; the canvas keeps the source's
+          // dimensions, so corners can clip at non-90deg angles.
+          ctx.translate(canvas.width / 2, canvas.height / 2);
+          ctx.rotate(radians);
+          ctx.translate(-canvas.width / 2, -canvas.height / 2);
           ctx.drawImage(source.bitmap, 0, 0);
         }
       );
