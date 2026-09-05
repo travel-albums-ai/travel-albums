@@ -1,3 +1,9 @@
+## [1.307.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.306.0...v1.307.0) (2026-09-05)
+
+### ✨ Features
+
+* **pipeline:** implement off-thread image processing with worker ([047370e](https://github.com/travel-albums-ai/travel-albums/commit/047370ed6005fb4d901eb1eb560b899cbb8b556d))
+
 ## [1.306.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.305.0...v1.306.0) (2026-09-05)
 
 ### ✨ Features
