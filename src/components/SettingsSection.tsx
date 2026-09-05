@@ -2,12 +2,13 @@ import { Box, Divider, IconButton, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, useState } from 'react';
+import stc from 'string-to-color';
 
 function collapseStorageKey(uuid: string) {
   return `settings-section-${uuid}`;
 }
 
-export default function SettingsSection({ uuid, title, icon, guidance, children, gap = 0.5, divider = true, transparent = true } : { uuid?: string, title?: string, icon?: React.ReactNode, guidance?: string, children?: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean }) {
+export default function SettingsSection({ uuid, title, icon, guidance, children, gap = 0.5, divider = true, transparent = true, tint } : { uuid?: string, title?: string, icon?: React.ReactNode, guidance?: string, children?: React.ReactNode, gap?: number, divider?: boolean, transparent?: boolean, tint?: string }) {
 
   const [collapsed, setCollapsed] = useState(() => uuid ? localStorage.getItem(collapseStorageKey(uuid)) === 'true' : false)
 
@@ -20,7 +21,15 @@ export default function SettingsSection({ uuid, title, icon, guidance, children,
 
   return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 0, m: 0.25, overflow: 'visible' }}>
     <Box sx={{
-      bgcolor: theme => transparent ? alpha(theme.palette.background.default, 0.55) : theme.palette.background.paper + 'BD',
+      bgcolor: theme =>
+        transparent
+          ? tint
+            ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.default} 90%) 55%, transparent)`
+            : alpha(theme.palette.background.default, 0.55)
+          : tint
+            ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.paper} 90%) 55%, transparent)`
+            : `${theme.palette.background.paper}BD`,
+
       mb: 1,
       border: '1px solid',
       borderColor: theme => transparent ? 'transparent' : theme.palette.divider,

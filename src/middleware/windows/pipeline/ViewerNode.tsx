@@ -65,7 +65,7 @@ function ViewerNode({
   };
 
   return (
-    <SettingsSection title="Viewer Node" icon={<Eye />} uuid="viewer-node-reactflow" gap={2}>
+    <SettingsSection title="Viewer Node" icon={<Eye />} uuid="viewer-node-reactflow" gap={2} tint="viewer">
       <InputHandle id="image" position={Position.Top} />
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

@@ -21,7 +21,7 @@ function RescaleNode({
   const [scale, setScale] = useState(String(data.scale ?? 1));
 
   return (
-    <SettingsSection title="Rescale" icon={<Maximize2 />} uuid="rescale-node-reactflow" gap={2}>
+    <SettingsSection title="Rescale" icon={<Maximize2 />} uuid="rescale-node-reactflow" gap={2} tint="rescale">
       <InputHandle id="image" />
 
       <SegmentedControl

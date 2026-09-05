@@ -28,7 +28,7 @@ export function createSliderNode(config: SliderNodeConfig) {
     return <>
       <InputHandle id="image" />
 
-      <SettingsSection title={config.label} icon={<span>{config.icon}</span>}>
+      <SettingsSection title={config.label} icon={<span>{config.icon}</span>} tint={config.label}>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <input

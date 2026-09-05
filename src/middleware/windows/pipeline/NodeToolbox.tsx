@@ -94,7 +94,7 @@ function NodeToolbox() {
                   onDragStart(event, item.type)
                 }
               >
-                <SettingsSection title={item.label} icon={<span>{item.icon}</span>} />
+                <SettingsSection title={item.label} icon={<span>{item.icon}</span>} tint={item.type} />
               </div>
             ))}
           </Box>

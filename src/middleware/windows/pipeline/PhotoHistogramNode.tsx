@@ -23,6 +23,7 @@ function PhotoHistogramNode({
       icon={<BarChart3 />}
       uuid="photo-histogram-node-reactflow"
       gap={2}
+      tint="photo-histogram"
     >
       <InputHandle id="image" position={Position.Top} />
 

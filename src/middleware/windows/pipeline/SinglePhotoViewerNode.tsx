@@ -18,7 +18,7 @@ function SinglePhotoViewerNode({
     : undefined;
 
   return (
-    <SettingsSection title="Single Photo Viewer" icon={<Image />} uuid="single-photo-viewer-node-reactflow" gap={2}>
+    <SettingsSection title="Single Photo Viewer" icon={<Image />} uuid="single-photo-viewer-node-reactflow" gap={2} tint="single-photo-viewer">
       <InputHandle id="image" position={Position.Top} />
 
       <Box sx={{ height: '600px', width: '600px', overflow: 'auto' }}>
