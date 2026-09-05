@@ -11,6 +11,7 @@ const paletteItems: Array<{
 }> = [
   { type: "source", label: "Image Source", icon: "📷" },
   { type: "selection", label: "Gallery Selection", icon: "🗂️" },
+  { type: "ai-colorizer", label: "AI Async Colorizer", icon: "✨" },
   { type: "invert", label: "Invert", icon: "☯️" },
   { type: "flip", label: "Flip 180°", icon: "🔄" },
   { type: "brightness", label: "Brightness", icon: "☀️" },

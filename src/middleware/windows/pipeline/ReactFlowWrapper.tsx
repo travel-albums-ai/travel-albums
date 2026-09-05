@@ -24,6 +24,7 @@ import {
   useState,
 } from "react";
 
+import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import BrightnessNode from "./BrightnessNode";
 import ContrastNode from "./ContrastNode";
 import ExposureNode from "./ExposureNode";
@@ -49,6 +50,7 @@ import { evaluatePipeline } from "./evaluatePipeline";
 const nodeTypes = {
   source: SourceNode,
   selection: SelectionNode,
+  "ai-colorizer": AIAsyncColorizerNode,
   invert: InvertNode,
   flip: FlipNode,
   brightness: BrightnessNode,
@@ -145,9 +147,11 @@ function loadStoredGraph(): { nodes: Node[]; edges: Edge[] } {
 
 // Evaluated results (e.g. viewer `image`) are regenerated on load,
 // so they're stripped before saving to keep localStorage small.
+// The BYOK API key is also re-synced from its own store, so it's
+// never persisted a second time here.
 function saveStoredGraph(nodes: Node[], edges: Edge[]) {
   const strippedNodes = nodes.map((node) => {
-    const { image: _image, photos: _photos, ...rest } = node.data as Record<string, unknown>;
+    const { image: _image, photos: _photos, apiKey: _apiKey, ...rest } = node.data as Record<string, unknown>;
     return { ...node, data: rest };
   });
 
