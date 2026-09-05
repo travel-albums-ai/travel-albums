@@ -1,3 +1,13 @@
+## [1.302.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.301.0...v1.302.0) (2026-09-05)
+
+### ✨ Features
+
+* add trash can functionality for node deletion in pipeline ([f7f5471](https://github.com/travel-albums-ai/travel-albums/commit/f7f54716c1c58c8b5a54d2f7316027c6fdca2c6f))
+
+### 🧹 Refactors
+
+* simplify NodeToolbox component by removing commented code and enhancing readability ([2fc5296](https://github.com/travel-albums-ai/travel-albums/commit/2fc52961b3e9a7ee6c1dcae272a917c3e95d9f8a))
+
 ## [1.301.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.300.0...v1.301.0) (2026-09-05)
 
 ### ✨ Features
