@@ -1,3 +1,9 @@
+## [1.300.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.299.0...v1.300.0) (2026-09-05)
+
+### ✨ Features
+
+* add AI Async Colorizer node and integrate with pipeline ([8fa2a37](https://github.com/travel-albums-ai/travel-albums/commit/8fa2a37867279abd7d67312dfb0dbe2374eea3d9))
+
 ## [1.299.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.298.0...v1.299.0) (2026-09-05)
 
 ### ✨ Features
