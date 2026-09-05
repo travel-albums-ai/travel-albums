@@ -1,3 +1,9 @@
+## [1.311.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.310.0...v1.311.0) (2026-09-05)
+
+### ✨ Features
+
+* add Mirror and Rotate nodes with corresponding implementations ([f3911f0](https://github.com/travel-albums-ai/travel-albums/commit/f3911f05ca36cc4c39049510fa504c28b129298d))
+
 ## [1.310.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.309.0...v1.310.0) (2026-09-05)
 
 ### ✨ Features
