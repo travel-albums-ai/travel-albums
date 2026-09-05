@@ -1,3 +1,9 @@
+## [1.310.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.309.0...v1.310.0) (2026-09-05)
+
+### ✨ Features
+
+* add Single Photo Viewer node and update viewer handling in pipeline ([77f87dd](https://github.com/travel-albums-ai/travel-albums/commit/77f87ddc85af2703897279bdf09037c2d173a16b))
+
 ## [1.309.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.308.0...v1.309.0) (2026-09-05)
 
 ### ✨ Features
