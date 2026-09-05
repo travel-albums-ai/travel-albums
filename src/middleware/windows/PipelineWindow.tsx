@@ -3,10 +3,10 @@ import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
 import { Dialog } from '@mui/material';
 
 export default function PipelineWindow() {
-  const showSettings = useSettingsStoreSelector(s => s.showSettings)
+  const pipelineOpen = useSettingsStoreSelector(s => s.pipelineOpen)
   const { setSetting } = useSettings()
 
-  const showWindow = true
+  const showWindow = pipelineOpen
 
   if (!showWindow) return null
 
@@ -15,7 +15,7 @@ export default function PipelineWindow() {
       fullWidth
       maxWidth="xl"
       open={showWindow}
-      onClose={() => setSetting(prev => ({ ...prev, showSettings: false }))}
+      onClose={() => setSetting(prev => ({ ...prev, pipelineOpen: false }))}
       slotProps={{
         paper: {
           sx: {

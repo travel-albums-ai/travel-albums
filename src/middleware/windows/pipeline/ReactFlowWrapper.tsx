@@ -21,6 +21,7 @@ import {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from "react";
 
 import BrightnessNode from "./BrightnessNode";
@@ -118,15 +119,56 @@ const initialEdges: Edge[] = [
 ];
 
 // ============================================================
+// Persistence
+// ============================================================
+
+const STORAGE_KEY = "pipeline-flow";
+
+function loadStoredGraph(): { nodes: Node[]; edges: Edge[] } {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if (!raw) return { nodes: initialNodes, edges: initialEdges };
+
+    const parsed = JSON.parse(raw);
+
+    if (!Array.isArray(parsed.nodes) || !Array.isArray(parsed.edges)) {
+      return { nodes: initialNodes, edges: initialEdges };
+    }
+
+    return parsed;
+  } catch (error) {
+    console.error("Failed to load stored pipeline:", error);
+    return { nodes: initialNodes, edges: initialEdges };
+  }
+}
+
+// Evaluated results (e.g. viewer `image`) are regenerated on load,
+// so they're stripped before saving to keep localStorage small.
+function saveStoredGraph(nodes: Node[], edges: Edge[]) {
+  const strippedNodes = nodes.map((node) => {
+    const { image: _image, ...rest } = node.data as Record<string, unknown>;
+    return { ...node, data: rest };
+  });
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({ nodes: strippedNodes, edges })
+  );
+}
+
+// ============================================================
 // App
 // ============================================================
 
 function Pipeline() {
+  const [initialGraph] = useState(loadStoredGraph);
+
   const [nodes, setNodes, onNodesChange] =
-    useNodesState(initialNodes);
+    useNodesState(initialGraph.nodes);
 
   const [edges, setEdges, onEdgesChange] =
-    useEdgesState(initialEdges);
+    useEdgesState(initialGraph.edges);
 
   const { screenToFlowPosition } = useReactFlow();
   const nodeIdRef = useRef(0);
@@ -243,6 +285,32 @@ function Pipeline() {
       );
     };
   }, [evaluate]);
+
+  // Persist the graph so it can be restored when the user returns.
+  // Debounced since drags/resizes fire nodes/edges changes rapidly.
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const scheduleSave = useCallback(() => {
+    clearTimeout(saveTimeoutRef.current);
+
+    saveTimeoutRef.current = setTimeout(() => {
+      saveStoredGraph(nodes, edges);
+    }, 500);
+  }, [nodes, edges]);
+
+  useEffect(() => {
+    scheduleSave();
+  }, [scheduleSave]);
+
+  // Node data (e.g. slider values) is mutated in place, so it doesn't
+  // trigger the effect above; save explicitly on the pipeline event too.
+  useEffect(() => {
+    window.addEventListener("pipeline:changed", scheduleSave);
+
+    return () => {
+      window.removeEventListener("pipeline:changed", scheduleSave);
+    };
+  }, [scheduleSave]);
 
   const onConnect = useCallback(
     (connection: Connection) => {
