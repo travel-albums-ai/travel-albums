@@ -1,3 +1,9 @@
+## [1.298.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.297.0...v1.298.0) (2026-09-05)
+
+### ✨ Features
+
+* refactor NodeToolbox to use MUI Box for layout and styling ([45919ec](https://github.com/travel-albums-ai/travel-albums/commit/45919eceb9f11d483d5e3781e90938aa683d7aa2))
+
 ## [1.297.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.296.0...v1.297.0) (2026-09-05)
 
 ### ✨ Features
