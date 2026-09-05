@@ -2,7 +2,8 @@ import { Box, Tooltip } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 
 interface HistogramProps {
-  imageUrl: string;
+  imageUrl?: string;
+  imageBase64?: string;
   width?: number;
   height?: number;
 }
@@ -51,6 +52,7 @@ const CHANNELS: {
 
 export default function RGBHistogram({
   imageUrl,
+  imageBase64,
   width = 200,
   height = 200,
 }: HistogramProps) {
@@ -166,15 +168,25 @@ export default function RGBHistogram({
   useEffect(() => {
     let cancelled = false;
 
+    const source = imageBase64 || imageUrl;
+
+    if (!source) return;
+
     const load = async () => {
       const img = new Image();
 
-      img.crossOrigin = 'anonymous';
+      /*
+       * Base64 data URLs are same-origin, so
+       * crossOrigin isn't needed (and can break some browsers).
+       */
+      if (!imageBase64) {
+        img.crossOrigin = 'anonymous';
+      }
 
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
         img.onerror = reject;
-        img.src = imageUrl;
+        img.src = source;
       });
 
       if (cancelled) return;
@@ -225,7 +237,7 @@ export default function RGBHistogram({
     return () => {
       cancelled = true;
     };
-  }, [imageUrl]);
+  }, [imageUrl, imageBase64]);
 
   useEffect(() => {
     drawHistogram();

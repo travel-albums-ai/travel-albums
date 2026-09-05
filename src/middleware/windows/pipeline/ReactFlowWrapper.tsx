@@ -40,6 +40,7 @@ import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
 import MirrorNode from "./MirrorNode";
 import NodeToolbox from "./NodeToolbox";
+import PhotoHistogramNode from "./PhotoHistogramNode";
 import PopNode from "./PopNode";
 import RescaleNode from "./RescaleNode";
 import RotateNode from "./RotateNode";
@@ -84,6 +85,7 @@ const nodeTypes = {
   rescale: RescaleNode,
   viewer: ViewerNode,
   "viewer-single": SinglePhotoViewerNode,
+  "photo-histogram": PhotoHistogramNode,
 };
 
 // ============================================================

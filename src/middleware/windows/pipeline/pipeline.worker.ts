@@ -680,6 +680,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       };
     },
   },
+
+  "photo-histogram": {
+    async execute(inputs) {
+      await Promise.resolve();
+
+      return {
+        image: (inputs.image as WorkerImage[] | undefined) ?? [],
+      };
+    },
+  },
 };
 
 // ============================================================
