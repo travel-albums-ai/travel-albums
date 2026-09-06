@@ -675,6 +675,21 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  grouper: {
+    async execute(inputs) {
+      const imageInputs = ["image-1", "image-2", "image-3", "image-4"];
+      const image = imageInputs.flatMap((input) => {
+        const photoArray = inputs[input];
+
+        return Array.isArray(photoArray)
+          ? photoArray as WorkerImage[]
+          : [];
+      });
+
+      return { image };
+    },
+  },
+
   invert: stageNode(invertStage),
   "black-white": stageNode(blackAndWhiteStage),
 

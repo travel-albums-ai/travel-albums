@@ -13,6 +13,7 @@ const paletteItems: Array<{
 }> = [
   { type: "source", label: "Image Source", icon: "📷", group: "input" },
   { type: "selection", label: "Gallery Selection", icon: "🗂️", group: "input" },
+  { type: "grouper", label: "Grouper", icon: "⊕", group: "utility" },
   { type: "ai-colorizer", label: "AI Async Colorizer", icon: "✨", group: "ai" },
   { type: "ai-denoiser", label: "AI Async Denoiser", icon: "🧹", group: "ai" },
   { type: "invert", label: "Invert", icon: "☯️", group: "base" },

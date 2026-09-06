@@ -35,6 +35,7 @@ import FadeNode from "./FadeNode";
 import FlipNode from "./FlipNode";
 import GammaNode from "./GammaNode";
 import GrainNode from "./GrainNode";
+import GrouperNode from "./GrouperNode";
 import HdrNode from "./HdrNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
@@ -63,6 +64,7 @@ import { VIEWER_NODE_TYPES } from "./types";
 const nodeTypes = {
   source: SourceNode,
   selection: SelectionNode,
+  grouper: GrouperNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
   invert: InvertNode,
