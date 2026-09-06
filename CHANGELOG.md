@@ -1,3 +1,9 @@
+## [1.334.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.333.0...v1.334.0) (2026-09-06)
+
+### ✨ Features
+
+* add tooltips to NodeToolbox items for improved user guidance ([15206f7](https://github.com/travel-albums-ai/travel-albums/commit/15206f729c41dddf652d10de6a6b71bbc91c519c))
+
 ## [1.333.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.332.0...v1.333.0) (2026-09-06)
 
 ### ✨ Features
