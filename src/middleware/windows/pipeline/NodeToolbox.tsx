@@ -2,7 +2,7 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Divider, Typography, useTheme } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { cloneElement } from 'react';
 import stc from 'string-to-color';
@@ -21,8 +21,8 @@ const paletteItems: Array<{
   { type: "invert", label: "Invert", icon: <SquaresExclude size={16} />, group: "base" },
   { type: "black-white", label: "Black & White", icon: <Landmark size={16} /> , group: "base" },
   { type: "lut", label: "3D LUT", icon: <Film size={16} />, group: "color" },
-  { type: "flip", label: "Flip 180°", icon: <SquareCenterlineDashedHorizontal size={16} />, group: "utility" },
-  { type: "mirror", label: "Mirror", icon: <SquareCenterlineDashedVertical size={16} />, group: "utility" },
+  { type: "flip", label: "Flip 180°", icon: <SquareCenterlineDashedVertical size={16} />, group: "utility" },
+  { type: "mirror", label: "Mirror", icon: <SquareCenterlineDashedHorizontal size={16} />, group: "utility" },
   { type: "rotate", label: "Rotate", icon: <Angle size={16} />, group: "utility" },
   { type: "brightness", label: "Brightness", icon: <Lightbulb size={16} />, group: "basics" },
   { type: "gamma", label: "Gamma", icon: <Palette size={16} />, group: "adjustment" },
@@ -77,14 +77,16 @@ function NodeToolbox() {
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
         <Box key={group}
           sx={{
-            borderBottom: '1px dotted', borderColor: 'divider',
             pb: 1, mb: 1,
             display: 'flex', flexDirection: 'column', gap: 0
           }}
         >
-          <Typography variant="subtitle2" sx={{ textTransform: 'uppercase', fontWeight: 'bold', mb: 1 }}>
-            {group}
-          </Typography>
+          <Divider sx={{ mb: 0.75, borderStyle: 'dotted', borderColor: 'divider' }}>
+            <Typography variant="caption" sx={{ textTransform: 'uppercase' }} color="textDisabled">
+              {group}
+            </Typography>
+          </Divider>
+
           <Box sx={{
             display: 'grid',
             alignContent: 'start',
@@ -100,7 +102,7 @@ function NodeToolbox() {
                   flexDirection: 'row',
                   alignItems: 'center',
                   gap: 1,
-                  py: 1,
+                  py: 0.75,
                   px: 1,
                   borderRadius: 2,
                   border: '1px solid',
@@ -108,10 +110,10 @@ function NodeToolbox() {
                   borderBottom: '1px solid',
                   borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 35%, transparent)`,
                   background: `linear-gradient(
-      90deg,
-      transparent 0%,
-      color-mix(in srgb, ${stc(item.type)} 2%, transparent) 100%
-    )`,
+                    90deg,
+                    transparent 0%,
+                    color-mix(in srgb, ${stc(item.type)} 2%, transparent) 100%
+                  )`,
 
                 }}
                 key={item.type}
