@@ -1,3 +1,9 @@
+## [1.341.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.340.0...v1.341.0) (2026-09-06)
+
+### ✨ Features
+
+* refactor nodes to use NodeWrapper with type properties for improved structure ([cf7896f](https://github.com/travel-albums-ai/travel-albums/commit/cf7896f99f987f10db5487849f7c73660955d57d))
+
 ## [1.340.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.339.0...v1.340.0) (2026-09-06)
 
 ### ✨ Features
