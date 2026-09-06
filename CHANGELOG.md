@@ -1,3 +1,9 @@
+## [1.316.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.315.0...v1.316.0) (2026-09-06)
+
+### ✨ Features
+
+* import Stage type in utils for type safety in adjustments ([f9b2714](https://github.com/travel-albums-ai/travel-albums/commit/f9b271472e62c19ef07dde98c48dab56a2f7c723))
+
 ## [1.315.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.314.0...v1.315.0) (2026-09-05)
 
 ### ✨ Features
