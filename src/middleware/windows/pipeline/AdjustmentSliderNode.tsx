@@ -1,6 +1,6 @@
-import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Box } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
@@ -28,7 +28,8 @@ export function createSliderNode(config: SliderNodeConfig) {
     return <>
       <InputHandle id="image" />
 
-      <SettingsSection title={config.label} icon={<span>{config.icon}</span>} tint={config.label}>
+      {/* <SettingsSection title={config.label} icon={<span>{config.icon}</span>} tint={config.label}> */}
+      <NodeWrapper title={config.label} icon={<span>{config.icon}</span>}>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <input
@@ -51,8 +52,9 @@ export function createSliderNode(config: SliderNodeConfig) {
           />
           <SolidChip count={amount} />
         </Box>
+      </NodeWrapper>
 
-      </SettingsSection>
+      {/* </SettingsSection> */}
 
       <OutputHandle id="image" />
     </>;
