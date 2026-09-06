@@ -1,6 +1,8 @@
 import SettingsSection from '@/components/SettingsSection';
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
-import { Image } from 'lucide-react';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { Button } from '@mui/material';
+import { type Node, type NodeProps } from "@xyflow/react";
+import { HardDrive, Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
@@ -29,25 +31,36 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
     : "Choose photos";
 
   return (
-    <SettingsSection title="Images Source" icon={<Image />} uuid="viewer-node-reactflow" gap={2}>
-      <input
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={(event) => {
-          const selected = Array.from(event.target.files ?? []);
+    <SettingsSection title="Images Source" icon={<HardDrive />} uuid="viewer-node-reactflow" gap={2}>
+      <Button
+        component="label"
+        variant="outlined"
+        startIcon={<Upload />}
+      >
+        Select Images
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          hidden
+          onChange={(event) => {
+            const selected = Array.from(event.target.files ?? []);
 
-          if (selected.length === 0) return;
+            if (selected.length === 0) return;
 
-          data.files = selected;
-          setFiles(selected);
+            data.files = selected;
+            setFiles(selected);
 
-          // Tell the pipeline engine that this node changed.
-          window.dispatchEvent(
-            new CustomEvent("pipeline:changed")
-          );
-        }}
-      />
+            window.dispatchEvent(
+              new CustomEvent("pipeline:changed")
+            );
+
+            // Allows selecting the same file(s) again
+            event.target.value = "";
+          }}
+        />
+      </Button>
+
 
       <small>{label}</small>
 
@@ -59,11 +72,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
         </div>
       )}
 
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
+      <OutputHandle id="image" />
     </SettingsSection>
   );
 }
