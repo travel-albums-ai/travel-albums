@@ -3,7 +3,6 @@ import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
-import { Image } from 'lucide-react';
 import type { ImageArray } from "./types";
 
 function SinglePhotoViewerNode({
@@ -18,7 +17,7 @@ function SinglePhotoViewerNode({
 
   return (<>
     <InputHandle id="image" position={Position.Top} />
-    <NodeWrapper title={'Single Photo Viewer'} icon={<Image />} toolbar={<></>}>
+    <NodeWrapper type="viewer-single">
       <Box sx={{ height: '600px', width: '600px', overflow: 'auto' }}>
         {match ? (
           <img

@@ -4,7 +4,6 @@ import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
-import { BarChart3 } from 'lucide-react';
 import type { ImageArray } from './types';
 
 function PhotoHistogramNode({
@@ -19,7 +18,7 @@ function PhotoHistogramNode({
 
   return (<>
     <InputHandle id="image" position={Position.Top} />
-    <NodeWrapper title={'Photo Histogram'} icon={<BarChart3 />} toolbar={<></>}>
+    <NodeWrapper type="photo-histogram">
       <Box sx={{ width: 400, height: 220 }}>
         {match ? (
           <Histogram imageUrl={match.src} width={400} height={220} />

@@ -3,7 +3,7 @@ import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box, Button } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import JSZip from 'jszip';
-import { Download, Images } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { useState } from 'react';
 import type { ImageArray } from "./types";
 
@@ -66,7 +66,7 @@ function ViewerNode({
 
   return (<>
     <InputHandle id="image" position={Position.Top} />
-    <NodeWrapper title={'Photos Viewer'} icon={<Images />} toolbar={<></>}>
+    <NodeWrapper type="viewer">
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>

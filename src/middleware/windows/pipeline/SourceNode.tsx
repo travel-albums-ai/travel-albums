@@ -2,7 +2,7 @@ import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Box, Button } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
-import { HardDrive, Upload } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
@@ -31,7 +31,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
     : "Choose photos";
 
   return (
-    <NodeWrapper title={'Images Source'} icon={<HardDrive />} toolbar={<></>}>
+    <NodeWrapper type="source">
       <Button
         component="label"
         variant="outlined"

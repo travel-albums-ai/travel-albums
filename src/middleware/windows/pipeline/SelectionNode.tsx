@@ -2,14 +2,13 @@ import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import SettingsSection from '@/components/SettingsSection';
 import { useFilteredPhotos_GLOBAL } from "@/context/globals/filteredPhotosStore";
 import { useSections_GLOBAL } from "@/context/globals/sectionsStore";
 import type { GalleryPhoto } from "@/lib/galleryData";
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
 import { Box, MenuItem, Select, Stack, Typography } from '@mui/material';
-import { Folder } from 'lucide-react';
 
 type SelectionNodeData = {
   photos?: GalleryPhoto[];
@@ -105,7 +104,7 @@ function SelectionNode({
   }, [data, selectedPhotos, limit, selectedSectionId, selectedTypeName]);
 
   return <>
-    <SettingsSection title="Gallery Selection" icon={<Folder />} uuid={`selection-node-reactflow-${selectedTypeName}-${selectedSectionId}`} gap={2} tint="gallery-selection">
+    <NodeWrapper type="selection">
       <small>
         {selectedPhotos.length} of {photos.length} photo{photos.length === 1 ? "" : "s"} used
       </small>
@@ -166,7 +165,7 @@ function SelectionNode({
         <AllPhotosGridVirtuoso photos={selectedPhotos} width={200} height={100} />
       </Box>
 
-    </SettingsSection>
+    </NodeWrapper>
     <OutputHandle id="image" position={Position.Top} />
   </>;
 }
