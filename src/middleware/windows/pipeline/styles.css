@@ -113,3 +113,28 @@ body {
   border-radius: 8px;
   color: #888;
 }
+
+.react-flow__controls-button {
+  background: var(--bg-overlay);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  border-radius: 4px;
+}
+
+.react-flow__controls {
+  gap: 4px;
+  box-shadow: none;
+}
+
+.react-flow__minimap {
+  background: var(--bg-overlay);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.react-flow__minimap-node {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 16px;
+}
