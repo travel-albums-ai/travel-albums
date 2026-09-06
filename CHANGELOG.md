@@ -1,3 +1,9 @@
+## [1.331.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.330.0...v1.331.0) (2026-09-06)
+
+### ✨ Features
+
+* enhance image preview layout in SourceNode with grid display and styling ([cec710b](https://github.com/travel-albums-ai/travel-albums/commit/cec710bad505761729acd851b9c7dbcdf58fc8f3))
+
 ## [1.330.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.329.1...v1.330.0) (2026-09-06)
 
 ### ✨ Features
