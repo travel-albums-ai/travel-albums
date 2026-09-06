@@ -1,9 +1,9 @@
-import SettingsSection from '@/components/SettingsSection';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box, Button } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import JSZip from 'jszip';
-import { Download, Eye } from 'lucide-react';
+import { Download, Images } from 'lucide-react';
 import { useState } from 'react';
 import type { ImageArray } from "./types";
 
@@ -64,9 +64,9 @@ function ViewerNode({
     }
   };
 
-  return (
-    <SettingsSection title="Viewer Node" icon={<Eye />} uuid="viewer-node-reactflow" gap={2} tint="viewer">
-      <InputHandle id="image" position={Position.Top} />
+  return (<>
+    <InputHandle id="image" position={Position.Top} />
+    <NodeWrapper title={'Photos Viewer'} icon={<Images />} toolbar={<></>}>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
@@ -107,8 +107,8 @@ function ViewerNode({
           </div>
         )}
       </Box>
-    </SettingsSection>
-  );
+    </NodeWrapper>
+  </>);
 }
 
 export default ViewerNode;

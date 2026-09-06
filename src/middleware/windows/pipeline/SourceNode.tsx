@@ -1,4 +1,4 @@
-import SettingsSection from '@/components/SettingsSection';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Box, Button } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
@@ -31,7 +31,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
     : "Choose photos";
 
   return (
-    <SettingsSection title="Images Source" icon={<HardDrive />} uuid="viewer-node-reactflow" gap={2}>
+    <NodeWrapper title={'Images Source'} icon={<HardDrive />} toolbar={<></>}>
       <Button
         component="label"
         variant="outlined"
@@ -87,7 +87,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
       </Box>
 
       <OutputHandle id="image" />
-    </SettingsSection>
+    </NodeWrapper>
   );
 }
 

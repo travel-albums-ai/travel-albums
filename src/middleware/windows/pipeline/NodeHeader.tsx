@@ -2,9 +2,10 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
-import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
-import { Box, Divider, Tooltip, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { cloneElement } from 'react';
+import stc from 'string-to-color';
 
 const paletteItems: Array<{
   type: string;
@@ -42,78 +43,41 @@ const paletteItems: Array<{
   { type: "photo-histogram", label: "Photo Histogram", icon: <ChartColumn size={16} />, group: "output" },
 ];
 
-const groupedPaletteItems = paletteItems.reduce((acc, item) => {
-  if (!acc[item.group]) {
-    acc[item.group] = [];
-  }
-  acc[item.group].push(item);
-  return acc;
-}, {} as Record<string, typeof paletteItems>);
 
-function NodeToolbox() {
-
-  const onDragStart = (
-    event: React.DragEvent<HTMLDivElement>,
-    nodeType: string
-  ) => {
-    event.dataTransfer.setData(
-      "application/reactflow",
-      nodeType
-    );
-    event.dataTransfer.effectAllowed = "move";
-  };
+function NodeHeader({ icon, title, type, group } : { icon: React.ReactNode, title: string, type: string, group: string }) {
+  const theme = useTheme();
 
   return <>
-    <Box sx={{
-      display: 'flex', flexDirection: 'column',
-      gap: 0,
-      borderRight: '1px solid',
-      borderColor: 'divider',
-      overflowY: 'auto',
-      pr: 2
-    }}>
-      {Object.entries(groupedPaletteItems).map(([group, items]) => (
-        <Box key={group}
-          sx={{
-            pb: 1, mb: 1,
-            display: 'flex', flexDirection: 'column', gap: 0
-          }}
-        >
-          <Divider sx={{ mb: 0.75, borderStyle: 'dotted', borderColor: 'divider' }}>
-            <Typography variant="caption" sx={{ textTransform: 'uppercase' }} color="textDisabled">
-              {group}
-            </Typography>
-          </Divider>
+    <Box
+      sx={{
+        cursor: 'grab',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 1,
+        py: 0.75,
+        px: 1,
+        borderRadius: 2,
+        border: '1px solid',
+        borderColor: 'divider',
+        borderBottom: '1px solid',
+        borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 80%, ${theme.palette.text.primary} 70%) 35%, transparent)`,
+        background: `linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    color-mix(in srgb, ${stc(type)} 2%, ${stc(group)} 8%) 125%
+                  )`,
 
-          <Box sx={{
-            display: 'grid',
-            alignContent: 'start',
-            gridTemplateColumns: 'repeat(2, minmax(150px, 1fr))',
-            gap: 1,
-          }}>
-            {items.map((item, i) => (
-              <Tooltip title={`Drag to add a ${item.label} to your flow`} key={item.type} arrow placement={i % 2 !== 0 ? "right" : "left"}>
-                <Box
-                  key={item.type}
-                  draggable
-                  onDragStart={(event) =>
-                    onDragStart(event, item.type)
-                  }
-                >
-                  <NodeHeader
-                    icon={item.icon}
-                    title={item.label}
-                    type={item.type}
-                    group={item.group}
-                  />
-                </Box>
-              </Tooltip>
-            ))}
-          </Box>
-        </Box>
-      ))}
+      }}
+    >
+      {icon !== undefined && cloneElement(icon, { size: 16, style: {
+        color: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(group)} 100%) 95%, ${theme.palette.text.primary} 50%)`
+      } })}
+      <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        {title}
+      </Typography>
     </Box>
   </>
 }
 
-export default NodeToolbox;
+export default NodeHeader;
