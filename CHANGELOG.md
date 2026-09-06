@@ -1,3 +1,9 @@
+## [1.341.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.341.0...v1.341.1) (2026-09-06)
+
+### 🐛 Fixes
+
+* adjust background color mix for improved visibility in NodeWrapper ([cb87d61](https://github.com/travel-albums-ai/travel-albums/commit/cb87d6109cee44dbaf6e8de814598dfbd2a0216f))
+
 ## [1.341.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.340.0...v1.341.0) (2026-09-06)
 
 ### ✨ Features
