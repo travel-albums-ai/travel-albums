@@ -1,3 +1,9 @@
+## [1.326.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.325.0...v1.326.0) (2026-09-06)
+
+### ✨ Features
+
+* replace button components with GenericToggleButtonGroup for improved UI interaction ([8f0c3cb](https://github.com/travel-albums-ai/travel-albums/commit/8f0c3cb0a13749d449533c0c6133d8dd6ed7f61f))
+
 ## [1.325.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.324.0...v1.325.0) (2026-09-06)
 
 ### ✨ Features
