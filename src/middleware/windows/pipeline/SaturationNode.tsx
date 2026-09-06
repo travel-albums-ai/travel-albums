@@ -1,7 +1,8 @@
+import { SwatchBook } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: "🎨",
+  icon: <SwatchBook size={16} />,
   label: "Saturation",
   min: -100,
   max: 100,

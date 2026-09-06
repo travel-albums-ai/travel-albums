@@ -1,24 +1,18 @@
-import SettingsSection from '@/components/SettingsSection';
-import { Handle, Position } from "@xyflow/react";
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { SquareCenterlineDashedHorizontal } from 'lucide-react';
 
 function MirrorNode() {
   return (
     <>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
+      <InputHandle id="image" />
 
-      <SettingsSection title={'Mirror'} icon={<span>🪞</span>} tint={'mirror'}>
+      <NodeWrapper title={'Mirror'} icon={<SquareCenterlineDashedHorizontal size={16} />} toolbar={<></>}>
         <small>Flips the image horizontally</small>
-      </SettingsSection>
+      </NodeWrapper>
 
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
+      <OutputHandle id="image" />
     </>
   );
 }

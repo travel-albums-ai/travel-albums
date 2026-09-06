@@ -1,23 +1,19 @@
-import SettingsSection from '@/components/SettingsSection';
-import { Handle, Position } from "@xyflow/react";
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { SquaresExclude } from 'lucide-react';
 
 function InvertNode() {
   return (
-    <SettingsSection title="Invert">
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
+    <>
+      <InputHandle id="image" />
 
-      <small>Async image operation</small>
+      <NodeWrapper title={'Invert'} icon={<SquaresExclude size={16} />} toolbar={<></>}>
+        <small>Inverts the colors of the image</small>
+      </NodeWrapper>
 
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
-    </SettingsSection>
+      <OutputHandle id="image" />
+    </>
   );
 }
 

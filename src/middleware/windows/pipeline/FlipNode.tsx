@@ -1,24 +1,18 @@
-import SettingsSection from '@/components/SettingsSection';
-import { Handle, Position } from "@xyflow/react";
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { SquareCenterlineDashedVertical } from 'lucide-react';
 
 function FlipNode() {
   return (
     <>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
+      <InputHandle id="image" />
 
-      <SettingsSection title={'Flip 180°'} icon={<span>🔄</span>} tint={'flip'}>
+      <NodeWrapper title={'Flip 180°'} icon={<SquareCenterlineDashedVertical size={16} />} toolbar={<></>}>
         <small>Rotates the image upside down</small>
-      </SettingsSection>
+      </NodeWrapper>
 
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
+      <OutputHandle id="image" />
     </>
   );
 }

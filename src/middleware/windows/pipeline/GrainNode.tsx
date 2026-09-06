@@ -1,7 +1,8 @@
+import { Wheat } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: "🌾",
+  icon:<Wheat size={16} />,
   label: "Grain",
   min: 0,
   max: 100,

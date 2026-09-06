@@ -1,7 +1,8 @@
+import { Angle } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: "🔁",
+  icon: <Angle size={16} />,
   label: "Rotate",
   min: 0,
   max: 360,
