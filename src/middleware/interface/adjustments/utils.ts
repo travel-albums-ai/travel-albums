@@ -1,3 +1,4 @@
+import { Stage } from '@/middleware/interface/adjustments/types';
 
 export function clamp(v: number) {
   return Math.max(0, Math.min(255, v));
