@@ -1,3 +1,9 @@
+## [1.330.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.329.1...v1.330.0) (2026-09-06)
+
+### ✨ Features
+
+* replace file input with button in SourceNode for improved UX ([f91c1a2](https://github.com/travel-albums-ai/travel-albums/commit/f91c1a257991c4e3a31151ec1d74cd30509f48cf))
+
 ## [1.329.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.329.0...v1.329.1) (2026-09-06)
 
 ### 🐛 Fixes
