@@ -1,3 +1,9 @@
+## [1.320.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.319.0...v1.320.0) (2026-09-06)
+
+### ✨ Features
+
+* implement snapping functionality for node positioning in the pipeline ([9347400](https://github.com/travel-albums-ai/travel-albums/commit/93474001946e565ae7cc6487921bb234dc1b55f1))
+
 ## [1.319.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.318.0...v1.319.0) (2026-09-06)
 
 ### ✨ Features
