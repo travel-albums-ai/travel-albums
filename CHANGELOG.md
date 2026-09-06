@@ -1,3 +1,9 @@
+## [1.322.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.321.0...v1.322.0) (2026-09-06)
+
+### ✨ Features
+
+* refactor FlipNode and MirrorNode to use SettingsSection for consistency ([bd2e682](https://github.com/travel-albums-ai/travel-albums/commit/bd2e68235e0da54638b6f7a8b383c50b155b424d))
+
 ## [1.321.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.320.0...v1.321.0) (2026-09-06)
 
 ### ✨ Features
