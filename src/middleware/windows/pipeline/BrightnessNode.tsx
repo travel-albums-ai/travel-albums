@@ -1,7 +1,8 @@
 import { createSliderNode } from '@/middleware/windows/pipeline/AdjustmentSliderNode';
+import { Lightbulb } from 'lucide-react';
 
 export default createSliderNode({
-  icon: "◐",
+  icon: <Lightbulb />,
   label: "Brightness",
   min: -100,
   max: 100,

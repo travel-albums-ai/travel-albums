@@ -2,7 +2,7 @@ import { Mountain } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: <Mountain size={16} />,
+  icon: <Mountain />,
   label: "HDR Effect",
   min: 0,
   max: 100,

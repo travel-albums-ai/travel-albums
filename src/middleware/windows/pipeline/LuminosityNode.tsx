@@ -2,7 +2,7 @@ import { Lightbulb } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: <Lightbulb size={16} />,
+  icon: <Lightbulb />,
   label: "Luminosity",
   min: 0,
   max: 2,

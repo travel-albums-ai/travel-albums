@@ -2,7 +2,7 @@ import { Palette } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: <Palette size={16} />,
+  icon: <Palette />,
   label: "Gamma",
   min: 0.1,
   max: 3,

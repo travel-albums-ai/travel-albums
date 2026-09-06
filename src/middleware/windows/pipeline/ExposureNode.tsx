@@ -1,7 +1,8 @@
+import { Sun } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: "📸",
+  icon: <Sun />,
   label: "Exposure",
   min: -3,
   max: 3,

@@ -2,7 +2,7 @@ import { Gem } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: <Gem size={16} />,
+  icon: <Gem />,
   label: "Pop",
   min: 0,
   max: 100,

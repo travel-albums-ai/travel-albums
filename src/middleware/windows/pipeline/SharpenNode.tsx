@@ -2,7 +2,7 @@ import { Slice } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: <Slice size={16} />,
+  icon: <Slice />,
   label: "Sharpen",
   min: 0,
   max: 100,

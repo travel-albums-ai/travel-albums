@@ -5,17 +5,6 @@ import stc from 'string-to-color';
 function NodeWrapper({ title, icon, children, toolbar} : { title: string, icon: React.ReactNode, children: React.ReactNode, toolbar?: React.ReactNode }) {
   const theme = useTheme();
 
-  const onDragStart = (
-    event: React.DragEvent<HTMLDivElement>,
-    nodeType: string
-  ) => {
-    event.dataTransfer.setData(
-      "application/reactflow",
-      nodeType
-    );
-    event.dataTransfer.effectAllowed = "move";
-  };
-
   return <>
 
     <Box
@@ -58,10 +47,11 @@ function NodeWrapper({ title, icon, children, toolbar} : { title: string, icon: 
                   )`,
 
       }}>
+        {/* dddd {typeof icon} */}
         {icon !== undefined && cloneElement(icon as React.ReactElement, { size: 16, style: {
           color: `color-mix(in srgb, color-mix(in srgb, ${stc(title)} 80%, ${theme.palette.text.primary} 70%) 95%, transparent)`
         } })}
-        <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: 1 }}>
           {title}
         </Typography>
       </Box>

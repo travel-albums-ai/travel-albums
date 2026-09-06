@@ -1,7 +1,8 @@
+import { Contrast } from 'lucide-react';
 import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
-  icon: "◐",
+  icon: <Contrast />,
   label: "Contrast",
   min: -100,
   max: 100,
