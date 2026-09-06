@@ -105,7 +105,7 @@ function SelectionNode({
   }, [data, selectedPhotos, limit, selectedSectionId, selectedTypeName]);
 
   return <>
-    <SettingsSection title="Gallery Selection" icon={<Folder />} uuid="selection-node-reactflow" gap={2} tint="gallery-selection">
+    <SettingsSection title="Gallery Selection" icon={<Folder />} uuid={`selection-node-reactflow-${selectedTypeName}-${selectedSectionId}`} gap={2} tint="gallery-selection">
       <small>
         {selectedPhotos.length} of {photos.length} photo{photos.length === 1 ? "" : "s"} used
       </small>

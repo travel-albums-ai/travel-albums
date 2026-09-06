@@ -333,10 +333,10 @@ function Pipeline() {
   const loadPipeline = useCallback((id: string) => {
     if (!id || id === currentPipelineId) return;
 
-    if (isDirty) {
-      window.alert('Save the current pipeline before loading another one.');
-      return;
-    }
+    // if (isDirty) {
+    //   window.alert('Save the current pipeline before loading another one.');
+    //   return;
+    // }
 
     const pipeline = loadById(id);
     if (!pipeline) return;
