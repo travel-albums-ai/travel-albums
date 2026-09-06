@@ -1,3 +1,9 @@
+## [1.333.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.332.0...v1.333.0) (2026-09-06)
+
+### ✨ Features
+
+* update NodeToolbox layout with improved group headers and styling ([8d70cc2](https://github.com/travel-albums-ai/travel-albums/commit/8d70cc2b859bb9e3a1964af0688364e586c13157))
+
 ## [1.332.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.331.0...v1.332.0) (2026-09-06)
 
 ### ✨ Features
