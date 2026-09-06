@@ -1,6 +1,6 @@
 import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedControl';
-import SettingsSection from '@/components/SettingsSection';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { Maximize2 } from 'lucide-react';
@@ -20,9 +20,13 @@ function RescaleNode({
 }: NodeProps<Node<{ scale?: number }>>) {
   const [scale, setScale] = useState(String(data.scale ?? 1));
 
-  return (
-    <SettingsSection title="Rescale" icon={<Maximize2 />} uuid="rescale-node-reactflow" gap={2} tint="rescale">
-      <InputHandle id="image" />
+  return (<>
+    <InputHandle id="image" />
+    {/* <SettingsSection title="Rescale" icon={<Maximize2 />} uuid="rescale-node-reactflow" gap={2} tint="rescale"> */}
+
+
+    <NodeWrapper title={'Rescale'} icon={<Maximize2 />} toolbar={<></>}>
+      <small>Flips the image horizontally</small>
 
       <SegmentedControl
         value={scale}
@@ -43,10 +47,11 @@ function RescaleNode({
           </SegmentedControlItem>
         ))}
       </SegmentedControl>
+    </NodeWrapper>
 
-      <OutputHandle id="image" />
-    </SettingsSection>
-  );
+    {/* </SettingsSection> */}
+    <OutputHandle id="image" />
+  </>);
 }
 
 export default RescaleNode;

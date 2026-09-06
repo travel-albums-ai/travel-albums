@@ -1,10 +1,10 @@
-import SettingsSection from '@/components/SettingsSection';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Alert, Box, Button, LinearProgress, Typography } from '@mui/material';
 import type { Node, NodeProps } from "@xyflow/react";
-import { Sparkles } from 'lucide-react';
+import { Astroid, Sparkles } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 export type AIImageEditNodeConfig = {
@@ -68,15 +68,9 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
         ? Math.min(100, (progress.completed / progress.total) * 100)
         : 0;
 
-    return (
-      <SettingsSection
-        title={config.title}
-        icon={<Sparkles />}
-        uuid={`${config.type}-node-reactflow`}
-        gap={2}
-      >
-        <InputHandle id="image" />
-
+    return (<>
+      <InputHandle id="image" />
+      <NodeWrapper title={config.title} icon={<Astroid />} toolbar={<></>}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Button
             variant={engaged ? 'contained' : 'outlined'}
@@ -89,13 +83,13 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
         </Box>
 
         {engaged && !byokOpenAIKey && (
-          <Alert severity="warning" sx={{ py: 0 }}>
+          <Alert severity="warning" sx={{ py: 0, mt: 1 }}>
             No OpenAI key configured
           </Alert>
         )}
 
         {engaged && (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 1 }}>
             <LinearProgress variant="determinate" value={percent} />
             <Typography variant="caption" color="textSecondary">
               {progress
@@ -104,10 +98,9 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
             </Typography>
           </Box>
         )}
-
-        <OutputHandle id="image" />
-      </SettingsSection>
-    );
+      </NodeWrapper>
+      <OutputHandle id="image" />
+    </>);
   }
 
   return AIImageEditNode;

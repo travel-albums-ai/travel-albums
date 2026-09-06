@@ -1,6 +1,6 @@
-import SettingsSection from '@/components/SettingsSection';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { Image } from 'lucide-react';
@@ -12,15 +12,13 @@ function SinglePhotoViewerNode({
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj);
 
   const images = data.image ?? [];
-  // Pipeline images carry the source photo's title as their name.
   const match = previewPhotoObj
     ? images.find((image) => image.name === previewPhotoObj.title)
     : undefined;
 
-  return (
-    <SettingsSection title="Single Photo Viewer" icon={<Image />} uuid="single-photo-viewer-node-reactflow" gap={2} tint="single-photo-viewer">
-      <InputHandle id="image" position={Position.Top} />
-
+  return (<>
+    <InputHandle id="image" position={Position.Top} />
+    <NodeWrapper title={'Single Photo Viewer'} icon={<Image />} toolbar={<></>}>
       <Box sx={{ height: '600px', width: '600px', overflow: 'auto' }}>
         {match ? (
           <img
@@ -40,8 +38,8 @@ function SinglePhotoViewerNode({
           </div>
         )}
       </Box>
-    </SettingsSection>
-  );
+    </NodeWrapper>
+  </>);
 }
 
 export default SinglePhotoViewerNode;

@@ -1,8 +1,8 @@
-import SettingsSection from '@/components/SettingsSection';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { type Node, type NodeProps } from '@xyflow/react';
-import { Palette } from 'lucide-react';
+import { Film } from 'lucide-react';
 import { useState } from 'react';
 
 function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
@@ -12,7 +12,7 @@ function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
     <>
       <InputHandle id="image" />
 
-      <SettingsSection title="LUT (.cube)" icon={<Palette />} tint="lut">
+      <NodeWrapper title={'3D LUT'} icon={<Film />} toolbar={<></>}>
         <input
           type="file"
           accept=".cube,text/plain"
@@ -27,8 +27,7 @@ function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
           }}
         />
         <small>{fileName || 'Choose a .cube LUT'}</small>
-      </SettingsSection>
-
+      </NodeWrapper>
       <OutputHandle id="image" />
     </>
   );

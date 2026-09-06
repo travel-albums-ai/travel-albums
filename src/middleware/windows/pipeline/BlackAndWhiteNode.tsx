@@ -1,24 +1,16 @@
-import SettingsSection from '@/components/SettingsSection';
-import { Handle, Position } from "@xyflow/react";
+import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { Landmark } from 'lucide-react';
 
 function BlackAndWhiteNode() {
-  return (
-    <SettingsSection title="Black & White">
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="image"
-      />
-
-      <small>Async image operation</small>
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="image"
-      />
-    </SettingsSection>
-  );
+  return (<>
+    <InputHandle id="image" />
+    <NodeWrapper title={'Black & White'} icon={<Landmark />} toolbar={<></>}>
+      <small>Convert image to black & white</small>
+    </NodeWrapper>
+    <OutputHandle id="image" />
+  </>);
 }
 
 export default BlackAndWhiteNode;
