@@ -1,3 +1,9 @@
+## [1.323.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.322.0...v1.323.0) (2026-09-06)
+
+### ✨ Features
+
+* add PipelineProvider and usePipelineStore for managing pipeline state ([735db93](https://github.com/travel-albums-ai/travel-albums/commit/735db9302f1fbdb89a82c26566c3be58a75fe37e))
+
 ## [1.322.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.321.0...v1.322.0) (2026-09-06)
 
 ### ✨ Features
