@@ -17,6 +17,7 @@ const paletteItems: Array<{
   { type: "ai-denoiser", label: "AI Async Denoiser", icon: "🧹", group: "ai" },
   { type: "invert", label: "Invert", icon: "☯️", group: "base" },
   { type: "black-white", label: "Black & White", icon: "⬛", group: "base" },
+  { type: "lut", label: "3D LUT", icon: "🎞️", group: "color" },
   { type: "flip", label: "Flip 180°", icon: "🔄", group: "utility" },
   { type: "mirror", label: "Mirror", icon: "🪞", group: "utility" },
   { type: "rotate", label: "Rotate", icon: "🔁", group: "utility" },
