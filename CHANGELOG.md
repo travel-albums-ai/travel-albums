@@ -1,3 +1,9 @@
+## [1.328.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.327.0...v1.328.0) (2026-09-06)
+
+### ✨ Features
+
+* update NodeToolbox to use React icons and improve layout ([3035540](https://github.com/travel-albums-ai/travel-albums/commit/3035540a9967ec94d25ded81e271d4a80bbf180d))
+
 ## [1.327.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.326.0...v1.327.0) (2026-09-06)
 
 ### ✨ Features
