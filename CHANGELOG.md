@@ -1,3 +1,9 @@
+## [1.318.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.317.0...v1.318.0) (2026-09-06)
+
+### ✨ Features
+
+* enhance SelectionNode with dynamic photo and section selection UI ([3ee8a78](https://github.com/travel-albums-ai/travel-albums/commit/3ee8a78a4d317eb550281203a993a7b3d745c45b))
+
 ## [1.317.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.316.0...v1.317.0) (2026-09-06)
 
 ### ✨ Features
