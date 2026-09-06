@@ -1,3 +1,9 @@
+## [1.340.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.339.0...v1.340.0) (2026-09-06)
+
+### ✨ Features
+
+* add type property to NodeWrapper for various image processing nodes ([0306bc7](https://github.com/travel-albums-ai/travel-albums/commit/0306bc772bbcb16ae3450d2a1fa6ea1f221ac445))
+
 ## [1.339.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.338.0...v1.339.0) (2026-09-06)
 
 ### ✨ Features
