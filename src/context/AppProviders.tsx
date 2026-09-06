@@ -20,6 +20,7 @@ import { FilterProvider } from './filterStore';
 import { IgnoredProvider } from './ignoredStore';
 import { LabelsProvider } from './labelsStore';
 import { PinnedProvider } from './pinnedStore';
+import { PipelineProvider } from './pipelineStore';
 import { PrivateProvider } from './privateStore';
 import { SettingsProvider } from './settingsStore';
 import { ThemeContextProvider } from './ThemeContext';
@@ -44,23 +45,25 @@ export default function AppProviders({ children }: Props) {
                               <LayoutProvider>
                                 <PrivateProvider>
                                   <FilterPresetProvider>
-                                    <FilterProvider>
-                                      <AlbumPhotoCardProvider>
-                                        <AdjustmentsProvider>
-                                          <UnfilteredPhotosProvider>
-                                            <FilteredPhotosProvider>
-                                              <FilteredGpsPhotosProvider>
-                                                <SectionsProvider>
-                                                  <SectionsProviderForced>
-                                                    {children}
-                                                  </SectionsProviderForced>
-                                                </SectionsProvider>
-                                              </FilteredGpsPhotosProvider>
-                                            </FilteredPhotosProvider>
-                                          </UnfilteredPhotosProvider>
-                                        </AdjustmentsProvider>
-                                      </AlbumPhotoCardProvider>
-                                    </FilterProvider>
+                                    <PipelineProvider>
+                                      <FilterProvider>
+                                        <AlbumPhotoCardProvider>
+                                          <AdjustmentsProvider>
+                                            <UnfilteredPhotosProvider>
+                                              <FilteredPhotosProvider>
+                                                <FilteredGpsPhotosProvider>
+                                                  <SectionsProvider>
+                                                    <SectionsProviderForced>
+                                                      {children}
+                                                    </SectionsProviderForced>
+                                                  </SectionsProvider>
+                                                </FilteredGpsPhotosProvider>
+                                              </FilteredPhotosProvider>
+                                            </UnfilteredPhotosProvider>
+                                          </AdjustmentsProvider>
+                                        </AlbumPhotoCardProvider>
+                                      </FilterProvider>
+                                    </PipelineProvider>
                                   </FilterPresetProvider>
                                 </PrivateProvider>
                               </LayoutProvider>

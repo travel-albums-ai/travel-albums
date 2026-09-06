@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
 import {
   addEdge,
   Background,
@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { Trash2 } from 'lucide-react';
+import { Copy, FilePlus2, Save, Trash2 } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -26,6 +26,7 @@ import {
   useState,
 } from "react";
 
+import { usePipelineStore } from '@/context/pipelineStore';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
@@ -44,6 +45,7 @@ import LutNode from "./LutNode";
 import MirrorNode from "./MirrorNode";
 import NodeToolbox from "./NodeToolbox";
 import PhotoHistogramNode from "./PhotoHistogramNode";
+import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 import PopNode from "./PopNode";
 import RescaleNode from "./RescaleNode";
 import RotateNode from "./RotateNode";
@@ -52,11 +54,10 @@ import SelectionNode from "./SelectionNode";
 import SharpenNode from "./SharpenNode";
 import SinglePhotoViewerNode from "./SinglePhotoViewerNode";
 import SourceNode from "./SourceNode";
+import { VIEWER_NODE_TYPES } from "./types";
 import VibranceNode from "./VibranceNode";
 import ViewerNode from "./ViewerNode";
 import VignetteNode from "./VignetteNode";
-import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
-import { VIEWER_NODE_TYPES } from "./types";
 
 const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 
@@ -154,65 +155,29 @@ const initialEdges: Edge[] = [
 const SNAP_GRID: [number, number] = [20, 20];
 
 // ============================================================
-// Persistence
-// ============================================================
-
-const STORAGE_KEY = "pipeline-flow";
-
-function loadStoredGraph(): { nodes: Node[]; edges: Edge[] } {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-
-    if (!raw) return { nodes: initialNodes, edges: initialEdges };
-
-    const parsed = JSON.parse(raw);
-
-    if (!Array.isArray(parsed.nodes) || !Array.isArray(parsed.edges)) {
-      return { nodes: initialNodes, edges: initialEdges };
-    }
-
-    return parsed;
-  } catch (error) {
-    console.error("Failed to load stored pipeline:", error);
-    return { nodes: initialNodes, edges: initialEdges };
-  }
-}
-
-// Evaluated results (e.g. viewer `image`) are regenerated on load,
-// so they're stripped before saving to keep localStorage small.
-// The BYOK API key is also re-synced from its own store, so it's
-// never persisted a second time here. `files` and `lutFile` (File objects) can't
-// survive JSON serialization either — they'd come back as empty
-// plain objects — so uploaded files are dropped on save too.
-function saveStoredGraph(nodes: Node[], edges: Edge[]) {
-  const strippedNodes = nodes.map((node) => {
-    const { image: _image, photos: _photos, apiKey: _apiKey, files: _files, lutFile: _lutFile, ...rest } = node.data as Record<string, unknown>;
-    return { ...node, data: rest };
-  });
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ nodes: strippedNodes, edges })
-  );
-}
-
-// ============================================================
 // App
 // ============================================================
 
 function Pipeline() {
-  const [initialGraph] = useState(loadStoredGraph);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 
-  const [nodes, setNodes, onNodesChange] =
-    useNodesState(initialGraph.nodes);
-
-  const [edges, setEdges, onEdgesChange] =
-    useEdgesState(initialGraph.edges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const { screenToFlowPosition, fitView } = useReactFlow();
+  const {
+    pipelines,
+    saveNew,
+    cloneExisting,
+    updateById,
+    deleteById,
+    loadById
+  } = usePipelineStore();
   const nodeIdRef = useRef(0);
   const trashRef = useRef<HTMLDivElement>(null);
   const [trashActive, setTrashActive] = useState(false);
+  const [currentPipelineId, setCurrentPipelineId] = useState<string>('');
+  const [currentPipelineName, setCurrentPipelineName] = useState('');
+  const [isDirty, setIsDirty] = useState(false);
 
   // Nodes are measured asynchronously, so fitView is deferred a frame
   // to ensure it accounts for the restored graph's actual dimensions.
@@ -318,51 +283,103 @@ function Pipeline() {
     evaluate();
   }, [nodes, edges, evaluate]);
 
-  // File selection changes node.data directly,
-  // so listen for the explicit pipeline event.
+  const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
+    setIsDirty(true);
+    onNodesChange(changes);
+  }, [onNodesChange]);
+
+  const handleEdgesChange = useCallback((changes: Parameters<typeof onEdgesChange>[0]) => {
+    setIsDirty(true);
+    onEdgesChange(changes);
+  }, [onEdgesChange]);
+
+  const saveCurrent = useCallback(() => {
+    const name = currentPipelineName.trim() || window.prompt('Pipeline name', 'Untitled pipeline');
+    if (name === null) return;
+
+    const normalizedName = name.trim() || 'Untitled pipeline';
+
+    if (currentPipelineId) {
+      updateById(currentPipelineId, normalizedName, { nodes, edges });
+      setCurrentPipelineName(normalizedName);
+      setIsDirty(false);
+      return;
+    }
+
+    const id = saveNew(name, { nodes, edges });
+    setCurrentPipelineId(id);
+    setCurrentPipelineName(normalizedName);
+    setIsDirty(false);
+  }, [currentPipelineId, currentPipelineName, edges, nodes, saveNew, updateById]);
+
+  const saveAsCopy = useCallback(() => {
+    const name = window.prompt(
+      'Copy name',
+      `${currentPipelineName || 'Untitled pipeline'} copy`
+    );
+    if (name === null) return;
+
+    const id = currentPipelineId && !isDirty
+      ? cloneExisting(currentPipelineId, name)
+      : saveNew(name, { nodes, edges });
+
+    if (!id) return;
+
+    setCurrentPipelineId(id);
+    setCurrentPipelineName(name.trim() || 'Untitled pipeline');
+    setIsDirty(false);
+  }, [cloneExisting, currentPipelineId, currentPipelineName, edges, isDirty, nodes, saveNew]);
+
+  const loadPipeline = useCallback((id: string) => {
+    if (!id || id === currentPipelineId) return;
+
+    if (isDirty) {
+      window.alert('Save the current pipeline before loading another one.');
+      return;
+    }
+
+    const pipeline = loadById(id);
+    if (!pipeline) return;
+
+    setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
+    setEdges(pipeline.edges.map((edge) => ({ ...edge })));
+    setCurrentPipelineId(pipeline.id);
+    setCurrentPipelineName(pipeline.name);
+    setIsDirty(false);
+    fitView();
+  }, [currentPipelineId, fitView, isDirty, loadById, setEdges, setNodes]);
+
+  const deleteCurrent = useCallback(() => {
+    if (!currentPipelineId) return;
+
+    if (!window.confirm(`Delete pipeline "${currentPipelineName}"?`)) return;
+
+    deleteById(currentPipelineId);
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+    setCurrentPipelineId('');
+    setCurrentPipelineName('');
+    setIsDirty(false);
+  }, [currentPipelineId, currentPipelineName, deleteById, setEdges, setNodes]);
+
+  const clearWorkspace = useCallback(() => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+    setCurrentPipelineId('');
+    setCurrentPipelineName('');
+    setIsDirty(false);
+    fitView();
+  }, [fitView, setEdges, setNodes]);
+
   useEffect(() => {
     const handler = () => {
+      setIsDirty(true);
       evaluate();
     };
 
-    window.addEventListener(
-      "pipeline:changed",
-      handler
-    );
-
-    return () => {
-      window.removeEventListener(
-        "pipeline:changed",
-        handler
-      );
-    };
+    window.addEventListener('pipeline:changed', handler);
+    return () => window.removeEventListener('pipeline:changed', handler);
   }, [evaluate]);
-
-  // Persist the graph so it can be restored when the user returns.
-  // Debounced since drags/resizes fire nodes/edges changes rapidly.
-  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-
-  const scheduleSave = useCallback(() => {
-    clearTimeout(saveTimeoutRef.current);
-
-    saveTimeoutRef.current = setTimeout(() => {
-      saveStoredGraph(nodes, edges);
-    }, 500);
-  }, [nodes, edges]);
-
-  useEffect(() => {
-    scheduleSave();
-  }, [scheduleSave]);
-
-  // Node data (e.g. slider values) is mutated in place, so it doesn't
-  // trigger the effect above; save explicitly on the pipeline event too.
-  useEffect(() => {
-    window.addEventListener("pipeline:changed", scheduleSave);
-
-    return () => {
-      window.removeEventListener("pipeline:changed", scheduleSave);
-    };
-  }, [scheduleSave]);
 
   const onConnect = useCallback(
     (connection: Connection) => {
@@ -516,8 +533,8 @@ function Pipeline() {
           defaultEdgeOptions={{ type: CONNECTION_LINE_TYPE }}
           minZoom={0.25}
           nodeTypes={nodeTypes}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
+          onNodesChange={handleNodesChange}
+          onEdgesChange={handleEdgesChange}
           onConnect={onConnect}
 
           onReconnect={onReconnect}
@@ -533,30 +550,91 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-        <Box
-          ref={trashRef}
-          sx={{
-            position: 'absolute',
-            top: 24,
-            right: 24,
-            zIndex: 10,
-            width: 56,
-            height: 56,
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '1px solid',
-            borderColor: trashActive ? 'error.main' : 'divider',
-            bgcolor: trashActive ? 'error.main' : 'background.paper',
-            color: trashActive ? 'error.contrastText' : 'text.secondary',
-            boxShadow: 3,
-            transform: trashActive ? 'scale(1.15)' : 'scale(1)',
-            transition: 'transform 0.15s ease-in-out, background-color 0.15s ease-in-out',
-          }}
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ position: 'absolute', top: 24, right: 24, zIndex: 10, alignItems: 'center' }}
         >
-          <Trash2 size={22} />
-        </Box>
+          <TextField
+            size="small"
+            value={currentPipelineName}
+            placeholder="Pipeline title"
+            onChange={(event) => {
+              setCurrentPipelineName(event.target.value);
+              setIsDirty(true);
+            }}
+            slotProps={{ htmlInput: { 'aria-label': 'Pipeline title' } }}
+            sx={{ width: 180, bgcolor: 'background.paper' }}
+          />
+          <Button
+            size="small"
+            variant="outlined"
+            startIcon={<FilePlus2 size={16} />}
+            onClick={clearWorkspace}
+            title="New pipeline"
+          >
+            New
+          </Button>
+          <Button
+            size="small"
+            variant="contained"
+            startIcon={<Save size={16} />}
+            onClick={saveCurrent}
+            title="Save pipeline"
+          >
+            Save
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            startIcon={<Copy size={16} />}
+            onClick={saveAsCopy}
+            title="Save as copy"
+          >
+            Copy
+          </Button>
+          <FormControl size="small" sx={{ minWidth: 180 }}>
+            <Select
+              value={currentPipelineId}
+              displayEmpty
+              onChange={(event) => loadPipeline(event.target.value)}
+              renderValue={(value) => value
+                ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
+                : 'Load pipeline'}
+              aria-label="Load pipeline"
+            >
+              <MenuItem value="" disabled>Load pipeline</MenuItem>
+              {pipelines.map((pipeline) => (
+                <MenuItem key={pipeline.id} value={pipeline.id}>
+                  {pipeline.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box
+            ref={trashRef}
+            sx={{
+              width: 56,
+              height: 56,
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1px solid',
+              borderColor: trashActive ? 'error.main' : 'divider',
+              bgcolor: trashActive ? 'error.main' : 'background.paper',
+              color: trashActive ? 'error.contrastText' : 'text.secondary',
+              boxShadow: 3,
+              transform: trashActive ? 'scale(1.15)' : 'scale(1)',
+              transition: 'transform 0.15s ease-in-out, background-color 0.15s ease-in-out',
+              cursor: currentPipelineId ? 'pointer' : 'default'
+            }}
+            onClick={deleteCurrent}
+            title={currentPipelineId ? 'Delete current pipeline' : 'No saved pipeline selected'}
+          >
+            <Trash2 size={22} />
+          </Box>
+        </Stack>
       </div>
     </Box>
   );
