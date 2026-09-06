@@ -1,3 +1,9 @@
+## [1.317.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.316.0...v1.317.0) (2026-09-06)
+
+### ✨ Features
+
+* add LutNode component and integrate LUT functionality into the pipeline ([3e1cf50](https://github.com/travel-albums-ai/travel-albums/commit/3e1cf50071f283ea6c19dd6842616c1197126974))
+
 ## [1.316.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.315.0...v1.316.0) (2026-09-06)
 
 ### ✨ Features
