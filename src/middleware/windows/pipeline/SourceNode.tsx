@@ -1,6 +1,6 @@
 import SettingsSection from '@/components/SettingsSection';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { HardDrive, Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
@@ -61,16 +61,30 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
         />
       </Button>
 
-
       <small>{label}</small>
 
-      {previewUrls.length > 0 && (
-        <div className="viewer-grid">
-          {previewUrls.map((url, index) => (
-            <img key={index} src={url} alt="" />
-          ))}
-        </div>
-      )}
+      <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
+        {previewUrls.length > 0 ? (
+          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
+            {previewUrls.map((value, index) => (
+              <img
+                key={index}
+                src={value}
+                alt=""
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: '300px',
+                  objectFit: 'cover',
+                  borderRadius: '6px',
+                }}
+              />
+            ))}
+          </Box>
+        ) : (
+          <p>No images selected</p>
+        )}
+      </Box>
 
       <OutputHandle id="image" />
     </SettingsSection>
