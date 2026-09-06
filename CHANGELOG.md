@@ -1,3 +1,9 @@
+## [1.327.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.326.0...v1.327.0) (2026-09-06)
+
+### ✨ Features
+
+* enhance Pipeline component layout and add pipeline loading functionality ([4e151c4](https://github.com/travel-albums-ai/travel-albums/commit/4e151c4feb77a1312cf086eb7d3a1b86baad92f9))
+
 ## [1.326.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.325.0...v1.326.0) (2026-09-06)
 
 ### ✨ Features
