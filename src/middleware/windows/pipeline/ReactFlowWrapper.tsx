@@ -103,55 +103,55 @@ const nodeTypes = {
 // ============================================================
 
 const initialNodes: Node[] = [
-  {
-    id: "selection",
-    type: "selection",
-    position: {
-      x: 50,
-      y: 200,
-    },
-    data: {},
-  },
+  // {
+  //   id: "selection",
+  //   type: "selection",
+  //   position: {
+  //     x: 50,
+  //     y: 200,
+  //   },
+  //   data: {},
+  // },
 
-  {
-    id: "brightness",
-    type: "brightness",
-    position: {
-      x: 650,
-      y: 200,
-    },
-    data: {},
-  },
+  // {
+  //   id: "brightness",
+  //   type: "brightness",
+  //   position: {
+  //     x: 650,
+  //     y: 200,
+  //   },
+  //   data: {},
+  // },
 
-  {
-    id: "viewer",
-    type: "viewer",
-    position: {
-      x: 1250,
-      y: 200,
-    },
-    data: {},
-  },
+  // {
+  //   id: "viewer",
+  //   type: "viewer",
+  //   position: {
+  //     x: 1250,
+  //     y: 200,
+  //   },
+  //   data: {},
+  // },
 ];
 
 const initialEdges: Edge[] = [
-  {
-    id: "source-invert",
-    type: CONNECTION_LINE_TYPE,
-    source: "selection",
-    sourceHandle: "image",
-    target: "brightness",
-    targetHandle: "image",
-  },
+  // {
+  //   id: "source-invert",
+  //   type: CONNECTION_LINE_TYPE,
+  //   source: "selection",
+  //   sourceHandle: "image",
+  //   target: "brightness",
+  //   targetHandle: "image",
+  // },
 
-  {
-    id: "brightness-viewer",
-    type: CONNECTION_LINE_TYPE,
-    source: "brightness",
-    sourceHandle: "image",
-    target: "viewer",
-    targetHandle: "image",
-  },
+  // {
+  //   id: "brightness-viewer",
+  //   type: CONNECTION_LINE_TYPE,
+  //   source: "brightness",
+  //   sourceHandle: "image",
+  //   target: "viewer",
+  //   targetHandle: "image",
+  // },
 ];
 
 const SNAP_GRID: [number, number] = [20, 20];

@@ -107,7 +107,7 @@ export interface IconDoodleBackgroundProps {
 export function IconDoodleBackground({
   size = 40,
   iconSize = 28,
-  opacity = 0.10,
+  opacity = 0.02,
   strokeWidth = 1.4,
   seed = 1337,
   background = "#151515",
