@@ -1,3 +1,9 @@
+## [1.319.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.318.0...v1.319.0) (2026-09-06)
+
+### ✨ Features
+
+* add GrouperNode component and integrate it into the pipeline with input and output handles ([9d904ef](https://github.com/travel-albums-ai/travel-albums/commit/9d904efe2dcb233ca27d8b7f38d12e1f3bb1bb80))
+
 ## [1.318.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.317.0...v1.318.0) (2026-09-06)
 
 ### ✨ Features
