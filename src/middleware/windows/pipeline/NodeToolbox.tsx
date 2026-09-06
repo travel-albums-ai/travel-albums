@@ -2,7 +2,7 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
-import { Box, Divider, Typography, useTheme } from '@mui/material';
+import { Box, Divider, Tooltip, Typography, useTheme } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { cloneElement } from 'react';
 import stc from 'string-to-color';
@@ -93,42 +93,44 @@ function NodeToolbox() {
             gridTemplateColumns: 'repeat(2, minmax(150px, 1fr))',
             gap: 1,
           }}>
-            {items.map((item) => (
-              <Box
-                id={item.type}
-                sx={{
-                  cursor: 'grab',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 1,
-                  py: 0.75,
-                  px: 1,
-                  borderRadius: 2,
-                  border: '1px solid',
-                  borderColor: 'divider',
-                  borderBottom: '1px solid',
-                  borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 35%, transparent)`,
-                  background: `linear-gradient(
+            {items.map((item, i) => (
+              <Tooltip title={`Drag to add a ${item.label} to your flow`} key={item.type} arrow placement={i % 2 !== 0 ? "right" : "left"}>
+                <Box
+                  id={item.type}
+                  sx={{
+                    cursor: 'grab',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 1,
+                    py: 0.75,
+                    px: 1,
+                    borderRadius: 2,
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    borderBottom: '1px solid',
+                    borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 35%, transparent)`,
+                    background: `linear-gradient(
                     90deg,
                     transparent 0%,
                     color-mix(in srgb, ${stc(item.type)} 2%, transparent) 100%
                   )`,
 
-                }}
-                key={item.type}
-                draggable
-                onDragStart={(event) =>
-                  onDragStart(event, item.type)
-                }
-              >
-                {item.icon !== undefined && cloneElement(item.icon, { size: 16, style: {
-                  color: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 95%, transparent)`
-                } })}
-                <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {item.label}
-                </Typography>
-              </Box>
+                  }}
+                  key={item.type}
+                  draggable
+                  onDragStart={(event) =>
+                    onDragStart(event, item.type)
+                  }
+                >
+                  {item.icon !== undefined && cloneElement(item.icon, { size: 16, style: {
+                    color: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 95%, transparent)`
+                  } })}
+                  <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {item.label}
+                  </Typography>
+                </Box>
+              </Tooltip>
             ))}
           </Box>
         </Box>
