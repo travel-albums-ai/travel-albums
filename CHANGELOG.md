@@ -1,3 +1,9 @@
+## [1.325.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.324.0...v1.325.0) (2026-09-06)
+
+### ✨ Features
+
+* enhance theme variables and styles for React Flow components ([1f88a43](https://github.com/travel-albums-ai/travel-albums/commit/1f88a435ac983ff98a009de53c5f52b6e19e0cdf))
+
 ## [1.324.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.323.0...v1.324.0) (2026-09-06)
 
 ### ✨ Features
