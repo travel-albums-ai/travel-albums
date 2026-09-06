@@ -1,3 +1,9 @@
+## [1.339.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.338.0...v1.339.0) (2026-09-06)
+
+### ✨ Features
+
+* implement NodeHeader component and refactor nodes to use NodeWrapper for improved structure ([d6002f1](https://github.com/travel-albums-ai/travel-albums/commit/d6002f1e505a8fdbd2cf45535537ed0e57b78424))
+
 ## [1.338.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.337.0...v1.338.0) (2026-09-06)
 
 ### ✨ Features
