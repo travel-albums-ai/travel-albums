@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import {
   addEdge,
   Background,
+  ConnectionLineType,
   Controls,
   MiniMap,
   ReactFlow,
@@ -56,6 +57,8 @@ import ViewerNode from "./ViewerNode";
 import VignetteNode from "./VignetteNode";
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 import { VIEWER_NODE_TYPES } from "./types";
+
+const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 
 // ============================================================
 // React Flow node registry
@@ -131,6 +134,7 @@ const initialNodes: Node[] = [
 const initialEdges: Edge[] = [
   {
     id: "source-invert",
+    type: CONNECTION_LINE_TYPE,
     source: "selection",
     sourceHandle: "image",
     target: "brightness",
@@ -139,6 +143,7 @@ const initialEdges: Edge[] = [
 
   {
     id: "brightness-viewer",
+    type: CONNECTION_LINE_TYPE,
     source: "brightness",
     sourceHandle: "image",
     target: "viewer",
@@ -362,7 +367,7 @@ function Pipeline() {
   const onConnect = useCallback(
     (connection: Connection) => {
       setEdges((current) =>
-        addEdge(connection, current)
+        addEdge({ ...connection, type: CONNECTION_LINE_TYPE }, current)
       );
     },
     [setEdges]
@@ -507,6 +512,8 @@ function Pipeline() {
           edges={edges}
           snapToGrid
           snapGrid={SNAP_GRID}
+          connectionLineType={CONNECTION_LINE_TYPE}
+          defaultEdgeOptions={{ type: CONNECTION_LINE_TYPE }}
           minZoom={0.25}
           nodeTypes={nodeTypes}
           onNodesChange={onNodesChange}
