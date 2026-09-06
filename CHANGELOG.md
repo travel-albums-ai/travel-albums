@@ -1,3 +1,9 @@
+## [1.337.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.336.0...v1.337.0) (2026-09-06)
+
+### ✨ Features
+
+* update icon properties in slider nodes to use Lucide icons for consistency ([a874659](https://github.com/travel-albums-ai/travel-albums/commit/a874659dd4d7db6cb601ed8d91c22da9da68ba10))
+
 ## [1.336.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.335.0...v1.336.0) (2026-09-06)
 
 ### ✨ Features
