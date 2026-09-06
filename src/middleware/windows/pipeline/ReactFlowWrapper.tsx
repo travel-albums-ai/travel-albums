@@ -146,6 +146,8 @@ const initialEdges: Edge[] = [
   },
 ];
 
+const SNAP_GRID: [number, number] = [20, 20];
+
 // ============================================================
 // Persistence
 // ============================================================
@@ -455,6 +457,10 @@ function Pipeline() {
         x: event.clientX,
         y: event.clientY,
       });
+      const snappedPosition = {
+        x: Math.round(position.x / SNAP_GRID[0]) * SNAP_GRID[0],
+        y: Math.round(position.y / SNAP_GRID[1]) * SNAP_GRID[1],
+      };
 
       const id = `${type}-${++nodeIdRef.current}`;
 
@@ -463,7 +469,7 @@ function Pipeline() {
         {
           id,
           type,
-          position,
+          position: snappedPosition,
           data: {},
         },
       ]);
@@ -499,6 +505,8 @@ function Pipeline() {
         <ReactFlow
           nodes={nodes}
           edges={edges}
+          snapToGrid
+          snapGrid={SNAP_GRID}
           minZoom={0.25}
           nodeTypes={nodeTypes}
           onNodesChange={onNodesChange}
@@ -513,7 +521,7 @@ function Pipeline() {
           zoomOnDoubleClick={false}
           fitView
         >
-          <Background />
+          <Background gap={SNAP_GRID[0]} />
           <Controls />
           <MiniMap />
         </ReactFlow>
