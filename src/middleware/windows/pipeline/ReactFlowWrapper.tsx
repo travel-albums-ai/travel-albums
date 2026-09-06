@@ -555,39 +555,64 @@ function Pipeline() {
         <Stack
           direction="row"
           spacing={1}
-          sx={{ position: 'absolute', top: 24, left: 24, zIndex: 10, alignItems: 'center' }}
+          sx={{ position: 'absolute',
+            top: 8, left: 16, zIndex: 10,
+            alignItems: 'center', bgcolor: 'divider',
+            p: 1, borderRadius: 2,
+            boxShadow: 3,
+          }}
         >
-          <TextField
-            size="small"
-            value={currentPipelineName}
-            placeholder="Pipeline title..."
-            onChange={(event) => {
-              setCurrentPipelineName(event.target.value);
-              setIsDirty(true);
-            }}
-            slotProps={{ htmlInput: { 'aria-label': 'Pipeline title' } }}
-            sx={{ width: 180,  }}
-          />
-          <GenericToggleButtonGroup items={[
-            {
-              tooltip: 'New pipeline',
-              icon: <CirclePlus /> ,
-              onClick: () => clearWorkspace(),
-              title: '',
-            },
-            {
-              tooltip: 'Save pipeline',
-              icon: <Save /> ,
-              onClick: () => saveCurrent(),
-              title: 'Save',
-            },
-            {
-              tooltip: 'Save as clone',
-              icon: <Copy /> ,
-              onClick: () => saveAsCopy(),
-              title: 'Clone',
-            }
-          ] satisfies GenericToggleButtonProps[]} />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <TextField
+              size="small"
+              value={currentPipelineName}
+              placeholder="Pipeline title..."
+              onChange={(event) => {
+                setCurrentPipelineName(event.target.value);
+                setIsDirty(true);
+              }}
+              slotProps={{ htmlInput: { 'aria-label': 'Pipeline title' } }}
+              sx={{ width: 180,  }}
+            />
+            <GenericToggleButtonGroup items={[
+              {
+                tooltip: 'New pipeline',
+                icon: <CirclePlus /> ,
+                onClick: () => clearWorkspace(),
+                title: '',
+              },
+              {
+                tooltip: 'Save pipeline',
+                icon: <Save /> ,
+                onClick: () => saveCurrent(),
+                title: 'Save',
+              },
+              {
+                tooltip: 'Save as clone',
+                icon: <Copy /> ,
+                onClick: () => saveAsCopy(),
+                title: 'Clone',
+              }
+            ] satisfies GenericToggleButtonProps[]} />
+            <FormControl size="small" sx={{ minWidth: 180 }}>
+              <Select
+                value={currentPipelineId}
+                displayEmpty
+                onChange={(event) => loadPipeline(event.target.value)}
+                renderValue={(value) => value
+                  ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
+                  : 'Load pipeline'}
+                aria-label="Load pipeline"
+              >
+                <MenuItem value="" disabled>Load pipeline</MenuItem>
+                {pipelines.map((pipeline) => (
+                  <MenuItem key={pipeline.id} value={pipeline.id}>
+                    {pipeline.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
         </Stack>
 
 
@@ -595,26 +620,9 @@ function Pipeline() {
         <Stack
           direction="row"
           spacing={1}
-          sx={{ position: 'absolute', top: 24, right: 24, zIndex: 10, alignItems: 'center' }}
+          sx={{ position: 'absolute', top: 8, right: 16, zIndex: 10,
+          }}
         >
-          <FormControl size="small" sx={{ minWidth: 180 }}>
-            <Select
-              value={currentPipelineId}
-              displayEmpty
-              onChange={(event) => loadPipeline(event.target.value)}
-              renderValue={(value) => value
-                ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
-                : 'Load pipeline'}
-              aria-label="Load pipeline"
-            >
-              <MenuItem value="" disabled>Load pipeline</MenuItem>
-              {pipelines.map((pipeline) => (
-                <MenuItem key={pipeline.id} value={pipeline.id}>
-                  {pipeline.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
           <Box
             ref={trashRef}
             sx={{
