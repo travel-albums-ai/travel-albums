@@ -1,3 +1,9 @@
+## [1.332.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.331.0...v1.332.0) (2026-09-06)
+
+### ✨ Features
+
+* enhance NodeToolbox with dynamic styling and improved drag item visuals ([5bc71a5](https://github.com/travel-albums-ai/travel-albums/commit/5bc71a5f12d17d55a018764b57bcde0e7af1bf8b))
+
 ## [1.331.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.330.0...v1.331.0) (2026-09-06)
 
 ### ✨ Features
