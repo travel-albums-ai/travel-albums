@@ -1,24 +1,25 @@
+import SettingsSection from '@/components/SettingsSection';
 import { Handle, Position } from "@xyflow/react";
 
 function FlipNode() {
   return (
-    <div className="node">
+    <>
       <Handle
         type="target"
         position={Position.Left}
         id="image"
       />
 
-      <strong>🔄 Flip 180°</strong>
-
-      <small>Rotates the image upside down</small>
+      <SettingsSection title={'Flip 180°'} icon={<span>🔄</span>} tint={'flip'}>
+        <small>Rotates the image upside down</small>
+      </SettingsSection>
 
       <Handle
         type="source"
         position={Position.Right}
         id="image"
       />
-    </div>
+    </>
   );
 }
 
