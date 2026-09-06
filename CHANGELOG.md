@@ -1,3 +1,13 @@
+## [1.329.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.329.0...v1.329.1) (2026-09-06)
+
+### 🐛 Fixes
+
+* adjust opacity in IconDoodleBackground and update onboarding button with Workflow icon ([2504b5b](https://github.com/travel-albums-ai/travel-albums/commit/2504b5bdd6e74e64b74531f15135f69b71c90633))
+
+### 🧹 Refactors
+
+* clean up IconDoodleBackground component by removing unused comments and adjusting icon size ([bfdf2a3](https://github.com/travel-albums-ai/travel-albums/commit/bfdf2a3590c04f0e4021911343bd8e13da7ba52c))
+
 ## [1.329.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.328.0...v1.329.0) (2026-09-06)
 
 ### ✨ Features
