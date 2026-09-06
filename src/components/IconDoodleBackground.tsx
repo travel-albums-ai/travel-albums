@@ -86,66 +86,27 @@ function createIconData(index: number): IconData {
 
   return {
     Icon: ICONS[index % ICONS.length],
-
-    // Random rotation: full 360°
     rotation: r1 * 360,
-
-    // Exactly either 85% or 105%
     scale: r2 > 0.5 ? 1.05 : 0.85,
-
-    // You requested 0.9 / 1.1.
-    // CSS opacity cannot exceed 1, so 1.1 becomes 1.
     opacity: r3 > 0.5 ? 1 : 0.9,
   };
 }
 
 export interface IconDoodleBackgroundProps {
-  /**
-   * Distance between neighbouring icon centres.
-   * Smaller = tighter honeycomb.
-   */
   size?: number;
-
-  /**
-   * Base icon size.
-   */
   iconSize?: number;
-
-  /**
-   * Base opacity applied to the entire pattern.
-   *
-   * The per-icon 0.9 / 1.0 variation is multiplied by this.
-   */
   opacity?: number;
-
-  /**
-   * Lucide stroke width.
-   */
   strokeWidth?: number;
-
-  /**
-   * Deterministic pattern seed.
-   */
   seed?: number;
-
-  /**
-   * Background colour.
-   */
   background?: string;
-
-  /**
-   * Icon colour.
-   */
   foreground?: string;
-
   className?: string;
-
   style?: React.CSSProperties;
 }
 
 export function IconDoodleBackground({
   size = 40,
-  iconSize = 30,
+  iconSize = 28,
   opacity = 0.10,
   strokeWidth = 1.4,
   seed = 1337,
@@ -154,25 +115,9 @@ export function IconDoodleBackground({
   className,
   style,
 }: IconDoodleBackgroundProps) {
-  /**
-   * Pointy-top hexagonal lattice:
-   *
-   *       ●       ●
-   *
-   *    ●       ●
-   *
-   *       ●       ●
-   *
-   * Horizontal distance = sqrt(3)/2 * size
-   * Vertical distance   = 3/4 * size
-   */
   const horizontalSpacing = size * 0.8660254;
   const verticalSpacing = size * 0.75;
 
-  /**
-   * We create a deliberately oversized virtual grid.
-   * The parent clips it, so it works regardless of viewport size.
-   */
   const cells = useMemo(() => {
     const columns = Math.ceil(2000 / horizontalSpacing);
     const rows = Math.ceil(2000 / verticalSpacing);
@@ -214,18 +159,10 @@ export function IconDoodleBackground({
       <div
         style={{
           position: "absolute",
-
-          /*
-           * Oversized canvas.
-           * Negative offset means we don't get an obvious
-           * empty border around the viewport.
-           */
           left: -size,
           top: -size,
-
           width: 2000,
           height: 2000,
-
           pointerEvents: "none",
         }}
       >
@@ -239,28 +176,16 @@ export function IconDoodleBackground({
               strokeWidth={strokeWidth}
               style={{
                 position: "absolute",
-
                 left: cell.x,
                 top: cell.y,
-
-                /*
-                 * Centre the icon on the lattice point.
-                 */
                 transform: `
                   translate(-50%, -50%)
                   rotate(${cell.rotation}deg)
                   scale(${cell.scale})
                 `,
-
                 transformOrigin: "center",
-
                 color: foreground,
-
-                /*
-                 * Base opacity × 0.9 / 1.0.
-                 */
                 opacity: opacity * cell.opacity,
-
                 flexShrink: 0,
               }}
             />
