@@ -2,8 +2,10 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { cloneElement } from 'react';
+import stc from 'string-to-color';
 
 const paletteItems: Array<{
   type: string;
@@ -50,6 +52,8 @@ const groupedPaletteItems = paletteItems.reduce((acc, item) => {
 }, {} as Record<string, typeof paletteItems>);
 
 function NodeToolbox() {
+  const theme = useTheme();
+
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
     nodeType: string
@@ -67,10 +71,9 @@ function NodeToolbox() {
       gap: 0,
       borderRight: '1px solid',
       borderColor: 'divider',
-      overflowY: 'auto', // Enable vertical scrolling if content exceeds the viewport height
+      overflowY: 'auto',
       pr: 2
     }}>
-      {/* <IconDoodleBackground /> */}
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
         <Box key={group}
           sx={{
@@ -96,12 +99,19 @@ function NodeToolbox() {
                   display: 'flex',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  gap: 2,
+                  gap: 1,
                   py: 1,
                   px: 1,
                   borderRadius: 2,
                   border: '1px solid',
-                  borderColor: 'divider'
+                  borderColor: 'divider',
+                  borderBottom: '1px solid',
+                  borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 35%, transparent)`,
+                  background: `linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, ${stc(item.type)} 2%, transparent) 100%
+    )`,
 
                 }}
                 key={item.type}
@@ -109,14 +119,13 @@ function NodeToolbox() {
                 onDragStart={(event) =>
                   onDragStart(event, item.type)
                 }
-
               >
-                {/* <span>{item.icon !== undefined && cloneElement(item.icon, { size: 30})}</span> */}
-                {item.icon}
+                {item.icon !== undefined && cloneElement(item.icon, { size: 16, style: {
+                  color: `color-mix(in srgb, color-mix(in srgb, ${stc(item.type)} 80%, ${theme.palette.text.primary} 70%) 95%, transparent)`
+                } })}
                 <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {item.label}
                 </Typography>
-                {/* <SettingsSection title={item.label} icon={<span>{item.icon}</span>} tint={item.type} /> */}
               </Box>
             ))}
           </Box>
