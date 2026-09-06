@@ -1,3 +1,9 @@
+## [1.336.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.335.0...v1.336.0) (2026-09-06)
+
+### ✨ Features
+
+* replace emoji icons with Lucide icons for improved visual consistency across nodes ([8e5b40f](https://github.com/travel-albums-ai/travel-albums/commit/8e5b40fbf0307b26a060a7b17906d0078dc4112c))
+
 ## [1.335.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.334.0...v1.335.0) (2026-09-06)
 
 ### ✨ Features
