@@ -1,3 +1,9 @@
+## [1.324.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.323.0...v1.324.0) (2026-09-06)
+
+### ✨ Features
+
+* update SettingsSection UUID in SelectionNode for dynamic identification ([d417990](https://github.com/travel-albums-ai/travel-albums/commit/d417990ae24b6b38d9aebe9323fd357bff33a90a))
+
 ## [1.323.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.322.0...v1.323.0) (2026-09-06)
 
 ### ✨ Features
