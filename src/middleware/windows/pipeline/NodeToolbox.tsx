@@ -2,6 +2,7 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
+import { IconDoodleBackground } from '@/components/IconDoodleBackground';
 import { Box, Typography } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
@@ -70,6 +71,7 @@ function NodeToolbox() {
       overflowY: 'auto', // Enable vertical scrolling if content exceeds the viewport height
       pr: 2
     }}>
+      <IconDoodleBackground />
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
         <Box key={group}
           sx={{
