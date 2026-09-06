@@ -33,7 +33,7 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
         borderRadius: 2,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
-        bgcolor: `color-mix(in srgb, ${theme.palette.background.paper} 60%, transparent 100%)`,
+        bgcolor: `color-mix(in srgb, ${theme.palette.background.paper} 80%, transparent 50%)`,
       }}>
         {children}
       </Box>
