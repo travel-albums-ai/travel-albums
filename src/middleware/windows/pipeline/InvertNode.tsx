@@ -8,7 +8,7 @@ function InvertNode() {
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper title={'Invert'} icon={<SquaresExclude size={16} />} toolbar={<></>}>
+      <NodeWrapper title={'Invert'} icon={<SquaresExclude size={16} />} toolbar={<></>} type="invert">
         <small>Inverts the colors of the image</small>
       </NodeWrapper>
 

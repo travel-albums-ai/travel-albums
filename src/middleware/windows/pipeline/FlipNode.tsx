@@ -8,7 +8,7 @@ function FlipNode() {
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper title={'Flip 180°'} icon={<SquareCenterlineDashedVertical size={16} />} toolbar={<></>}>
+      <NodeWrapper title={'Flip 180°'} icon={<SquareCenterlineDashedVertical size={16} />} toolbar={<></>} type="flip">
         <small>Rotates the image upside down</small>
       </NodeWrapper>
 

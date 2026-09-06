@@ -7,12 +7,11 @@ import { type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
 export type SliderNodeConfig = {
-  icon: React.ReactNode;
-  label: string;
   min: number;
   max: number;
   step: number;
   defaultValue: number;
+  type: string;
 };
 
 // Builds a single-slider node component sharing the same
@@ -29,7 +28,7 @@ export function createSliderNode(config: SliderNodeConfig) {
       <InputHandle id="image" />
 
       {/* <SettingsSection title={config.label} icon={<span>{config.icon}</span>} tint={config.label}> */}
-      <NodeWrapper title={config.label} icon={config.icon}>
+      <NodeWrapper title={config.label} icon={config.icon} type={config.type}>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <input

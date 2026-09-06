@@ -101,10 +101,7 @@ function NodeToolbox() {
                   }
                 >
                   <NodeHeader
-                    icon={item.icon}
-                    title={item.label}
                     type={item.type}
-                    group={item.group}
                   />
                 </Box>
               </Tooltip>

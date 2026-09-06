@@ -70,7 +70,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
 
     return (<>
       <InputHandle id="image" />
-      <NodeWrapper title={config.title} icon={<Astroid />} toolbar={<></>}>
+      <NodeWrapper title={config.title} icon={<Astroid />} toolbar={<></>} type={config.type}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Button
             variant={engaged ? 'contained' : 'outlined'}

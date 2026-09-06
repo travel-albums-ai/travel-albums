@@ -8,7 +8,7 @@ function MirrorNode() {
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper title={'Mirror'} icon={<SquareCenterlineDashedHorizontal size={16} />} toolbar={<></>}>
+      <NodeWrapper title={'Mirror'} icon={<SquareCenterlineDashedHorizontal size={16} />} toolbar={<></>} type="mirror">
         <small>Flips the image horizontally</small>
       </NodeWrapper>
 

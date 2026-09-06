@@ -22,7 +22,7 @@ function GrouperNode(_props: NodeProps<Node>) {
       />
     ))}
 
-    <NodeWrapper title={'Grouper'} icon={<Combine />} toolbar={<></>}>
+    <NodeWrapper title={'Grouper'} icon={<Combine />} toolbar={<></>} type="grouper">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
         {INPUTS.map((input) => (
           <Typography key={input.id} variant="caption" sx={{ lineHeight: 2.2 }}>{input.label}</Typography>

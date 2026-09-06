@@ -25,8 +25,8 @@ function RescaleNode({
     {/* <SettingsSection title="Rescale" icon={<Maximize2 />} uuid="rescale-node-reactflow" gap={2} tint="rescale"> */}
 
 
-    <NodeWrapper title={'Rescale'} icon={<Maximize2 />} toolbar={<></>}>
-      <small>Flips the image horizontally</small>
+    <NodeWrapper title={'Rescale'} icon={<Maximize2 />} toolbar={<></>} type="rescale">
+      <small>Rescales the image according to the selected preset</small>
 
       <SegmentedControl
         value={scale}

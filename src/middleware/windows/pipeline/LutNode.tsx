@@ -12,7 +12,7 @@ function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper title={'3D LUT'} icon={<Film />} toolbar={<></>}>
+      <NodeWrapper title={'3D LUT'} icon={<Film />} toolbar={<></>} type="lut">
         <input
           type="file"
           accept=".cube,text/plain"

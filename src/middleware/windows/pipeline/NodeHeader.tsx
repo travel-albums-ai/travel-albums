@@ -44,8 +44,10 @@ const paletteItems: Array<{
 ];
 
 
-function NodeHeader({ icon, title, type, group } : { icon: React.ReactNode, title: string, type: string, group: string }) {
+function NodeHeader({ type, sx } : { type: string, sx?: object }) {
   const theme = useTheme();
+
+  const relevantPaletteItem = paletteItems.find(item => item.type === type);
 
   return <>
     <Box
@@ -65,16 +67,17 @@ function NodeHeader({ icon, title, type, group } : { icon: React.ReactNode, titl
         background: `linear-gradient(
                     90deg,
                     transparent 0%,
-                    color-mix(in srgb, ${stc(type)} 2%, ${stc(group)} 8%) 125%
+                    color-mix(in srgb, ${stc(type)} 2%, ${stc(relevantPaletteItem?.group)} 8%) 125%
                   )`,
+        ...sx,
 
       }}
     >
-      {icon !== undefined && cloneElement(icon, { size: 16, style: {
-        color: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(group)} 100%) 95%, ${theme.palette.text.primary} 50%)`
+      {relevantPaletteItem?.icon !== undefined && cloneElement(relevantPaletteItem?.icon, { size: 16, style: {
+        color: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(relevantPaletteItem?.group)} 100%) 95%, ${theme.palette.text.primary} 50%)`
       } })}
       <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-        {title}
+        {relevantPaletteItem?.label}
       </Typography>
     </Box>
   </>

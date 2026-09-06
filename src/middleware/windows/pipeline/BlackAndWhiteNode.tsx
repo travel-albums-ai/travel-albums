@@ -6,7 +6,7 @@ import { Landmark } from 'lucide-react';
 function BlackAndWhiteNode() {
   return (<>
     <InputHandle id="image" />
-    <NodeWrapper title={'Black & White'} icon={<Landmark />} toolbar={<></>}>
+    <NodeWrapper title={'Black & White'} icon={<Landmark />} toolbar={<></>} type="black-white">
       <small>Convert image to black & white</small>
     </NodeWrapper>
     <OutputHandle id="image" />
