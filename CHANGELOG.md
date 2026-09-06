@@ -1,3 +1,9 @@
+## [1.329.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.328.0...v1.329.0) (2026-09-06)
+
+### ✨ Features
+
+* add IconDoodleBackground component for dynamic icon patterns ([bbb203d](https://github.com/travel-albums-ai/travel-albums/commit/bbb203d12678272feedf44a462b72c62c370fd21))
+
 ## [1.328.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.327.0...v1.328.0) (2026-09-06)
 
 ### ✨ Features
