@@ -1,3 +1,9 @@
+## [1.335.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.334.0...v1.335.0) (2026-09-06)
+
+### ✨ Features
+
+* implement NodeWrapper component for enhanced slider node layout ([0b34487](https://github.com/travel-albums-ai/travel-albums/commit/0b3448755dac9e9a368c54ebe9d97cf071655db0))
+
 ## [1.334.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.333.0...v1.334.0) (2026-09-06)
 
 ### ✨ Features
