@@ -8,29 +8,68 @@ import { useSections_GLOBAL } from "@/context/globals/sectionsStore";
 import type { GalleryPhoto } from "@/lib/galleryData";
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import AllPhotosGridVirtuoso from '@/pages/components/AllPhotosGridVirtuoso';
-import { Box } from '@mui/material';
+import { Box, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { Folder } from 'lucide-react';
+
+type SelectionNodeData = {
+  photos?: GalleryPhoto[];
+  limit?: number;
+  typeName?: string;
+  sectionId?: string;
+};
 
 function SelectionNode({
   data,
-}: NodeProps<Node<{ photos?: GalleryPhoto[]; limit?: number }>>) {
+}: NodeProps<Node<SelectionNodeData>>) {
   // Same route-driven photo resolution as ScrollerDrawer.
   const { type_name = "", id: sectionId = "" } = useParams();
   const sections = useSections_GLOBAL();
   const photosFiltered = useFilteredPhotos_GLOBAL();
 
-  const showAll = type_name === "";
+  const [selectedTypeName, setSelectedTypeName] = useState(
+    () => data.typeName ?? type_name
+  );
+  const [selectedSectionId, setSelectedSectionId] = useState(
+    () => data.sectionId ?? sectionId
+  );
+
+  const availableTypes = useMemo(
+    () => sections.filter((section) => section.type && section.data?.length),
+    [sections]
+  );
+  const selectedType = availableTypes.find(
+    (section) => section.type === selectedTypeName
+  );
+  const availableSectionIds = useMemo<string[]>(
+    () => (selectedType?.data ?? []).map((item: { name: string }) => item.name),
+    [selectedType]
+  );
+  const showAll = selectedTypeName === "";
 
   const photos = useMemo(() => {
     if (showAll) return photosFiltered;
 
-    const foundSection = sections?.find((s) => s.type === type_name);
-    const foundSet = foundSection?.data?.find(
-      (d: any) => d.name === sectionId
+    const foundSet = selectedType?.data?.find(
+      (item: { name: string; photos?: GalleryPhoto[] }) =>
+        item.name === selectedSectionId
     );
 
     return foundSet?.photos ?? [];
-  }, [showAll, sections, photosFiltered, type_name, sectionId]);
+  }, [showAll, photosFiltered, selectedSectionId, selectedType]);
+
+  useEffect(() => {
+    if (selectedTypeName && !selectedType) {
+      setSelectedTypeName(availableTypes[0]?.type ?? "");
+      return;
+    }
+
+    if (
+      selectedTypeName &&
+      !availableSectionIds.includes(selectedSectionId)
+    ) {
+      setSelectedSectionId(availableSectionIds[0] ?? "");
+    }
+  }, [availableSectionIds, availableTypes, selectedSectionId, selectedType, selectedTypeName]);
 
   // How many of the matched photos are actually used downstream.
   // Defaults to 10 once the real photo count is known, unless a
@@ -59,15 +98,60 @@ function SelectionNode({
   useEffect(() => {
     data.photos = selectedPhotos;
     data.limit = limit;
+    data.typeName = selectedTypeName;
+    data.sectionId = selectedSectionId;
 
     window.dispatchEvent(new CustomEvent("pipeline:changed"));
-  }, [data, selectedPhotos, limit]);
+  }, [data, selectedPhotos, limit, selectedSectionId, selectedTypeName]);
 
   return <>
     <SettingsSection title="Gallery Selection" icon={<Folder />} uuid="selection-node-reactflow" gap={2} tint="gallery-selection">
       <small>
         {selectedPhotos.length} of {photos.length} photo{photos.length === 1 ? "" : "s"} used
       </small>
+
+      <Stack spacing={1}>
+        <Typography variant="caption" color="text.secondary">
+          Photo selection
+        </Typography>
+        <Select
+          size="small"
+          value={selectedTypeName}
+          onChange={(event) => {
+            const nextTypeName = event.target.value;
+            const nextType = availableTypes.find(
+              (section) => section.type === nextTypeName
+            );
+            setSelectedTypeName(nextTypeName);
+            setSelectedSectionId(nextType?.data?.[0]?.name ?? "");
+          }}
+          displayEmpty
+        >
+          <MenuItem value="">All photos</MenuItem>
+          {availableTypes.map((section) => (
+            <MenuItem key={section.type} value={section.type}>
+              {section.type}
+            </MenuItem>
+          ))}
+        </Select>
+
+        <Select
+          size="small"
+          value={showAll ? "" : selectedSectionId}
+          onChange={(event) => setSelectedSectionId(event.target.value)}
+          disabled={showAll || availableSectionIds.length === 0}
+          displayEmpty
+        >
+          <MenuItem value="">
+            <em>{showAll ? "All sections" : "Select a section"}</em>
+          </MenuItem>
+          {availableSectionIds.map((availableSectionId) => (
+            <MenuItem key={availableSectionId} value={availableSectionId}>
+              {availableSectionId}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
 
       <input
         type="range"
