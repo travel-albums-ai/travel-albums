@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
+import { Box, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
 import {
   addEdge,
   Background,
@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { Copy, FilePlus2, Save, Trash2 } from 'lucide-react';
+import { CirclePlus, Copy, Save, Trash2 } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -26,6 +26,8 @@ import {
   useState,
 } from "react";
 
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineStore } from '@/context/pipelineStore';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
@@ -553,46 +555,48 @@ function Pipeline() {
         <Stack
           direction="row"
           spacing={1}
-          sx={{ position: 'absolute', top: 24, right: 24, zIndex: 10, alignItems: 'center' }}
+          sx={{ position: 'absolute', top: 24, left: 24, zIndex: 10, alignItems: 'center' }}
         >
           <TextField
             size="small"
             value={currentPipelineName}
-            placeholder="Pipeline title"
+            placeholder="Pipeline title..."
             onChange={(event) => {
               setCurrentPipelineName(event.target.value);
               setIsDirty(true);
             }}
             slotProps={{ htmlInput: { 'aria-label': 'Pipeline title' } }}
-            sx={{ width: 180, bgcolor: 'background.paper' }}
+            sx={{ width: 180,  }}
           />
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<FilePlus2 size={16} />}
-            onClick={clearWorkspace}
-            title="New pipeline"
-          >
-            New
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            startIcon={<Save size={16} />}
-            onClick={saveCurrent}
-            title="Save pipeline"
-          >
-            Save
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<Copy size={16} />}
-            onClick={saveAsCopy}
-            title="Save as copy"
-          >
-            Copy
-          </Button>
+          <GenericToggleButtonGroup items={[
+            {
+              tooltip: 'New pipeline',
+              icon: <CirclePlus /> ,
+              onClick: () => clearWorkspace(),
+              title: '',
+            },
+            {
+              tooltip: 'Save pipeline',
+              icon: <Save /> ,
+              onClick: () => saveCurrent(),
+              title: 'Save',
+            },
+            {
+              tooltip: 'Save as clone',
+              icon: <Copy /> ,
+              onClick: () => saveAsCopy(),
+              title: 'Clone',
+            }
+          ] satisfies GenericToggleButtonProps[]} />
+        </Stack>
+
+
+
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ position: 'absolute', top: 24, right: 24, zIndex: 10, alignItems: 'center' }}
+        >
           <FormControl size="small" sx={{ minWidth: 180 }}>
             <Select
               value={currentPipelineId}
