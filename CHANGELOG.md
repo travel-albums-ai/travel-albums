@@ -1,3 +1,9 @@
+## [1.321.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.320.0...v1.321.0) (2026-09-06)
+
+### ✨ Features
+
+* unify connection line type in the pipeline for consistency ([d113716](https://github.com/travel-albums-ai/travel-albums/commit/d11371608200a5c83df5375ad52a1df7faddc629))
+
 ## [1.320.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.319.0...v1.320.0) (2026-09-06)
 
 ### ✨ Features
