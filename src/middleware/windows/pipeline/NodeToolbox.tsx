@@ -12,9 +12,9 @@ export const paletteItems: Array<{
   icon: React.ReactNode;
   group: string;
 }> = [
-  { type: "source", label: "Image Source", icon: <HardDrive size={16} />, group: "input" },
-  { type: "hot-folder-read", label: "Hot Folder Read", icon: <FolderInput size={16} />, group: "input" },
-  { type: "selection", label: "Gallery Selection", icon: <GalleryVerticalEnd size={16} />, group: "input" },
+  { type: "source", label: "Local Storage", icon: <HardDrive size={16} />, group: "input" },
+  { type: "hot-folder-read", label: "Hot Folder", icon: <FolderInput size={16} />, group: "input" },
+  { type: "selection", label: "Gallery", icon: <GalleryVerticalEnd size={16} />, group: "input" },
   { type: "grouper", label: "Grouper", icon: <Group size={16} />, group: "utility" },
   { type: "ai-colorizer", label: "AI Colorizer", icon: <Astroid size={16} />, group: "ai" },
   { type: "ai-denoiser", label: "AI Denoiser", icon: <Astroid size={16} />, group: "ai" },
@@ -35,8 +35,8 @@ export const paletteItems: Array<{
   { type: "vignette", label: "Vignette", icon: <Theater size={16} />, group: "decorative" },
   { type: "grain", label: "Grain", icon: <Wheat size={16} />, group: "decorative" },
   { type: "sharpen", label: "Sharpen", icon: <Slice size={16} />, group: "decorative" },
-  { type: "pop", label: "Pop", icon: <Gem size={16} />, group: "basics" },
-  { type: "hdr", label: "HDR Effect", icon: <Mountain size={16} />, group: "basics" },
+  { type: "pop", label: "Pop", icon: <Gem size={16} />, group: "decorative" },
+  { type: "hdr", label: "HDR Effect", icon: <Mountain size={16} />, group: "decorative" },
   { type: "hue-rotation", label: "Hue Rotation", icon: <Palette size={16} />, group: "color" },
   { type: "fade", label: "Fade", icon: <EyeDashed size={16} />, group: "decorative" },
   { type: "rescale", label: "Rescale", icon: <ImageUpscale size={16} />, group: "utility" },
@@ -85,7 +85,7 @@ function NodeToolbox() {
             display: 'flex', flexDirection: 'column', gap: 0
           }}
         >
-          <Divider sx={{ mb: 0.75, borderStyle: 'dotted', borderColor: 'divider' }}>
+          <Divider sx={{ mb: 0.5, borderStyle: 'dotted', borderColor: 'divider' }}>
             <Typography variant="caption" sx={{ textTransform: 'uppercase' }} color="textDisabled">
               {group}
             </Typography>
