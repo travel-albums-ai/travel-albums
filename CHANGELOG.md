@@ -1,3 +1,9 @@
+## [1.345.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.344.0...v1.345.0) (2026-09-07)
+
+### ✨ Features
+
+* add Hot Folder Read node for monitoring image changes in a selected directory ([77a3e5c](https://github.com/travel-albums-ai/travel-albums/commit/77a3e5c5c74c8ddf39d32fffb7a4b8ef73de5332))
+
 ## [1.344.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.343.1...v1.344.0) (2026-09-07)
 
 ### ✨ Features
