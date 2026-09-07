@@ -1,4 +1,5 @@
 import Histogram from '@/components/Histogram';
+import NoPhotos from '@/components/NoPhotos';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
@@ -23,9 +24,7 @@ function PhotoHistogramNode({
         {match ? (
           <Histogram imageUrl={match.src} width={400} height={220} />
         ) : (
-          <div className="empty">
-            {previewPhotoObj ? 'Selected photo not in this pipeline output' : 'No photo selected'}
-          </div>
+          <NoPhotos />
         )}
       </Box>
     </NodeWrapper>

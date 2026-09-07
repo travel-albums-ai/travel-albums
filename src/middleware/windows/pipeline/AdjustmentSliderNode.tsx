@@ -4,7 +4,7 @@ import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
 import { Box } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
-import { useState } from "react";
+import { JSX, useState } from "react";
 
 export type SliderNodeConfig = {
   min: number;
@@ -12,6 +12,7 @@ export type SliderNodeConfig = {
   step: number;
   defaultValue: number;
   type: string;
+  info: (config) => JSX.Element;
 };
 
 // Builds a single-slider node component sharing the same
@@ -51,6 +52,8 @@ export function createSliderNode(config: SliderNodeConfig) {
           />
           <SolidChip count={amount} />
         </Box>
+
+        {config.info && config.info({...config, amount })}
       </NodeWrapper>
 
       {/* </SettingsSection> */}

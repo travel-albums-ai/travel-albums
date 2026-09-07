@@ -1,9 +1,11 @@
+import NoPhotos from '@/components/NoPhotos';
+import SolidChip from '@/components/SolidChip';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box, Button } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import JSZip from 'jszip';
-import { Download } from 'lucide-react';
+import { Download, Images } from 'lucide-react';
 import { useState } from 'react';
 import type { ImageArray } from "./types";
 
@@ -68,19 +70,19 @@ function ViewerNode({
     <InputHandle id="image" position={Position.Top} />
     <NodeWrapper type="viewer">
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <small>{images.length} photo{images.length === 1 ? "" : "s"}</small>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
+
 
         <Button
           variant="outlined"
-          size="small"
+          fullWidth
           startIcon={<Download size={14} />}
           disabled={images.length === 0 || downloading}
           onClick={handleDownload}
-          sx={{ ml: 'auto' }}
         >
           {downloading ? 'Zipping…' : 'Download All'}
         </Button>
+        <SolidChip count={images.length} label="Photos" fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
       </Box>
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
@@ -102,9 +104,7 @@ function ViewerNode({
             ))}
           </Box>
         ) : (
-          <div className="empty">
-          Waiting for photos...
-          </div>
+          <NoPhotos />
         )}
       </Box>
     </NodeWrapper>

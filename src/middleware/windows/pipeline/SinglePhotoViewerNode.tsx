@@ -1,3 +1,4 @@
+import NoPhotos from '@/components/NoPhotos';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
@@ -31,11 +32,9 @@ function SinglePhotoViewerNode({
               borderRadius: '6px',
             }}
           />
-        ) : (
-          <div className="empty">
-            {previewPhotoObj ? 'Selected photo not in this pipeline output' : 'No photo selected'}
-          </div>
-        )}
+        ) : (<>
+          <NoPhotos />
+        </>)}
       </Box>
     </NodeWrapper>
   </>);
