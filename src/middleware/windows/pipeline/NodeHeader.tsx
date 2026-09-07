@@ -4,7 +4,7 @@
 
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Box, Typography, useTheme } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { cloneElement } from 'react';
 import stc from 'string-to-color';
 
@@ -15,6 +15,7 @@ const paletteItems: Array<{
   group: string;
 }> = [
   { type: "source", label: "Image Source", icon: <HardDrive size={16} />, group: "input" },
+  { type: "hot-folder-read", label: "Hot Folder Read", icon: <FolderInput size={16} />, group: "input" },
   { type: "selection", label: "Gallery Selection", icon: <GalleryVerticalEnd size={16} />, group: "input" },
   { type: "grouper", label: "Grouper", icon: <Group size={16} />, group: "utility" },
   { type: "ai-colorizer", label: "AI Async Colorizer", icon: <Astroid size={16} />, group: "ai" },

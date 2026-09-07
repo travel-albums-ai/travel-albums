@@ -657,6 +657,22 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "hot-folder-read": {
+    async execute(inputs) {
+      const files = inputs.files as File[] | undefined;
+
+      if (!files || files.length === 0) { return { image: [] } }
+
+      const image = await mapWithConcurrency(
+        files,
+        inputs.evaluationId as number,
+        loadFileImage
+      );
+
+      return { image };
+    },
+  },
+
   selection: {
     async execute(inputs) {
       const photos = inputs.photos as GalleryPhoto[] | undefined;
@@ -956,7 +972,7 @@ async function runEvaluation(
 
       // Special case:
       // Source node gets its Files from node.data.
-      if (node.type === "source") {
+      if (node.type === "source" || node.type === "hot-folder-read") {
         inputs.files = node.data.files;
       }
 

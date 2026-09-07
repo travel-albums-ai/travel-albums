@@ -41,6 +41,7 @@ import GammaNode from "./GammaNode";
 import GrainNode from "./GrainNode";
 import GrouperNode from "./GrouperNode";
 import HdrNode from "./HdrNode";
+import HotFolderReadNode from "./HotFolderReadNode";
 import HotFolderWriteNode from "./HotFolderWriteNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
@@ -70,6 +71,7 @@ const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 
 const nodeTypes = {
   source: SourceNode,
+  "hot-folder-read": HotFolderReadNode,
   selection: SelectionNode,
   grouper: GrouperNode,
   "ai-colorizer": AIAsyncColorizerNode,
