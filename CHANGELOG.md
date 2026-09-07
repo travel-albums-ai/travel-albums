@@ -1,3 +1,9 @@
+## [1.356.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.355.0...v1.356.0) (2026-09-07)
+
+### ✨ Features
+
+* reorder imports and adjust layout in NodeToolbox ([0f71aa8](https://github.com/travel-albums-ai/travel-albums/commit/0f71aa812e53ad29d9a51fbd49fc5f631a709392))
+
 ## [1.355.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.354.0...v1.355.0) (2026-09-07)
 
 ### ✨ Features
