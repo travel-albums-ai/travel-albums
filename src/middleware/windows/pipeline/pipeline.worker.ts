@@ -241,12 +241,25 @@ function drawTriangle(
   const m22 = ((w.y - u.y) * (b.x - a.x) - (v.y - u.y) * (c.x - a.x)) / determinant;
   const dx = u.x - m11 * a.x - m21 * a.y;
   const dy = u.y - m12 * a.x - m22 * a.y;
+  const center = {
+    x: (u.x + v.x + w.x) / 3,
+    y: (u.y + v.y + w.y) / 3,
+  };
+  const expand = (point: Point): Point => {
+    const length = Math.hypot(point.x - center.x, point.y - center.y) || 1;
+    const overlap = 1.25;
+    return {
+      x: point.x + ((point.x - center.x) / length) * overlap,
+      y: point.y + ((point.y - center.y) / length) * overlap,
+    };
+  };
+  const clipDestination = [expand(u), expand(v), expand(w)] as [Point, Point, Point];
 
   ctx.save();
   ctx.beginPath();
-  ctx.moveTo(u.x, u.y);
-  ctx.lineTo(v.x, v.y);
-  ctx.lineTo(w.x, w.y);
+  ctx.moveTo(clipDestination[0].x, clipDestination[0].y);
+  ctx.lineTo(clipDestination[1].x, clipDestination[1].y);
+  ctx.lineTo(clipDestination[2].x, clipDestination[2].y);
   ctx.closePath();
   ctx.clip();
   ctx.setTransform(m11, m12, m21, m22, dx, dy);
