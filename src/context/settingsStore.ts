@@ -12,6 +12,8 @@ type SettingsStore = {
   serverOnline: boolean,
   lightboxOpen: boolean,
   pipelineOpen: boolean,
+
+  performanceMode: boolean,
   drawerId?: string,
   tutorial: boolean,
   themeMode?: 'light' | 'dark',
@@ -29,10 +31,10 @@ type SettingsStore = {
   mapShowPreview: boolean,
   activeSettingsTab?: string,
   previewPhotoObj?: GalleryPhoto
-  focusedPhoto: string
+  focusedPhoto: string,
   loading: boolean,
   loadingValue: number | null,
-  serverType: 'files' | 'http'
+  serverType: 'files' | 'http',
   sidebarTerm: string,
   sidebarSearchOpen: boolean,
   showPreviewMap: boolean,
@@ -86,6 +88,7 @@ type SettingsStore = {
 const defaults: SettingsStore = {
   onboarding: true,
   newVersion: false,
+  performanceMode: false,
   indexing: false,
   indexerProgress: { totalFound: 0, totalFiles: 0, done: 0, preindexed: 0, failed: 0 },
   mascot: false,

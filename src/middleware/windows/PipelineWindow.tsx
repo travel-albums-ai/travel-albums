@@ -4,6 +4,7 @@ import { Dialog } from '@mui/material';
 
 export default function PipelineWindow() {
   const pipelineOpen = useSettingsStoreSelector(s => s.pipelineOpen)
+  const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
   const { setSetting } = useSettings()
 
   const showWindow = pipelineOpen
@@ -19,6 +20,9 @@ export default function PipelineWindow() {
       slotProps={{
         paper: {
           sx: {
+            ...performanceMode && {
+              bgcolor: 'background.paper',
+            },
             width: '95vw',
             height: '95vh',
             maxHeight: '95vh',

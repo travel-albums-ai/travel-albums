@@ -2,6 +2,7 @@
 // Palette of node types that can be dragged onto the canvas
 // ============================================================
 
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { cloneElement } from 'react';
@@ -46,6 +47,7 @@ const paletteItems: Array<{
 
 function NodeHeader({ type, sx } : { type: string, sx?: object }) {
   const theme = useTheme();
+  const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
 
   const relevantPaletteItem = paletteItems.find(item => item.type === type);
 
@@ -63,8 +65,10 @@ function NodeHeader({ type, sx } : { type: string, sx?: object }) {
         border: '1px solid',
         borderColor: 'divider',
         borderBottom: '1px solid',
-        borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 80%, ${theme.palette.text.primary} 70%) 35%, transparent)`,
-        background: `linear-gradient(
+        borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(relevantPaletteItem?.group)} 70%) 35%, ${theme.palette.text.primary} 25%)`,
+        background: performanceMode
+          ? `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 2%, ${stc(relevantPaletteItem?.group)} 8%) 100%, ${theme.palette.background.paper} 45%)`
+          : `linear-gradient(
                     90deg,
                     transparent 0%,
                     color-mix(in srgb, ${stc(type)} 2%, ${stc(relevantPaletteItem?.group)} 8%) 125%
