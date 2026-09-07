@@ -1,3 +1,9 @@
+## [1.347.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.346.0...v1.347.0) (2026-09-07)
+
+### ✨ Features
+
+* add sepia stage and corresponding node for image processing ([6f9384c](https://github.com/travel-albums-ai/travel-albums/commit/6f9384c5eeec0866f4f2009edaa8fb0090d3ddf1))
+
 ## [1.346.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.345.0...v1.346.0) (2026-09-07)
 
 ### ✨ Features
