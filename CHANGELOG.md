@@ -1,3 +1,9 @@
+## [1.342.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.342.1...v1.342.2) (2026-09-07)
+
+### 🐛 Fixes
+
+* enhance layout of NodeWrapper by ensuring consistent flex properties ([3c0fec5](https://github.com/travel-albums-ai/travel-albums/commit/3c0fec507439103f5211b0b01a1cbed4c72c44f9))
+
 ## [1.342.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.342.0...v1.342.1) (2026-09-07)
 
 ### 🐛 Fixes
