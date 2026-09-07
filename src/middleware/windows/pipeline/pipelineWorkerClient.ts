@@ -36,6 +36,14 @@ const NODE_DATA_KEYS = [
   "bottom",
   "left",
   "right",
+  "topLeftx",
+  "topLefty",
+  "topRightx",
+  "topRighty",
+  "bottomLeftx",
+  "bottomLefty",
+  "bottomRightx",
+  "bottomRighty",
 ] as const;
 
 type PendingViewer = {

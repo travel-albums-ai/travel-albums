@@ -221,6 +221,76 @@ function renderImages(
   );
 }
 
+type Point = { x: number; y: number };
+
+function drawTriangle(
+  ctx: OffscreenCanvasRenderingContext2D,
+  source: [Point, Point, Point],
+  destination: [Point, Point, Point],
+  bitmap: ImageBitmap
+) {
+  const [a, b, c] = source;
+  const [u, v, w] = destination;
+  const determinant = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+
+  if (Math.abs(determinant) < 0.001) return;
+
+  const m11 = ((v.x - u.x) * (c.y - a.y) - (w.x - u.x) * (b.y - a.y)) / determinant;
+  const m12 = ((v.y - u.y) * (c.y - a.y) - (w.y - u.y) * (b.y - a.y)) / determinant;
+  const m21 = ((w.x - u.x) * (b.x - a.x) - (v.x - u.x) * (c.x - a.x)) / determinant;
+  const m22 = ((w.y - u.y) * (b.x - a.x) - (v.y - u.y) * (c.x - a.x)) / determinant;
+  const dx = u.x - m11 * a.x - m21 * a.y;
+  const dy = u.y - m12 * a.x - m22 * a.y;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(u.x, u.y);
+  ctx.lineTo(v.x, v.y);
+  ctx.lineTo(w.x, w.y);
+  ctx.closePath();
+  ctx.clip();
+  ctx.setTransform(m11, m12, m21, m22, dx, dy);
+  ctx.drawImage(bitmap, 0, 0);
+  ctx.restore();
+}
+
+function drawPerspective(
+  ctx: OffscreenCanvasRenderingContext2D,
+  canvas: OffscreenCanvas,
+  source: WorkerImage,
+  offsets: number[]
+) {
+  const points: [Point, Point, Point, Point] = [
+    { x: offsets[0] * canvas.width / 100, y: offsets[1] * canvas.height / 100 },
+    { x: canvas.width * (1 + offsets[2] / 100), y: offsets[3] * canvas.height / 100 },
+    { x: offsets[4] * canvas.width / 100, y: canvas.height * (1 + offsets[5] / 100) },
+    { x: canvas.width * (1 + offsets[6] / 100), y: canvas.height * (1 + offsets[7] / 100) },
+  ];
+  const divisions = 16;
+
+  for (let row = 0; row < divisions; row += 1) {
+    for (let column = 0; column < divisions; column += 1) {
+      const x0 = column / divisions;
+      const x1 = (column + 1) / divisions;
+      const y0 = row / divisions;
+      const y1 = (row + 1) / divisions;
+      const sourceCorners: [Point, Point, Point, Point] = [
+        { x: x0 * source.width, y: y0 * source.height },
+        { x: x1 * source.width, y: y0 * source.height },
+        { x: x0 * source.width, y: y1 * source.height },
+        { x: x1 * source.width, y: y1 * source.height },
+      ];
+      const interpolate = (x: number, y: number): Point => ({
+        x: points[0].x * (1 - x) * (1 - y) + points[1].x * x * (1 - y) + points[2].x * (1 - x) * y + points[3].x * x * y,
+        y: points[0].y * (1 - x) * (1 - y) + points[1].y * x * (1 - y) + points[2].y * (1 - x) * y + points[3].y * x * y,
+      });
+      const destinationCorners: [Point, Point, Point, Point] = [interpolate(x0, y0), interpolate(x1, y0), interpolate(x0, y1), interpolate(x1, y1)];
+      drawTriangle(ctx, [sourceCorners[0], sourceCorners[1], sourceCorners[2]], [destinationCorners[0], destinationCorners[1], destinationCorners[2]], source.bitmap);
+      drawTriangle(ctx, [sourceCorners[1], sourceCorners[3], sourceCorners[2]], [destinationCorners[1], destinationCorners[3], destinationCorners[2]], source.bitmap);
+    }
+  }
+}
+
 function scaleImage(source: WorkerImage, scale: number): WorkerImage {
   const width = Math.max(1, Math.round(source.width * scale));
   const height = Math.max(1, Math.round(source.height * scale));
@@ -839,6 +909,22 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  perspective: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) { return { image: [] }; }
+
+      const offsets = (inputs.perspectiveOffsets as number[] | undefined) ?? [0, 0, 0, 0, 0, 0, 0, 0];
+      const image = await renderImages(
+        sources,
+        inputs.evaluationId as number,
+        (ctx, canvas, source) => drawPerspective(ctx, canvas, source, offsets)
+      );
+
+      return { image };
+    },
+  },
+
   crop: {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1073,6 +1159,15 @@ async function runEvaluation(
         inputs.cropBottom = node.data.bottom;
         inputs.cropLeft = node.data.left;
         inputs.cropRight = node.data.right;
+      }
+
+      if (node.type === "perspective") {
+        inputs.perspectiveOffsets = [
+          node.data.topLeftx, node.data.topLefty,
+          node.data.topRightx, node.data.topRighty,
+          node.data.bottomLeftx, node.data.bottomLefty,
+          node.data.bottomRightx, node.data.bottomRighty,
+        ].map((value) => typeof value === "number" ? value : 0);
       }
 
       // Cancellation plumbing available to every node.

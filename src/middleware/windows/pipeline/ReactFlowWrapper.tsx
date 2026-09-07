@@ -49,6 +49,7 @@ import LuminosityNode from "./LuminosityNode";
 import LutNode from "./LutNode";
 import MirrorNode from "./MirrorNode";
 import NodeToolbox from "./NodeToolbox";
+import PerspectiveNode from "./PerspectiveNode";
 import PhotoHistogramNode from "./PhotoHistogramNode";
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 import PopNode from "./PopNode";
@@ -91,6 +92,7 @@ const nodeTypes = {
   exposure: ExposureNode,
   contrast: ContrastNode,
   crop: CropNode,
+  perspective: PerspectiveNode,
   saturation: SaturationNode,
   vibrance: VibranceNode,
   vignette: VignetteNode,
