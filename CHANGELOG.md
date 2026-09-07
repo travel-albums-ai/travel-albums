@@ -1,3 +1,9 @@
+## [1.343.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.343.0...v1.343.1) (2026-09-07)
+
+### 🐛 Fixes
+
+* add missing scale presets and improve component structure in RescaleNode ([69f3e88](https://github.com/travel-albums-ai/travel-albums/commit/69f3e889f8bd37c89ed96eb14976fbd4d238d5df))
+
 ## [1.343.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.342.2...v1.343.0) (2026-09-07)
 
 ### ✨ Features
