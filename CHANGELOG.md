@@ -1,3 +1,9 @@
+## [1.344.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.343.1...v1.344.0) (2026-09-07)
+
+### ✨ Features
+
+* add Hot Folder Write node for saving images to a selected directory ([0611770](https://github.com/travel-albums-ai/travel-albums/commit/0611770c37b3c06b5d8247b8b7fd951a59ac38db))
+
 ## [1.343.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.343.0...v1.343.1) (2026-09-07)
 
 ### 🐛 Fixes
