@@ -4,7 +4,7 @@
 
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { Box, Typography, useTheme } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { cloneElement } from 'react';
 import stc from 'string-to-color';
 
@@ -42,6 +42,7 @@ const paletteItems: Array<{
   { type: "viewer", label: "Photos Viewer", icon:<Images size={16} />, group: "output" },
   { type: "viewer-single", label: "Photo Viewer", icon: <Image size={16} />, group: "output" },
   { type: "photo-histogram", label: "Photo Histogram", icon: <ChartColumn size={16} />, group: "output" },
+  { type: "hot-folder-write", label: "Hot Folder Write", icon: <FolderOutput size={16} />, group: "output" },
 ];
 
 

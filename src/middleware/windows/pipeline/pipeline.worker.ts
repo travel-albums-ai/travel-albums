@@ -859,6 +859,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       };
     },
   },
+
+  "hot-folder-write": {
+    async execute(inputs) {
+      await Promise.resolve();
+
+      return {
+        image: (inputs.image as WorkerImage[] | undefined) ?? [],
+      };
+    },
+  },
 };
 
 // ============================================================

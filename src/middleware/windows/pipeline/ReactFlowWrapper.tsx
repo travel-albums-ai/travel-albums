@@ -41,6 +41,7 @@ import GammaNode from "./GammaNode";
 import GrainNode from "./GrainNode";
 import GrouperNode from "./GrouperNode";
 import HdrNode from "./HdrNode";
+import HotFolderWriteNode from "./HotFolderWriteNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
 import LutNode from "./LutNode";
@@ -96,6 +97,7 @@ const nodeTypes = {
   viewer: ViewerNode,
   "viewer-single": SinglePhotoViewerNode,
   "photo-histogram": PhotoHistogramNode,
+  "hot-folder-write": HotFolderWriteNode,
 };
 
 // ============================================================

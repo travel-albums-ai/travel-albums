@@ -4,7 +4,7 @@
 
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
 import { Box, Divider, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
 const paletteItems: Array<{
   type: string;
@@ -40,6 +40,7 @@ const paletteItems: Array<{
   { type: "viewer", label: "Photos Viewer", icon:<Images size={16} />, group: "output" },
   { type: "viewer-single", label: "Photo Viewer", icon: <Image size={16} />, group: "output" },
   { type: "photo-histogram", label: "Photo Histogram", icon: <ChartColumn size={16} />, group: "output" },
+  { type: "hot-folder-write", label: "Hot Folder Write", icon: <FolderOutput size={16} />, group: "output" },
 ];
 
 const groupedPaletteItems = paletteItems.reduce((acc, item) => {
