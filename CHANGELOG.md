@@ -1,3 +1,9 @@
+## [1.352.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.351.0...v1.352.0) (2026-09-07)
+
+### ✨ Features
+
+* update node labels and group classifications in the palette ([05e2384](https://github.com/travel-albums-ai/travel-albums/commit/05e2384e0cfd5da8f8bff879891824495b84590c))
+
 ## [1.351.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.350.0...v1.351.0) (2026-09-07)
 
 ### ✨ Features
