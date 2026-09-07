@@ -44,6 +44,7 @@ import GrouperNode from "./GrouperNode";
 import HdrNode from "./HdrNode";
 import HotFolderReadNode from "./HotFolderReadNode";
 import HotFolderWriteNode from "./HotFolderWriteNode";
+import HueRotationNode from "./HueRotationNode";
 import InvertNode from "./InvertNode";
 import LuminosityNode from "./LuminosityNode";
 import LutNode from "./LutNode";
@@ -100,6 +101,7 @@ const nodeTypes = {
   sharpen: SharpenNode,
   pop: PopNode,
   hdr: HdrNode,
+  "hue-rotation": HueRotationNode,
   fade: FadeNode,
   rescale: RescaleNode,
   viewer: ViewerNode,

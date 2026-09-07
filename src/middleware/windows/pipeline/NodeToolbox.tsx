@@ -37,6 +37,7 @@ export const paletteItems: Array<{
   { type: "sharpen", label: "Sharpen", icon: <Slice size={16} />, group: "decorative" },
   { type: "pop", label: "Pop", icon: <Gem size={16} />, group: "basics" },
   { type: "hdr", label: "HDR Effect", icon: <Mountain size={16} />, group: "basics" },
+  { type: "hue-rotation", label: "Hue Rotation", icon: <Palette size={16} />, group: "color" },
   { type: "fade", label: "Fade", icon: <EyeDashed size={16} />, group: "decorative" },
   { type: "rescale", label: "Rescale", icon: <ImageUpscale size={16} />, group: "utility" },
   { type: "crop", label: "Crop", icon: <Crop size={16} />, group: "utility" },

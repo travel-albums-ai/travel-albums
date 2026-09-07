@@ -22,6 +22,7 @@ import {
   gammaStage,
   grainStage,
   hdrEffectStage,
+  hueRotationStage,
   invertStage,
   luminosityStage,
   popStage,
@@ -534,6 +535,7 @@ const SLIDER_NODE_TYPES = new Set([
   "sharpen",
   "pop",
   "hdr",
+  "hue-rotation",
   "fade",
   "rotate",
 ]);
@@ -969,6 +971,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   sharpen: amountStageNode(sharpenStage, 0),
   pop: amountStageNode(popStage, 0),
   hdr: amountStageNode(hdrEffectStage, 0),
+  "hue-rotation": amountStageNode(hueRotationStage, 0),
   fade: amountStageNode(fadeStage, 0),
 
   "ai-colorizer": createAIImageEditNodeDefinition(
