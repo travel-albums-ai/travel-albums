@@ -13,6 +13,8 @@ const SCALE_PRESETS = [
   { value: "0.5", label: "50%" },
   { value: "0.65", label: "65%" },
   { value: "0.85", label: "85%" },
+  { value: "1.5", label: "150%" },
+  { value: "2", label: "200%" },
 ];
 
 function RescaleNode({
@@ -22,11 +24,7 @@ function RescaleNode({
 
   return (<>
     <InputHandle id="image" />
-    {/* <SettingsSection title="Rescale" icon={<Maximize2 />} uuid="rescale-node-reactflow" gap={2} tint="rescale"> */}
-
-
     <NodeWrapper title={'Rescale'} icon={<Maximize2 />} toolbar={<></>} type="rescale">
-      <small>Rescales the image according to the selected preset</small>
 
       <SegmentedControl
         value={scale}
@@ -34,7 +32,6 @@ function RescaleNode({
           data.scale = Number(value);
           setScale(value);
 
-          // Tell the pipeline engine that this node changed.
           window.dispatchEvent(
             new CustomEvent("pipeline:changed")
           );
@@ -47,9 +44,9 @@ function RescaleNode({
           </SegmentedControlItem>
         ))}
       </SegmentedControl>
-    </NodeWrapper>
+      <small>Rescales the image according to the selected preset</small>
 
-    {/* </SettingsSection> */}
+    </NodeWrapper>
     <OutputHandle id="image" />
   </>);
 }
