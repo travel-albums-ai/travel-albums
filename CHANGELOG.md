@@ -1,3 +1,9 @@
+## [1.355.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.354.0...v1.355.0) (2026-09-07)
+
+### ✨ Features
+
+* add shadows stage and corresponding node to the pipeline ([ccd2361](https://github.com/travel-albums-ai/travel-albums/commit/ccd2361bc4170c1783fba3321133c4df12c3a2e2))
+
 ## [1.354.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.353.0...v1.354.0) (2026-09-07)
 
 ### ✨ Features
