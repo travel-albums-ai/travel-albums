@@ -26,6 +26,7 @@ export const paletteItems: Array<{
   { type: "mirror", label: "Mirror", icon: <SquareCenterlineDashedHorizontal size={16} />, group: "utility" },
   { type: "rotate", label: "Rotate", icon: <Angle size={16} />, group: "utility" },
   { type: "brightness", label: "Brightness", icon: <Lightbulb size={16} />, group: "basics" },
+  { type: "highlights", label: "Highlights", icon: <Sun size={16} />, group: "tone" },
   { type: "gamma", label: "Gamma", icon: <Palette size={16} />, group: "adjustment" },
   { type: "luminosity", label: "Luminosity", icon: <Lightbulb size={16} />, group: "adjustment" },
   { type: "exposure", label: "Exposure", icon: <Sun size={16} />, group: "basics" },

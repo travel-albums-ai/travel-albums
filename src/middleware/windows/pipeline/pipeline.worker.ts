@@ -22,6 +22,7 @@ import {
   gammaStage,
   grainStage,
   hdrEffectStage,
+  highlightsStage,
   hueRotationStage,
   invertStage,
   luminosityStage,
@@ -524,6 +525,7 @@ function createAIImageEditNodeDefinition(
 // stored on node.data.amount.
 const SLIDER_NODE_TYPES = new Set([
   "brightness",
+  "highlights",
   "gamma",
   "luminosity",
   "exposure",
@@ -960,6 +962,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   },
 
   brightness: amountStageNode(brightnessStage, 0),
+  highlights: amountStageNode(highlightsStage, 0),
   gamma: amountStageNode(gammaStage, 1),
   luminosity: amountStageNode(luminosityStage, 0),
   exposure: amountStageNode(exposureStage, 0),

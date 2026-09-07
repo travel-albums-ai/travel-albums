@@ -42,6 +42,7 @@ import GammaNode from "./GammaNode";
 import GrainNode from "./GrainNode";
 import GrouperNode from "./GrouperNode";
 import HdrNode from "./HdrNode";
+import HighlightsNode from "./HighlightsNode";
 import HotFolderReadNode from "./HotFolderReadNode";
 import HotFolderWriteNode from "./HotFolderWriteNode";
 import HueRotationNode from "./HueRotationNode";
@@ -87,6 +88,7 @@ const nodeTypes = {
   mirror: MirrorNode,
   rotate: RotateNode,
   brightness: BrightnessNode,
+  highlights: HighlightsNode,
   gamma: GammaNode,
   luminosity: LuminosityNode,
   lut: LutNode,
