@@ -1,3 +1,9 @@
+## [1.346.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.345.0...v1.346.0) (2026-09-07)
+
+### ✨ Features
+
+* add toggle functionality for toolbox visibility in Pipeline component ([5b801d2](https://github.com/travel-albums-ai/travel-albums/commit/5b801d2c1aa701e4b162a7f4324cf1999b009e7b))
+
 ## [1.345.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.344.0...v1.345.0) (2026-09-07)
 
 ### ✨ Features
