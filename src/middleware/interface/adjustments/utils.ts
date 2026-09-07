@@ -30,6 +30,21 @@ export const blackAndWhiteStage = (): Stage => {
   };
 };
 
+export const sepiaStage = (): Stage => {
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const red = d[i];
+      const green = d[i + 1];
+      const blue = d[i + 2];
+
+      d[i] = clamp(0.393 * red + 0.769 * green + 0.189 * blue);
+      d[i + 1] = clamp(0.349 * red + 0.686 * green + 0.168 * blue);
+      d[i + 2] = clamp(0.272 * red + 0.534 * green + 0.131 * blue);
+    }
+  };
+};
+
 export const brightnessStage = (amount: number): Stage => {
   return (img) => {
     const d = img.data;

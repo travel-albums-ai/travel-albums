@@ -6,7 +6,7 @@ import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
 import { Box, Divider, Tooltip, Typography } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
-const paletteItems: Array<{
+export const paletteItems: Array<{
   type: string;
   label: string;
   icon: React.ReactNode;
@@ -18,8 +18,9 @@ const paletteItems: Array<{
   { type: "grouper", label: "Grouper", icon: <Group size={16} />, group: "utility" },
   { type: "ai-colorizer", label: "AI Async Colorizer", icon: <Astroid size={16} />, group: "ai" },
   { type: "ai-denoiser", label: "AI Async Denoiser", icon: <Astroid size={16} />, group: "ai" },
-  { type: "invert", label: "Invert", icon: <SquaresExclude size={16} />, group: "base" },
-  { type: "black-white", label: "Black & White", icon: <Landmark size={16} /> , group: "base" },
+  { type: "invert", label: "Invert", icon: <SquaresExclude size={16} />, group: "color" },
+  { type: "black-white", label: "Black & White", icon: <Landmark size={16} /> , group: "color" },
+  { type: "sepia", label: "Sepia", icon: <Palette size={16} />, group: "color" },
   { type: "lut", label: "3D LUT", icon: <Film size={16} />, group: "color" },
   { type: "flip", label: "Flip 180°", icon: <SquareCenterlineDashedVertical size={16} />, group: "utility" },
   { type: "mirror", label: "Mirror", icon: <SquareCenterlineDashedHorizontal size={16} />, group: "utility" },

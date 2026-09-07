@@ -3,49 +3,10 @@
 // ============================================================
 
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { paletteItems } from '@/middleware/windows/pipeline/NodeToolbox';
 import { Box, Typography, useTheme } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { cloneElement } from 'react';
 import stc from 'string-to-color';
-
-const paletteItems: Array<{
-  type: string;
-  label: string;
-  icon: React.ReactNode;
-  group: string;
-}> = [
-  { type: "source", label: "Image Source", icon: <HardDrive size={16} />, group: "input" },
-  { type: "hot-folder-read", label: "Hot Folder Read", icon: <FolderInput size={16} />, group: "input" },
-  { type: "selection", label: "Gallery Selection", icon: <GalleryVerticalEnd size={16} />, group: "input" },
-  { type: "grouper", label: "Grouper", icon: <Group size={16} />, group: "utility" },
-  { type: "ai-colorizer", label: "AI Async Colorizer", icon: <Astroid size={16} />, group: "ai" },
-  { type: "ai-denoiser", label: "AI Async Denoiser", icon: <Astroid size={16} />, group: "ai" },
-  { type: "invert", label: "Invert", icon: <SquaresExclude size={16} />, group: "base" },
-  { type: "black-white", label: "Black & White", icon: <Landmark size={16} /> , group: "base" },
-  { type: "lut", label: "3D LUT", icon: <Film size={16} />, group: "color" },
-  { type: "flip", label: "Flip 180°", icon: <SquareCenterlineDashedVertical size={16} />, group: "utility" },
-  { type: "mirror", label: "Mirror", icon: <SquareCenterlineDashedHorizontal size={16} />, group: "utility" },
-  { type: "rotate", label: "Rotate", icon: <Angle size={16} />, group: "utility" },
-  { type: "brightness", label: "Brightness", icon: <Lightbulb size={16} />, group: "basics" },
-  { type: "gamma", label: "Gamma", icon: <Palette size={16} />, group: "adjustment" },
-  { type: "luminosity", label: "Luminosity", icon: <Lightbulb size={16} />, group: "adjustment" },
-  { type: "exposure", label: "Exposure", icon: <Sun size={16} />, group: "basics" },
-  { type: "contrast", label: "Contrast", icon: <Contrast size={16} />, group: "basics" },
-  { type: "saturation", label: "Saturation", icon: <SwatchBook size={16} />, group: "adjustment" },
-  { type: "vibrance", label: "Vibrance", icon:<Pipette size={16} />, group: "adjustment" },
-  { type: "vignette", label: "Vignette", icon: <Theater size={16} />, group: "decorative" },
-  { type: "grain", label: "Grain", icon: <Wheat size={16} />, group: "decorative" },
-  { type: "sharpen", label: "Sharpen", icon: <Slice size={16} />, group: "decorative" },
-  { type: "pop", label: "Pop", icon: <Gem size={16} />, group: "basics" },
-  { type: "hdr", label: "HDR Effect", icon: <Mountain size={16} />, group: "basics" },
-  { type: "fade", label: "Fade", icon: <EyeDashed size={16} />, group: "decorative" },
-  { type: "rescale", label: "Rescale", icon: <ImageUpscale size={16} />, group: "utility" },
-  { type: "viewer", label: "Photos Viewer", icon:<Images size={16} />, group: "output" },
-  { type: "viewer-single", label: "Photo Viewer", icon: <Image size={16} />, group: "output" },
-  { type: "photo-histogram", label: "Photo Histogram", icon: <ChartColumn size={16} />, group: "output" },
-  { type: "hot-folder-write", label: "Hot Folder Write", icon: <FolderOutput size={16} />, group: "output" },
-];
-
 
 function NodeHeader({ type, sx } : { type: string, sx?: object }) {
   const theme = useTheme();

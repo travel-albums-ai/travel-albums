@@ -26,6 +26,7 @@ import {
   luminosityStage,
   popStage,
   saturationStage,
+  sepiaStage,
   sharpenStage,
   vibranceStage,
   vignetteStage,
@@ -708,6 +709,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 
   invert: stageNode(invertStage),
   "black-white": stageNode(blackAndWhiteStage),
+  sepia: stageNode(sepiaStage),
 
   lut: {
     async execute(inputs) {

@@ -1,29 +1,29 @@
 import { Box, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
 import {
-  addEdge,
-  Background,
-  ConnectionLineType,
-  Controls,
-  MiniMap,
-  ReactFlow,
-  ReactFlowProvider,
-  reconnectEdge,
-  useEdgesState,
-  useNodesState,
-  useReactFlow,
-  type Connection,
-  type Edge,
-  type Node,
+    addEdge,
+    Background,
+    ConnectionLineType,
+    Controls,
+    MiniMap,
+    ReactFlow,
+    ReactFlowProvider,
+    reconnectEdge,
+    useEdgesState,
+    useNodesState,
+    useReactFlow,
+    type Connection,
+    type Edge,
+    type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
 import { CirclePlus, Copy, PanelLeftDashed, Save, Trash2 } from 'lucide-react';
 import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
 } from "react";
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
@@ -55,6 +55,7 @@ import RescaleNode from "./RescaleNode";
 import RotateNode from "./RotateNode";
 import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
+import SepiaNode from "./SepiaNode";
 import SharpenNode from "./SharpenNode";
 import SinglePhotoViewerNode from "./SinglePhotoViewerNode";
 import SourceNode from "./SourceNode";
@@ -78,6 +79,7 @@ const nodeTypes = {
   "ai-denoiser": AIAsyncDenoiserNode,
   invert: InvertNode,
   "black-white": BlackAndWhiteNode,
+  sepia: SepiaNode,
   flip: FlipNode,
   mirror: MirrorNode,
   rotate: RotateNode,
