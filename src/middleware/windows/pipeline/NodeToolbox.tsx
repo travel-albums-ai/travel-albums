@@ -83,7 +83,6 @@ function NodeToolbox() {
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
         <Box key={group}
           sx={{
-            pb: 1, mb: 1,
             display: 'flex', flexDirection: 'column', gap: 0
           }}
         >
@@ -96,7 +95,8 @@ function NodeToolbox() {
           <Box sx={{
             display: 'grid',
             alignContent: 'start',
-            gridTemplateColumns: 'repeat(2, minmax(100px, 1fr))',
+            mb: 1,
+            gridTemplateColumns: 'repeat(2, 140px)',
             gap: 1,
           }}>
             {items.map((item, i) => (

@@ -29,8 +29,8 @@ import {
   popStage,
   saturationStage,
   sepiaStage,
-  sharpenStage,
   shadowsStage,
+  sharpenStage,
   vibranceStage,
   vignetteStage,
 } from "../../interface/adjustments/utils";
