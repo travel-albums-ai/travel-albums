@@ -1,7 +1,7 @@
 {
   "name": "travel-albums",
   "private": true,
-  "version": "1.350.0",
+  "version": "1.351.0",
   "type": "module",
   "scripts": {
     "#-----RUNNING------": "",

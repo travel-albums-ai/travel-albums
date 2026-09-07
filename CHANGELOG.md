@@ -1,3 +1,9 @@
+## [1.351.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.350.0...v1.351.0) (2026-09-07)
+
+### ✨ Features
+
+* add hue rotation stage and corresponding node to the pipeline ([48cfc86](https://github.com/travel-albums-ai/travel-albums/commit/48cfc86a6ca025096bc31d14c9f662c0525e8a3f))
+
 ## [1.350.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.349.0...v1.350.0) (2026-09-07)
 
 ### ✨ Features
