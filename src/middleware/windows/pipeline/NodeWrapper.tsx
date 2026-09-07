@@ -33,6 +33,9 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
         borderRadius: 2,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
         bgcolor: `color-mix(in srgb, ${theme.palette.background.paper} 100%, transparent 10%)`,
       }}>
         {children}
