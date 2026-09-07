@@ -1,3 +1,9 @@
+## [1.342.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.342.0...v1.342.1) (2026-09-07)
+
+### 🐛 Fixes
+
+* add missing border property to NodeHeader for consistent styling ([618b122](https://github.com/travel-albums-ai/travel-albums/commit/618b122ea4627dba2a6bd9894d09afc71548250e))
+
 ## [1.342.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.341.1...v1.342.0) (2026-09-07)
 
 ### ✨ Features
