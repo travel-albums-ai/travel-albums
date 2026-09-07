@@ -1,3 +1,9 @@
+## [1.342.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.341.1...v1.342.0) (2026-09-07)
+
+### ✨ Features
+
+* add performance mode toggle and integrate into relevant components ([2a543ac](https://github.com/travel-albums-ai/travel-albums/commit/2a543ac2660b362a5c3d2f9397d4373870f2ba52))
+
 ## [1.341.1](https://github.com/travel-albums-ai/travel-albums/compare/v1.341.0...v1.341.1) (2026-09-06)
 
 ### 🐛 Fixes
