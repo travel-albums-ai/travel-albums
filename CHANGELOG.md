@@ -1,3 +1,9 @@
+## [1.343.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.342.2...v1.343.0) (2026-09-07)
+
+### ✨ Features
+
+* add BeforeAfter component for image comparison with styling props ([bc91389](https://github.com/travel-albums-ai/travel-albums/commit/bc91389fa002f0e62cc4ccfbad7d5bcd3c785775))
+
 ## [1.342.2](https://github.com/travel-albums-ai/travel-albums/compare/v1.342.1...v1.342.2) (2026-09-07)
 
 ### 🐛 Fixes
