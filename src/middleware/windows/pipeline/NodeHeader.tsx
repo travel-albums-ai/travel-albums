@@ -63,6 +63,7 @@ function NodeHeader({ type, sx } : { type: string, sx?: object }) {
         px: 1,
         borderRadius: 2,
         border: '1px solid',
+
         borderColor: 'divider',
         borderBottom: '1px solid',
         borderBottomColor: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(relevantPaletteItem?.group)} 70%) 35%, ${theme.palette.text.primary} 25%)`,
