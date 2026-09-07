@@ -30,6 +30,7 @@ import {
   saturationStage,
   sepiaStage,
   sharpenStage,
+  shadowsStage,
   vibranceStage,
   vignetteStage,
 } from "../../interface/adjustments/utils";
@@ -526,6 +527,7 @@ function createAIImageEditNodeDefinition(
 const SLIDER_NODE_TYPES = new Set([
   "brightness",
   "highlights",
+  "shadows",
   "gamma",
   "luminosity",
   "exposure",
@@ -963,6 +965,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 
   brightness: amountStageNode(brightnessStage, 0),
   highlights: amountStageNode(highlightsStage, 0),
+  shadows: amountStageNode(shadowsStage, 0),
   gamma: amountStageNode(gammaStage, 1),
   luminosity: amountStageNode(luminosityStage, 0),
   exposure: amountStageNode(exposureStage, 0),

@@ -4,7 +4,7 @@
 
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
 import { Box, Divider, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
   type: string;
@@ -27,6 +27,7 @@ export const paletteItems: Array<{
   { type: "rotate", label: "Rotate", icon: <Angle size={16} />, group: "utility" },
   { type: "brightness", label: "Brightness", icon: <Lightbulb size={16} />, group: "basics" },
   { type: "highlights", label: "Highlights", icon: <Sun size={16} />, group: "tone" },
+  { type: "shadows", label: "Shadows", icon: <Moon size={16} />, group: "tone" },
   { type: "gamma", label: "Gamma", icon: <Palette size={16} />, group: "adjustment" },
   { type: "luminosity", label: "Luminosity", icon: <Lightbulb size={16} />, group: "adjustment" },
   { type: "exposure", label: "Exposure", icon: <Sun size={16} />, group: "basics" },

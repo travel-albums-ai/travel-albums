@@ -61,6 +61,7 @@ import SaturationNode from "./SaturationNode";
 import SelectionNode from "./SelectionNode";
 import SepiaNode from "./SepiaNode";
 import SharpenNode from "./SharpenNode";
+import ShadowsNode from "./ShadowsNode";
 import SinglePhotoViewerNode from "./SinglePhotoViewerNode";
 import SourceNode from "./SourceNode";
 import { VIEWER_NODE_TYPES } from "./types";
@@ -89,6 +90,7 @@ const nodeTypes = {
   rotate: RotateNode,
   brightness: BrightnessNode,
   highlights: HighlightsNode,
+  shadows: ShadowsNode,
   gamma: GammaNode,
   luminosity: LuminosityNode,
   lut: LutNode,

@@ -72,6 +72,22 @@ export const highlightsStage = (amount: number): Stage => {
   };
 };
 
+export const shadowsStage = (amount: number): Stage => {
+  const strength = amount / 100;
+
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const luminance = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
+      const shadowWeight = (1 - luminance) * (1 - luminance);
+
+      d[i] = clamp(d[i] + (strength >= 0 ? (255 - d[i]) * strength : d[i] * strength) * shadowWeight);
+      d[i + 1] = clamp(d[i + 1] + (strength >= 0 ? (255 - d[i + 1]) * strength : d[i + 1] * strength) * shadowWeight);
+      d[i + 2] = clamp(d[i + 2] + (strength >= 0 ? (255 - d[i + 2]) * strength : d[i + 2] * strength) * shadowWeight);
+    }
+  };
+};
+
 export const gammaStage = (gamma: number): Stage => {
   const lut = new Uint8Array(256);
   for (let i = 0; i < 256; i++) {
