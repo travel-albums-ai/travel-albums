@@ -13,10 +13,12 @@ export type SavedPipeline = PipelineGraph & {
 
 type PipelineStore = {
   pipelines: SavedPipeline[]
+  showToolbox: boolean
 }
 
 const defaults: PipelineStore = {
-  pipelines: []
+  pipelines: [],
+  showToolbox: true
 }
 
 const {
@@ -53,7 +55,9 @@ export const usePipelineStore = () => {
   const setState = useSetStore()
 
   return {
+    setState,
     pipelines: store.pipelines,
+    toggleToolbox: () => setState((prev) => ({ ...prev, showToolbox: !prev.showToolbox })),
     saveNew: (name: string, graph: PipelineGraph) => {
       const pipeline: SavedPipeline = {
         ...prepareGraph(graph),

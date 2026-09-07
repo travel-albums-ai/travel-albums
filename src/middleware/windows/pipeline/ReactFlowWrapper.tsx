@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, Save, Trash2 } from 'lucide-react';
+import { CirclePlus, Copy, PanelLeftDashed, Save, Trash2 } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -28,7 +28,7 @@ import {
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import { usePipelineStore } from '@/context/pipelineStore';
+import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
@@ -160,14 +160,11 @@ const initialEdges: Edge[] = [
 
 const SNAP_GRID: [number, number] = [20, 20];
 
-// ============================================================
-// App
-// ============================================================
-
 function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
+  const { toggleToolbox } = usePipelineStore();
 
   const { screenToFlowPosition, fitView } = useReactFlow();
   const {
@@ -522,7 +519,7 @@ function Pipeline() {
 
   return (
     <Box className="app" sx={{ width: '100%', height: '100%' }}>
-      <NodeToolbox />
+      {showToolbox && <NodeToolbox />}
 
       <div
         className="reactflow-canvas"
@@ -596,6 +593,12 @@ function Pipeline() {
                 icon: <Copy /> ,
                 onClick: () => saveAsCopy(),
                 title: 'Clone',
+              },
+              {
+                tooltip: 'Toggle toolbox',
+                icon: <PanelLeftDashed /> ,
+                onClick: () => toggleToolbox(),
+                title: 'Toggle toolbox',
               }
             ] satisfies GenericToggleButtonProps[]} />
             <FormControl size="small" sx={{ minWidth: 180 }}>
