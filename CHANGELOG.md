@@ -1,3 +1,9 @@
+## [1.348.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.347.0...v1.348.0) (2026-09-07)
+
+### ✨ Features
+
+* add CropNode component and implement cropping functionality in the pipeline ([b656213](https://github.com/travel-albums-ai/travel-albums/commit/b656213c5020d628cc3e1f912a6f2cafc07c6848))
+
 ## [1.347.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.346.0...v1.347.0) (2026-09-07)
 
 ### ✨ Features
