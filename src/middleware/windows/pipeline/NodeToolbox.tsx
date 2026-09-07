@@ -86,7 +86,7 @@ function NodeToolbox() {
           }}
         >
           <Divider sx={{ mb: 0.5, borderStyle: 'dotted', borderColor: 'divider' }}>
-            <Typography variant="caption" sx={{ textTransform: 'uppercase' }} color="textDisabled">
+            <Typography variant="caption" sx={{ textTransform: 'uppercase', fontSize: 10 }} color="textDisabled">
               {group}
             </Typography>
           </Divider>
