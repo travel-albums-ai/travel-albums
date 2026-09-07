@@ -1,3 +1,9 @@
+## [1.353.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.352.0...v1.353.0) (2026-09-07)
+
+### ✨ Features
+
+* adjust font size for group labels in node toolbox ([127c741](https://github.com/travel-albums-ai/travel-albums/commit/127c74114815b89c902adef6cbee950458fe967a))
+
 ## [1.352.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.351.0...v1.352.0) (2026-09-07)
 
 ### ✨ Features
