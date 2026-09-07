@@ -1,3 +1,9 @@
+## [1.350.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.349.0...v1.350.0) (2026-09-07)
+
+### ✨ Features
+
+* enhance triangle drawing by expanding vertices for better clipping ([1ed5d1d](https://github.com/travel-albums-ai/travel-albums/commit/1ed5d1d958e5a0ef6521eace713141229bf09717))
+
 ## [1.349.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.348.0...v1.349.0) (2026-09-07)
 
 ### ✨ Features
