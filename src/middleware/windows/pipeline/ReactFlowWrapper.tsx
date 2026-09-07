@@ -1,29 +1,29 @@
 import { Box, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
 import {
-    addEdge,
-    Background,
-    ConnectionLineType,
-    Controls,
-    MiniMap,
-    ReactFlow,
-    ReactFlowProvider,
-    reconnectEdge,
-    useEdgesState,
-    useNodesState,
-    useReactFlow,
-    type Connection,
-    type Edge,
-    type Node,
+  addEdge,
+  Background,
+  ConnectionLineType,
+  Controls,
+  MiniMap,
+  ReactFlow,
+  ReactFlowProvider,
+  reconnectEdge,
+  useEdgesState,
+  useNodesState,
+  useReactFlow,
+  type Connection,
+  type Edge,
+  type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
 import { CirclePlus, Copy, PanelLeftDashed, Save, Trash2 } from 'lucide-react';
 import {
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
 } from "react";
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
@@ -34,6 +34,7 @@ import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
 import BrightnessNode from "./BrightnessNode";
 import ContrastNode from "./ContrastNode";
+import CropNode from "./CropNode";
 import ExposureNode from "./ExposureNode";
 import FadeNode from "./FadeNode";
 import FlipNode from "./FlipNode";
@@ -89,6 +90,7 @@ const nodeTypes = {
   lut: LutNode,
   exposure: ExposureNode,
   contrast: ContrastNode,
+  crop: CropNode,
   saturation: SaturationNode,
   vibrance: VibranceNode,
   vignette: VignetteNode,
@@ -271,6 +273,10 @@ function Pipeline() {
   useEffect(() => {
     const signature = JSON.stringify({
       nodeIds: nodes.map((node) => node.id).sort(),
+      cropValues: nodes
+        .filter((node) => node.type === "crop")
+        .map((node) => `${node.id}:${node.data.top ?? 0}:${node.data.bottom ?? 0}:${node.data.left ?? 0}:${node.data.right ?? 0}`)
+        .sort(),
       edges: edges
         .map(
           (edge) =>

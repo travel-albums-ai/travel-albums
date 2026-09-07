@@ -4,7 +4,7 @@
 
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
 import { Box, Divider, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
   type: string;
@@ -39,6 +39,7 @@ export const paletteItems: Array<{
   { type: "hdr", label: "HDR Effect", icon: <Mountain size={16} />, group: "basics" },
   { type: "fade", label: "Fade", icon: <EyeDashed size={16} />, group: "decorative" },
   { type: "rescale", label: "Rescale", icon: <ImageUpscale size={16} />, group: "utility" },
+  { type: "crop", label: "Crop", icon: <Crop size={16} />, group: "utility" },
   { type: "viewer", label: "Photos Viewer", icon:<Images size={16} />, group: "output" },
   { type: "viewer-single", label: "Photo Viewer", icon: <Image size={16} />, group: "output" },
   { type: "photo-histogram", label: "Photo Histogram", icon: <ChartColumn size={16} />, group: "output" },

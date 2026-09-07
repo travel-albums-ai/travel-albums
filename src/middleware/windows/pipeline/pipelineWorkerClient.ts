@@ -32,6 +32,10 @@ const NODE_DATA_KEYS = [
   "passthru",
   "apiKey",
   "scale",
+  "top",
+  "bottom",
+  "left",
+  "right",
 ] as const;
 
 type PendingViewer = {

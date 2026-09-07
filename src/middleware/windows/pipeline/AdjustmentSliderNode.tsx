@@ -12,7 +12,9 @@ export type SliderNodeConfig = {
   step: number;
   defaultValue: number;
   type: string;
-  info: (config) => JSX.Element;
+  label?: string;
+  icon?: JSX.Element;
+  info?: (config: SliderNodeConfig & { amount: number }) => JSX.Element;
 };
 
 // Builds a single-slider node component sharing the same
@@ -29,7 +31,7 @@ export function createSliderNode(config: SliderNodeConfig) {
       <InputHandle id="image" />
 
       {/* <SettingsSection title={config.label} icon={<span>{config.icon}</span>} tint={config.label}> */}
-      <NodeWrapper title={config.label} icon={config.icon} type={config.type}>
+      <NodeWrapper title={config.label ?? config.type} icon={config.icon} type={config.type}>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <input

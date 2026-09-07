@@ -506,6 +506,47 @@ function amountStageNode(
   };
 }
 
+function cropImages(
+  sources: WorkerImage[],
+  evaluationId: number,
+  topPercent: number,
+  bottomPercent: number,
+  leftPercent: number,
+  rightPercent: number
+): Promise<WorkerImage[]> {
+  const top = Math.max(0, Math.min(0.9, topPercent / 100));
+  const bottom = Math.max(0, Math.min(0.9, bottomPercent / 100));
+  const left = Math.max(0, Math.min(0.9, leftPercent / 100));
+  const right = Math.max(0, Math.min(0.9, rightPercent / 100));
+
+  return mapWithConcurrency(sources, evaluationId, async (source) => {
+    const cropWidth = Math.max(1, Math.round(source.width * (1 - left - right)));
+    const cropHeight = Math.max(1, Math.round(source.height * (1 - top - bottom)));
+    const offsetX = Math.min(Math.round(source.width * left), source.width - cropWidth);
+    const offsetY = Math.min(Math.round(source.height * top), source.height - cropHeight);
+    const [canvas, ctx] = createCanvas(cropWidth, cropHeight);
+
+    ctx.drawImage(
+      source.bitmap,
+      offsetX,
+      offsetY,
+      cropWidth,
+      cropHeight,
+      0,
+      0,
+      cropWidth,
+      cropHeight
+    );
+
+    return {
+      bitmap: canvas.transferToImageBitmap(),
+      width: cropWidth,
+      height: cropHeight,
+      name: source.name,
+    };
+  });
+}
+
 type CubeLut = {
   size: number;
   values: Float32Array;
@@ -798,6 +839,25 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  crop: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+
+      if (sources.length === 0) { return { image: [] } }
+
+      const image = await cropImages(
+        sources,
+        inputs.evaluationId as number,
+        (inputs.cropTop as number | undefined) ?? 0,
+        (inputs.cropBottom as number | undefined) ?? 0,
+        (inputs.cropLeft as number | undefined) ?? 0,
+        (inputs.cropRight as number | undefined) ?? 0
+      );
+
+      return { image };
+    },
+  },
+
   brightness: amountStageNode(brightnessStage, 0),
   gamma: amountStageNode(gammaStage, 1),
   luminosity: amountStageNode(luminosityStage, 0),
@@ -1006,6 +1066,13 @@ async function runEvaluation(
       // Rescale node gets its scale factor from node.data.
       if (node.type === "rescale") {
         inputs.scale = node.data.scale;
+      }
+
+      if (node.type === "crop") {
+        inputs.cropTop = node.data.top;
+        inputs.cropBottom = node.data.bottom;
+        inputs.cropLeft = node.data.left;
+        inputs.cropRight = node.data.right;
       }
 
       // Cancellation plumbing available to every node.
