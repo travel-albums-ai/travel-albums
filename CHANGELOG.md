@@ -1,3 +1,9 @@
+## [1.349.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.348.0...v1.349.0) (2026-09-07)
+
+### ✨ Features
+
+* add PerspectiveNode component and implement perspective transformation in the pipeline ([97f96cf](https://github.com/travel-albums-ai/travel-albums/commit/97f96cf866f96e66858f9e01962558ac626ac0d8))
+
 ## [1.348.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.347.0...v1.348.0) (2026-09-07)
 
 ### ✨ Features
