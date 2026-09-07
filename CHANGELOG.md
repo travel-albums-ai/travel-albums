@@ -1,3 +1,9 @@
+## [1.354.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.353.0...v1.354.0) (2026-09-07)
+
+### ✨ Features
+
+* add highlights stage and corresponding node to the pipeline ([6afe6f2](https://github.com/travel-albums-ai/travel-albums/commit/6afe6f2908ae9f4e2615dc19d75c4919deb90a22))
+
 ## [1.353.0](https://github.com/travel-albums-ai/travel-albums/compare/v1.352.0...v1.353.0) (2026-09-07)
 
 ### ✨ Features
